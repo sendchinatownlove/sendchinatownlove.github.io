@@ -14,7 +14,7 @@ const OwnerPanel: React.SFC<Props> = ({ imageSrc, ownerName, className }) => {
       <figure className={styles.ownerContainer}>
         <img className={styles.ownerImage} src={imageSrc} alt={ownerName} />
       </figure>
-      <h2>{ownerName}</h2>
+      <h2 className={styles.ownerName}>{ownerName}</h2>
       <div className={styles.buttonContainer}>
         <button className={classnames(styles.button, "button--filled")}>Donate</button>
         <button className={classnames(styles.button, "button--outlined")}>Buy Gift Card</button>

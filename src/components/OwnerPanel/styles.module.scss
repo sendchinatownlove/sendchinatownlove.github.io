@@ -9,6 +9,10 @@ $container-size: 150px;
   padding: 18px;
 }
 
+.ownerName {
+  margin: 6px 0;
+}
+
 .ownerContainer {
   width: $container-size;
   height: $container-size;
@@ -20,6 +24,7 @@ $container-size: 150px;
 
 .buttonContainer {
   text-align: center;
+  margin: 25px 0;
 }
 
 .button {

@@ -27,9 +27,9 @@ const StoreInfo: React.SFC<Props> = ({
       <div className={styles.nationality}>{nationality}</div>
       <h1>{name}</h1>
       <p>
-        {address.line1}
-        {address.line2}
-        {phoneNumber}
+        <div>{address.line1}</div>
+        <div>{address.line2}</div>
+        <div>{phoneNumber}</div>
       </p>
       <p>{introduction}</p>
     </section>
