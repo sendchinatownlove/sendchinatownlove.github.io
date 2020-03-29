@@ -1,17 +1,15 @@
 @import "../../responsive";
 
-.container {
-  padding: 44px 48px;
-}
-
 .contentContainer {
   display: grid;
   align-items: start;
   grid-column-gap: 69px;
   margin: 20px 0;
+  padding: 0 20px;
 
   @include for-tablet-landscape-up {
     grid-template-columns: 2fr minmax(250px, 1fr);
+    padding: 0 44px;
   }
 }
 
