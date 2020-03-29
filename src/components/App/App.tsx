@@ -1,11 +1,12 @@
 import React from 'react';
 import MerchantPage from '../MerchantPage';
-import styles from './App.module.scss';
+import Footer from '../Footer';
 
 function App() {
   return (
-    <div className={styles.container}>
+    <div>
       <MerchantPage />
+      <Footer/>
     </div>
   );
 }

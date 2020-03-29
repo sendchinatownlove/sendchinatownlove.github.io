@@ -1,0 +1,42 @@
+@import "../../responsive.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 43px 48px;
+  background-color: #F7F7F7;
+
+  @include for-tablet-portrait-up {
+    justify-content: space-between;
+  }
+}
+
+.logo {
+  height: 100px;
+
+  @include for-tablet-portrait-up {
+    order: 1;
+  }
+}
+
+.links {
+  margin-bottom: 16px;
+
+  @include for-tablet-portrait-up {
+    order: 2;
+  }
+}
+
+.link {
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  margin: 0 22px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
