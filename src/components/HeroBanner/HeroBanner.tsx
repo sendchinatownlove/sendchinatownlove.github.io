@@ -5,9 +5,13 @@ import styles from './styles.module.scss';
 const HeroBanner: React.SFC = () => {
   return (
     <div className={styles.container}>
-      <img className={styles.image} src={bannerImage} alt="Merchant Store Front" />
+      <img
+        className={styles.image}
+        src={bannerImage}
+        alt="Merchant Store Front"
+      />
     </div>
-  )
+  );
 };
 
 export default HeroBanner;

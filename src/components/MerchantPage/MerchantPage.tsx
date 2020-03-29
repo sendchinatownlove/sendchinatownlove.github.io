@@ -7,6 +7,6 @@ const MerchantPage: React.SFC = () => {
       <HeroBanner />
     </main>
   );
-}
+};
 
 export default MerchantPage;
