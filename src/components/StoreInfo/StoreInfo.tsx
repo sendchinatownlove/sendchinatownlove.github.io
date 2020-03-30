@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styles from './styles.module.scss';
+import StoreDetails, { StoreDetailsProps } from '../StoreDetails';
 import classnames from 'classnames';
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
   phoneNumber: string;
   introduction: string;
   className?: string;
+  storeDetailsProps: StoreDetailsProps;
 }
 
 const StoreInfo: React.SFC<Props> = ({
@@ -20,7 +22,8 @@ const StoreInfo: React.SFC<Props> = ({
   address,
   phoneNumber,
   introduction,
-  className
+  className,
+  storeDetailsProps
 }) => {
   return (
     <section className={classnames(styles.container, className)}>
@@ -32,6 +35,7 @@ const StoreInfo: React.SFC<Props> = ({
         <div>{phoneNumber}</div>
       </p>
       <p>{introduction}</p>
+      <StoreDetails {...storeDetailsProps} />
     </section>
   );
 };
