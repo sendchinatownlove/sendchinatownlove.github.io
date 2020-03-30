@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styles from './styles.module.scss';
 
 export interface Props {
   story: string;
@@ -6,7 +7,7 @@ export interface Props {
 
 const StoreStory: React.SFC<Props> = ({story}) => {
   return (
-    <section>
+    <section className={styles.container}>
       {story}
     </section>
   );

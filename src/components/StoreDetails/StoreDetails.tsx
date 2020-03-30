@@ -1,23 +1,32 @@
 import * as React from 'react';
 import styles from './styles.module.scss';
-import { Link, Switch, Route } from 'react-router-dom';
+import { NavLink, Switch, Route } from 'react-router-dom';
 import StoreStory, { StoreStoryProps } from '../StoreStory';
 import StoreMenu from '../StoreMenu';
 
 export interface Props {
+  className?: string;
   storeStoryProps: StoreStoryProps;
 }
 
-const StoreDetails: React.SFC<Props> = ({ storeStoryProps }) => {
+const StoreDetails: React.SFC<Props> = ({ storeStoryProps, className }) => {
   return (
-    <section>
-      <nav>
-        <Link className={styles.navLink} to={`/story`}>
+    <section className={className}>
+      <nav className={styles.navLinkContainer}>
+        <NavLink
+          className={styles.navLink}
+          activeClassName={styles['navLink--active']}
+          to={`/story`}
+        >
           Story
-        </Link>
-        <Link className={styles.navLink} to={`/menu`}>
+        </NavLink>
+        <NavLink
+          className={styles.navLink}
+          activeClassName={styles['navLink--active']}
+          to={`/menu`}
+        >
           Menu
-        </Link>
+        </NavLink>
       </nav>
       <Switch>
         <Route path={`/story`}>
