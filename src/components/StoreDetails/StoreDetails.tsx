@@ -2,14 +2,15 @@ import * as React from 'react';
 import styles from './styles.module.scss';
 import { NavLink, Switch, Route } from 'react-router-dom';
 import StoreStory, { StoreStoryProps } from '../StoreStory';
-import StoreMenu from '../StoreMenu';
+import StoreMenu, { StoreMenuProps } from '../StoreMenu';
 
 export interface Props {
   className?: string;
   storeStoryProps: StoreStoryProps;
+  storeMenuProps: StoreMenuProps;
 }
 
-const StoreDetails: React.SFC<Props> = ({ storeStoryProps, className }) => {
+const StoreDetails: React.SFC<Props> = ({ storeStoryProps, storeMenuProps, className }) => {
   return (
     <section className={className}>
       <nav className={styles.navLinkContainer}>
@@ -33,7 +34,7 @@ const StoreDetails: React.SFC<Props> = ({ storeStoryProps, className }) => {
           <StoreStory {...storeStoryProps} />
         </Route>
         <Route path={`/menu`}>
-          <StoreMenu />
+          <StoreMenu {...storeMenuProps}/>
         </Route>
       </Switch>
     </section>

@@ -12,6 +12,9 @@ const MerchantPage: React.SFC = () => {
       storeStoryProps: {
         story: sampleMerchant.storeStory,
       },
+      storeMenuProps: {
+        menuItems: sampleMerchant.menuItems,
+      }
     },
     className: styles.storeInfo,
   };

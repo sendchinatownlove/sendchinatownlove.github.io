@@ -29,6 +29,14 @@ h2 {
   margin: 0;
 }
 
+h3 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 24px;
+  margin: 0;
+}
+
 @mixin base-button {
   border-radius: 100px;
   padding: 10px 22px;

@@ -1,12 +1,22 @@
 import * as React from 'react';
+import MenuItem from '../MenuItem';
 
-export interface Props {
-  
+interface Item {
+  name: string;
+  description: string;
+  imageSrc?: string;
 }
 
-const StoreMenu: React.SFC<Props> = ({}) => {
+export interface Props {
+  menuItems: Item[];
+}
+
+const StoreMenu: React.SFC<Props> = ({menuItems}) => {
   return (
     <section>
+      {menuItems.map((item, index) => {
+        return <MenuItem {...item} key={`menu-item-${index}`} />;
+      })}
     </section>
   );
 };
