@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
+import PopupModal, { PopupModalProps } from '../PopupModal';
 
 interface Props {
   ownerName: string;
@@ -16,8 +17,8 @@ const OwnerPanel: React.SFC<Props> = ({ imageSrc, ownerName, className }) => {
       </figure>
       <h2 className={styles.ownerName}>{ownerName}</h2>
       <div className={styles.buttonContainer}>
-        <button className={classnames(styles.button, "button--filled")}>Donate</button>
-        <button className={classnames(styles.button, "button--outlined")}>Buy Gift Card</button>
+        <PopupModal merchant="Shunfa Bakery" option="Donation" className={classnames(styles.button, "button--filled")} />
+        <PopupModal merchant="Shunfa Bakery" option="Gift Card" className={classnames(styles.button, "button--outlined")}/>
       </div>
     </section>
   );
