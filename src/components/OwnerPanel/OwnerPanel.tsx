@@ -59,10 +59,11 @@ const OwnerPanel: React.SFC<Props> = ({ imageSrc, ownerName, className }) => {
       </div>
 
       <div className={styles.socialContainer}>
-        <a href="#" className={classnames(styles.fa, "fa fa-twitter")}></a>
-        <a href="#" className={classnames(styles.fa, "fa fa-instagram")}></a>
-        <a href="#" className={classnames(styles.fa, "fa fa-facebook")}></a>
-        <a href="#" className={classnames(styles.fa, "fa fa-youtube")}></a>
+        {/* TEMPLATE!!! add appropriate links & social icons as needed*/}
+        <a href="#" className={classnames(styles.fa, "fa fa-twitter")} />
+        <a href="#" className={classnames(styles.fa, "fa fa-instagram")} />
+        <a href="#" className={classnames(styles.fa, "fa fa-facebook")} />
+        <a href="#" className={classnames(styles.fa, "fa fa-youtube")} />
       </div>
 
       <div className={styles.mapsContainer}>

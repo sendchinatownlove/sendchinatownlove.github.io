@@ -32,7 +32,6 @@ const StoreInfo: React.SFC<Props> = ({
   return (
     <section className={classnames(styles.container, className)}>
       <div className={styles.nationality}>{nationality}</div>
-      {/* <h1>{name}</h1> */}
       <p>
         <div className={styles.address}>{address.line1}</div>
         <div className={styles.address}>{address.line2}</div>
