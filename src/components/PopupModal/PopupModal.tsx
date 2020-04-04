@@ -1,8 +1,7 @@
 import * as React from 'react';
-import classnames from 'classnames';
 import styles from './styles.module.scss';
 import Popup from 'reactjs-popup';
-import CheckoutForm, { CheckoutFormProps } from '../CheckoutForm';
+import CheckoutForm from '../CheckoutForm';
 
 export interface Props {
   merchant: string;

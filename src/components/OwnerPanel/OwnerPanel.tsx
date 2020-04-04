@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-import PopupModal, { PopupModalProps } from '../PopupModal';
+import PopupModal from '../PopupModal';
 
 interface Props {
   ownerName: string;
