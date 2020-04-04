@@ -17,8 +17,8 @@ const OwnerPanel: React.SFC<Props> = ({ imageSrc, ownerName, className }) => {
       </figure>
       <h2 className={styles.ownerName}>{ownerName}</h2>
       <div className={styles.buttonContainer}>
-        <PopupModal merchant="Shunfa Bakery" option="Donation" className={classnames(styles.button, "button--filled")} />
-        <PopupModal merchant="Shunfa Bakery" option="Gift Card" className={classnames(styles.button, "button--outlined")}/>
+        <PopupModal merchant="Shunfa Bakery" option="Donate" className={classnames(styles.button, "button--filled")} />
+        <PopupModal merchant="Shunfa Bakery" option="Buy Gift Card" className={classnames(styles.button, "button--outlined")}/>
       </div>
     </section>
   );

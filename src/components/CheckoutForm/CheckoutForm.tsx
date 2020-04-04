@@ -31,7 +31,7 @@ const stripe = new Stripe('pk_test_5AByIibLOhR6WHL3Mwnmel3P00zm0pIDrD', {
 class CheckoutForm extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-
+    
     this.state = {
       lineItems: {
         amount: 0,

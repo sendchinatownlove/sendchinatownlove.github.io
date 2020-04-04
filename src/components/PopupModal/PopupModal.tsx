@@ -17,9 +17,9 @@ const PopupModal: React.SFC<Props> = ({ merchant, option, className }) => (
   >
     {close => (
       <div className={styles.modal}>
-        <div className={styles.header}>{ option }</div>
+        <div className={styles.header}>{ option === "Donate"? "Donation" : "Gift Card" }</div>
         <div className={styles.content}>
-          <CheckoutForm merchant={merchant} option={option}/>
+          <CheckoutForm merchant={merchant} option={option === "Donate"? "Donation" : "Gift Card"}/>
         </div>
       </div>
     )}
