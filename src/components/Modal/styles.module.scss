@@ -1,0 +1,87 @@
+
+.donationsContainer {
+    width: 725px;
+    height: 575px;
+    background-color: white;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    padding: 50px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+
+.amountContainer {
+    background-color: #f7f7f7;
+    padding: 25px 35px;
+}
+
+.selectAmtContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: 15px 0px;
+}
+
+form button {
+    padding: 10px 40px;
+    width: 120px;
+    border-radius: 50px;
+    font-size: 12px;
+}
+
+button:focus {
+    color: white;
+    background-color: #DD678A;
+    border: 1px solid #DD678A;
+}
+
+button:disabled {
+    background-color: grey;
+    border: 1px solid grey;
+}
+
+.closeBtn {
+    position: absolute;
+    right: 50px;
+    font-weight: bold;
+    border: none;
+    padding: 0px;
+    width: 25px;
+}
+
+.selectAmtBtn {
+    border: 1px solid #DD678A;
+    color: #DD678A;
+    border-radius: 25px;
+    margin: 10px 0px;
+}
+
+.customAmt {
+    width: 250px;
+    height: 35px;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.nextBtn {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    letter-spacing: .1em;
+}
+
+
+@media only screen and (max-width: 799px) {
+    .donationsContainer {
+        width: 85vw;
+    }
+}
+
