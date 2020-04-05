@@ -1,0 +1,14 @@
+$image-width-size: 150px;
+
+.container {
+  display: flex;
+  margin: 24px 0;
+}
+
+.image {
+  flex: 1 0 auto;
+  width: $image-width-size;
+  height: $image-width-size;
+  margin-right: 12px;
+}
+
