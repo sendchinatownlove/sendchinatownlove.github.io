@@ -1,0 +1,19 @@
+label {
+  text-align:right;
+}
+
+.formContainer{
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap: 25px;
+    justify-content: center;
+    margin: 25px auto;
+}
+
+.noOutline {
+  border: 0;
+}
+
+.noOutline:focus {
+  outline: none;
+}

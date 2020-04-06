@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4688c56e.chunk.css",
+    "main.js": "/static/js/main.717e29bb.chunk.js",
+    "main.js.map": "/static/js/main.717e29bb.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f7beece5.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f7beece5.js.map",
+    "static/js/2.d7c7aa17.chunk.js": "/static/js/2.d7c7aa17.chunk.js",
+    "static/js/2.d7c7aa17.chunk.js.map": "/static/js/2.d7c7aa17.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.511b9a1b970ba964bff220f7443ab2bf.js": "/precache-manifest.511b9a1b970ba964bff220f7443ab2bf.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.4688c56e.chunk.css.map": "/static/css/main.4688c56e.chunk.css.map",
+    "static/js/2.d7c7aa17.chunk.js.LICENSE.txt": "/static/js/2.d7c7aa17.chunk.js.LICENSE.txt",
+    "static/media/logo.png": "/static/media/logo.edd78b0d.png",
+    "static/media/merchant-front.png": "/static/media/merchant-front.f7ad639e.png",
+    "static/media/sample-menu-item.png": "/static/media/sample-menu-item.18cdfea7.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f7beece5.js",
+    "static/js/2.d7c7aa17.chunk.js",
+    "static/css/main.4688c56e.chunk.css",
+    "static/js/main.717e29bb.chunk.js"
+  ]
+}
