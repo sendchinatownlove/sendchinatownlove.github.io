@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 artifacts.zip
 /dist
 /coverage
@@ -82,7 +82,6 @@ static/src/stylesheets/pasteup/.npmrc
 *.crt
 *.key
 .vscode/settings.json
-=======
+
 build/*
 node_modules
->>>>>>> eb275e342f797d40d548f9ee4f918cc676641bff
