@@ -4,9 +4,6 @@ import { sampleMerchant } from './sample-merchant';
 import StoreInfo from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import styles from './styles.module.scss';
-import Modal from '../Modal';
-
-const ModalBox: any = Modal;
 
 const MerchantPage: React.SFC = () => {
   const storeInfoProps = {
@@ -31,7 +28,6 @@ const MerchantPage: React.SFC = () => {
           {...sampleMerchant.ownerInfo}
         />
       </div>
-      {/* <ModalBox /> */}
     </main>
   );
 };

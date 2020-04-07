@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { relative } from 'path';
 import styles from './styles.module.scss';
-import CheckoutForm from '../CheckoutForm';
 import ModalBilling from '../ModalBilling';
 
 interface Props {
@@ -109,24 +109,26 @@ class Modal extends React.Component<Props, State> {
           <label htmlFor="custom-amount">Or enter any amount </label> <br />
           <input
             name="custom-amount"
-            type="text"
+            type="number"
             className={styles.customAmt}
             onChange={(e) => this.handleChange(e, true)}
             value={ this.state.customInput ? this.state.amount : ''}
             placeholder='$'
           />
+        </div>
 
-          <button
+        <button
             type='button'
             className={styles.nextBtn}
             onClick={this.showBillingsModal}
             disabled={this.state.amount === 0}
           >
             Next
-          </button>
-        </div>
+        </button>
 
-        <ModalBillingBox showBillModal={this.state.showBillModal} hideBillModal={this.hideBillingsModal} />
+        <ModalBillingBox showBillModal={this.state.showBillModal} 
+                         hideBillModal={this.hideBillingsModal} 
+                         donatedAmt={this.state.amount} />
 
       </form>
     );

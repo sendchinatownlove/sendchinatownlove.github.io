@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
+import PopUpModal from '../PopupModal';
 import Modal from '../Modal';
 
 interface Props {
@@ -15,6 +16,7 @@ interface State {
   show: boolean
 }
 
+const PopupModal: any = PopUpModal;
 const ModalBox: any = Modal;
 
 class OwnerPanel extends React.Component<Props, State> {
@@ -57,7 +59,8 @@ class OwnerPanel extends React.Component<Props, State> {
 
         <div className={styles.buttonContainer}>
           <button className={classnames(styles.button, "button--filled")} onClick={this.showModal}>Donate</button>
-          <button className={classnames(styles.button, "button--outlined")}> Buy gift card</button>
+          {/* <button className={classnames(styles.button, "button--outlined")}>Get gift card</button> */}
+          <PopupModal merchant="Shunfa Bakery" option="Gift Card" className={classnames(styles.button, "button--outlined")}/>
         </div>
 
         <ModalBox show={this.state.show} handleClose={this.hideModal}/>

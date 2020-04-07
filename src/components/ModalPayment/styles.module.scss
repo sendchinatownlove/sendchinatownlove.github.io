@@ -1,52 +1,42 @@
 
-.billFormContainer {
+.container {
     width: 725px;
-    height: 625px;
+    height: 675px;
+    font-size: 14px;
 }
 
-.billingsContainer {
+.paymentContainer {
     display: flex;
     flex-direction: column;
 }
 
 h3 {
-    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
-.label {
-    width: 350px;
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+}
+
+.cardLabel, .label {
     height: 35px;
     padding: 10px;
     font-size: 12px;
     margin: 10px 0px;
 }
 
-.email:invalid {
-    border: 1px solid #DD678A;
+.label {
+    width: 180px;
 }
 
-.address {
-    width: 100%;
+.cardLabel {
+    width: 375px;
 }
 
-.row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-
-.state {
-    width: 75px;
-}
-
-.zipcode {
-    width: 150px;
+.checkbox {
+    margin-right: 15px;
 }
 
 .closeBtn {
@@ -63,8 +53,8 @@ h3 {
 .btnRow {
     display: flex;
     flex-direction: row;
-    position: fixed;
-    bottom: 50px;
+    position: relative;
+    bottom: -25px;
 }
 
 .backBtn {
@@ -87,24 +77,22 @@ h3 {
 
 
 @media only screen and (max-width: 799px) {
-    .billFormContainer {
+    .container {
         width: 85vw;
         height: 75vh;
-        font-size: 13px;
         overflow-y: scroll;
     }
 
-    .row {
+    .paymentContainer {
         flex-direction: column;
     }
 
-    .label {
-        width: 100%;
+    .cardLabel {
+        width: 101%;
     }
 
-    .btnRow {
-        position: relative;
-        bottom: -25px;
+    .label {
+        width: 65%;
     }
 }
 

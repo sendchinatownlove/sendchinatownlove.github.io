@@ -1,7 +1,6 @@
 
-.donationsContainer {
-    width: 725px;
-    height: 575px;
+// all forms will receive 
+form {
     background-color: white;
     position: fixed;
     left: 50%;
@@ -9,6 +8,31 @@
     transform: translate(-50%, -50%);
     z-index: 100;
     padding: 50px;
+}
+
+form button {
+    padding: 8px;
+    width: 120px;
+    border-radius: 75px;
+    font-size: 12px;
+}
+
+form button:focus {
+    color: white;
+    background-color: #DD678A;
+    border: 1px solid #DD678A;
+}
+
+form button:disabled {
+    background-color: grey;
+    border: 1px solid grey;
+}
+
+
+// specific to this modal box 
+.donationsContainer {
+    width: 725px;
+    height: 550px;
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
 }
 
@@ -25,24 +49,6 @@
     margin: 15px 0px;
 }
 
-form button {
-    padding: 10px 40px;
-    width: 120px;
-    border-radius: 50px;
-    font-size: 12px;
-}
-
-button:focus {
-    color: white;
-    background-color: #DD678A;
-    border: 1px solid #DD678A;
-}
-
-button:disabled {
-    background-color: grey;
-    border: 1px solid grey;
-}
-
 .closeBtn {
     position: absolute;
     right: 50px;
@@ -50,6 +56,8 @@ button:disabled {
     border: none;
     padding: 0px;
     width: 25px;
+    font-size: 30px;
+    top: 40px;
 }
 
 .selectAmtBtn {
@@ -81,7 +89,16 @@ button:disabled {
 
 @media only screen and (max-width: 799px) {
     .donationsContainer {
-        width: 85vw;
+        width: 85%;
+        height: 75vh;
+        overflow-y: scroll;
+    }
+
+    .nextBtn {
+        position: relative;
+        float: right;
+        right: 0px;
+        bottom: -35px;
     }
 }
 
