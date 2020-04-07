@@ -88,7 +88,7 @@ class CheckoutForm extends React.Component<Props, State> {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form className={styles.form} onSubmit={this.handleSubmit}>
         <div className={styles.formContainer}>
           <label>Merchant</label>
           <input type="text" className={styles.noOutline} value={this.props.merchant} readOnly />
