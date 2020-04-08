@@ -1,5 +1,10 @@
 label {
-  text-align:right;
+  // text-align:right;
+}
+
+.form {
+  position: relative;
+  top:165px;
 }
 
 .formContainer{
@@ -8,6 +13,7 @@ label {
     grid-gap: 25px;
     justify-content: center;
     margin: 25px auto;
+    width: 500px;
 }
 
 .noOutline {

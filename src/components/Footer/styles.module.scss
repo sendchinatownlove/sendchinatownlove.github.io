@@ -34,9 +34,13 @@
   color: black;
   text-decoration: none;
   letter-spacing: 0.02em;
-  margin: 0 22px;
+  margin: 0 8px;
 
   &:hover {
     text-decoration: underline;
   }
+}
+
+footer span {
+  margin-left: 24px;
 }

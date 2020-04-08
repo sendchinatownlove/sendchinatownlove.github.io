@@ -1,0 +1,58 @@
+
+.container {
+    height: 675px;
+    font-size: 14px;
+}
+
+.paymentContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+}
+
+.label {
+    width: 180px;
+}
+
+.cardLabel {
+    width: 375px;
+}
+
+.checkbox {
+    margin-right: 15px;
+}
+
+.btnRow {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    bottom: -15px;
+    justify-content: space-between;
+}
+
+
+@media only screen and (max-width: 799px) {
+    .container {
+        width: 85vw;
+        height: 75vh;
+        overflow-y: scroll;
+    }
+
+    .paymentContainer {
+        flex-direction: column;
+    }
+
+    .cardLabel {
+        width: 101%;
+    }
+
+    .label {
+        width: 65%;
+    }
+}
+

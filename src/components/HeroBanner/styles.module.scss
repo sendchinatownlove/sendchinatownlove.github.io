@@ -22,7 +22,15 @@
 
 
 // mobile css down below
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 899px) {
+  .container {
+    justify-content: center;
+  }
+
+  .image {
+    margin: 0;
+  }
+  
   .header {
     font-size: 2em;
   }
