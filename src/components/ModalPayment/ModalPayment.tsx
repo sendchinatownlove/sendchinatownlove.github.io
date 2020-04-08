@@ -50,12 +50,9 @@ class ModalPayment extends React.Component<Props, State> {
     return(
       <React.Fragment>
         <form id="payment-form" 
-              className={styles.container}
+              className={classnames(styles.container, "modalForm--form")}
               style={{display: this.props.showPayModal ? "block" : "none" }} >
-            <button
-              className={styles.closeBtn} 
-              onClick={this.props.handleClose}> ×
-            </button> 
+          <button className={"closeButton--close"} onClick={this.props.handleClose}> × </button> 
 
           <h2>Complete your donation</h2>
           <p>Please add your payment information below</p>
@@ -66,7 +63,7 @@ class ModalPayment extends React.Component<Props, State> {
               <input
                   name="name"
                   type="text"
-                  className={styles.cardLabel}
+                  className={classnames(styles.cardLabel, "modalInput--input")}
                   onChange={(e) => this.handleChange(e)}
                   value={this.state.number}
               /> 
@@ -77,7 +74,7 @@ class ModalPayment extends React.Component<Props, State> {
                       <input
                           name="expiryDate"
                           type="text"
-                          className={styles.label}
+                          className={classnames(styles.label, "modalInput--input")}
                           onChange={(e) => this.handleChange(e)}
                           value={this.state.expiryDate}
                       />
@@ -88,7 +85,7 @@ class ModalPayment extends React.Component<Props, State> {
                       <input
                           name="securityCode"
                           type="text"
-                          className={styles.label}
+                          className={classnames(styles.label, "modalInput--input")}
                           onChange={(e) => this.handleChange(e)}
                           value={this.state.securityCode}
                       />
@@ -112,16 +109,16 @@ class ModalPayment extends React.Component<Props, State> {
               <div className={styles.btnRow}>
                   <button
                       type='button'
-                      className={classnames(styles.backBtn)}
+                      className={"modalButton--back"}
                       onClick={this.props.hidePaymentModal}
-                  >ᐸ Back
+                  > ᐸ Back
                   </button>
 
                   <button
                       type='button'
-                      className={styles.nextBtn}
+                      className={"modalButton--filled"}
                       onClick={this.showConfirmationModal}
-                  >Confirm
+                  > Confirm
                   </button>
               </div>
           </div>

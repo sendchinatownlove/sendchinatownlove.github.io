@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { relative } from 'path';
+import classnames from 'classnames';
 import styles from './styles.module.scss';
 import ModalBilling from '../ModalBilling';
 
@@ -54,16 +54,10 @@ class Modal extends React.Component<Props, State> {
   render() {
     return(
       <form id="donation-form" 
-            className={styles.donationsContainer} 
+            className={classnames(styles.donationsContainer, "modalForm--form")} 
             style={{display: this.props.show ? "block" : "none" }}
       >
-          <button
-            type="button"
-            className={styles.closeBtn} 
-            onClick={this.props.handleClose}
-          > 
-            × 
-          </button> 
+        <button className={"closeButton--close"} onClick={this.props.handleClose}> × </button> 
 
         {/* Pass in props here for name */}
         <h2>Shunfa Bakery</h2>
@@ -74,35 +68,31 @@ class Modal extends React.Component<Props, State> {
           <div className={styles.selectAmtContainer}>
             <button
               type='button'
-              className={styles.selectAmtBtn}
+              className={"modalButton--outlined"}
               value='10'
               onClick={e => this.handleChange(e, false)}
-            >
-              $10
+            > $10
             </button>
             <button
               type='button'
-              className={styles.selectAmtBtn}
+              className={"modalButton--outlined"}
               value='25'
               onClick={e => this.handleChange(e, false)}
-            >
-              $25
+            > $25
             </button>
             <button
               type='button'
-              className={styles.selectAmtBtn}
+              className={"modalButton--outlined"}
               value='50'
               onClick={e => this.handleChange(e, false)}
-            >
-              $50
+            > $50
             </button>
             <button
               type='button'
-              className={styles.selectAmtBtn}
+              className={"modalButton--outlined"}
               value='100'
               onClick={e => this.handleChange(e, false)}
-            >
-              $100
+            > $100
             </button>
           </div>
 
@@ -110,7 +100,7 @@ class Modal extends React.Component<Props, State> {
           <input
             name="custom-amount"
             type="number"
-            className={styles.customAmt}
+            className={classnames(styles.customAmt, "modalInput--input")}
             onChange={(e) => this.handleChange(e, true)}
             value={ this.state.customInput ? this.state.amount : ''}
             placeholder='$'
@@ -119,11 +109,10 @@ class Modal extends React.Component<Props, State> {
 
         <button
             type='button'
-            className={styles.nextBtn}
+            className={classnames(styles.nextBtn, "modalButton--filled")}
             onClick={this.showBillingsModal}
             disabled={this.state.amount === 0}
-          >
-            Next
+          > Next
         </button>
 
         <ModalBillingBox showBillModal={this.state.showBillModal} 

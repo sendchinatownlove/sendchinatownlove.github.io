@@ -1,4 +1,5 @@
 import * as React from 'react';
+import classnames from 'classnames';
 import styles from './styles.module.scss';
 import confirmationPic from './chinatown-logo.png';
 
@@ -19,11 +20,11 @@ class ModalPayment extends React.Component<Props> {
   render() {
     return(
       <form id="payment-form" 
-            className={styles.container}
+            className={classnames(styles.container, "modalForm--form")}
             style={{display: this.props.showConfirmModal ? "block" : "none" }}
       >
           <button
-            className={styles.closeBtn} 
+            className={"closeButton--close"}
             onClick={this.props.handleClose} > ×
           </button> 
 
@@ -37,7 +38,7 @@ class ModalPayment extends React.Component<Props> {
         />
         
         <button
-            className={styles.finishBtn} 
+            className={classnames(styles.finishBtn, "modalButton--filled")} 
             onClick={this.props.handleClose}
           > 
           Finish

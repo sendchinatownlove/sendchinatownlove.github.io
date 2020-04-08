@@ -61,15 +61,10 @@ class ModalBilling extends React.Component<Props, State> {
     return(
         <React.Fragment>
             <form id="billing-form" 
-                    className={styles.billFormContainer}
-                    style={{display: this.props.showBillModal ? "block" : "none" }}
+                    className={classnames(styles.billFormContainer, "modalForm--form")}
+                    style={{display: this.props.showBillModal ? "block" : "none" }} 
             >
-                <button
-                    className={styles.closeBtn} 
-                    onClick={this.props.handleClose}
-                > 
-                ×
-                </button> 
+                <button className={"closeButton--close"} onClick={this.props.handleClose}> × </button> 
 
                 <h2>Complete your donation</h2>
                 <p>Please add your payment information below</p>
@@ -80,7 +75,7 @@ class ModalBilling extends React.Component<Props, State> {
                     <input
                         name="name"
                         type="text"
-                        className={styles.label}
+                        className={classnames(styles.label, "modalInput--input")}
                         onChange={(e) => this.handleChange(e)}
                         value={this.state.name}
                     /> 
@@ -89,7 +84,7 @@ class ModalBilling extends React.Component<Props, State> {
                     <input
                         name="email"
                         type="email"
-                        className={classnames(styles.label, styles.email)}
+                        className={classnames(styles.label, styles.email, "modalInput--input")}
                         onChange={(e) => this.handleChange(e)}
                         value={ this.state.email }
                     />
@@ -98,7 +93,7 @@ class ModalBilling extends React.Component<Props, State> {
                     <input
                         name="address"
                         type="text"
-                        className={classnames(styles.label, styles.address)}
+                        className={classnames(styles.label, styles.address, "modalInput--input")}
                         onChange={(e) => this.handleChange(e)}
                         value={ this.state.address }
                     />
@@ -109,7 +104,7 @@ class ModalBilling extends React.Component<Props, State> {
                             <input
                                 name="city"
                                 type="text"
-                                className={classnames(styles.label, styles.city)}
+                                className={classnames("modalInput--input", styles.label, styles.city)}
                                 onChange={(e) => this.handleChange(e)}
                                 value={ this.state.city }
                             />
@@ -120,9 +115,9 @@ class ModalBilling extends React.Component<Props, State> {
                             <input
                                 name="state"
                                 type="text"
-                                className={classnames(styles.label, styles.state)}
+                                className={classnames("modalInput--input", styles.label, styles.state)}
                                 onChange={(e) => this.handleChange(e)}
-                                value={ this.state.state }
+                                value={ this.state.state } 
                             />
                         </div>
 
@@ -131,28 +126,23 @@ class ModalBilling extends React.Component<Props, State> {
                             <input
                                 name="zipcode"
                                 type="text"
-                                className={classnames(styles.label, styles.zipcode)}
+                                className={classnames("modalInput--input", styles.label, styles.zipcode)}
                                 onChange={(e) => this.handleChange(e)}
-                                value={ this.state.zipcode }
+                                value={ this.state.zipcode } 
                             />
                         </div>
                     </div>
 
                     <div className={styles.btnRow}>
-                        <button
-                            type='button'
-                            className={classnames(styles.backBtn)}
-                            onClick={this.props.hideBillModal}
-                        >
-                        ᐸ Back
+                        <button type="button" 
+                                className={classnames(styles.nextBtn, "modalButton--back")} 
+                                onClick={this.props.hideBillModal}
+                            > ᐸ Back 
                         </button>
-
-                        <button
-                            type='button'
-                            className={styles.nextBtn}
-                            onClick={this.showPaymentModal}
-                        >
-                            Next
+                        <button type="button" 
+                                className={"modalButton--filled"} 
+                                onClick={this.showPaymentModal}
+                            > Next 
                         </button>
                     </div>
                 </div>
