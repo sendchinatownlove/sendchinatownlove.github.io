@@ -61,8 +61,8 @@ class ModalBilling extends React.Component<Props, State> {
     return(
         <React.Fragment>
             <form id="billing-form" 
-                    className={classnames(styles.billFormContainer, "modalForm--form")}
-                    style={{display: this.props.showBillModal ? "block" : "none" }} 
+                  className={classnames(styles.billFormContainer, "modalForm--form")}
+                  style={{display: this.props.showBillModal ? "block" : "none" }} 
             >
                 <button className={"closeButton--close"} onClick={this.props.handleClose}> × </button> 
 
@@ -149,10 +149,10 @@ class ModalBilling extends React.Component<Props, State> {
             </form>
 
             <ModalPaymentBox showPayModal={this.state.showPayModal} 
-                                handleClose={this.props.handleClose} 
-                                hidePaymentModal={this.hidePaymentModal}
-                                donatedAmt={this.props.donatedAmt}
-                                billingInfo={this.state} />
+                             handleClose={this.props.handleClose} 
+                             hidePaymentModal={this.hidePaymentModal}
+                             donatedAmt={this.props.donatedAmt}
+                             billingInfo={this.state} />
       </React.Fragment>
     );
   }
