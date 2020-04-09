@@ -53,6 +53,7 @@ class CheckoutForm extends React.Component<Props, State> {
     const lineItems = this.state.lineItems;
     lineItems.description = `${this.state.formattedValue} ${this.props.option.toLowerCase()} for ${this.props.merchant}`;
     lineItems.amount = lineItems.amount * 100;
+    lineItems.quantity = 1; 
 
     // should return stripe checkout session id once the endpoint is working
     return axios.post('https://api.sendchinatownlove.com/charges', {
