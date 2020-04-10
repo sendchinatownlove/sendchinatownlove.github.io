@@ -16,9 +16,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install Packages
-      run: npm install
+      run: yarn install
     - name: Build page
-      run: npm run build
+      run: yarn run build
       env: 
         CI: "true"
     - name: Deploy to gh-pages
