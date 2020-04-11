@@ -1,7 +1,12 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
+import axios from 'axios';
+import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
+import { prependOnceListener } from 'cluster';
+
 import styles from './styles.module.scss';
 import ModalConfirmation from '../ModalConfirmation';
+import CardSection from '../CheckoutForm/CardSection';
 
 interface Props {
     merchant: string;
@@ -11,122 +16,111 @@ interface Props {
     hidePaymentModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
     showPayModal: boolean;
     donatedAmt: number;
-    billingInfo: object; //props to send to stripe backend
-}
-
-interface State {
-  number: string
-  expiryDate: string
-  securityCode: string
-  showConfirmModal: boolean
+    name: string;
+    email: string;
+    address: string;
+    city: string;
+    stateForm: string;
+    zipcode: string;
 }
 
 const ModalConfirmBox: any = ModalConfirmation
 
-class ModalPayment extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      number: "",
-      expiryDate: "", 
-      securityCode: "",
-      showConfirmModal: false,
+const ModalPayment = ({handleClose, hidePaymentModal, showPayModal, donatedAmt, name, email, address, city, stateForm, zipcode}: Props) => {
+
+  const [isShown, setIsShown] = useState(false);
+  const showConfirmModal = () => setIsShown(true);
+
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const handleSubmit = async (event:any) => {
+    event.preventDefault();
+
+    const lineItems = { 
+      "amount": Number(donatedAmt) * 100,
+      "currency": "usd",
+      "name": "Gift Card",
+      "quantity": 1,
+      "description": `$${donatedAmt} to Shunfa Bakery`
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.showConfirmationModal = this.showConfirmationModal.bind(this);
-  }
 
-  handleChange(e: any) {
-    const changeInput = e.target.name;
-    const input = e.target.value;
-    this.setState({ [changeInput]: input} as Pick<State, keyof State>)
-  }
+    // returns stripe payment intent 
+    // *** NOTE: change url to whatever is the actual url when ready *** 
+    const res = await axios.post('http://localhost:3001/charges', {
+      line_items: [lineItems],
+      merchant_id: "hello-world"
+    }, {
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    }).then(async (res) => {
+        if (!stripe || !elements) return;
+        else {
+          const cardElement = elements!.getElement(CardElement);
+          const result = await stripe!.confirmCardPayment(`${res.data.client_secret}`, {
+            payment_method: {
+              card: cardElement!,
+              billing_details: {
+                  name: name,
+                  email: email,
+                  address: {
+                    city,
+                    state: stateForm,
+                    country: "US",
+                    postal_code: zipcode,
+                    line1: address
+                  }
+              },
+            }
+          });
 
-  showConfirmationModal() {
-    this.setState({showConfirmModal: true})
-  }
+          if (result.error) {
+            console.log(result.error.message);
+          } else {
+              if (result.paymentIntent?.status === 'succeeded') {
+                console.log(result.paymentIntent?.status, 'The payment has been processed!')
+                showConfirmModal() // shows confirmation modal box 
+              }
+          }
+        }
+      })
+  };
 
-  render() {
     return(
       <React.Fragment>
         <form id="payment-form" 
               className={classnames(styles.container, "modalForm--form")}
-              style={{display: this.props.showPayModal ? "block" : "none" }} >
-          <button className={"closeButton--close"} onClick={this.props.handleClose}> × </button> 
+              style={{display: showPayModal ? "block" : "none" }} >
+          <button className={"closeButton--close"} onClick={handleClose}> × </button> 
 
           <h2>Complete your donation</h2>
           <p>Please add your payment information below</p>
 
           <div className={styles.paymentContainer}>
               <h3>Payment Information</h3>
-              <label htmlFor="card-info">Card number</label>
-              <input
-                  name="name"
-                  type="text"
-                  className={classnames(styles.cardLabel, "modalInput--input")}
-                  onChange={(e) => this.handleChange(e)}
-                  value={this.state.number}
-              /> 
+              <CardSection />  
 
-              <div className={styles.row}>
-                  <div className={styles.column}>
-                      <label htmlFor="expiryDate">Expiry date</label>
-                      <input
-                          name="expiryDate"
-                          type="text"
-                          className={classnames(styles.label, "modalInput--input")}
-                          onChange={(e) => this.handleChange(e)}
-                          value={this.state.expiryDate}
-                      />
-                  </div>
-
-                  <div className={styles.column}>
-                      <label htmlFor="securityCode">Security code</label> 
-                      <input
-                          name="securityCode"
-                          type="text"
-                          className={classnames(styles.label, "modalInput--input")}
-                          onChange={(e) => this.handleChange(e)}
-                          value={this.state.securityCode}
-                      />
-                  </div>
-              </div>
               <br/>
               <h3>Donation details</h3>
-              {/* pass in props here for name */}
-              <span>Donate <b>${this.props.donatedAmt}</b> to Shufna Bakery</span> <p />
+              <span>Donate <b>${donatedAmt}</b> to {name}</span> <p />
 
               <div className={styles.row}>
-                  <input type="checkbox" 
-                        name="checkbox" 
-                        className={styles.checkbox} 
-                        value="Agree" />
+                  <input type="checkbox" name="checkbox" className={styles.checkbox} value="Agree"/>
                   <label htmlFor="checkbox">I agree with the <b>Terms & Conditions</b></label>
               </div>
 
               <p>Given the unpredictable nature of current market conditions, in the event that the merchant runs out of business, gift cards will be treated as a donation to the merchant.</p>
 
               <div className={styles.btnRow}>
-                  <button
-                      type='button'
-                      className={"modalButton--back"}
-                      onClick={this.props.hidePaymentModal}
-                  > ᐸ Back
-                  </button>
-
-                  <button
-                      type='button'
-                      className={"modalButton--filled"}
-                      onClick={this.showConfirmationModal}
-                  > Confirm
-                  </button>
+                  <button type='button' className={"modalButton--back"} onClick={hidePaymentModal}> ᐸ Back </button>
+                  <button type='button' className={"modalButton--filled"} onClick={handleSubmit}> Confirm </button>
               </div>
           </div>
         </form>
-        <ModalConfirmBox showConfirmModal={this.state.showConfirmModal} />
+
+          <ModalConfirmBox showConfirmModal={isShown} handleClose={handleClose}/> 
+
       </React.Fragment>
     );
-  }
 }
 
 export default ModalPayment;
