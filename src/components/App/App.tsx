@@ -1,19 +1,20 @@
 import React from 'react';
+import Home from '../Home';
 import MerchantPage from '../MerchantPage';
-import Footer from '../Footer';
+import About from '../About';
 import { createBrowserHistory } from 'history';
-import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 
 const history = createBrowserHistory();
 
 function App() {
   return (
     <Router history={history}>
-      <Redirect exact from="/" to="/story" />
       <Switch>
-        <Route component={MerchantPage} />
+        <Route exact path="/" component={Home} />
+        <Route path="/story" component={MerchantPage} />
+        <Route path="/about" component={About} />
       </Switch>
-      <Footer />
     </Router>
   );
 }

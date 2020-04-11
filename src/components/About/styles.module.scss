@@ -1,0 +1,68 @@
+@import "../../responsive.scss";
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.introContainer {
+  margin: 64px;
+
+  @include for-phone-only {
+    margin: 20px 16px 40px;
+  }
+}
+
+.headerText {
+  font-weight: 500;
+  font-family: Avenir, sans-serif;
+  font-size: 48px;
+}
+
+.introTextSection {
+  margin: 40px 0;
+}
+
+.introText {
+  font-weight: normal;
+  font-family: Avenir, sans-serif;
+  font-size: 18px;
+
+  @include for-phone-only {
+    font-size: 16px;
+  }
+}
+
+.ctaButton {
+  border-radius: 100px;
+  width: 200px;
+  height: 64px;
+  border: none;
+  background-color: #1E1E1E;
+  color: white;
+  font-family: Avenir, sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  cursor: pointer;
+
+  @include for-phone-only {
+    width: 100%;
+  }
+}
+
+.ctaSubtext {
+  font-family: Avenir, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  margin-left: 32px;
+
+  @include for-phone-only {
+    display: block;
+    margin-left: 0;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+  }
+}

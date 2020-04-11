@@ -1,0 +1,52 @@
+@import "../../responsive";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.contentContainer {
+  width: 100%;
+  height: 1000px;
+  display: flex;
+  background-image:     linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%),
+                        url(./images/chinatown-splash.jpg);
+  background-size:      cover;
+  background-repeat:    no-repeat;
+  background-position:  center center;
+}
+
+.headerText {
+  color: white;
+  font-weight: 900;
+  font-size: 48px;
+  font-family: Avenir, sans-serif;
+  margin-bottom: 40px;
+}
+
+.introText {
+  color: white;
+  font-weight: 500;
+  font-size: 24px;
+  font-family: Avenir, sans-serif;
+  margin-bottom: 75px;
+}
+
+.ctaButton {
+  color: white;
+  background-color: #DD678A;
+  border-radius: 100px;
+  border: none;
+  width: 200px;
+  height: 64px;
+  font-size: 18px;
+  font-family: Avenir, sans-serif;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.introContainer {
+  margin: 10%;
+}
