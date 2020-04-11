@@ -5,9 +5,13 @@ import Stripe from 'stripe';
 import NumberFormat from 'react-number-format';
 import axios from 'axios';
 
+import {CardElement, ElementsConsumer} from '@stripe/react-stripe-js';
+
 export interface Props {
   merchant: string,
-  option: string
+  option: string,
+  // stripe: Function,
+  // elements: Function
 }
 
 interface LineItem {
@@ -24,9 +28,9 @@ interface State {
   formattedValue: string
 }
 
-const stripe = new Stripe('pk_test_5AByIibLOhR6WHL3Mwnmel3P00zm0pIDrD', {
-  apiVersion: '2020-03-02',
-});
+// const stripe = new Stripe('pk_test_5AByIibLOhR6WHL3Mwnmel3P00zm0pIDrD', {
+//   apiVersion: '2020-03-02',
+// });
 
 class CheckoutForm extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -47,16 +51,17 @@ class CheckoutForm extends React.Component<Props, State> {
     this.handleChange = this.handleChange.bind(this);
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    // this.InjectedCheckoutForm = this.InjectedCheckoutForm.bind(this);
   }
 
-  getCheckoutSession() {
+  async getCheckoutSession() {
     const lineItems = this.state.lineItems;
     lineItems.description = `${this.state.formattedValue} ${this.props.option.toLowerCase()} for ${this.props.merchant}`;
     lineItems.amount = lineItems.amount * 100;
-    lineItems.quantity = 1; 
+    lineItems.quantity = 1;
 
     // should return stripe checkout session id once the endpoint is working
-    return axios.post('https://api.sendchinatownlove.com/charges', {
+    const res = await axios.post('http://localhost:3001/charges', {
       line_items: [lineItems],
       merchant_id: this.state.merchantId
     }, {

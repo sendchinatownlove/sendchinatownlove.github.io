@@ -1,8 +1,12 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import styles from './styles.module.scss';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 
+import styles from './styles.module.scss';
 import ModalPayment from '../ModalPayment';
+
+const stripePromise = loadStripe('pk_test_5AByIibLOhR6WHL3Mwnmel3P00zm0pIDrD');
 
 interface Props {
     merchant: string;
@@ -19,7 +23,7 @@ interface State {
   email: string
   address: string
   city: string
-  state: string 
+  stateForm: string 
   zipcode: string
   showPayModal: boolean
 }
@@ -34,7 +38,7 @@ class ModalBilling extends React.Component<Props, State> {
         email: "", 
         address: "",
         city: "",
-        state: "", 
+        stateForm: "", 
         zipcode: "",
         showPayModal: false,
     }
@@ -113,11 +117,11 @@ class ModalBilling extends React.Component<Props, State> {
                         <div className={styles.column}>
                             <label htmlFor="State">State</label>
                             <input
-                                name="state"
+                                name="stateForm"
                                 type="text"
                                 className={classnames("modalInput--input", styles.label, styles.state)}
                                 onChange={(e) => this.handleChange(e)}
-                                value={ this.state.state } 
+                                value={ this.state.stateForm } 
                             />
                         </div>
 
@@ -148,11 +152,20 @@ class ModalBilling extends React.Component<Props, State> {
                 </div>
             </form>
 
+        <Elements stripe={stripePromise}>
             <ModalPaymentBox showPayModal={this.state.showPayModal} 
                              handleClose={this.props.handleClose} 
                              hidePaymentModal={this.hidePaymentModal}
                              donatedAmt={this.props.donatedAmt}
-                             billingInfo={this.state} />
+                             name={this.state.name} 
+                             email={this.state.email}
+                             address={this.state.address}
+                             city={this.state.city}
+                             state={this.state.stateForm}
+                             zipcode={this.state.zipcode}
+                             />
+        </Elements>
+
       </React.Fragment>
     );
   }
