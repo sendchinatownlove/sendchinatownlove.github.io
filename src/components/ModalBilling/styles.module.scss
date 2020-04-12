@@ -73,3 +73,13 @@
     }
 }
 
+@media only screen and (max-width: 450px) {
+    .billFormContainer {
+        width: 100%;
+        height: 100%;
+    }
+
+    .label {
+        border: 1px solid #dadada;
+    }
+}
