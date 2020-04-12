@@ -1,7 +1,7 @@
 
 .container {
-    height: 675px;
-    font-size: 14px;
+    height: 600px;
+    font-size: 15px;
 }
 
 .paymentContainer {
@@ -13,10 +13,7 @@
     display: flex;
     flex-direction: row;
     width: 400px;
-}
-
-.label {
-    width: 180px;
+    align-items: center;
 }
 
 .cardLabel {
@@ -25,7 +22,29 @@
 
 .checkbox {
     margin-right: 15px;
+    -webkit-appearance: none;
+    border: 1px solid grey;
+    padding: 9px;
+    outline: none;
 }
+
+.checkbox:checked {
+    content: "";
+    padding: 2px;
+    text-align: center;
+    position: relative;
+    border: solid #DD678A;
+    border-width: 0 3px 3px 0;
+    transform: rotate(35deg);
+    -webkit-transform: rotate(35deg);
+    -ms-transform: rotate(35deg);
+    width: 10px;
+    height: 20px;
+    bottom: 5px;
+    left: 5px;
+    margin-right: 25px;
+}
+
 
 .btnRow {
     display: flex;

@@ -4,9 +4,7 @@ import styles from './styles.module.scss';
 import ModalBilling from '../ModalBilling';
 
 interface Props {
-  merchant: string;
-  option: string;
-  className?: string;
+  purchaseType: string;
   handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   show: boolean;
 }
@@ -60,7 +58,7 @@ class Modal extends React.Component<Props, State> {
         <button className={"closeButton--close"} onClick={this.props.handleClose}> × </button> 
 
         {/* Pass in props here for name */}
-        <h2>Shunfa Bakery</h2>
+    <h2>Shunfa Bakery</h2>
         <p>Please select an amount and leave a message</p>
 
         <div className={styles.amountContainer}>
@@ -117,7 +115,8 @@ class Modal extends React.Component<Props, State> {
 
         <ModalBillingBox showBillModal={this.state.showBillModal} 
                          hideBillModal={this.hideBillingsModal} 
-                         donatedAmt={this.state.amount} />
+                         donatedAmt={this.state.amount} 
+                         purchaseType={this.props.purchaseType}/>
 
       </form>
     );

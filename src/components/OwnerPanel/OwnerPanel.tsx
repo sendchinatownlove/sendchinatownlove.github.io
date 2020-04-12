@@ -13,7 +13,8 @@ interface Props {
 interface State {
   current: number;
   need: number;
-  show: boolean
+  show: boolean;
+  purchaseType: string;
 }
 
 const PopupModal: any = PopUpModal;
@@ -26,14 +27,16 @@ class OwnerPanel extends React.Component<Props, State> {
         // these will be props fix throughout when passed thru 
         current: 4000,
         need: 5000,
-        show: false
+        show: false,
+        purchaseType: ""
       }
       this.showModal = this.showModal.bind(this);
       this.hideModal = this.hideModal.bind(this);
     }
 
-  showModal() {
-      this.setState({show: true})
+  showModal(event: any) {
+    let button = event.target.value
+    this.setState({show: true, purchaseType: button})
   }
 
   hideModal() {
@@ -58,12 +61,12 @@ class OwnerPanel extends React.Component<Props, State> {
         </div>
 
         <div className={styles.buttonContainer}>
-          <button className={classnames(styles.button, "button--filled")} onClick={this.showModal}>Donate</button>
-          {/* <button className={classnames(styles.button, "button--outlined")}>Get gift card</button> */}
-          <PopupModal merchant="Shunfa Bakery" option="Gift Card" className={classnames(styles.button, "button--outlined")}/>
+          <button value="donation" className={classnames(styles.button, "button--filled")} onClick={this.showModal}>Donate</button>
+          <button value="gift-card" className={classnames(styles.button, "button--outlined")} onClick={this.showModal}>Gift Card</button>
+          {/* <PopupModal merchant="Shunfa Bakery" option="Gift Card" className={classnames(styles.button, "button--outlined")}/> */}
         </div>
 
-        <ModalBox show={this.state.show} handleClose={this.hideModal}/>
+        <ModalBox show={this.state.show} handleClose={this.hideModal} purchaseType={this.state.purchaseType}/>
 
         <div className={styles.summaryContainer}>
           <div>
