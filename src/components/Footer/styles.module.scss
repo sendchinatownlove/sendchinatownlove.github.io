@@ -5,11 +5,12 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding: 43px 48px;
+  padding: 46px;
   background-color: #F7F7F7;
 
   @include for-tablet-portrait-up {
     justify-content: space-between;
+    height: 186px;
   }
 }
 
@@ -22,10 +23,15 @@
 }
 
 .links {
-  margin-bottom: 16px;
+  padding: 0;
+  list-style: none;
+  display: flex;
 
   @include for-tablet-portrait-up {
     order: 2;
+  }
+  @include for-phone-only {
+    flex-direction: column;
   }
 }
 
@@ -43,4 +49,12 @@
 
 footer span {
   margin-left: 24px;
+}
+
+.colorWhite {
+  color: white;
+}
+
+.bgColorDark {
+  background-color: #1E1E1E;
 }
