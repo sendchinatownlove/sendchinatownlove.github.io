@@ -1,7 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-import PopUpModal from '../PopupModal';
 import Modal from '../Modal';
 
 interface Props {
@@ -17,7 +16,6 @@ interface State {
   purchaseType: string;
 }
 
-const PopupModal: any = PopUpModal;
 const ModalBox: any = Modal;
 
 class OwnerPanel extends React.Component<Props, State> {
@@ -63,7 +61,6 @@ class OwnerPanel extends React.Component<Props, State> {
         <div className={styles.buttonContainer}>
           <button value="donation" className={classnames(styles.button, "button--filled")} onClick={this.showModal}>Donate</button>
           <button value="gift-card" className={classnames(styles.button, "button--outlined")} onClick={this.showModal}>Gift Card</button>
-          {/* <PopupModal merchant="Shunfa Bakery" option="Gift Card" className={classnames(styles.button, "button--outlined")}/> */}
         </div>
 
         <ModalBox show={this.state.show} handleClose={this.hideModal} purchaseType={this.state.purchaseType}/>

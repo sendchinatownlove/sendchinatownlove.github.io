@@ -5,7 +5,7 @@ import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 
 import styles from './styles.module.scss';
 import ModalConfirmation from '../ModalConfirmation';
-import CardSection from '../CheckoutForm/CardSection';
+import CardSection from './CardSection';
 
 interface Props {
   purchaseType: string;
