@@ -1,11 +1,15 @@
 
 .billFormContainer {
-    height: 625px;
+    height: 600px;
 }
 
 .billingsContainer {
     display: flex;
     flex-direction: column;
+}
+
+.addSpacing {
+    padding: 10px 0px;
 }
 
 .label {

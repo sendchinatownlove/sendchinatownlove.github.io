@@ -44,6 +44,7 @@ h3 {
   min-width: 150px;
   text-transform: uppercase;
   font-size: 14px;
+  outline: none;
 }
 
 .button {
@@ -65,6 +66,7 @@ h3 {
   width: 120px;
   border-radius: 75px;
   font-size: 12px;
+  outline: none;
 }
 
 .modalButton {
@@ -74,6 +76,7 @@ h3 {
     margin: 10px 0px;
     width: 50px;
     font-weight: bold;
+    outline: none;
   }
 
   &--outlined {
@@ -114,6 +117,7 @@ h3 {
   top: 40px;
   width: 40px;
   padding: 0;
+  outline: none;
 }
 
 .closeButton {
@@ -150,7 +154,7 @@ h3 {
   padding: 10px;
   margin: 10px 0px;
   font-size: 12px;
-
+  outline: none;
 }
 
 .modalInput {

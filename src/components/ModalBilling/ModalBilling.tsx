@@ -9,9 +9,7 @@ import ModalPayment from '../ModalPayment';
 const stripePromise = loadStripe('pk_test_5AByIibLOhR6WHL3Mwnmel3P00zm0pIDrD');
 
 interface Props {
-    merchant: string;
-    option: string;
-    className?: string;
+    purchaseType: string;
     handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
     hideBillModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
     showBillModal: boolean;
@@ -70,8 +68,8 @@ class ModalBilling extends React.Component<Props, State> {
             >
                 <button className={"closeButton--close"} onClick={this.props.handleClose}> × </button> 
 
-                <h2>Complete your donation</h2>
-                <p>Please add your payment information below</p>
+                <h2>Complete your {this.props.purchaseType === 'donation' ? "donation" : "gift card purchase"}</h2>
+                <div className={styles.addSpacing}>Please add your payment information below</div>
 
                 <div className={styles.billingsContainer}>
                     <h3>Billing Information</h3>
@@ -163,6 +161,7 @@ class ModalBilling extends React.Component<Props, State> {
                              city={this.state.city}
                              state={this.state.stateForm}
                              zipcode={this.state.zipcode}
+                             purchaseType={this.props.purchaseType}
                              />
         </Elements>
 
