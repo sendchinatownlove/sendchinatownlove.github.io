@@ -7,14 +7,16 @@ export const getSellers = async () => {
   // TO DO, fix expected type response
   let response: any = undefined;
 
-  // console.log('interactionManager.ts: ', { genericHeader });
-
   await axios
     .get('https://api.sendchinatownlove.com/sellers')
     .then((res) => {
+      // TO DO: fix response to success
       response = res;
     })
-    .catch((err) => console.log({ err }));
+    .catch((err) => {
+      // TO DO: fix response to error
+      console.log({ err });
+    });
 
   return response;
 };
@@ -26,9 +28,13 @@ export const getSeller = async () => {
   await axios
     .get('https://api.sendchinatownlove.com/sellers/test_kitchen')
     .then((res) => {
+      // TO DO: fix response to success
       response = res;
     })
-    .catch((err) => console.log);
+    .catch((err) => {
+      // TO DO: fix response to error
+      console.log({ err });
+    });
 
   return response;
 };
@@ -53,6 +59,7 @@ export const makePayment = async (
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
     .then(async (res) => {
+      // TO DO: fix response to success
       if (!stripe || !elements) return;
       else {
         const cardElement = elements!.getElement(CardElement);
@@ -88,4 +95,6 @@ export const makePayment = async (
         }
       }
     });
+
+  // TO DO: fix response to error
 };

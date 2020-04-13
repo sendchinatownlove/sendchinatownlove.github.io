@@ -12,9 +12,7 @@ class App extends React.Component<
   {},
   { sellers: []; sellersLoading: Boolean }
 > {
-  // add util method to fetch api data
-
-  // Leaving this as `any` type until we have some use case for typing it
+  // TO DO: Leaving this as `any` type until we have some use case for typing it
   constructor(props: any) {
     super(props);
     this.state = {
@@ -27,13 +25,11 @@ class App extends React.Component<
     const sellers: any = getSellers();
 
     console.log('App.tsx, componentWillMount: ', {
-      'this.state.merchants': this.state.sellers,
+      sellers,
     });
-    // this.setState({sellers})
   }
 
   render() {
-    console.log('App.tsx: ', { 'this.state.sellers': this.state.sellers });
     return (
       <Router history={history}>
         <Switch>

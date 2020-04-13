@@ -10,14 +10,10 @@ import styles from './styles.module.scss';
 import { getSeller } from '../../utilities/api';
 
 const MerchantPage: React.SFC = () => {
-  // creates global name variable
   let { id } = useParams();
-
-  console.log('MerchantPage.tsx', { id });
 
   // TO DO: implement component async pattern for api dep/loading state
   useEffect(() => {
-    // Update the document title using the browser API
     getSeller();
   }, []);
 
