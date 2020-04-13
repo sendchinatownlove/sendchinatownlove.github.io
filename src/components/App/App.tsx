@@ -34,6 +34,8 @@ class App extends React.Component<
       <Router history={history}>
         <Switch>
           <Route exact path="/" component={Home} />
+          {// TO DO: add router config for this route
+          }
           <Route path="/story/:id" component={MerchantPage} />
           <Route path="/about" component={About} />
         </Switch>
