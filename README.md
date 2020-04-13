@@ -17,6 +17,7 @@ You will also see any lint errors in the console.
 Builds the application and deploys to master branch, which is the branch that hosts Github user pages.
 
 ### `yarn format`
+
 Formats entire directory using Prettier.
 
 ### `yarn test`

@@ -1,4 +1,4 @@
-@import "../../responsive.scss";
+@import '../../responsive.scss';
 
 .container {
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
   flex-wrap: wrap;
   padding: 46px;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 
   @include for-tablet-portrait-up {
     justify-content: space-between;
@@ -56,5 +56,5 @@ footer span {
 }
 
 .bgColorDark {
-  background-color: #1E1E1E;
+  background-color: #1e1e1e;
 }

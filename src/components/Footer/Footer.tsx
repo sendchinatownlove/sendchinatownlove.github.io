@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 export type Theme = 'dark' | 'none';
 
 interface Props {
-  theme?: Theme
+  theme?: Theme;
 }
 
 function applyThemeColor(className: string, theme: Theme) {
@@ -31,9 +31,9 @@ function imgLogo(theme: Theme) {
 function Footer(props: Props) {
   const { theme = 'none' } = props;
 
-  const envelopeClass = applyThemeColor("fa fa-envelope", theme);
-  const instagramClass = applyThemeColor("fa fa-instagram", theme);
-  const facebookClass = applyThemeColor("fa fa-facebook", theme);
+  const envelopeClass = applyThemeColor('fa fa-envelope', theme);
+  const instagramClass = applyThemeColor('fa fa-instagram', theme);
+  const facebookClass = applyThemeColor('fa fa-facebook', theme);
   const linkClass = applyThemeColor(styles.link, theme);
   const containerClass = applyThemeBackgroundColor(styles.container, theme);
 
@@ -42,10 +42,7 @@ function Footer(props: Props) {
       <ul className={styles.links}>
         <li>
           <span className={envelopeClass} />
-          <a
-            className={linkClass}
-            href="mailto:sendchinatownlove@gmail.com"
-          >
+          <a className={linkClass} href="mailto:sendchinatownlove@gmail.com">
             Email
           </a>
         </li>
@@ -65,10 +62,14 @@ function Footer(props: Props) {
             href="https://www.facebook.com/Send-Chinatown-Love-100872288240891/"
           >
             Facebook
-        </a>
+          </a>
         </li>
       </ul>
-      <img className={styles.logo} src={imgLogo(theme)} alt="send chinatown love" />
+      <img
+        className={styles.logo}
+        src={imgLogo(theme)}
+        alt="send chinatown love"
+      />
     </footer>
   );
 }

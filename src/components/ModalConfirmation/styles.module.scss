@@ -1,25 +1,23 @@
-
 .container {
-    height: 600px;
+  height: 600px;
 }
 
 form img {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .finishBtn {
-    position: relative;
-    bottom: -35px;
-    float: right;
-    right: 0px;
+  position: relative;
+  bottom: -35px;
+  float: right;
+  right: 0px;
 }
 
 @media only screen and (max-width: 799px) {
-    .container {
-        width: 85vw;
-        height: 75vh;
-        overflow-y: hidden;
-    }
+  .container {
+    width: 85vw;
+    height: 75vh;
+    overflow-y: hidden;
+  }
 }
-

@@ -23,12 +23,12 @@ const StoreInfo: React.SFC<Props> = ({
   phoneNumber,
   introduction,
   className,
-  storeDetailsProps
+  storeDetailsProps,
 }) => {
   const detailsProps = {
     ...storeDetailsProps,
-    className: styles.storeDetails
-  }
+    className: styles.storeDetails,
+  };
   return (
     <section className={classnames(styles.container, className)}>
       <div className={styles.nationality}>{nationality}</div>

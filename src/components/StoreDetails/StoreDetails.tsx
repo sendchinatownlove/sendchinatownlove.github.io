@@ -10,7 +10,11 @@ export interface Props {
   storeMenuProps: StoreMenuProps;
 }
 
-const StoreDetails: React.SFC<Props> = ({ storeStoryProps, storeMenuProps, className }) => {
+const StoreDetails: React.SFC<Props> = ({
+  storeStoryProps,
+  storeMenuProps,
+  className,
+}) => {
   return (
     <section className={className}>
       <nav className={styles.navLinkContainer}>
@@ -41,7 +45,7 @@ const StoreDetails: React.SFC<Props> = ({ storeStoryProps, storeMenuProps, class
           <StoreStory {...storeStoryProps} />
         </Route>
         <Route path={`/menu`}>
-          <StoreMenu {...storeMenuProps}/>
+          <StoreMenu {...storeMenuProps} />
         </Route>
         <Route path={`/photos`}>
           {/* NEED TO ADD IN STORE COMPONENT HERE WHEN MADE! */}
