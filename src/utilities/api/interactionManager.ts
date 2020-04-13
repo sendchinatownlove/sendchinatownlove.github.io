@@ -14,7 +14,23 @@ export const getSellers = async () => {
   // console.log('interactionManager.ts: ', { genericHeader });
 
   await axios
-    .get('https://api.sendchinatownlove.com/sellers')
+    .get('http://localhost:5000/sellers')
+    .then((res) => {
+      response = res;
+    })
+    .catch((err) => console.log);
+
+  return response;
+};
+
+export const getSeller = async () => {
+  // TO DO, fix expected type response
+  let response: any = undefined;
+
+  // console.log('interactionManager.ts: ', { genericHeader });
+
+  await axios
+    .get('http://localhost:5000/sellers/test_kitchen')
     .then((res) => {
       response = res;
     })
