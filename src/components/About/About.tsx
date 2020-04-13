@@ -29,11 +29,8 @@ const About: React.SFC = () => {
             </p>
           </div>
           <a href="mailto:sendchinatownlove@gmail.com">
-            <button className={styles.ctaButton}>Partner with us</button>
+            <button className={styles.ctaButton}>Work with us</button>
           </a>
-          <span className={styles.ctaSubtext}>
-            We partner with local businesses
-          </span>
         </div>
       </main>
       <Footer />
