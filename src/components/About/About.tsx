@@ -4,8 +4,8 @@ import Footer from '../Footer';
 
 const About: React.SFC = () => {
   return (
-    <div>
-      <main className={styles.container}>
+    <div className={styles.container}>
+      <main>
         <div className={styles.introContainer}>
           <h1 className={styles.headerText}>Send Chinatown Love</h1>
           <div className={styles.introTextSection}>
@@ -19,9 +19,7 @@ const About: React.SFC = () => {
               similar effects of COVID-19 on sales. Immigrant owners who
               typically don’t speak English and their dependence on a cash-only
               system have put them at an even greater disadvantage of surviving
-              through this pandemic.
-            </p>
-            <p className={styles.introText}>
+              through this pandemic. <br></br> <br></br>
               They were there for you on those late 4am nights you barely
               remember, or the next morning when you were desperately seeking a
               fresh bowl of noodle soup and cold tea. To all the tourists and

@@ -38,38 +38,40 @@ function Footer(props: Props) {
   const containerClass = applyThemeBackgroundColor(styles.container, theme);
 
   return (
-    <footer className={containerClass}>
-      <img
-        className={styles.logo}
-        src={imgLogo(theme)}
-        alt="send chinatown love"
-      />
-      <ul className={styles.links}>
-        <li>
-          <span className={envelopeClass} />
-          <a className={linkClass} href="mailto:sendchinatownlove@gmail.com">
-            Email
-          </a>
-        </li>
-        <li>
-          <span className={instagramClass} />
-          <a
-            className={linkClass}
-            href="https://instagram.com/sendchinatownlove"
-          >
-            Instagram
-          </a>
-        </li>
-        <li>
-          <span className={facebookClass} />
-          <a
-            className={linkClass}
-            href="https://www.facebook.com/Send-Chinatown-Love-100872288240891/"
-          >
-            Facebook
-          </a>
-        </li>
-      </ul>
+    <footer>
+      <div className={containerClass}>
+        <img
+          className={styles.logo}
+          src={imgLogo(theme)}
+          alt="send chinatown love"
+        />
+        <ul className={styles.links}>
+          <li>
+            <span className={envelopeClass} />
+            <a className={linkClass} href="mailto:sendchinatownlove@gmail.com">
+              Email
+            </a>
+          </li>
+          <li>
+            <span className={instagramClass} />
+            <a
+              className={linkClass}
+              href="https://instagram.com/sendchinatownlove"
+            >
+              Instagram
+            </a>
+          </li>
+          <li>
+            <span className={facebookClass} />
+            <a
+              className={linkClass}
+              href="https://www.facebook.com/Send-Chinatown-Love-100872288240891/"
+            >
+              Facebook
+            </a>
+          </li>
+        </ul>
+      </div>
     </footer>
   );
 }
