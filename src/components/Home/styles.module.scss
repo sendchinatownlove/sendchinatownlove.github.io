@@ -28,6 +28,10 @@
   font-size: 48px;
   font-family: Avenir, sans-serif;
   margin-bottom: 40px;
+
+  @include for-phone-only {
+    line-height: 1.2;
+  }
 }
 
 .introText {
@@ -36,6 +40,10 @@
   font-size: 24px;
   font-family: Avenir, sans-serif;
   margin-bottom: 75px;
+
+  @include for-phone-only {
+    line-height: 1.4;
+  }
 }
 
 .ctaButton {
