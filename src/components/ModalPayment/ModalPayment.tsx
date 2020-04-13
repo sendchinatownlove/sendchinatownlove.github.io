@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
 import axios from 'axios';
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
@@ -29,6 +29,9 @@ const ModalPayment = ({purchaseType, handleClose, hidePaymentModal, showPayModal
   const showConfirmModal = () => setIsShown(true);
   const [isChecked, setChecked] = useState(false);
   const checkAgreement = () => isChecked ? setChecked(false) : setChecked(true);
+  const sellerId = window.location.pathname.split("/")[2];
+
+  const name1 = sellerId.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ');
 
   const stripe = useStripe();
   const elements = useElements();
@@ -39,19 +42,20 @@ const ModalPayment = ({purchaseType, handleClose, hidePaymentModal, showPayModal
     const lineItems = { 
       "amount": Number(donatedAmt) * 100,
       "currency": "usd",
-      "name": "Gift Card",
+      "item_type": "donation",
       "quantity": 1,
-      "description": `$${donatedAmt} to Shunfa Bakery`
+      "seller_id": sellerId
     }
 
     // returns stripe payment intent 
     // *** NOTE: change url to whatever is the actual url when ready *** 
     const res = await axios.post('http://localhost:3001/charges', {
       line_items: [lineItems],
-      merchant_id: "hello-world"
-    }, {
-      headers: { 'Access-Control-Allow-Origin': '*' }
-    }).then(async (res) => {
+      email: "testing@email.com"
+      }
+    ).then(async (res) => {
+        console.log("made the res", res)
+
         if (!stripe || !elements) return;
         else {
           const cardElement = elements!.getElement(CardElement);
@@ -71,6 +75,8 @@ const ModalPayment = ({purchaseType, handleClose, hidePaymentModal, showPayModal
               },
             }
           });
+
+          console.log('made the payment', result)
 
           if (result.error) {
             console.log(result.error.message);
@@ -99,7 +105,7 @@ const ModalPayment = ({purchaseType, handleClose, hidePaymentModal, showPayModal
               <CardSection />  <br/>
 
               <h3>{purchaseType === 'donation' ? "Donation" : "Gift card"} details</h3>
-              <span>Donate <b>${donatedAmt}</b> to Shunfa Bakery</span> <p />
+              <span>{purchaseType === 'donation' ? "Donate" : "Gift card purchase of "} <b>${donatedAmt}</b> to {name1}</span> <p />
 
               <div className={styles.row}>
                   <input type="checkbox" name="checkbox" className={styles.checkbox} value="Agree" onClick={checkAgreement}/>

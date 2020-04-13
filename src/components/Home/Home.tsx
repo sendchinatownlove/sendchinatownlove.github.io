@@ -9,7 +9,7 @@ const Home: React.SFC = () => {
       <main className={styles.contentContainer}>
         <div className={styles.introContainer}>
           <h1 className={styles.headerText}>Chinatown needs your help</h1>
-          <p className={styles.introText}>Help local businesses survive the COVID-19 pandemic and digitize them the future</p>
+          <p className={styles.introText}>Help local businesses survive the COVID-19 pandemic and digitize them for the future</p>
           <Link to="/about">
             <button className={styles.ctaButton}>Learn More</button>
           </Link>
