@@ -5,25 +5,18 @@ import {loadStripe} from '@stripe/stripe-js';
 
 import styles from './styles.module.scss';
 import ModalPayment from '../ModalPayment';
+// TO DO: Fix relative paths
+import { Merchant as State } from '../../utilities/api'
 
+// TO DO: I assume this is our api code or someting.. marked to fix.
 const stripePromise = loadStripe('pk_test_5AByIibLOhR6WHL3Mwnmel3P00zm0pIDrD');
 
-interface Props {
+type Props = {
     purchaseType: string;
     handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
     hideBillModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
     showBillModal: boolean;
     donatedAmt: number;
-}
-
-interface State {
-  name: string
-  email: string
-  address: string
-  city: string
-  stateForm: string 
-  zipcode: string
-  showPayModal: boolean
 }
 
 const ModalPaymentBox: any = ModalPayment;
@@ -155,12 +148,12 @@ class ModalBilling extends React.Component<Props, State> {
                              handleClose={this.props.handleClose} 
                              hidePaymentModal={this.hidePaymentModal}
                              donatedAmt={this.props.donatedAmt}
-                             name={this.state.name} 
+                             merchant={this.state} 
                              email={this.state.email}
-                             address={this.state.address}
-                             city={this.state.city}
-                             state={this.state.stateForm}
-                             zipcode={this.state.zipcode}
+                            //  address={this.state.address}
+                            //  city={this.state.city}
+                            //  stateForm={this.state.stateForm}
+                            //  zipcode={this.state.zipcode}
                              purchaseType={this.props.purchaseType}
                              />
         </Elements>

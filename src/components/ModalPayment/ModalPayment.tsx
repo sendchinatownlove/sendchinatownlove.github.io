@@ -1,87 +1,44 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import axios from 'axios';
-import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 
 import styles from './styles.module.scss';
+import { makePayment, PaymentParams } from '../../utilities/api'
 import ModalConfirmation from '../ModalConfirmation';
 import CardSection from './CardSection';
+import { Merchant } from '../../utilities/api'
 
-interface Props {
+type Props = {
   purchaseType: string;
   handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   hidePaymentModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
   showPayModal: boolean;
   donatedAmt: number;
-  name: string;
-  email: string;
-  address: string;
-  city: string;
-  stateForm: string;
-  zipcode: string;
+  merchant: Merchant;
 }
 
 const ModalConfirmBox: any = ModalConfirmation
 
-const ModalPayment = ({purchaseType, handleClose, hidePaymentModal, showPayModal, donatedAmt, name, email, address, city, stateForm, zipcode}: Props) => {
+const ModalPayment = ({purchaseType, handleClose, hidePaymentModal, showPayModal, donatedAmt, merchant}: Props) => {
+
+  const payment: PaymentParams = { 
+    "amount": Number(donatedAmt) * 100,
+    "currency": "usd",
+    "name": "Gift Card",
+    "quantity": 1,
+    "description": `$${donatedAmt} to Shunfa Bakery`
+  }
 
   const [isShown, setIsShown] = useState(false);
   const showConfirmModal = () => setIsShown(true);
   const [isChecked, setChecked] = useState(false);
   const checkAgreement = () => isChecked ? setChecked(false) : setChecked(true);
 
-  const stripe = useStripe();
-  const elements = useElements();
-
   const handleSubmit = async (event:any) => {
     event.preventDefault();
 
-    const lineItems = { 
-      "amount": Number(donatedAmt) * 100,
-      "currency": "usd",
-      "name": "Gift Card",
-      "quantity": 1,
-      "description": `$${donatedAmt} to Shunfa Bakery`
-    }
-
-    // returns stripe payment intent 
-    // *** NOTE: change url to whatever is the actual url when ready *** 
-    const res = await axios.post('http://localhost:3001/charges', {
-      line_items: [lineItems],
-      merchant_id: "hello-world"
-    }, {
-      headers: { 'Access-Control-Allow-Origin': '*' }
-    }).then(async (res) => {
-        if (!stripe || !elements) return;
-        else {
-          const cardElement = elements!.getElement(CardElement);
-          const result = await stripe!.confirmCardPayment(`${res.data.client_secret}`, {
-            payment_method: {
-              card: cardElement!,
-              billing_details: {
-                  name: name,
-                  email: email,
-                  address: {
-                    city,
-                    state: stateForm,
-                    country: "US",
-                    postal_code: zipcode,
-                    line1: address
-                  }
-              },
-            }
-          });
-
-          if (result.error) {
-            console.log(result.error.message);
-          } else {
-              if (result.paymentIntent?.status === 'succeeded') {
-                console.log(result.paymentIntent?.status, 'The payment has been processed!')
-                showConfirmModal() // shows confirmation modal box 
-              }
-          }
-        }
-      })
+    // returns stripe payment intent
+    const res = await makePayment(payment, merchant)
+    showConfirmModal() // shows confirmation modal box 
   };
 
     return(

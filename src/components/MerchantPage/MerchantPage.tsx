@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useParams } from 'react-router-dom'
 import HeroBanner from '../HeroBanner';
 import Footer from '../Footer';
 import { sampleMerchant } from './sample-merchant';
@@ -7,6 +8,9 @@ import OwnerPanel from '../OwnerPanel';
 import styles from './styles.module.scss';
 
 const MerchantPage: React.SFC = () => {
+  // creates global name variable
+  let { name } = useParams();
+
   const storeInfoProps = {
     ...sampleMerchant.storeInfo,
     storeDetailsProps: {

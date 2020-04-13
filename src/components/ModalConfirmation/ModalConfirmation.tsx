@@ -8,7 +8,7 @@ interface Props {
     showConfirmModal: boolean;
 }
 
-const ModalConfirmation = ({ handleClose, showConfirmModal}: Props) => {
+const ModalConfirmation: React.SFC<Props> = ({ handleClose, showConfirmModal}) => {
     return(
       <form id="payment-form" 
             className={classnames(styles.container, "modalForm--form")}
