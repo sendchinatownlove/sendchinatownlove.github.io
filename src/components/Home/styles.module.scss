@@ -30,7 +30,7 @@
 
 
 .introContainer {
-  padding: 15% 0 0 10%;
+  padding: 10% 0 0 10%;
 
   @include for-phone-only {
     padding: 20% 0 0 10%;
@@ -39,14 +39,15 @@
 
 .headerText {
   color: white;
-  font-weight: 900;
-  font-size: 48px;
+  font-weight: 500;
+  font-size: 40px;
   font-family: Avenir, sans-serif;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 
   @include for-phone-only {
     font-size: 32px;
     line-height: 32px;
+    width: 90%;
     margin-bottom: 24px;
   }
 }
@@ -54,12 +55,13 @@
 .introText {
   color: white;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 16px;
   font-family: Avenir, sans-serif;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
+  width: 65%;
 
   @include for-phone-only {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 20px;
     width: 90%;
     margin-bottom: 24px;
@@ -72,10 +74,10 @@
   border: none;
   border-radius: 100px;
   width: 200px;
-  height: 64px;
+  height: 56px;
   font-size: 16px;
   font-family: Avenir, sans-serif;
-  font-weight: 650;
+  font-weight: 500;
   cursor: pointer;
 
   @include for-phone-only {
