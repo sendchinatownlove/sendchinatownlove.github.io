@@ -1,0 +1,87 @@
+
+.billFormContainer {
+    height: 600px;
+}
+
+.billingsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.addSpacing {
+    padding: 10px 0px;
+}
+
+.label {
+    font-size: 12px;
+}
+
+.email:invalid {
+    border: 1px solid #DD678A;
+}
+
+.address {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.city {
+    width: 300px;
+}
+
+.state {
+    width: 75px;
+}
+
+.zipcode {
+    width: 150px;
+}
+
+.btnRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    bottom: -25px;
+}
+
+@media only screen and (max-width: 799px) {
+    .billFormContainer {
+        width: 85vw;
+        height: 75vh;
+        font-size: 13px;
+        overflow-y: scroll;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .label {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .billFormContainer {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .label {
+        border: 1px solid #dadada;
+    }
+}

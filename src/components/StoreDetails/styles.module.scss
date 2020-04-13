@@ -18,14 +18,15 @@
   text-transform: uppercase;
   font-size: 18px;
   letter-spacing: 0.1em;
-  margin: 12px 10px;
+  margin: 12px 15px;
+  color: black;
 
   &:first-child {
     margin-left: 0;
   }
 
   &--active {
-    color: #A8192E;
-    font-weight: 800;
+    color: #DD678A;
+    font-weight: 900;
   }
 }
