@@ -14,8 +14,8 @@
   display: flex;
   background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0) 100%
+      rgba(40, 40, 40, 0.4) 0%,
+      rgba(0, 0, 0, 0.2) 100%
     ),
     url(./images/chinatown-splash.png);
   background-size: cover;
@@ -47,6 +47,7 @@
   @include for-phone-only {
     font-size: 32px;
     line-height: 32px;
+    margin-bottom: 24px;
   }
 }
 
@@ -55,19 +56,20 @@
   font-weight: 500;
   font-size: 24px;
   font-family: Avenir, sans-serif;
-  margin-bottom: 75px;
+  margin-bottom: 80px;
 
   @include for-phone-only {
     font-size: 16px;
-    line-height: 24px;
+    line-height: 20px;
     width: 90%;
+    margin-bottom: 24px;
   }
 }
 
 .ctaButton {
   color: white;
   background-color: black;
-  border-color: white;
+  border: none;
   border-radius: 100px;
   width: 200px;
   height: 64px;
