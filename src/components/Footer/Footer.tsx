@@ -23,9 +23,9 @@ function applyThemeBackgroundColor(className: string, theme: Theme) {
 
 function imgLogo(theme: Theme) {
   if (theme === 'dark') {
-    return require(`./image/logo-dark.png`);
+    return require(`./image/logo.svg`);
   }
-  return require(`./image/logo.png`);
+  return require(`./image/logo.svg`);
 }
 
 function Footer(props: Props) {
@@ -39,6 +39,11 @@ function Footer(props: Props) {
 
   return (
     <footer className={containerClass}>
+      <img
+        className={styles.logo}
+        src={imgLogo(theme)}
+        alt="send chinatown love"
+      />
       <ul className={styles.links}>
         <li>
           <span className={envelopeClass} />
@@ -65,11 +70,6 @@ function Footer(props: Props) {
           </a>
         </li>
       </ul>
-      <img
-        className={styles.logo}
-        src={imgLogo(theme)}
-        alt="send chinatown love"
-      />
     </footer>
   );
 }

@@ -3,23 +3,38 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 100%;
+  max-width: 1480px; 
+  margin: 0 auto; 
 }
 
 .contentContainer {
   width: 100%;
-  height: 1000px;
+  height: 1500px;
   display: flex;
-  background-image: linear-gradient(
+  background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.8) 0%,
       rgba(0, 0, 0, 0) 100%
     ),
-    url(./images/chinatown-splash.jpg);
+    url(./images/chinatown-splash.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+
+  @include for-phone-only {
+    height: 732px;
+    background-position: center center;
+  }
+}
+
+
+.introContainer {
+  padding: 15% 0 0 10%;
+
+  @include for-phone-only {
+    padding: 20% 0 0 10%;
+  }
 }
 
 .headerText {
@@ -27,7 +42,12 @@
   font-weight: 900;
   font-size: 48px;
   font-family: Avenir, sans-serif;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
+
+  @include for-phone-only {
+    font-size: 32px;
+    line-height: 32px;
+  }
 }
 
 .introText {
@@ -35,22 +55,31 @@
   font-weight: 500;
   font-size: 24px;
   font-family: Avenir, sans-serif;
-  margin-bottom: 75px;
+  margin-bottom: 24px;
+  width: 75%;
+
+  @include for-phone-only {
+    font-size: 16px;
+    line-height: 24px;
+    width: 90%;
+  }
 }
 
 .ctaButton {
   color: white;
-  background-color: #dd678a;
+  background-color: #1e1e1e;
+  border-color: white;
   border-radius: 100px;
-  border: none;
   width: 200px;
   height: 64px;
-  font-size: 18px;
+  font-size: 16px;
   font-family: Avenir, sans-serif;
-  font-weight: 800;
+  font-weight: 650;
   cursor: pointer;
-}
 
-.introContainer {
-  margin: 10%;
+  @include for-phone-only {
+    font-size: 12px;
+    width: 160px;
+    height: 40px;
+  }
 }
