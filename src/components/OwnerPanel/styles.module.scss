@@ -34,7 +34,7 @@ $container-size: 150px;
 }
 
 .myBar {
-  background-color: #DD678A;
+  background-color: #dd678a;
   z-index: 5;
   height: 12px;
 }
@@ -47,7 +47,7 @@ $container-size: 150px;
 .button {
   margin: 5px 10px;
   font-weight: 500;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
 }
 
 .summaryContainer {
@@ -55,7 +55,6 @@ $container-size: 150px;
   border-top: 1px solid #dedede;
   border-bottom: 1px solid #dedede;
   padding: 30px 20px;
-  
 }
 
 .storeSummaryLabel {
@@ -65,11 +64,11 @@ $container-size: 150px;
 .fa {
   width: 50px;
   height: 50px;
-  background-color: #DFDFDF;
+  background-color: #dfdfdf;
   color: white;
   text-align: center;
   text-decoration: none;
-  border: 1px solid #DFDFDF;
+  border: 1px solid #dfdfdf;
   border-radius: 50%;
   padding: 15px;
   margin: 25px 10px;
@@ -77,6 +76,6 @@ $container-size: 150px;
 }
 
 .fa:hover {
-  background-color: #DD678A;
-  border: 1px solid #DD678A;
+  background-color: #dd678a;
+  border: 1px solid #dd678a;
 }

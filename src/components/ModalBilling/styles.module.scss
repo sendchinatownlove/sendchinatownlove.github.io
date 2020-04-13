@@ -1,75 +1,73 @@
-
 .billFormContainer {
-    height: 600px;
+  height: 600px;
 }
 
 .billingsContainer {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .addSpacing {
-    padding: 10px 0px;
+  padding: 10px 0px;
 }
 
 .label {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .email:invalid {
-    border: 1px solid #DD678A;
+  border: 1px solid #dd678a;
 }
 
 .address {
-    width: 100%;
+  width: 100%;
 }
 
 .row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .city {
-    width: 300px;
+  width: 300px;
 }
 
 .state {
-    width: 75px;
+  width: 75px;
 }
 
 .zipcode {
-    width: 150px;
+  width: 150px;
 }
 
 .btnRow {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: relative;
-    bottom: -25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  bottom: -25px;
 }
 
 @media only screen and (max-width: 799px) {
-    .billFormContainer {
-        width: 85vw;
-        height: 75vh;
-        font-size: 13px;
-        overflow-y: scroll;
-    }
+  .billFormContainer {
+    width: 85vw;
+    height: 75vh;
+    font-size: 13px;
+    overflow-y: scroll;
+  }
 
-    .row {
-        flex-direction: column;
-    }
+  .row {
+    flex-direction: column;
+  }
 
-    .label {
-        width: 100%;
-    }
+  .label {
+    width: 100%;
+  }
 }
-

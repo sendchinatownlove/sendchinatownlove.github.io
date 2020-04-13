@@ -11,7 +11,7 @@ export interface Props {
   menuItems: Item[];
 }
 
-const StoreMenu: React.SFC<Props> = ({menuItems}) => {
+const StoreMenu: React.SFC<Props> = ({ menuItems }) => {
   return (
     <section>
       {menuItems.map((item, index) => {

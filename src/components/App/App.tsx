@@ -4,27 +4,41 @@ import MerchantPage from '../MerchantPage';
 import About from '../About';
 import { createBrowserHistory } from 'history';
 import { Router, Switch, Route } from 'react-router-dom';
+import { getSellers } from '../../utilities/api';
 
 const history = createBrowserHistory();
 
-class App extends React.Component<{}> {
+class App extends React.Component<
+  {},
+  { sellers: []; sellersLoading: Boolean }
+> {
   // add util method to fetch api data
 
   // Leaving this as `any` type until we have some use case for typing it
   constructor(props: any) {
-    super(props)
+    super(props);
     this.state = {
-      vendors: [],
-      vendorsLoading: false
-    }
+      sellers: [],
+      sellersLoading: false,
+    };
+  }
+
+  componentDidMount() {
+    const sellers: any = getSellers();
+
+    console.log('App.tsx, componentWillMount: ', {
+      'this.state.merchants': this.state.sellers,
+    });
+    // this.setState({sellers})
   }
 
   render() {
+    console.log('App.tsx: ', { 'this.state.sellers': this.state.sellers });
     return (
       <Router history={history}>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/story/:name" component={MerchantPage} />
+          <Route path="/story/:id" component={MerchantPage} />
           <Route path="/about" component={About} />
         </Switch>
       </Router>

@@ -1,4 +1,4 @@
-@import "../../responsive";
+@import '../../responsive';
 
 .container {
   display: flex;
@@ -11,11 +11,15 @@
   width: 100%;
   height: 1000px;
   display: flex;
-  background-image:     linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%),
-                        url(./images/chinatown-splash.jpg);
-  background-size:      cover;
-  background-repeat:    no-repeat;
-  background-position:  center center;
+  background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    url(./images/chinatown-splash.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .headerText {
@@ -36,7 +40,7 @@
 
 .ctaButton {
   color: white;
-  background-color: #DD678A;
+  background-color: #dd678a;
   border-radius: 100px;
   border: none;
   width: 200px;

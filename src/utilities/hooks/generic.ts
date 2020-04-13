@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, } from 'react'
+import { useCallback, useEffect, useState } from 'react';
 
 // Hook
 const useAsync = (asyncFunction, immediate = true) => {
@@ -15,8 +15,8 @@ const useAsync = (asyncFunction, immediate = true) => {
     setValue(null);
     setError(null);
     return asyncFunction()
-      .then(response => setValue(response))
-      .catch(error => setError(error))
+      .then((response) => setValue(response))
+      .catch((error) => setError(error))
       .finally(() => setPending(false));
   }, [asyncFunction]);
 

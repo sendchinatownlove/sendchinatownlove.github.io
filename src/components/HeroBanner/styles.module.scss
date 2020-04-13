@@ -1,4 +1,3 @@
-
 .container {
   width: 100%;
   border-bottom: 2px solid #eeeeee;
@@ -20,7 +19,6 @@
   padding-left: 25px;
 }
 
-
 // mobile css down below
 @media only screen and (max-width: 899px) {
   .container {
@@ -30,7 +28,7 @@
   .image {
     margin: 0;
   }
-  
+
   .header {
     font-size: 2em;
   }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 import HeroBanner from '../HeroBanner';
 import Footer from '../Footer';
 import { sampleMerchant } from './sample-merchant';
@@ -9,7 +9,9 @@ import styles from './styles.module.scss';
 
 const MerchantPage: React.SFC = () => {
   // creates global name variable
-  let { name } = useParams();
+  let { id } = useParams();
+
+  console.log('MerchantPage.tsx', { id });
 
   const storeInfoProps = {
     ...sampleMerchant.storeInfo,
@@ -19,7 +21,7 @@ const MerchantPage: React.SFC = () => {
       },
       storeMenuProps: {
         menuItems: sampleMerchant.menuItems,
-      }
+      },
     },
     className: styles.storeInfo,
   };
