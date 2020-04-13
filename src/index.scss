@@ -1,9 +1,10 @@
 $default-button-color: black;
 
 body {
+  background-color: #f3f3f3;
   margin: 0;
-  font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -51,7 +52,7 @@ h3 {
   &--filled {
     @include base-button;
     color: white;
-    background-color: $default-button-color
+    background-color: $default-button-color;
   }
 
   &--outlined {
@@ -81,8 +82,8 @@ h3 {
 
   &--outlined {
     @include modal-button;
-    border: 1px solid #DD678A;
-    color: #DD678A;
+    border: 1px solid #dd678a;
+    color: #dd678a;
     border-radius: 25px;
     margin: 10px 0px;
   }
@@ -93,18 +94,20 @@ h3 {
     background-color: $default-button-color;
     color: white;
     font-weight: bold;
-    letter-spacing: .1em;
+    letter-spacing: 0.1em;
   }
 
-  &--filled:disabled, &--outline:disabled {
+  &--filled:disabled,
+  &--outline:disabled {
     background-color: grey;
     border: 1px solid grey;
   }
 
-  &--filled:focus, &--outlined:focus {
+  &--filled:focus,
+  &--outlined:focus {
     color: white;
-    background-color: #DD678A;
-    border: 1px solid #DD678A;
+    background-color: #dd678a;
+    border: 1px solid #dd678a;
   }
 }
 

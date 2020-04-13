@@ -1,25 +1,33 @@
-@import "../../responsive.scss";
+@import '../../responsive.scss';
 
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding: 46px;
   background-color: #F7F7F7;
+  padding: 0 40px 0 40px;
 
   @include for-tablet-portrait-up {
     justify-content: space-between;
-    height: 186px;
+    height: 120px;
+  }
+  @include for-phone-only {
+    padding: 0 16px 0 16px;
+    height: 80px;
   }
 }
 
 .logo {
-  height: 100px;
+  height: 64px;
 
   @include for-tablet-portrait-up {
     order: 1;
   }
+  @include for-phone-only {
+    height: 40px;
+  }
+  
 }
 
 .links {
@@ -31,7 +39,7 @@
     order: 2;
   }
   @include for-phone-only {
-    flex-direction: column;
+    flex-direction: row;
   }
 }
 
@@ -45,6 +53,9 @@
   &:hover {
     text-decoration: underline;
   }
+  @include for-phone-only {
+    display: none;
+  }
 }
 
 footer span {
@@ -52,9 +63,9 @@ footer span {
 }
 
 .colorWhite {
-  color: white;
+  color:black;
 }
 
 .bgColorDark {
-  background-color: #1E1E1E;
+  background-color: #f7f7f7;
 }

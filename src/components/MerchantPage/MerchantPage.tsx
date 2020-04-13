@@ -1,12 +1,22 @@
 import * as React from 'react';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import HeroBanner from '../HeroBanner';
 import Footer from '../Footer';
 import { sampleMerchant } from './sample-merchant';
 import StoreInfo from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import styles from './styles.module.scss';
+import { getSeller } from '../../utilities/api';
 
 const MerchantPage: React.SFC = () => {
+  let { id } = useParams();
+
+  // TO DO: implement component async pattern for api dep/loading state
+  useEffect(() => {
+    getSeller();
+  }, []);
+
   const storeInfoProps = {
     ...sampleMerchant.storeInfo,
     storeDetailsProps: {
@@ -15,7 +25,7 @@ const MerchantPage: React.SFC = () => {
       },
       storeMenuProps: {
         menuItems: sampleMerchant.menuItems,
-      }
+      },
     },
     className: styles.storeInfo,
   };
