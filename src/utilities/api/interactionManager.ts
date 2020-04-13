@@ -1,11 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { CardElement } from '@stripe/react-stripe-js';
 import { Merchant, PaymentParams } from './types';
-
-// const genericHeader = {
-//   headers: { 'Access-Control-Allow-Origin': '*' },
-// };
 
 export const getSellers = async () => {
   // TO DO, fix expected type response
@@ -14,11 +10,11 @@ export const getSellers = async () => {
   // console.log('interactionManager.ts: ', { genericHeader });
 
   await axios
-    .get('http://localhost:5000/sellers')
+    .get('https://api.sendchinatownlove.com/sellers')
     .then((res) => {
       response = res;
     })
-    .catch((err) => console.log);
+    .catch((err) => console.log({ err }));
 
   return response;
 };
@@ -27,10 +23,8 @@ export const getSeller = async () => {
   // TO DO, fix expected type response
   let response: any = undefined;
 
-  // console.log('interactionManager.ts: ', { genericHeader });
-
   await axios
-    .get('http://localhost:5000/sellers/test_kitchen')
+    .get('https://api.sendchinatownlove.com/sellers/test_kitchen')
     .then((res) => {
       response = res;
     })
