@@ -18,7 +18,7 @@ const Home: React.SFC = () => {
           </Link>
         </div>
       </main>
-      <Footer theme={'dark'} />
+      <Footer />
     </div>
   );
 };
