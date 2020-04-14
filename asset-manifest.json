@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8fa96a31.chunk.css",
+    "main.js": "/static/js/main.4ff69270.chunk.js",
+    "main.js.map": "/static/js/main.4ff69270.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f7beece5.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f7beece5.js.map",
+    "static/js/2.078e524e.chunk.js": "/static/js/2.078e524e.chunk.js",
+    "static/js/2.078e524e.chunk.js.map": "/static/js/2.078e524e.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.f6e25ae2e4368a3441e927ec7b98770b.js": "/precache-manifest.f6e25ae2e4368a3441e927ec7b98770b.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.8fa96a31.chunk.css.map": "/static/css/main.8fa96a31.chunk.css.map",
+    "static/js/2.078e524e.chunk.js.LICENSE.txt": "/static/js/2.078e524e.chunk.js.LICENSE.txt",
+    "static/media/chinatown-logo.png": "/static/media/chinatown-logo.349de0ef.png",
+    "static/media/styles.module.scss": "/static/media/chinatown-splash.67dd7391.png",
+    "static/media/logo.svg": "/static/media/logo.909f1479.svg",
+    "static/media/sample-menu-item.png": "/static/media/sample-menu-item.18cdfea7.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f7beece5.js",
+    "static/js/2.078e524e.chunk.js",
+    "static/css/main.8fa96a31.chunk.css",
+    "static/js/main.4ff69270.chunk.js"
+  ]
+}
