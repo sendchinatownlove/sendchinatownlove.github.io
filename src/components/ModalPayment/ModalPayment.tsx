@@ -92,7 +92,11 @@ const ModalPayment = ({
             </label>
           </div>
           <p>
-          By proceeding with your purchase, you understand that the gift card is not redeemable for cash and can only be used at the merchant’s restaurant. All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase.
+            By proceeding with your purchase, you understand that the gift card
+            is not redeemable for cash and can only be used at the merchant’s
+            restaurant. All purchases are final. In the event that the merchant
+            is no longer open at the time of redemption, Send Chinatown Love
+            Inc. will not be able to refund your purchase.
           </p>
           <div className={styles.btnRow}>
             <button

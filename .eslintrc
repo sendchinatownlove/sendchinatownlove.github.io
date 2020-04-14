@@ -5,8 +5,7 @@
   "overrides": [
     {
       "files": ["**/*.ts?(x)"],
-      "rules": {
-      }
+      "rules": {}
     }
   ]
 }
