@@ -34,6 +34,7 @@ function Footer(props: Props) {
   const envelopeClass = applyThemeColor('fa fa-envelope', theme);
   const instagramClass = applyThemeColor('fa fa-instagram', theme);
   const facebookClass = applyThemeColor('fa fa-facebook', theme);
+  const iconClass = applyThemeColor(styles.icon, theme);
   const linkClass = applyThemeColor(styles.link, theme);
   const containerClass = applyThemeBackgroundColor(styles.container, theme);
 
@@ -47,13 +48,23 @@ function Footer(props: Props) {
         />
         <ul className={styles.links}>
           <li>
-            <span className={envelopeClass} />
+            <a 
+              className={iconClass}
+              href="mailto:sendchinatownlove@gmail.com"
+            >
+              <span className={envelopeClass} />
+            </a>
             <a className={linkClass} href="mailto:sendchinatownlove@gmail.com">
               Email
             </a>
           </li>
           <li>
-            <span className={instagramClass} />
+            <a 
+              className={iconClass}
+              href="https://instagram.com/sendchinatownlove"
+            >
+              <span className={instagramClass} />
+            </a>
             <a
               className={linkClass}
               href="https://instagram.com/sendchinatownlove"
@@ -62,7 +73,12 @@ function Footer(props: Props) {
             </a>
           </li>
           <li>
-            <span className={facebookClass} />
+            <a 
+              className={iconClass}
+              href="https://www.facebook.com/Send-Chinatown-Love-100872288240891/"
+            >
+                <span className={facebookClass} />
+            </a>
             <a
               className={linkClass}
               href="https://www.facebook.com/Send-Chinatown-Love-100872288240891/"
