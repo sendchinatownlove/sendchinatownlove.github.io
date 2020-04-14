@@ -47,7 +47,7 @@ const ModalPayment = ({
     event.preventDefault();
 
     // returns stripe payment intent
-    const res = await makePayment(stripe, elements, payment, merchant);
+    await makePayment(stripe, elements, payment, merchant);
     showConfirmModal(); // shows confirmation modal box
   };
 
