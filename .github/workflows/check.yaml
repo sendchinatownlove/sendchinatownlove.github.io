@@ -1,4 +1,4 @@
-name: Check Build
+name: Compile Build
 on:
   pull_request:
     branches:
@@ -19,8 +19,6 @@ jobs:
         run: yarn install
       - name: Build page
         run: yarn run build
-        env:
-          CI: 'true'
 #       - name: Deploy to gh-pages
 #         uses: peaceiris/actions-gh-pages@v3
 #         with:

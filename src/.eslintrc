@@ -1,0 +1,18 @@
+{
+  "eslintConfig": {
+    "extends": ["react-app", "shared-config"],
+    "rules": {
+      "additional-rule": "warn"
+    },
+    "plugins": ["@typescript-eslint"],
+    "overrides": [
+      {
+        "files": ["**/*.ts?(x)"],
+        "rules": {
+          "@typescript-eslint/no-unused-vars": "off",
+          "react/react-in-jsx-scope": "off"
+        }
+      }
+    ]
+  }
+}
