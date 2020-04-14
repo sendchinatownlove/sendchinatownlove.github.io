@@ -34,6 +34,8 @@ follow our own ESLINT rules by doing the below environment variable set.
 [docs](https://create-react-app.dev/docs/setting-up-your-editor/#experimental-extending-the-eslint-config)
           EXTEND_ESLINT: 'true'
 
+         node ./node_modules/eslint/bin/eslint.js --print-config ./index.js
+
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
