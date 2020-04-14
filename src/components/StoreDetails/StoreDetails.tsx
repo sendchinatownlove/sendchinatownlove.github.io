@@ -47,10 +47,10 @@ const StoreDetails: React.SFC<Props> = ({
         <Route path={`/menu`}>
           <StoreMenu {...storeMenuProps} />
         </Route>
-        <Route path={`/photos`}>
-          {/* NEED TO ADD IN STORE COMPONENT HERE WHEN MADE! */}
-          {/* <StoreMenu {...storeMenuProps}/>  */}
-        </Route>
+        {/* Hide store photos tab until needed */}
+        {/* <Route path={`/photos`}>
+          <StoreMenu {...storePhotoProps}/> 
+        </Route> */}
       </Switch>
     </section>
   );

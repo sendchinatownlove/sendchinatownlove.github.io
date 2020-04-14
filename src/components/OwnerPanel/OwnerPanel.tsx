@@ -94,7 +94,8 @@ class OwnerPanel extends React.Component<Props, State> {
           purchaseType={this.state.purchaseType}
         />
 
-        <div className={styles.summaryContainer}>
+        {/* hide extra info section until needed */}
+        {/* <div className={styles.summaryContainer}>
           <div>
             <span className={styles.storeSummaryLabel}>Type: </span>
             <span>Family-owned and operated</span>
@@ -114,15 +115,15 @@ class OwnerPanel extends React.Component<Props, State> {
             <span className={styles.storeSummaryLabel}>Breakeven: </span>
             <span>$1000 / month</span>
           </div>
-        </div>
+        </div> */}
 
-        <div className={styles.socialContainer}>
-          {/* TEMPLATE!!! add appropriate links & social icons as needed*/}
+        {/* hide social links until needed */}
+        {/* <div className={styles.socialContainer}>
           <a href="#" className={classnames(styles.fa, 'fa fa-twitter')} />
           <a href="#" className={classnames(styles.fa, 'fa fa-instagram')} />
           <a href="#" className={classnames(styles.fa, 'fa fa-facebook')} />
           <a href="#" className={classnames(styles.fa, 'fa fa-youtube')} />
-        </div>
+        </div> */}
 
         <div className={styles.mapsContainer}>
           {/* need to put in google API */}

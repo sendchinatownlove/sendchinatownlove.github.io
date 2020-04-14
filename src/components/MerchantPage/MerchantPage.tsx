@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import HeroBanner from '../HeroBanner';
 import Footer from '../Footer';
 import { sampleMerchant } from './sample-merchant';
