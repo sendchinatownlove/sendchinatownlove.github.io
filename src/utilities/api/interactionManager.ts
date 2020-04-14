@@ -53,7 +53,7 @@ export const makePayment = async (
       'http://localhost:3001/charges',
       {
         line_items: [payment],
-        email: email
+        email: email,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )

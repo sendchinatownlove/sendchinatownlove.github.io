@@ -32,7 +32,7 @@ const ModalPayment = ({
     currency: 'usd',
     item_type: purchaseType === 'donation' ? 'donation' : 'gift_card',
     quantity: 1,
-    seller_id: 'shunfa-bakery' //edit props to pass in store here!!!
+    seller_id: 'shunfa-bakery', //edit props to pass in store here!!!
   };
 
   const [isShown, setIsShown] = useState(false);

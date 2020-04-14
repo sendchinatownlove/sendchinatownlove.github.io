@@ -1,19 +1,16 @@
 {
-
-    "extends": ["react-app"],
-    "rules": {
-    },
-    "plugins": ["@typescript-eslint"],
-    "overrides": [
-      {
-        "files": ["**/*.ts?(x)"],
-        "rules": {
-          "@typescript-eslint/no-unused-vars": "off",
-          "react/react-in-jsx-scope": "off",
-          "jsx-a11y/anchor-has-content": "off",
-          "jsx-a11y/anchor-is-valid": "off"
-        }
+  "extends": ["react-app"],
+  "rules": {},
+  "plugins": ["@typescript-eslint"],
+  "overrides": [
+    {
+      "files": ["**/*.ts?(x)"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+        "react/react-in-jsx-scope": "off",
+        "jsx-a11y/anchor-has-content": "off",
+        "jsx-a11y/anchor-is-valid": "off"
       }
-    ]
-  
+    }
+  ]
 }
