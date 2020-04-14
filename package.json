@@ -39,7 +39,7 @@
     "format": "prettier --write .",
     "deploy": "yarn build && gh-pages -d build -b master"
   },
-  "eslintConfig": {
+  "_eslintConfig": {
     "extends": "react-app"
   },
   "browserslist": {
