@@ -1,4 +1,5 @@
-$container-size: 150px;
+@import '../../responsive';
+$container-size: 160px;
 
 .container {
   display: flex;
@@ -20,6 +21,7 @@ $container-size: 150px;
   border-radius: 50%;
   overflow: hidden;
   margin-top: 25px;
+  padding: 8px;
 }
 
 .progressContainer {
@@ -40,6 +42,7 @@ $container-size: 150px;
 }
 
 .buttonContainer {
+  flex-direction: row;
   text-align: center;
   margin: 15px 0px 25px 0px;
 }
@@ -48,6 +51,10 @@ $container-size: 150px;
   margin: 5px 10px;
   font-weight: 500;
   letter-spacing: 0.05em;
+  @include for-phone-only {
+    font-size: 14px;
+    width: 240px;
+  }
 }
 
 .summaryContainer {
