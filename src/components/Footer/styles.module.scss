@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   padding: 0 40px 0 40px;
 
   @include for-tablet-portrait-up {
@@ -27,7 +27,6 @@
   @include for-phone-only {
     height: 40px;
   }
-  
 }
 
 .links {
@@ -63,7 +62,7 @@ footer span {
 }
 
 .colorWhite {
-  color:black;
+  color: black;
 }
 
 .bgColorDark {
