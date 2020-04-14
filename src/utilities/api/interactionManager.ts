@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Merchant, PaymentParams } from './types';
+import { charges, sellers, seller } from './endpoints'
 
 export const getSellers = async () => {
   // TO DO, fix expected type response
   let response: any = undefined;
 
   await axios
-    .get('https://api.sendchinatownlove.com/sellers')
+    .get(sellers)
     .then((res) => {
       // TO DO: fix response to success
       response = res;
@@ -25,7 +26,7 @@ export const getSeller = async () => {
   let response: any = undefined;
 
   await axios
-    .get('https://api.sendchinatownlove.com/sellers/test_kitchen')
+    .get(seller)
     .then((res) => {
       // TO DO: fix response to success
       response = res;
@@ -50,7 +51,7 @@ export const makePayment = async (
   // TO DO: abstract api call, create global object for headers
   await axios
     .post(
-      'http://localhost:3001/charges',
+      charges,
       {
         line_items: [payment],
         merchant_id: 'hello-world',
