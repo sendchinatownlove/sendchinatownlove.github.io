@@ -32,7 +32,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 follow our own ESLINT rules by doing the below environment variable set.
 [docs](https://create-react-app.dev/docs/setting-up-your-editor/#experimental-extending-the-eslint-config)
-          EXTEND_ESLINT: 'true'
+EXTEND_ESLINT: 'true'
 
          node ./node_modules/eslint/bin/eslint.js --print-config ./index.js
 

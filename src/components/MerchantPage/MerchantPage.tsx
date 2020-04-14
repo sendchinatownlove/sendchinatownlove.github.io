@@ -10,7 +10,6 @@ import styles from './styles.module.scss';
 import { getSeller } from '../../utilities/api';
 
 const MerchantPage: React.SFC = () => {
-
   // TO DO: implement component async pattern for api dep/loading state
   useEffect(() => {
     getSeller();
