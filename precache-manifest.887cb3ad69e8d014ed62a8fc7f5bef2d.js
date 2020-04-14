@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "77f49ab93a5c030afb532070b7341a89",
+    "revision": "cff9551a2fa129d47df17aa1ae29ebff",
     "url": "/index.html"
   },
   {
-    "revision": "ea3ed171d3b26ab34547",
-    "url": "/static/css/main.41d926b7.chunk.css"
+    "revision": "be76f267e91a101d3ae3",
+    "url": "/static/css/main.c2d71dfe.chunk.css"
   },
   {
-    "revision": "b7bba41581959c0ce20f",
-    "url": "/static/js/2.bd208709.chunk.js"
+    "revision": "f2e38f0697e329ccadfe",
+    "url": "/static/js/2.7f9515af.chunk.js"
   },
   {
     "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/static/js/2.bd208709.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.7f9515af.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ea3ed171d3b26ab34547",
-    "url": "/static/js/main.b3cd913a.chunk.js"
+    "revision": "be76f267e91a101d3ae3",
+    "url": "/static/js/main.dfe98fc1.chunk.js"
   },
   {
     "revision": "b991e9c21dba036bc800",
@@ -34,6 +34,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "67dd739116e104ca62265f818c797ad2",
     "url": "/static/media/chinatown-splash.67dd7391.png"
+  },
+  {
+    "revision": "46412c79a0082e73eb711911bf68237d",
+    "url": "/static/media/female.46412c79.svg"
   },
   {
     "revision": "909f1479b519e732b5a828cc5a69317a",
