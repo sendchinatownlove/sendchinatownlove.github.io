@@ -25,29 +25,28 @@ const StoreDetails: React.SFC<Props> = ({
         >
           Story
         </NavLink>
-        <NavLink
+        {/* <NavLink
           className={styles.navLink}
           activeClassName={styles['navLink--active']}
           to={`/menu`}
         >
           Menu
-        </NavLink>
-        <NavLink
+        </NavLink> */}
+        {/* <NavLink
           className={styles.navLink}
           activeClassName={styles['navLink--active']}
           to={`/photos`}
         >
           Photos
-        </NavLink>
+        </NavLink> */}
       </nav>
       <Switch>
         <Route path={`/story`}>
           <StoreStory {...storeStoryProps} />
         </Route>
-        <Route path={`/menu`}>
+        {/* <Route path={`/menu`}>
           <StoreMenu {...storeMenuProps} />
-        </Route>
-        {/* Hide store photos tab until needed */}
+        </Route> */}
         {/* <Route path={`/photos`}>
           <StoreMenu {...storePhotoProps}/> 
         </Route> */}
