@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from 'react';
 import Home from '../Home';
 import MerchantPage from '../MerchantPage';
 import About from '../About';
 import { createBrowserHistory } from 'history';
 import { Router, Switch, Route } from 'react-router-dom';
 import { getSellers } from '../../utilities/api';
+import React from 'react';
 
 const history = createBrowserHistory();
 
@@ -34,7 +34,8 @@ class App extends React.Component<
       <Router history={history}>
         <Switch>
           <Route exact path="/" component={Home} />
-          {// TO DO: add router config for this route
+          {
+            // TO DO: add router config for this route
           }
           <Route path="/story/:id" component={MerchantPage} />
           <Route path="/about" component={About} />
