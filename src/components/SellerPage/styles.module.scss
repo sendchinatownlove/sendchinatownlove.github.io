@@ -1,11 +1,13 @@
 @import '../../responsive';
 
-
 .container {
   background: white;
   min-height: 1500px;
   max-width: 1440px;
   margin: 0 auto;
+  border-width: thin;
+  border-color: yellow;
+  border-style: solid;
 }
 
 .contentContainer {

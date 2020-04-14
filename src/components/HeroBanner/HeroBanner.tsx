@@ -2,14 +2,14 @@ import * as React from 'react';
 import styles from './styles.module.scss';
 import sclLogo from './scl-logo.png';
 
-const HeroBanner: React.SFC = () => {
+type Props = {
+  name: string;
+};
+const HeroBanner: React.SFC<Props> = ({ name }) => {
   return (
     <div className={styles.container}>
       <img className={styles.image} src={sclLogo} alt="Logo" />
-      <div className={styles.header}>
-        {/* pass in props here for each store name*/}
-        Shunfa Bakery
-      </div>
+      <div className={styles.header}>{name}</div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Props } from './StoreDetails';
+// import { Props } from './StoreDetails';
 export { default } from './StoreDetails';
 
-export type StoreDetailsProps = Props;
+// export type StoreDetailsProps = Props;

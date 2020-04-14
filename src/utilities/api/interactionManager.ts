@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
-import { Merchant, PaymentParams } from './types';
+import { Seller, PaymentParams } from './types';
 import { charges, sellers, seller } from './endpoints';
 
 export const getSellers = async () => {
@@ -11,6 +11,7 @@ export const getSellers = async () => {
     .get(sellers)
     .then((res) => {
       // TO DO: fix response to success
+      console.log('getSellers res: ', { res });
       response = res;
     })
     .catch((err) => {
@@ -21,32 +22,25 @@ export const getSellers = async () => {
   return response;
 };
 
-export const getSeller = async () => {
-  // TO DO, fix expected type response
-  let response: any = undefined;
-
-  await axios
+// Fix this typing
+export const getSeller: any = async () =>
+  axios
     .get(seller)
-    .then((res) => {
-      // TO DO: fix response to success
-      response = res;
-    })
+    .then((res) => res)
     .catch((err) => {
       // TO DO: fix response to error
       console.log({ err });
     });
-
-  return response;
-};
 
 // TO DO: add typing for stripe elements
 export const makePayment = async (
   stripe: any,
   elements: any,
   payment: PaymentParams,
-  merchant: Merchant
+  seller: Seller
 ) => {
-  const { address, city, email, name, stateForm, zipCode } = merchant;
+  // TO DO*: Fix after shape is finalized
+  // const { address, city, email, name, stateForm, zipCode } = seller;
 
   // TO DO: abstract api call, create global object for headers
   await axios
@@ -54,7 +48,7 @@ export const makePayment = async (
       charges,
       {
         line_items: [payment],
-        email: email,
+        // email: email,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
@@ -68,17 +62,17 @@ export const makePayment = async (
           {
             payment_method: {
               card: cardElement!,
-              billing_details: {
-                name: name,
-                email: email,
-                address: {
-                  city,
-                  state: stateForm,
-                  country: 'US',
-                  postal_code: zipCode,
-                  line1: address,
-                },
-              },
+              // billing_details: {
+              //   name: name,
+              //   email: email,
+              //   address: {
+              //     city,
+              //     state: stateForm,
+              //     country: 'US',
+              //     postal_code: zipCode,
+              //     line1: address,
+              //   },
+              // },
             },
           }
         );

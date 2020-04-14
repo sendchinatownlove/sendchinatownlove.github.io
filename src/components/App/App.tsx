@@ -1,9 +1,9 @@
 import Home from '../Home';
-import MerchantPage from '../MerchantPage';
+import SellerPage from '../SellerPage';
 import About from '../About';
 import { createBrowserHistory } from 'history';
 import { Router, Switch, Route } from 'react-router-dom';
-import { getSellers } from '../../utilities/api';
+// import { getSellers } from '../../utilities/api';
 import React from 'react';
 
 import ReactGA from 'react-ga';
@@ -32,13 +32,13 @@ class App extends React.Component<
     };
   }
 
-  componentDidMount() {
-    const sellers: any = getSellers();
+  // componentDidMount() {
+  //   const sellers: any = getSellers();
 
-    console.log('App.tsx, componentWillMount: ', {
-      sellers,
-    });
-  }
+  //   console.log('App.tsx, componentWillMount: ', {
+  //     sellers,
+  //   });
+  // }
 
   render() {
     return (
@@ -48,7 +48,7 @@ class App extends React.Component<
           {
             // TO DO: add router config for this route
           }
-          <Route path="/story/:id" component={MerchantPage} />
+          <Route path="/story/:id" component={SellerPage} />
           <Route path="/about" component={About} />
         </Switch>
       </Router>

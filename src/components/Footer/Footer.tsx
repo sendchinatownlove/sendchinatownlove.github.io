@@ -48,10 +48,7 @@ function Footer(props: Props) {
         />
         <ul className={styles.links}>
           <li>
-            <a 
-              className={iconClass}
-              href="mailto:sendchinatownlove@gmail.com"
-            >
+            <a className={iconClass} href="mailto:sendchinatownlove@gmail.com">
               <span className={envelopeClass} />
             </a>
             <a className={linkClass} href="mailto:sendchinatownlove@gmail.com">
@@ -59,7 +56,7 @@ function Footer(props: Props) {
             </a>
           </li>
           <li>
-            <a 
+            <a
               className={iconClass}
               href="https://instagram.com/sendchinatownlove"
             >
@@ -73,11 +70,11 @@ function Footer(props: Props) {
             </a>
           </li>
           <li>
-            <a 
+            <a
               className={iconClass}
               href="https://www.facebook.com/Send-Chinatown-Love-100872288240891/"
             >
-                <span className={facebookClass} />
+              <span className={facebookClass} />
             </a>
             <a
               className={linkClass}

@@ -6,12 +6,17 @@ export type PaymentParams = {
   seller_id: string;
 };
 
-export type Merchant = {
-  name: string;
-  email: string;
+export type Seller = {
   address: string;
-  city: string;
-  stateForm: string;
-  zipCode: string;
-  showPayModal: boolean;
+  //TO DO: what is className doing
+  className: '';
+  cuisineName: string;
+  // email: string;
+  name: string;
+  phoneNumber: string;
+  //TO DO: why is this necessary here
+  showPayModal?: boolean;
+  summary: string;
+  story: string;
+  // zipCode: string;
 };

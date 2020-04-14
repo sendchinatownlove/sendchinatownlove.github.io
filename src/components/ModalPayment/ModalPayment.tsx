@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 import { makePayment, PaymentParams } from '../../utilities/api';
 import ModalConfirmation from '../ModalConfirmation';
 import CardSection from './CardSection';
-import { Merchant } from '../../utilities/api';
+import { Seller } from '../../utilities/api';
 
 type Props = {
   purchaseType: string;
@@ -14,7 +14,7 @@ type Props = {
   hidePaymentModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
   showPayModal: boolean;
   donatedAmt: number;
-  merchant: Merchant;
+  seller: Seller;
 };
 
 const ModalConfirmBox: any = ModalConfirmation;
@@ -25,7 +25,7 @@ const ModalPayment = ({
   hidePaymentModal,
   showPayModal,
   donatedAmt,
-  merchant,
+  seller,
 }: Props) => {
   const payment: PaymentParams = {
     amount: Number(donatedAmt) * 100,
@@ -47,7 +47,7 @@ const ModalPayment = ({
     event.preventDefault();
 
     // returns stripe payment intent
-    await makePayment(stripe, elements, payment, merchant);
+    await makePayment(stripe, elements, payment, seller);
     showConfirmModal(); // shows confirmation modal box
   };
 
