@@ -8,7 +8,7 @@ import ModalPayment from '../ModalPayment';
 // TO DO: Fix relative paths
 import { Merchant as State } from '../../utilities/api';
 
-const stripe_pk = process.env.STRIPE_PUBLISHABLE_KEY!;
+const stripe_pk = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripe_pk);
 
 type Props = {
