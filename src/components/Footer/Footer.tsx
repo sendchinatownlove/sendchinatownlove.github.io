@@ -52,7 +52,7 @@ function Footer(props: Props) {
               Email
             </a>
           </li>
-          <li>
+          {false && <li>
             <span className={instagramClass} />
             <a
               className={linkClass}
@@ -60,8 +60,8 @@ function Footer(props: Props) {
             >
               Instagram
             </a>
-          </li>
-          <li>
+          </li>}
+          {false && <li>
             <span className={facebookClass} />
             <a
               className={linkClass}
@@ -69,7 +69,7 @@ function Footer(props: Props) {
             >
               Facebook
             </a>
-          </li>
+          </li>}
         </ul>
       </div>
     </footer>
