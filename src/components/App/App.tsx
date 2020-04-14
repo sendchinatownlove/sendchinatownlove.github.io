@@ -4,6 +4,7 @@ import About from '../About';
 import { createBrowserHistory } from 'history';
 import { Router, Switch, Route } from 'react-router-dom';
 import { getSellers } from '../../utilities/api';
+import React from 'react';
 
 const history = createBrowserHistory();
 
