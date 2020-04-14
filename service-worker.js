@@ -12,11 +12,7 @@
  */
 
 importScripts(
-<<<<<<< HEAD
-  "/precache-manifest.e74ba72f14a210479a5ccdeac672c65b.js"
-=======
   'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js'
->>>>>>> 11d092887a48b469799cd76017634269a1937815
 );
 
 importScripts('/precache-manifest.17f22be2a5f74d1156ef9b64c8cc30f7.js');
