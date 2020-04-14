@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Merchant, PaymentParams } from './types';
-import { charges, sellers, seller } from './endpoints'
+import { charges, sellers, seller } from './endpoints';
 
 export const getSellers = async () => {
   // TO DO, fix expected type response

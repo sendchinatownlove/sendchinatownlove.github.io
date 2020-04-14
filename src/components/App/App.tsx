@@ -29,7 +29,7 @@ class App extends React.Component<
     });
   }
 
-  render() {    
+  render() {
     return (
       <Router history={history}>
         <Switch>
