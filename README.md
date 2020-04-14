@@ -30,6 +30,10 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+follow our own ESLINT rules by doing the below environment variable set.
+[docs](https://create-react-app.dev/docs/setting-up-your-editor/#experimental-extending-the-eslint-config)
+          EXTEND_ESLINT: 'true'
+
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
