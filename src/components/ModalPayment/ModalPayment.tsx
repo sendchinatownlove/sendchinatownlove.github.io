@@ -30,9 +30,9 @@ const ModalPayment = ({
   const payment: PaymentParams = {
     amount: Number(donatedAmt) * 100,
     currency: 'usd',
-    name: 'Gift Card',
+    item_type: purchaseType === 'donation' ? 'donation' : 'gift_card',
     quantity: 1,
-    description: `$${donatedAmt} to Shunfa Bakery`,
+    seller_id: 'shunfa-bakery' //edit props to pass in store here!!!
   };
 
   const [isShown, setIsShown] = useState(false);
