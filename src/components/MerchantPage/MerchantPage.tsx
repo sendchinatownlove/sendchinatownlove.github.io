@@ -27,8 +27,8 @@ const MerchantPage: React.SFC = () => {
     className: styles.storeInfo,
   };
   return (
-    <div>
-      <main className={styles.container}>
+    <div className={styles.container}>
+      <main>
         <HeroBanner />
         <div className={styles.contentContainer}>
           <StoreInfo {...storeInfoProps} />
