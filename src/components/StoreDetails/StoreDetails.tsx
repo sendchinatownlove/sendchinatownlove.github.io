@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './styles.module.scss';
 import { NavLink, Switch, Route } from 'react-router-dom';
 import StoreStory, { StoreStoryProps } from '../StoreStory';
-import StoreMenu, { StoreMenuProps } from '../StoreMenu';
+import { StoreMenuProps } from '../StoreMenu'; //add back "StoreMenu" when needed
 
 export interface Props {
   className?: string;
@@ -25,32 +25,31 @@ const StoreDetails: React.SFC<Props> = ({
         >
           Story
         </NavLink>
-        <NavLink
+        {/* <NavLink
           className={styles.navLink}
           activeClassName={styles['navLink--active']}
           to={`/menu`}
         >
           Menu
-        </NavLink>
-        <NavLink
+        </NavLink> */}
+        {/* <NavLink
           className={styles.navLink}
           activeClassName={styles['navLink--active']}
           to={`/photos`}
         >
           Photos
-        </NavLink>
+        </NavLink> */}
       </nav>
       <Switch>
         <Route path={`/story`}>
           <StoreStory {...storeStoryProps} />
         </Route>
-        <Route path={`/menu`}>
+        {/* <Route path={`/menu`}>
           <StoreMenu {...storeMenuProps} />
-        </Route>
-        <Route path={`/photos`}>
-          {/* NEED TO ADD IN STORE COMPONENT HERE WHEN MADE! */}
-          {/* <StoreMenu {...storeMenuProps}/>  */}
-        </Route>
+        </Route> */}
+        {/* <Route path={`/photos`}>
+          <StoreMenu {...storePhotoProps}/> 
+        </Route> */}
       </Switch>
     </section>
   );

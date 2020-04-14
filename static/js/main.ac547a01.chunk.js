@@ -23,6 +23,7 @@
       e.exports = {
         billFormContainer: 'styles_billFormContainer__3S6Xl',
         billingsContainer: 'styles_billingsContainer__3DluJ',
+        addSpacing: 'styles_addSpacing__3vUb2',
         label: 'styles_label__1zfOS',
         email: 'styles_email__23z1f',
         address: 'styles_address__3OJzv',
@@ -34,6 +35,7 @@
         btnRow: 'styles_btnRow__1jGYu',
       };
     },
+    ,
     ,
     ,
     ,
@@ -51,6 +53,11 @@
       };
     },
     ,
+    ,
+    ,
+    ,
+    ,
+    ,
     function (e, t, a) {
       e.exports = {
         navLinkContainer: 'styles_navLinkContainer__2K1Dj',
@@ -63,10 +70,10 @@
       e.exports = {
         container: 'styles_container__3NFhU',
         contentContainer: 'styles_contentContainer__1jVyv',
+        introContainer: 'styles_introContainer__2kp9d',
         headerText: 'styles_headerText__2lVbU',
         introText: 'styles_introText__3No1g',
         ctaButton: 'styles_ctaButton__39FHM',
-        introContainer: 'styles_introContainer__2kp9d',
       };
     },
     function (e, t, a) {
@@ -86,10 +93,32 @@
         storeDetails: 'styles_storeDetails__frA5Y',
       };
     },
-    ,
-    ,
-    ,
-    ,
+    function (e, t, a) {
+      
+      var n = a(40);
+      a.o(n, 'getSeller') &&
+        a.d(t, 'getSeller', function () {
+          return n.getSeller;
+        }),
+        a.o(n, 'getSellers') &&
+          a.d(t, 'getSellers', function () {
+            return n.getSellers;
+          }),
+        a.o(n, 'makePayment') &&
+          a.d(t, 'makePayment', function () {
+            return n.makePayment;
+          });
+      var o = a(41);
+      a.d(t, 'getSeller', function () {
+        return o.a;
+      }),
+        a.d(t, 'getSellers', function () {
+          return o.b;
+        }),
+        a.d(t, 'makePayment', function () {
+          return o.c;
+        });
+    },
     function (e, t, a) {
       e.exports = {
         donationsContainer: 'styles_donationsContainer__2I-52',
@@ -104,13 +133,12 @@
         container: 'styles_container__1GePj',
         paymentContainer: 'styles_paymentContainer__3PfAD',
         row: 'styles_row__3dGjH',
-        label: 'styles_label__3Gsvi',
         cardLabel: 'styles_cardLabel__1m9JD',
         checkbox: 'styles_checkbox__38N48',
         btnRow: 'styles_btnRow__m72Gz',
+        label: 'styles_label__3Gsvi',
       };
     },
-    ,
     ,
     function (e, t, a) {
       e.exports = {
@@ -121,7 +149,6 @@
     },
     ,
     ,
-    ,
     function (e, t, a) {
       e.exports = {
         container: 'styles_container__3EZ7J',
@@ -129,15 +156,7 @@
         header: 'styles_header__1kjrZ',
       };
     },
-    function (e, t, a) {
-      e.exports = {
-        modal: 'styles_modal__tQf07',
-        header: 'styles_header__2d-30',
-        content: 'styles_content__5vCBT',
-        actions: 'styles_actions__OXFGq',
-        close: 'styles_close__2x4FL',
-      };
-    },
+    ,
     function (e, t, a) {
       e.exports = {
         container: 'styles_container__2viEp',
@@ -155,7 +174,198 @@
     },
     ,
     ,
+    function (e, t, a) {
+      e.exports = a.p + 'static/media/logo.909f1479.svg';
+    },
     ,
+    function (e, t) {},
+    function (e, t, a) {
+      
+      a.d(t, 'b', function () {
+        return c;
+      }),
+        a.d(t, 'a', function () {
+          return m;
+        }),
+        a.d(t, 'c', function () {
+          return u;
+        });
+      var n = a(8),
+        o = a.n(n),
+        s = a(18),
+        l = a(30),
+        r = a.n(l),
+        i = a(9),
+        c = (function () {
+          var e = Object(s.a)(
+            o.a.mark(function e() {
+              var t;
+              return o.a.wrap(function (e) {
+                for (;;)
+                  switch ((e.prev = e.next)) {
+                    case 0:
+                      return (
+                        (t = void 0),
+                        (e.next = 3),
+                        r.a
+                          .get('https://api.sendchinatownlove.com/sellers')
+                          .then(function (e) {
+                            t = e;
+                          })
+                          .catch(function (e) {
+                            console.log({ err: e });
+                          })
+                      );
+                    case 3:
+                      return e.abrupt('return', t);
+                    case 4:
+                    case 'end':
+                      return e.stop();
+                  }
+              }, e);
+            })
+          );
+          return function () {
+            return e.apply(this, arguments);
+          };
+        })(),
+        m = (function () {
+          var e = Object(s.a)(
+            o.a.mark(function e() {
+              var t;
+              return o.a.wrap(function (e) {
+                for (;;)
+                  switch ((e.prev = e.next)) {
+                    case 0:
+                      return (
+                        (t = void 0),
+                        (e.next = 3),
+                        r.a
+                          .get(
+                            'https://api.sendchinatownlove.com/sellers/test_kitchen'
+                          )
+                          .then(function (e) {
+                            t = e;
+                          })
+                          .catch(function (e) {
+                            console.log({ err: e });
+                          })
+                      );
+                    case 3:
+                      return e.abrupt('return', t);
+                    case 4:
+                    case 'end':
+                      return e.stop();
+                  }
+              }, e);
+            })
+          );
+          return function () {
+            return e.apply(this, arguments);
+          };
+        })(),
+        u = (function () {
+          var e = Object(s.a)(
+            o.a.mark(function e(t, a, n, l) {
+              var c, m, u, d, h, p;
+              return o.a.wrap(function (e) {
+                for (;;)
+                  switch ((e.prev = e.next)) {
+                    case 0:
+                      return (
+                        (c = l.address),
+                        (m = l.city),
+                        (u = l.email),
+                        (d = l.name),
+                        (h = l.stateForm),
+                        (p = l.zipCode),
+                        (e.next = 3),
+                        r.a
+                          .post(
+                            'http://localhost:3001/charges',
+                            { line_items: [n], merchant_id: 'hello-world' },
+                            { headers: { 'Access-Control-Allow-Origin': '*' } }
+                          )
+                          .then(
+                            (function () {
+                              var e = Object(s.a)(
+                                o.a.mark(function e(n) {
+                                  var s, l, r, f;
+                                  return o.a.wrap(function (e) {
+                                    for (;;)
+                                      switch ((e.prev = e.next)) {
+                                        case 0:
+                                          if (t && a) {
+                                            e.next = 4;
+                                            break;
+                                          }
+                                          return e.abrupt('return');
+                                        case 4:
+                                          return (
+                                            (s = a.getElement(i.CardElement)),
+                                            (e.next = 7),
+                                            t.confirmCardPayment(
+                                              ''.concat(n.data.client_secret),
+                                              {
+                                                payment_method: {
+                                                  card: s,
+                                                  billing_details: {
+                                                    name: d,
+                                                    email: u,
+                                                    address: {
+                                                      city: m,
+                                                      state: h,
+                                                      country: 'US',
+                                                      postal_code: p,
+                                                      line1: c,
+                                                    },
+                                                  },
+                                                },
+                                              }
+                                            )
+                                          );
+                                        case 7:
+                                          (l = e.sent).error
+                                            ? console.log(l.error.message)
+                                            : 'succeeded' ===
+                                                (null ===
+                                                  (r = l.paymentIntent) ||
+                                                void 0 === r
+                                                  ? void 0
+                                                  : r.status) &&
+                                              console.log(
+                                                null ===
+                                                  (f = l.paymentIntent) ||
+                                                  void 0 === f
+                                                  ? void 0
+                                                  : f.status,
+                                                'The payment has been processed!'
+                                              );
+                                        case 9:
+                                        case 'end':
+                                          return e.stop();
+                                      }
+                                  }, e);
+                                })
+                              );
+                              return function (t) {
+                                return e.apply(this, arguments);
+                              };
+                            })()
+                          )
+                      );
+                    case 3:
+                    case 'end':
+                      return e.stop();
+                  }
+              }, e);
+            })
+          );
+          return function (t, a, n, o) {
+            return e.apply(this, arguments);
+          };
+        })();
+    },
     ,
     ,
     ,
@@ -178,11 +388,9 @@
       e.exports = a.p + 'static/media/sample-menu-item.18cdfea7.png';
     },
     ,
-    ,
     function (e, t, a) {
       e.exports = a.p + 'static/media/chinatown-logo.349de0ef.png';
     },
-    ,
     function (e, t, a) {
       e.exports = a(87);
     },
@@ -191,13 +399,6 @@
     ,
     ,
     function (e, t, a) {},
-    function (e, t) {
-      e.exports =
-        'data:image/png;base64,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';
-    },
-    function (e, t, a) {
-      e.exports = a.p + 'static/media/logo.edd78b0d.png';
-    },
     ,
     ,
     ,
@@ -226,55 +427,48 @@
       a.r(t);
       var n = a(0),
         o = a.n(n),
-        s = a(46),
+        s = a(50),
         l = a.n(s),
-        r = (a(61), a(13)),
-        i = a.n(r),
-        c = a(14),
-        m = a.n(c);
-      function u(e, t) {
-        return 'dark' === t ? [e, m.a.colorWhite].join(' ') : e;
+        r = (a(63), a(11)),
+        i = a(12),
+        c = a(13),
+        m = a(15),
+        u = a(19),
+        d = a.n(u),
+        h = a(20),
+        p = a.n(h);
+      function f(e, t) {
+        return 'dark' === t ? [e, p.a.colorWhite].join(' ') : e;
       }
-      function d(e) {
-        return a('dark' === e ? 62 : 63);
-      }
-      var h = function (e) {
+      var b = function (e) {
           var t = e.theme,
-            a = void 0 === t ? 'none' : t,
-            n = u('fa fa-envelope', a),
-            s = u('fa fa-instagram', a),
-            l = u('fa fa-facebook', a),
-            r = u(m.a.link, a),
-            i = (function (e, t) {
-              return 'dark' === t ? [e, m.a.bgColorDark].join(' ') : e;
-            })(m.a.container, a);
+            n = void 0 === t ? 'none' : t,
+            s = f('fa fa-envelope', n),
+            l = f('fa fa-instagram', n),
+            r = f('fa fa-facebook', n),
+            i = f(p.a.link, n),
+            c = (function (e, t) {
+              return 'dark' === t ? [e, p.a.bgColorDark].join(' ') : e;
+            })(p.a.container, n);
           return o.a.createElement(
             'footer',
-            { className: i },
+            { className: c },
+            o.a.createElement('img', {
+              className: p.a.logo,
+              src: a(38),
+              alt: 'send chinatown love',
+            }),
             o.a.createElement(
               'ul',
-              { className: m.a.links },
-              o.a.createElement(
-                'li',
-                null,
-                o.a.createElement('span', { className: n }),
-                o.a.createElement(
-                  'a',
-                  { className: r, href: 'mailto:sendchinatownlove@gmail.com' },
-                  'Email'
-                )
-              ),
+              { className: p.a.links },
               o.a.createElement(
                 'li',
                 null,
                 o.a.createElement('span', { className: s }),
                 o.a.createElement(
                   'a',
-                  {
-                    className: r,
-                    href: 'https://instagram.com/sendchinatownlove',
-                  },
-                  'Instagram'
+                  { className: i, href: 'mailto:sendchinatownlove@gmail.com' },
+                  'Email'
                 )
               ),
               o.a.createElement(
@@ -284,74 +478,83 @@
                 o.a.createElement(
                   'a',
                   {
-                    className: r,
+                    className: i,
+                    href: 'https://instagram.com/sendchinatownlove',
+                  },
+                  'Instagram'
+                )
+              ),
+              o.a.createElement(
+                'li',
+                null,
+                o.a.createElement('span', { className: r }),
+                o.a.createElement(
+                  'a',
+                  {
+                    className: i,
                     href:
                       'https://www.facebook.com/Send-Chinatown-Love-100872288240891/',
                   },
                   'Facebook'
                 )
               )
-            ),
-            o.a.createElement('img', {
-              className: m.a.logo,
-              src: d(a),
-              alt: 'send chinatown love',
-            })
+            )
           );
         },
-        p = a(12),
+        y = a(14),
         A = function () {
           return n.createElement(
             'div',
-            { className: i.a.container },
+            { className: d.a.container },
             n.createElement(
               'main',
-              { className: i.a.contentContainer },
+              { className: d.a.contentContainer },
               n.createElement(
                 'div',
-                { className: i.a.introContainer },
+                { className: d.a.introContainer },
                 n.createElement(
                   'h1',
-                  { className: i.a.headerText },
+                  { className: d.a.headerText },
                   'Chinatown needs your help'
                 ),
                 n.createElement(
                   'p',
-                  { className: i.a.introText },
-                  'Help local businesses survive the COVID-19 pandemic and digitize them the future'
+                  { className: d.a.introText },
+                  'Support local Chinatown businesses during the COVID-19 pandemic and help us bring their stores online'
                 ),
                 n.createElement(
-                  p.a,
+                  y.a,
                   { to: '/about' },
                   n.createElement(
                     'button',
-                    { className: i.a.ctaButton },
+                    { className: d.a.ctaButton },
                     'Learn More'
                   )
                 )
               )
             ),
-            n.createElement(h, { theme: 'dark' })
+            n.createElement(b, { theme: 'dark' })
           );
         },
-        E = a(25),
-        b = a(28),
-        y = a.n(b),
-        f = a(49),
-        C = a.n(f),
-        v = function () {
+        E = a(27),
+        v = a(16),
+        g = a(29),
+        C = a.n(g),
+        N = a(53),
+        k = a.n(N),
+        w = function () {
           return n.createElement(
             'div',
-            { className: y.a.container },
+            { className: C.a.container },
             n.createElement('img', {
-              className: y.a.image,
-              src: C.a,
+              className: C.a.image,
+              src: k.a,
               alt: 'Logo',
             }),
-            n.createElement('div', { className: y.a.header }, 'Shunfa Bakery')
+            n.createElement('div', { className: C.a.header }, 'Shunfa Bakery')
           );
         },
-        g = {
+        B = {
           storeInfo: {
             nationality: 'Chinese',
             name: 'Shunfa Bakery',
@@ -379,30 +582,29 @@
             },
           ],
         },
-        N = a(15),
-        k = a.n(N),
-        I = a(11),
-        w = a.n(I),
-        B = a(10),
-        x = a(50),
-        O = a.n(x),
-        S = function (e) {
+        I = a(21),
+        x = a.n(I),
+        O = a(17),
+        S = a.n(O),
+        j = a(54),
+        M = a.n(j),
+        _ = function (e) {
           var t = e.story;
-          return n.createElement('section', { className: O.a.container }, t);
+          return n.createElement('section', { className: M.a.container }, t);
         },
-        D = a(51),
-        j = a.n(D),
-        R = a(34),
-        L = a.n(R),
-        z = function (e) {
+        W = a(55),
+        P = a.n(W),
+        J = a(35),
+        T = a.n(J),
+        L = function (e) {
           var t = e.name,
             a = e.description,
             o = e.imageSrc,
-            s = void 0 === o ? j.a : o;
+            s = void 0 === o ? P.a : o;
           return n.createElement(
             'div',
-            { className: L.a.container },
-            n.createElement('img', { className: L.a.image, src: s, alt: t }),
+            { className: T.a.container },
+            n.createElement('img', { className: T.a.image, src: s, alt: t }),
             n.createElement(
               'div',
               null,
@@ -411,20 +613,20 @@
             )
           );
         },
-        P = function (e) {
+        q = function (e) {
           var t = e.menuItems;
           return n.createElement(
             'section',
             null,
             t.map(function (e, t) {
               return n.createElement(
-                z,
+                L,
                 Object.assign({}, e, { key: 'menu-item-'.concat(t) })
               );
             })
           );
         },
-        W = function (e) {
+        D = function (e) {
           var t = e.storeStoryProps,
             a = e.storeMenuProps,
             o = e.className;
@@ -433,46 +635,46 @@
             { className: o },
             n.createElement(
               'nav',
-              { className: w.a.navLinkContainer },
+              { className: S.a.navLinkContainer },
               n.createElement(
-                p.b,
+                y.b,
                 {
-                  className: w.a.navLink,
-                  activeClassName: w.a['navLink--active'],
+                  className: S.a.navLink,
+                  activeClassName: S.a['navLink--active'],
                   to: '/story',
                 },
                 'Story'
               ),
               n.createElement(
-                p.b,
+                y.b,
                 {
-                  className: w.a.navLink,
-                  activeClassName: w.a['navLink--active'],
+                  className: S.a.navLink,
+                  activeClassName: S.a['navLink--active'],
                   to: '/menu',
                 },
                 'Menu'
               ),
               n.createElement(
-                p.b,
+                y.b,
                 {
-                  className: w.a.navLink,
-                  activeClassName: w.a['navLink--active'],
+                  className: S.a.navLink,
+                  activeClassName: S.a['navLink--active'],
                   to: '/photos',
                 },
                 'Photos'
               )
             ),
             n.createElement(
-              B.c,
+              v.c,
               null,
-              n.createElement(B.a, { path: '/story' }, n.createElement(S, t)),
-              n.createElement(B.a, { path: '/menu' }, n.createElement(P, a)),
-              n.createElement(B.a, { path: '/photos' })
+              n.createElement(v.a, { path: '/story' }, n.createElement(_, t)),
+              n.createElement(v.a, { path: '/menu' }, n.createElement(q, a)),
+              n.createElement(v.a, { path: '/photos' })
             )
           );
         },
-        q = a(1),
-        J = a.n(q),
+        R = a(1),
+        z = a.n(R),
         F = function (e) {
           var t = e.nationality,
             a = (e.name, e.address),
@@ -480,83 +682,44 @@
             s = e.introduction,
             l = e.className,
             r = e.storeDetailsProps,
-            i = Object(E.a)({}, r, { className: k.a.storeDetails });
+            i = Object(E.a)({}, r, { className: x.a.storeDetails });
           return n.createElement(
             'section',
-            { className: J()(k.a.container, l) },
-            n.createElement('div', { className: k.a.nationality }, t),
+            { className: z()(x.a.container, l) },
+            n.createElement('div', { className: x.a.nationality }, t),
             n.createElement(
               'p',
               null,
-              n.createElement('div', { className: k.a.address }, a.line1),
-              n.createElement('div', { className: k.a.address }, a.line2),
-              n.createElement('div', { className: k.a.address }, o)
+              n.createElement('div', { className: x.a.address }, a.line1),
+              n.createElement('div', { className: x.a.address }, a.line2),
+              n.createElement('div', { className: x.a.address }, o)
             ),
             n.createElement('p', null, s),
-            n.createElement(W, i)
+            n.createElement(D, i)
           );
         },
-        T = a(16),
-        M = a(17),
         Q = a(6),
-        X = a(18),
-        K = a(19),
-        H = a(2),
-        V = a.n(H),
-        G = a(29),
-        U = a.n(G),
-        Y = a(52),
-        Z = a(8),
-        _ = a(27),
-        $ = Object(_.a)('pk_test_5AByIibLOhR6WHL3Mwnmel3P00zm0pIDrD'),
-        ee = function (e) {
-          e.merchant;
-          var t = e.option,
-            a = e.className;
-          return n.createElement(
-            Y.a,
-            {
-              trigger: n.createElement('button', { className: a }, t),
-              position: 'top left',
-              modal: !0,
-              closeOnDocumentClick: !0,
-            },
-            function (e) {
-              return n.createElement(
-                'div',
-                { className: U.a.modal },
-                n.createElement(
-                  'div',
-                  { className: U.a.header },
-                  'Donate' === t ? 'Donation' : 'Gift Card'
-                ),
-                n.createElement(
-                  'div',
-                  { className: U.a.content },
-                  n.createElement(Z.Elements, { stripe: $ })
-                )
-              );
-            }
-          );
-        },
-        te = a(20),
-        ae = a.n(te),
-        ne = a(26),
-        oe = a(3),
+        V = a(2),
+        Y = a.n(V),
+        K = a(23),
+        Z = a.n(K),
+        X = a(28),
+        U = a(9),
+        H = a(56),
+        G = a(3),
+        $ = a.n(G),
+        ee = a(8),
+        te = a.n(ee),
+        ae = a(18),
+        ne = a(36),
+        oe = a(24),
         se = a.n(oe),
-        le = a(23),
-        re = a.n(le),
-        ie = a(35),
-        ce = a(55),
-        me = a(53),
-        ue = a.n(me),
-        de = a(21),
-        he = a.n(de),
-        pe = a(30),
-        Ae = a.n(pe),
-        Ee = a(54),
-        be = a.n(Ee),
-        ye = {
+        le = a(22),
+        re = a(31),
+        ie = a.n(re),
+        ce = a(57),
+        me = a.n(ce),
+        ue = {
           style: {
             base: {
               color: '#32325d',
@@ -568,27 +731,28 @@
             invalid: { color: '#fa755a', iconColor: '#fa755a' },
           },
         };
-      var fe = function () {
+      var de = function () {
           return o.a.createElement(
             'label',
             null,
-            o.a.createElement(Z.CardElement, { options: ye })
+            o.a.createElement(U.CardElement, { options: ue })
           );
         },
-        Ce = function (e) {
+        he = function (e) {
           var t = e.handleClose,
             a = e.showConfirmModal;
           return n.createElement(
             'form',
             {
               id: 'payment-form',
-              className: J()(Ae.a.container, 'modalForm--form'),
+              className: z()(ie.a.container, 'modalForm--form'),
               style: { display: a ? 'block' : 'none' },
             },
             n.createElement(
               'button',
               { className: 'closeButton--close', onClick: t },
-              ' \xd7'
+              ' ',
+              '\xd7'
             ),
             n.createElement('h2', null, 'Thank you for your donation!'),
             n.createElement(
@@ -597,140 +761,59 @@
               'We appreciate your support for small businesses'
             ),
             n.createElement('img', {
-              className: Ae.a.image,
-              src: be.a,
+              className: ie.a.image,
+              src: me.a,
               alt: 'Logo',
             }),
             n.createElement(
               'button',
               {
-                className: J()(Ae.a.finishBtn, 'modalButton--filled'),
+                className: z()(ie.a.finishBtn, 'modalButton--filled'),
                 onClick: t,
               },
-              ' Finish'
+              ' ',
+              'Finish'
             )
           );
         },
-        ve = function (e) {
-          var t = e.handleClose,
-            a = e.hidePaymentModal,
-            s = e.showPayModal,
-            l = e.donatedAmt,
-            r = e.name,
-            i = e.email,
-            c = e.address,
-            m = e.city,
-            u = e.stateForm,
-            d = e.zipcode,
-            h = Object(n.useState)(!1),
-            p = Object(ce.a)(h, 2),
-            A = p[0],
-            E = p[1],
-            b = Object(Z.useStripe)(),
-            y = Object(Z.useElements)(),
-            f = (function () {
-              var e = Object(ie.a)(
-                re.a.mark(function e(t) {
-                  var a;
-                  return re.a.wrap(function (e) {
+        pe = function (e) {
+          var t = e.purchaseType,
+            a = e.handleClose,
+            s = e.hidePaymentModal,
+            l = e.showPayModal,
+            r = e.donatedAmt,
+            i = e.merchant,
+            c = {
+              amount: 100 * Number(r),
+              currency: 'usd',
+              name: 'Gift Card',
+              quantity: 1,
+              description: '$'.concat(r, ' to Shunfa Bakery'),
+            },
+            m = Object(n.useState)(!1),
+            u = Object(ne.a)(m, 2),
+            d = u[0],
+            h = u[1],
+            p = Object(n.useState)(!1),
+            f = Object(ne.a)(p, 2),
+            b = f[0],
+            y = f[1],
+            A = Object(U.useStripe)(),
+            E = Object(U.useElements)(),
+            v = (function () {
+              var e = Object(ae.a)(
+                te.a.mark(function e(t) {
+                  return te.a.wrap(function (e) {
                     for (;;)
                       switch ((e.prev = e.next)) {
                         case 0:
                           return (
                             t.preventDefault(),
-                            (a = {
-                              amount: 100 * Number(l),
-                              currency: 'usd',
-                              name: 'Gift Card',
-                              quantity: 1,
-                              description: '$'.concat(l, ' to Shunfa Bakery'),
-                            }),
-                            (e.next = 4),
-                            ue.a
-                              .post(
-                                'http://localhost:3001/charges',
-                                { line_items: [a], merchant_id: 'hello-world' },
-                                {
-                                  headers: {
-                                    'Access-Control-Allow-Origin': '*',
-                                  },
-                                }
-                              )
-                              .then(
-                                (function () {
-                                  var e = Object(ie.a)(
-                                    re.a.mark(function e(t) {
-                                      var a, n, o, s;
-                                      return re.a.wrap(function (e) {
-                                        for (;;)
-                                          switch ((e.prev = e.next)) {
-                                            case 0:
-                                              if (b && y) {
-                                                e.next = 4;
-                                                break;
-                                              }
-                                              return e.abrupt('return');
-                                            case 4:
-                                              return (
-                                                (a = y.getElement(
-                                                  Z.CardElement
-                                                )),
-                                                (e.next = 7),
-                                                b.confirmCardPayment(
-                                                  ''.concat(
-                                                    t.data.client_secret
-                                                  ),
-                                                  {
-                                                    payment_method: {
-                                                      card: a,
-                                                      billing_details: {
-                                                        name: r,
-                                                        email: i,
-                                                        address: {
-                                                          city: m,
-                                                          state: u,
-                                                          country: 'US',
-                                                          postal_code: d,
-                                                          line1: c,
-                                                        },
-                                                      },
-                                                    },
-                                                  }
-                                                )
-                                              );
-                                            case 7:
-                                              (n = e.sent).error
-                                                ? console.log(n.error.message)
-                                                : 'succeeded' ===
-                                                    (null ===
-                                                      (o = n.paymentIntent) ||
-                                                    void 0 === o
-                                                      ? void 0
-                                                      : o.status) &&
-                                                  (console.log(
-                                                    null ===
-                                                      (s = n.paymentIntent) ||
-                                                      void 0 === s
-                                                      ? void 0
-                                                      : s.status,
-                                                    'The payment has been processed!'
-                                                  ),
-                                                  E(!0));
-                                            case 9:
-                                            case 'end':
-                                              return e.stop();
-                                          }
-                                      }, e);
-                                    })
-                                  );
-                                  return function (t) {
-                                    return e.apply(this, arguments);
-                                  };
-                                })()
-                              )
+                            (e.next = 3),
+                            Object(le.makePayment)(A, E, c, i)
                           );
-                        case 4:
-                          e.sent;
+                        case 3:
+                          e.sent, h(!0);
                         case 5:
                         case 'end':
                           return e.stop();
@@ -749,15 +832,23 @@
               'form',
               {
                 id: 'payment-form',
-                className: J()(he.a.container, 'modalForm--form'),
-                style: { display: s ? 'block' : 'none' },
+                className: z()(se.a.container, 'modalForm--form'),
+                style: { display: l ? 'block' : 'none' },
               },
               o.a.createElement(
                 'button',
-                { className: 'closeButton--close', onClick: t },
-                ' \xd7 '
+                { className: 'closeButton--close', onClick: a },
+                ' ',
+                '\xd7',
+                ' '
               ),
-              o.a.createElement('h2', null, 'Complete your donation'),
+              o.a.createElement(
+                'h2',
+                null,
+                'Complete your',
+                ' ',
+                'donation' === t ? 'donation' : 'gift card purchase'
+              ),
               o.a.createElement(
                 'p',
                 null,
@@ -765,29 +856,37 @@
               ),
               o.a.createElement(
                 'div',
-                { className: he.a.paymentContainer },
+                { className: se.a.paymentContainer },
                 o.a.createElement('h3', null, 'Payment Information'),
-                o.a.createElement(fe, null),
+                o.a.createElement(de, null),
+                ' ',
                 o.a.createElement('br', null),
-                o.a.createElement('h3', null, 'Donation details'),
+                o.a.createElement(
+                  'h3',
+                  null,
+                  'donation' === t ? 'Donation' : 'Gift card',
+                  ' details'
+                ),
                 o.a.createElement(
                   'span',
                   null,
                   'Donate ',
-                  o.a.createElement('b', null, '$', l),
-                  ' to ',
-                  r
+                  o.a.createElement('b', null, '$', r),
+                  ' to Shunfa Bakery'
                 ),
                 ' ',
                 o.a.createElement('p', null),
                 o.a.createElement(
                   'div',
-                  { className: he.a.row },
+                  { className: se.a.row },
                   o.a.createElement('input', {
                     type: 'checkbox',
                     name: 'checkbox',
-                    className: he.a.checkbox,
+                    className: se.a.checkbox,
                     value: 'Agree',
+                    onClick: function () {
+                      return y(!b);
+                    },
                   }),
                   o.a.createElement(
                     'label',
@@ -799,51 +898,56 @@
                 o.a.createElement(
                   'p',
                   null,
-                  'Given the unpredictable nature of current market conditions, in the event that the merchant runs out of business, gift cards will be treated as a donation to the merchant.'
+                  '* Given the unpredictable nature of current market conditions, in the event that the merchant runs out of business, gift cards will be treated as a donation to the merchant.'
                 ),
                 o.a.createElement(
                   'div',
-                  { className: he.a.btnRow },
+                  { className: se.a.btnRow },
                   o.a.createElement(
                     'button',
                     {
                       type: 'button',
                       className: 'modalButton--back',
-                      onClick: a,
+                      onClick: s,
                     },
-                    ' \u1438 Back '
+                    ' ',
+                    '\u1438 Back',
+                    ' '
                   ),
                   o.a.createElement(
                     'button',
                     {
                       type: 'button',
                       className: 'modalButton--filled',
-                      onClick: f,
+                      onClick: v,
+                      disabled: !1 === b,
                     },
-                    ' Confirm '
+                    ' ',
+                    'Confirm',
+                    ' '
                   )
                 )
               )
             ),
-            o.a.createElement(Ce, { showConfirmModal: A, handleClose: t })
+            o.a.createElement(he, { showConfirmModal: d, handleClose: a })
           );
         },
-        ge = Object(_.a)('pk_test_5AByIibLOhR6WHL3Mwnmel3P00zm0pIDrD'),
-        Ne = ve,
-        ke = (function (e) {
-          Object(K.a)(a, e);
-          var t = Object(X.a)(a);
+        fe = Object(H.a)('pk_test_5AByIibLOhR6WHL3Mwnmel3P00zm0pIDrD'),
+        be = pe,
+        ye = (function (e) {
+          Object(m.a)(a, e);
+          var t = Object(c.a)(a);
           function a(e) {
             var n;
             return (
-              Object(T.a)(this, a),
+              Object(r.a)(this, a),
               ((n = t.call(this, e)).state = {
                 name: '',
                 email: '',
                 address: '',
                 city: '',
                 stateForm: '',
-                zipcode: '',
+                zipCode: '',
                 showPayModal: !1,
               }),
               (n.handleChange = n.handleChange.bind(Object(Q.a)(n))),
@@ -853,13 +957,13 @@
             );
           }
           return (
-            Object(M.a)(a, [
+            Object(i.a)(a, [
               {
                 key: 'handleChange',
                 value: function (e) {
                   var t = e.target.name,
                     a = e.target.value;
-                  this.setState(Object(ne.a)({}, t, a));
+                  this.setState(Object(X.a)({}, t, a));
                 },
               },
               {
@@ -885,8 +989,8 @@
                       'form',
                       {
                         id: 'billing-form',
-                        className: J()(
-                          se.a.billFormContainer,
+                        className: z()(
+                          $.a.billFormContainer,
                           'modalForm--form'
                         ),
                         style: {
@@ -899,17 +1003,27 @@
                           className: 'closeButton--close',
                           onClick: this.props.handleClose,
                         },
-                        ' \xd7 '
+                        ' ',
+                        '\xd7',
+                        ' '
                       ),
-                      n.createElement('h2', null, 'Complete your donation'),
                       n.createElement(
-                        'p',
+                        'h2',
                         null,
+                        'Complete your',
+                        ' ',
+                        'donation' === this.props.purchaseType
+                          ? 'donation'
+                          : 'gift card purchase'
+                      ),
+                      n.createElement(
+                        'div',
+                        { className: $.a.addSpacing },
                         'Please add your payment information below'
                       ),
                       n.createElement(
                         'div',
-                        { className: se.a.billingsContainer },
+                        { className: $.a.billingsContainer },
                         n.createElement('h3', null, 'Billing Information'),
                         n.createElement(
                           'label',
@@ -919,7 +1033,7 @@
                         n.createElement('input', {
                           name: 'name',
                           type: 'text',
-                          className: J()(se.a.label, 'modalInput--input'),
+                          className: z()($.a.label, 'modalInput--input'),
                           onChange: function (t) {
                             return e.handleChange(t);
                           },
@@ -929,9 +1043,9 @@
                         n.createElement('input', {
                           name: 'email',
                           type: 'email',
-                          className: J()(
-                            se.a.label,
-                            se.a.email,
+                          className: z()(
+                            $.a.label,
+                            $.a.email,
                             'modalInput--input'
                           ),
                           onChange: function (t) {
@@ -947,9 +1061,9 @@
                         n.createElement('input', {
                           name: 'address',
                           type: 'text',
-                          className: J()(
-                            se.a.label,
-                            se.a.address,
+                          className: z()(
+                            $.a.label,
+                            $.a.address,
                             'modalInput--input'
                           ),
                           onChange: function (t) {
@@ -959,10 +1073,10 @@
                         }),
                         n.createElement(
                           'div',
-                          { className: se.a.row },
+                          { className: $.a.row },
                           n.createElement(
                             'div',
-                            { className: se.a.column },
+                            { className: $.a.column },
                             n.createElement(
                               'label',
                               { htmlFor: 'City' },
@@ -971,10 +1085,10 @@
                             n.createElement('input', {
                               name: 'city',
                               type: 'text',
-                              className: J()(
+                              className: z()(
                                 'modalInput--input',
-                                se.a.label,
-                                se.a.city
+                                $.a.label,
+                                $.a.city
                               ),
                               onChange: function (t) {
                                 return e.handleChange(t);
@@ -984,7 +1098,7 @@
                           ),
                           n.createElement(
                             'div',
-                            { className: se.a.column },
+                            { className: $.a.column },
                             n.createElement(
                               'label',
                               { htmlFor: 'State' },
@@ -993,10 +1107,10 @@
                             n.createElement('input', {
                               name: 'stateForm',
                               type: 'text',
-                              className: J()(
+                              className: z()(
                                 'modalInput--input',
-                                se.a.label,
-                                se.a.state
+                                $.a.label,
+                                $.a.state
                               ),
                               onChange: function (t) {
                                 return e.handleChange(t);
@@ -1006,7 +1120,7 @@
                           ),
                           n.createElement(
                             'div',
-                            { className: se.a.column },
+                            { className: $.a.column },
                             n.createElement(
                               'label',
                               { htmlFor: 'zipcode' },
@@ -1015,29 +1129,30 @@
                             n.createElement('input', {
                               name: 'zipcode',
                               type: 'text',
-                              className: J()(
+                              className: z()(
                                 'modalInput--input',
-                                se.a.label,
-                                se.a.zipcode
+                                $.a.label,
+                                $.a.zipcode
                               ),
                               onChange: function (t) {
                                 return e.handleChange(t);
                               },
-                              value: this.state.zipcode,
+                              value: this.state.zipCode,
                             })
                           )
                         ),
                         n.createElement(
                           'div',
-                          { className: se.a.btnRow },
+                          { className: $.a.btnRow },
                           n.createElement(
                             'button',
                             {
                               type: 'button',
-                              className: J()(se.a.nextBtn, 'modalButton--back'),
+                              className: z()($.a.nextBtn, 'modalButton--back'),
                               onClick: this.props.hideBillModal,
                             },
-                            ' \u1438 Back'
+                            ' ',
+                            '\u1438 Back'
                           ),
                           n.createElement(
                             'button',
@@ -1046,25 +1161,22 @@
                               className: 'modalButton--filled',
                               onClick: this.showPaymentModal,
                             },
-                            ' Next'
+                            ' ',
+                            'Next'
                           )
                         )
                       )
                     ),
                     n.createElement(
-                      Z.Elements,
-                      { stripe: ge },
-                      n.createElement(Ne, {
+                      U.Elements,
+                      { stripe: fe },
+                      n.createElement(be, {
                         showPayModal: this.state.showPayModal,
                         handleClose: this.props.handleClose,
                         hidePaymentModal: this.hidePaymentModal,
                         donatedAmt: this.props.donatedAmt,
-                        name: this.state.name,
-                        email: this.state.email,
-                        address: this.state.address,
-                        city: this.state.city,
-                        state: this.state.stateForm,
-                        zipcode: this.state.zipcode,
+                        merchant: this.state,
+                        purchaseType: this.props.purchaseType,
                       })
                     )
                   );
@@ -1074,13 +1186,13 @@
             a
           );
         })(n.Component),
-        Ie = (function (e) {
-          Object(K.a)(a, e);
-          var t = Object(X.a)(a);
+        Ae = (function (e) {
+          Object(m.a)(a, e);
+          var t = Object(c.a)(a);
           function a(e) {
             var n;
             return (
-              Object(T.a)(this, a),
+              Object(r.a)(this, a),
               ((n = t.call(this, e)).state = {
                 amount: 0,
                 customInput: !1,
@@ -1095,7 +1207,7 @@
             );
           }
           return (
-            Object(M.a)(a, [
+            Object(i.a)(a, [
               {
                 key: 'handleChange',
                 value: function (e, t) {
@@ -1125,10 +1237,7 @@
                     'form',
                     {
                       id: 'donation-form',
-                      className: J()(
-                        ae.a.donationsContainer,
-                        'modalForm--form'
-                      ),
+                      className: z()(Z.a.donationsContainer, 'modalForm--form'),
                       style: { display: this.props.show ? 'block' : 'none' },
                     },
                     n.createElement(
@@ -1137,7 +1246,9 @@
                         className: 'closeButton--close',
                         onClick: this.props.handleClose,
                       },
-                      ' \xd7 '
+                      ' ',
+                      '\xd7',
+                      ' '
                     ),
                     n.createElement('h2', null, 'Shunfa Bakery'),
                     n.createElement(
@@ -1147,7 +1258,7 @@
                     ),
                     n.createElement(
                       'div',
-                      { className: ae.a.amountContainer },
+                      { className: Z.a.amountContainer },
                       n.createElement(
                         'label',
                         { htmlFor: 'select-amount' },
@@ -1157,7 +1268,7 @@
                       n.createElement('br', null),
                       n.createElement(
                         'div',
-                        { className: ae.a.selectAmtContainer },
+                        { className: Z.a.selectAmtContainer },
                         n.createElement(
                           'button',
                           {
@@ -1168,7 +1279,8 @@
                               return e.handleChange(t, !1);
                             },
                           },
-                          ' $10'
+                          ' ',
+                          '$10'
                         ),
                         n.createElement(
                           'button',
@@ -1180,7 +1292,8 @@
                               return e.handleChange(t, !1);
                             },
                           },
-                          ' $25'
+                          ' ',
+                          '$25'
                         ),
                         n.createElement(
                           'button',
@@ -1192,7 +1305,8 @@
                               return e.handleChange(t, !1);
                             },
                           },
-                          ' $50'
+                          ' ',
+                          '$50'
                         ),
                         n.createElement(
                           'button',
@@ -1204,7 +1318,8 @@
                               return e.handleChange(t, !1);
                             },
                           },
-                          ' $100'
+                          ' ',
+                          '$100'
                         )
                       ),
                       n.createElement(
@@ -1217,7 +1332,7 @@
                       n.createElement('input', {
                         name: 'custom-amount',
                         type: 'number',
-                        className: J()(ae.a.customAmt, 'modalInput--input'),
+                        className: z()(Z.a.customAmt, 'modalInput--input'),
                         onChange: function (t) {
                           return e.handleChange(t, !0);
                         },
@@ -1229,16 +1344,18 @@
                       'button',
                       {
                         type: 'button',
-                        className: J()(ae.a.nextBtn, 'modalButton--filled'),
+                        className: z()(Z.a.nextBtn, 'modalButton--filled'),
                         onClick: this.showBillingsModal,
                         disabled: 0 === this.state.amount,
                       },
-                      ' Next'
+                      ' ',
+                      'Next'
                     ),
-                    n.createElement(ke, {
+                    n.createElement(ye, {
                       showBillModal: this.state.showBillModal,
                       hideBillModal: this.hideBillingsModal,
                       donatedAmt: this.state.amount,
+                      purchaseType: this.props.purchaseType,
                     })
                   );
                 },
@@ -1247,19 +1364,18 @@
             a
           );
         })(n.Component),
-        we = ee,
-        Be = Ie,
-        xe = (function (e) {
-          Object(K.a)(a, e);
-          var t = Object(X.a)(a);
+        Ee = (function (e) {
+          Object(m.a)(a, e);
+          var t = Object(c.a)(a);
           function a(e) {
             var n;
             return (
-              Object(T.a)(this, a),
+              Object(r.a)(this, a),
               ((n = t.call(this, e)).state = {
                 current: 4e3,
                 need: 5e3,
                 show: !1,
+                purchaseType: '',
               }),
               (n.showModal = n.showModal.bind(Object(Q.a)(n))),
               (n.hideModal = n.hideModal.bind(Object(Q.a)(n))),
@@ -1267,11 +1383,12 @@
             );
           }
           return (
-            Object(M.a)(a, [
+            Object(i.a)(a, [
               {
                 key: 'showModal',
-                value: function () {
-                  this.setState({ show: !0 });
+                value: function (e) {
+                  var t = e.target.value;
+                  this.setState({ show: !0, purchaseType: t });
                 },
               },
               {
@@ -1285,31 +1402,31 @@
                 value: function () {
                   return n.createElement(
                     'section',
-                    { className: J()(V.a.container, this.props.className) },
+                    { className: z()(Y.a.container, this.props.className) },
                     n.createElement(
                       'figure',
-                      { className: V.a.ownerContainer },
+                      { className: Y.a.ownerContainer },
                       n.createElement('img', {
-                        className: V.a.ownerImage,
+                        className: Y.a.ownerImage,
                         src: this.props.imageSrc,
                         alt: this.props.ownerName,
                       })
                     ),
                     n.createElement(
                       'h2',
-                      { className: V.a.ownerName },
+                      { className: Y.a.ownerName },
                       this.props.ownerName
                     ),
                     n.createElement(
                       'div',
-                      { className: V.a.progressContainer },
+                      { className: Y.a.progressContainer },
                       n.createElement(
                         'div',
-                        { className: J()(V.a.progressBar, 'progress-bar') },
+                        { className: z()(Y.a.progressBar, 'progress-bar') },
                         n.createElement(
                           'div',
                           {
-                            className: V.a.myBar,
+                            className: Y.a.myBar,
                             style: {
                               width: ''.concat(
                                 (this.state.current / this.state.need) * 100,
@@ -1331,34 +1448,40 @@
                     ),
                     n.createElement(
                       'div',
-                      { className: V.a.buttonContainer },
+                      { className: Y.a.buttonContainer },
                       n.createElement(
                         'button',
                         {
-                          className: J()(V.a.button, 'button--filled'),
+                          value: 'donation',
+                          className: z()(Y.a.button, 'button--filled'),
                           onClick: this.showModal,
                         },
                         'Donate'
                       ),
-                      n.createElement(we, {
-                        merchant: 'Shunfa Bakery',
-                        option: 'Gift Card',
-                        className: J()(V.a.button, 'button--outlined'),
-                      })
+                      n.createElement(
+                        'button',
+                        {
+                          value: 'gift-card',
+                          className: z()(Y.a.button, 'button--outlined'),
+                          onClick: this.showModal,
+                        },
+                        'Gift Card'
+                      )
                     ),
-                    n.createElement(Be, {
+                    n.createElement(Ae, {
                       show: this.state.show,
                       handleClose: this.hideModal,
+                      purchaseType: this.state.purchaseType,
                     }),
                     n.createElement(
                       'div',
-                      { className: V.a.summaryContainer },
+                      { className: Y.a.summaryContainer },
                       n.createElement(
                         'div',
                         null,
                         n.createElement(
                           'span',
-                          { className: V.a.storeSummaryLabel },
+                          { className: Y.a.storeSummaryLabel },
                           'Type: '
                         ),
                         n.createElement(
@@ -1374,7 +1497,7 @@
                         null,
                         n.createElement(
                           'span',
-                          { className: V.a.storeSummaryLabel },
+                          { className: Y.a.storeSummaryLabel },
                           'Employees: '
                         ),
                         n.createElement('span', null, '5')
@@ -1386,7 +1509,7 @@
                         null,
                         n.createElement(
                           'span',
-                          { className: V.a.storeSummaryLabel },
+                          { className: Y.a.storeSummaryLabel },
                           'Runaway: '
                         ),
                         n.createElement('span', null, '3 months')
@@ -1398,7 +1521,7 @@
                         null,
                         n.createElement(
                           'span',
-                          { className: V.a.storeSummaryLabel },
+                          { className: Y.a.storeSummaryLabel },
                           'Breakeven: '
                         ),
                         n.createElement('span', null, '$1000 / month')
@@ -1406,25 +1529,25 @@
                     ),
                     n.createElement(
                       'div',
-                      { className: V.a.socialContainer },
+                      { className: Y.a.socialContainer },
                       n.createElement('a', {
                         href: '#',
-                        className: J()(V.a.fa, 'fa fa-twitter'),
+                        className: z()(Y.a.fa, 'fa fa-twitter'),
                       }),
                       n.createElement('a', {
                         href: '#',
-                        className: J()(V.a.fa, 'fa fa-instagram'),
+                        className: z()(Y.a.fa, 'fa fa-instagram'),
                       }),
                       n.createElement('a', {
                         href: '#',
-                        className: J()(V.a.fa, 'fa fa-facebook'),
+                        className: z()(Y.a.fa, 'fa fa-facebook'),
                       }),
                       n.createElement('a', {
                         href: '#',
-                        className: J()(V.a.fa, 'fa fa-youtube'),
+                        className: z()(Y.a.fa, 'fa fa-youtube'),
                       })
                     ),
-                    n.createElement('div', { className: V.a.mapsContainer })
+                    n.createElement('div', { className: Y.a.mapsContainer })
                   );
                 },
               },
@@ -1432,64 +1555,68 @@
             a
           );
         })(n.Component),
-        Oe = a(24),
-        Se = a.n(Oe),
-        De = function () {
-          var e = Object(E.a)({}, g.storeInfo, {
+        ve = a(26),
+        ge = a.n(ve),
+        Ce = function () {
+          Object(v.f)().id;
+          Object(n.useEffect)(function () {
+            Object(le.getSeller)();
+          }, []);
+          var e = Object(E.a)({}, B.storeInfo, {
             storeDetailsProps: {
-              storeStoryProps: { story: g.storeStory },
-              storeMenuProps: { menuItems: g.menuItems },
+              storeStoryProps: { story: B.storeStory },
+              storeMenuProps: { menuItems: B.menuItems },
             },
-            className: Se.a.storeInfo,
+            className: ge.a.storeInfo,
           });
           return n.createElement(
             'div',
             null,
             n.createElement(
               'main',
-              { className: Se.a.container },
-              n.createElement(v, null),
+              { className: ge.a.container },
+              n.createElement(w, null),
               n.createElement(
                 'div',
-                { className: Se.a.contentContainer },
+                { className: ge.a.contentContainer },
                 n.createElement(F, e),
                 n.createElement(
-                  xe,
-                  Object.assign({ className: Se.a.ownerPanel }, g.ownerInfo)
+                  Ee,
+                  Object.assign({ className: ge.a.ownerPanel }, B.ownerInfo)
                 )
               )
             ),
-            n.createElement(h, null)
+            n.createElement(b, null)
           );
         },
-        je = a(9),
-        Re = a.n(je),
-        Le = function () {
+        Ne = a(10),
+        ke = a.n(Ne),
+        we = function () {
           return n.createElement(
             'div',
             null,
             n.createElement(
               'main',
-              { className: Re.a.container },
+              { className: ke.a.container },
               n.createElement(
                 'div',
-                { className: Re.a.introContainer },
+                { className: ke.a.introContainer },
                 n.createElement(
                   'h1',
-                  { className: Re.a.headerText },
+                  { className: ke.a.headerText },
                   'Send Chinatown Love'
                 ),
                 n.createElement(
                   'div',
-                  { className: Re.a.introTextSection },
+                  { className: ke.a.introTextSection },
                   n.createElement(
                     'p',
-                    { className: Re.a.introText },
+                    { className: ke.a.introText },
                     'Once a bustling location known for its delicious food, fresh produce, and affordable prices \u2013 NYC\u2019s Chinatown has now become completely barren. Although many businesses have been affected by the recent COVID-19 outbreak, Chinatown has had it the worst. Chinatown businesses have been facing declines in business due to discrimination and racism weeks before other restuarants felt similar effects of COVID-19 on sales. Immigrant owners who typically don\u2019t speak English and their dependence on a cash-only system have put them at an even greater disadvantage of surviving through this pandemic.'
                   ),
                   n.createElement(
                     'p',
-                    { className: Re.a.introText },
+                    { className: ke.a.introText },
                     'They were there for you on those late 4am nights you barely remember, or the next morning when you were desperately seeking a fresh bowl of noodle soup and cold tea. To all the tourists and locals alike who have visited NYC\u2019s Chinatown and were mesmerized by the ambience and enjoyed it\u2019s services. Be there for your Chinatown. The time to help is now.'
                   )
                 ),
@@ -1498,35 +1625,72 @@
                   { href: 'mailto:sendchinatownlove@gmail.com' },
                   n.createElement(
                     'button',
-                    { className: Re.a.ctaButton },
+                    { className: ke.a.ctaButton },
                     'Partner with us'
                   )
                 ),
                 n.createElement(
                   'span',
-                  { className: Re.a.ctaSubtext },
+                  { className: ke.a.ctaSubtext },
                   'We partner with local businesses'
                 )
               )
             ),
-            n.createElement(h, null)
+            n.createElement(b, null)
           );
         },
-        ze = a(4),
-        Pe = Object(ze.a)();
-      var We = function () {
-        return o.a.createElement(
-          B.b,
-          { history: Pe },
-          o.a.createElement(
-            B.c,
-            null,
-            o.a.createElement(B.a, { exact: !0, path: '/', component: A }),
-            o.a.createElement(B.a, { path: '/story', component: De }),
-            o.a.createElement(B.a, { path: '/about', component: Le })
-          )
-        );
-      };
+        Be = a(4),
+        Ie = Object(Be.a)(),
+        xe = (function (e) {
+          Object(m.a)(a, e);
+          var t = Object(c.a)(a);
+          function a(e) {
+            var n;
+            return (
+              Object(r.a)(this, a),
+              ((n = t.call(this, e)).state = {
+                sellers: [],
+                sellersLoading: !1,
+              }),
+              n
+            );
+          }
+          return (
+            Object(i.a)(a, [
+              {
+                key: 'componentDidMount',
+                value: function () {
+                  var e = Object(le.getSellers)();
+                  console.log('App.tsx, componentWillMount: ', { sellers: e });
+                },
+              },
+              {
+                key: 'render',
+                value: function () {
+                  return o.a.createElement(
+                    v.b,
+                    { history: Ie },
+                    o.a.createElement(
+                      v.c,
+                      null,
+                      o.a.createElement(v.a, {
+                        exact: !0,
+                        path: '/',
+                        component: A,
+                      }),
+                      o.a.createElement(v.a, {
+                        path: '/story/:id',
+                        component: Ce,
+                      }),
+                      o.a.createElement(v.a, { path: '/about', component: we })
+                    )
+                  );
+                },
+              },
+            ]),
+            a
+          );
+        })(o.a.Component);
       Boolean(
         'localhost' === window.location.hostname ||
           '[::1]' === window.location.hostname ||
@@ -1535,7 +1699,7 @@
           )
       );
       l.a.render(
-        o.a.createElement(o.a.StrictMode, null, o.a.createElement(We, null)),
+        o.a.createElement(o.a.StrictMode, null, o.a.createElement(xe, null)),
         document.getElementById('root')
       ),
         'serviceWorker' in navigator &&
@@ -1548,6 +1712,6 @@
             });
     },
   ],
-  [[56, 1, 2]],
+  [[58, 1, 2]],
 ]);
-//# sourceMappingURL=main.4abd00a0.chunk.js.map
+//# sourceMappingURL=main.ac547a01.chunk.js.map

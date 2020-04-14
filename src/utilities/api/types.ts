@@ -1,9 +1,9 @@
 export type PaymentParams = {
   amount: number;
   currency: string;
-  name: string;
+  item_type: string;
   quantity: number;
-  description: string;
+  seller_id: string;
 };
 
 export type Merchant = {

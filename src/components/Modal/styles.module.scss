@@ -34,3 +34,19 @@
     overflow-y: scroll;
   }
 }
+
+@media only screen and (max-width: 450px) {
+  .donationsContainer {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  form button {
+    background-color: white;
+  }
+
+  .customAmt {
+    width: 100%;
+  }
+}

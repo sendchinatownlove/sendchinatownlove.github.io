@@ -1,5 +1,5 @@
 .container {
-  height: 600px;
+  height: 650px;
 }
 
 form img {
@@ -19,5 +19,13 @@ form img {
     width: 85vw;
     height: 75vh;
     overflow-y: hidden;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .container {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
   }
 }
