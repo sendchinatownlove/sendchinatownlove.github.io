@@ -1,4 +1,3 @@
-import React from 'react';
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Merchant, PaymentParams } from './types';

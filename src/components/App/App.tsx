@@ -1,4 +1,3 @@
-import React, { useState, useCallback } from 'react';
 import Home from '../Home';
 import MerchantPage from '../MerchantPage';
 import About from '../About';

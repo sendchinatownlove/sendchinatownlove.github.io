@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
+import { useStripe, useElements } from '@stripe/react-stripe-js';
 
 import styles from './styles.module.scss';
 import { makePayment, PaymentParams } from '../../utilities/api';
@@ -47,7 +47,6 @@ const ModalPayment = ({
     event.preventDefault();
 
     // returns stripe payment intent
-    const res = await makePayment(stripe, elements, payment, merchant);
     showConfirmModal(); // shows confirmation modal box
   };
 
