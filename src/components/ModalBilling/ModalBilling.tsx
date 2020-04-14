@@ -9,7 +9,8 @@ import ModalPayment from '../ModalPayment';
 import { Merchant as State } from '../../utilities/api';
 
 // TO DO: I assume this is our api code or someting.. marked to fix.
-const stripePromise = loadStripe('pk_test_5AByIibLOhR6WHL3Mwnmel3P00zm0pIDrD');
+const stripe_pk = process.env.STRIPE_PUBLISHABLE_KEY!
+const stripePromise = loadStripe(stripe_pk);
 
 type Props = {
   purchaseType: string;
