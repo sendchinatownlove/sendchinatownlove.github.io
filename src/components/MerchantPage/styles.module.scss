@@ -19,6 +19,10 @@
     grid-template-columns: 2fr minmax(250px, 1fr);
     padding: 0 44px;
   }
+  @include for-phone-only {
+    font-size: 14px;
+    margin: 32px 0px;
+  }
 }
 
 .ownerPanel {
@@ -28,6 +32,10 @@
     position: sticky;
     top: 20px;
     order: 2;
+  }
+  @include for-phone-only {
+    font-size: 14px;
+    padding: 24px;
   }
 }
 
