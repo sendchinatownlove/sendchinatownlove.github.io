@@ -53,7 +53,9 @@ $container-size: 160px;
   letter-spacing: 0.05em;
   @include for-phone-only {
     font-size: 14px;
+    height: 48px;
     width: 240px;
+    margin-bottom: px;
   }
 }
 
