@@ -11,9 +11,9 @@ export const getSellers = async () =>
     .catch((err) => err);
 
 // Fix return typing
-export const getSeller = async () =>
+export const getSeller = async (id: string) =>
   axios
-    .get(seller)
+    .get(seller + id)
     .then((res) => res)
     .catch((err) => err);
 

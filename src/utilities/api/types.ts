@@ -19,7 +19,7 @@ export type Seller = {
   //TO DO: what is className doing
   className: '';
   cuisineName: string;
-  email?: email;
+  email?: string;
   name: string;
   phoneNumber: string;
   //TO DO: why is this necessary here

@@ -26,7 +26,7 @@ class App extends React.Component<{}> {
           {
             // TO DO: add router config for this route
           }
-          <Route path="/story/:id" component={SellerPage} />
+          <Route path="/:id" component={SellerPage} />
           <Route path="/about" component={About} />
         </Switch>
       </Router>

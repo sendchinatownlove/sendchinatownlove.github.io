@@ -7,16 +7,19 @@ import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import styles from './styles.module.scss';
 import { getSeller } from '../../utilities';
+import { useParams } from 'react-router-dom';
 
 const SellerPage: React.FC<{}> = () => {
   // fix typing
   const [seller, setSeller] = useState<any | null>();
+  const { id } = useParams();
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const result = await getSeller();
+    const result = await getSeller(id);
     setSeller(result.data);
   };
 
