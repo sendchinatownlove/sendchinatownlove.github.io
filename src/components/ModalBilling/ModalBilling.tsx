@@ -6,7 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import styles from './styles.module.scss';
 import ModalPayment from '../ModalPayment';
 // TO DO: Fix relative paths
-import { Seller as State } from '../../utilities/api';
+import { Buyer as State } from '../../utilities/api';
 
 const stripe_pk = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripe_pk);
@@ -17,23 +17,23 @@ type Props = {
   hideBillModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
   showBillModal: boolean;
   donatedAmt: number;
+  sellerId: string;
 };
 
 const ModalPaymentBox: any = ModalPayment;
 
-// TO DO: Fix type
-class ModalBilling extends React.Component<Props, any> {
+class ModalBilling extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      address: '',
-      email: '',
       className: '',
-      cuisineName: '',
       name: '',
-      showPayModal: false,
-      summary: '',
-      story: '',
+      email: '',
+      address: '',
+      city: '',
+      stateForm: '',
+      zipCode: '',
+      showPayModal: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.showPaymentModal = this.showPaymentModal.bind(this);
@@ -191,7 +191,8 @@ class ModalBilling extends React.Component<Props, any> {
             handleClose={this.props.handleClose}
             hidePaymentModal={this.hidePaymentModal}
             donatedAmt={this.props.donatedAmt}
-            merchant={this.state}
+            buyer={this.state}
+            sellerId={this.props.sellerId}
             purchaseType={this.props.purchaseType}
           />
         </Elements>

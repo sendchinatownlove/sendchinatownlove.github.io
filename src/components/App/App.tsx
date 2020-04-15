@@ -4,8 +4,8 @@ import About from '../About';
 import { createBrowserHistory } from 'history';
 import { Router, Switch, Route } from 'react-router-dom';
 import React from 'react';
-
 import ReactGA from 'react-ga';
+
 const trackingId =  process.env.REACT_APP_API_ENDPOINT!;
 ReactGA.initialize(trackingId);
 
@@ -27,6 +27,7 @@ class App extends React.Component<{}> {
             // TO DO: add router config for this route
           }
           <Route path="/:id" component={SellerPage} />
+          <Route path="/:id#story" component={SellerPage} />
           <Route path="/about" component={About} />
         </Switch>
       </Router>

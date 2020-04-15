@@ -9,7 +9,10 @@ interface Props {
   amountRaised: number;
   targetAmount: number;
   acceptDonations:boolean;
-  sellGiftCard: boolean;
+  sellGiftCards: boolean;
+  ownerName: string;
+  sellerId: string;
+  sellerName: string;
 }
 
 interface State {
@@ -47,10 +50,12 @@ class OwnerPanel extends React.Component<Props, State> {
           <img
             className={styles.ownerImage}
             src={this.props.imageSrc}
+            alt={this.props.ownerName}
           />
         </figure>
 
-        {this.props.targetAmount && this.props.amountRaised && (
+        <h2 className={styles.ownerName}>{this.props.ownerName}</h2>
+        {this.props.targetAmount && (
           <div className={styles.progressContainer}>
             <div className={classnames(styles.progressBar, 'progress-bar')}>
               <div
@@ -65,19 +70,22 @@ class OwnerPanel extends React.Component<Props, State> {
               </div>
             </div>
             <div>
-              ${this.props.amountRaised} of ${this.props.targetAmount}
+              {/* TODO(jtmckibb): Add commas for easier readability */}
+              ${Math.floor(this.props.amountRaised)/100} of ${Math.floor(this.props.targetAmount)/100}
             </div>
           </div>
         )}
 
-        {this.props.acceptDonations && this.props.sellGiftCard && <div className={styles.buttonContainer}>
+        <div className={styles.buttonContainer}>
+          {this.props.acceptDonations &&
           <button
             value="donation"
             className={classnames(styles.button, 'button--filled')}
             onClick={this.showModal}
           >
             Donate
-          </button>
+          </button>}
+          {this.props.sellGiftCards &&
           <button
             value="gift-card"
             className={classnames(styles.button, 'button--outlined')}
@@ -85,12 +93,15 @@ class OwnerPanel extends React.Component<Props, State> {
           >
             Gift Card
           </button>
-        </div>}
+          }
+        </div>
 
         <ModalBox
           show={this.state.show}
           handleClose={this.hideModal}
           purchaseType={this.state.purchaseType}
+          sellerId={this.props.sellerId}
+          sellerName={this.props.sellerName}
         />
 
         {/* hide extra info section until needed */}

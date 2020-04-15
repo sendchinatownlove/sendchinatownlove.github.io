@@ -34,7 +34,6 @@ const SellerPage: React.FC<{}> = () => {
             seller={{
               name: seller.name,
               addresses: seller.addresses,
-              className: '',
               cuisineName: seller.cuisine_name,
               story: seller.story,
               summary: seller.summary,
@@ -43,10 +42,14 @@ const SellerPage: React.FC<{}> = () => {
           <OwnerPanel
             className={styles.ownerPanel}
             acceptDonations={seller.accept_donations}
-            sellGiftCard={seller.sell_gift_card}
+            sellGiftCards={seller.sell_gift_cards}
             amountRaised={seller.amount_raised}
             targetAmount={seller.target_amount}
-            {...sampleMerchant.ownerInfo}
+            ownerName={seller.owner_name}
+            imageSrc={sampleMerchant.ownerInfo.imageSrc}
+            sellerName={seller.name}
+            // TODO(jtmckibb): Should not crash here
+            sellerId={id!}
           />
         </div>
       </main>

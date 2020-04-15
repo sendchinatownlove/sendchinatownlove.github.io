@@ -15,16 +15,24 @@ export type Address = {
   zip_code: number;
 };
 
-export type Seller = {
-  addresses?: Address[];
+export type Buyer = {
+  name: string;
+  email: string;
+  address: string;
+  city: string;
+  stateForm: string;
+  zipCode: string;
+  showPayModal: boolean;
+
   //TO DO: what is className doing
   className: '';
+}
+
+export type Seller = {
+  addresses?: Address[];
   cuisineName: string;
   email?: string;
   name: string;
-  
-  //TO DO: why is this necessary here
-  showPayModal?: boolean;
   summary: string;
   story: string;
 };

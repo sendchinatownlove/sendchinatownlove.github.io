@@ -14,7 +14,7 @@ const StoreDetails: React.SFC<Props> = ({ className, story }) => (
       <NavLink
         className={styles.navLink}
         activeClassName={styles['navLink--active']}
-        to={`/story`}
+        to={`#story`}
       >
         Story
       </NavLink>
@@ -34,14 +34,14 @@ const StoreDetails: React.SFC<Props> = ({ className, story }) => (
         </NavLink> */}
     </nav>
     <Switch>
-      <Route path={`/story`}>
+      <Route path={``}>
         <StoreStory story={story} />
       </Route>
       {/* <Route path={`/menu`}>
           <StoreMenu {...storeMenuProps} />
         </Route> */}
       {/* <Route path={`/photos`}>
-          <StoreMenu {...storePhotoProps}/> 
+          <StoreMenu {...storePhotoProps}/>
         </Route> */}
     </Switch>
   </section>

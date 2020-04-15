@@ -12,13 +12,12 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
   const {
     summary,
     story,
-    className,
     cuisineName,
     addresses,
   } = seller;
 
   return (
-    <section className={classnames(styles.container, className)}>
+    <section className={classnames(styles.container)}>
       <div className={styles.nationality}>{cuisineName}</div>
       <p>
         {addresses &&
