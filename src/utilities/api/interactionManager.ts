@@ -11,7 +11,6 @@ export const getSellers = async () => {
     .get(sellers)
     .then((res) => {
       // TO DO: fix response to success
-      console.log('getSellers res: ', { res });
       response = res;
     })
     .catch((err) => {

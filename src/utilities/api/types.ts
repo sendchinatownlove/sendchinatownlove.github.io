@@ -6,8 +6,16 @@ export type PaymentParams = {
   seller_id: string;
 };
 
+export type Address = {
+  city: string;
+  state: string;
+  address1: string;
+  address2: string;
+  zip_code: number;
+};
+
 export type Seller = {
-  address: string;
+  addresses: Address[];
   //TO DO: what is className doing
   className: '';
   cuisineName: string;

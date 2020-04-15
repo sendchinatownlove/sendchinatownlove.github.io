@@ -34,7 +34,7 @@ const SellerPage: React.FC<{}> = () => {
             seller={{
               name: seller.name,
               phoneNumber: seller.phone_number,
-              address: seller.address,
+              addresses: seller.addresses,
               className: '',
               cuisineName: seller.cuisine_name,
               story: seller.story,

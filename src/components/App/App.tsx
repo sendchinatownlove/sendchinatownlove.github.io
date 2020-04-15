@@ -32,14 +32,6 @@ class App extends React.Component<
     };
   }
 
-  // componentDidMount() {
-  //   const sellers: any = getSellers();
-
-  //   console.log('App.tsx, componentWillMount: ', {
-  //     sellers,
-  //   });
-  // }
-
   render() {
     return (
       <Router history={history}>
