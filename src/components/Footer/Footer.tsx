@@ -48,10 +48,10 @@ function Footer(props: Props) {
         />
         <ul className={styles.links}>
           <li>
-            <a className={iconClass} href="mailto:sendchinatownlove@gmail.com">
+            <a className={iconClass} href="mailto:team@sendchinatownlove.com">
               <span className={envelopeClass} />
             </a>
-            <a className={linkClass} href="mailto:sendchinatownlove@gmail.com">
+            <a className={linkClass} href="mailto:team@sendchinatownlove.com">
               Email
             </a>
           </li>
