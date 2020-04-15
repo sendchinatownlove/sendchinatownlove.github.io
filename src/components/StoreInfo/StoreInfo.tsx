@@ -25,7 +25,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
           addresses.map((address: Address) => (
             <>
               <div className={styles.address}>{address.address1}</div>
-              <div className={styles.address}>{address.address1}</div>
+              <div className={styles.address}>{address.address2}</div>
               <div className={styles.address}>{address.city}</div>
               <div className={styles.address}>{address.state}</div>
               <div className={styles.address}>{address.zip_code}</div>

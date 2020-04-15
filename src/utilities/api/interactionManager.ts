@@ -13,7 +13,7 @@ export const getSellers = async () =>
 // Fix return typing
 export const getSeller = async (id: string) =>
   axios
-    .get(seller + id)
+    .get(sellers + id)
     .then((res) => res)
     .catch((err) => err);
 
