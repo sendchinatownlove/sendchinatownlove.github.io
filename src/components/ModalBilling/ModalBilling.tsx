@@ -149,7 +149,7 @@ class ModalBilling extends React.Component<Props, State> {
               <div className={styles.column}>
                 <label htmlFor="zipcode">Zipcode</label>
                 <input
-                  name="zipcode"
+                  name="zipCode"
                   type="text"
                   className={classnames(
                     'modalInput--input',
