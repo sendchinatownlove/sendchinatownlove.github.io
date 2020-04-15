@@ -26,7 +26,7 @@ export type Buyer = {
 
   //TO DO: what is className doing
   className: '';
-}
+};
 
 export type Seller = {
   locations?: Location[];

@@ -9,12 +9,7 @@ type Props = {
 };
 
 export const StoreInfo: React.SFC<Props> = ({ seller }) => {
-  const {
-    summary,
-    story,
-    cuisineName,
-    locations,
-  } = seller;
+  const { summary, story, cuisineName, locations } = seller;
 
   return (
     <section className={classnames(styles.container)}>
@@ -25,7 +20,9 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
             <>
               <div className={styles.address}>{location.address1}</div>
               <div className={styles.address}>{location.address2}</div>
-              <div className={styles.address}>{location.city}, {location.state} {location.zip_code}</div>
+              <div className={styles.address}>
+                {location.city}, {location.state} {location.zip_code}
+              </div>
               <div className={styles.address}>{location.phone_number}</div>
             </>
           ))}

@@ -8,7 +8,7 @@ interface Props {
   className?: string;
   amountRaised: number;
   targetAmount: number;
-  acceptDonations:boolean;
+  acceptDonations: boolean;
   sellGiftCards: boolean;
   ownerName: string;
   sellerId: string;
@@ -70,30 +70,32 @@ class OwnerPanel extends React.Component<Props, State> {
               </div>
             </div>
             <div>
-              {/* TODO(jtmckibb): Add commas for easier readability */}
-              ${Math.floor(this.props.amountRaised)/100} of ${Math.floor(this.props.targetAmount)/100}
+              {/* TODO(jtmckibb): Add commas for easier readability */}$
+              {Math.floor(this.props.amountRaised) / 100} of $
+              {Math.floor(this.props.targetAmount) / 100}
             </div>
           </div>
         )}
 
         <div className={styles.buttonContainer}>
-          {this.props.acceptDonations &&
-          <button
-            value="donation"
-            className={classnames(styles.button, 'button--filled')}
-            onClick={this.showModal}
-          >
-            Donate
-          </button>}
-          {this.props.sellGiftCards &&
-          <button
-            value="gift-card"
-            className={classnames(styles.button, 'button--outlined')}
-            onClick={this.showModal}
-          >
-            Gift Card
-          </button>
-          }
+          {this.props.acceptDonations && (
+            <button
+              value="donation"
+              className={classnames(styles.button, 'button--filled')}
+              onClick={this.showModal}
+            >
+              Donate
+            </button>
+          )}
+          {this.props.sellGiftCards && (
+            <button
+              value="gift-card"
+              className={classnames(styles.button, 'button--outlined')}
+              onClick={this.showModal}
+            >
+              Gift Card
+            </button>
+          )}
         </div>
 
         <ModalBox

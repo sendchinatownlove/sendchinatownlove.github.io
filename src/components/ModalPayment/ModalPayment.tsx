@@ -27,7 +27,7 @@ const ModalPayment = ({
   showPayModal,
   donatedAmt,
   buyer,
-  sellerId
+  sellerId,
 }: Props) => {
   const payment: PaymentParams = {
     amount: Number(donatedAmt) * 100,

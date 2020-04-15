@@ -33,7 +33,7 @@ class ModalBilling extends React.Component<Props, State> {
       city: '',
       stateForm: '',
       zipCode: '',
-      showPayModal: false
+      showPayModal: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.showPaymentModal = this.showPaymentModal.bind(this);

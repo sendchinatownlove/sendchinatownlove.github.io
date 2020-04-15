@@ -19,7 +19,7 @@ const SellerPage: React.FC<{}> = () => {
   }, []);
 
   const fetchData = async () => {
-    const result = id && await getSeller(id);
+    const result = id && (await getSeller(id));
     setSeller(result.data);
   };
 

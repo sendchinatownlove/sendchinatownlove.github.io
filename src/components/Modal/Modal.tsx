@@ -29,7 +29,7 @@ class Modal extends React.Component<Props, State> {
       customInput: false,
       close: false,
       next: false,
-      showBillModal: false
+      showBillModal: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.showBillingsModal = this.showBillingsModal.bind(this);
