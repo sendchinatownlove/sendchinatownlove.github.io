@@ -27,6 +27,15 @@
   bottom: -25px;
 }
 
+.customAmt:invalid {
+  border: 1px solid red;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 13px;
+}
+
 @media only screen and (max-width: 799px) {
   .donationsContainer {
     width: 85%;

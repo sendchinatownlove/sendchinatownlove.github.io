@@ -15,13 +15,15 @@ const SellerPage: React.FC<{}> = () => {
   const { id } = useParams();
 
   const fetchData = async () => {
+    console.log('hi', id);
     const result = id && (await getSeller(id));
     setSeller(result.data);
+    console.log('hi2', seller);
   };
 
   useEffect(() => {
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // TODO(ArtyEmsee): handle actual null states and loading

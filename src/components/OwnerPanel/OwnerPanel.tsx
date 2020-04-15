@@ -89,7 +89,7 @@ class OwnerPanel extends React.Component<Props, State> {
           )}
           {this.props.sellGiftCards && (
             <button
-              value="gift-card"
+              value="gift_card"
               className={classnames(styles.button, 'button--outlined')}
               onClick={this.showModal}
             >

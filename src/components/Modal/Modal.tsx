@@ -109,7 +109,7 @@ class Modal extends React.Component<Props, State> {
               $100
             </button>
           </div>
-          <label htmlFor="custom-amount">Or enter any amount </label> <br />
+          <label htmlFor="custom-amount">Or enter an amount </label> <br />
           <input
             name="custom-amount"
             type="number"
@@ -117,14 +117,22 @@ class Modal extends React.Component<Props, State> {
             onChange={(e) => this.handleChange(e, true)}
             value={this.state.customInput ? this.state.amount : ''}
             placeholder="$"
+            min="5"
           />
+          {this.state.amount < 5 && this.state.customInput ? (
+            <div className={styles.errorMessage}>
+              Minimum contribution is $5.00
+            </div>
+          ) : (
+            ''
+          )}
         </div>
 
         <button
           type="button"
           className={classnames(styles.nextBtn, 'modalButton--filled')}
           onClick={this.showBillingsModal}
-          disabled={this.state.amount === 0}
+          disabled={this.state.amount <= 5}
         >
           {' '}
           Next
