@@ -464,7 +464,7 @@
                 o.a.createElement('span', { className: s }),
                 o.a.createElement(
                   'a',
-                  { className: i, href: 'mailto:sendchinatownlove@gmail.com' },
+                  { className: i, href: 'mailto:team@sendchinatownlove.com' },
                   'Email'
                 )
               ),
@@ -1619,7 +1619,7 @@
                 ),
                 n.createElement(
                   'a',
-                  { href: 'mailto:sendchinatownlove@gmail.com' },
+                  { href: 'mailto:team@sendchinatownlove.com' },
                   n.createElement(
                     'button',
                     { className: ke.a.ctaButton },
