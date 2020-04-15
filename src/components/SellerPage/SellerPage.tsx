@@ -14,14 +14,15 @@ const SellerPage: React.FC<{}> = () => {
   const [seller, setSeller] = useState<any | null>();
   const { id } = useParams();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const fetchData = async () => {
     const result = id && (await getSeller(id));
     setSeller(result.data);
   };
+
+  useEffect(() => {
+    fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // TODO(ArtyEmsee): handle actual null states and loading
   return seller ? (
