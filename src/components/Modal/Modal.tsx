@@ -66,7 +66,7 @@ class Modal extends React.Component<Props, State> {
 
         {/* Pass in props here for name */}
         <h2>Shunfa Bakery</h2>
-        <p>Please select an amount and leave a message</p>
+        <p>Please select an amount</p>
 
         <div className={styles.amountContainer}>
           <label htmlFor="select-amount">Select an amount </label> <br />
