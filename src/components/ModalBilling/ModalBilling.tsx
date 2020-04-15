@@ -8,8 +8,8 @@ import ModalPayment from '../ModalPayment';
 // TODO(ArtyEmsee): Fix relative paths
 import { Buyer as State } from '../../utilities/api';
 
-const stripe_pk = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
-const stripePromise = loadStripe(stripe_pk);
+const stripePK = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
+const stripePromise = loadStripe(stripePK);
 
 type Props = {
   purchaseType: string;
