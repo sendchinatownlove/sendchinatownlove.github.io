@@ -7,11 +7,11 @@ interface Props {
   ownerName: string;
   imageSrc: string;
   className?: string;
+  amountRaised: number;
+  targetAmount: number;
 }
 
 interface State {
-  current: number;
-  need: number;
   show: boolean;
   purchaseType: string;
 }
@@ -23,8 +23,6 @@ class OwnerPanel extends React.Component<Props, State> {
     super(props);
     this.state = {
       // these will be props fix throughout when passed thru
-      current: 4000,
-      need: 5000,
       show: false,
       purchaseType: '',
     };
@@ -54,22 +52,25 @@ class OwnerPanel extends React.Component<Props, State> {
 
         <h2 className={styles.ownerName}>{this.props.ownerName}</h2>
 
-        <div className={styles.progressContainer}>
-          <div className={classnames(styles.progressBar, 'progress-bar')}>
-            <div
-              className={styles.myBar}
-              style={{
-                width: `${(this.state.current / this.state.need) * 100}%`,
-              }}
-            >
-              {' '}
+        {this.props.targetAmount && this.props.amountRaised && (
+          <div className={styles.progressContainer}>
+            <div className={classnames(styles.progressBar, 'progress-bar')}>
+              <div
+                className={styles.myBar}
+                style={{
+                  width: `${
+                    (this.props.amountRaised / this.props.targetAmount) * 100
+                  }%`,
+                }}
+              >
+                {' '}
+              </div>
+            </div>
+            <div>
+              ${this.props.amountRaised} of ${this.props.targetAmount}
             </div>
           </div>
-          {/* pass props down here*/}
-          <div>
-            ${this.state.current} of ${this.state.need}
-          </div>
-        </div>
+        )}
 
         <div className={styles.buttonContainer}>
           <button

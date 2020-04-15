@@ -3,33 +3,19 @@ import { CardElement } from '@stripe/react-stripe-js';
 import { Seller, PaymentParams } from './types';
 import { charges, sellers, seller } from './endpoints';
 
-export const getSellers = async () => {
-  // TO DO, fix expected type response
-  let response: any = undefined;
-
-  await axios
+// Fix return typing
+export const getSellers = async () =>
+  axios
     .get(sellers)
-    .then((res) => {
-      // TO DO: fix response to success
-      response = res;
-    })
-    .catch((err) => {
-      // TO DO: fix response to error
-      console.log({ err });
-    });
+    .then((res) => res)
+    .catch((err) => err);
 
-  return response;
-};
-
-// Fix this typing
-export const getSeller: any = async () =>
+// Fix return typing
+export const getSeller = async () =>
   axios
     .get(seller)
     .then((res) => res)
-    .catch((err) => {
-      // TO DO: fix response to error
-      console.log({ err });
-    });
+    .catch((err) => err);
 
 // TO DO: add typing for stripe elements
 export const makePayment = async (

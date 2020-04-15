@@ -3,7 +3,6 @@ import SellerPage from '../SellerPage';
 import About from '../About';
 import { createBrowserHistory } from 'history';
 import { Router, Switch, Route } from 'react-router-dom';
-// import { getSellers } from '../../utilities/api';
 import React from 'react';
 
 import ReactGA from 'react-ga';
@@ -18,20 +17,7 @@ history.listen(location => {
   ReactGA.pageview(location.pathname); // Record a pageview for the given page
 });
 
-
-class App extends React.Component<
-  {},
-  { sellers: []; sellersLoading: Boolean }
-> {
-  // TO DO: Leaving this as `any` type until we have some use case for typing it
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      sellers: [],
-      sellersLoading: false,
-    };
-  }
-
+class App extends React.Component<{}> {
   render() {
     return (
       <Router history={history}>

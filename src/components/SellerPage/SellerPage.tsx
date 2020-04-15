@@ -6,12 +6,11 @@ import { sampleMerchant } from './sample-merchant';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import styles from './styles.module.scss';
-import { getSeller, Seller } from '../../utilities';
+import { getSeller } from '../../utilities';
 
 const SellerPage: React.FC<{}> = () => {
   // fix typing
   const [seller, setSeller] = useState<any | null>();
-  // TO DO: implement component async pattern for api dep/loading state
   useEffect(() => {
     fetchData();
   }, []);
@@ -20,8 +19,6 @@ const SellerPage: React.FC<{}> = () => {
     const result = await getSeller();
     setSeller(result.data);
   };
-
-  console.log('SellerPage.tsx', { seller });
 
   // TO DO: handle actual null states and loading
   return seller ? (
@@ -43,6 +40,8 @@ const SellerPage: React.FC<{}> = () => {
           />
           <OwnerPanel
             className={styles.ownerPanel}
+            amountRaised={seller.amount_raised}
+            targetAmount={seller.target_amount}
             {...sampleMerchant.ownerInfo}
           />
         </div>

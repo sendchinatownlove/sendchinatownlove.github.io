@@ -15,7 +15,7 @@ export type Address = {
 };
 
 export type Seller = {
-  addresses: Address[];
+  addresses?: Address[];
   //TO DO: what is className doing
   className: '';
   cuisineName: string;
