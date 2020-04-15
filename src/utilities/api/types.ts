@@ -6,13 +6,13 @@ export type PaymentParams = {
   seller_id: string;
 };
 
-export type Address = {
+export type Location = {
   address1: string;
   address2: string;
   city: string;
-  phone_number: string;
   state: string;
   zip_code: number;
+  phone_number: string;
 };
 
 export type Buyer = {
@@ -29,7 +29,7 @@ export type Buyer = {
 }
 
 export type Seller = {
-  addresses?: Address[];
+  locations?: Location[];
   cuisineName: string;
   email?: string;
   name: string;

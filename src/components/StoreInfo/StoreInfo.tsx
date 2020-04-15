@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './styles.module.scss';
 import StoreDetails from '../StoreDetails';
 import classnames from 'classnames';
-import { Address, Seller } from '../../utilities';
+import { Location, Seller } from '../../utilities';
 
 type Props = {
   seller: Seller;
@@ -13,22 +13,20 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
     summary,
     story,
     cuisineName,
-    addresses,
+    locations,
   } = seller;
 
   return (
     <section className={classnames(styles.container)}>
       <div className={styles.nationality}>{cuisineName}</div>
       <p>
-        {addresses &&
-          addresses.map((address: Address) => (
+        {locations &&
+          locations.map((location: Location) => (
             <>
-              <div className={styles.address}>{address.address1}</div>
-              <div className={styles.address}>{address.address2}</div>
-              <div className={styles.address}>{address.city}</div>
-              <div className={styles.address}>{address.state}</div>
-              <div className={styles.address}>{address.zip_code}</div>
-              <div className={styles.address}>{address.phone_number}</div>
+              <div className={styles.address}>{location.address1}</div>
+              <div className={styles.address}>{location.address2}</div>
+              <div className={styles.address}>{location.city}, {location.state} {location.zip_code}</div>
+              <div className={styles.address}>{location.phone_number}</div>
             </>
           ))}
       </p>

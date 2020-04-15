@@ -33,7 +33,7 @@ const SellerPage: React.FC<{}> = () => {
           <StoreInfo
             seller={{
               name: seller.name,
-              addresses: seller.addresses,
+              locations: seller.locations,
               cuisineName: seller.cuisine_name,
               story: seller.story,
               summary: seller.summary,
