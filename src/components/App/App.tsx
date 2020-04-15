@@ -26,9 +26,9 @@ class App extends React.Component<{}> {
           {
             // TODO(ArtyEmsee): add router config for this route
           }
+          <Route path="/about" component={About} />
           <Route path="/:id" component={SellerPage} />
           <Route path="/:id#story" component={SellerPage} />
-          <Route path="/about" component={About} />
         </Switch>
       </Router>
     );
