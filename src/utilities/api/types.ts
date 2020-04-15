@@ -19,12 +19,11 @@ export type Seller = {
   //TO DO: what is className doing
   className: '';
   cuisineName: string;
-  // email: string;
+  email?: email;
   name: string;
   phoneNumber: string;
   //TO DO: why is this necessary here
   showPayModal?: boolean;
   summary: string;
   story: string;
-  // zipCode: string;
 };

@@ -25,55 +25,56 @@ export const makePayment = async (
   seller: Seller
 ) => {
   // TO DO*: Fix after shape is finalized
-  // const { address, city, email, name, stateForm, zipCode } = seller;
+  const { addresses, email, name } = seller;
 
   // TO DO: abstract api call, create global object for headers
-  await axios
-    .post(
-      charges,
-      {
-        line_items: [payment],
-        // email: email,
-      },
-      { headers: { 'Access-Control-Allow-Origin': '*' } }
-    )
-    .then(async (res) => {
-      // TO DO: fix response to success
-      if (!stripe || !elements) return;
-      else {
-        const cardElement = elements!.getElement(CardElement);
-        const result = await stripe!.confirmCardPayment(
-          `${res.data.client_secret}`,
-          {
-            payment_method: {
-              card: cardElement!,
-              // billing_details: {
-              //   name: name,
-              //   email: email,
-              //   address: {
-              //     city,
-              //     state: stateForm,
-              //     country: 'US',
-              //     postal_code: zipCode,
-              //     line1: address,
-              //   },
-              // },
-            },
-          }
-        );
+  addresses &&
+    (await axios
+      .post(
+        charges,
+        {
+          line_items: [payment],
+          email: email,
+        },
+        { headers: { 'Access-Control-Allow-Origin': '*' } }
+      )
+      .then(async (res) => {
+        // TO DO: fix response to success
+        if (!stripe || !elements) return;
+        else {
+          const cardElement = elements!.getElement(CardElement);
+          const result = await stripe!.confirmCardPayment(
+            `${res.data.client_secret}`,
+            {
+              payment_method: {
+                card: cardElement!,
+                billing_details: {
+                  name: name,
+                  email: email,
+                  address: {
+                    city: addresses[0].city,
+                    state: addresses[0].city,
+                    country: 'US',
+                    postal_code: addresses[0].zip_code,
+                    line1: addresses[0].address1,
+                  },
+                },
+              },
+            }
+          );
 
-        if (result.error) {
-          console.log(result.error.message);
-        } else {
-          if (result.paymentIntent?.status === 'succeeded') {
-            console.log(
-              result.paymentIntent?.status,
-              'The payment has been processed!'
-            );
+          if (result.error) {
+            console.log(result.error.message);
+          } else {
+            if (result.paymentIntent?.status === 'succeeded') {
+              console.log(
+                result.paymentIntent?.status,
+                'The payment has been processed!'
+              );
+            }
           }
         }
-      }
-    });
+      }));
 
   // TO DO: fix response to error
 };
