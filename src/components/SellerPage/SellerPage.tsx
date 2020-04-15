@@ -23,13 +23,13 @@ const SellerPage: React.FC<{}> = () => {
     setSeller(result.data);
   };
 
-  // TO DO: handle actual null states and loading
+  // TODO(ArtyEmsee): handle actual null states and loading
   return seller ? (
     <div className={styles.container}>
       <main>
         <HeroBanner name={seller.name} />
         <div className={styles.contentContainer}>
-          {/* TO DO: Fix object mapping */}
+          {/* TODO(ArtyEmsee): Fix object mapping */}
           <StoreInfo
             seller={{
               name: seller.name,

@@ -24,7 +24,7 @@ class App extends React.Component<{}> {
         <Switch>
           <Route exact path="/" component={Home} />
           {
-            // TO DO: add router config for this route
+            // TODO(ArtyEmsee): add router config for this route
           }
           <Route path="/:id" component={SellerPage} />
           <Route path="/:id#story" component={SellerPage} />

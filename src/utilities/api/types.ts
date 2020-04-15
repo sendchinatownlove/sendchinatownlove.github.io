@@ -24,7 +24,7 @@ export type Buyer = {
   zipCode: string;
   showPayModal: boolean;
 
-  //TO DO: what is className doing
+  //TODO(ArtyEmsee): what is className doing
   className: '';
 };
 

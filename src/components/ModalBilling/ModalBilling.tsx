@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 import styles from './styles.module.scss';
 import ModalPayment from '../ModalPayment';
-// TO DO: Fix relative paths
+// TODO(ArtyEmsee): Fix relative paths
 import { Buyer as State } from '../../utilities/api';
 
 const stripe_pk = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;

@@ -17,7 +17,7 @@ export const getSeller = async (id: string) =>
     .then((res) => res)
     .catch((err) => err);
 
-// TO DO: add typing for stripe elements
+// TODO(ArtyEmsee): add typing for stripe elements
 export const makePayment = async (
   stripe: any,
   elements: any,
@@ -26,7 +26,7 @@ export const makePayment = async (
 ) => {
   const { address, city, email, name, stateForm, zipCode } = buyer;
 
-  // TO DO: abstract api call, create global object for headers
+  // TODO(ArtyEmsee): abstract api call, create global object for headers
   await axios
     .post(
       charges,
@@ -37,7 +37,7 @@ export const makePayment = async (
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
     .then(async (res) => {
-      // TO DO: fix response to success
+      // TODO(ArtyEmsee): fix response to success
       if (!stripe || !elements) return;
       else {
         const cardElement = elements!.getElement(CardElement);
@@ -74,5 +74,5 @@ export const makePayment = async (
       }
     });
 
-  // TO DO: fix response to error
+  // TODO(ArtyEmsee): fix response to error
 };
