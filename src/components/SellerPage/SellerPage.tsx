@@ -42,6 +42,8 @@ const SellerPage: React.FC<{}> = () => {
           />
           <OwnerPanel
             className={styles.ownerPanel}
+            acceptDonations={seller.accept_donations}
+            sellGiftCard={seller.sell_gift_card}
             amountRaised={seller.amount_raised}
             targetAmount={seller.target_amount}
             {...sampleMerchant.ownerInfo}

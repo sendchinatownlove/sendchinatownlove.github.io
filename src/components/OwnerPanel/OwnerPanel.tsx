@@ -4,11 +4,12 @@ import styles from './styles.module.scss';
 import Modal from '../Modal';
 
 interface Props {
-  ownerName: string;
   imageSrc: string;
   className?: string;
   amountRaised: number;
   targetAmount: number;
+  acceptDonations:boolean;
+  sellGiftCard: boolean;
 }
 
 interface State {
@@ -46,11 +47,8 @@ class OwnerPanel extends React.Component<Props, State> {
           <img
             className={styles.ownerImage}
             src={this.props.imageSrc}
-            alt={this.props.ownerName}
           />
         </figure>
-
-        <h2 className={styles.ownerName}>{this.props.ownerName}</h2>
 
         {this.props.targetAmount && this.props.amountRaised && (
           <div className={styles.progressContainer}>
@@ -72,7 +70,7 @@ class OwnerPanel extends React.Component<Props, State> {
           </div>
         )}
 
-        <div className={styles.buttonContainer}>
+        {this.props.acceptDonations && this.props.sellGiftCard && <div className={styles.buttonContainer}>
           <button
             value="donation"
             className={classnames(styles.button, 'button--filled')}
@@ -87,7 +85,7 @@ class OwnerPanel extends React.Component<Props, State> {
           >
             Gift Card
           </button>
-        </div>
+        </div>}
 
         <ModalBox
           show={this.state.show}
