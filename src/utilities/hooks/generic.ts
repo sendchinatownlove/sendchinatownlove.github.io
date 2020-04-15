@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 // Hook
-const useAsync = (asyncFunction: any, immediate = true) => {
+export const useAsync = (asyncFunction: any, immediate = true) => {
   const [pending, setPending] = useState(false);
   const [value, setValue] = useState(null);
   const [error, setError] = useState(null);

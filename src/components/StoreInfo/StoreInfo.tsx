@@ -1,46 +1,34 @@
 import * as React from 'react';
 import styles from './styles.module.scss';
-import StoreDetails, { StoreDetailsProps } from '../StoreDetails';
+import StoreDetails from '../StoreDetails';
 import classnames from 'classnames';
+import { Location, Seller } from '../../utilities';
 
-interface Props {
-  nationality: string;
-  name: string;
-  address: {
-    line1: string;
-    line2: string;
-  };
-  phoneNumber: string;
-  introduction: string;
-  className?: string;
-  storeDetailsProps: StoreDetailsProps;
-}
+type Props = {
+  seller: Seller;
+};
 
-const StoreInfo: React.SFC<Props> = ({
-  nationality,
-  name,
-  address,
-  phoneNumber,
-  introduction,
-  className,
-  storeDetailsProps,
-}) => {
-  const detailsProps = {
-    ...storeDetailsProps,
-    className: styles.storeDetails,
-  };
+export const StoreInfo: React.SFC<Props> = ({ seller }) => {
+  const { summary, story, cuisineName, locations } = seller;
+
   return (
-    <section className={classnames(styles.container, className)}>
-      <div className={styles.nationality}>{nationality}</div>
+    <section className={classnames(styles.container)}>
+      <div className={styles.nationality}>{cuisineName}</div>
       <p>
-        <div className={styles.address}>{address.line1}</div>
-        <div className={styles.address}>{address.line2}</div>
-        <div className={styles.address}>{phoneNumber}</div>
+        {locations &&
+          locations.map((location: Location) => (
+            <>
+              <div className={styles.address}>{location.address1}</div>
+              <div className={styles.address}>{location.address2}</div>
+              <div className={styles.address}>
+                {location.city}, {location.state} {location.zip_code}
+              </div>
+              <div className={styles.address}>{location.phone_number}</div>
+            </>
+          ))}
       </p>
-      <p>{introduction}</p>
-      <StoreDetails {...detailsProps} />
+      <p>{summary}</p>
+      <StoreDetails story={story} />
     </section>
   );
 };
-
-export default StoreInfo;

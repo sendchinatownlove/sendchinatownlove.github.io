@@ -6,7 +6,16 @@ export type PaymentParams = {
   seller_id: string;
 };
 
-export type Merchant = {
+export type Location = {
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  zip_code: number;
+  phone_number: string;
+};
+
+export type Buyer = {
   name: string;
   email: string;
   address: string;
@@ -14,4 +23,16 @@ export type Merchant = {
   stateForm: string;
   zipCode: string;
   showPayModal: boolean;
+
+  //TODO(ArtyEmsee): what is className doing
+  className: '';
+};
+
+export type Seller = {
+  locations?: Location[];
+  cuisineName: string;
+  email?: string;
+  name: string;
+  summary: string;
+  story: string;
 };

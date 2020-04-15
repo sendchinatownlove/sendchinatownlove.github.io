@@ -1,54 +1,32 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
-import { Merchant, PaymentParams } from './types';
-import { charges, sellers, seller } from './endpoints';
+import { Buyer, PaymentParams } from './types';
+import { charges, sellers } from './endpoints';
 
-export const getSellers = async () => {
-  // TO DO, fix expected type response
-  let response: any = undefined;
-
-  await axios
+// Fix return typing
+export const getSellers = async () =>
+  axios
     .get(sellers)
-    .then((res) => {
-      // TO DO: fix response to success
-      response = res;
-    })
-    .catch((err) => {
-      // TO DO: fix response to error
-      console.log({ err });
-    });
+    .then((res) => res)
+    .catch((err) => err);
 
-  return response;
-};
+// Fix return typing
+export const getSeller = async (id: string) =>
+  axios
+    .get(sellers + id)
+    .then((res) => res)
+    .catch((err) => err);
 
-export const getSeller = async () => {
-  // TO DO, fix expected type response
-  let response: any = undefined;
-
-  await axios
-    .get(seller)
-    .then((res) => {
-      // TO DO: fix response to success
-      response = res;
-    })
-    .catch((err) => {
-      // TO DO: fix response to error
-      console.log({ err });
-    });
-
-  return response;
-};
-
-// TO DO: add typing for stripe elements
+// TODO(ArtyEmsee): add typing for stripe elements
 export const makePayment = async (
   stripe: any,
   elements: any,
   payment: PaymentParams,
-  merchant: Merchant
+  buyer: Buyer
 ) => {
-  const { address, city, email, name, stateForm, zipCode } = merchant;
+  const { address, city, email, name, stateForm, zipCode } = buyer;
 
-  // TO DO: abstract api call, create global object for headers
+  // TODO(ArtyEmsee): abstract api call, create global object for headers
   await axios
     .post(
       charges,
@@ -59,7 +37,7 @@ export const makePayment = async (
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
     .then(async (res) => {
-      // TO DO: fix response to success
+      // TODO(ArtyEmsee): fix response to success
       if (!stripe || !elements) return;
       else {
         const cardElement = elements!.getElement(CardElement);
@@ -96,5 +74,5 @@ export const makePayment = async (
       }
     });
 
-  // TO DO: fix response to error
+  // TODO(ArtyEmsee): fix response to error
 };

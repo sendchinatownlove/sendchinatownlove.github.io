@@ -7,6 +7,8 @@ interface Props {
   purchaseType: string;
   handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   show: boolean;
+  sellerId: string;
+  sellerName: string;
 }
 
 interface State {
@@ -64,9 +66,8 @@ class Modal extends React.Component<Props, State> {
           ×{' '}
         </button>
 
-        {/* Pass in props here for name */}
-        <h2>Shunfa Bakery</h2>
-        <p>Please select an amount</p>
+        <h2>{this.props.sellerName}</h2>
+        <p>Please select an amount and leave a message</p>
 
         <div className={styles.amountContainer}>
           <label htmlFor="select-amount">Select an amount </label> <br />
@@ -134,6 +135,7 @@ class Modal extends React.Component<Props, State> {
           hideBillModal={this.hideBillingsModal}
           donatedAmt={this.state.amount}
           purchaseType={this.props.purchaseType}
+          sellerId={this.props.sellerId}
         />
       </form>
     );
