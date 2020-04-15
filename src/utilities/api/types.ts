@@ -7,10 +7,11 @@ export type PaymentParams = {
 };
 
 export type Address = {
-  city: string;
-  state: string;
   address1: string;
   address2: string;
+  city: string;
+  phone_number: string;
+  state: string;
   zip_code: number;
 };
 
@@ -21,7 +22,7 @@ export type Seller = {
   cuisineName: string;
   email?: string;
   name: string;
-  phoneNumber: string;
+  
   //TO DO: why is this necessary here
   showPayModal?: boolean;
   summary: string;

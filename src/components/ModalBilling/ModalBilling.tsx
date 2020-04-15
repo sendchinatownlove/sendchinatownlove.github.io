@@ -31,7 +31,6 @@ class ModalBilling extends React.Component<Props, any> {
       className: '',
       cuisineName: '',
       name: '',
-      phoneNumber: '',
       showPayModal: false,
       summary: '',
       story: '',

@@ -15,7 +15,6 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
     className,
     cuisineName,
     addresses,
-    phoneNumber,
   } = seller;
 
   return (
@@ -30,9 +29,9 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
               <div className={styles.address}>{address.city}</div>
               <div className={styles.address}>{address.state}</div>
               <div className={styles.address}>{address.zip_code}</div>
+              <div className={styles.address}>{address.phone_number}</div>
             </>
           ))}
-        <div className={styles.address}>{phoneNumber}</div>
       </p>
       <p>{summary}</p>
       <StoreDetails story={story} />
