@@ -37,7 +37,8 @@ const ModalPayment = ({
     seller_id: sellerId,
   };
 
-  const purchaseTypePhrase = purchaseType === 'donation' ? 'Donation' : 'Gift card purchase'
+  const purchaseTypePhrase =
+    purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
 
   const [isShown, setIsShown] = useState(false);
   const showConfirmModal = () => setIsShown(true);
@@ -67,18 +68,13 @@ const ModalPayment = ({
           ×{' '}
         </button>
 
-        <h2>
-          Complete your{' '}
-          {purchaseTypePhrase.toLowerCase()}
-        </h2>
+        <h2>Complete your {purchaseTypePhrase.toLowerCase()}</h2>
         <p>Please add your payment information below</p>
 
         <div className={styles.paymentContainer}>
           <h3>Payment Information</h3>
           <CardSection /> <br />
-          <h3>
-            Checkout details
-          </h3>
+          <h3>Checkout details</h3>
           <span>
             {purchaseTypePhrase} of <b>${donatedAmt}</b> to Shunfa Bakery
           </span>{' '}

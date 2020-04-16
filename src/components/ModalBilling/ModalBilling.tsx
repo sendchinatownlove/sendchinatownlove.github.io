@@ -184,11 +184,11 @@ class ModalBilling extends React.Component<Props, State> {
                 className={'modalButton--filled'}
                 onClick={this.showPaymentModal}
                 disabled={
-                  !this.state.name || 
-                  !this.state.address || 
-                  !this.state.email || 
-                  !this.state.city || 
-                  !this.state.stateForm || 
+                  !this.state.name ||
+                  !this.state.address ||
+                  !this.state.email ||
+                  !this.state.city ||
+                  !this.state.stateForm ||
                   !this.state.zipCode
                 }
               >
