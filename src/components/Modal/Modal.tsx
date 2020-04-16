@@ -121,7 +121,7 @@ class Modal extends React.Component<Props, State> {
           />
           {this.state.amount < 5 && this.state.customInput ? (
             <div className={styles.errorMessage}>
-              Minimum contribution is $5.00
+              Please enter an amount greater than $5.00
             </div>
           ) : (
             ''
