@@ -115,6 +115,7 @@ class ModalBilling extends React.Component<Props, State> {
               )}
               onChange={(e) => this.handleChange(e)}
               value={this.state.address}
+              required
             />
 
             <div className={styles.row}>
@@ -130,6 +131,7 @@ class ModalBilling extends React.Component<Props, State> {
                   )}
                   onChange={(e) => this.handleChange(e)}
                   value={this.state.city}
+                  required
                 />
               </div>
 
@@ -145,6 +147,8 @@ class ModalBilling extends React.Component<Props, State> {
                   )}
                   onChange={(e) => this.handleChange(e)}
                   value={this.state.stateForm}
+                  maxLength={2}
+                  required
                 />
               </div>
 
@@ -160,6 +164,8 @@ class ModalBilling extends React.Component<Props, State> {
                   )}
                   onChange={(e) => this.handleChange(e)}
                   value={this.state.zipCode}
+                  maxLength={5}
+                  required
                 />
               </div>
             </div>
@@ -177,6 +183,14 @@ class ModalBilling extends React.Component<Props, State> {
                 type="button"
                 className={'modalButton--filled'}
                 onClick={this.showPaymentModal}
+                disabled={
+                  !this.state.name || 
+                  !this.state.address || 
+                  !this.state.email || 
+                  !this.state.city || 
+                  !this.state.stateForm || 
+                  !this.state.zipCode
+                }
               >
                 {' '}
                 Next
