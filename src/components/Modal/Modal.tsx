@@ -132,7 +132,7 @@ class Modal extends React.Component<Props, State> {
           type="button"
           className={classnames(styles.nextBtn, 'modalButton--filled')}
           onClick={this.showBillingsModal}
-          disabled={this.state.amount <= 5}
+          disabled={this.state.amount < 5}
         >
           {' '}
           Next
