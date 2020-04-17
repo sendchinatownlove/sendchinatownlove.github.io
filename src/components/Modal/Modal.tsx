@@ -1,7 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-// import ModalBilling from '../ModalBilling';
 import ModalPayment from '../ModalPayment';
 
 import { Elements } from '@stripe/react-stripe-js';
@@ -23,7 +22,6 @@ interface State {
   showBillModal: boolean;
 }
 
-// const ModalBillingBox: any = ModalBilling;
 const ModalPaymentBox: any = ModalPayment;
 
 const stripePK = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
@@ -150,7 +148,7 @@ class Modal extends React.Component<Props, State> {
           <ModalPaymentBox
             showPayModal={this.state.showBillModal}
             hidePaymentModal={this.hideBillingsModal}
-            donatedAmt={this.state.amount}
+            amount={this.state.amount}
             purchaseType={this.props.purchaseType}
             sellerId={this.props.sellerId}
           />

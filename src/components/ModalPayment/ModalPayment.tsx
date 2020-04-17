@@ -12,7 +12,7 @@ type Props = {
   handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   hidePaymentModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
   showPayModal: boolean;
-  donatedAmt: number;
+  amount: number;
   sellerId: string;
 };
 
@@ -23,11 +23,11 @@ const ModalPayment = ({
   handleClose,
   hidePaymentModal,
   showPayModal,
-  donatedAmt,
+  amount,
   sellerId,
 }: Props) => {
   const payment: PaymentParams = {
-    amount: Number(donatedAmt) * 100,
+    amount: Number(amount) * 100,
     currency: 'usd',
     item_type: purchaseType,
     quantity: 1,
@@ -106,7 +106,7 @@ const ModalPayment = ({
           <CardSection /> <br />
           <h3>Checkout details</h3>
           <span>
-            {purchaseTypePhrase} of <b>${donatedAmt}</b> to Shunfa Bakery
+            {purchaseTypePhrase} of <b>${amount}</b> to Shunfa Bakery
           </span>{' '}
           <p />
           <div className={styles.row}>
