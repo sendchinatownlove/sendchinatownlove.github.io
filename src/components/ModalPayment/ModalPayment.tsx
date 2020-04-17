@@ -3,10 +3,10 @@ import classnames from 'classnames';
 import { useStripe, useElements } from '@stripe/react-stripe-js';
 
 import styles from './styles.module.scss';
-import { makePayment, PaymentParams } from '../../utilities/api';
+import { makePayment, PaymentParams, Buyer } from '../../utilities/api';
 import ModalConfirmation from '../ModalConfirmation';
 import CardSection from './CardSection';
-import { Buyer } from '../../utilities/api';
+// import { Buyer } from '../../utilities/api';
 
 type Props = {
   purchaseType: string;
@@ -14,7 +14,7 @@ type Props = {
   hidePaymentModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
   showPayModal: boolean;
   donatedAmt: number;
-  buyer: Buyer;
+  // buyer: Buyer;
   sellerId: string;
 };
 
@@ -26,7 +26,7 @@ const ModalPayment = ({
   hidePaymentModal,
   showPayModal,
   donatedAmt,
-  buyer,
+  // buyer,
   sellerId,
 }: Props) => {
   const payment: PaymentParams = {
@@ -36,6 +36,11 @@ const ModalPayment = ({
     quantity: 1,
     seller_id: sellerId,
   };
+
+  const buyer: Buyer = {
+    name: 'hello',
+    email: 'hello@test.com'
+  }
 
   const purchaseTypePhrase =
     purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
@@ -47,6 +52,10 @@ const ModalPayment = ({
     isChecked ? setChecked(false) : setChecked(true);
   const stripe = useStripe();
   const elements = useElements();
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -73,6 +82,36 @@ const ModalPayment = ({
 
         <div className={styles.paymentContainer}>
           <h3>Payment Information</h3>
+
+          <div className={styles.inputRow} >
+            <div className={styles.row}>
+              <span className={classnames('fa fa-user', styles.icons)} />
+              <input
+                name="name"
+                type="text"
+                className={classnames(styles.label, 'modalInput--input')}
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                placeholder="Name"
+              />
+            </div>
+            <div className={styles.row}>
+              <span className={classnames('fa fa-envelope', styles.icons)} />
+              <input
+                name="email"
+                type="email"
+                className={classnames(
+                  styles.label,
+                  styles.email,
+                  'modalInput--input'
+                )}
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder="Email"
+              />
+            </div>
+          </div>
+
           <CardSection /> <br />
           <h3>Checkout details</h3>
           <span>

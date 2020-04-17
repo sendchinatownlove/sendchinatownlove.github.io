@@ -12,12 +12,12 @@ const stripePK = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripePK);
 
 type Props = {
-  purchaseType: string;
-  handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  hideBillModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  showBillModal: boolean;
-  donatedAmt: number;
-  sellerId: string;
+  // purchaseType: string;
+  // handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  // hideBillModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  // showBillModal: boolean;
+  // donatedAmt: number;
+  // sellerId: string;
 };
 
 const ModalPaymentBox: any = ModalPayment;
@@ -25,39 +25,39 @@ const ModalPaymentBox: any = ModalPayment;
 class ModalBilling extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-      className: '',
-      name: '',
-      email: '',
-      address: '',
-      city: '',
-      stateForm: '',
-      zipCode: '',
-      showPayModal: false,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.showPaymentModal = this.showPaymentModal.bind(this);
-    this.hidePaymentModal = this.hidePaymentModal.bind(this);
+    // this.state = {
+      // className: '',
+      // name: '',
+      // email: '',
+      // address: '',
+      // city: '',
+      // stateForm: '',
+      // zipCode: '',
+      // showPayModal: false,
+    // };
+    // this.handleChange = this.handleChange.bind(this);
+    // this.showPaymentModal = this.showPaymentModal.bind(this);
+    // this.hidePaymentModal = this.hidePaymentModal.bind(this);
   }
 
-  handleChange(e: any) {
-    const changeInput = e.target.name;
-    const input = e.target.value;
-    this.setState({ [changeInput]: input } as Pick<State, keyof State>);
-  }
+  // handleChange(e: any) {
+  //   const changeInput = e.target.name;
+  //   const input = e.target.value;
+  //   this.setState({ [changeInput]: input } as Pick<State, keyof State>);
+  // }
 
-  showPaymentModal() {
-    this.setState({ showPayModal: true });
-  }
+  // showPaymentModal() {
+  //   this.setState({ showPayModal: true });
+  // }
 
-  hidePaymentModal() {
-    this.setState({ showPayModal: false });
-  }
+  // hidePaymentModal() {
+  //   this.setState({ showPayModal: false });
+  // }
 
   render() {
     return (
       <React.Fragment>
-        <form
+        {/* <form
           id="billing-form"
           className={classnames(styles.billFormContainer, 'modalForm--form')}
           style={{ display: this.props.showBillModal ? 'block' : 'none' }}
@@ -209,7 +209,7 @@ class ModalBilling extends React.Component<Props, State> {
             sellerId={this.props.sellerId}
             purchaseType={this.props.purchaseType}
           />
-        </Elements>
+        </Elements> */}
       </React.Fragment>
     );
   }

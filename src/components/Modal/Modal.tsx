@@ -1,7 +1,11 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-import ModalBilling from '../ModalBilling';
+// import ModalBilling from '../ModalBilling';
+import ModalPayment from '../ModalPayment';
+
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 interface Props {
   purchaseType: string;
@@ -19,7 +23,12 @@ interface State {
   showBillModal: boolean;
 }
 
-const ModalBillingBox: any = ModalBilling;
+// const ModalBillingBox: any = ModalBilling;
+const ModalPaymentBox: any = ModalPayment;
+
+const stripePK = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
+const stripePromise = loadStripe(stripePK);
+
 
 class Modal extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -138,13 +147,15 @@ class Modal extends React.Component<Props, State> {
           Next
         </button>
 
-        <ModalBillingBox
-          showBillModal={this.state.showBillModal}
-          hideBillModal={this.hideBillingsModal}
-          donatedAmt={this.state.amount}
-          purchaseType={this.props.purchaseType}
-          sellerId={this.props.sellerId}
-        />
+        <Elements stripe={stripePromise}>
+          <ModalPaymentBox
+            showPayModal={this.state.showBillModal}
+            hidePaymentModal={this.hideBillingsModal}
+            donatedAmt={this.state.amount}
+            purchaseType={this.props.purchaseType}
+            sellerId={this.props.sellerId}
+          />
+        </Elements>
       </form>
     );
   }
