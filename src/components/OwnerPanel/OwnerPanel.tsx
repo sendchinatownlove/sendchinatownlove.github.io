@@ -64,7 +64,8 @@ class OwnerPanel extends React.Component<Props, State> {
                   width: `${
                     (this.props.amountRaised / this.props.targetAmount) * 100
                     }%`,
-                  backgroundColor: `${this.props.progressBarColor ? this.props.progressBarColor : ''}`
+                  backgroundColor: this.props.progressBarColor
+                  //defaults to default color if no color is passed in
                 }}
               >
                 {' '}
