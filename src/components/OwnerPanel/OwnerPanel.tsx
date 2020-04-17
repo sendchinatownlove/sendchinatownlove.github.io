@@ -44,7 +44,6 @@ class OwnerPanel extends React.Component<Props, State> {
   }
 
   render() {
-    console.log('in bar place', this.props)
     return (
       <section className={classnames(styles.container, this.props.className)}>
         <figure className={styles.ownerContainer}>
