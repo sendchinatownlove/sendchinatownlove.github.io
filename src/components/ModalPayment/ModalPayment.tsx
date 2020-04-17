@@ -6,7 +6,6 @@ import styles from './styles.module.scss';
 import { makePayment, PaymentParams, Buyer } from '../../utilities/api';
 import ModalConfirmation from '../ModalConfirmation';
 import CardSection from './CardSection';
-// import { Buyer } from '../../utilities/api';
 
 type Props = {
   purchaseType: string;
@@ -14,7 +13,6 @@ type Props = {
   hidePaymentModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
   showPayModal: boolean;
   donatedAmt: number;
-  // buyer: Buyer;
   sellerId: string;
 };
 
@@ -26,7 +24,6 @@ const ModalPayment = ({
   hidePaymentModal,
   showPayModal,
   donatedAmt,
-  // buyer,
   sellerId,
 }: Props) => {
   const payment: PaymentParams = {
@@ -37,11 +34,6 @@ const ModalPayment = ({
     seller_id: sellerId,
   };
 
-  const buyer: Buyer = {
-    name: 'hello',
-    email: 'hello@test.com'
-  }
-
   const purchaseTypePhrase =
     purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
 
@@ -50,12 +42,13 @@ const ModalPayment = ({
   const [isChecked, setChecked] = useState(false);
   const checkAgreement = () =>
     isChecked ? setChecked(false) : setChecked(true);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+
+  const buyer: Buyer = { name, email };
+
   const stripe = useStripe();
   const elements = useElements();
-
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -82,8 +75,7 @@ const ModalPayment = ({
 
         <div className={styles.paymentContainer}>
           <h3>Payment Information</h3>
-
-          <div className={styles.inputRow} >
+          <div className={styles.inputRow}>
             <div className={styles.row}>
               <span className={classnames('fa fa-user', styles.icons)} />
               <input
@@ -111,7 +103,6 @@ const ModalPayment = ({
               />
             </div>
           </div>
-
           <CardSection /> <br />
           <h3>Checkout details</h3>
           <span>

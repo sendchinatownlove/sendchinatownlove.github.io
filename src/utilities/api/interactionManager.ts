@@ -26,8 +26,6 @@ export const makePayment = async (
 ) => {
   const { email, name } = buyer;
 
-  // address, city, stateForm, zipCode
-
   // TODO(ArtyEmsee): abstract api call, create global object for headers
   await axios
     .post(
@@ -50,14 +48,7 @@ export const makePayment = async (
               card: cardElement!,
               billing_details: {
                 name: name,
-                email: email,
-                // address: {
-                //   city,
-                //   state: stateForm,
-                //   country: 'US',
-                //   postal_code: zipCode,
-                //   line1: address,
-                // },
+                email: email
               },
             },
           }

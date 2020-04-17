@@ -29,7 +29,6 @@ const ModalPaymentBox: any = ModalPayment;
 const stripePK = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripePK);
 
-
 class Modal extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);

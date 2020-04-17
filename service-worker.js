@@ -11,9 +11,7 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts(
-  "/precache-manifest.388662efbc763eede9c669b4e2017736.js"
-);
+importScripts('/precache-manifest.388662efbc763eede9c669b4e2017736.js');
 
 importScripts('/precache-manifest.17f22be2a5f74d1156ef9b64c8cc30f7.js');
 
