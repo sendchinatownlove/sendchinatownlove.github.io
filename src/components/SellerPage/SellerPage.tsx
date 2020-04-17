@@ -21,7 +21,7 @@ const SellerPage: React.FC<{}> = () => {
 
   useEffect(() => {
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // TODO(ArtyEmsee): handle actual null states and loading
@@ -49,6 +49,7 @@ const SellerPage: React.FC<{}> = () => {
             ownerName={seller.owner_name}
             imageSrc={sampleMerchant.ownerInfo.imageSrc}
             sellerName={seller.name}
+            progressBarColor={seller.progress_bar_color}
             // TODO(jtmckibb): Should not crash here
             sellerId={id!}
           />
