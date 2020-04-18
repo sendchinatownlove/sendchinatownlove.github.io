@@ -2,6 +2,7 @@ import * as React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
 import Modal from '../Modal';
+import {validateHexcode} from '../../utilities/sanitizers';
 
 interface Props {
   imageSrc: string;
@@ -64,7 +65,7 @@ class OwnerPanel extends React.Component<Props, State> {
                   width: `${
                     (this.props.amountRaised / this.props.targetAmount) * 100
                     }%`,
-                  backgroundColor: this.props.progressBarColor
+                  backgroundColor: validateHexcode(this.props.progressBarColor) ? this.props.progressBarColor : undefined
                   //defaults to default color if no color is passed in
                 }}
               >
