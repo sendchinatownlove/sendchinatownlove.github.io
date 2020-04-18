@@ -38,6 +38,7 @@ const SellerPage: React.FC<{}> = () => {
               cuisineName: seller.cuisine_name,
               story: seller.story,
               summary: seller.summary,
+              hero_image_url: seller.hero_image_url
             }}
           />
           <OwnerPanel
