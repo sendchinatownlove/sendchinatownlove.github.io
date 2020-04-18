@@ -26,11 +26,13 @@
 
 .ownerPanel {
   order: 1;
+  grid-row: 1; /* NEW */
 
   @include for-tablet-landscape-up {
     position: sticky;
     top: 20px;
     order: 2;
+    grid-column: 2; /* NEW */
   }
   @include for-phone-only {
     font-size: 14px;
@@ -40,9 +42,15 @@
 
 .storeInfo {
   order: 2;
+  grid-row: 2; 
   margin: 20px 0;
 
   @include for-tablet-landscape-up {
-    order: 1;
+    order: 1; 
+    grid-column: 1;
+  }
+  @include for-phone-only {
+    font-size: 14px;
+    padding: 24px;
   }
 }
