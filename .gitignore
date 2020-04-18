@@ -57,6 +57,8 @@ static/riffraff
 
 static/src/stylesheets/icons/*
 
+static/css
+static/js
 
 # emacs temp #
 **~
@@ -85,3 +87,4 @@ static/src/stylesheets/pasteup/.npmrc
 
 build/*
 node_modules
+
