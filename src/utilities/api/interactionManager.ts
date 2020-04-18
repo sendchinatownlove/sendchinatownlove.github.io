@@ -48,7 +48,7 @@ export const makePayment = async (
               card: cardElement!,
               billing_details: {
                 name: name,
-                email: email
+                email: email,
               },
             },
           }

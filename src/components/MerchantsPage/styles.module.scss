@@ -1,0 +1,52 @@
+.container {
+  padding: 50px 5vw;
+  background-color: white;
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.merchantsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  justify-content: center;
+}
+
+.merchantCard {
+  height: 525px;
+  width: 350px;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+  margin: 25px;
+  padding: 25px;
+}
+
+.merchantCardLogo {
+  position: relative;
+  width: 100%;
+  margin: 0 0 15px 0;
+}
+
+.location {
+  font-weight: bolder;
+  color: #46accc;
+}
+
+.progressContainer {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.progressBar {
+  background-color: #dedede;
+  height: 12px;
+}
+
+.myBar {
+  background-color: #dd678a;
+  z-index: 5;
+  height: 12px;
+}

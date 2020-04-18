@@ -72,12 +72,14 @@ h3 {
 
 .modalButton {
   &--back {
+    font-size: 12px;
     border: none;
     padding: 0px;
     margin: 10px 0px;
-    width: 50px;
+    width: 120px;
     font-weight: bold;
     outline: none;
+    letter-spacing: 0.1em;
   }
 
   &--outlined {
@@ -162,5 +164,19 @@ h3 {
 .modalInput {
   &--input {
     @include modal-input;
+  }
+}
+
+@mixin progess-bar {
+  background-color: #dedede;
+  height: 12px;
+  margin-bottom: 15px;
+}
+
+.myBar {
+  &--progress-bar {
+    background-color: #dd678a;
+    z-index: 5;
+    height: 12px;
   }
 }

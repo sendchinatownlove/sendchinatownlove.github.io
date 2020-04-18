@@ -1,6 +1,7 @@
 import Home from '../Home';
 import SellerPage from '../SellerPage';
 import About from '../About';
+import MerchantsPage from '../MerchantsPage';
 import { createBrowserHistory } from 'history';
 import { Router, Switch, Route } from 'react-router-dom';
 import React from 'react';
@@ -27,6 +28,7 @@ class App extends React.Component<{}> {
             // TODO(ArtyEmsee): add router config for this route
           }
           <Route path="/about" component={About} />
+          <Route path="/sellers" component={MerchantsPage} />
           <Route path="/:id" component={SellerPage} />
           <Route path="/:id#story" component={SellerPage} />
         </Switch>
