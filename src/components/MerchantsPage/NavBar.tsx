@@ -17,7 +17,7 @@ const NavBar = () => {
           All Shops
         </button>
 
-          {/* hidden until ready to use */}
+        {/* hidden until ready to use */}
         {/* <button
           className={
             selected === 'bakeries'

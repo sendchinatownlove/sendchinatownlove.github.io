@@ -37,7 +37,7 @@ export type Seller = {
   story: string;
 };
 
-export type SellerTwo = {
+export type BrowsePageSeller = {
   id: number;
   seller_id: string;
   cuisine_name: string;
