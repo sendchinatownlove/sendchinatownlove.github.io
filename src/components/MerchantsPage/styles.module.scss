@@ -1,6 +1,7 @@
 .container {
   padding: 50px 5vw;
   background-color: white;
+  overflow-x: hidden;
 }
 
 .navContainer {
@@ -19,7 +20,7 @@
 
 .merchantCard {
   height: 525px;
-  width: 350px;
+  width: 325px;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
   margin: 30px;
   padding: 25px;
