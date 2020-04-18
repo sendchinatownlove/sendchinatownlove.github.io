@@ -1,1 +1,1 @@
-export { default } from './ModalPayment';
+export { default } from './SquareModal';
