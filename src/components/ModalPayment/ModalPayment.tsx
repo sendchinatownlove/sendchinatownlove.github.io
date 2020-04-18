@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
+import { useStripe, useElements } from '@stripe/react-stripe-js';
 
 import styles from './styles.module.scss';
-// import { makePayment, PaymentParams, Buyer } from '../../utilities/api';
+import { makePayment, PaymentParams, Buyer } from '../../utilities/api';
 import ModalConfirmation from '../ModalConfirmation';
 import CardSection from './CardSection';
 
@@ -25,13 +26,13 @@ const ModalPayment = ({
   amount,
   sellerId,
 }: Props) => {
-  // const payment: PaymentParams = {
-  //   amount: Number(amount) * 100,
-  //   currency: 'usd',
-  //   item_type: purchaseType,
-  //   quantity: 1,
-  //   seller_id: sellerId,
-  // };
+  const payment: PaymentParams = {
+    amount: Number(amount) * 100,
+    currency: 'usd',
+    item_type: purchaseType,
+    quantity: 1,
+    seller_id: sellerId,
+  };
 
   const purchaseTypePhrase =
     purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
@@ -44,16 +45,16 @@ const ModalPayment = ({
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  // const buyer: Buyer = { name, email };
+  const buyer: Buyer = { name, email };
 
+  const stripe = useStripe();
+  const elements = useElements();
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     // returns stripe payment intent
-    
-    // TODO(bruce): call new payment api call with square
-
+    await makePayment(stripe, elements, payment, buyer);
     showConfirmModal(); // shows confirmation modal box
   };
 
@@ -102,8 +103,7 @@ const ModalPayment = ({
               />
             </div>
           </div>
-          <CardSection/>
-          <br />
+          <CardSection /> <br />
           <h3>Checkout details</h3>
           <span>
             {purchaseTypePhrase} of <b>${amount}</b> to Shunfa Bakery
