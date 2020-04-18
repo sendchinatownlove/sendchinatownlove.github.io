@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.b1a4d883.chunk.css",
+    "main.css": "/static/css/main.4ee7f959.chunk.css",
     "main.js": "/static/js/main.45c2751e.chunk.js",
     "main.js.map": "/static/js/main.45c2751e.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.f7beece5.js",
@@ -8,9 +8,9 @@
     "static/js/2.64b2f8b3.chunk.js": "/static/js/2.64b2f8b3.chunk.js",
     "static/js/2.64b2f8b3.chunk.js.map": "/static/js/2.64b2f8b3.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.dbb59789735c4d947ee80b83e100ea17.js": "/precache-manifest.dbb59789735c4d947ee80b83e100ea17.js",
+    "precache-manifest.60c9f1809ba877d763bfd5e57c88c0a8.js": "/precache-manifest.60c9f1809ba877d763bfd5e57c88c0a8.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.b1a4d883.chunk.css.map": "/static/css/main.b1a4d883.chunk.css.map",
+    "static/css/main.4ee7f959.chunk.css.map": "/static/css/main.4ee7f959.chunk.css.map",
     "static/js/2.64b2f8b3.chunk.js.LICENSE.txt": "/static/js/2.64b2f8b3.chunk.js.LICENSE.txt",
     "static/media/chinatown-logo.png": "/static/media/chinatown-logo.349de0ef.png",
     "static/media/styles.module.scss": "/static/media/chinatown-splash.67dd7391.png",
@@ -20,7 +20,7 @@
   "entrypoints": [
     "static/js/runtime-main.f7beece5.js",
     "static/js/2.64b2f8b3.chunk.js",
-    "static/css/main.b1a4d883.chunk.css",
+    "static/css/main.4ee7f959.chunk.css",
     "static/js/main.45c2751e.chunk.js"
   ]
 }
