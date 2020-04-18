@@ -18,7 +18,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
           seller.hero_image_url && (
             <img 
               src={seller.hero_image_url} 
-              alt="merchantIllustration"
+              alt={`${seller.name} Illustration`}
               className={styles.merchantIllustration}
             />
           )
