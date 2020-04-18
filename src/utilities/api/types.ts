@@ -18,14 +18,14 @@ export type Location = {
 export type Buyer = {
   name: string;
   email: string;
-  address: string;
-  city: string;
-  stateForm: string;
-  zipCode: string;
-  showPayModal: boolean;
+  // address: string;
+  // city: string;
+  // stateForm: string;
+  // zipCode: string;
+  // showPayModal: boolean;
 
   //TODO(ArtyEmsee): what is className doing
-  className: '';
+  // className: '';
 };
 
 export type Seller = {

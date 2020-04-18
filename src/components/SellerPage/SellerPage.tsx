@@ -21,7 +21,7 @@ const SellerPage: React.FC<{}> = () => {
 
   useEffect(() => {
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // TODO(ArtyEmsee): handle actual null states and loading
