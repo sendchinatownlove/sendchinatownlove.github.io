@@ -18,7 +18,7 @@ const NavBar = () => {
           All Shops 
         </button>
 
-        <button
+        {/* <button
           className={
             selected === 'bakeries'
               ? 'modalButton--filled'
@@ -72,7 +72,7 @@ const NavBar = () => {
           onClick={() => setSelected('stands')}
         >
           Stands
-        </button>
+        </button> */}
 
       </div>
     </React.Fragment>

@@ -25,12 +25,7 @@ const MerchantCard = ({ storeInfo }: Props) => {
       <div className={styles.merchantCard}>
         <img className={styles.merchantCardLogo} src={temp} alt="Logo" />
         <div className={styles.location}>Chinatown, Manhattan</div>
-        {/* <Link
-          to={`/${storeInfo?.seller_id}`}
-          style={{ textDecoration: 'none', color: 'black' }}
-        > */}
-          <h3> {storeName} </h3>
-        {/* </Link> */}
+        <h3> {storeName} </h3>
         <p>
           {' '}
           100% of all gift card purchases and donations will go to support this

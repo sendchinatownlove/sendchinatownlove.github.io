@@ -5,7 +5,8 @@
 
 .navContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin-top: 25px;
 }
 
 .merchantsContainer {
@@ -20,7 +21,7 @@
   height: 525px;
   width: 350px;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
-  margin: 25px;
+  margin: 30px;
   padding: 25px;
 }
 
