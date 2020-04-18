@@ -9,7 +9,6 @@ import { getSellers } from '../../utilities';
 
 const MerchantsPage: React.FC<{}> = () => {
   const [sellers, setSellers] = useState<any | null>();
-  //   const [filter, setFilter] = useState('bakeries')
 
   const fetchData = async () => {
     const result = await getSellers();

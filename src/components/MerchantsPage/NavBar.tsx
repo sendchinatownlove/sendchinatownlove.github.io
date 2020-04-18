@@ -1,5 +1,4 @@
 import * as React from 'react';
-import classnames from 'classnames';
 import { useState } from 'react';
 import styles from './styles.module.scss';
 
@@ -15,9 +14,10 @@ const NavBar = () => {
           }
           onClick={() => setSelected('all')}
         >
-          All Shops 
+          All Shops
         </button>
 
+          {/* hidden until ready to use */}
         {/* <button
           className={
             selected === 'bakeries'
@@ -73,7 +73,6 @@ const NavBar = () => {
         >
           Stands
         </button> */}
-
       </div>
     </React.Fragment>
   );
