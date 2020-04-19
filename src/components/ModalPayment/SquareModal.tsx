@@ -5,6 +5,8 @@ import { SquarePaymentForm, SimpleCard } from 'react-square-payment-form'
 import 'react-square-payment-form/lib/default.css'
 import styles from './styles.module.scss';
 import SubmissionButton from './SubmissionButton';
+import {makeSquarePayment, SquarePaymentParams, Buyer} from "../../utilities/api"
+import ModalConfirmation from '../ModalConfirmation';
 
 type Props = {
   purchaseType: string;
@@ -15,7 +17,7 @@ type Props = {
   sellerId: string;
 };
 
-// const ModalConfirmBox: any = ModalConfirmation;
+const ModalConfirmBox: any = ModalConfirmation;
 
 const ModalPayment = ({
   purchaseType,
@@ -29,8 +31,7 @@ const ModalPayment = ({
   const purchaseTypePhrase =
     purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
 
-  // const [isShown, setIsShown] = useState(false);
-  // const showConfirmModal = () => setIsShown(true);
+  const [isShown, setIsShown] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const checkAgreement = () =>
     isChecked ? setChecked(false) : setChecked(true);
@@ -40,13 +41,33 @@ const ModalPayment = ({
 
 
   const cardNonceResponseReceived = (errors: any[], nonce: string, cardData: any, buyerVerificationToken: string | undefined) => {
-    console.log("cardData: ", cardData)
+    
     if (errors.length > 0 && errors[0]) {
       setErrors(errors.map(error => error.message))
       return
     }
     setErrors([])
-    alert("nonce created: " + nonce + ", buyerVerificationToken: " + buyerVerificationToken)
+
+    const payment: SquarePaymentParams = {
+      amount: Number(amount) * 100,
+      currency: 'usd',
+      item_type: purchaseType,
+      quantity: 1,
+      seller_id: sellerId,
+      nonce: nonce,
+      buyer_token: buyerVerificationToken
+    };
+    
+    const buyer: Buyer = { name, email };
+
+    return makeSquarePayment( payment, buyer )
+      .then((res) => {
+        if (res.status === 200) {
+          setIsShown(true)
+        } else {
+          setIsShown(false)
+        }
+      })
   }
 
   function createVerificationDetails() {
@@ -170,7 +191,7 @@ const ModalPayment = ({
          </div>
       </form>
 
-      {/* <ModalConfirmBox showConfirmModal={isShown} handleClose={handleClose} /> */}
+      <ModalConfirmBox showConfirmModal={isShown} handleClose={handleClose} />
     </React.Fragment>
   );
 };
