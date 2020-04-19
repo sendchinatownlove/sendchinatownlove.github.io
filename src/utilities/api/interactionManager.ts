@@ -72,6 +72,7 @@ export const makePayment = async (
 
 
 export const makeSquarePayment = async (
+  nonce: string,
   payment: SquarePaymentParams,
   buyer: Buyer
 ) => {
@@ -81,8 +82,10 @@ export const makeSquarePayment = async (
     .post(
       charges,
       {
+        is_square: true,
+        nonce,
         line_items: [payment],
-        email: email,
+        email
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )

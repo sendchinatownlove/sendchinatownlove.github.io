@@ -9216,6 +9216,11 @@ react-scripts@3.4.1:
   optionalDependencies:
     fsevents "2.1.2"
 
+react-square-payment-form@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/react-square-payment-form/-/react-square-payment-form-0.6.2.tgz#24399ef0b7905a3e13b693990fbd53a18336ef24"
+  integrity sha512-VscDGtORPkPK0zZxi4UQ92JccpZ/ZlRhyxaDsMeueDEf8Jo+BKCzXm7QZy5eXUuKCq9yTcctRUA/MhwaXMdXOA==
+
 react@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"

@@ -53,14 +53,12 @@ const ModalPayment = ({
       currency: 'usd',
       item_type: purchaseType,
       quantity: 1,
-      seller_id: sellerId,
-      nonce: nonce,
-      buyer_token: buyerVerificationToken
+      seller_id: sellerId
     };
     
     const buyer: Buyer = { name, email };
 
-    return makeSquarePayment( payment, buyer )
+    return makeSquarePayment( nonce, payment, buyer )
       .then((res) => {
         if (res.status === 200) {
           setIsShown(true)

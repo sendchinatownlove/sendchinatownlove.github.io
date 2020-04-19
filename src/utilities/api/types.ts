@@ -12,8 +12,6 @@ export type SquarePaymentParams = {
   item_type: string;
   quantity: number;
   seller_id: string;
-  nonce: string;
-  buyer_token: string | undefined;
 };
 
 export type Location = {
