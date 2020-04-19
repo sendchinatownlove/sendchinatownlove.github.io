@@ -31,6 +31,7 @@ export const makePayment = async (
     .post(
       charges,
       {
+        is_square: false,
         line_items: [payment],
         email: email,
       },
