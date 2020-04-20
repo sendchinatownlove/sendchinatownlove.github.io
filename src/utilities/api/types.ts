@@ -6,6 +6,14 @@ export type PaymentParams = {
   seller_id: string;
 };
 
+export type SquarePaymentParams = {
+  amount: number;
+  currency: string;
+  item_type: string;
+  quantity: number;
+  seller_id: string;
+};
+
 export type Location = {
   address1: string;
   address2: string;
@@ -18,6 +26,7 @@ export type Location = {
 export type Buyer = {
   name: string;
   email: string;
+  nonce?: string;
   // address: string;
   // city: string;
   // stateForm: string;
