@@ -48,14 +48,7 @@ const SellerPage: React.FC<{}> = () => {
             imageSrc={sampleMerchant.ownerInfo.imageSrc}
             sellerName={seller.name}
             progressBarColor={seller.progress_bar_color}
-            extraInfo={{
-              Type: 'fam owned',
-              Employees: 5,
-              Founded: '2018',
-              Website: 'www.diankitchen.com',
-              Menu: 'diankitchen.com/menu'
-            }}
-            // extraInfo={seller.seller_extra_infos}
+            extraInfo={seller.seller_extra_info}
             // TODO(jtmckibb): Should not crash here
             sellerId={id!}
           />
