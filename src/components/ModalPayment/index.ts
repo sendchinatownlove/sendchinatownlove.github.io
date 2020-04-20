@@ -1,1 +1,2 @@
-export { default } from './SquareModal';
+export { default as StripeModal } from './ModalPayment';
+export { default as SquareModal } from './SquareModal';
