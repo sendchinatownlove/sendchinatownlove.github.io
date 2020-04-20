@@ -42,7 +42,7 @@ const ModalPayment = ({
 
   const cardNonceResponseReceived = (errors: any[], nonce: string, cardData: any, buyerVerificationToken: string | undefined) => {
 
-    if (errors.length > 0 && errors[0]) {
+    if (errors && errors.length > 0 && errors[0]) {
       setErrors(errors.map(error => error.message))
       return
     }
@@ -67,24 +67,6 @@ const ModalPayment = ({
           setIsShown(false)
         }
       })
-  }
-
-  function createVerificationDetails() {
-    return {
-      amount: '100.00',
-      currencyCode: "USD",
-      intent: "CHARGE",
-      billingContact: {
-        familyName: "Smith",
-        givenName: "John",
-        email: "jsmith@example.com",
-        country: "GB",
-        city: "London",
-        addressLines: ["1235 Emperor's Gate"],
-        postalCode: "SW7 4JA",
-        phone: "020 7946 0532"
-      }
-    }
   }
 
   const applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ? process.env.REACT_APP_SQUARE_APPLICATION_ID : ""
@@ -140,7 +122,6 @@ const ModalPayment = ({
             applicationId={applicationId}
             locationId={locationId}
             cardNonceResponseReceived={cardNonceResponseReceived}
-            createVerificationDetails={createVerificationDetails}
             formId="SPF"
             apiWrapper=""
           >
