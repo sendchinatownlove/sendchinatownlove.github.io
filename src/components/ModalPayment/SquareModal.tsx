@@ -128,6 +128,7 @@ const ModalPayment = ({
             <SimpleCard/>
             <br/>
             <h3>Checkout details</h3>
+            {/* TODO(jmckibben): This should be replaced with Seller.name */}
             <span> {purchaseTypePhrase} of <b>${amount}</b> to Shunfa Bakery </span>
             <p />
             <div className={styles.row}>
