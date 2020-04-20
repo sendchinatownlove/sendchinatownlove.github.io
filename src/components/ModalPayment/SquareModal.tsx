@@ -27,7 +27,7 @@ const ModalPayment = ({
   amount,
   sellerId,
 }: Props) => {
-  
+
   const purchaseTypePhrase =
     purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
 
@@ -37,11 +37,11 @@ const ModalPayment = ({
     isChecked ? setChecked(false) : setChecked(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [errors, setErrors] = useState<string[]>([]);    
+  const [errors, setErrors] = useState<string[]>([]);
 
 
   const cardNonceResponseReceived = (errors: any[], nonce: string, cardData: any, buyerVerificationToken: string | undefined) => {
-    
+
     if (errors.length > 0 && errors[0]) {
       setErrors(errors.map(error => error.message))
       return
@@ -54,11 +54,10 @@ const ModalPayment = ({
       item_type: purchaseType,
       quantity: 1,
       seller_id: sellerId,
-      nonce: nonce,
       buyer_token: buyerVerificationToken
     };
-    
-    const buyer: Buyer = { name, email };
+
+    const buyer: Buyer = { name, email, nonce };
 
     return makeSquarePayment( payment, buyer )
       .then((res) => {
@@ -179,7 +178,7 @@ const ModalPayment = ({
                 ᐸ Back{' '}
               </button>
               <SubmissionButton isChecked={isChecked}/>
-            </div> 
+            </div>
           </SquarePaymentForm>
           <div className="sq-error-message">
             {
