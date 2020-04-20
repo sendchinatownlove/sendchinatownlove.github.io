@@ -14,6 +14,8 @@ interface Props {
   sellerId: string;
   sellerName: string;
   progressBarColor: string;
+  extraInfo: { [prop: string]: any }
+  ;
 }
 
 interface State {
@@ -44,6 +46,7 @@ class OwnerPanel extends React.Component<Props, State> {
   }
 
   render() {
+    console.log(this.props)
     return (
       <section className={classnames(styles.container, this.props.className)}>
         <figure className={styles.ownerContainer}>
@@ -64,7 +67,8 @@ class OwnerPanel extends React.Component<Props, State> {
                   width: `${
                     (this.props.amountRaised / this.props.targetAmount) * 100
                     }%`,
-                  backgroundColor: `${this.props.progressBarColor ? this.props.progressBarColor : ''}`
+                  backgroundColor: this.props.progressBarColor
+                  //defaults to default color if no color is passed in
                 }}
               >
                 {' '}
@@ -77,7 +81,6 @@ class OwnerPanel extends React.Component<Props, State> {
             </div>
           </div>
         )}
-
         <div className={styles.buttonContainer}>
           {this.props.acceptDonations && (
             <button
@@ -98,6 +101,49 @@ class OwnerPanel extends React.Component<Props, State> {
             </button>
           )}
         </div>
+        {Object.keys(this.props.extraInfo).length !== 0 ?
+          <div
+            style={{
+              width: '100%',
+              borderTop: '1px solid #dedede',
+              borderBottom: '1px solid #dedede'
+            }}>
+            {Object.keys(this.props.extraInfo).map((current) => {
+              if (current === 'Website' || current == 'Menu') {
+                return (
+                  <>
+                    <p
+                      style={{
+                        fontWeight: 'bold'
+                      }}>
+                      {`${current}: `}
+                      <a href={`http://${this.props.extraInfo[current]}`}>{this.props.extraInfo[current]}</a>
+                    </p>
+                  </>
+                )
+              }
+              else {
+                return (
+                  <>
+                    <p style={{
+                      fontWeight: 'bold',
+                    }}>
+                      {`${current}: `}
+                      <span style={{
+                        fontWeight: 'normal'
+                      }}>
+                        {this.props.extraInfo[current]}
+                      </span>
+                    </p>
+                  </>
+                )
+              }
+            })}
+          </div>
+          :
+          ''
+        }
+
 
         <ModalBox
           show={this.state.show}

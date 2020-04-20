@@ -18,12 +18,10 @@ const SellerPage: React.FC<{}> = () => {
     const result = id && (await getSeller(id));
     setSeller(result.data);
   };
-
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   // TODO(ArtyEmsee): handle actual null states and loading
   return seller ? (
     <div className={styles.container}>
@@ -50,6 +48,14 @@ const SellerPage: React.FC<{}> = () => {
             imageSrc={sampleMerchant.ownerInfo.imageSrc}
             sellerName={seller.name}
             progressBarColor={seller.progress_bar_color}
+            extraInfo={{
+              Type: 'fam owned',
+              Employees: 5,
+              Founded: '2018',
+              Website: 'www.diankitchen.com',
+              Menu: 'diankitchen.com/menu'
+            }}
+            // extraInfo={seller.seller_extra_infos}
             // TODO(jtmckibb): Should not crash here
             sellerId={id!}
           />

@@ -74,6 +74,7 @@ const ModalPayment = ({
         <div className={styles.paymentContainer}>
           <h3>Payment Information</h3>
           <CardSection /> <br />
+
           <h3>
             {purchaseType === 'donation' ? 'Donation' : 'Gift card'} details
           </h3>
