@@ -26,6 +26,7 @@ export type Location = {
 export type Buyer = {
   name: string;
   email: string;
+  nonce?: string;
   // address: string;
   // city: string;
   // stateForm: string;

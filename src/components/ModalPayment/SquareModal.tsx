@@ -27,7 +27,7 @@ const ModalPayment = ({
   amount,
   sellerId,
 }: Props) => {
-  
+
   const purchaseTypePhrase =
     purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
 
@@ -37,12 +37,12 @@ const ModalPayment = ({
     isChecked ? setChecked(false) : setChecked(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [errors, setErrors] = useState<string[]>([]);    
+  const [errors, setErrors] = useState<string[]>([]);
 
 
   const cardNonceResponseReceived = (errors: any[], nonce: string, cardData: any, buyerVerificationToken: string | undefined) => {
-    
-    if (errors.length > 0 && errors[0]) {
+
+    if (errors && errors.length > 0 && errors[0]) {
       setErrors(errors.map(error => error.message))
       return
     }
@@ -55,8 +55,8 @@ const ModalPayment = ({
       quantity: 1,
       seller_id: sellerId
     };
-    
-    const buyer: Buyer = { name, email };
+
+    const buyer: Buyer = { name, email, nonce };
 
     return makeSquarePayment( nonce, payment, buyer )
       .then((res) => {
@@ -66,24 +66,6 @@ const ModalPayment = ({
           setIsShown(false)
         }
       })
-  }
-
-  function createVerificationDetails() {
-    return {
-      amount: '100.00',
-      currencyCode: "USD",
-      intent: "CHARGE",
-      billingContact: {
-        familyName: "Smith",
-        givenName: "John",
-        email: "jsmith@example.com",
-        country: "GB",
-        city: "London",
-        addressLines: ["1235 Emperor's Gate"],
-        postalCode: "SW7 4JA",
-        phone: "020 7946 0532"
-      }
-    }
   }
 
   const applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ? process.env.REACT_APP_SQUARE_APPLICATION_ID : ""
@@ -139,13 +121,13 @@ const ModalPayment = ({
             applicationId={applicationId}
             locationId={locationId}
             cardNonceResponseReceived={cardNonceResponseReceived}
-            createVerificationDetails={createVerificationDetails}
             formId="SPF"
             apiWrapper=""
           >
             <SimpleCard/>
             <br/>
             <h3>Checkout details</h3>
+            {/* TODO(jmckibben): This should be replaced with Seller.name */}
             <span> {purchaseTypePhrase} of <b>${amount}</b> to Shunfa Bakery </span>
             <p />
             <div className={styles.row}>
@@ -177,7 +159,7 @@ const ModalPayment = ({
                 ᐸ Back{' '}
               </button>
               <SubmissionButton isChecked={isChecked}/>
-            </div> 
+            </div>
           </SquarePaymentForm>
           <div className="sq-error-message">
             {

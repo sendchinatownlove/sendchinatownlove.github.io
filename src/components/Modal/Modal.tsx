@@ -22,7 +22,7 @@ interface State {
   showBillModal: boolean;
 }
 
-const ModalPaymentBox: any = !process.env.REACT_APP_USE_STRIPE ? StripeModal : SquareModal ;
+const ModalPaymentBox: any = process.env.REACT_APP_USE_STRIPE === "TRUE" ? StripeModal : SquareModal ;
 
 const stripePK = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripePK);
