@@ -22,6 +22,7 @@ const SellerPage: React.FC<{}> = () => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log(seller)
   // TODO(ArtyEmsee): handle actual null states and loading
   return seller ? (
     <div className={styles.container}>
@@ -48,7 +49,13 @@ const SellerPage: React.FC<{}> = () => {
             imageSrc={sampleMerchant.ownerInfo.imageSrc}
             sellerName={seller.name}
             progressBarColor={seller.progress_bar_color}
-            extraInfo={seller.seller_extra_info}
+            extraInfo={{
+              Type: seller.business_type,
+              Employees: seller.num_employees,
+              Founded: seller.founded_year,
+              Website: seller.website_url,
+              Menu: seller.menu_url
+            }}
             // TODO(jtmckibb): Should not crash here
             sellerId={id!}
           />

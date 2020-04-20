@@ -46,7 +46,6 @@ class OwnerPanel extends React.Component<Props, State> {
   }
 
   render() {
-    console.log(this.props)
     return (
       <section className={classnames(styles.container, this.props.className)}>
         <figure className={styles.ownerContainer}>
@@ -109,15 +108,12 @@ class OwnerPanel extends React.Component<Props, State> {
               borderBottom: '1px solid #dedede'
             }}>
             {Object.keys(this.props.extraInfo).map((current) => {
-              if (current === 'Website' || current == 'Menu') {
+              if (current === 'Website' || current === 'Menu') {
                 return (
                   <>
-                    <p
-                      style={{
-                        fontWeight: 'bold'
-                      }}>
+                    <p className={styles.extraInfoKey}>
                       {`${current}: `}
-                      <a href={`http://${this.props.extraInfo[current]}`}>{this.props.extraInfo[current]}</a>
+                      <a className={styles.extraInfoValue} href={`http://${this.props.extraInfo[current]}`}>{this.props.extraInfo[current]}</a>
                     </p>
                   </>
                 )
@@ -125,13 +121,9 @@ class OwnerPanel extends React.Component<Props, State> {
               else {
                 return (
                   <>
-                    <p style={{
-                      fontWeight: 'bold',
-                    }}>
+                    <p className={styles.extraInfoKey}>
                       {`${current}: `}
-                      <span style={{
-                        fontWeight: 'normal'
-                      }}>
+                      <span className={styles.extraInfoValue}>
                         {this.props.extraInfo[current]}
                       </span>
                     </p>
@@ -139,7 +131,7 @@ class OwnerPanel extends React.Component<Props, State> {
                 )
               }
             })}
-          </div>
+          </div >
           :
           ''
         }
@@ -189,7 +181,7 @@ class OwnerPanel extends React.Component<Props, State> {
           {/* might need to use a react lib since it uses script tags */}
           {/* https://www.npmjs.com/package/google-map-react */}
         </div>
-      </section>
+      </section >
     );
   }
 }
