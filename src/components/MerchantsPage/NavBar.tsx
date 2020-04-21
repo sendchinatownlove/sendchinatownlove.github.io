@@ -22,13 +22,15 @@ const NavBar = () => {
           <div>
             <button
               className={
-                selected === type.value ? 'modalButton--filled' : 'modalButton--back'
+                selected === type.value
+                  ? 'modalButton--filled'
+                  : 'modalButton--back'
               }
               onClick={() => setSelected(type.value)}
             >
               {type.text}
             </button>
-         </div>
+          </div>
         ))}
       </div>
     </React.Fragment>

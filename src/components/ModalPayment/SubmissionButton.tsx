@@ -5,13 +5,13 @@ type Props = {
   isChecked: boolean;
 };
 
-const SubmissionButton = ({isChecked}: Props) => {
+const SubmissionButton = ({ isChecked }: Props) => {
   const context = useContext(Context);
- 
-  const handleSubmit = (evt: { preventDefault: () => void; }) => {
-     evt.preventDefault();
-     context.onCreateNonce();
-  }
+
+  const handleSubmit = (evt: { preventDefault: () => void }) => {
+    evt.preventDefault();
+    context.onCreateNonce();
+  };
 
   return (
     <button
@@ -24,6 +24,6 @@ const SubmissionButton = ({isChecked}: Props) => {
       Confirm{' '}
     </button>
   );
- }
+};
 
- export default SubmissionButton;
+export default SubmissionButton;

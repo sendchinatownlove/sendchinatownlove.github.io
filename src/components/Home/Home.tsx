@@ -15,10 +15,10 @@ const Home: React.SFC = () => {
           </p>
           <div className={styles.btnContainer}>
             <Link to="/about">
-              <button className={styles.ctaButton}>Learn More</button>
+              <button className={styles.learnMoreButton}>Learn More</button>
             </Link>
             <Link to="/sellers">
-              <button className={styles.ctaButton2}>View Merchants</button>
+              <button className={styles.merchantsButton}>View Merchants</button>
             </Link>
           </div>
         </div>

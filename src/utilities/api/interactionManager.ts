@@ -71,7 +71,6 @@ export const makePayment = async (
   // TODO(ArtyEmsee): fix response to error
 };
 
-
 export const makeSquarePayment = async (
   nonce: string,
   payment: SquarePaymentParams,
@@ -86,10 +85,12 @@ export const makeSquarePayment = async (
         is_square: true,
         nonce,
         line_items: [payment],
-        email
+        email,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
     .then(async (res) => res)
-    .catch((err) => {throw err})
+    .catch((err) => {
+      throw err;
+    });
 };

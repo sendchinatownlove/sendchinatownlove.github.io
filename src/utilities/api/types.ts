@@ -54,7 +54,7 @@ export type BrowsePageSeller = {
   target_amount: number;
   amount_raised: number;
   progress_bar_color: string;
-
+  summary: string;
   story: string;
   accept_donations: boolean;
   sell_gift_cards: boolean;

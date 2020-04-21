@@ -25,18 +25,17 @@ const MerchantCard = ({ storeInfo }: Props) => {
         style={{ textDecoration: 'none', color: 'black' }}
       >
         <div className={styles.merchantCard}>
+          {/* TODO: update src with illustration of each merchant */}
           <img className={styles.merchantCardLogo} src={temp} alt="Logo" />
           <div className={styles.location}>
             {city}, {state}
           </div>
           <h3> {storeInfo!.name} </h3>
-          <p>
-            {' '}
-            100% of all gift card purchases and donations will go to support
-            this business and their staff.
-          </p>
+          <div className={styles.sellerSummary}>
+            <p> {storeInfo!.summary} </p>
+          </div>
           <div style={{ color: '#949494' }}>
-            {/* need to fix this */}
+            {/* TODO: need to update "donation" phrase and the time stamp */}
             Last donation 1h ago
           </div>{' '}
           <br />

@@ -38,6 +38,15 @@
   color: #46accc;
 }
 
+.sellerSummary p {
+  display: -webkit-box;
+  height: 45px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media only screen and (max-width: 450px) {
   .merchantCard {
     width: 90vw;

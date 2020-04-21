@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-import {SquareModal, StripeModal} from '../ModalPayment';
+import { SquareModal, StripeModal } from '../ModalPayment';
 
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -22,7 +22,8 @@ interface State {
   showBillModal: boolean;
 }
 
-const ModalPaymentBox: any = process.env.REACT_APP_USE_STRIPE === "TRUE" ? StripeModal : SquareModal ;
+const ModalPaymentBox: any =
+  process.env.REACT_APP_USE_STRIPE === 'TRUE' ? StripeModal : SquareModal;
 
 const stripePK = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripePK);
