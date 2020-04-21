@@ -2,11 +2,8 @@ import * as React from 'react';
 import { useState } from 'react';
 import styles from './styles.module.scss';
 
-interface Props {
-  fetchFilteredData: Function;
-}
 
-const NavBar = ({ fetchFilteredData }: Props) => {
+const NavBar = () => {
   const [selected, setSelected] = useState('all');
 
   return (
@@ -16,36 +13,9 @@ const NavBar = ({ fetchFilteredData }: Props) => {
           className={
             selected === 'all' ? 'modalButton--filled' : 'modalButton--back'
           }
-          onClick={() => {
-            setSelected('all');
-            fetchFilteredData('all');
-          }}
+          onClick={() => setSelected('all')}
         >
           All Shops
-        </button>
-
-        <button
-          className={
-            selected === 'bakery' ? 'modalButton--filled' : 'modalButton--back'
-          }
-          onClick={() => {
-            setSelected('bakery');
-            fetchFilteredData('bakery');
-          }}
-        >
-          Bakeries
-        </button>
-
-        <button
-          className={
-            selected === 'market' ? 'modalButton--filled' : 'modalButton--back'
-          }
-          onClick={() => {
-            setSelected('market');
-            fetchFilteredData('market');
-          }}
-        >
-          Markets
         </button>
 
         {/* hidden until ready to use */}

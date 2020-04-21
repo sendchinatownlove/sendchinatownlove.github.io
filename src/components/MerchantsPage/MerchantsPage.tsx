@@ -3,23 +3,14 @@ import { useEffect, useState } from 'react';
 import Footer from '../Footer';
 import NavBar from './NavBar';
 import MerchantCard from './MerchantCard';
-
 import styles from './styles.module.scss';
-import { getSellers, getStore } from '../../utilities';
+import { getSellers } from '../../utilities';
 
 const MerchantsPage: React.FC<{}> = () => {
   const [sellers, setSellers] = useState<any | null>();
 
   const fetchData = async () => {
     const result = await getSellers();
-    setSellers(result.data);
-  };
-
-  const fetchFilteredData = async (type: any) => {
-    let result;
-    type === 'all'
-      ? (result = await getSellers())
-      : (result = await getStore(type));
     setSellers(result.data);
   };
 
@@ -38,7 +29,7 @@ const MerchantsPage: React.FC<{}> = () => {
           fundraiser.
         </p>
 
-        <NavBar fetchFilteredData={fetchFilteredData} />
+        <NavBar />
 
         <div className={styles.merchantsContainer}>
           {sellers.map((store: any) => (
@@ -46,7 +37,9 @@ const MerchantsPage: React.FC<{}> = () => {
           ))}
         </div>
       </div>
+
       <Footer />
+
     </React.Fragment>
   ) : null;
 };
