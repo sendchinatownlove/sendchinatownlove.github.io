@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
-import { Buyer, PaymentParams } from './types';
+import { Buyer, PaymentParams, SquarePaymentParams } from './types';
 import { charges, sellers, storeType } from './endpoints';
 
 // Fix return typing
@@ -37,6 +37,7 @@ export const makePayment = async (
     .post(
       charges,
       {
+        is_square: false,
         line_items: [payment],
         email: email,
       },
@@ -74,4 +75,27 @@ export const makePayment = async (
     });
 
   // TODO(ArtyEmsee): fix response to error
+};
+
+
+export const makeSquarePayment = async (
+  nonce: string,
+  payment: SquarePaymentParams,
+  buyer: Buyer
+) => {
+  const { email } = buyer;
+
+  return await axios
+    .post(
+      charges,
+      {
+        is_square: true,
+        nonce,
+        line_items: [payment],
+        email
+      },
+      { headers: { 'Access-Control-Allow-Origin': '*' } }
+    )
+    .then(async (res) => res)
+    .catch((err) => {throw err})
 };

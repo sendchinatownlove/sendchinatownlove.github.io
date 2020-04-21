@@ -13,6 +13,7 @@ interface Props {
   ownerName: string;
   sellerId: string;
   sellerName: string;
+  progressBarColor: string;
 }
 
 interface State {
@@ -33,7 +34,6 @@ class OwnerPanel extends React.Component<Props, State> {
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
   }
-
   showModal(event: any) {
     let button = event.target.value;
     this.setState({ show: true, purchaseType: button });
@@ -63,7 +63,9 @@ class OwnerPanel extends React.Component<Props, State> {
                 style={{
                   width: `${
                     (this.props.amountRaised / this.props.targetAmount) * 100
-                  }%`,
+                    }%`,
+                  backgroundColor: this.props.progressBarColor
+                  //defaults to default color if no color is passed in
                 }}
               >
                 {' '}
