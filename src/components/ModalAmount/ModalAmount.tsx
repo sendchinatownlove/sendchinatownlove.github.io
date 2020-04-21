@@ -81,6 +81,7 @@ export const Modal = (props: Props) => {
         <input
           name="custom-amount"
           type="number"
+          onFocus={(e) => handleAmount(0, true)}
           className={classnames(styles.customAmt, 'modalInput--input')}
           onChange={(e) => handleAmount(parseInt(e.target.value), true)}
           value={isCustomAmount ? amount : ''}

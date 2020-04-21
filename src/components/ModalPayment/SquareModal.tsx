@@ -68,19 +68,13 @@ const ModalPayment = ({
           const newErrors = errorMessages.length > 0 ? [...errorMessages,responseErrors.map((error: { detail: string }) => error.detail) ] : responseErrors.map((error: { detail: string }) => error.detail)
           setErrorsMessages(newErrors)
         }
-        // return err.text()
-        //   .then((res: string) => {
-        //     if (typeof res === "string") {
-        //       return JSON.parse(res)
-        //     }
-        //     return Promise.reject(res)
-        //   })
       })
   }
 
   const applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ? process.env.REACT_APP_SQUARE_APPLICATION_ID : ""
   const locationId = process.env.REACT_APP_SQUARE_SANDBOX_LOCATION_ID ? process.env.REACT_APP_SQUARE_SANDBOX_LOCATION_ID : ""
 
+  const canSubmit = isChecked && name.length > 0 && email.length > 0;
   return (
     <React.Fragment>
 
@@ -158,7 +152,7 @@ const ModalPayment = ({
             >
               ᐸ Back
             </button>
-            <SubmissionButton isChecked={isChecked}/>
+            <SubmissionButton canSubmit={canSubmit}/>
           </div>
         </SquarePaymentForm>
         <div className="sq-error-message">
