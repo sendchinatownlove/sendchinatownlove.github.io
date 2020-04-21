@@ -22,7 +22,6 @@ const SellerPage: React.FC<{}> = () => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(seller)
   // TODO(ArtyEmsee): handle actual null states and loading
   return seller ? (
     <div className={styles.container}>
