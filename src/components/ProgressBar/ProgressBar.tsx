@@ -19,6 +19,7 @@ const ProgressBar = ({ amountRaised, targetAmount }: Props) => {
           {' '}
         </div>
       </div>
+      <br />
       <div>
         $ {Math.floor(amountRaised) / 100} out of $
         {Math.floor(targetAmount) / 100}{' '}

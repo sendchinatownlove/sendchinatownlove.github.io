@@ -166,17 +166,3 @@ h3 {
     @include modal-input;
   }
 }
-
-@mixin progess-bar {
-  background-color: #dedede;
-  height: 12px;
-  margin-bottom: 15px;
-}
-
-.myBar {
-  &--progress-bar {
-    background-color: #dd678a;
-    z-index: 5;
-    height: 12px;
-  }
-}

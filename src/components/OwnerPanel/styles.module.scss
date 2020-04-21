@@ -51,6 +51,7 @@ $container-size: 160px;
   margin: 5px 10px;
   font-weight: 500;
   letter-spacing: 0.05em;
+  cursor: pointer;
   @include for-phone-only {
     font-size: 14px;
     height: 48px;

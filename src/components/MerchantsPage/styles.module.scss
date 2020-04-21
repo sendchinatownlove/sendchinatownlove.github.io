@@ -15,14 +15,15 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 50px;
-  justify-content: center;
+  justify-content: space-around;
+  font-size: 14px;
 }
 
 .merchantCard {
-  height: 525px;
-  width: 325px;
+  height: 475px;
+  width: 350px;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
-  margin: 30px;
+  margin: 30px 0px;
   padding: 25px;
 }
 
@@ -35,4 +36,11 @@
 .location {
   font-weight: bolder;
   color: #46accc;
+}
+
+@media only screen and (max-width: 450px) {
+  .merchantCard {
+    width: 90vw;
+    overflow: hidden;
+  }
 }

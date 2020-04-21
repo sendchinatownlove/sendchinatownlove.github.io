@@ -10,6 +10,14 @@ export interface Props {
 }
 
 const MerchantCard = ({ storeInfo }: Props) => {
+  let city = '';
+  let state = '';
+
+  if (storeInfo!.locations && storeInfo!.locations[0]) {
+    city = storeInfo!.locations[0].city;
+    state = storeInfo!.locations[0].state;
+  }
+
   return (
     <React.Fragment>
       <Link
@@ -18,7 +26,9 @@ const MerchantCard = ({ storeInfo }: Props) => {
       >
         <div className={styles.merchantCard}>
           <img className={styles.merchantCardLogo} src={temp} alt="Logo" />
-          <div className={styles.location}>Chinatown, Manhattan</div>
+          <div className={styles.location}>
+            {city}, {state}
+          </div>
           <h3> {storeInfo!.name} </h3>
           <p>
             {' '}
