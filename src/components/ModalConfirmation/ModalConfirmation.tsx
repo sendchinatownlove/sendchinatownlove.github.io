@@ -10,7 +10,7 @@ const ModalConfirmation: React.SFC = () => {
   const dispatch = useModalPaymentDispatch();
 
   return (
-    <>
+    <div className={styles.paymentContainer}>
       <h2>Thank you for your donation!</h2>
       <p>We appreciate your support for small businesses</p>
 
@@ -22,7 +22,7 @@ const ModalConfirmation: React.SFC = () => {
       >
         Finish
       </button>
-    </>
+    </div>
   );
 };
 

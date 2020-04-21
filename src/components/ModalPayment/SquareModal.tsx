@@ -32,16 +32,16 @@ const ModalPayment = ({
   const [isChecked, setChecked] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [errors, setErrors] = useState<string[]>([]);
+  const [errorMessages, setErrorsMessages] = useState<string[]>([]);
 
 
   const cardNonceResponseReceived = (errors: any[], nonce: string) => {
+    setErrorsMessages([])
 
     if (errors && errors.length > 0 && errors[0]) {
-      setErrors(errors.map(error => error.message))
+      setErrorsMessages(errors.map(error => error.message))
       return
     }
-    setErrors([])
 
     const payment: SquarePaymentParams = {
       amount: Number(amount) * 100,
@@ -58,6 +58,23 @@ const ModalPayment = ({
         if (res.status === 200) {
           dispatch({type: SET_MODAL_VIEW, payload: 2})
         } 
+      })
+      .catch((err) => {
+        if( err.response
+          && err.response.data
+          && err.response.data.errors
+          && err.response.data.errors.length > 0){          
+          const responseErrors = err.response.data.errors
+          const newErrors = errorMessages.length > 0 ? [...errorMessages,responseErrors.map((error: { detail: string }) => error.detail) ] : responseErrors.map((error: { detail: string }) => error.detail)
+          setErrorsMessages(newErrors)
+        }
+        // return err.text()
+        //   .then((res: string) => {
+        //     if (typeof res === "string") {
+        //       return JSON.parse(res)
+        //     }
+        //     return Promise.reject(res)
+        //   })
       })
   }
 
@@ -146,7 +163,7 @@ const ModalPayment = ({
         </SquarePaymentForm>
         <div className="sq-error-message">
           {
-            errors.map(errorMessage =>
+            errorMessages.map(errorMessage =>
               <li key={`sq-error-${errorMessage}`}>{errorMessage}</li>
             )
           }
