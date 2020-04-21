@@ -12,7 +12,7 @@ interface Props {
 
 export const Modal = (props: Props) => {
 
-  const {amount, modalView} = useModalPaymentState();
+  const {amount} = useModalPaymentState();
   const [isCustomAmount, setIsCustomAmount] = useState(false)
   const dispatch = useModalPaymentDispatch();
 
