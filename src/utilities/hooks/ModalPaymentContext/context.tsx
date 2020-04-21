@@ -6,16 +6,8 @@
  */
 
 import React from "react";
-import { defaultState,ModalPaymentState } from "./types"
+import { defaultState } from "./types"
 import ModalPaymentReducer, {Action} from "./reducers"
-
-// import {
-//   SET_MODAL_VIEW,
-//   SET_AMOUNT,
-//   CLOSE_MODAL,
-//   OPEN_MODAL,
-//   CLEAR_FORMS
-// } from "./constants"
 
 // CONTEXT
 const ModalPaymentStateContext = React.createContext(defaultState)

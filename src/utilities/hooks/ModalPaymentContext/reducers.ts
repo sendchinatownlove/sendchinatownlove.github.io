@@ -2,7 +2,6 @@
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
-  OPEN_MODAL,
   CLOSE_MODAL,
   CLEAR_FORMS
 } from "./constants"
@@ -21,10 +20,8 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
       return { ...state, modalView: payload};
     case SET_AMOUNT:
       return { ...state, amount: payload};
-    case OPEN_MODAL:
-      return { ...state, showModal: true};    
     case CLOSE_MODAL:
-      return { ...state, showModal: false};    
+      return defaultState;
     case CLEAR_FORMS:
       return defaultState;
     default: 
