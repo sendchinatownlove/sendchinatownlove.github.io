@@ -2,67 +2,33 @@ import * as React from 'react';
 import { useState } from 'react';
 import styles from './styles.module.scss';
 
-
 const NavBar = () => {
   const [selected, setSelected] = useState('all');
+
+  const storeTypes = [
+    { value: 'all', text: 'All Shops' },
+    // { value: 'market', text: 'Markets' },
+    // { value: 'food', text: 'Foods' },
+    // { value: 'salon', text: 'Salons' },
+    // { value: 'shop', text: 'Shops' },
+    // { value: 'stand', text: 'Stands' },
+  ];
 
   return (
     <React.Fragment>
       <div className={styles.navContainer}>
-        <button
-          className={
-            selected === 'all' ? 'modalButton--filled' : 'modalButton--back'
-          }
-          onClick={() => setSelected('all')}
-        >
-          All Shops
-        </button>
-
-        {/* hidden until ready to use */}
-        {/* <button
-          className={
-            selected === 'markets' ? 'modalButton--filled' : 'modalButton--back'
-          }
-          onClick={() => setSelected('markets')}
-        >
-          Markets
-        </button>
-
-        <button
-          className={
-            selected === 'foods' ? 'modalButton--filled' : 'modalButton--back'
-          }
-          onClick={() => setSelected('foods')}
-        >
-          Foods
-        </button>
-
-        <button
-          className={
-            selected === 'salons' ? 'modalButton--filled' : 'modalButton--back'
-          }
-          onClick={() => setSelected('salons')}
-        >
-          Salons
-        </button>
-
-        <button
-          className={
-            selected === 'shops' ? 'modalButton--filled' : 'modalButton--back'
-          }
-          onClick={() => setSelected('shops')}
-        >
-          Shops
-        </button>
-
-        <button
-          className={
-            selected === 'stands' ? 'modalButton--filled' : 'modalButton--back'
-          }
-          onClick={() => setSelected('stands')}
-        >
-          Stands
-        </button> */}
+        {storeTypes.map((type) => (
+          <div>
+            <button
+              className={
+                selected === type.value ? 'modalButton--filled' : 'modalButton--back'
+              }
+              onClick={() => setSelected(type.value)}
+            >
+              {type.text}
+            </button>
+         </div>
+        ))}
       </div>
     </React.Fragment>
   );
