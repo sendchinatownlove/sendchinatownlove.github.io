@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 const NavBar = () => {
   const [selected, setSelected] = useState('all');
 
+  // TODO: Update buttons with shop types from database
   const storeTypes = [
     { value: 'all', text: 'All Shops' },
     // { value: 'market', text: 'Markets' },
