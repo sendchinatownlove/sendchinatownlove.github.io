@@ -6,7 +6,6 @@ import 'react-square-payment-form/lib/default.css'
 import styles from './styles.module.scss';
 import SubmissionButton from './SubmissionButton';
 import {makeSquarePayment, SquarePaymentParams, Buyer} from "../../utilities/api"
-import ModalConfirmation from '../ModalConfirmation';
 
 import { useModalPaymentState, useModalPaymentDispatch } from "../../utilities/hooks/ModalPaymentContext/context"
 import { SET_MODAL_VIEW } from "../../utilities/hooks/ModalPaymentContext/constants"
@@ -14,13 +13,14 @@ import { SET_MODAL_VIEW } from "../../utilities/hooks/ModalPaymentContext/consta
 type Props = {
   purchaseType: string;
   sellerId: string;
+  sellerName: string;
 };
 
-const ModalConfirmBox: any = ModalConfirmation;
 
 const ModalPayment = ({
   purchaseType,
   sellerId,
+  sellerName
 }: Props) => {
 
   const {amount} = useModalPaymentState();
@@ -29,7 +29,6 @@ const ModalPayment = ({
   const purchaseTypePhrase = purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
   const checkAgreement = () => isChecked ? setChecked(false) : setChecked(true);
 
-  const [isShown, setIsShown] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -57,10 +56,8 @@ const ModalPayment = ({
     return makeSquarePayment( nonce, payment, buyer )
       .then((res) => {
         if (res.status === 200) {
-          setIsShown(true)
-        } else {
-          setIsShown(false)
-        }
+          dispatch({type: SET_MODAL_VIEW, payload: 2})
+        } 
       })
   }
 
@@ -115,7 +112,7 @@ const ModalPayment = ({
           <br/>
           <h3>Checkout details</h3>
           {/* TODO(jmckibben): This should be replaced with Seller.name */}
-          <span> {purchaseTypePhrase} of <b>${amount}</b> to Shunfa Bakery </span>
+          <span> {purchaseTypePhrase} of <b>${amount}</b> to ${sellerName} </span>
           <p />
           <div className={styles.row}>
             <input
@@ -155,8 +152,6 @@ const ModalPayment = ({
           }
         </div>
       </div>
-
-      <ModalConfirmBox showConfirmModal={isShown}/>
     </React.Fragment>
   );
 };

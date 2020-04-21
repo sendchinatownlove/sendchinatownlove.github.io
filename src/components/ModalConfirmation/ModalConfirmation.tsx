@@ -3,26 +3,14 @@ import classnames from 'classnames';
 import styles from './styles.module.scss';
 import confirmationPic from './chinatown-logo.png';
 
-interface Props {
-  handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  showConfirmModal: boolean;
-}
+import { useModalPaymentDispatch } from "../../utilities/hooks/ModalPaymentContext/context"
+import { CLOSE_MODAL } from "../../utilities/hooks/ModalPaymentContext/constants"
 
-const ModalConfirmation: React.SFC<Props> = ({
-  handleClose,
-  showConfirmModal,
-}) => {
+const ModalConfirmation: React.SFC = () => {
+  const dispatch = useModalPaymentDispatch();
+
   return (
-    <form
-      id="payment-form"
-      className={classnames(styles.container, 'modalForm--form')}
-      style={{ display: showConfirmModal ? 'block' : 'none' }}
-    >
-      <button className={'closeButton--close'} onClick={handleClose}>
-        {' '}
-        ×
-      </button>
-
+    <>
       <h2>Thank you for your donation!</h2>
       <p>We appreciate your support for small businesses</p>
 
@@ -30,12 +18,11 @@ const ModalConfirmation: React.SFC<Props> = ({
 
       <button
         className={classnames(styles.finishBtn, 'modalButton--filled')}
-        onClick={handleClose}
+        onClick={() => dispatch({type: CLOSE_MODAL, payload: undefined})}
       >
-        {' '}
         Finish
       </button>
-    </form>
+    </>
   );
 };
 

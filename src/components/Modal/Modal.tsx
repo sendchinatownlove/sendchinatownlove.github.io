@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import styles from './styles.module.scss';
 import ModalAmount from '../ModalAmount';
 import {SquareModal} from '../ModalPayment';
+import ModalConfirmation from '../ModalConfirmation';
 import { useModalPaymentState, useModalPaymentDispatch } from "../../utilities/hooks/ModalPaymentContext/context"
 import { CLOSE_MODAL } from "../../utilities/hooks/ModalPaymentContext/constants"
 
@@ -33,6 +34,7 @@ export const Modal = (props: Props) => {
       </button>
       {modalView === 0 && <ModalAmount {...props}/>}
       {modalView === 1 && <SquareModal {...props}/>}
+      {modalView === 2 && <ModalConfirmation/>}
     </div>
   );
 }
