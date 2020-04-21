@@ -35,7 +35,6 @@ export const Modal = (props: Props) => {
     <form
       id="donation-form"
       className={classnames(styles.donationsContainer, 'modalForm--form')}
-      style={{ display: modalView > -1 ? 'block' : 'none' }}
     >
       <button className={'closeButton--close'} onClick={closeModal} > 
         ×
