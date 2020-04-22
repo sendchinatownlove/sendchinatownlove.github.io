@@ -37,6 +37,15 @@ export const Modal = (props: Props) => {
     dispatch({ type: CLOSE_MODAL, payload: undefined });
   };
 
+  const buttonAmounts = [
+    { value: 10, text: '$10' },
+    { value: 25, text: '$25' },
+    { value: 50, text: '$50' },
+    { value: 100, text: '$100' },
+  ];
+
+  const [selected, setSelected] = useState('');
+
   return (
     <form
       id="donation-form"
@@ -53,34 +62,22 @@ export const Modal = (props: Props) => {
         <label htmlFor="select-amount">Select an amount </label>
         <br />
         <div className={styles.selectAmtContainer}>
-          <button
-            type="button"
-            className={'modalButton--outlined'}
-            onClick={(e) => handleAmount(10, false)}
-          >
-            $10
-          </button>
-          <button
-            type="button"
-            className={'modalButton--outlined'}
-            onClick={(e) => handleAmount(25, false)}
-          >
-            $25
-          </button>
-          <button
-            type="button"
-            className={'modalButton--outlined'}
-            onClick={(e) => handleAmount(50, false)}
-          >
-            $50
-          </button>
-          <button
-            type="button"
-            className={'modalButton--outlined'}
-            onClick={(e) => handleAmount(100, false)}
-          >
-            $100
-          </button>
+          {buttonAmounts.map((amount) => (
+            <button
+              type="button"
+              className={
+                selected === amount.text
+                  ? 'modalButton--selected'
+                  : 'modalButton--outlined'
+              }
+              onClick={(e) => {
+                setSelected(amount.text)
+                handleAmount(amount.value, false)
+              }}
+            >
+              {amount.text}
+            </button>
+          ))}
         </div>
         <label htmlFor="custom-amount">Or enter an amount </label>
         <br />
@@ -89,15 +86,16 @@ export const Modal = (props: Props) => {
           type="number"
           onFocus={(e) => handleAmount(0, true)}
           className={classnames(styles.customAmt, 'modalInput--input')}
-          onChange={(e) => handleAmount(parseInt(e.target.value), true)}
+          onChange={(e) => {
+            setSelected('')
+            handleAmount(parseInt(e.target.value), true)
+          }}
           value={isCustomAmount ? amount : ''}
           placeholder="$"
           min="6"
         />
         {amount <= 5 && isCustomAmount && (
-          <div className={styles.errorMessage}>
-            $5 is our minimum gift card amount
-          </div>
+          <div className={styles.errorMessage}>Minimum donation amount: $5</div>
         )}
       </div>
 

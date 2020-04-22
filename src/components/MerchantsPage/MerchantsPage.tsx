@@ -25,7 +25,7 @@ const MerchantsPage: React.FC<{}> = () => {
         <h2> Support our local merchants </h2>
         <p>
           Send Chinatown Love is intended to support our local businesses facing
-          financial loss. Make a difference today by donating or buing a gift
+          financial loss. Make a difference today by donating or buying a gift
           card.
         </p>
 

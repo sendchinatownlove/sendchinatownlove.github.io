@@ -80,6 +80,7 @@ h3 {
     font-weight: bold;
     outline: none;
     letter-spacing: 0.1em;
+    cursor: pointer;
   }
 
   &--outlined {
@@ -88,6 +89,7 @@ h3 {
     color: #dd678a;
     border-radius: 25px;
     margin: 10px 0px;
+    cursor: pointer;
   }
 
   &--filled {
@@ -97,6 +99,15 @@ h3 {
     color: white;
     font-weight: bold;
     letter-spacing: 0.1em;
+    cursor: pointer;
+  }
+
+  &--selected {
+    @include modal-button;
+    color: white;
+    background-color: #dd678a;
+    border: 1px solid #dd678a;
+    margin: 10px 0px;
   }
 
   &--filled:disabled,
@@ -105,8 +116,7 @@ h3 {
     border: 1px solid grey;
   }
 
-  &--filled:focus,
-  &--outlined:focus {
+  &--filled:focus {
     color: white;
     background-color: #dd678a;
     border: 1px solid #dd678a;
