@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { Context } from 'react-square-payment-form';
 
 type Props = {
-  isChecked: boolean;
+  canSubmit: boolean;
 };
 
-const SubmissionButton = ({ isChecked }: Props) => {
+const SubmissionButton = ({ canSubmit }: Props) => {
   const context = useContext(Context);
 
   const handleSubmit = (evt: { preventDefault: () => void }) => {
@@ -18,10 +18,9 @@ const SubmissionButton = ({ isChecked }: Props) => {
       type="button"
       className={'modalButton--filled'}
       onClick={handleSubmit}
-      disabled={isChecked === false}
+      disabled={canSubmit === false}
     >
-      {' '}
-      Confirm{' '}
+      Confirm
     </button>
   );
 };

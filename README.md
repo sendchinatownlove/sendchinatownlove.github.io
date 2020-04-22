@@ -12,6 +12,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
+If you see issues related to Node versioning, run `yarn --ignore-engines`
+
 ### `yarn deploy`
 
 Builds the application and deploys to master branch, which is the branch that hosts Github user pages.
