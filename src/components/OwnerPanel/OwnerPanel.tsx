@@ -89,12 +89,7 @@ const OwnerPanel = (props: Props) => {
         )}
       </div>
       {Object.keys(props.extraInfo).length !== 0 ?
-        <div
-          style={{
-            width: '100%',
-            borderTop: '1px solid #dedede',
-            borderBottom: '1px solid #dedede'
-          }}>
+        <div className = {styles.extraInfoContainer}>
           {Object.keys(props.extraInfo).map((current) => {
             if (current === 'Website' || current === 'Menu') {
               return (
