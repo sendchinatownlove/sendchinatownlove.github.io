@@ -6,6 +6,14 @@ export type PaymentParams = {
   seller_id: string;
 };
 
+export type SquarePaymentParams = {
+  amount: number;
+  currency: string;
+  item_type: string;
+  quantity: number;
+  seller_id: string;
+};
+
 export type Location = {
   address1: string;
   address2: string;
@@ -18,14 +26,15 @@ export type Location = {
 export type Buyer = {
   name: string;
   email: string;
-  address: string;
-  city: string;
-  stateForm: string;
-  zipCode: string;
-  showPayModal: boolean;
+  nonce?: string;
+  // address: string;
+  // city: string;
+  // stateForm: string;
+  // zipCode: string;
+  // showPayModal: boolean;
 
   //TODO(ArtyEmsee): what is className doing
-  className: '';
+  // className: '';
 };
 
 export type Seller = {

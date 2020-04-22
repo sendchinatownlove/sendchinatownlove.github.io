@@ -6,17 +6,19 @@
 .paymentContainer {
   display: flex;
   flex-direction: column;
+
+  div {
+    width: 100% !important;
+  }
 }
 
-.row {
+.row,
+.inputRow {
   display: flex;
   flex-direction: row;
-  width: 400px;
+  width: 100%;
   align-items: center;
-}
-
-.cardLabel {
-  width: 375px;
+  margin-bottom: 10px;
 }
 
 .checkbox {
@@ -52,6 +54,29 @@
   justify-content: space-between;
 }
 
+.label {
+  font-size: 16px;
+  color: #32325d;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  border: none;
+  position: relative;
+  min-width: 70%;
+}
+
+.label::placeholder {
+  color: #aab7c4;
+}
+
+.icons {
+  color: #aab7c4;
+  font-size: 20px;
+  opacity: 0.5;
+}
+
+.label:invalid {
+  color: #fa755a;
+}
+
 @media only screen and (max-width: 799px) {
   .container {
     width: 85vw;
@@ -63,12 +88,14 @@
     flex-direction: column;
   }
 
-  .cardLabel {
-    width: 101%;
-  }
-
   .label {
     width: 65%;
+  }
+
+  .inputRow {
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-around;
   }
 }
 

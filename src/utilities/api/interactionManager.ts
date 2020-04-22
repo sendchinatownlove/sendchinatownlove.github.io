@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
-import { Buyer, PaymentParams } from './types';
+import { Buyer, PaymentParams, SquarePaymentParams } from './types';
 import { charges, sellers } from './endpoints';
 
 // Fix return typing
@@ -24,13 +24,14 @@ export const makePayment = async (
   payment: PaymentParams,
   buyer: Buyer
 ) => {
-  const { address, city, email, name, stateForm, zipCode } = buyer;
+  const { email, name } = buyer;
 
   // TODO(ArtyEmsee): abstract api call, create global object for headers
   await axios
     .post(
       charges,
       {
+        is_square: false,
         line_items: [payment],
         email: email,
       },
@@ -49,13 +50,6 @@ export const makePayment = async (
               billing_details: {
                 name: name,
                 email: email,
-                address: {
-                  city,
-                  state: stateForm,
-                  country: 'US',
-                  postal_code: zipCode,
-                  line1: address,
-                },
               },
             },
           }
@@ -75,4 +69,31 @@ export const makePayment = async (
     });
 
   // TODO(ArtyEmsee): fix response to error
+};
+
+export const makeSquarePayment = async (
+  nonce: string,
+  payment: SquarePaymentParams,
+  buyer: Buyer
+) => {
+  const { email } = buyer;
+
+  return await axios
+    .post(
+      charges,
+      {
+        is_square: true,
+        nonce,
+        line_items: [payment],
+        email,
+      },
+      { headers: { 'Access-Control-Allow-Origin': '*' } }
+    )
+    .then(async (res) => {
+      console.log('res: ', res);
+      return res;
+    })
+    .catch((err) => {
+      throw err;
+    });
 };

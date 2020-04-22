@@ -1,145 +1,44 @@
-import * as React from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-import ModalBilling from '../ModalBilling';
+import ModalAmount from '../ModalAmount';
+import { SquareModal } from '../ModalPayment';
+import ModalConfirmation from '../ModalConfirmation';
+import {
+  useModalPaymentState,
+  useModalPaymentDispatch,
+} from '../../utilities/hooks/ModalPaymentContext/context';
+import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 interface Props {
   purchaseType: string;
-  handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  show: boolean;
   sellerId: string;
   sellerName: string;
 }
 
-interface State {
-  amount: number;
-  customInput: boolean;
-  close: boolean;
-  next: boolean;
-  showBillModal: boolean;
-}
+export const Modal = (props: Props) => {
+  const { modalView } = useModalPaymentState();
+  const dispatch = useModalPaymentDispatch();
 
-const ModalBillingBox: any = ModalBilling;
+  const closeModal = (e: any) => {
+    e.preventDefault();
+    dispatch({ type: CLOSE_MODAL, payload: undefined });
+  };
 
-class Modal extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      amount: 0,
-      customInput: false,
-      close: false,
-      next: false,
-      showBillModal: false,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.showBillingsModal = this.showBillingsModal.bind(this);
-    this.hideBillingsModal = this.hideBillingsModal.bind(this);
-  }
-
-  handleChange(e: any, customInput: any) {
-    const input = e.target.value;
-    customInput && Number(input)
-      ? this.setState({ amount: input, customInput })
-      : this.setState({ amount: input });
-  }
-
-  showBillingsModal() {
-    this.setState({ showBillModal: true });
-  }
-
-  hideBillingsModal() {
-    this.setState({ showBillModal: false });
-  }
-
-  render() {
-    return (
-      <form
-        id="donation-form"
-        className={classnames(styles.donationsContainer, 'modalForm--form')}
-        style={{ display: this.props.show ? 'block' : 'none' }}
-      >
-        <button
-          className={'closeButton--close'}
-          onClick={this.props.handleClose}
-        >
-          {' '}
-          ×{' '}
-        </button>
-
-        <h2>{this.props.sellerName}</h2>
-        <p>Please select an amount and leave a message</p>
-
-        <div className={styles.amountContainer}>
-          <label htmlFor="select-amount">Select an amount </label> <br />
-          <div className={styles.selectAmtContainer}>
-            <button
-              type="button"
-              className={'modalButton--outlined'}
-              value="10"
-              onClick={(e) => this.handleChange(e, false)}
-            >
-              {' '}
-              $10
-            </button>
-            <button
-              type="button"
-              className={'modalButton--outlined'}
-              value="25"
-              onClick={(e) => this.handleChange(e, false)}
-            >
-              {' '}
-              $25
-            </button>
-            <button
-              type="button"
-              className={'modalButton--outlined'}
-              value="50"
-              onClick={(e) => this.handleChange(e, false)}
-            >
-              {' '}
-              $50
-            </button>
-            <button
-              type="button"
-              className={'modalButton--outlined'}
-              value="100"
-              onClick={(e) => this.handleChange(e, false)}
-            >
-              {' '}
-              $100
-            </button>
-          </div>
-          <label htmlFor="custom-amount">Or enter any amount </label> <br />
-          <input
-            name="custom-amount"
-            type="number"
-            className={classnames(styles.customAmt, 'modalInput--input')}
-            onChange={(e) => this.handleChange(e, true)}
-            value={this.state.customInput ? this.state.amount : ''}
-            placeholder="$"
-          />
-        </div>
-
-        <button
-          type="button"
-          className={classnames(styles.nextBtn, 'modalButton--filled')}
-          onClick={this.showBillingsModal}
-          disabled={this.state.amount === 0}
-        >
-          {' '}
-          Next
-        </button>
-
-        <ModalBillingBox
-          showBillModal={this.state.showBillModal}
-          hideBillModal={this.hideBillingsModal}
-          donatedAmt={this.state.amount}
-          purchaseType={this.props.purchaseType}
-          sellerId={this.props.sellerId}
-        />
-      </form>
-    );
-  }
-}
+  return (
+    <div
+      id="donation-form"
+      className={classnames(styles.donationsContainer, 'modalForm--form')}
+      style={{ display: modalView > -1 ? 'block' : 'none' }}
+    >
+      <button className={'closeButton--close'} onClick={closeModal}>
+        ×
+      </button>
+      {modalView === 0 && <ModalAmount {...props} />}
+      {modalView === 1 && <SquareModal {...props} />}
+      {modalView === 2 && <ModalConfirmation />}
+    </div>
+  );
+};
 
 export default Modal;

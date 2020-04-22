@@ -5,6 +5,7 @@ import Footer from '../Footer';
 import { sampleMerchant } from './sample-merchant';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
+import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import styles from './styles.module.scss';
 import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
@@ -38,26 +39,28 @@ const SellerPage: React.FC<{}> = () => {
               summary: seller.summary,
             }}
           />
-          <OwnerPanel
-            className={styles.ownerPanel}
-            acceptDonations={seller.accept_donations}
-            sellGiftCards={seller.sell_gift_cards}
-            amountRaised={seller.amount_raised}
-            targetAmount={seller.target_amount}
-            ownerName={seller.owner_name}
-            imageSrc={sampleMerchant.ownerInfo.imageSrc}
-            sellerName={seller.name}
-            progressBarColor={seller.progress_bar_color}
-            extraInfo={{
+          <ModalPaymentProvider>
+            <OwnerPanel
+              className={styles.ownerPanel}
+              acceptDonations={seller.accept_donations}
+              sellGiftCards={seller.sell_gift_cards}
+              amountRaised={seller.amount_raised}
+              targetAmount={seller.target_amount}
+              ownerName={seller.owner_name}
+              imageSrc={sampleMerchant.ownerInfo.imageSrc}
+              sellerName={seller.name}
+              progressBarColor={seller.progress_bar_color}
+              extraInfo={{
               Type: seller.business_type,
               Employees: seller.num_employees,
               Founded: seller.founded_year,
               Website: seller.website_url,
               Menu: seller.menu_url
             }}
-            // TODO(jtmckibb): Should not crash here
-            sellerId={id!}
-          />
+              // TODO(jtmckibb): Should not crash here
+              sellerId={id!}
+            />
+          </ModalPaymentProvider>
         </div>
       </main>
       <Footer />
