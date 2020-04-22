@@ -47,7 +47,7 @@ export const Modal = (props: Props) => {
       </button>
 
       <h2>{props.sellerName}</h2>
-      <p>Please select an amount and leave a message</p>
+      <p>Please select an amount or enter any amount</p>
 
       <div className={styles.amountContainer}>
         <label htmlFor="select-amount">Select an amount </label>
@@ -92,11 +92,11 @@ export const Modal = (props: Props) => {
           onChange={(e) => handleAmount(parseInt(e.target.value), true)}
           value={isCustomAmount ? amount : ''}
           placeholder="$"
-          min="5"
+          min="6"
         />
-        {amount < 5 && isCustomAmount && (
+        {amount <= 5 && isCustomAmount && (
           <div className={styles.errorMessage}>
-            Please enter an amount greater than $5.00
+            $5 is our minimum gift card amount
           </div>
         )}
       </div>
@@ -105,7 +105,7 @@ export const Modal = (props: Props) => {
         type="button"
         className={classnames(styles.nextBtn, 'modalButton--filled')}
         onClick={openModal}
-        disabled={amount < 5}
+        disabled={amount <= 5}
       >
         Next
       </button>
