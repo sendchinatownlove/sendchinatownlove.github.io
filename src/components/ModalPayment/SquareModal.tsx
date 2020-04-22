@@ -81,7 +81,6 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
   const applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID
     ? process.env.REACT_APP_SQUARE_APPLICATION_ID
     : '';
-  console.log(applicationId);
   const locationId = process.env.REACT_APP_SQUARE_LOCATION_ID
     ? process.env.REACT_APP_SQUARE_LOCATION_ID
     : '';
