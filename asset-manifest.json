@@ -1,29 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.d0fa3303.chunk.css",
-    "main.js": "/static/js/main.a2aba770.chunk.js",
-    "main.js.map": "/static/js/main.a2aba770.chunk.js.map",
+    "main.css": "/static/css/main.95f8edaf.chunk.css",
+    "main.js": "/static/js/main.67cb030e.chunk.js",
+    "main.js.map": "/static/js/main.67cb030e.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.242ae121.js",
     "runtime-main.js.map": "/static/js/runtime-main.242ae121.js.map",
     "static/css/2.52f00974.chunk.css": "/static/css/2.52f00974.chunk.css",
-    "static/js/2.3c37bfff.chunk.js": "/static/js/2.3c37bfff.chunk.js",
-    "static/js/2.3c37bfff.chunk.js.map": "/static/js/2.3c37bfff.chunk.js.map",
+    "static/js/2.dea71104.chunk.js": "/static/js/2.dea71104.chunk.js",
+    "static/js/2.dea71104.chunk.js.map": "/static/js/2.dea71104.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.e48e0f0d8671566e0f2a853c45be6617.js": "/precache-manifest.e48e0f0d8671566e0f2a853c45be6617.js",
+    "precache-manifest.af93a925887c605d0e7e81c3d38f2745.js": "/precache-manifest.af93a925887c605d0e7e81c3d38f2745.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.52f00974.chunk.css.map": "/static/css/2.52f00974.chunk.css.map",
-    "static/css/main.d0fa3303.chunk.css.map": "/static/css/main.d0fa3303.chunk.css.map",
-    "static/js/2.3c37bfff.chunk.js.LICENSE.txt": "/static/js/2.3c37bfff.chunk.js.LICENSE.txt",
+    "static/css/main.95f8edaf.chunk.css.map": "/static/css/main.95f8edaf.chunk.css.map",
+    "static/js/2.dea71104.chunk.js.LICENSE.txt": "/static/js/2.dea71104.chunk.js.LICENSE.txt",
     "static/media/chinatown-logo.png": "/static/media/chinatown-logo.349de0ef.png",
     "static/media/styles.module.scss": "/static/media/chinatown-splash.67dd7391.png",
     "static/media/female.svg": "/static/media/female.46412c79.svg",
-    "static/media/logo.svg": "/static/media/logo.909f1479.svg"
+    "static/media/logo.svg": "/static/media/logo.909f1479.svg",
+    "static/media/temp.png": "/static/media/temp.6758359b.png"
   },
   "entrypoints": [
     "static/js/runtime-main.242ae121.js",
     "static/css/2.52f00974.chunk.css",
-    "static/js/2.3c37bfff.chunk.js",
-    "static/css/main.d0fa3303.chunk.css",
-    "static/js/main.a2aba770.chunk.js"
+    "static/js/2.dea71104.chunk.js",
+    "static/css/main.95f8edaf.chunk.css",
+    "static/js/main.67cb030e.chunk.js"
   ]
 }
