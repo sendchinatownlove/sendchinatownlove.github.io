@@ -81,8 +81,9 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
   const applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID
     ? process.env.REACT_APP_SQUARE_APPLICATION_ID
     : '';
-  const locationId = process.env.REACT_APP_SQUARE_SANDBOX_LOCATION_ID
-    ? process.env.REACT_APP_SQUARE_SANDBOX_LOCATION_ID
+  console.log(applicationId);
+  const locationId = process.env.REACT_APP_SQUARE_LOCATION_ID
+    ? process.env.REACT_APP_SQUARE_LOCATION_ID
     : '';
 
   const canSubmit = isChecked && name.length > 0 && email.length > 0;
@@ -122,7 +123,7 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
           </div>
         </div>
         <SquarePaymentForm
-          sandbox={true}
+          sandbox={!process.env.NODE_ENV || process.env.NODE_ENV === 'development'}
           applicationId={applicationId}
           locationId={locationId}
           cardNonceResponseReceived={cardNonceResponseReceived}
