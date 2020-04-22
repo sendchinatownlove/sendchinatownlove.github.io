@@ -13,9 +13,14 @@ const Home: React.SFC = () => {
             Support local Chinatown businesses during the COVID-19 pandemic and
             help us bring their stores online
           </p>
-          <Link to="/about">
-            <button className={styles.ctaButton}>Learn More</button>
-          </Link>
+          <div className={styles.btnContainer}>
+            <Link to="/about">
+              <button className={styles.learnMoreButton}>Learn More</button>
+            </Link>
+            <Link to="/sellers">
+              <button className={styles.merchantsButton}>View Merchants</button>
+            </Link>
+          </div>
         </div>
       </main>
       <Footer theme={'dark'} />

@@ -45,3 +45,20 @@ export type Seller = {
   summary: string;
   story: string;
 };
+
+export type BrowsePageSeller = {
+  id: number;
+  seller_id: string;
+  cuisine_name: string;
+  name: string;
+  target_amount: number;
+  amount_raised: number;
+  progress_bar_color: string;
+  summary: string;
+  story: string;
+  accept_donations: boolean;
+  sell_gift_cards: boolean;
+  owner_name: string;
+  owner_image_url: string;
+  locations?: Location[];
+};

@@ -72,12 +72,14 @@ h3 {
 
 .modalButton {
   &--back {
+    font-size: 12px;
     border: none;
     padding: 0px;
     margin: 10px 0px;
-    width: 50px;
+    width: 120px;
     font-weight: bold;
     outline: none;
+    letter-spacing: 0.1em;
   }
 
   &--outlined {
