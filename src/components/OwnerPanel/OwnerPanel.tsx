@@ -62,7 +62,7 @@ const OwnerPanel = (props: Props) => {
           <div>
             {/* TODO(jtmckibb): Add commas for easier readability */}$
             {Math.floor(props.amountRaised) / 100} of $
-            {Math.floor(props.targetAmount) / 100}
+            {(Math.floor(props.targetAmount) / 100).toLocaleString()}
           </div>
         </div>
       )}
@@ -74,7 +74,7 @@ const OwnerPanel = (props: Props) => {
             className={classnames(styles.button, 'button--filled')}
             onClick={showModal}
           >
-            Donate
+            Donation
           </button>
         )}
         {props.sellGiftCards && (

@@ -62,7 +62,7 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
         }
       })
       .catch((err) => {
-        if ( err.response ) {
+        if (err.response) {
           const responseErrors = err.response.data.errors;
           const newErrors =
             errorMessages.length > 0
@@ -122,7 +122,9 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
           </div>
         </div>
         <SquarePaymentForm
-          sandbox={!process.env.NODE_ENV || process.env.NODE_ENV === 'development'}
+          sandbox={
+            !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+          }
           applicationId={applicationId}
           locationId={locationId}
           cardNonceResponseReceived={cardNonceResponseReceived}

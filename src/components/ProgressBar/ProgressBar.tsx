@@ -21,8 +21,8 @@ const ProgressBar = ({ amountRaised, targetAmount }: Props) => {
       </div>
       <br />
       <div>
-        $ {Math.floor(amountRaised) / 100} out of $
-        {Math.floor(targetAmount) / 100}{' '}
+        ${Math.floor(amountRaised) / 100} out of $
+        {(Math.floor(targetAmount) / 100).toLocaleString()}
       </div>
     </div>
   );
