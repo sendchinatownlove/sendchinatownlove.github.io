@@ -1,6 +1,6 @@
 /**
- * Modal Payment STATE 
- *   
+ * Modal Payment STATE
+ *
  * @typedef {Object} DefaultModalPaymentState
  * @property {number} amount - amount (in cents)
  * @property {boolean} customInput - if a user used the custom input
@@ -13,10 +13,10 @@ export type ModalPaymentState = {
   amount: number;
   customInput: boolean;
   modalView: number;
-}
+};
 
-export const defaultState: ModalPaymentState =  {
+export const defaultState: ModalPaymentState = {
   amount: 0,
   customInput: false,
-  modalView: -1
-}
+  modalView: -1,
+};

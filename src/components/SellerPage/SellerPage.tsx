@@ -5,7 +5,7 @@ import Footer from '../Footer';
 import { sampleMerchant } from './sample-merchant';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
-import {ModalPaymentProvider} from '../../utilities/hooks/ModalPaymentContext/context';
+import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import styles from './styles.module.scss';
 import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
@@ -56,7 +56,6 @@ const SellerPage: React.FC<{}> = () => {
               sellerId={id!}
             />
           </ModalPaymentProvider>
-          
         </div>
       </main>
       <Footer />

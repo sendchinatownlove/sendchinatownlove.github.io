@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
 import Modal from '../Modal';
-import { useModalPaymentDispatch } from "../../utilities/hooks/ModalPaymentContext/context"
-import { SET_MODAL_VIEW } from "../../utilities/hooks/ModalPaymentContext/constants"
+import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
+import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 interface Props {
   imageSrc: string;
@@ -25,15 +25,15 @@ interface State {
 
 const ModalBox: any = Modal;
 
-const OwnerPanel =(props: Props) => {
+const OwnerPanel = (props: Props) => {
   const dispatch = useModalPaymentDispatch();
   const [purchaseType, setPurchaseType] = useState('');
-  
+
   const showModal = (event: any) => {
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 })
+    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
     setPurchaseType(event.target.value);
-  }
-  
+  };
+
   return (
     <section className={classnames(styles.container, props.className)}>
       <figure className={styles.ownerContainer}>
@@ -45,53 +45,47 @@ const OwnerPanel =(props: Props) => {
       </figure>
 
       <h2 className={styles.ownerName}>{props.ownerName}</h2>
-      {
-        props.targetAmount && (
-          <div className={styles.progressContainer}>
-            <div className={classnames(styles.progressBar, 'progress-bar')}>
-              <div
-                className={styles.myBar}
-                style={{
-                  width: `${ (props.amountRaised / props.targetAmount) * 100 }%`,
-                  backgroundColor: props.progressBarColor
-                  //defaults to default color if no color is passed in
-                }}
-              >
-                {' '}
-              </div>
-            </div>
-            <div>
-              {/* TODO(jtmckibb): Add commas for easier readability */}$
-              {Math.floor(props.amountRaised) / 100} of $
-              {Math.floor(props.targetAmount) / 100}
+      {props.targetAmount && (
+        <div className={styles.progressContainer}>
+          <div className={classnames(styles.progressBar, 'progress-bar')}>
+            <div
+              className={styles.myBar}
+              style={{
+                width: `${(props.amountRaised / props.targetAmount) * 100}%`,
+                backgroundColor: props.progressBarColor,
+                //defaults to default color if no color is passed in
+              }}
+            >
+              {' '}
             </div>
           </div>
-        )
-      }
+          <div>
+            {/* TODO(jtmckibb): Add commas for easier readability */}$
+            {Math.floor(props.amountRaised) / 100} of $
+            {Math.floor(props.targetAmount) / 100}
+          </div>
+        </div>
+      )}
 
       <div className={styles.buttonContainer}>
-        {
-          props.acceptDonations && (
-            <button
-              value="donation"
-              className={classnames(styles.button, 'button--filled')}
-              onClick={showModal}
-            >
-              Donate
-            </button>
-          )
-        }
-        {
-          props.sellGiftCards && (
-            <button
-              value="gift_card"
-              className={classnames(styles.button, 'button--outlined')}
-              onClick={showModal}
-            >
-              Gift Card
-            </button>
-          )
-        }
+        {props.acceptDonations && (
+          <button
+            value="donation"
+            className={classnames(styles.button, 'button--filled')}
+            onClick={showModal}
+          >
+            Donate
+          </button>
+        )}
+        {props.sellGiftCards && (
+          <button
+            value="gift_card"
+            className={classnames(styles.button, 'button--outlined')}
+            onClick={showModal}
+          >
+            Gift Card
+          </button>
+        )}
       </div>
 
       <ModalBox
@@ -138,6 +132,6 @@ const OwnerPanel =(props: Props) => {
       </div>
     </section>
   );
-}
+};
 
 export default OwnerPanel;

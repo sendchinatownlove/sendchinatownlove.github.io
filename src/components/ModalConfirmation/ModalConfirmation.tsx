@@ -3,8 +3,8 @@ import classnames from 'classnames';
 import styles from './styles.module.scss';
 import confirmationPic from './chinatown-logo.png';
 
-import { useModalPaymentDispatch } from "../../utilities/hooks/ModalPaymentContext/context"
-import { CLOSE_MODAL } from "../../utilities/hooks/ModalPaymentContext/constants"
+import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
+import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 const ModalConfirmation: React.SFC = () => {
   const dispatch = useModalPaymentDispatch();
@@ -18,7 +18,7 @@ const ModalConfirmation: React.SFC = () => {
 
       <button
         className={classnames(styles.finishBtn, 'modalButton--filled')}
-        onClick={() => dispatch({type: CLOSE_MODAL, payload: undefined})}
+        onClick={() => dispatch({ type: CLOSE_MODAL, payload: undefined })}
       >
         Finish
       </button>

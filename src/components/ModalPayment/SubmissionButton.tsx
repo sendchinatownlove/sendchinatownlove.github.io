@@ -5,14 +5,13 @@ type Props = {
   canSubmit: boolean;
 };
 
-const SubmissionButton = ({canSubmit}: Props) => {
+const SubmissionButton = ({ canSubmit }: Props) => {
   const context = useContext(Context);
- 
-  console.log(context)
-  const handleSubmit = (evt: { preventDefault: () => void; }) => {
-     evt.preventDefault();
-     context.onCreateNonce();
-  }
+
+  const handleSubmit = (evt: { preventDefault: () => void }) => {
+    evt.preventDefault();
+    context.onCreateNonce();
+  };
 
   return (
     <button
@@ -24,6 +23,6 @@ const SubmissionButton = ({canSubmit}: Props) => {
       Confirm
     </button>
   );
- }
+};
 
- export default SubmissionButton;
+export default SubmissionButton;
