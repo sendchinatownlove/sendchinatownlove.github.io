@@ -14,7 +14,7 @@ const StoreDetails: React.SFC<Props> = ({ className, story }) => (
       <NavLink
         className={styles.navLink}
         activeClassName={styles['navLink--active']}
-        to={`#story`}
+        to={`#`}
       >
         Story
       </NavLink>

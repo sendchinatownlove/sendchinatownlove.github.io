@@ -20,9 +20,11 @@ interface Props {
 export const Modal = (props: Props) => {
   const { amount } = useModalPaymentState();
   const [isCustomAmount, setIsCustomAmount] = useState(false);
+  const [selected, setSelected] = useState('');
   const dispatch = useModalPaymentDispatch();
 
-  const handleAmount = (value: number, customAmount: boolean) => {
+  const handleAmount = (value: number, customAmount: boolean, text:string) => {
+    setSelected(text);
     setIsCustomAmount(customAmount);
     dispatch({ type: SET_AMOUNT, payload: value });
   };
@@ -44,8 +46,6 @@ export const Modal = (props: Props) => {
     { value: 100, text: '$100' },
   ];
 
-  const [selected, setSelected] = useState('');
-
   return (
     <form
       id="donation-form"
@@ -56,7 +56,7 @@ export const Modal = (props: Props) => {
       </button>
 
       <h2>{props.sellerName}</h2>
-      <p>Please select an amount or enter any amount</p>
+      <p>Please select an amount or enter a custom amount</p>
 
       <div className={styles.amountContainer}>
         <label htmlFor="select-amount">Select an amount </label>
@@ -71,8 +71,7 @@ export const Modal = (props: Props) => {
                   : 'modalButton--outlined'
               }
               onClick={(e) => {
-                setSelected(amount.text)
-                handleAmount(amount.value, false)
+                handleAmount(amount.value, false, amount.text);
               }}
             >
               {amount.text}
@@ -84,11 +83,10 @@ export const Modal = (props: Props) => {
         <input
           name="custom-amount"
           type="number"
-          onFocus={(e) => handleAmount(0, true)}
+          onFocus={(e) => handleAmount(0, true, "")}
           className={classnames(styles.customAmt, 'modalInput--input')}
           onChange={(e) => {
-            setSelected('')
-            handleAmount(parseInt(e.target.value), true)
+            handleAmount(parseInt(e.target.value), true, "");
           }}
           value={isCustomAmount ? amount : ''}
           placeholder="$"
