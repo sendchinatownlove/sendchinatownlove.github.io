@@ -42,11 +42,11 @@
 
 .storeInfo {
   order: 2;
-  grid-row: 2; 
+  grid-row: 2;
   margin: 20px 0;
 
   @include for-tablet-landscape-up {
-    order: 1; 
+    order: 1;
     grid-column: 1;
   }
   @include for-phone-only {

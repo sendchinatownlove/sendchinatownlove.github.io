@@ -14,6 +14,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
 
   return (
     <section className={classnames(styles.container)}>
+
       {
         <img
           src={seller.hero_image_url ? process.env.REACT_APP_BASE_URL + seller.hero_image_url : defaultStoreFront}
@@ -21,6 +22,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
           className={styles.merchantIllustration}
         />
       }
+
       <div className={styles.nationality}>{cuisineName}</div>
       <p>
         {locations &&
