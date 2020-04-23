@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import StoreDetails from '../StoreDetails';
 import classnames from 'classnames';
 import { Location, Seller } from '../../utilities';
+import defaultStoreFront from './misc-store.png';
 
 type Props = {
   seller: Seller;
@@ -13,17 +14,13 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
 
   return (
     <section className={classnames(styles.container)}>
-      <div className={styles.merchantIllustrationContainer}>
-        { 
-          seller.hero_image_url && (
-            <img 
-              src={seller.hero_image_url} 
-              alt={`${seller.name} Illustration`}
-              className={styles.merchantIllustration}
-            />
-          )
-        }
-      </div>
+      {
+        <img
+          src={seller.hero_image_url ? process.env.REACT_APP_BASE_URL + seller.hero_image_url : defaultStoreFront}
+          alt={`${seller.name} Illustration`}
+          className={styles.merchantIllustration}
+        />
+      }
       <div className={styles.nationality}>{cuisineName}</div>
       <p>
         {locations &&
