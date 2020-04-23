@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a02fc9dc2da898b28612698a502ee250",
+    "revision": "6583b03e72057c6186c43d06b845158d",
     "url": "/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/css/2.52f00974.chunk.css"
   },
   {
-    "revision": "531e5477cf7aabfd7e03",
+    "revision": "a37c4ebc3148ad239757",
     "url": "/static/css/main.95f8edaf.chunk.css"
   },
   {
@@ -20,16 +20,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/2.d9fd1fe4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "531e5477cf7aabfd7e03",
-    "url": "/static/js/main.8bdd0f42.chunk.js"
+    "revision": "a37c4ebc3148ad239757",
+    "url": "/static/js/main.c67f3534.chunk.js"
   },
   {
     "revision": "b991e9c21dba036bc800",
     "url": "/static/js/runtime-main.f7beece5.js"
   },
   {
-    "revision": "349de0ef47f1b994db493c4d3776c2d4",
-    "url": "/static/media/chinatown-logo.349de0ef.png"
+    "revision": "f9e716bafd5bcd4ef121111701cb48c5",
+    "url": "/static/media/chinatown-logo.f9e716ba.png"
   },
   {
     "revision": "4a2be72851ef3a703d4ed8cd4f1c3bd1",
