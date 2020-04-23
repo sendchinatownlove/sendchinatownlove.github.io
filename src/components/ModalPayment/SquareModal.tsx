@@ -154,7 +154,7 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
           {purchaseTypePhrase === 'Donation' ? (
             <p>
               By proceeding with your transaction, you understand that you are
-              making a donation to the {sellerName}. No goods or services were
+              making a donation to {sellerName}. No goods or services were
               exchanged for this donation.
             </p>
           ) : (
