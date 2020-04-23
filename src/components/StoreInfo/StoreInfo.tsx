@@ -13,10 +13,13 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
   const { summary, story, cuisineName, locations } = seller;
   return (
     <section className={classnames(styles.container)}>
-
       {
         <img
-          src={seller.hero_image_url ? process.env.REACT_APP_BASE_URL + seller.hero_image_url : defaultStoreFront}
+          src={
+            seller.hero_image_url
+              ? process.env.REACT_APP_BASE_URL + seller.hero_image_url
+              : defaultStoreFront
+          }
           alt={`${seller.name} Illustration`}
           className={styles.merchantIllustration}
         />

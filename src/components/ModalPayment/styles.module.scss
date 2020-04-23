@@ -13,12 +13,17 @@
 }
 
 .row,
-.inputRow {
+.inputRow,
+.termsAndConditions {
   display: flex;
   flex-direction: row;
   width: 100%;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.termsAndConditions:hover {
+  text-decoration: underline;
 }
 
 .checkbox {

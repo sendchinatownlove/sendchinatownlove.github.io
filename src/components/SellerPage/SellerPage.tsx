@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import HeroBanner from '../HeroBanner';
 import Footer from '../Footer';
-import { sampleMerchant } from './sample-merchant';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
@@ -52,12 +51,12 @@ const SellerPage: React.FC<{}> = () => {
               sellerName={seller.name}
               progressBarColor={seller.progress_bar_color}
               extraInfo={{
-              Type: seller.business_type,
-              Employees: seller.num_employees,
-              Founded: seller.founded_year,
-              Website: seller.website_url,
-              Menu: seller.menu_url
-            }}
+                Type: seller.business_type,
+                Employees: seller.num_employees,
+                Founded: seller.founded_year,
+                Website: seller.website_url,
+                Menu: seller.menu_url,
+              }}
               // TODO(jtmckibb): Should not crash here
               sellerId={id!}
             />

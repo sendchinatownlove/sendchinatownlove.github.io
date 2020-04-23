@@ -17,7 +17,7 @@ interface Props {
   sellerId: string;
   sellerName: string;
   progressBarColor: string;
-  extraInfo: { [prop: string]: any }
+  extraInfo: { [prop: string]: any };
 }
 
 interface State {
@@ -41,12 +41,20 @@ const OwnerPanel = (props: Props) => {
     return 100;
   };
 
+  const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
+    return props.extraInfo[current] != null;
+  });
+
   return (
     <section className={classnames(styles.container, props.className)}>
       <figure className={styles.ownerContainer}>
         <img
           className={styles.ownerImage}
-          src={props.imageSrc ? process.env.REACT_APP_BASE_URL + props.imageSrc : defaultOwnerImage}
+          src={
+            props.imageSrc
+              ? process.env.REACT_APP_BASE_URL + props.imageSrc
+              : defaultOwnerImage
+          }
           alt={props.ownerName}
         />
       </figure>
@@ -97,44 +105,45 @@ const OwnerPanel = (props: Props) => {
           </button>
         )}
       </div>
-      {Object.keys(props.extraInfo).length !== 0 ?
-        <div className = {styles.extraInfoContainer}>
-          {Object.keys(props.extraInfo).map((current) => {
+      {validExtraInfo !== [] ? (
+        <div className={styles.extraInfoContainer}>
+          {validExtraInfo.map((current) => {
             if (current === 'Website' || current === 'Menu') {
               return (
                 <>
-                  <p className={styles.extraInfoKey}>
+                  <p key={current} className={styles.extraInfoKey}>
                     {`${current}: `}
-                    <a className={styles.extraInfoValue} href={`http://${props.extraInfo[current]}`}>{props.extraInfo[current]}</a>
+                    <a
+                      className={styles.extraInfoValue}
+                      href={`http://${props.extraInfo[current]}`}
+                    >
+                      {props.extraInfo[current]}
+                    </a>
                   </p>
                 </>
-              )
-            }
-            else {
+              );
+            } else
               return (
                 <>
-                  <p className={styles.extraInfoKey}>
+                  <p key={current} className={styles.extraInfoKey}>
                     {`${current}: `}
                     <span className={styles.extraInfoValue}>
                       {props.extraInfo[current]}
                     </span>
                   </p>
                 </>
-              )
-            }
+              );
           })}
-        </div >
-        :
+        </div>
+      ) : (
         ''
-      }
-
+      )}
 
       <ModalBox
         purchaseType={purchaseType}
         sellerId={props.sellerId}
         sellerName={props.sellerName}
       />
-
 
       {/* hide extra info section until needed */}
       {/* <div className={styles.summaryContainer}>
@@ -173,7 +182,6 @@ const OwnerPanel = (props: Props) => {
         {/* https://www.npmjs.com/package/google-map-react */}
       </div>
     </section>
-
   );
 };
 
