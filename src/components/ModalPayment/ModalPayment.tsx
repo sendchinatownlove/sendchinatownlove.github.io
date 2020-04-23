@@ -116,7 +116,9 @@ const ModalPayment = ({
               className={styles.checkbox}
               value="Agree"
               onClick={checkAgreement}
-            > </input>
+            >
+              {' '}
+            </input>
             <label htmlFor="checkbox">
               I agree with the <b>Terms & Conditions</b>
             </label>
