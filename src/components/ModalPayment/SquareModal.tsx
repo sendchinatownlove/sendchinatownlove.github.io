@@ -87,7 +87,7 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
 
   const canSubmit = isChecked && name.length > 0 && email.length > 0;
   return (
-    <React.Fragment>
+    <div className={styles.container}>
       <h2>Complete your {purchaseTypePhrase.toLowerCase()}</h2>
       <p>Please add your payment information below</p>
 
@@ -111,9 +111,9 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
               name="email"
               type="email"
               className={classnames(
-                styles.label,
                 styles.email,
-                'modalInput--input'
+                'modalInput--input',
+                styles.label,
               )}
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -132,9 +132,15 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
           apiWrapper=""
         >
           <SimpleCard />
+          <div className="sq-error-message">
+            {errorMessages.map((errorMessage) => (
+              <li key={`sq-error-${errorMessage}`}>{errorMessage}</li>
+            ))}
+          </div>
+
           <br />
-          <h3>Checkout details</h3>
-          <span>
+          <h3 className={styles.text}>Checkout details</h3>
+          <span className={styles.text}>
             {' '}
             {purchaseTypePhrase} of <b>${amount}</b> to {sellerName}{' '}
           </span>
@@ -147,11 +153,11 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
               value="Agree"
               onClick={checkAgreement}
             />
-            <label htmlFor="checkbox">
+            <label htmlFor="checkbox" className={styles.text}>
               I agree with the <b>Terms & Conditions</b>
             </label>
           </div>
-          <p>
+          <p className={styles.text}>
             By proceeding with your purchase, you understand that the gift card
             is not redeemable for cash and can only be used at the merchant’s
             restaurant. All purchases are final. In the event that the merchant
@@ -161,7 +167,7 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
           <div className={styles.btnRow}>
             <button
               type="button"
-              className={'modalButton--back'}
+              className={classnames('modalButton--back', styles.backBtn)}
               onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 0 })}
             >
               ᐸ Back
@@ -169,13 +175,8 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
             <SubmissionButton canSubmit={canSubmit} />
           </div>
         </SquarePaymentForm>
-        <div className="sq-error-message">
-          {errorMessages.map((errorMessage) => (
-            <li key={`sq-error-${errorMessage}`}>{errorMessage}</li>
-          ))}
-        </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
