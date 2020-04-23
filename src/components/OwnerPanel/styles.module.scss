@@ -14,10 +14,16 @@ $container-size: 160px;
   margin: 6px 0;
 }
 
+.ownerImage {
+  width: 100%;
+  height: 100%;
+}
+
 .ownerContainer {
   width: $container-size;
   height: $container-size;
-  background-color: #c4c4c4;
+  // TODO(jmckibben): See if we really *need* this
+  // background-color: #c4c4c4;
   border-radius: 50%;
   overflow: hidden;
   margin-top: 25px;

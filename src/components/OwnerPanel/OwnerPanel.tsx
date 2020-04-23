@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import Modal from '../Modal';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import defaultOwnerImage from './assets/female.svg';
 
 interface Props {
   imageSrc: string;
@@ -44,7 +45,7 @@ const OwnerPanel = (props: Props) => {
       <figure className={styles.ownerContainer}>
         <img
           className={styles.ownerImage}
-          src={props.imageSrc}
+          src={props.imageSrc ? process.env.REACT_APP_BASE_URL + props.imageSrc : defaultOwnerImage}
           alt={props.ownerName}
         />
       </figure>

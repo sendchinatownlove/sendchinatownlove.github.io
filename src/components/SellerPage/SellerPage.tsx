@@ -50,7 +50,7 @@ const SellerPage: React.FC<{}> = () => {
               amountRaised={seller.amount_raised}
               targetAmount={seller.target_amount}
               ownerName={seller.owner_name}
-              imageSrc={sampleMerchant.ownerInfo.imageSrc}
+              imageSrc={seller.owner_image_url}
               sellerName={seller.name}
               progressBarColor={seller.progress_bar_color}
               // TODO(jtmckibb): Should not crash here
