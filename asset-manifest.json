@@ -1,30 +1,31 @@
 {
   "files": {
-    "main.css": "/static/css/main.95f8edaf.chunk.css",
-    "main.js": "/static/js/main.8b45f3e3.chunk.js",
-    "main.js.map": "/static/js/main.8b45f3e3.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.f7beece5.js",
-    "runtime-main.js.map": "/static/js/runtime-main.f7beece5.js.map",
+    "main.css": "/static/css/main.6a422699.chunk.css",
+    "main.js": "/static/js/main.4e4b28b7.chunk.js",
+    "main.js.map": "/static/js/main.4e4b28b7.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.242ae121.js",
+    "runtime-main.js.map": "/static/js/runtime-main.242ae121.js.map",
     "static/css/2.52f00974.chunk.css": "/static/css/2.52f00974.chunk.css",
-    "static/js/2.d9fd1fe4.chunk.js": "/static/js/2.d9fd1fe4.chunk.js",
-    "static/js/2.d9fd1fe4.chunk.js.map": "/static/js/2.d9fd1fe4.chunk.js.map",
+    "static/js/2.bb86ba02.chunk.js": "/static/js/2.bb86ba02.chunk.js",
+    "static/js/2.bb86ba02.chunk.js.map": "/static/js/2.bb86ba02.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.1c20f23bdbe3196ef0ba1c555b83e307.js": "/precache-manifest.1c20f23bdbe3196ef0ba1c555b83e307.js",
+    "precache-manifest.edf291a9cf6f4d4208315defbd34f4f0.js": "/precache-manifest.edf291a9cf6f4d4208315defbd34f4f0.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.52f00974.chunk.css.map": "/static/css/2.52f00974.chunk.css.map",
-    "static/css/main.95f8edaf.chunk.css.map": "/static/css/main.95f8edaf.chunk.css.map",
-    "static/js/2.d9fd1fe4.chunk.js.LICENSE.txt": "/static/js/2.d9fd1fe4.chunk.js.LICENSE.txt",
+    "static/css/main.6a422699.chunk.css.map": "/static/css/main.6a422699.chunk.css.map",
+    "static/js/2.bb86ba02.chunk.js.LICENSE.txt": "/static/js/2.bb86ba02.chunk.js.LICENSE.txt",
     "static/media/chinatown-logo.png": "/static/media/chinatown-logo.f9e716ba.png",
     "static/media/styles.module.scss": "/static/media/chinatown-splash.67dd7391.png",
     "static/media/female.svg": "/static/media/female.46412c79.svg",
     "static/media/logo.svg": "/static/media/logo.909f1479.svg",
+    "static/media/misc-store.png": "/static/media/misc-store.7e1a70b6.png",
     "static/media/temp.png": "/static/media/temp.6758359b.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.f7beece5.js",
+    "static/js/runtime-main.242ae121.js",
     "static/css/2.52f00974.chunk.css",
-    "static/js/2.d9fd1fe4.chunk.js",
-    "static/css/main.95f8edaf.chunk.css",
-    "static/js/main.8b45f3e3.chunk.js"
+    "static/js/2.bb86ba02.chunk.js",
+    "static/css/main.6a422699.chunk.css",
+    "static/js/main.4e4b28b7.chunk.js"
   ]
 }
