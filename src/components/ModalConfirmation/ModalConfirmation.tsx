@@ -13,7 +13,8 @@ const ModalConfirmation: React.SFC = () => {
     <div className={styles.paymentContainer}>
       <h2>Thank you!</h2>
       <p>
-        We appreciate your support.<br/>
+        We appreciate your support.
+        <br />
         Please check your email for your receipt.
       </p>
 

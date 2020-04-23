@@ -34,6 +34,11 @@ const OwnerPanel = (props: Props) => {
     setPurchaseType(event.target.value);
   };
 
+  const progressWidth = (raised: number, target: number) => {
+    if (raised < target) return (raised / target) * 100;
+    return 100;
+  };
+
   return (
     <section className={classnames(styles.container, props.className)}>
       <figure className={styles.ownerContainer}>
@@ -51,7 +56,10 @@ const OwnerPanel = (props: Props) => {
             <div
               className={styles.myBar}
               style={{
-                width: `${(props.amountRaised / props.targetAmount) * 100}%`,
+                width: `${progressWidth(
+                  props.amountRaised,
+                  props.targetAmount
+                )}%`,
                 backgroundColor: props.progressBarColor,
                 //defaults to default color if no color is passed in
               }}

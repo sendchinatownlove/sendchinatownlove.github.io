@@ -14,15 +14,13 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
   return (
     <section className={classnames(styles.container)}>
       <div className={styles.merchantIllustrationContainer}>
-        { 
-          seller.hero_image_url && (
-            <img 
-              src={seller.hero_image_url} 
-              alt={`${seller.name} Illustration`}
-              className={styles.merchantIllustration}
-            />
-          )
-        }
+        {seller.hero_image_url && (
+          <img
+            src={seller.hero_image_url}
+            alt={`${seller.name} Illustration`}
+            className={styles.merchantIllustration}
+          />
+        )}
       </div>
       <div className={styles.nationality}>{cuisineName}</div>
       <p>
