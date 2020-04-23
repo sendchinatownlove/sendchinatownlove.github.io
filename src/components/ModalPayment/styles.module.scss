@@ -13,12 +13,17 @@
 }
 
 .row,
-.inputRow {
+.inputRow,
+.tc {
   display: flex;
   flex-direction: row;
   width: 100%;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.tc:hover{
+  text-decoration: underline;
 }
 
 .checkbox {

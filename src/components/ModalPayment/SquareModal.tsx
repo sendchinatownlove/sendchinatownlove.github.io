@@ -139,17 +139,19 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
             {purchaseTypePhrase} of <b>${amount}</b> to {sellerName}{' '}
           </span>
           <p />
-          <div className={styles.row}>
-            <input
-              type="checkbox"
-              name="checkbox"
-              className={styles.checkbox}
-              value="Agree"
-              onClick={checkAgreement}
-            />
-            <label htmlFor="checkbox">
-              I agree with the <b>Terms & Conditions</b>
+          <div>
+            <label className={styles.tc}>
+              <input
+                type="checkbox"
+                id='checkbox'
+                name="checkbox"
+                className={styles.checkbox}
+                value="Agree"
+                onClick={checkAgreement}
+              />
+              <span>I agree with the {' '}<b>Terms & Conditions</b></span>
             </label>
+
           </div>
           {purchaseTypePhrase === 'Donation' ? (
             <p>
