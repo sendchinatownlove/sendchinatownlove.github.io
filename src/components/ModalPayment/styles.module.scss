@@ -14,7 +14,7 @@
 
 .row,
 .inputRow,
-.tc {
+.termsAndConditions {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -22,7 +22,7 @@
   margin-bottom: 10px;
 }
 
-.tc:hover {
+.termsAndConditions:hover {
   text-decoration: underline;
 }
 
