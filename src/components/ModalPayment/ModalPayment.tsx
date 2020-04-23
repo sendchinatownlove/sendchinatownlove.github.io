@@ -104,6 +104,7 @@ const ModalPayment = ({
             </div>
           </div>
           <CardSection /> <br />
+
           <h3>Checkout details</h3>
           <span>
             {purchaseTypePhrase} of <b>${amount}</b> to Shunfa Bakery

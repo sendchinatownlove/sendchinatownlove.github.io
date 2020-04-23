@@ -17,6 +17,7 @@ interface Props {
   sellerId: string;
   sellerName: string;
   progressBarColor: string;
+  extraInfo: { [prop: string]: any }
 }
 
 interface State {
@@ -96,12 +97,44 @@ const OwnerPanel = (props: Props) => {
           </button>
         )}
       </div>
+      {Object.keys(props.extraInfo).length !== 0 ?
+        <div className = {styles.extraInfoContainer}>
+          {Object.keys(props.extraInfo).map((current) => {
+            if (current === 'Website' || current === 'Menu') {
+              return (
+                <>
+                  <p className={styles.extraInfoKey}>
+                    {`${current}: `}
+                    <a className={styles.extraInfoValue} href={`http://${props.extraInfo[current]}`}>{props.extraInfo[current]}</a>
+                  </p>
+                </>
+              )
+            }
+            else {
+              return (
+                <>
+                  <p className={styles.extraInfoKey}>
+                    {`${current}: `}
+                    <span className={styles.extraInfoValue}>
+                      {props.extraInfo[current]}
+                    </span>
+                  </p>
+                </>
+              )
+            }
+          })}
+        </div >
+        :
+        ''
+      }
+
 
       <ModalBox
         purchaseType={purchaseType}
         sellerId={props.sellerId}
         sellerName={props.sellerName}
       />
+
 
       {/* hide extra info section until needed */}
       {/* <div className={styles.summaryContainer}>
@@ -140,6 +173,7 @@ const OwnerPanel = (props: Props) => {
         {/* https://www.npmjs.com/package/google-map-react */}
       </div>
     </section>
+
   );
 };
 
