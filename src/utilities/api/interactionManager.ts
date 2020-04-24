@@ -76,7 +76,7 @@ export const makeSquarePayment = async (
   payment: SquarePaymentParams,
   buyer: Buyer
 ) => {
-  const { email } = buyer;
+  const { email, name } = buyer;
 
   return await axios
     .post(
@@ -86,6 +86,7 @@ export const makeSquarePayment = async (
         nonce,
         line_items: [payment],
         email,
+        name,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
