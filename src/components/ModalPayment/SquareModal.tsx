@@ -16,7 +16,7 @@ import {
   useModalPaymentState,
   useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { SET_MODAL_VIEW, CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 type Props = {
   purchaseType: string;
@@ -64,20 +64,29 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
       })
       .catch((err) => {
         if (err.response) {
+
           const responseErrors = err.response.data.errors;
-          const newErrors =
-            errorMessages.length > 0
-              ? [
-                  ...errorMessages,
-                  responseErrors.map(
-                    (error: { detail: string }) => error.detail
-                  ),
-                ]
-              : responseErrors.map((error: { detail: string }) => error.detail);
+          // const newErrors =
+          //   errorMessages.length > 0
+          //     ? [
+          //         ...errorMessages,
+          //         responseErrors.map(
+          //           (error: { detail: string }) => error.detail
+          //         ),
+          //       ]
+          //     : responseErrors.map((error: { detail: string }) => error.detail);
+          const newErrors = responseErrors.length > 0 ? responseErrors.map((error: { detail: string }) => error.detail) : [];
           setErrorsMessages(newErrors);
         }
       });
   };
+
+
+  const closeModal = (e: any) => {
+    e.preventDefault();
+    dispatch({ type: CLOSE_MODAL, payload: undefined });
+  };
+
 
   const applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID
     ? process.env.REACT_APP_SQUARE_APPLICATION_ID
@@ -89,7 +98,13 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
   const canSubmit = isChecked && name.length > 0 && email.length > 0;
   return (
     <div className={styles.container}>
-      <h2>Complete your {purchaseTypePhrase.toLowerCase()}</h2>
+      <div>
+
+        <h2>Complete your {purchaseTypePhrase.toLowerCase()}</h2>
+        <button className={'closeButton--close'} onClick={closeModal}>
+          ×
+        </button>
+      </div>
       <p>Please add your payment information below</p>
 
       <div className={styles.paymentContainer}>
