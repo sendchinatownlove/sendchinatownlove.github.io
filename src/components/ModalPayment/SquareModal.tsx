@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
+import { Checkbox } from '@material-ui/core';
 
 import { SquarePaymentForm, SimpleCard } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
@@ -147,12 +148,9 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
           <p />
           <div>
             <label className={styles.termsAndConditions}>
-              <input
-                type="checkbox"
-                id="checkbox"
-                name="checkbox"
-                className={styles.checkbox}
-                value="Agree"
+              <Checkbox
+                value="checkedA"
+                inputProps={{ 'aria-label': 'Checkbox A' }}
                 onClick={checkAgreement}
               />
               <span>
