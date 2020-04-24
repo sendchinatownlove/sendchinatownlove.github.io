@@ -67,11 +67,11 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
           const newErrors =
             errorMessages.length > 0
               ? [
-                ...errorMessages,
-                responseErrors.map(
-                  (error: { detail: string }) => error.detail
-                ),
-              ]
+                  ...errorMessages,
+                  responseErrors.map(
+                    (error: { detail: string }) => error.detail
+                  ),
+                ]
               : responseErrors.map((error: { detail: string }) => error.detail);
           setErrorsMessages(newErrors);
         }
@@ -167,14 +167,14 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
               exchanged for this donation.
             </p>
           ) : (
-              <p>
-                By proceeding with your purchase, you understand that the gift
+            <p>
+              By proceeding with your purchase, you understand that the gift
               card is not redeemable for cash and can only be used at{' '}
-                {sellerName}. All purchases are final. In the event that the
+              {sellerName}. All purchases are final. In the event that the
               merchant is no longer open at the time of redemption, Send
               Chinatown Love Inc. will not be able to refund your purchase.
-              </p>
-            )}
+            </p>
+          )}
           <div className={styles.btnRow}>
             <button
               type="button"
