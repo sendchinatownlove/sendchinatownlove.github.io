@@ -91,7 +91,6 @@ export const makeSquarePayment = async (
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
     .then(async (res) => {
-      console.log('res: ', res);
       return res;
     })
     .catch((err) => {

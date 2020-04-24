@@ -6,6 +6,7 @@ import { SquarePaymentForm, SimpleCard } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
 import styles from './styles.module.scss';
 import SubmissionButton from './SubmissionButton';
+import {SquareErrors, hasKey} from '../../consts';
 import {
   makeSquarePayment,
   SquarePaymentParams,
@@ -75,7 +76,14 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
           //         ),
           //       ]
           //     : responseErrors.map((error: { detail: string }) => error.detail);
-          const newErrors = responseErrors.length > 0 ? responseErrors.map((error: { detail: string }) => error.detail) : [];
+
+          const newErrors = responseErrors.length > 0 ? responseErrors.map((error: { code: string, detail: string }) => {
+            if (hasKey(SquareErrors, error.code)){
+              return SquareErrors[error.code]
+            } else {
+              return error.detail
+            }
+          }) : [];
           setErrorsMessages(newErrors);
         }
       });
