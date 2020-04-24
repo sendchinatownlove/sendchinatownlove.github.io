@@ -51,11 +51,13 @@ export const Modal = (props: Props) => {
       id="donation-form"
       className={classnames(styles.donationsContainer, 'modalForm--form')}
     >
-      <button className={'closeButton--close'} onClick={closeModal}>
-        ×
-      </button>
-
-      <h2>{props.sellerName}</h2>
+      <div>
+        <h2>{props.sellerName}</h2>
+        <button className={'closeButton--close'} onClick={closeModal}>
+          ×
+        </button>
+      </div> 
+      
       <p>Please select an amount or enter a custom amount</p>
 
       <div className={styles.amountContainer}>

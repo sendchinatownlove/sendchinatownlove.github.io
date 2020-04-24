@@ -6,9 +6,9 @@ import { SquareModal } from '../ModalPayment';
 import ModalConfirmation from '../ModalConfirmation';
 import {
   useModalPaymentState,
-  useModalPaymentDispatch,
+  // useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext/context';
-import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
+// import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 interface Props {
   purchaseType: string;
@@ -18,12 +18,12 @@ interface Props {
 
 export const Modal = (props: Props) => {
   const { modalView } = useModalPaymentState();
-  const dispatch = useModalPaymentDispatch();
+  // const dispatch = useModalPaymentDispatch();
 
-  const closeModal = (e: any) => {
-    e.preventDefault();
-    dispatch({ type: CLOSE_MODAL, payload: undefined });
-  };
+  // const closeModal = (e: any) => {
+  //   e.preventDefault();
+  //   dispatch({ type: CLOSE_MODAL, payload: undefined });
+  // };
 
   return (
     <div
@@ -31,9 +31,9 @@ export const Modal = (props: Props) => {
       className={classnames(styles.donationsContainer, 'modalForm--form')}
       style={{ display: modalView > -1 ? 'block' : 'none' }}
     >
-      <button className={'closeButton--close'} onClick={closeModal}>
+      {/* <button className={'closeButton--close'} onClick={closeModal}>
         ×
-      </button>
+      </button> */}
       {modalView === 0 && <ModalAmount {...props} />}
       {modalView === 1 && <SquareModal {...props} />}
       {modalView === 2 && <ModalConfirmation />}
