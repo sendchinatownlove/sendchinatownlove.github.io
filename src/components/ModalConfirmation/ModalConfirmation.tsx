@@ -10,12 +10,10 @@ const ModalConfirmation: React.SFC = () => {
   const dispatch = useModalPaymentDispatch();
 
   return (
-    <div className={styles.paymentContainer}>
+    <div className={styles.container}>
       <h2>Thank you!</h2>
       <p>
-        We appreciate your support.
-        <br />
-        Please check your email for your receipt.
+        We appreciate your support. Please check your email for your receipt.
       </p>
 
       <img className={styles.image} src={confirmationPic} alt="Logo" />

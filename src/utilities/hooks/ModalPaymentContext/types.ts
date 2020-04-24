@@ -16,7 +16,7 @@ export type ModalPaymentState = {
 };
 
 export const defaultState: ModalPaymentState = {
-  amount: "",
+  amount: '',
   customInput: false,
   modalView: -1,
 };
