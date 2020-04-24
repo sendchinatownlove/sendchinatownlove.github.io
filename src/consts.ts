@@ -1,4 +1,4 @@
-const Errors = {
+const SquareErrors = {
   BAD_EXPIRATION: 'The card expiration date is either missing or incorrectly formatted.',
   INVALID_ACCOUNT: 'The card issuer was not able to locate account on record.',
   CARDHOLDER_INSUFFICIENT_PERMISSIONS: '	The card issuer has declined the transaction due to restrictions on where the card can be used.',
@@ -25,4 +25,5 @@ const Errors = {
   CARD_DECLINED_VERIFICATION_REQUIRED: 'This payment requires verification. For more information, see SCA Overview.',
   GIFT_CARD_AVAILABLE_AMOUNT: 'Gift card does not have sufficient balance for requested amount and tip.',
 };
-export default Errors;
+
+export {SquareErrors}
