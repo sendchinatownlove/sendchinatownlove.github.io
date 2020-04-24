@@ -63,16 +63,9 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
       })
       .catch((err) => {
         if (err.response) {
+
           const responseErrors = err.response.data.errors;
-          const newErrors =
-            errorMessages.length > 0
-              ? [
-                ...errorMessages,
-                responseErrors.map(
-                  (error: { detail: string }) => error.detail
-                ),
-              ]
-              : responseErrors.map((error: { detail: string }) => error.detail);
+          const newErrors = responseErrors.map((error: { detail: string }) => error.detail);
           setErrorsMessages(newErrors);
         }
       });
