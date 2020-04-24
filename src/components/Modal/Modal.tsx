@@ -36,7 +36,7 @@ export const Modal = (props: Props) => {
       </button>
       {modalView === 0 && <ModalAmount {...props} />}
       {modalView === 1 && <SquareModal {...props} />}
-      {modalView === 2 && <ModalConfirmation />}
+      {modalView === 2 && <ModalConfirmation {...props} />}
     </div>
   );
 };
