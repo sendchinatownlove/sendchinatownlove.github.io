@@ -10,13 +10,13 @@
  */
 
 export type ModalPaymentState = {
-  amount: number;
+  amount: string;
   customInput: boolean;
   modalView: number;
 };
 
 export const defaultState: ModalPaymentState = {
-  amount: 0,
+  amount: "",
   customInput: false,
   modalView: -1,
 };
