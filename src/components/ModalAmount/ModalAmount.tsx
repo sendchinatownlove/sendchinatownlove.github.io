@@ -90,9 +90,9 @@ export const Modal = (props: Props) => {
           }}
           value={isCustomAmount ? amount : ''}
           placeholder="$"
-          min="6"
+          min="5"
         />
-        {amount <= 5 && isCustomAmount && (
+        {amount < 5 && isCustomAmount && (
           <div className={styles.errorMessage}>Minimum donation amount: $5</div>
         )}
       </div>
@@ -101,7 +101,7 @@ export const Modal = (props: Props) => {
         type="button"
         className={classnames(styles.nextBtn, 'modalButton--filled')}
         onClick={openModal}
-        disabled={amount <= 5}
+        disabled={amount < 5}
       >
         Next
       </button>
