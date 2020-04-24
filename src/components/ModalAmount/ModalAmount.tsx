@@ -22,6 +22,8 @@ export const Modal = (props: Props) => {
   const [isCustomAmount, setIsCustomAmount] = useState(false);
   const [selected, setSelected] = useState('');
   const dispatch = useModalPaymentDispatch();
+  const minAmount = 5;
+  const maxAmount = 10000;
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
     setSelected(text);
@@ -91,9 +93,21 @@ export const Modal = (props: Props) => {
           value={isCustomAmount ? amount : ''}
           placeholder="$"
           min="5"
+          max="10000"
         />
-        {Number(amount) < 5 && isCustomAmount && (
-          <div className={styles.errorMessage}>Minimum donation amount: $5</div>
+        {Number(amount) < minAmount && isCustomAmount && (
+          <div className={styles.errorMessage}>
+            Minimum{' '}
+            {props.purchaseType === 'gift_card' ? 'gift card' : 'donation'}{' '}
+            amount: $5
+          </div>
+        )}
+        {Number(amount) > maxAmount && isCustomAmount && (
+          <div className={styles.errorMessage}>
+            Maximum{' '}
+            {props.purchaseType === 'gift_card' ? 'gift card' : 'donation'}{' '}
+            amount: $10000
+          </div>
         )}
       </div>
 
@@ -101,7 +115,7 @@ export const Modal = (props: Props) => {
         type="button"
         className={classnames(styles.nextBtn, 'modalButton--filled')}
         onClick={openModal}
-        disabled={Number(amount) < 5}
+        disabled={Number(amount) < minAmount || Number(amount) > maxAmount}
       >
         Next
       </button>
