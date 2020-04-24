@@ -23,7 +23,7 @@ export const Modal = (props: Props) => {
   const [selected, setSelected] = useState('');
   const dispatch = useModalPaymentDispatch();
 
-  const handleAmount = (value: number, customAmount: boolean, text:string) => {
+  const handleAmount = (value: number, customAmount: boolean, text: string) => {
     setSelected(text);
     setIsCustomAmount(customAmount);
     dispatch({ type: SET_AMOUNT, payload: value });
@@ -83,10 +83,10 @@ export const Modal = (props: Props) => {
         <input
           name="custom-amount"
           type="number"
-          onFocus={(e) => handleAmount(0, true, "")}
+          onFocus={(e) => handleAmount(0, true, '')}
           className={classnames(styles.customAmt, 'modalInput--input')}
           onChange={(e) => {
-            handleAmount(parseInt(e.target.value), true, "");
+            handleAmount(parseInt(e.target.value), true, '');
           }}
           value={isCustomAmount ? amount : ''}
           placeholder="$"

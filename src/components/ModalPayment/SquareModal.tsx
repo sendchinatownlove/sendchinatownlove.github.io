@@ -113,7 +113,7 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
               className={classnames(
                 styles.email,
                 'modalInput--input',
-                styles.label,
+                styles.label
               )}
               onChange={(e) => setEmail(e.target.value)}
               value={email}
