@@ -56,7 +56,7 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
 
     const buyer: Buyer = { name, email, nonce };
 
-    return makeSquarePayment(nonce, payment, buyer)
+    return makeSquarePayment(nonce, payment, buyer, name)
       .then((res) => {
         if (res.status === 200) {
           dispatch({ type: SET_MODAL_VIEW, payload: 2 });
