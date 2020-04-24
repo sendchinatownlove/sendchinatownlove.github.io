@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import HeroBanner from '../HeroBanner';
 import Footer from '../Footer';
-import { sampleMerchant } from './sample-merchant';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
@@ -19,12 +18,10 @@ const SellerPage: React.FC<{}> = () => {
     const result = id && (await getSeller(id));
     setSeller(result.data);
   };
-
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   // TODO(ArtyEmsee): handle actual null states and loading
   return seller ? (
     <div className={styles.container}>
@@ -39,6 +36,7 @@ const SellerPage: React.FC<{}> = () => {
               cuisineName: seller.cuisine_name,
               story: seller.story,
               summary: seller.summary,
+              hero_image_url: seller.hero_image_url,
             }}
           />
           <ModalPaymentProvider>
@@ -49,9 +47,16 @@ const SellerPage: React.FC<{}> = () => {
               amountRaised={seller.amount_raised}
               targetAmount={seller.target_amount}
               ownerName={seller.owner_name}
-              imageSrc={sampleMerchant.ownerInfo.imageSrc}
+              imageSrc={seller.owner_image_url}
               sellerName={seller.name}
               progressBarColor={seller.progress_bar_color}
+              extraInfo={{
+                Type: seller.business_type,
+                Employees: seller.num_employees,
+                Founded: seller.founded_year,
+                Website: seller.website_url,
+                Menu: seller.menu_url,
+              }}
               // TODO(jtmckibb): Should not crash here
               sellerId={id!}
             />

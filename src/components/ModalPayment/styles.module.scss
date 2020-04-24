@@ -1,5 +1,5 @@
 .container {
-  height: 500px;
+  height: 550px;
   font-size: 15px;
   overflow-y: scroll;
   text-align: justify;
@@ -15,12 +15,17 @@
 }
 
 .row,
-.inputRow {
+.inputRow,
+.termsAndConditions {
   display: flex;
   flex-direction: row;
   width: 50%;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.termsAndConditions:hover {
+  text-decoration: underline;
 }
 
 .inputRow {

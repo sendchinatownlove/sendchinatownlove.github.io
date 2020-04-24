@@ -44,6 +44,7 @@ export type Seller = {
   name: string;
   summary: string;
   story: string;
+  hero_image_url: string;
 };
 
 export type BrowsePageSeller = {

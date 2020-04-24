@@ -11,8 +11,12 @@ const ModalConfirmation: React.SFC = () => {
 
   return (
     <div className={styles.paymentContainer}>
-      <h2>Thank you for your donation!</h2>
-      <p>We appreciate your support for small businesses</p>
+      <h2>Thank you!</h2>
+      <p>
+        We appreciate your support.
+        <br />
+        Please check your email for your receipt.
+      </p>
 
       <img className={styles.image} src={confirmationPic} alt="Logo" />
 

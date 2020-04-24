@@ -1,4 +1,4 @@
-import avatar from './images/female.svg';
+import avatar from '/assets/female.svg';
 
 export const sampleMerchant = {
   storeInfo: {

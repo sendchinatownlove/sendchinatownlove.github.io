@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import Modal from '../Modal';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import defaultOwnerImage from './assets/female.svg';
 
 interface Props {
   imageSrc: string;
@@ -16,6 +17,7 @@ interface Props {
   sellerId: string;
   sellerName: string;
   progressBarColor: string;
+  extraInfo: { [prop: string]: any };
 }
 
 interface State {
@@ -34,12 +36,25 @@ const OwnerPanel = (props: Props) => {
     setPurchaseType(event.target.value);
   };
 
+  const progressWidth = (raised: number, target: number) => {
+    if (raised < target) return (raised / target) * 100;
+    return 100;
+  };
+
+  const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
+    return props.extraInfo[current] != null;
+  });
+
   return (
     <section className={classnames(styles.container, props.className)}>
       <figure className={styles.ownerContainer}>
         <img
           className={styles.ownerImage}
-          src={props.imageSrc}
+          src={
+            props.imageSrc
+              ? process.env.REACT_APP_BASE_URL + props.imageSrc
+              : defaultOwnerImage
+          }
           alt={props.ownerName}
         />
       </figure>
@@ -51,7 +66,10 @@ const OwnerPanel = (props: Props) => {
             <div
               className={styles.myBar}
               style={{
-                width: `${(props.amountRaised / props.targetAmount) * 100}%`,
+                width: `${progressWidth(
+                  props.amountRaised,
+                  props.targetAmount
+                )}%`,
                 backgroundColor: props.progressBarColor,
                 //defaults to default color if no color is passed in
               }}
@@ -87,6 +105,39 @@ const OwnerPanel = (props: Props) => {
           </button>
         )}
       </div>
+      {validExtraInfo !== [] ? (
+        <div className={styles.extraInfoContainer}>
+          {validExtraInfo.map((current) => {
+            if (current === 'Website' || current === 'Menu') {
+              return (
+                <>
+                  <p key={current} className={styles.extraInfoKey}>
+                    {`${current}: `}
+                    <a
+                      className={styles.extraInfoValue}
+                      href={`http://${props.extraInfo[current]}`}
+                    >
+                      {props.extraInfo[current]}
+                    </a>
+                  </p>
+                </>
+              );
+            } else
+              return (
+                <>
+                  <p key={current} className={styles.extraInfoKey}>
+                    {`${current}: `}
+                    <span className={styles.extraInfoValue}>
+                      {props.extraInfo[current]}
+                    </span>
+                  </p>
+                </>
+              );
+          })}
+        </div>
+      ) : (
+        ''
+      )}
 
       <ModalBox
         purchaseType={purchaseType}
