@@ -65,7 +65,6 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName, idempotentKey }: Pro
     return makeSquarePayment(nonce, payment, buyer)
       .then((res) => {
         if (res.status === 200) {
-          console.log('testing', payment.idempotentKey)
           dispatch({ type: SET_MODAL_VIEW, payload: 2 });
         }
       })
