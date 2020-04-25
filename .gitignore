@@ -4,8 +4,9 @@ artifacts.zip
 /coverage
 
 # Generated CMP data
-static/src/javascripts/projects/commercial/modules/cmp/vendorlist.js
-static/vendor/data/cmp_vendorlist.json
+static/*
+precache-manifest.*
+service-worker.js
 
 *.min.css
 *.min.css.map
