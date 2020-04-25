@@ -17,7 +17,7 @@ interface Props {
   sellerName: string;
 }
 
-const idempotency_key = uuid();
+const idempotencyKey = uuid();
 
 export const Modal = (props: Props) => {
   const { modalView } = useModalPaymentState();
@@ -38,7 +38,7 @@ export const Modal = (props: Props) => {
         ×
       </button> */}
       {modalView === 0 && <ModalAmount {...props} />}
-      {modalView === 1 && <SquareModal {...props} idempotency_key={idempotency_key}/>}
+      {modalView === 1 && <SquareModal {...props} idempotencyKey={idempotencyKey}/>}
       {modalView === 2 && <ModalConfirmation {...props} />}
     </div>
   );
