@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import { v4 as uuid } from 'uuid';
 import styles from './styles.module.scss';
 import ModalAmount from '../ModalAmount';
 import { SquareModal } from '../ModalPayment';
@@ -15,6 +16,8 @@ interface Props {
   sellerId: string;
   sellerName: string;
 }
+
+const idempotencyKey = uuid();
 
 export const Modal = (props: Props) => {
   const { modalView } = useModalPaymentState();
@@ -35,7 +38,7 @@ export const Modal = (props: Props) => {
         ×
       </button> */}
       {modalView === 0 && <ModalAmount {...props} />}
-      {modalView === 1 && <SquareModal {...props} />}
+      {modalView === 1 && <SquareModal {...props} idempotencyKey={idempotencyKey}/>}
       {modalView === 2 && <ModalConfirmation {...props} />}
     </div>
   );
