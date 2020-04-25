@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 import ModalAmount from '../ModalAmount';
 import { SquareModal } from '../ModalPayment';
 import ModalConfirmation from '../ModalConfirmation';
+import ModalBilling from '../ModalBilling';
 import {
   useModalPaymentState,
   // useModalPaymentDispatch,
@@ -38,8 +39,9 @@ export const Modal = (props: Props) => {
         ×
       </button> */}
       {modalView === 0 && <ModalAmount {...props} />}
-      {modalView === 1 && <SquareModal {...props} idempotencyKey={idempotencyKey}/>}
-      {modalView === 2 && <ModalConfirmation {...props} />}
+      {modalView === 1 && <ModalBilling {...props} />}
+      {modalView === 2 && <SquareModal {...props} idempotencyKey={idempotencyKey}/>}
+      {modalView === 3 && <ModalConfirmation {...props} />}
     </div>
   );
 };
