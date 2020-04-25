@@ -12,7 +12,7 @@ export type SquarePaymentParams = {
   item_type: string;
   quantity: number;
   seller_id: string;
-  idempotencyKey: string;
+  idempotency_key: string;
 };
 
 export type Location = {

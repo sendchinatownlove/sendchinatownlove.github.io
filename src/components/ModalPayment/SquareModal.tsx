@@ -26,10 +26,10 @@ type Props = {
   purchaseType: string;
   sellerId: string;
   sellerName: string;
-  idempotencyKey: string;
+  idempotency_key: string;
 };
 
-const ModalPayment = ({ purchaseType, sellerId, sellerName, idempotencyKey }: Props) => {
+const ModalPayment = ({ purchaseType, sellerId, sellerName, idempotency_key }: Props) => {
   const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
 
@@ -57,7 +57,7 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName, idempotencyKey }: Pr
       item_type: purchaseType,
       quantity: 1,
       seller_id: sellerId,
-      idempotencyKey: idempotencyKey,
+      idempotency_key: idempotency_key,
     };
 
     const buyer: Buyer = { name, email, nonce };
