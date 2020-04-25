@@ -88,7 +88,7 @@ export const makeSquarePayment = async (
         line_items: [payment],
         email,
         name,
-		seller_id: sellerId
+        seller_id: sellerId,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
