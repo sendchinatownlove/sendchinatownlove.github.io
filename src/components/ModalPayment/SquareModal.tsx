@@ -22,9 +22,10 @@ type Props = {
   purchaseType: string;
   sellerId: string;
   sellerName: string;
+  idempotentKey: string;
 };
 
-const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
+const ModalPayment = ({ purchaseType, sellerId, sellerName, idempotentKey }: Props) => {
   const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
 
@@ -52,6 +53,7 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
       item_type: purchaseType,
       quantity: 1,
       seller_id: sellerId,
+      idempotentKey: idempotentKey,
     };
 
     const buyer: Buyer = { name, email, nonce };
@@ -59,6 +61,7 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName }: Props) => {
     return makeSquarePayment(nonce, payment, buyer)
       .then((res) => {
         if (res.status === 200) {
+          console.log('testing', payment.idempotentKey)
           dispatch({ type: SET_MODAL_VIEW, payload: 2 });
         }
       })
