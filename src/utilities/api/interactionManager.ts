@@ -86,12 +86,11 @@ export const makeSquarePayment = async (
         nonce,
         line_items: [payment],
         email,
-        name
+        name,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
     .then(async (res) => {
-      console.log('res: ', res);
       return res;
     })
     .catch((err) => {
