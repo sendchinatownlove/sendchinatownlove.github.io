@@ -57,10 +57,9 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName, idempotencyKey }: Pr
       item_type: purchaseType,
       quantity: 1,
       seller_id: sellerId,
-      idempotency_key: idempotencyKey,
     };
 
-    const buyer: Buyer = { name, email, nonce };
+    const buyer: Buyer = { name, email, nonce, idempotency_key: idempotencyKey, };
 
     return makeSquarePayment(nonce, payment, buyer)
       .then((res) => {
