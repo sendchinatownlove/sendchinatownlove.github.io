@@ -61,7 +61,6 @@ const ModalPayment = ({
       currency: 'usd',
       item_type: purchaseType,
       quantity: 1,
-      seller_id: sellerId,
     };
 
     const buyer: Buyer = {
@@ -71,7 +70,7 @@ const ModalPayment = ({
       idempotency_key: idempotencyKey,
     };
 
-    return makeSquarePayment(nonce, payment, buyer)
+    return makeSquarePayment(nonce, sellerId, payment, buyer)
       .then((res) => {
         if (res.status === 200) {
           dispatch({ type: SET_MODAL_VIEW, payload: 2 });
