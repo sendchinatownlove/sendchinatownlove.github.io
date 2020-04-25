@@ -41,11 +41,13 @@ function Footer(props: Props) {
   return (
     <footer>
       <div className={containerClass}>
-        <img
-          className={styles.logo}
-          src={imgLogo(theme)}
-          alt="send chinatown love"
-        />
+        <a href="https://sendchinatownlove.com/">
+          <img
+            className={styles.logo}
+            src={imgLogo(theme)}
+            alt="send chinatown love"
+          />
+        </a>
         <ul className={styles.links}>
           <li>
             <a className={iconClass} href="mailto:hello@sendchinatownlove.com">
