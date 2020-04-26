@@ -7,11 +7,6 @@
   flex-direction: column;
 }
 
-.row {
-  display: flex;
-  justify-content: space-between;
-}
-
 .column {
   display: flex;
   flex-direction: column;
@@ -34,6 +29,11 @@ label {
   margin: 20px 0 5px 0;
 }
 
+.addressRow, .btnRow {
+  display: flex;
+  justify-content: space-between;
+}
+
 .btnRow {
   margin-top: 30px;
 }
@@ -45,4 +45,28 @@ label {
 
 input:invalid {
   border: 1px solid red;
+}
+
+@media only screen and (max-width: 799px) {
+  .billingsContainer {
+    width: 85%;
+    height: 75vh;
+    overflow-y: scroll;
+  }
+
+  .addressRow {
+    flex-direction: column;
+  }
+
+  .column {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .billingsContainer {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
 }

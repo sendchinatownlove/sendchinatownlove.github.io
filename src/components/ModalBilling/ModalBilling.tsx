@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
 
@@ -18,15 +18,10 @@ import {
   SET_ZIPCODE,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 
-interface Props {
-  purchaseType: string;
-  sellerId: string;
-  sellerName: string;
-}
 
-export const ModalBilling = (props: Props) => {
-  const { name, email, address, city, state, zipCode } = useModalPaymentState();
+export const ModalBilling = () => {
   const dispatch = useModalPaymentDispatch();
+  const { name, email, address, city, state, zipCode } = useModalPaymentState();
 
   const handleChange = (action: string, value: string) => {
     dispatch({ type: action, payload: value });
@@ -62,7 +57,6 @@ export const ModalBilling = (props: Props) => {
             className={'modalInput--input'}
             onChange={(e) => handleChange(SET_NAME, e.target.value)}
             value={name}
-            required
           />
         </div>
         <div className={classnames(styles.email, styles.column)}>
@@ -73,7 +67,6 @@ export const ModalBilling = (props: Props) => {
             className={'modalInput--input'}
             onChange={(e) => handleChange(SET_EMAIL, e.target.value)}
             value={email}
-            required
           />
         </div>
 
@@ -85,7 +78,7 @@ export const ModalBilling = (props: Props) => {
           onChange={(e) => handleChange(SET_ADDRESS, e.target.value)}
           value={address}
         />
-        <div className={styles.row}>
+        <div className={styles.addressRow}>
           <div className={classnames(styles.column, styles.city)}>
             <label htmlFor="city">City</label>
             <input

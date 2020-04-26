@@ -26,7 +26,7 @@ export const Modal = (props: Props) => {
       style={{ display: modalView > -1 ? 'block' : 'none' }}
     >
       {modalView === 0 && <ModalAmount {...props} />}
-      {modalView === 1 && <ModalBilling {...props} />}
+      {modalView === 1 && <ModalBilling />}
       {modalView === 2 && (
         <SquareModal {...props} idempotencyKey={idempotencyKey} />
       )}
