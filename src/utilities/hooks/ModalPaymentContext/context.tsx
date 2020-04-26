@@ -18,7 +18,7 @@ const ModalPaymentDispatchContext = React.createContext(
 // MODAL BILLING CONTEXT
 const ModalBillingStateContext = React.createContext(billingInfoState);
 const ModalBillingDispatchContext = React.createContext(
-  (() =>  null) as React.Dispatch<Action>
+  (() => null) as React.Dispatch<Action>
 );
 
 
@@ -45,7 +45,10 @@ const ModalPaymentProvider = (props: any) => {
 
 // MODAL BILLING PROVIDER
 const ModalBillingInfoProvider = (props: any) => {
-  const [state, dispatch] = React.useReducer(ModalBillingReducer, billingInfoState);
+  const [state, dispatch] = React.useReducer(
+    ModalBillingReducer,
+    billingInfoState
+  );
 
   return (
     <ModalBillingStateContext.Provider value={state}>
@@ -55,7 +58,6 @@ const ModalBillingInfoProvider = (props: any) => {
     </ModalBillingStateContext.Provider>
   );
 };
-
 
 // MODAL PAYMENT STATE & DISPATCH
 function useModalPaymentState() {
@@ -94,5 +96,11 @@ function useModalBillingDispatch() {
   return context;
 }
 
-
-export { ModalPaymentProvider, useModalPaymentDispatch, useModalPaymentState, ModalBillingInfoProvider, useModalBillingState, useModalBillingDispatch };
+export {
+  ModalPaymentProvider,
+  useModalPaymentDispatch,
+  useModalPaymentState,
+  ModalBillingInfoProvider,
+  useModalBillingState,
+  useModalBillingDispatch,
+};

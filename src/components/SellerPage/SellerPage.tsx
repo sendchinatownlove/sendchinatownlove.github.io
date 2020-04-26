@@ -4,7 +4,10 @@ import HeroBanner from '../HeroBanner';
 import Footer from '../Footer';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
-import { ModalPaymentProvider, ModalBillingInfoProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import {
+  ModalPaymentProvider,
+  ModalBillingInfoProvider,
+} from '../../utilities/hooks/ModalPaymentContext/context';
 import styles from './styles.module.scss';
 import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';

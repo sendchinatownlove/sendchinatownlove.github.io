@@ -4,10 +4,10 @@ import {
   CLOSE_MODAL,
   CLEAR_FORMS,
   SET_NAME,
-  SET_EMAIL, 
-  SET_ADDRESS, 
-  SET_CITY, 
-  SET_STATE, 
+  SET_EMAIL,
+  SET_ADDRESS,
+  SET_CITY,
+  SET_STATE,
   SET_ZIPCODE,
 } from './constants';
 import { defaultState, ModalPaymentState, ModalBillingState } from './types';
@@ -36,23 +36,26 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
 
 export default ModalPaymentReducer;
 
-export const ModalBillingReducer = (state: ModalBillingState, action: Action) => {
+export const ModalBillingReducer = (
+  state: ModalBillingState,
+  action: Action
+) => {
   const { type, payload } = action;
 
-  switch(type) {
+  switch (type) {
     case SET_NAME:
-      return { ...state, name: payload }
-    case SET_EMAIL: 
-      return { ...state, email: payload }
+      return { ...state, name: payload };
+    case SET_EMAIL:
+      return { ...state, email: payload };
     case SET_ADDRESS:
-      return { ...state, address: payload }
+      return { ...state, address: payload };
     case SET_CITY:
-      return { ...state, city: payload}
+      return { ...state, city: payload };
     case SET_STATE:
-      return { ...state, state: payload}
+      return { ...state, state: payload };
     case SET_ZIPCODE:
-      return { ...state, zipCode: payload}
-    default: 
-      return state
+      return { ...state, zipCode: payload };
+    default:
+      return state;
   }
 };

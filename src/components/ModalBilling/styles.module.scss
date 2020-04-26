@@ -1,10 +1,43 @@
+.billingsContainer {
+    overflow-y: scroll;
+}
 
 .inputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column {
     display: flex;
     flex-direction: column;
 }
 
+.name, .email {
+    width: 55%;
+}
+
+.city {
+    width: 50%;
+}
+
+.state {
+    width: 15%;
+}
+
+label {
+    margin: 20px 0 5px 0;
+}
+
 .btnRow {
-    display: flex;
-    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.backBtn {
+    width: 75px;
+    font-size: 13px;
 }

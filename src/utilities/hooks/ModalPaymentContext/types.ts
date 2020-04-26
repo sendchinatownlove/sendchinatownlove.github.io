@@ -35,7 +35,7 @@ export type ModalBillingState = {
   city: string;
   state: string;
   zipCode: string;
-}
+};
 
 export const billingInfoState: ModalBillingState = {
   name: '',

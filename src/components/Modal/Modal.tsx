@@ -40,7 +40,9 @@ export const Modal = (props: Props) => {
       </button> */}
       {modalView === 0 && <ModalAmount {...props} />}
       {modalView === 1 && <ModalBilling {...props} />}
-      {modalView === 2 && <SquareModal {...props} idempotencyKey={idempotencyKey}/>}
+      {modalView === 2 && (
+        <SquareModal {...props} idempotencyKey={idempotencyKey} />
+      )}
       {modalView === 3 && <ModalConfirmation {...props} />}
     </div>
   );

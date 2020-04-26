@@ -16,6 +16,7 @@ import {
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
+  useModalBillingState
 } from '../../utilities/hooks/ModalPaymentContext/context';
 import {
   SET_MODAL_VIEW,
@@ -29,9 +30,16 @@ type Props = {
   idempotencyKey: string;
 };
 
-const ModalPayment = ({ purchaseType, sellerId, sellerName, idempotencyKey }: Props) => {
+const ModalPayment = ({
+  purchaseType,
+  sellerId,
+  sellerName,
+  idempotencyKey,
+}: Props) => {
   const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
+
+  const { name, email, address, city, state, zipCode } = useModalBillingState();
 
   const purchaseTypePhrase =
     purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
@@ -39,8 +47,6 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName, idempotencyKey }: Pr
     isChecked ? setChecked(false) : setChecked(true);
 
   const [isChecked, setChecked] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
 
   const cardNonceResponseReceived = (errors: any[], nonce: string) => {
@@ -114,34 +120,6 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName, idempotencyKey }: Pr
 
       <div className={styles.paymentContainer}>
         <h3>Payment Information</h3>
-        <div className={styles.inputRow}>
-          <div className={styles.row}>
-            <span className={classnames('fa fa-user', styles.icons)} />
-            <input
-              name="name"
-              type="text"
-              className={classnames(styles.label, 'modalInput--input')}
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              placeholder="Name"
-            />
-          </div>
-          <div className={styles.row}>
-            <span className={classnames('fa fa-envelope', styles.icons)} />
-            <input
-              name="email"
-              type="email"
-              className={classnames(
-                styles.email,
-                'modalInput--input',
-                styles.label
-              )}
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              placeholder="Email"
-            />
-          </div>
-        </div>
         <SquarePaymentForm
           sandbox={
             !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
