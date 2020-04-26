@@ -8,9 +8,7 @@ import ModalConfirmation from '../ModalConfirmation';
 import ModalBilling from '../ModalBilling';
 import {
   useModalPaymentState,
-  // useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext/context';
-// import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 interface Props {
   purchaseType: string;
@@ -22,12 +20,6 @@ const idempotencyKey = uuid();
 
 export const Modal = (props: Props) => {
   const { modalView } = useModalPaymentState();
-  // const dispatch = useModalPaymentDispatch();
-
-  // const closeModal = (e: any) => {
-  //   e.preventDefault();
-  //   dispatch({ type: CLOSE_MODAL, payload: undefined });
-  // };
 
   return (
     <div
@@ -35,9 +27,6 @@ export const Modal = (props: Props) => {
       className={classnames(styles.donationsContainer, 'modalForm--form')}
       style={{ display: modalView > -1 ? 'block' : 'none' }}
     >
-      {/* <button className={'closeButton--close'} onClick={closeModal}>
-        ×
-      </button> */}
       {modalView === 0 && <ModalAmount {...props} />}
       {modalView === 1 && <ModalBilling {...props} />}
       {modalView === 2 && (

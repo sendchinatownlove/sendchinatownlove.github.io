@@ -39,7 +39,8 @@ const ModalPayment = ({
   const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
 
-  const { name, email, address, city, state, zipCode } = useModalBillingState();
+  const { name, email } = useModalBillingState();
+  // , address, city, state, zipCode
 
   const purchaseTypePhrase =
     purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';

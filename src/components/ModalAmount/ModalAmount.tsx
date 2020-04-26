@@ -66,8 +66,9 @@ export const Modal = (props: Props) => {
         <label htmlFor="select-amount">Select an amount </label>
         <br />
         <div className={styles.selectAmtContainer}>
-          {buttonAmounts.map((amount) => (
+          {buttonAmounts.map((amount, idx) => (
             <button
+              key={idx}
               type="button"
               className={
                 selected === amount.text

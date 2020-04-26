@@ -25,20 +25,20 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
         />
       }
 
-      <div className={styles.nationality}>{cuisineName}</div>
-      <p>
+      <div className={styles.nationality}>{cuisineName}</div> <p />
+      <div>
         {locations &&
-          locations.map((location: Location) => (
-            <>
+          locations.map((location: Location, idx) => (
+            <div key={idx}>
               <div className={styles.address}>{location.address1}</div>
               <div className={styles.address}>{location.address2}</div>
               <div className={styles.address}>
                 {location.city}, {location.state} {location.zip_code}
               </div>
               <div className={styles.address}>{location.phone_number}</div>
-            </>
+            </div>
           ))}
-      </p>
+      </div>
       <p>{summary}</p>
       <StoreDetails story={story} />
     </section>
