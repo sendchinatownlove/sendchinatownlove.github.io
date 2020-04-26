@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
 
 import {
-  useModalPaymentState,
   useModalPaymentDispatch,
+  useModalBillingState, 
+  useModalBillingDispatch
 } from '../../utilities/hooks/ModalPaymentContext/context';
 
 import {
   SET_MODAL_VIEW,
-  SET_AMOUNT,
   CLOSE_MODAL,
+  SET_NAME,
+  SET_EMAIL, 
+  SET_ADDRESS, 
+  SET_CITY, 
+  SET_STATE, 
+  SET_ZIPCODE,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 interface Props {
@@ -20,17 +26,15 @@ interface Props {
 }
 
 export const ModalBilling = (props: Props) => {
-  const { amount } = useModalPaymentState();
-  const [isCustomAmount, setIsCustomAmount] = useState(false);
-  const [selected, setSelected] = useState('');
+  const { name, email, address, city, state, zipCode } = useModalBillingState();
+  const dispatchBillingInfo = useModalBillingDispatch();
   const dispatch = useModalPaymentDispatch();
-  const minAmount = 5;
-  const maxAmount = 10000;
 
-  const handleAmount = (value: string, customAmount: boolean, text: string) => {
-    setSelected(text);
-    setIsCustomAmount(customAmount);
-    dispatch({ type: SET_AMOUNT, payload: value });
+  const handleChange = (action: string, value: string) => {
+    dispatchBillingInfo({ type: action, payload: value });
+    console.log(name)
+    console.log(value)
+    console.log(action)
   };
 
   const openModal = (e: any) => {
@@ -40,89 +44,90 @@ export const ModalBilling = (props: Props) => {
 
   const closeModal = (e: any) => {
     e.preventDefault();
+    console.log('getting here!')
     dispatch({ type: CLOSE_MODAL, payload: undefined });
   };
 
-  const buttonAmounts = [
-    { value: '10', text: '$10' },
-    { value: '25', text: '$25' },
-    { value: '50', text: '$50' },
-    { value: '100', text: '$100' },
-  ];
-
   return (
     <form
-      id="donation-form"
-      className={classnames(styles.donationsContainer, 'modalForm--form')}
+      className={classnames(styles.billingsContainer, 'modalForm--form')}
     >
       <div>
-        <h2>{props.sellerName}</h2>
         <button className={'closeButton--close'} onClick={closeModal}>
           ×
         </button>
       </div>
 
-      <p>Please select an amount or enter a custom amount</p>
-
-      <div className={styles.amountContainer}>
-        <label htmlFor="select-amount">Select an amount </label>
-        <br />
-        <div className={styles.selectAmtContainer}>
-          {buttonAmounts.map((amount) => (
-            <button
-              type="button"
-              className={
-                selected === amount.text
-                  ? 'modalButton--selected'
-                  : 'modalButton--outlined'
-              }
-              onClick={(e) => {
-                handleAmount(amount.value, false, amount.text);
-              }}
-            >
-              {amount.text}
-            </button>
-          ))}
-        </div>
-        <label htmlFor="custom-amount">Or enter an amount </label>
-        <br />
+      <div className={styles.inputContainer}>
+        <label htmlFor='name'>Name</label>
         <input
-          name="custom-amount"
-          type="number"
-          onFocus={(e) => handleAmount('', true, '')}
-          className={classnames(styles.customAmt, 'modalInput--input')}
-          onChange={(e) => {
-            handleAmount(e.target.value, true, '');
-          }}
-          value={isCustomAmount ? amount : ''}
-          placeholder="$"
-          min="5"
-          max="10000"
+          name='name'
+          type="text"
+          className={'modalInput--input'}
+          onChange={(e) => handleChange(SET_NAME, e.target.value)}
+          value={name}
         />
-        {Number(amount) < minAmount && isCustomAmount && (
-          <div className={styles.errorMessage}>
-            Minimum{' '}
-            {props.purchaseType === 'gift_card' ? 'gift card' : 'donation'}{' '}
-            amount: $5
-          </div>
-        )}
-        {Number(amount) > maxAmount && isCustomAmount && (
-          <div className={styles.errorMessage}>
-            Maximum{' '}
-            {props.purchaseType === 'gift_card' ? 'gift card' : 'donation'}{' '}
-            amount: $10000
-          </div>
-        )}
+        <label htmlFor='email'>Email</label>
+        <input
+          name='email'
+          type="text"
+          className={'modalInput--input'}
+          onChange={(e) => handleChange(SET_EMAIL, e.target.value)}
+          value={email}
+        />
+        <label htmlFor='address'>Address</label>
+        <input
+          name='address'
+          type="text"
+          className={'modalInput--input'}
+          onChange={(e) => handleChange(SET_ADDRESS, e.target.value)}
+          value={address}
+        />
+        <label htmlFor='city'>City</label>
+        <input
+          name='city'
+          type="text"
+          className={'modalInput--input'}
+          onChange={(e) => handleChange(SET_CITY, e.target.value)}
+          value={city}
+        />
+        <label htmlFor='state'>State</label>
+        <input
+          name='state'
+          type="text"
+          className={'modalInput--input'}
+          onChange={(e) => handleChange(SET_STATE, e.target.value)}
+          value={state}
+        />
+        <label htmlFor='zipCode'>Zip Code</label>
+        <input
+          name='zipCode'
+          type="text"
+          className={'modalInput--input'}
+          onChange={(e) => handleChange(SET_ZIPCODE, e.target.value)}
+          value={zipCode}
+        />
+    
       </div>
 
-      <button
-        type="button"
-        className={classnames(styles.nextBtn, 'modalButton--filled')}
-        onClick={openModal}
-        disabled={Number(amount) < minAmount || Number(amount) > maxAmount}
-      >
-        Next
-      </button>
+      <div className={styles.btnRow}> 
+        <button
+          type="button"
+          className={classnames('modalButton--back', styles.backBtn)}
+          onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 0 })}
+        >
+          ᐸ Back
+        </button>
+        <button
+          type="button"
+          className={classnames(styles.nextBtn, 'modalButton--filled')}
+          onClick={openModal}
+          // disabled={}
+        >
+          Next
+        </button>
+      </div>
+
     </form>
   );
 };

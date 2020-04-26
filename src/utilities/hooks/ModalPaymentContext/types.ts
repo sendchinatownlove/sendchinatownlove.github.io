@@ -20,3 +20,28 @@ export const defaultState: ModalPaymentState = {
   customInput: false,
   modalView: -1,
 };
+
+/**
+ * Modal Billing STATE
+ *
+ * @typedef {Object} DefaultModalBillingState
+ *
+ */
+
+export type ModalBillingState = {
+  name: string;
+  email: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+}
+
+export const billingInfoState: ModalBillingState = {
+  name: '',
+  email: '',
+  address: '',
+  city: '',
+  state: '',
+  zipCode: '',
+};

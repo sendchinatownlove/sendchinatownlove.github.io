@@ -197,7 +197,7 @@ const ModalPayment = ({ purchaseType, sellerId, sellerName, idempotencyKey }: Pr
             <button
               type="button"
               className={classnames('modalButton--back', styles.backBtn)}
-              onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 0 })}
+              onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 1 })}
             >
               ᐸ Back
             </button>

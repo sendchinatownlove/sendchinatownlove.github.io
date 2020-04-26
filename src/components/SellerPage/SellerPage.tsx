@@ -4,10 +4,11 @@ import HeroBanner from '../HeroBanner';
 import Footer from '../Footer';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import { ModalPaymentProvider, ModalBillingInfoProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import styles from './styles.module.scss';
 import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
+// import Modal from '../ModalAmount';
 
 const SellerPage: React.FC<{}> = () => {
   // fix typing
@@ -40,26 +41,28 @@ const SellerPage: React.FC<{}> = () => {
             }}
           />
           <ModalPaymentProvider>
-            <OwnerPanel
-              className={styles.ownerPanel}
-              acceptDonations={seller.accept_donations}
-              sellGiftCards={seller.sell_gift_cards}
-              amountRaised={seller.amount_raised}
-              targetAmount={seller.target_amount}
-              ownerName={seller.owner_name}
-              imageSrc={seller.owner_image_url}
-              sellerName={seller.name}
-              progressBarColor={seller.progress_bar_color}
-              extraInfo={{
-                Type: seller.business_type,
-                Employees: seller.num_employees,
-                Founded: seller.founded_year,
-                Website: seller.website_url,
-                Menu: seller.menu_url,
-              }}
-              // TODO(jtmckibb): Should not crash here
-              sellerId={id!}
-            />
+            <ModalBillingInfoProvider>
+              <OwnerPanel
+                className={styles.ownerPanel}
+                acceptDonations={seller.accept_donations}
+                sellGiftCards={seller.sell_gift_cards}
+                amountRaised={seller.amount_raised}
+                targetAmount={seller.target_amount}
+                ownerName={seller.owner_name}
+                imageSrc={seller.owner_image_url}
+                sellerName={seller.name}
+                progressBarColor={seller.progress_bar_color}
+                extraInfo={{
+                  Type: seller.business_type,
+                  Employees: seller.num_employees,
+                  Founded: seller.founded_year,
+                  Website: seller.website_url,
+                  Menu: seller.menu_url,
+                }}
+                // TODO(jtmckibb): Should not crash here
+                sellerId={id!}
+              />
+            </ModalBillingInfoProvider>
           </ModalPaymentProvider>
         </div>
       </main>
