@@ -107,10 +107,10 @@ const OwnerPanel = (props: Props) => {
       </div>
       {validExtraInfo !== [] ? (
         <div className={styles.extraInfoContainer}>
-          {validExtraInfo.map((current) => {
+          {validExtraInfo.map((current, idx) => {
             if (current === 'Website' || current === 'Menu') {
               return (
-                <>
+                <div key={idx}>
                   <p key={current} className={styles.extraInfoKey}>
                     {`${current}: `}
                     <a
@@ -120,18 +120,18 @@ const OwnerPanel = (props: Props) => {
                       {props.extraInfo[current]}
                     </a>
                   </p>
-                </>
+                </div>
               );
             } else
               return (
-                <>
+                <div key={idx}>
                   <p key={current} className={styles.extraInfoKey}>
                     {`${current}: `}
                     <span className={styles.extraInfoValue}>
                       {props.extraInfo[current]}
                     </span>
                   </p>
-                </>
+                </div>
               );
           })}
         </div>

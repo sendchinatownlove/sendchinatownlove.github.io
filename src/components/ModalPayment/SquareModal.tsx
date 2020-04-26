@@ -16,7 +16,6 @@ import {
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-  useModalBillingState
 } from '../../utilities/hooks/ModalPaymentContext/context';
 import {
   SET_MODAL_VIEW,
@@ -36,11 +35,16 @@ const ModalPayment = ({
   sellerName,
   idempotencyKey,
 }: Props) => {
-  const { amount } = useModalPaymentState();
+  const {
+    amount,
+    name,
+    email,
+    address,
+    city,
+    state,
+    zipCode,
+  } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
-
-  const { name, email } = useModalBillingState();
-  // , address, city, state, zipCode
 
   const purchaseTypePhrase =
     purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
@@ -70,6 +74,10 @@ const ModalPayment = ({
       email,
       nonce,
       idempotency_key: idempotencyKey,
+      address,
+      city,
+      state,
+      zip_code: zipCode,
     };
 
     return makeSquarePayment(nonce, sellerId, payment, buyer)

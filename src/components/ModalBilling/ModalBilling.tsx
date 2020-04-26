@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
 
 import {
   useModalPaymentDispatch,
-  useModalBillingState,
-  useModalBillingDispatch,
+  useModalPaymentState,
 } from '../../utilities/hooks/ModalPaymentContext/context';
 
 import {
@@ -26,12 +25,11 @@ interface Props {
 }
 
 export const ModalBilling = (props: Props) => {
-  const { name, email, address, city, state, zipCode } = useModalBillingState();
-  const dispatchBillingInfo = useModalBillingDispatch();
+  const { name, email, address, city, state, zipCode } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
 
   const handleChange = (action: string, value: string) => {
-    dispatchBillingInfo({ type: action, payload: value });
+    dispatch({ type: action, payload: value });
   };
 
   const openModal = (e: any) => {
@@ -64,19 +62,21 @@ export const ModalBilling = (props: Props) => {
             className={'modalInput--input'}
             onChange={(e) => handleChange(SET_NAME, e.target.value)}
             value={name}
+            required
           />
         </div>
         <div className={classnames(styles.email, styles.column)}>
-        <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email</label>
           <input
             name="email"
-            type="text"
+            type="email"
             className={'modalInput--input'}
             onChange={(e) => handleChange(SET_EMAIL, e.target.value)}
             value={email}
+            required
           />
         </div>
-        
+
         <label htmlFor="address">Address</label>
         <input
           name="address"
@@ -131,7 +131,6 @@ export const ModalBilling = (props: Props) => {
           type="button"
           className={classnames(styles.nextBtn, 'modalButton--filled')}
           onClick={openModal}
-          // disabled={}
         >
           Next
         </button>

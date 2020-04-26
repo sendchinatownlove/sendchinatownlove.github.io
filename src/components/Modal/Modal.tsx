@@ -6,9 +6,7 @@ import ModalAmount from '../ModalAmount';
 import { SquareModal } from '../ModalPayment';
 import ModalConfirmation from '../ModalConfirmation';
 import ModalBilling from '../ModalBilling';
-import {
-  useModalPaymentState,
-} from '../../utilities/hooks/ModalPaymentContext/context';
+import { useModalPaymentState } from '../../utilities/hooks/ModalPaymentContext/context';
 
 interface Props {
   purchaseType: string;

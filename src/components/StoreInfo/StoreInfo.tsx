@@ -24,7 +24,6 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
           className={styles.merchantIllustration}
         />
       }
-
       <div className={styles.nationality}>{cuisineName}</div> <p />
       <div>
         {locations &&

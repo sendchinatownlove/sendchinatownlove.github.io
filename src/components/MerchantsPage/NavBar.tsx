@@ -18,8 +18,8 @@ const NavBar = () => {
   return (
     <React.Fragment>
       <div className={styles.navContainer}>
-        {storeTypes.map((type) => (
-          <div>
+        {storeTypes.map((type, idx) => (
+          <div key={idx}>
             <button
               className={
                 selected === type.value

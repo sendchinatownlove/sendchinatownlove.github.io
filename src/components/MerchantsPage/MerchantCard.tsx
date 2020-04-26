@@ -7,6 +7,7 @@ import ProgressBar from '../ProgressBar';
 
 export interface Props {
   storeInfo?: BrowsePageSeller;
+  key: number;
 }
 
 const MerchantCard = ({ storeInfo }: Props) => {

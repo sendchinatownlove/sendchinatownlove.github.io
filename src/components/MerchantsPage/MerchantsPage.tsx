@@ -32,8 +32,8 @@ const MerchantsPage: React.FC<{}> = () => {
         <NavBar />
 
         <div className={styles.merchantsContainer}>
-          {sellers.map((store: any) => (
-            <MerchantCard storeInfo={store} />
+          {sellers.map((store: any, idx: any) => (
+            <MerchantCard storeInfo={store} key={idx} />
           ))}
         </div>
       </div>

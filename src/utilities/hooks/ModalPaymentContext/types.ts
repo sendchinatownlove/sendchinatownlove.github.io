@@ -5,7 +5,13 @@
  * @property {number} amount - amount (in cents)
  * @property {boolean} customInput - if a user used the custom input
  * @property {boolean} close - modal for closing the payment modal
- * @property {number} modalView - expiration year
+ * @property {number} modalView - view of current modal
+ * @property {string} name - user's billing information
+ * @property {string} email - user's billing information
+ * @property {string} address - user's billing information
+ * @property {string} city - user's billing information
+ * @property {string} state - user's billing information
+ * @property {string} zipCode - user's billing information
  *
  */
 
@@ -13,22 +19,6 @@ export type ModalPaymentState = {
   amount: string;
   customInput: boolean;
   modalView: number;
-};
-
-export const defaultState: ModalPaymentState = {
-  amount: '',
-  customInput: false,
-  modalView: -1,
-};
-
-/**
- * Modal Billing STATE
- *
- * @typedef {Object} DefaultModalBillingState
- *
- */
-
-export type ModalBillingState = {
   name: string;
   email: string;
   address: string;
@@ -37,7 +27,10 @@ export type ModalBillingState = {
   zipCode: string;
 };
 
-export const billingInfoState: ModalBillingState = {
+export const defaultState: ModalPaymentState = {
+  amount: '',
+  customInput: false,
+  modalView: -1,
   name: '',
   email: '',
   address: '',

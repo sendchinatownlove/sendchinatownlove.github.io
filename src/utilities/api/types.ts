@@ -27,14 +27,10 @@ export type Buyer = {
   email: string;
   nonce?: string;
   idempotency_key?: string;
-  // address: string;
-  // city: string;
-  // stateForm: string;
-  // zipCode: string;
-  // showPayModal: boolean;
-
-  //TODO(ArtyEmsee): what is className doing
-  // className: '';
+  address?: string;
+  city?: string;
+  state?: string;
+  zip_code?: string;
 };
 
 export type Seller = {
