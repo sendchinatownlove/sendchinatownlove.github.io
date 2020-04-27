@@ -3,7 +3,8 @@ import {
   SET_AMOUNT,
   CLOSE_MODAL,
   CLEAR_FORMS,
-  SET_NAME,
+  SET_FIRST_NAME,
+  SET_LAST_NAME,
   SET_EMAIL,
   SET_ADDRESS,
   SET_CITY,
@@ -29,8 +30,10 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
       return defaultState;
     case CLEAR_FORMS:
       return defaultState;
-    case SET_NAME:
-      return { ...state, name: payload };
+    case SET_FIRST_NAME:
+      return { ...state, firstName: payload };
+    case SET_LAST_NAME:
+      return { ...state, lastName: payload };
     case SET_EMAIL:
       return { ...state, email: payload };
     case SET_ADDRESS:

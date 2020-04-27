@@ -13,6 +13,7 @@
 }
 
 .name,
+.lastName,
 .email {
   width: 55%;
 }
@@ -29,7 +30,8 @@ label {
   margin: 20px 0 5px 0;
 }
 
-.addressRow, .btnRow {
+.addressRow,
+.btnRow {
   display: flex;
   justify-content: space-between;
 }

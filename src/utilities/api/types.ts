@@ -23,8 +23,8 @@ export type Location = {
 };
 
 export type Buyer = {
-  name: string;
-  email: string;
+  name?: string;
+  email?: string;
   nonce?: string;
   idempotency_key?: string;
   address?: string;

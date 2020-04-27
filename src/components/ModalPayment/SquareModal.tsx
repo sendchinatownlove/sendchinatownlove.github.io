@@ -17,6 +17,7 @@ import {
   useModalPaymentState,
   useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext/context';
+
 import {
   SET_MODAL_VIEW,
   CLOSE_MODAL,
@@ -37,11 +38,11 @@ const ModalPayment = ({
 }: Props) => {
   const {
     amount,
-    name,
+    firstName,
+    lastName,
     email,
     address,
     city,
-    state,
     zipCode,
   } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
@@ -54,7 +55,29 @@ const ModalPayment = ({
   const [isChecked, setChecked] = useState(false);
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
 
-  const cardNonceResponseReceived = (errors: any[], nonce: string) => {
+  function createVerificationDetails() {
+    return {
+      amount: amount,
+      currencyCode: 'USD',
+      intent: 'CHARGE',
+      billingContact: {
+        familyName: lastName,
+        givenName: firstName,
+        email: email,
+        country: 'US',
+        city: city,
+        addressLines: [address],
+        postalCode: zipCode,
+      },
+    };
+  }
+
+  const cardNonceResponseReceived = (
+    errors: any[],
+    nonce: string,
+    cardData: any,
+    buyerVerificationToken: any
+  ) => {
     setErrorsMessages([]);
 
     if (errors && errors.length > 0 && errors[0]) {
@@ -70,17 +93,23 @@ const ModalPayment = ({
     };
 
     const buyer: Buyer = {
-      name,
+      name: `${firstName} ${lastName}`,
       email,
-      nonce,
       idempotency_key: idempotencyKey,
-      address,
-      city,
-      state,
-      zip_code: zipCode,
+      //   nonce,
+      //   address,
+      //   city,
+      //   state,
+      //   zip_code: zipCode,
     };
 
-    return makeSquarePayment(nonce, sellerId, payment, buyer)
+    return makeSquarePayment(
+      nonce,
+      sellerId,
+      payment,
+      buyerVerificationToken,
+      buyer
+    )
       .then((res) => {
         if (res.status === 200) {
           dispatch({ type: SET_MODAL_VIEW, payload: 3 });
@@ -119,7 +148,12 @@ const ModalPayment = ({
     ? process.env.REACT_APP_SQUARE_LOCATION_ID
     : '';
 
-  const canSubmit = isChecked && name.length > 0 && email.length > 0;
+  const canSubmit =
+    isChecked &&
+    firstName.length > 0 &&
+    lastName.length > 0 &&
+    email.length > 0;
+
   return (
     <div className={styles.container}>
       <div>
@@ -141,6 +175,7 @@ const ModalPayment = ({
           cardNonceResponseReceived={cardNonceResponseReceived}
           formId="SPF"
           apiWrapper=""
+          createVerificationDetails={createVerificationDetails}
         >
           <SimpleCard />
           <div className="sq-error-message">

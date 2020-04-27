@@ -10,7 +10,8 @@ const CLOSE_MODAL = 'CLOSE_MODAL';
 const CLEAR_FORMS = 'CLEAR_FORMS';
 
 // TYPE constants for billing info modal
-const SET_NAME = 'SET_NAME';
+const SET_FIRST_NAME = 'SET_FIRST_NAME';
+const SET_LAST_NAME = 'SET_LAST_NAME';
 const SET_EMAIL = 'SET_EMAIL';
 const SET_ADDRESS = 'SET_ADDRESS';
 const SET_CITY = 'SET_CITY';
@@ -22,7 +23,8 @@ export {
   SET_AMOUNT,
   CLOSE_MODAL,
   CLEAR_FORMS,
-  SET_NAME,
+  SET_FIRST_NAME,
+  SET_LAST_NAME,
   SET_EMAIL,
   SET_ADDRESS,
   SET_CITY,

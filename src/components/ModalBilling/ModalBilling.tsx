@@ -10,7 +10,8 @@ import {
 import {
   SET_MODAL_VIEW,
   CLOSE_MODAL,
-  SET_NAME,
+  SET_FIRST_NAME,
+  SET_LAST_NAME,
   SET_EMAIL,
   SET_ADDRESS,
   SET_CITY,
@@ -18,10 +19,17 @@ import {
   SET_ZIPCODE,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 
-
 export const ModalBilling = () => {
   const dispatch = useModalPaymentDispatch();
-  const { name, email, address, city, state, zipCode } = useModalPaymentState();
+  const {
+    firstName,
+    lastName,
+    email,
+    address,
+    city,
+    state,
+    zipCode,
+  } = useModalPaymentState();
 
   const handleChange = (action: string, value: string) => {
     dispatch({ type: action, payload: value });
@@ -40,23 +48,32 @@ export const ModalBilling = () => {
   return (
     <form className={classnames(styles.billingsContainer, 'modalForm--form')}>
       <div>
-        <h2>Complete your donation</h2>
+        <h2>Billing Information</h2>
         <button className={'closeButton--close'} onClick={closeModal}>
           ×
         </button>
       </div>
       <p>Please add your payment information below</p>
 
-      <h3>Billing Information</h3>
       <div className={styles.inputContainer}>
         <div className={classnames(styles.name, styles.column)}>
-          <label htmlFor="name">Full name</label>
+          <label htmlFor="firstName">First name</label>
           <input
-            name="name"
+            name="firstName"
             type="text"
             className={'modalInput--input'}
-            onChange={(e) => handleChange(SET_NAME, e.target.value)}
-            value={name}
+            onChange={(e) => handleChange(SET_FIRST_NAME, e.target.value)}
+            value={firstName}
+          />
+        </div>
+        <div className={classnames(styles.lastName, styles.column)}>
+          <label htmlFor="lastName">Last name</label>
+          <input
+            name="lastName"
+            type="text"
+            className={'modalInput--input'}
+            onChange={(e) => handleChange(SET_LAST_NAME, e.target.value)}
+            value={lastName}
           />
         </div>
         <div className={classnames(styles.email, styles.column)}>

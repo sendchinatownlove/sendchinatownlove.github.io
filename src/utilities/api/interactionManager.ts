@@ -75,16 +75,17 @@ export const makeSquarePayment = async (
   nonce: string,
   sellerId: string,
   payment: SquarePaymentParams,
+  buyerVerificationToken: string,
   buyer: Buyer
 ) => {
   const {
+    idempotency_key,
     email,
     name,
-    idempotency_key,
-    address,
-    city,
-    state,
-    zip_code,
+    //   address,
+    //   city,
+    //   state,
+    //   zip_code,
   } = buyer;
 
   return await axios
@@ -94,14 +95,15 @@ export const makeSquarePayment = async (
         is_square: true,
         nonce,
         line_items: [payment],
-        email,
-        name,
         seller_id: sellerId,
         idempotency_key,
-        address,
-        city,
-        state,
-        zip_code,
+        buyer_verification_token: buyerVerificationToken,
+        email,
+        name,
+        // address,
+        // city,
+        // state,
+        // zip_code,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )

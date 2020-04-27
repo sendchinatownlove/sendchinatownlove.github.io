@@ -6,7 +6,8 @@
  * @property {boolean} customInput - if a user used the custom input
  * @property {boolean} close - modal for closing the payment modal
  * @property {number} modalView - view of current modal
- * @property {string} name - user's billing information
+ * @property {string} firstName - user's billing information
+ * @property {string} lastName - user's billing information
  * @property {string} email - user's billing information
  * @property {string} address - user's billing information
  * @property {string} city - user's billing information
@@ -19,7 +20,8 @@ export type ModalPaymentState = {
   amount: string;
   customInput: boolean;
   modalView: number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   address: string;
   city: string;
@@ -31,7 +33,8 @@ export const defaultState: ModalPaymentState = {
   amount: '',
   customInput: false,
   modalView: -1,
-  name: '',
+  firstName: '',
+  lastName: '',
   email: '',
   address: '',
   city: '',
