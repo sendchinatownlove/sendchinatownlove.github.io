@@ -2,7 +2,7 @@ name: Deployment
 on:
   push:
     branches:
-      - master
+      - dev
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -26,4 +26,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          publish_branch: gh-pages
