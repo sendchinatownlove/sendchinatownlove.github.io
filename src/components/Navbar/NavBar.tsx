@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
-import sclLogo from './scl-logo.png';
+import sclLogo from '../../images/logo-with-text.png';
 
 interface Props {}
 
