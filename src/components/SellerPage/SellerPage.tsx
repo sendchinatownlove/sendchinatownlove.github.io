@@ -4,6 +4,7 @@ import HeroBanner from '../HeroBanner';
 import Footer from '../Footer';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
+import ErrorPage from '../404Page';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import styles from './styles.module.scss';
 import { getSeller } from '../../utilities';
@@ -65,7 +66,7 @@ const SellerPage: React.FC<{}> = () => {
       </main>
       <Footer />
     </div>
-  ) : null;
+  ) : <ErrorPage />;
 };
 
 export default SellerPage;
