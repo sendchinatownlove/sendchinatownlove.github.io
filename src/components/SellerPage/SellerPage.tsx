@@ -66,7 +66,9 @@ const SellerPage: React.FC<{}> = () => {
       </main>
       <Footer />
     </div>
-  ) : <ErrorPage />;
+  ) : (
+    <ErrorPage />
+  );
 };
 
 export default SellerPage;

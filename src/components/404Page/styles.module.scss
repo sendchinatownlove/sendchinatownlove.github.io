@@ -1,0 +1,27 @@
+.container {
+  background-color: #fefcf9;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.textContainer {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+.mainHeader {
+  font-weight: 600;
+}
+.subHeader {
+  font-weight: 500;
+  margin: 0.2rem auto;
+}
+.backToHome {
+  font-weight: 450;
+  font-size: 1rem;
+  a {
+    color: #a7182d;
+  }
+}
+@media only screen and (max-width: 450px) {
+}
