@@ -4,19 +4,19 @@
   flex-direction: row;
   justify-content: space-between;
   width: 90%;
-  margin: 1rem auto;
+  margin: 15px auto;
   align-items: center;
 }
 .image {
-  width: 45px;
-  height: 45px;
+  width: 150px;
+  height: 66px;
 }
 .navLinksContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 50%;
-  max-width: 25rem;
+  max-width: 400px;
 }
 .navLink {
   a {
