@@ -46,7 +46,10 @@ const OwnerPanel = (props: Props) => {
   });
 
   return (
-    <section className={classnames(styles.container, props.className)}>
+    <section
+      data-testid="Owner Panel"
+      className={classnames(styles.container, props.className)}
+    >
       <figure className={styles.ownerContainer}>
         <img
           className={styles.ownerImage}
@@ -110,7 +113,7 @@ const OwnerPanel = (props: Props) => {
           {validExtraInfo.map((current) => {
             if (current === 'Website' || current === 'Menu') {
               return (
-                <>
+                <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
                     {`${current}: `}
                     <a
@@ -120,18 +123,18 @@ const OwnerPanel = (props: Props) => {
                       {props.extraInfo[current]}
                     </a>
                   </p>
-                </>
+                </React.Fragment>
               );
             } else
               return (
-                <>
+                <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
                     {`${current}: `}
                     <span className={styles.extraInfoValue}>
                       {props.extraInfo[current]}
                     </span>
                   </p>
-                </>
+                </React.Fragment>
               );
           })}
         </div>
