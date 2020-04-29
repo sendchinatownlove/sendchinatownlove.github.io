@@ -7,7 +7,7 @@ type Props = {
 };
 const HeroBanner: React.SFC<Props> = ({ name }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="Hero Banner">
       <img className={styles.image} src={sclLogo} alt="Logo" />
       <div className={styles.header}>{name}</div>
     </div>

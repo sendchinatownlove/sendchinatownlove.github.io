@@ -39,7 +39,7 @@ function Footer(props: Props) {
   const containerClass = applyThemeBackgroundColor(styles.container, theme);
 
   return (
-    <footer>
+    <footer data-testid="Footer">
       <div className={containerClass}>
         <a href="https://sendchinatownlove.com/">
           <img

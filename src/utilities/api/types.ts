@@ -14,6 +14,7 @@ export type SquarePaymentParams = {
 };
 
 export type Location = {
+  seller_id: number;
   address1: string;
   address2: string;
   city: string;

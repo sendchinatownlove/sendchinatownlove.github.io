@@ -8,14 +8,19 @@ import React from 'react';
 import ReactGA from 'react-ga';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
-ReactGA.initialize(trackingId);
+// For Testing purposes: https://github.com/react-ga/react-ga/issues/322
+if (process.env.NODE_ENV === 'production') {
+  ReactGA.initialize(trackingId);
+}
 
 const history = createBrowserHistory();
 
 // Initialize google analytics page view tracking
 history.listen((location) => {
-  ReactGA.set({ page: location.pathname }); // Update the user's current page
-  ReactGA.pageview(location.pathname); // Record a pageview for the given page
+  if (process.env.NODE_ENV === 'production') {
+    ReactGA.set({ page: location.pathname }); // Update the user's current page
+    ReactGA.pageview(location.pathname); // Record a pageview for the given page
+  }
 });
 
 class App extends React.Component<{}> {
