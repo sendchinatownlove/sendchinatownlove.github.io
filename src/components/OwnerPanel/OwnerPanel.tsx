@@ -117,6 +117,7 @@ const OwnerPanel = (props: Props) => {
                       className={styles.extraInfoValue}
                       href={`http://${props.extraInfo[current]}`}
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       {current}
                     </a>
