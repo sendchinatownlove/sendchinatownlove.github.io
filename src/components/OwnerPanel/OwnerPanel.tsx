@@ -45,9 +45,7 @@ const OwnerPanel = (props: Props) => {
   const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
     return props.extraInfo[current] != null
   }).map((current) => {
-    if(props.extraInfo[current] != null) {
-      return { label: current, value: props.extraInfo[current], id: shortid.generate() }
-    }
+    return { label: current, value: props.extraInfo[current], id: shortid.generate() }
   });
 
   return (
