@@ -16,6 +16,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^5.1.3",
+    "@types/shortid": "0.0.29",
     "@types/stripe-v3": "^3.1.17",
     "@types/uuid": "^7.0.3",
     "axios": "^0.19.2",
@@ -35,6 +36,7 @@
     "react-uuid": "^1.0.2",
     "reactjs-popup": "^1.5.0",
     "redux": "^4.0.5",
+    "shortid": "^2.2.15",
     "stripe": "^8.38.0",
     "typescript": "^3.8",
     "yarn": "^1.22.4"

@@ -2,6 +2,7 @@ import * as React from 'react';
 import styles from './styles.module.scss';
 import StoreDetails from '../StoreDetails';
 import classnames from 'classnames';
+import shortid from 'shortid';
 import { Location, Seller } from '../../utilities';
 import defaultStoreFront from './misc-store.png';
 
@@ -27,8 +28,8 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
       <div className={styles.nationality}>{cuisineName}</div> <p />
       <div>
         {locations &&
-          locations.map((location: Location, idx) => (
-            <div key={idx}>
+          locations.map((location: Location) => (
+            <div key={shortid.generate()}>
               <div className={styles.address}>{location.address1}</div>
               <div className={styles.address}>{location.address2}</div>
               <div className={styles.address}>

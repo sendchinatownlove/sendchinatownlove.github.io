@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
+import shortid from 'shortid';
 import styles from './styles.module.scss';
 import Modal from '../Modal';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
@@ -42,7 +43,11 @@ const OwnerPanel = (props: Props) => {
   };
 
   const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
-    return props.extraInfo[current] != null;
+    return props.extraInfo[current] != null
+  }).map((current) => {
+    if(props.extraInfo[current] != null) {
+      return { label: current, value: props.extraInfo[current], id: shortid.generate() }
+    }
   });
 
   return (
@@ -107,28 +112,28 @@ const OwnerPanel = (props: Props) => {
       </div>
       {validExtraInfo !== [] ? (
         <div className={styles.extraInfoContainer}>
-          {validExtraInfo.map((current, idx) => {
-            if (current === 'Website' || current === 'Menu') {
+          {validExtraInfo.map((current) => {
+            if (current!.label === 'Website' || current!.label === 'Menu') {
               return (
-                <div key={idx}>
-                  <p key={current} className={styles.extraInfoKey}>
-                    {`${current}: `}
+                <div key={current!.id}>
+                  <p key={current!.label} className={styles.extraInfoKey}>
+                    {`${current!.label}: `}
                     <a
                       className={styles.extraInfoValue}
-                      href={`http://${props.extraInfo[current]}`}
+                      href={`http://${props.extraInfo!.value}`}
                     >
-                      {props.extraInfo[current]}
+                      {current!.value}
                     </a>
                   </p>
                 </div>
               );
             } else
               return (
-                <div key={idx}>
-                  <p key={current} className={styles.extraInfoKey}>
-                    {`${current}: `}
+                <div key={current!.id}>
+                  <p key={current!.label} className={styles.extraInfoKey}>
+                    {`${current!.label}: `}
                     <span className={styles.extraInfoValue}>
-                      {props.extraInfo[current]}
+                      {current!.value}
                     </span>
                   </p>
                 </div>
@@ -144,29 +149,6 @@ const OwnerPanel = (props: Props) => {
         sellerId={props.sellerId}
         sellerName={props.sellerName}
       />
-
-      {/* hide extra info section until needed */}
-      {/* <div className={styles.summaryContainer}>
-        <div>
-          <span className={styles.storeSummaryLabel}>Type: </span>
-          <span>Family-owned and operated</span>
-        </div>{' '}
-        <br />
-        <div>
-          <span className={styles.storeSummaryLabel}>Employees: </span>
-          <span>5</span>
-        </div>{' '}
-        <br />
-        <div>
-          <span className={styles.storeSummaryLabel}>Runaway: </span>
-          <span>3 months</span>
-        </div>{' '}
-        <br />
-        <div>
-          <span className={styles.storeSummaryLabel}>Breakeven: </span>
-          <span>$1000 / month</span>
-        </div>
-      </div> */}
 
       {/* hide social links until needed */}
       {/* <div className={styles.socialContainer}>

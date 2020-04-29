@@ -1,5 +1,6 @@
 .billingsContainer {
   overflow-y: scroll;
+  max-height: 85vh;
 }
 
 .inputContainer {
@@ -52,7 +53,6 @@ input:invalid {
 @media only screen and (max-width: 799px) {
   .billingsContainer {
     width: 85%;
-    height: 75vh;
     overflow-y: scroll;
   }
 

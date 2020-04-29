@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import shortid from 'shortid';
 import styles from './styles.module.scss';
 
 const NavBar = () => {
@@ -7,7 +8,7 @@ const NavBar = () => {
 
   // TODO: Update buttons with shop types from database
   const storeTypes = [
-    { value: 'all', text: 'All Shops' },
+    { value: 'all', text: 'All Shops', id: shortid.generate() },
     // { value: 'market', text: 'Markets' },
     // { value: 'food', text: 'Foods' },
     // { value: 'salon', text: 'Salons' },
@@ -19,7 +20,7 @@ const NavBar = () => {
     <React.Fragment>
       <div className={styles.navContainer}>
         {storeTypes.map((type, idx) => (
-          <div key={idx}>
+          <div key={type.id}>
             <button
               className={
                 selected === type.value

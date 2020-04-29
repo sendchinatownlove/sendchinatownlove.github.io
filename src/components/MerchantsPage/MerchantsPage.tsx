@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import shortid from 'shortid';
 import Footer from '../Footer';
 import NavBar from './NavBar';
 import MerchantCard from './MerchantCard';
@@ -32,8 +33,8 @@ const MerchantsPage: React.FC<{}> = () => {
         <NavBar />
 
         <div className={styles.merchantsContainer}>
-          {sellers.map((store: any, idx: any) => (
-            <MerchantCard storeInfo={store} key={idx} />
+          {sellers.map((store: any) => (
+            <MerchantCard storeInfo={store} key={shortid.generate()} />
           ))}
         </div>
       </div>

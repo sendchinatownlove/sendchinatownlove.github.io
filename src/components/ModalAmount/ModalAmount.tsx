@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
+import shortid from 'shortid';
 import styles from './styles.module.scss';
 import {
   useModalPaymentState,
@@ -42,10 +43,10 @@ export const Modal = (props: Props) => {
   };
 
   const buttonAmounts = [
-    { value: '10', text: '$10' },
-    { value: '25', text: '$25' },
-    { value: '50', text: '$50' },
-    { value: '100', text: '$100' },
+    { value: '10', text: '$10', id: shortid.generate() },
+    { value: '25', text: '$25', id: shortid.generate() },
+    { value: '50', text: '$50', id: shortid.generate() },
+    { value: '100', text: '$100', id: shortid.generate() },
   ];
 
   return (
@@ -66,9 +67,9 @@ export const Modal = (props: Props) => {
         <label htmlFor="select-amount">Select an amount </label>
         <br />
         <div className={styles.selectAmtContainer}>
-          {buttonAmounts.map((amount, idx) => (
+          {buttonAmounts.map((amount) => (
             <button
-              key={idx}
+              key={amount.id}
               type="button"
               className={
                 selected === amount.text
