@@ -180,6 +180,7 @@ const ModalPayment = ({
                 value="checkedA"
                 inputProps={{ 'aria-label': 'Checkbox A' }}
                 onClick={checkAgreement}
+                checked={isChecked}
               />
               <span>
                 I agree with the <b>Terms & Conditions</b>
@@ -209,7 +210,7 @@ const ModalPayment = ({
             >
               ᐸ Back
             </button>
-            <SubmissionButton canSubmit={canSubmit} />
+            <SubmissionButton canSubmit={canSubmit} setChecked={setChecked} />
           </div>
         </SquarePaymentForm>
       </div>
