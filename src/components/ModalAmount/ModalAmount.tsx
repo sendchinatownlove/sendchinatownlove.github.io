@@ -10,7 +10,7 @@ import {
   SET_AMOUNT,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 
-interface Props {
+export interface Props {
   purchaseType: string;
   sellerId: string;
   sellerName: string;
@@ -43,7 +43,11 @@ export const Modal = (props: Props) => {
   ];
 
   return (
-    <form id="donation-form">
+    <form
+      id="donation-form"
+      className={classnames(styles.donationsContainer, 'modalForm--form')}
+      data-testid="Modal Amount"
+    >
       <div>
         <h2>{props.sellerName}</h2>
       </div>
