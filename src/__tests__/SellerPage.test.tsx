@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderIntegration } from '../utilities/testing/render';
-import { render } from '@testing-library/react';
 import SellerPage from '../components/SellerPage';
 
 jest.mock('../utilities/api', () => {
@@ -60,17 +59,8 @@ jest.mock('react-router-dom', () => {
     })),
   };
 });
+
 describe('Seller Page', () => {
-  // const APIRequests = require("../utilities/api");
-
-  beforeEach(() => {
-    // merchantResponse  = shunfaBakeryResponse
-    // jest.spyOn(APIRequests, 'getSeller').mockImplementation(() => Promise.resolve(merchantResponse));
-  });
-
-  afterEach(() => {
-    // mocked(APIRequests.getSeller).mockClear();
-  });
 
   test('should display SellerPage with succesful GET /seller request', async () => {
     const { findByTestId } = renderIntegration(
