@@ -83,14 +83,14 @@ const ModalPayment = ({
           const newErrors =
             responseErrors.length > 0
               ? responseErrors.map(
-                  (error: { code: string; detail: string }) => {
-                    if (hasKey(SquareErrors, error.code)) {
-                      return SquareErrors[error.code];
-                    } else {
-                      return error.detail;
-                    }
+                (error: { code: string; detail: string }) => {
+                  if (hasKey(SquareErrors, error.code)) {
+                    return SquareErrors[error.code];
+                  } else {
+                    return error.detail;
                   }
-                )
+                }
+              )
               : [];
           setErrorsMessages(newErrors);
         }
@@ -112,8 +112,8 @@ const ModalPayment = ({
   const canSubmit = isChecked && name.length > 0 && email.length > 0;
   return (
     <div className={styles.container}>
-      <div>
-        <h2>Complete your {purchaseTypePhrase.toLowerCase()}</h2>
+      <div className={styles.headerView}>
+        <h2 className={styles.title}>Complete your {purchaseTypePhrase.toLowerCase()}</h2>
         <button className={'closeButton--close'} onClick={closeModal}>
           ×
         </button>
@@ -193,14 +193,14 @@ const ModalPayment = ({
               exchanged for this donation.
             </p>
           ) : (
-            <p>
-              By proceeding with your purchase, you understand that the gift
+              <p>
+                By proceeding with your purchase, you understand that the gift
               card is not redeemable for cash and can only be used at{' '}
-              {sellerName}. All purchases are final. In the event that the
+                {sellerName}. All purchases are final. In the event that the
               merchant is no longer open at the time of redemption, Send
               Chinatown Love Inc. will not be able to refund your purchase.
-            </p>
-          )}
+              </p>
+            )}
           <div className={styles.btnRow}>
             <button
               type="button"
