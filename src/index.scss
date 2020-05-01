@@ -138,6 +138,7 @@ h3 {
 .closeButton {
   &--close {
     @include modal-close-button;
+    background-color: white;
   }
 
   &--close:focus {
