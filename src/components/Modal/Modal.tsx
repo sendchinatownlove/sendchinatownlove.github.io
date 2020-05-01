@@ -11,7 +11,7 @@ import {
 } from '../../utilities/hooks/ModalPaymentContext/context';
 import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
 
-interface Props {
+export interface Props {
   purchaseType: string;
   sellerId: string;
   sellerName: string;

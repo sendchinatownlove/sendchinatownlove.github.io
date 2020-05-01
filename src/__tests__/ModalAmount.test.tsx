@@ -1,8 +1,14 @@
 import React from 'react';
-import { ModalPaymentProvider } from '../utilities/hooks/ModalPaymentContext/context';
+import { ModalPaymentProvider, useModalPaymentDispatch } from '../utilities/hooks/ModalPaymentContext/context';
 import ModalPage, {Props} from '../components/ModalAmount';
-import { render, findByText } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
+jest.mock('../utilities/hooks/ModalPaymentContext/context', () => {
+  return {
+    ...jest.requireActual('../utilities/hooks/ModalPaymentContext/context'),
+    useModalPaymentDispatch: jest.fn(() => jest.fn())
+  };
+});
 
 const renderModal = (props : Props) => {
   return render(
@@ -17,7 +23,7 @@ describe('Modal Page for payment processing', () => {
   test('Should display amount page for donations/giftcards', async () => {
     const { getByText, getByPlaceholderText } = renderModal({
       purchaseType: "donation",
-      sellerId: "shunfa-bakery",
+      sellerId: "shdunfa-bakery",
       sellerName: "Shunfa Bakery"
     });
 
@@ -41,4 +47,19 @@ describe('Modal Page for payment processing', () => {
     expect(Prompt3).toBeInTheDocument();
     expect(customAmount).toBeInTheDocument();
   });
+
+  // test('Clicking the next button should go to payment details amount', async () => {
+  //   const { getByText } = renderModal({
+  //     purchaseType: "donation",
+  //     sellerId: "shunfa-bakery",
+  //     sellerName: "Shunfa Bakery"
+  //   });
+  //   const amount1 = getByText('$10');
+  //   const customAmount =  getByText('Next');
+
+  //   fireEvent.click(amount1);
+  //   fireEvent.click(customAmount);
+
+  //   expect(useModalPaymentDispatch).toHaveBeenCalledWith({ type: "CLOSE_MODAL", payload: undefined });
+  // });
 });
