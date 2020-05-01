@@ -6,7 +6,7 @@ import confirmationPic from './chinatown-logo.png';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
 
-type Props = {
+export type Props = {
   purchaseType: string;
   sellerId: string;
   sellerName: string;
@@ -16,7 +16,7 @@ const ModalConfirmation = (props: Props) => {
   const dispatch = useModalPaymentDispatch();
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="Modal Confirmation">
       <h2>Thank you!</h2>
       <p>
         We appreciate your support. We'll{' '}
