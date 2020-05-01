@@ -78,6 +78,7 @@ export const makeSquarePayment = async (
   buyer: Buyer
 ) => {
   const { email, name } = buyer;
+  const idempotencyKey = buyer.idempotency_key;
 
   return await axios
     .post(
@@ -89,6 +90,7 @@ export const makeSquarePayment = async (
         email,
         name,
         seller_id: sellerId,
+        idempotency_key: idempotencyKey,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
