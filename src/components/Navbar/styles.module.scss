@@ -1,0 +1,24 @@
+.navBarContainer {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  margin: 15px auto;
+  align-items: center;
+}
+.image {
+  width: 150px;
+  height: 66px;
+}
+.navLinksContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
+  max-width: 400px;
+}
+.navLink {
+  text-decoration: none;
+  color: black;
+}

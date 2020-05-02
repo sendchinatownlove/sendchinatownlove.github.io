@@ -2,6 +2,7 @@ import Home from '../Home';
 import SellerPage from '../SellerPage';
 import About from '../About';
 import MerchantsPage from '../MerchantsPage';
+import ErrorPage from '../404Page';
 import { createBrowserHistory } from 'history';
 import { Router, Switch, Route } from 'react-router-dom';
 import React from 'react';
@@ -31,6 +32,7 @@ class App extends React.Component<{}> {
           <Route path="/sellers" component={MerchantsPage} />
           <Route path="/:id" component={SellerPage} />
           <Route path="/:id#story" component={SellerPage} />
+          <Route component={ErrorPage} />
         </Switch>
       </Router>
     );
