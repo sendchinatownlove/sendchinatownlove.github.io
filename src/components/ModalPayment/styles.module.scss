@@ -14,19 +14,22 @@
   }
 }
 
-@media screen and (max-width:450px){
-  .headerView{
-    padding-top:25px
+@media screen and (max-width: 450px) {
+  .headerView {
+    padding-top: 25px;
+    display: flex;
+    text-align: center;
+  }
+  .title {
+    width: max-content;
   }
 }
-
 
 .row,
 .inputRow,
 .termsAndConditions {
   display: flex;
   flex-direction: row;
-  width: 50%;
   align-items: center;
   margin-bottom: 10px;
 }
