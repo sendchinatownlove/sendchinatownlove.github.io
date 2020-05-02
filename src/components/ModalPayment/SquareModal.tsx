@@ -112,7 +112,7 @@ const ModalPayment = ({
   const canSubmit = isChecked && name.length > 0 && email.length > 0;
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.headerView}>
         <h2>Complete your {purchaseTypePhrase.toLowerCase()}</h2>
         <button className={'closeButton--close'} onClick={closeModal}>
           ×
@@ -180,6 +180,7 @@ const ModalPayment = ({
                 value="checkedA"
                 inputProps={{ 'aria-label': 'Checkbox A' }}
                 onClick={checkAgreement}
+                checked={isChecked}
               />
               <span>
                 I agree with the <b>Terms & Conditions</b>
@@ -209,7 +210,7 @@ const ModalPayment = ({
             >
               ᐸ Back
             </button>
-            <SubmissionButton canSubmit={canSubmit} />
+            <SubmissionButton canSubmit={canSubmit} setChecked={setChecked} />
           </div>
         </SquarePaymentForm>
       </div>
