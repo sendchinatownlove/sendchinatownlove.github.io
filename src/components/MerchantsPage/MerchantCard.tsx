@@ -4,21 +4,20 @@ import { BrowsePageSeller } from '../../utilities/api';
 import ProgressBar from '../ProgressBar';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
-import temp from './images/temp.png';
 
 const Location = styled.div`
-    font-weight: bolder;
-    color: #46accc;
-  `;
+  font-weight: bolder;
+  color: #46accc;
+`;
 
 const Summary = styled.p`
-    display: -webkit-box;
-    height: 45px;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  `;
+  display: -webkit-box;
+  height: 45px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
 export interface Props {
   storeInfo?: BrowsePageSeller;
@@ -39,20 +38,18 @@ const MerchantCard = ({ storeInfo }: Props) => {
         to={`/${storeInfo!.seller_id}`}
         style={{ textDecoration: 'none', color: 'black' }}
       >
-        {
-          console.log('store info', storeInfo)
-        }
+        {console.log('store info', storeInfo)}
         <div className={styles.merchantCard}>
-          <img className={styles.merchantCardLogo} src={storeInfo!.hero_image_url} alt="Logo" />
-          <Location> 
-            {city}, {state} 
+          <img
+            className={styles.merchantCardLogo}
+            src={storeInfo!.hero_image_url}
+            alt="Logo"
+          />
+          <Location>
+            {city}, {state}
           </Location>
-          <h3> 
-            {storeInfo!.name} 
-          </h3>
-          <Summary>
-            {storeInfo!.summary}
-          </Summary>
+          <h3>{storeInfo!.name}</h3>
+          <Summary>{storeInfo!.summary}</Summary>
           <div style={{ color: '#949494' }}>
             {/* TODO: need to update "donation" phrase and the time stamp */}
             Last donation 1h ago

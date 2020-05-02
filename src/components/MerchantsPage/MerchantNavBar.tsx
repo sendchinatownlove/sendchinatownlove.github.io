@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
+  max-width: 500px;
 `;
 
 interface Props {
@@ -15,19 +15,18 @@ interface Props {
 const NavBar = ({ filterStoreType }: Props) => {
   const [selected, setSelected] = useState('all');
 
-  const setStoreType = (type:any, e:any) => {
+  const setStoreType = (type: any, e: any) => {
     e.preventDefault();
     setSelected(type);
     filterStoreType(type);
-  }
+  };
 
-  // TODO: Update buttons with shop types from database
   const storeTypes = [
     { value: 'all', text: 'All' },
     { value: 'bakery', text: 'Bakery' },
     { value: 'restaurant', text: 'Restaurant' },
-    { value: 'grocery', text: 'Grocery' },
-    { value: 'salon', text: 'Salon' },
+    // { value: 'grocery', text: 'Grocery' },
+    // { value: 'salon', text: 'Salon' },
   ];
 
   return (

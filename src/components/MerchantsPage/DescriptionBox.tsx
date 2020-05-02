@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
-import targetMerchantImage from './images/grandmaIcon.png';
+import merchantIcon from './images/merchantIcon.png';
 
 const Container = styled.div`
-    text-align: center;
-  `;
+  text-align: center;
+`;
 
 const IMG = styled.img`
   width: 45%;
@@ -22,8 +22,8 @@ const BP = styled.li`
 
 const TargetMerchantBox = () => (
   <Container className={styles.merchantCard}>
-    <IMG src={targetMerchantImage} alt="target-merchant-img" />
-    <h3>Meet our Target Merchant:</h3>
+    <IMG src={merchantIcon} alt="target-merchant-img" />
+    <h3>Meet our Target Merchant</h3>
     <UL>
       <BP>Asian immigrant-owned small businesses</BP>
       <BP>

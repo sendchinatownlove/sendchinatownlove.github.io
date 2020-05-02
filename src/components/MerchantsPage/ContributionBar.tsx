@@ -24,7 +24,7 @@ const TextContainer = styled.div`
   justify-content: space-between;
 `;
 
-const ProgressBar = ({ totalDonations, totalVouchers }: Props) => {
+const ContributionBar = ({ totalDonations, totalVouchers }: Props) => {
   const progressWidth = (raised: number, total: number) => {
     if (raised < total) return (raised / total) * 100;
     return 100;
@@ -32,7 +32,7 @@ const ProgressBar = ({ totalDonations, totalVouchers }: Props) => {
 
   return (
     <Container>
-      <h4>Total Raised:</h4>
+      <h4>Total Raised</h4>
       <Donations
         style={{
           background: `linear-gradient(-45deg, #dd678a ${progressWidth(
@@ -57,4 +57,4 @@ const ProgressBar = ({ totalDonations, totalVouchers }: Props) => {
   );
 };
 
-export default ProgressBar;
+export default ContributionBar;

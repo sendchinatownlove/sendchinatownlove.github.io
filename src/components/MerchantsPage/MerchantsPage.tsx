@@ -5,7 +5,7 @@ import Footer from '../Footer';
 import NavBar from './MerchantNavBar';
 import MerchantCard from './MerchantCard';
 import DescriptionBox from './DescriptionBox';
-import ProgressBarTwo from './ProgressBar';
+import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
 
@@ -24,19 +24,22 @@ const MerchantsPage: React.FC<{}> = () => {
   }, []);
 
   // TODO: replace this filter with a backend API call
-  const filterStoreType = async (type:any) => {
-    const result = sellers.filter((store:any) => store!.business_type === type)
-    await setFilter(result);
-  }
+  const filterStoreType = async (type: any) => {
+    if (type === 'all') {
+      await setFilter(sellers);
+    } else {
+      const result = sellers.filter(
+        (store: any) => store!.business_type === type
+      );
+      await setFilter(result);
+    }
+  };
 
   return filter ? (
     <div>
-      <div className={styles.container}> {
-        console.log('filter', filter)
-      }
-
+      <div className={styles.container}>
         <div className={styles.overlayContainer}>
-          <img src={nycMapBackground} alt='Nyc' className={styles.nycMap}/>
+          <img src={nycMapBackground} alt="NYC MAP" className={styles.nycMap} />
           <div className={styles.contentContainer}>
             <div className={styles.textArea}>
               <h2 style={{ fontWeight: 'bolder' }}>Our Chinatown</h2>
@@ -47,22 +50,21 @@ const MerchantsPage: React.FC<{}> = () => {
                 impacted by COVID-19.
               </p>
               <p>
-                Support local merchants by making a donation or purchasing a gift
-                card from them.
+                Support local merchants by making a donation or purchasing a
+                gift card from them.
               </p>
             </div>
             {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
             <div className={styles.storeInfo}>
-              <ProgressBarTwo totalDonations={3000} totalVouchers={1700} />
+              <ContributionBar totalDonations={3000} totalVouchers={1700} />
             </div>
             <div className={styles.ownerPanel}>
               <DescriptionBox />
             </div>
           </div>
         </div>
-
-        <div className={styles.container2}>
-          <NavBar filterStoreType={filterStoreType}/>
+        <div className={styles.storeInfoContainer}>
+          <NavBar filterStoreType={filterStoreType} />
 
           <div className={styles.merchantsContainer}>
             {filter.map((store: any) => (
@@ -71,7 +73,6 @@ const MerchantsPage: React.FC<{}> = () => {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   ) : null;
