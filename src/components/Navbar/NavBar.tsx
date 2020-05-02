@@ -10,15 +10,15 @@ const NavBar = (props: Props) => {
     <div className={styles.navBarContainer}>
       <img className={styles.image} src={sclLogo} alt="Logo" />
       <div className={styles.navLinksContainer}>
-        <div className={styles.navLink}>
-          <Link to="/">HOME</Link>
-        </div>
-        <div className={styles.navLink}>
-          <Link to="/sellers">MERCHANTS</Link>
-        </div>
-        <div className={styles.navLink}>
-          <Link to="/about">ABOUT US</Link>
-        </div>
+        <Link to="/" className={styles.navLink}>
+          HOME
+        </Link>
+        <Link to="/sellers" className={styles.navLink}>
+          MERCHANTS
+        </Link>
+        <Link to="/about" className={styles.navLink}>
+          ABOUT US
+        </Link>
       </div>
     </div>
   );

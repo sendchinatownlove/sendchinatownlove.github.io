@@ -26,24 +26,3 @@ const ErrorPage = (props: Props) => {
 };
 
 export default ErrorPage;
-// curl --location --request POST 'http://localhost:5000' \
-// --header 'Content-Type: application/json' \
-// --data-raw '{
-//     "seller_id": "shunfa-bakery",
-//     "cuisine_name": "Bakery",
-//     "name": "Shunfa Bakery",
-//     "story": "When Shunfa Bakery, a ",
-//     "accept_donations": true,
-//     "sell_gift_cards": true,
-//     "owner_name": "Shunfa Bakery",
-//     "owner_image_url": "assets/shunfa-bakery-logo.png",
-//     "target_amount": 1000000,
-//     "summary": null,
-//     "hero_image_url": "assets/shunfa-bakery-hero.png",
-//     "progress_bar_color": null,
-//     "business_type": "Family-owned",
-//     "num_employees": 3,
-//     "founded_year": 2015,
-//     "website_url": null,
-//     "menu_url": null
-// }'
