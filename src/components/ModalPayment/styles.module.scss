@@ -14,14 +14,14 @@
   }
 }
 
+.headerView {
+display: flex;
+text-align: center;
+}
+
 @media screen and (max-width: 450px) {
   .headerView {
     padding-top: 25px;
-    display: flex;
-    text-align: center;
-  }
-  .title {
-    width: max-content;
   }
 }
 
