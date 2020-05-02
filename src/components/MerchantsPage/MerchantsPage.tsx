@@ -1,45 +1,79 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import Footer from '../Footer';
-import NavBar from './NavBar';
-import MerchantCard from './MerchantCard';
-import styles from './styles.module.scss';
 import { getSellers } from '../../utilities';
+import Footer from '../Footer';
+import NavBar from './MerchantNavBar';
+import MerchantCard from './MerchantCard';
+import DescriptionBox from './DescriptionBox';
+import ProgressBarTwo from './ProgressBar';
+import styles from './styles.module.scss';
+import nycMapBackground from './images/nyc_3.png';
 
 const MerchantsPage: React.FC<{}> = () => {
   const [sellers, setSellers] = useState<any | null>();
+  const [filter, setFilter] = useState<any | null>();
 
   const fetchData = async () => {
     const result = await getSellers();
-    setSellers(result.data);
+    await setSellers(result.data);
+    await setFilter(result.data);
   };
 
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return sellers ? (
-    <React.Fragment>
-      <div className={styles.container}>
-        <h2> Support our local merchants </h2>
-        <p>
-          Send Chinatown Love is intended to support our local businesses facing
-          financial loss. Make a difference today by donating or buying a gift
-          card.
-        </p>
+  // TODO: replace this filter with a backend API call
+  const filterStoreType = async (type:any) => {
+    const result = sellers.filter((store:any) => store!.business_type === type)
+    await setFilter(result);
+  }
 
-        <NavBar />
+  return filter ? (
+    <div>
+      <div className={styles.container}> {
+        console.log('filter', filter)
+      }
 
-        <div className={styles.merchantsContainer}>
-          {sellers.map((store: any) => (
-            <MerchantCard storeInfo={store} />
-          ))}
+        <div className={styles.overlayContainer}>
+          <img src={nycMapBackground} alt='Nyc' className={styles.nycMap}/>
+          <div className={styles.contentContainer}>
+            <div className={styles.textArea}>
+              <h2 style={{ fontWeight: 'bolder' }}>Our Chinatown</h2>
+              <br />
+              <p>
+                We are providing an online platform to low-tech, cash-only,
+                Asian-owned small businesses that have been disproportionately
+                impacted by COVID-19.
+              </p>
+              <p>
+                Support local merchants by making a donation or purchasing a gift
+                card from them.
+              </p>
+            </div>
+            {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
+            <div className={styles.storeInfo}>
+              <ProgressBarTwo totalDonations={3000} totalVouchers={1700} />
+            </div>
+            <div className={styles.ownerPanel}>
+              <DescriptionBox />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.container2}>
+          <NavBar filterStoreType={filterStoreType}/>
+
+          <div className={styles.merchantsContainer}>
+            {filter.map((store: any) => (
+              <MerchantCard storeInfo={store} />
+            ))}
+          </div>
         </div>
       </div>
 
       <Footer />
-    </React.Fragment>
+    </div>
   ) : null;
 };
 

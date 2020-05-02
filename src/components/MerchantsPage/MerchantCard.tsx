@@ -1,9 +1,24 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './styles.module.scss';
 import { BrowsePageSeller } from '../../utilities/api';
-import temp from './temp.png';
 import ProgressBar from '../ProgressBar';
+import styled from 'styled-components';
+import styles from './styles.module.scss';
+import temp from './images/temp.png';
+
+const Location = styled.div`
+    font-weight: bolder;
+    color: #46accc;
+  `;
+
+const Summary = styled.p`
+    display: -webkit-box;
+    height: 45px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `;
 
 export interface Props {
   storeInfo?: BrowsePageSeller;
@@ -24,16 +39,20 @@ const MerchantCard = ({ storeInfo }: Props) => {
         to={`/${storeInfo!.seller_id}`}
         style={{ textDecoration: 'none', color: 'black' }}
       >
+        {
+          console.log('store info', storeInfo)
+        }
         <div className={styles.merchantCard}>
-          {/* TODO: update src with illustration of each merchant */}
-          <img className={styles.merchantCardLogo} src={temp} alt="Logo" />
-          <div className={styles.location}>
-            {city}, {state}
-          </div>
-          <h3> {storeInfo!.name} </h3>
-          <div className={styles.sellerSummary}>
-            <p> {storeInfo!.summary} </p>
-          </div>
+          <img className={styles.merchantCardLogo} src={storeInfo!.hero_image_url} alt="Logo" />
+          <Location> 
+            {city}, {state} 
+          </Location>
+          <h3> 
+            {storeInfo!.name} 
+          </h3>
+          <Summary>
+            {storeInfo!.summary}
+          </Summary>
           <div style={{ color: '#949494' }}>
             {/* TODO: need to update "donation" phrase and the time stamp */}
             Last donation 1h ago
@@ -42,6 +61,7 @@ const MerchantCard = ({ storeInfo }: Props) => {
           <ProgressBar
             amountRaised={storeInfo!.amount_raised}
             targetAmount={storeInfo!.target_amount}
+            progressBarColor={storeInfo!.progress_bar_color}
           />
         </div>
       </Link>
