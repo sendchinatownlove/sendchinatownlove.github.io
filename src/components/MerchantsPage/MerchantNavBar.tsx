@@ -33,7 +33,7 @@ const NavBar = ({ filterStoreType }: Props) => {
     <React.Fragment>
       <NavContainer>
         {storeTypes.map((type) => (
-          <div>
+          <div key={type.value}>
             <button
               className={
                 selected === type.value

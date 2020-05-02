@@ -38,7 +38,6 @@ const MerchantCard = ({ storeInfo }: Props) => {
         to={`/${storeInfo!.seller_id}`}
         style={{ textDecoration: 'none', color: 'black' }}
       >
-        {console.log('store info', storeInfo)}
         <div className={styles.merchantCard}>
           <img
             className={styles.merchantCardLogo}

@@ -68,7 +68,7 @@ const MerchantsPage: React.FC<{}> = () => {
 
           <div className={styles.merchantsContainer}>
             {filter.map((store: any) => (
-              <MerchantCard storeInfo={store} />
+              <MerchantCard key={store!.seller_id} storeInfo={store} />
             ))}
           </div>
         </div>
