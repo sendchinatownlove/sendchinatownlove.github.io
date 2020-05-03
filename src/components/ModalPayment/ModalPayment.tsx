@@ -35,7 +35,7 @@ const ModalPayment = ({
   };
 
   const purchaseTypePhrase =
-    purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
+    purchaseType === 'donation' ? 'Donation' : 'Voucher purchase';
 
   const [isShown, setIsShown] = useState(false);
   const showConfirmModal = () => setIsShown(true);
@@ -122,7 +122,7 @@ const ModalPayment = ({
             </label>
           </div>
           <p>
-            By proceeding with your purchase, you understand that the gift card
+            By proceeding with your purchase, you understand that the voucher
             is not redeemable for cash and can only be used at the merchant’s
             restaurant. All purchases are final. In the event that the merchant
             is no longer open at the time of redemption, Send Chinatown Love
