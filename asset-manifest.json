@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.127f25da.chunk.css",
-    "main.js": "/static/js/main.f1746d1a.chunk.js",
-    "main.js.map": "/static/js/main.f1746d1a.chunk.js.map",
+    "main.css": "/static/css/main.7cb33078.chunk.css",
+    "main.js": "/static/js/main.b79070ec.chunk.js",
+    "main.js.map": "/static/js/main.b79070ec.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.f7beece5.js",
     "runtime-main.js.map": "/static/js/runtime-main.f7beece5.js.map",
     "static/css/2.52f00974.chunk.css": "/static/css/2.52f00974.chunk.css",
     "static/js/2.11876f3e.chunk.js": "/static/js/2.11876f3e.chunk.js",
     "static/js/2.11876f3e.chunk.js.map": "/static/js/2.11876f3e.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.06662fd01d74e79d6237a542bbbd3dbd.js": "/precache-manifest.06662fd01d74e79d6237a542bbbd3dbd.js",
+    "precache-manifest.29d1362a0921406a09d11670af68b1fc.js": "/precache-manifest.29d1362a0921406a09d11670af68b1fc.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.52f00974.chunk.css.map": "/static/css/2.52f00974.chunk.css.map",
-    "static/css/main.127f25da.chunk.css.map": "/static/css/main.127f25da.chunk.css.map",
+    "static/css/main.7cb33078.chunk.css.map": "/static/css/main.7cb33078.chunk.css.map",
     "static/js/2.11876f3e.chunk.js.LICENSE.txt": "/static/js/2.11876f3e.chunk.js.LICENSE.txt",
     "static/media/404-error-image.png": "/static/media/404-error-image.f72ee016.png",
     "static/media/chinatown-logo.png": "/static/media/chinatown-logo.f9e716ba.png",
@@ -26,7 +26,7 @@
     "static/js/runtime-main.f7beece5.js",
     "static/css/2.52f00974.chunk.css",
     "static/js/2.11876f3e.chunk.js",
-    "static/css/main.127f25da.chunk.css",
-    "static/js/main.f1746d1a.chunk.js"
+    "static/css/main.7cb33078.chunk.css",
+    "static/js/main.b79070ec.chunk.js"
   ]
 }
