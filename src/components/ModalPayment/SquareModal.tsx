@@ -36,15 +36,12 @@ const ModalPayment = ({
   const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
 
-  const purchaseTypePhrase =
-    purchaseType === 'donation' ? 'Donation' : 'Voucher purchase';
-  const checkAgreement = () =>
-    isChecked ? setChecked(false) : setChecked(true);
-
   const [isChecked, setChecked] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
+
+  const checkAgreement = () => setChecked(!isChecked);
 
   const cardNonceResponseReceived = (errors: any[], nonce: string) => {
     setErrorsMessages([]);
@@ -101,6 +98,8 @@ const ModalPayment = ({
   const locationId = process.env.REACT_APP_SQUARE_LOCATION_ID
     ? process.env.REACT_APP_SQUARE_LOCATION_ID
     : '';
+  const purchaseTypePhrase =
+    purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
 
   const canSubmit = isChecked && name.length > 0 && email.length > 0;
   return (
@@ -201,7 +200,7 @@ const ModalPayment = ({
               >
                 ᐸ Back
               </button>
-              <SubmissionButton canSubmit={canSubmit} setChecked={setChecked} />
+              <SubmissionButton canSubmit={canSubmit} />
             </div>
           </SquarePaymentForm>
         </div>

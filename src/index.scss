@@ -141,6 +141,7 @@ h3 {
   &--close {
     @include modal-close-button;
     background-color: white;
+    cursor: pointer;
   }
 
   &--close:focus {
