@@ -26,44 +26,39 @@ const ModalPayment = ({
   amount,
   sellerId,
 }: Props) => {
-  const payment: PaymentParams = {
-    amount: Number(amount) * 100,
-    currency: 'usd',
-    item_type: purchaseType,
-    quantity: 1,
-    seller_id: sellerId,
-  };
-
-  const purchaseTypePhrase =
-    purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
-
   const [isShown, setIsShown] = useState(false);
-  const showConfirmModal = () => setIsShown(true);
   const [isChecked, setChecked] = useState(false);
-  const checkAgreement = () =>
-    isChecked ? setChecked(false) : setChecked(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-
-  const buyer: Buyer = { name, email };
 
   const stripe = useStripe();
   const elements = useElements();
 
+  const showConfirmModal = () => setIsShown(true);
+
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-
+    const payment: PaymentParams = {
+      amount: Number(amount) * 100,
+      currency: 'usd',
+      item_type: purchaseType,
+      quantity: 1,
+      seller_id: sellerId,
+    };
+    const buyer: Buyer = { name, email };
     // returns stripe payment intent
     await makePayment(stripe, elements, payment, buyer);
     showConfirmModal(); // shows confirmation modal box
   };
+
+  const purchaseTypePhrase =
+    purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
 
   return (
     <React.Fragment>
       <form
         id="payment-form"
         className={classnames(styles.container, 'modalForm--form')}
-        style={{ display: showPayModal ? 'block' : 'none' }}
       >
         <button className={'closeButton--close'} onClick={handleClose}>
           {' '}
@@ -115,7 +110,7 @@ const ModalPayment = ({
               name="checkbox"
               className={styles.checkbox}
               value="Agree"
-              onClick={checkAgreement}
+              onClick={(e) => setChecked(!isChecked)}
             />
             <label htmlFor="checkbox">
               I agree with the <b>Terms & Conditions</b>

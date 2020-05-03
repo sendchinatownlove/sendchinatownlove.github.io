@@ -37,12 +37,11 @@ export const Modal = (props: Props) => {
       <button className={'closeButton--close'} onClick={closeModal}>
         ×
       </button>
-      {/* {modalView === 0 && <ModalAmount {...props} />}
+      {modalView === 0 && <ModalAmount {...props} />}
       {modalView === 1 && (
         <SquareModal {...props} idempotencyKey={idempotencyKey} />
       )}
-      {modalView === 2 && <ModalConfirmation {...props} />} */}
-      <ModalConfirmation {...props} />
+      {modalView === 2 && <ModalConfirmation {...props} />}
     </div>
   );
 };
