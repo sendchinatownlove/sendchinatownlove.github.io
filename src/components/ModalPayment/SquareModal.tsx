@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import classnames from 'classnames';
 import { Checkbox } from '@material-ui/core';
 
-import { SquarePaymentForm, SimpleCard } from 'react-square-payment-form';
+import { SquarePaymentForm } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
 import styles from './styles.module.scss';
+import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 import { SquareErrors, hasKey } from '../../consts';
 import {
@@ -139,69 +140,71 @@ const ModalPayment = ({
             />
           </div>
         </div>
-        <SquarePaymentForm
-          sandbox={
-            !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
-          }
-          applicationId={applicationId}
-          locationId={locationId}
-          cardNonceResponseReceived={cardNonceResponseReceived}
-          formId="SPF"
-          apiWrapper=""
-        >
-          <SimpleCard />
-          <div className="sq-error-message">
-            {errorMessages.map((errorMessage) => (
-              <li key={`sq-error-${errorMessage}`}>{errorMessage}</li>
-            ))}
-          </div>
+        <div className={styles.sqPaymentForm}>
+          <SquarePaymentForm
+            sandbox={
+              !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+            }
+            applicationId={applicationId}
+            locationId={locationId}
+            cardNonceResponseReceived={cardNonceResponseReceived}
+            formId="SPF"
+            apiWrapper=""
+          >
+            <SquareCardForm />
+            <div className="sq-error-message">
+              {errorMessages.map((errorMessage) => (
+                <li key={`sq-error-${errorMessage}`}>{errorMessage}</li>
+              ))}
+            </div>
 
-          <br />
-          <h3 className={styles.text}>Checkout details</h3>
-          <span className={styles.text}>
-            {' '}
-            {purchaseTypePhrase} of <b>${amount}</b> to {sellerName}{' '}
-          </span>
-          <p />
-          <div>
-            <label className={styles.termsAndConditions}>
-              <Checkbox
-                value="checkedA"
-                inputProps={{ 'aria-label': 'Checkbox A' }}
-                onClick={checkAgreement}
-                checked={isChecked}
-              />
-              <span>
-                I agree with the <b>Terms & Conditions</b>
-              </span>
-            </label>
-          </div>
-          {purchaseTypePhrase === 'Donation' ? (
-            <p>
-              By proceeding with your transaction, you understand that you are
-              making a donation to {sellerName}. No goods or services were
-              exchanged for this donation.
-            </p>
-          ) : (
-            <p>
-              By proceeding with your purchase, you understand that the voucher
-              is not redeemable for cash and can only be used at{' '}
-              {sellerName}. All purchases are final. In the event that the
-              merchant is no longer open at the time of redemption, Send
-              Chinatown Love Inc. will not be able to refund your purchase.
-            </p>
-          )}
-          <div className={styles.btnRow}>
-            <button
-              type="button"
-              className={classnames('modalButton--back', styles.backBtn)}
-              onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 0 })}
-            >
-              ᐸ Back
-            </button>
-            <SubmissionButton canSubmit={canSubmit} setChecked={setChecked} />
-          </div>
-        </SquarePaymentForm>
+            <br />
+            <h3 className={styles.text}>Checkout details</h3>
+            <span className={styles.text}>
+              {' '}
+              {purchaseTypePhrase} of <b>${amount}</b> to {sellerName}{' '}
+            </span>
+            <p />
+            <div>
+              <label className={styles.termsAndConditions}>
+                <Checkbox
+                  value="checkedA"
+                  inputProps={{ 'aria-label': 'Checkbox A' }}
+                  onClick={checkAgreement}
+                  checked={isChecked}
+                />
+                <span>
+                  I agree with the <b>Terms & Conditions</b>
+                </span>
+              </label>
+            </div>
+            {purchaseTypePhrase === 'Donation' ? (
+              <p>
+                By proceeding with your transaction, you understand that you are
+                making a donation to {sellerName}. No goods or services were
+                exchanged for this donation.
+              </p>
+            ) : (
+              <p>
+                By proceeding with your purchase, you understand that the gift
+                card is not redeemable for cash and can only be used at{' '}
+                {sellerName}. All purchases are final. In the event that the
+                merchant is no longer open at the time of redemption, Send
+                Chinatown Love Inc. will not be able to refund your purchase.
+              </p>
+            )}
+            <div className={styles.btnRow}>
+              <button
+                type="button"
+                className={classnames('modalButton--back', styles.backBtn)}
+                onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 0 })}
+              >
+                ᐸ Back
+              </button>
+              <SubmissionButton canSubmit={canSubmit} setChecked={setChecked} />
+            </div>
+          </SquarePaymentForm>
+        </div>
       </div>
     </div>
   );

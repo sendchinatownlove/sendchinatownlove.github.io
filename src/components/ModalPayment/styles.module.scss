@@ -118,6 +118,15 @@
     sans-serif;
 }
 
+.squareCardRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.squareCardRowItem {
+  width: 30% !important;
+}
+
 @media only screen and (max-width: 799px) {
   .paymentContainer {
     flex-direction: column;
@@ -138,5 +147,12 @@
 @media only screen and (max-width: 450px) {
   .paymentContainer {
     width: 100%;
+  }
+  .squareCardRow {
+    display: flex;
+    flex-direction: column;
+  }
+  .squareCardRowItem {
+    width: 100% !important;
   }
 }
