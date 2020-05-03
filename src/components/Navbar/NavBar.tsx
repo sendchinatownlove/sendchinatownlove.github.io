@@ -46,9 +46,12 @@ const NavBar = (props: Props) => {
             className={styles.closeIcon}
           />
         </div>
-        <Link to="/" className={styles.navCompactLink}>
+        <a
+          href="https://sendchinatownlove.com/"
+          className={styles.navCompactLink}
+        >
           HOME
-        </Link>
+        </a>
         <Link to="/sellers" className={styles.navCompactLink}>
           MERCHANTS
         </Link>
@@ -66,9 +69,9 @@ const NavBar = (props: Props) => {
         showCompactMenu()
       ) : (
         <div className={styles.navLinksContainer}>
-          <Link to="/" className={styles.navLink}>
+          <a href="https://sendchinatownlove.com/" className={styles.navLink}>
             HOME
-          </Link>
+          </a>
           <Link to="/sellers" className={styles.navLink}>
             MERCHANTS
           </Link>
