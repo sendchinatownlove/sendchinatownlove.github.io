@@ -1,4 +1,5 @@
 $default-button-color: black;
+$standard-red: #ab192e;
 
 body {
   background-color: #e5e5e5;
@@ -52,7 +53,8 @@ h3 {
   &--filled {
     @include base-button;
     color: white;
-    background-color: $default-button-color;
+    background-color: $standard-red;
+    border-color: $standard-red;
   }
 
   &--outlined {

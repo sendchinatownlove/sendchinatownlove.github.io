@@ -101,7 +101,7 @@ const OwnerPanel = (props: Props) => {
             className={classnames(styles.button, 'button--outlined')}
             onClick={showModal}
           >
-            Gift Card
+            Voucher
           </button>
         )}
       </div>
