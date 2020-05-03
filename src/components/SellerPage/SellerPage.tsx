@@ -13,11 +13,14 @@ import { useParams } from 'react-router-dom';
 const SellerPage: React.FC<{}> = () => {
   // fix typing
   const [seller, setSeller] = useState<any | null>();
+  const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
 
   const fetchData = async () => {
+    setLoading(true);
     const result = id && (await getSeller(id));
     setSeller(result.data);
+    setLoading(false);
   };
   useEffect(() => {
     fetchData();
@@ -67,7 +70,7 @@ const SellerPage: React.FC<{}> = () => {
       <Footer />
     </div>
   ) : (
-    <ErrorPage />
+    <>{loading ? null : <ErrorPage />}</>
   );
 };
 
