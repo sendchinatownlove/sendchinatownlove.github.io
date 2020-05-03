@@ -104,9 +104,9 @@ const ModalPayment = ({
   const canSubmit = isChecked && name.length > 0 && email.length > 0;
   return (
     <div className={styles.container}>
-      <div className={styles.headerView}>
-        <h2>Complete your {purchaseTypePhrase.toLowerCase()}</h2>
-      </div>
+      <h2 className={styles.paymentHeader}>
+        Complete your {purchaseTypePhrase.toLowerCase()}
+      </h2>
       <p>Please add your payment information below</p>
 
       <div className={styles.paymentContainer}>

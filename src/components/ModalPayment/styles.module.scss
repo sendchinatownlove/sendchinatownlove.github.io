@@ -1,8 +1,11 @@
 .container {
-  height: 550px;
   font-size: 15px;
-  overflow-y: scroll;
-  text-align: justify;
+  height: 100%;
+  width: 100%;
+}
+
+.paymentHeader {
+  width: 80%;
 }
 
 .paymentContainer {
@@ -10,7 +13,7 @@
   flex-direction: column;
 
   div {
-    width: 98%;
+    width: 100%;
   }
 }
 
@@ -30,6 +33,7 @@
 .termsAndConditions {
   display: flex;
   flex-direction: row;
+  width: 100%;
   align-items: center;
   margin-bottom: 10px;
 }
@@ -40,8 +44,8 @@
 
 .inputRow {
   box-shadow: 0px 2px 10px rgba(95, 94, 94, 0.1);
-  max-width: 94%;
-  margin: 0 1% 3%;
+  margin: 0 auto;
+  margin-bottom: 16px;
   height: 55px;
   border-radius: 5px;
   padding: 10px 25px 0px;
@@ -76,13 +80,14 @@
   display: flex;
   flex-direction: row;
   position: relative;
-  bottom: -15px;
   justify-content: space-between;
+  margin-bottom: 25px;
 }
 
 .backBtn {
   width: 75px;
   font-size: 13px;
+  background-color: white;
 }
 
 .label {
@@ -114,15 +119,8 @@
 }
 
 @media only screen and (max-width: 799px) {
-  .container {
-    width: 85vw;
-    height: 75vh;
-    overflow-y: scroll;
-  }
-
   .paymentContainer {
     flex-direction: column;
-    width: 80%;
   }
 
   .label {
@@ -138,11 +136,6 @@
 }
 
 @media only screen and (max-width: 450px) {
-  .container {
-    width: 100%;
-    height: 100%;
-  }
-
   .paymentContainer {
     width: 100%;
   }
