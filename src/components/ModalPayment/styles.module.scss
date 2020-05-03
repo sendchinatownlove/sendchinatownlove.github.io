@@ -17,17 +17,6 @@
   }
 }
 
-.headerView {
-  display: flex;
-  text-align: center;
-}
-
-@media screen and (max-width: 450px) {
-  .headerView {
-    padding-top: 25px;
-  }
-}
-
 .row,
 .inputRow,
 .termsAndConditions {
