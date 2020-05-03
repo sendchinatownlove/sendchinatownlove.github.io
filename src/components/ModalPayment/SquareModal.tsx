@@ -39,7 +39,7 @@ const ModalPayment = ({
   const dispatch = useModalPaymentDispatch();
 
   const purchaseTypePhrase =
-    purchaseType === 'donation' ? 'Donation' : 'Gift card purchase';
+    purchaseType === 'donation' ? 'Donation' : 'Voucher purchase';
   const checkAgreement = () =>
     isChecked ? setChecked(false) : setChecked(true);
 
@@ -195,8 +195,8 @@ const ModalPayment = ({
             </p>
           ) : (
             <p>
-              By proceeding with your purchase, you understand that the gift
-              card is not redeemable for cash and can only be used at{' '}
+              By proceeding with your purchase, you understand that the voucher
+              is not redeemable for cash and can only be used at{' '}
               {sellerName}. All purchases are final. In the event that the
               merchant is no longer open at the time of redemption, Send
               Chinatown Love Inc. will not be able to refund your purchase.

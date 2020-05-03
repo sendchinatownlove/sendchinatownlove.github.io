@@ -100,14 +100,14 @@ export const Modal = (props: Props) => {
         {Number(amount) < minAmount && isCustomAmount && (
           <div className={styles.errorMessage}>
             Minimum{' '}
-            {props.purchaseType === 'gift_card' ? 'gift card' : 'donation'}{' '}
+            {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
             amount: $5
           </div>
         )}
         {Number(amount) > maxAmount && isCustomAmount && (
           <div className={styles.errorMessage}>
             Maximum{' '}
-            {props.purchaseType === 'gift_card' ? 'gift card' : 'donation'}{' '}
+            {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
             amount: $10000
           </div>
         )}
