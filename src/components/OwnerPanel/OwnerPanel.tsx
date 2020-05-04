@@ -5,12 +5,20 @@ import Modal from '../Modal';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import defaultOwnerImage from './assets/female.svg';
+import { withStyles, Theme } from '@material-ui/core/styles';
+import Tooltip from '@material-ui/core/Tooltip';
+
 
 interface Props {
   imageSrc: string;
   className?: string;
   amountRaised: number;
   targetAmount: number;
+  numContributions: number;
+  numDonations: number;
+  numGiftCards: number;
+  donationAmount: number;
+  giftCardAmount: number;
   acceptDonations: boolean;
   sellGiftCards: boolean;
   ownerName: string;
@@ -40,6 +48,16 @@ const OwnerPanel = (props: Props) => {
     if (raised < target) return (raised / target) * 100;
     return 100;
   };
+
+  const SupporterTooltip = withStyles((theme: Theme) => ({
+    tooltip: {
+      backgroundColor: '#ffffff',
+      color: 'rgba(0, 0, 0, 0.87)',
+      width: 180,
+      fontSize: theme.typography.pxToRem(14),
+      border: '1px solid #dadde9',
+    },
+  }))(Tooltip);
 
   const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
     return props.extraInfo[current] != null;
@@ -77,10 +95,36 @@ const OwnerPanel = (props: Props) => {
               {' '}
             </div>
           </div>
-          <div>
+          <div className={styles.contributionInfo}>
             {/* TODO(jtmckibb): Add commas for easier readability */}$
             {Math.floor(props.amountRaised) / 100} of $
             {(Math.floor(props.targetAmount) / 100).toLocaleString()}
+            <SupporterTooltip
+              title={
+                <React.Fragment>
+                  <table>
+                    <tr>
+                      <td>
+                        <b>{props.numGiftCards}</b> gift cards
+                      </td>
+                      <td>
+                        <b>${Math.floor(props.giftCardAmount) / 100}</b>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>{props.numDonations}</b> donations
+                      </td>
+                      <td>
+                        <b>${Math.floor(props.donationAmount) / 100}</b>
+                      </td>
+                    </tr>
+                  </table>
+                  </React.Fragment>
+              } enterTouchDelay={50} placement="top"
+            >
+              <div><b>{props.numContributions}</b> supporters</div>
+            </SupporterTooltip>
           </div>
         </div>
       )}
@@ -138,8 +182,8 @@ const OwnerPanel = (props: Props) => {
           })}
         </div>
       ) : (
-        ''
-      )}
+          ''
+        )}
 
       <ModalBox
         purchaseType={purchaseType}
