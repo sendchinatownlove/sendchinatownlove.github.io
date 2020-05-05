@@ -1,4 +1,3 @@
-
 import SellerPage from '../SellerPage';
 import About from '../About';
 import MerchantsPage from '../MerchantsPage';
