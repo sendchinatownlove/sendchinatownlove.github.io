@@ -23,7 +23,7 @@ const ErrorPage = (props: Props) => {
         </h3>
         <h3 className={styles.subHeader}>Try going back to the homepage.</h3>
         <p className={styles.backToHome}>
-          <Link to="/">PLEASE GO TO HOMEPAGE</Link>
+          <a href="https://sendchinatownlove.com/">PLEASE GO TO HOMEPAGE</a>
         </p>
       </div>
     </main>
