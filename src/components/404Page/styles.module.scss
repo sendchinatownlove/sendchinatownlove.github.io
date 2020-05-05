@@ -1,5 +1,6 @@
 .container {
-  background-color: #fffcfa;
+  font-family: futura;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -23,7 +24,7 @@
   font-weight: 600;
 }
 .subHeader {
-  font-weight: 500;
+  font-weight: 400;
   margin: 0.2rem auto;
 }
 .backToHome {

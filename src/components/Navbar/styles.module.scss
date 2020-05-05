@@ -6,6 +6,7 @@
   width: 90%;
   margin: 15px auto;
   align-items: center;
+  font-family: futura;
 }
 .image {
   width: 150px;
@@ -33,6 +34,9 @@
 .navLink {
   text-decoration: none;
   color: black;
+  a:hover {
+    text-decoration: underline;
+  }
 }
 .navCompactLink {
   text-decoration: none;
