@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Dispatch } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
