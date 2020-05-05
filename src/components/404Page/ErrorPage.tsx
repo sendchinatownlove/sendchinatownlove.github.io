@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import NavBar from '../Navbar';
 import styles from './styles.module.scss';
-import { Link } from 'react-router-dom';
 import ErrorImage from '../../images/404-error-image.png';
 
 interface Props {}
