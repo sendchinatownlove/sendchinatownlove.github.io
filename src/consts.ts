@@ -23,7 +23,7 @@ const SquareErrors = {
     'The card expiration date is either invalid or indicates that the card is expired.',
   GENERIC_DECLINE: 'An unexpected error occurred.',
   GIFT_CARD_AVAILABLE_AMOUNT:
-    'Gift card does not have sufficient balance for requested amount and tip.',
+    'Voucher does not have sufficient balance for requested amount and tip.',
   INSUFFICIENT_FUNDS:
     'This payment source has insufficient funds to cover the payment.',
   INSUFFICIENT_PERMISSIONS:

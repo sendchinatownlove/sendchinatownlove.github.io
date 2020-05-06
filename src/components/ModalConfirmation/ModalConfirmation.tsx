@@ -21,7 +21,7 @@ const ModalConfirmation = (props: Props) => {
       <p>
         We appreciate your support. We'll{' '}
         {props.purchaseType === 'gift_card'
-          ? `email you your gift card when ${props.sellerName} opens back up!`
+          ? `email you your voucher when ${props.sellerName} opens back up!`
           : `let you know when ${props.sellerName} receives your donation!`}
       </p>
 

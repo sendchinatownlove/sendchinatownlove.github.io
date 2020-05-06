@@ -3,10 +3,9 @@ import { Context } from 'react-square-payment-form';
 
 type Props = {
   canSubmit: boolean;
-  setChecked: (isChecked: boolean) => void;
 };
 
-const SubmissionButton = ({ canSubmit, setChecked }: Props) => {
+const SubmissionButton = ({ canSubmit }: Props) => {
   const context = useContext(Context);
   var [submittable] = useState(false);
 
@@ -21,10 +20,7 @@ const SubmissionButton = ({ canSubmit, setChecked }: Props) => {
     <button
       type="button"
       className={'modalButton--filled'}
-      onClick={(e) => {
-        handleSubmit(e);
-        setChecked(false);
-      }}
+      onClick={handleSubmit}
       disabled={!submittable}
     >
       Confirm

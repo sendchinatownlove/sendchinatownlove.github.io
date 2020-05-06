@@ -1,0 +1,50 @@
+.navBarContainer {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  margin: 15px auto;
+  align-items: center;
+  font-family: futura;
+}
+.image {
+  width: 150px;
+  height: 66px;
+}
+.navLinksContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
+  max-width: 400px;
+}
+.navLinksCompactContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%h;
+  background-color: white;
+  z-index: 10;
+}
+.navLink {
+  text-decoration: none;
+  color: black;
+  a:hover {
+    text-decoration: underline;
+  }
+}
+.navCompactLink {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  margin: 16px auto;
+  text-align: center;
+}
+.closeIcon {
+  cursor: pointer;
+}

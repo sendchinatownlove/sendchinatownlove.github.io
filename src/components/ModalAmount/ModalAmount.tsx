@@ -8,7 +8,6 @@ import {
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
-  CLOSE_MODAL,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 interface Props {
@@ -36,11 +35,6 @@ export const Modal = (props: Props) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
   };
 
-  const closeModal = (e: any) => {
-    e.preventDefault();
-    dispatch({ type: CLOSE_MODAL, payload: undefined });
-  };
-
   const buttonAmounts = [
     { value: '10', text: '$10' },
     { value: '25', text: '$25' },
@@ -49,15 +43,9 @@ export const Modal = (props: Props) => {
   ];
 
   return (
-    <form
-      id="donation-form"
-      className={classnames(styles.donationsContainer, 'modalForm--form')}
-    >
+    <form id="donation-form">
       <div>
         <h2>{props.sellerName}</h2>
-        <button className={'closeButton--close'} onClick={closeModal}>
-          ×
-        </button>
       </div>
 
       <p>Please select an amount or enter a custom amount</p>
@@ -100,14 +88,14 @@ export const Modal = (props: Props) => {
         {Number(amount) < minAmount && isCustomAmount && (
           <div className={styles.errorMessage}>
             Minimum{' '}
-            {props.purchaseType === 'gift_card' ? 'gift card' : 'donation'}{' '}
+            {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
             amount: $5
           </div>
         )}
         {Number(amount) > maxAmount && isCustomAmount && (
           <div className={styles.errorMessage}>
             Maximum{' '}
-            {props.purchaseType === 'gift_card' ? 'gift card' : 'donation'}{' '}
+            {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
             amount: $10000
           </div>
         )}

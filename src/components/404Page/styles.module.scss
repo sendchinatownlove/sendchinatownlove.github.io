@@ -1,0 +1,38 @@
+.container {
+  font-family: futura;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.errorImage {
+  width: 80%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.textContainer {
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.mainHeader {
+  font-weight: 600;
+}
+.subHeader {
+  font-weight: 400;
+  margin: 0.2rem auto;
+}
+.backToHome {
+  font-weight: 450;
+  font-size: 1rem;
+  a {
+    color: #a7182d;
+  }
+}
+@media only screen and (max-width: 450px) {
+}
