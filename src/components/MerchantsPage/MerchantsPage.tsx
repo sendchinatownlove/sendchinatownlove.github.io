@@ -9,6 +9,9 @@ import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
 
+// the hook
+import { useTranslation } from 'react-i18next';
+
 const MerchantsPage: React.FC<{}> = () => {
   const [sellers, setSellers] = useState<any | null>();
   const [filter, setFilter] = useState<any | null>();
