@@ -61,7 +61,6 @@ jest.mock('react-router-dom', () => {
 });
 
 describe('Seller Page', () => {
-
   test('should display SellerPage with succesful GET /seller request', async () => {
     const { findByTestId } = renderIntegration(
       '/shunfa-bakery',
