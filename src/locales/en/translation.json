@@ -1,0 +1,13 @@
+{
+  "paymentProcessing": {
+    "amount": {
+      "header": "Please select an amount or enter a custom amount",
+      "label1": "Select an amount",
+      "label2": "Or enter an amount",
+      "minimum": "Minimum",
+      "maximum": "Maximum",
+      "amount": "amount",
+      "submit": "Next"
+    }
+  }
+}
