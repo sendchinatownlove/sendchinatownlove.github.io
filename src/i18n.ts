@@ -2,32 +2,35 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 // the translations
-// (tip move them in a JSON file and import them)
-const resources = {
-  en: {
-    translation: {
-      "Welcome to React": "Welcome to React and react-i18next",
-      "Support our local merchants": "YayMerchants!"
-    }
-  },
-  cn: {
-    translation: {
-      "Welcome to React": "Howdie",
-      "Support our local merchants": "Merch!"
-    }
-  },
-};
+import EnTrans from "./locales/en/translation.json"
+import CnTrans from "./locales/cn/translation.json"
+
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
-    resources,
+    initImmediate: false,
+    preload: ["en", "cn"],
+    fallbackLng: "en",
     lng: "en",
 
-    keySeparator: false, // we do not use keys in form messages.welcome
+    // have a common namespace used around the full app
+    ns: ['translation'],
+    defaultNS: 'translation',
+
+    // debug: true,
 
     interpolation: {
-      escapeValue: false // react already safes from xss
+      escapeValue: false, // not needed for react!!
+    },
+
+    resources: {
+      en: {
+        translation: EnTrans
+      },
+      jap: {
+        translation: CnTrans
+      }
     }
   });
 
