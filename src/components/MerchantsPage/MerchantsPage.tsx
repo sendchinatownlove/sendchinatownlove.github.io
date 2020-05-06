@@ -6,6 +6,9 @@ import MerchantCard from './MerchantCard';
 import styles from './styles.module.scss';
 import { getSellers } from '../../utilities';
 
+// the hook
+import { useTranslation } from 'react-i18next';
+
 const MerchantsPage: React.FC<{}> = () => {
   const [sellers, setSellers] = useState<any | null>();
 
