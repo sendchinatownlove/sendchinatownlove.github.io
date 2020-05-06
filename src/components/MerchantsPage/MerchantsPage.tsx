@@ -22,10 +22,12 @@ const MerchantsPage: React.FC<{}> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const { t, i18n } = useTranslation();
+
   return sellers ? (
     <React.Fragment>
       <div className={styles.container}>
-        <h2> Support our local merchants </h2>
+        <h2>{t('Support our local merchants')}</h2>
         <p>
           Send Chinatown Love is intended to support our local businesses facing
           financial loss. Make a difference today by donating or buying a gift
