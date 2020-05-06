@@ -9,7 +9,7 @@ import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   purchaseType: string;
@@ -51,10 +51,12 @@ export const Modal = (props: Props) => {
         <h2>{props.sellerName}</h2>
       </div>
 
-      <p>{t("paymentProcessing.amount.header")}</p>
+      <p>{t('paymentProcessing.amount.header')}</p>
 
       <div className={styles.amountContainer}>
-        <label htmlFor="select-amount">{t("paymentProcessing.amount.label1")}</label>
+        <label htmlFor="select-amount">
+          {t('paymentProcessing.amount.label1')}
+        </label>
         <br />
         <div className={styles.selectAmtContainer}>
           {buttonAmounts.map((amount) => (
@@ -73,7 +75,9 @@ export const Modal = (props: Props) => {
             </button>
           ))}
         </div>
-        <label htmlFor="custom-amount">{t("paymentProcessing.amount.label2")}</label>
+        <label htmlFor="custom-amount">
+          {t('paymentProcessing.amount.label2')}
+        </label>
         <br />
         <input
           name="custom-amount"
@@ -90,16 +94,16 @@ export const Modal = (props: Props) => {
         />
         {Number(amount) < minAmount && isCustomAmount && (
           <div className={styles.errorMessage}>
-            {t("paymentProcessing.amount.minimum")}{' '}
+            {t('paymentProcessing.amount.minimum')}{' '}
             {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
-            {t("paymentProcessing.amount.amount")}: $5
+            {t('paymentProcessing.amount.amount')}: $5
           </div>
         )}
         {Number(amount) > maxAmount && isCustomAmount && (
           <div className={styles.errorMessage}>
-            {t("paymentProcessing.amount.maximum")}{' '}
+            {t('paymentProcessing.amount.maximum')}{' '}
             {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
-            {t("paymentProcessing.amount.amount")}: $10000
+            {t('paymentProcessing.amount.amount')}: $10000
           </div>
         )}
       </div>
@@ -110,7 +114,7 @@ export const Modal = (props: Props) => {
         onClick={openModal}
         disabled={Number(amount) < minAmount || Number(amount) > maxAmount}
       >
-        {t("paymentProcessing.amount.submit")}
+        {t('paymentProcessing.amount.submit')}
       </button>
     </form>
   );
