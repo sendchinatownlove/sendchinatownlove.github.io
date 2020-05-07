@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.b0341d41.chunk.css",
+    "main.css": "/static/css/main.fa1cf6c7.chunk.css",
     "main.js": "/static/js/main.78885acf.chunk.js",
     "main.js.map": "/static/js/main.78885acf.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.f7beece5.js",
@@ -9,10 +9,10 @@
     "static/js/2.4cf997bb.chunk.js": "/static/js/2.4cf997bb.chunk.js",
     "static/js/2.4cf997bb.chunk.js.map": "/static/js/2.4cf997bb.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.d2341c7d747d5ecac12e2fea5f27ddae.js": "/precache-manifest.d2341c7d747d5ecac12e2fea5f27ddae.js",
+    "precache-manifest.bd18017611f62c3ed8253f23860415da.js": "/precache-manifest.bd18017611f62c3ed8253f23860415da.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.52f00974.chunk.css.map": "/static/css/2.52f00974.chunk.css.map",
-    "static/css/main.b0341d41.chunk.css.map": "/static/css/main.b0341d41.chunk.css.map",
+    "static/css/main.fa1cf6c7.chunk.css.map": "/static/css/main.fa1cf6c7.chunk.css.map",
     "static/js/2.4cf997bb.chunk.js.LICENSE.txt": "/static/js/2.4cf997bb.chunk.js.LICENSE.txt",
     "static/media/404-error-image.png": "/static/media/404-error-image.f72ee016.png",
     "static/media/chinatown-logo.png": "/static/media/chinatown-logo.f9e716ba.png",
@@ -26,7 +26,7 @@
     "static/js/runtime-main.f7beece5.js",
     "static/css/2.52f00974.chunk.css",
     "static/js/2.4cf997bb.chunk.js",
-    "static/css/main.b0341d41.chunk.css",
+    "static/css/main.fa1cf6c7.chunk.css",
     "static/js/main.78885acf.chunk.js"
   ]
 }
