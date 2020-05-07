@@ -32,8 +32,6 @@ const MerchantsPage: React.FC<{}> = () => {
     setFilter(data);
     setDonations(contributions[0]);
     setGiftCards(contributions[1]);
-
-    console.log(data);
   };
 
   useEffect(() => {
