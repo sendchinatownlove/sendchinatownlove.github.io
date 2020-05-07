@@ -1,32 +1,33 @@
 {
   "files": {
-    "main.css": "/static/css/main.fa1cf6c7.chunk.css",
-    "main.js": "/static/js/main.78885acf.chunk.js",
-    "main.js.map": "/static/js/main.78885acf.chunk.js.map",
+    "main.css": "/static/css/main.ec1e4116.chunk.css",
+    "main.js": "/static/js/main.60ead21b.chunk.js",
+    "main.js.map": "/static/js/main.60ead21b.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.f7beece5.js",
     "runtime-main.js.map": "/static/js/runtime-main.f7beece5.js.map",
     "static/css/2.52f00974.chunk.css": "/static/css/2.52f00974.chunk.css",
-    "static/js/2.4cf997bb.chunk.js": "/static/js/2.4cf997bb.chunk.js",
-    "static/js/2.4cf997bb.chunk.js.map": "/static/js/2.4cf997bb.chunk.js.map",
+    "static/js/2.60c0e05a.chunk.js": "/static/js/2.60c0e05a.chunk.js",
+    "static/js/2.60c0e05a.chunk.js.map": "/static/js/2.60c0e05a.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.bd18017611f62c3ed8253f23860415da.js": "/precache-manifest.bd18017611f62c3ed8253f23860415da.js",
+    "precache-manifest.13b225677c67d265b664ba2f8300080a.js": "/precache-manifest.13b225677c67d265b664ba2f8300080a.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.52f00974.chunk.css.map": "/static/css/2.52f00974.chunk.css.map",
-    "static/css/main.fa1cf6c7.chunk.css.map": "/static/css/main.fa1cf6c7.chunk.css.map",
-    "static/js/2.4cf997bb.chunk.js.LICENSE.txt": "/static/js/2.4cf997bb.chunk.js.LICENSE.txt",
+    "static/css/main.ec1e4116.chunk.css.map": "/static/css/main.ec1e4116.chunk.css.map",
+    "static/js/2.60c0e05a.chunk.js.LICENSE.txt": "/static/js/2.60c0e05a.chunk.js.LICENSE.txt",
     "static/media/404-error-image.png": "/static/media/404-error-image.f72ee016.png",
     "static/media/chinatown-logo.png": "/static/media/chinatown-logo.f9e716ba.png",
     "static/media/styles.module.scss": "/static/media/chinatown-splash.67dd7391.png",
     "static/media/female.svg": "/static/media/female.46412c79.svg",
     "static/media/logo.svg": "/static/media/logo.909f1479.svg",
+    "static/media/merchantIcon.png": "/static/media/merchantIcon.2c7f1dbe.png",
     "static/media/misc-store.png": "/static/media/misc-store.7e1a70b6.png",
-    "static/media/temp.png": "/static/media/temp.6758359b.png"
+    "static/media/nyc_3.png": "/static/media/nyc_3.d3931cea.png"
   },
   "entrypoints": [
     "static/js/runtime-main.f7beece5.js",
     "static/css/2.52f00974.chunk.css",
-    "static/js/2.4cf997bb.chunk.js",
-    "static/css/main.fa1cf6c7.chunk.css",
-    "static/js/main.78885acf.chunk.js"
+    "static/js/2.60c0e05a.chunk.js",
+    "static/css/main.ec1e4116.chunk.css",
+    "static/js/main.60ead21b.chunk.js"
   ]
 }
