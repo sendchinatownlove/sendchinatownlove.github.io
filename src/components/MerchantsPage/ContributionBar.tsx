@@ -15,7 +15,7 @@ const ContributionBar = ({ totalDonations, totalGiftCards }: Props) => {
   return (
     <Container>
       <Heading>Total Raised</Heading>
-      <Donations
+      <Contributions
         style={{
           background: `linear-gradient(-45deg, #dd678a ${progressWidth(
             totalDonations,
@@ -47,7 +47,7 @@ const Container = styled.div`
   font-size: 13px;
 `;
 
-const Donations = styled.div`
+const Contributions = styled.div`
   border-radius: 25px;
   height: 25px;
   z-index: 5;

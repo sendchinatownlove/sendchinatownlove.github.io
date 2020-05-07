@@ -15,7 +15,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 50px;
   justify-content: space-around;
 }
 
@@ -61,7 +60,7 @@
   // creating grid container for its own children components
   display: grid;
   grid-gap: 0 12%;
-  padding: 50px 7.5vw;
+  padding: 50px 7vw;
   background-color: transparent;
 
   @include for-tablet-landscape-up {
@@ -71,6 +70,7 @@
 
   @include for-phone-only {
     justify-items: center;
+    padding-bottom: 0;
   }
 }
 

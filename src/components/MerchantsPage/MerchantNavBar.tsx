@@ -51,4 +51,9 @@ const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   max-width: 500px;
+  margin-bottom: 50px;
+
+  @media (max-width: 450px) {
+    display: none;
+  }
 `;
