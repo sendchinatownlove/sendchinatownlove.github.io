@@ -17,18 +17,10 @@ history.listen((location) => {
 
 // we could use template strings, but just to be safe we'll hardcode the
 // lazy imports
-const importPage = (component: String) => {
-  switch (component) {
-    case 'SellerPage':
-      return lazy(() => import('../SellerPage'));
-    case 'About':
-      return lazy(() => import('../About'));
-    case 'MerchantsPage':
-      return lazy(() => import('../MerchantsPage'));
-    default:
-      return lazy(() => import('../404Page'));
-  }
-};
+const SellerPage = lazy(() => import('../SellerPage'));
+const AboutPage = lazy(() => import('../About'));
+const MerchantsPage = lazy(() => import('../MerchantsPage'));
+const ErrorPage = lazy(() => import('../404Page'));
 
 class App extends React.Component<{}> {
   render() {
@@ -39,11 +31,23 @@ class App extends React.Component<{}> {
             {
               // TODO(ArtyEmsee): add router config for this route
             }
-            <Route path="/about">{importPage('About')}</Route>
-            <Route path="/sellers">{importPage('MerchantsPage')}</Route>
-            <Route path="/:id">{importPage('SellerPage')}</Route>
-            <Route path="/:id#story">{importPage('SellerPage')}</Route>
-            <Route>{importPage('')}</Route>
+            <Route path="/about">
+              {' '}
+              <AboutPage />{' '}
+            </Route>
+            <Route path="/sellers">
+              {' '}
+              <MerchantsPage />
+            </Route>
+            <Route path="/:id">
+              <SellerPage />
+            </Route>
+            <Route path="/:id#story">
+              <SellerPage />
+            </Route>
+            <Route>
+              <ErrorPage />
+            </Route>
           </Switch>
         </Suspense>
       </Router>
