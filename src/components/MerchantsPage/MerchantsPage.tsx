@@ -12,11 +12,28 @@ import nycMapBackground from './images/nyc_3.png';
 const MerchantsPage: React.FC<{}> = () => {
   const [sellers, setSellers] = useState<any | null>();
   const [filter, setFilter] = useState<any | null>();
+  const [totalDontations, setDonations] = useState(0);
+  const [totalGiftCards, setGiftCards] = useState(0);
 
   const fetchData = async () => {
-    const result = await getSellers();
-    await setSellers(result.data);
-    await setFilter(result.data);
+    const { data } = await getSellers();
+
+    const contributions = data.reduce(
+      (total: any, store: any) => {
+        return [
+          total[0] + store!.donation_amount,
+          total[1] + store!.gift_card_amount,
+        ];
+      },
+      [0, 0]
+    );
+
+    setSellers(data);
+    setFilter(data);
+    setDonations(contributions[0]);
+    setGiftCards(contributions[1]);
+
+    console.log(data);
   };
 
   useEffect(() => {
@@ -24,22 +41,22 @@ const MerchantsPage: React.FC<{}> = () => {
   }, []);
 
   // TODO: replace this filter with a backend API call
-  const filterStoreType = async (type: any) => {
+  const filterStoreType = (type: any) => {
     if (type === 'all') {
-      await setFilter(sellers);
+      setFilter(sellers);
     } else {
       const result = sellers.filter(
-        (store: any) => store!.business_type === type
+        (store: any) => store!.cuisine_name === type
       );
-      await setFilter(result);
+      setFilter(result);
     }
   };
 
   return filter ? (
-    <div>
+    <React.Fragment>
       <div className={styles.container}>
         <div className={styles.overlayContainer}>
-          <img src={nycMapBackground} alt="NYC MAP" className={styles.nycMap} />
+          <img src={nycMapBackground} className={styles.nycMap} alt="NYC MAP" />
           <div className={styles.contentContainer}>
             <div className={styles.textArea}>
               <h2 style={{ fontWeight: 'bolder' }}>Our Chinatown</h2>
@@ -56,13 +73,17 @@ const MerchantsPage: React.FC<{}> = () => {
             </div>
             {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
             <div className={styles.storeInfo}>
-              <ContributionBar totalDonations={3000} totalVouchers={1700} />
+              <ContributionBar
+                totalDonations={totalDontations}
+                totalGiftCards={totalGiftCards}
+              />
             </div>
             <div className={styles.ownerPanel}>
               <DescriptionBox />
             </div>
           </div>
         </div>
+
         <div className={styles.storeInfoContainer}>
           <NavBar filterStoreType={filterStoreType} />
 
@@ -74,7 +95,7 @@ const MerchantsPage: React.FC<{}> = () => {
         </div>
       </div>
       <Footer />
-    </div>
+    </React.Fragment>
   ) : null;
 };
 

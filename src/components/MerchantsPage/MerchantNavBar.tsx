@@ -2,12 +2,6 @@ import * as React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const NavContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  max-width: 500px;
-`;
-
 interface Props {
   filterStoreType: Function;
 }
@@ -23,8 +17,8 @@ const NavBar = ({ filterStoreType }: Props) => {
 
   const storeTypes = [
     { value: 'all', text: 'All' },
-    { value: 'bakery', text: 'Bakery' },
-    { value: 'restaurant', text: 'Restaurant' },
+    { value: 'Bakery', text: 'Bakery' },
+    { value: 'Chinese', text: 'Restaurant' },
     // { value: 'grocery', text: 'Grocery' },
     // { value: 'salon', text: 'Salon' },
   ];
@@ -52,3 +46,9 @@ const NavBar = ({ filterStoreType }: Props) => {
 };
 
 export default NavBar;
+
+const NavContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+`;

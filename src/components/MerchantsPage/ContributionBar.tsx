@@ -3,8 +3,45 @@ import styled from 'styled-components';
 
 interface Props {
   totalDonations: number;
-  totalVouchers: number;
+  totalGiftCards: number;
 }
+
+const ContributionBar = ({ totalDonations, totalGiftCards }: Props) => {
+  const progressWidth = (raised: number, total: number) => {
+    if (raised < total) return (raised / total) * 100;
+    return 100;
+  };
+
+  return (
+    <Container>
+      <Heading>Total Raised</Heading>
+      <Donations
+        style={{
+          background: `linear-gradient(-45deg, #dd678a ${progressWidth(
+            totalDonations,
+            totalDonations + totalGiftCards
+          )}%, #F6B917 0%)`,
+        }}
+      />
+      <TextContainer>
+        <span>
+          VOUCHERS:{' '}
+          <b>${(Math.floor(totalGiftCards) / 100).toLocaleString()}</b>
+        </span>
+        <span>
+          DONATIONS:{' '}
+          <b>${(Math.floor(totalDonations) / 100).toLocaleString()}</b>
+        </span>
+      </TextContainer>
+      <p>
+        100% of all proceeds go to the businesses, and we cover the credit card
+        processing fees.
+      </p>
+    </Container>
+  );
+};
+
+export default ContributionBar;
 
 const Container = styled.div`
   font-size: 13px;
@@ -24,37 +61,8 @@ const TextContainer = styled.div`
   justify-content: space-between;
 `;
 
-const ContributionBar = ({ totalDonations, totalVouchers }: Props) => {
-  const progressWidth = (raised: number, total: number) => {
-    if (raised < total) return (raised / total) * 100;
-    return 100;
-  };
-
-  return (
-    <Container>
-      <h4>Total Raised</h4>
-      <Donations
-        style={{
-          background: `linear-gradient(-45deg, #dd678a ${progressWidth(
-            totalDonations,
-            totalDonations + totalVouchers
-          )}%, #F6B917 0%)`,
-        }}
-      />
-      <TextContainer>
-        <span>
-          VOUCHERS: <b>${totalVouchers}</b>
-        </span>
-        <span>
-          DONATIONS: <b>${totalDonations}</b>
-        </span>
-      </TextContainer>
-      <p>
-        100% of all proceeds go to the businesses, and we cover the credit card
-        processing fees.
-      </p>
-    </Container>
-  );
-};
-
-export default ContributionBar;
+const Heading = styled.div`
+  font-size: 17px;
+  font-weight: bold;
+  margin: 15px 0;
+`;

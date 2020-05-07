@@ -60,9 +60,8 @@
 
   // creating grid container for its own children components
   display: grid;
-  grid-gap: 0 8%;
-  max-width: 1440px;
-  padding: 50px 7vw;
+  grid-gap: 0 12%;
+  padding: 50px 7.5vw;
   background-color: transparent;
 
   @include for-tablet-landscape-up {
@@ -105,12 +104,6 @@
 .storeInfo {
   grid-row: 2;
   margin: 30px 0px;
-  // border: 1px solid black;
-
-  @include for-tablet-landscape-up {
-    // display: flex;
-    // align-self: end;
-  }
 
   @include for-phone-only {
     grid-row: 3;

@@ -5,20 +5,6 @@ import ProgressBar from '../ProgressBar';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
 
-const Location = styled.div`
-  font-weight: bolder;
-  color: #46accc;
-`;
-
-const Summary = styled.p`
-  display: -webkit-box;
-  height: 45px;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
 export interface Props {
   storeInfo?: BrowsePageSeller;
 }
@@ -48,11 +34,11 @@ const MerchantCard = ({ storeInfo }: Props) => {
             {city}, {state}
           </Location>
           <h3>{storeInfo!.name}</h3>
-          <Summary>{storeInfo!.summary}</Summary>
-          <div style={{ color: '#949494' }}>
-            {/* TODO: need to update "donation" phrase and the time stamp */}
+          <Summary>{storeInfo!.summary || storeInfo!.story}</Summary>
+          {/* TODO: need to update "donation" phrase and the time stamp */}
+          {/* <div style={{ color: '#949494' }}>
             Last donation 1h ago
-          </div>{' '}
+          </div> */}
           <br />
           <ProgressBar
             amountRaised={storeInfo!.amount_raised}
@@ -66,3 +52,17 @@ const MerchantCard = ({ storeInfo }: Props) => {
 };
 
 export default MerchantCard;
+
+const Location = styled.div`
+  font-weight: bolder;
+  color: #46accc;
+`;
+
+const Summary = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 75px;
+`;
