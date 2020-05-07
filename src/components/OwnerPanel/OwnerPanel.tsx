@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import styles from './styles.module.scss';
-import Modal from '../Modal';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import Modal from '../Modal';
+import ProgressBar from '../ProgressBar';
+import styles from './styles.module.scss';
 import defaultOwnerImage from './assets/female.svg';
 
 interface Props {
@@ -36,11 +37,6 @@ const OwnerPanel = (props: Props) => {
     setPurchaseType(event.target.value);
   };
 
-  const progressWidth = (raised: number, target: number) => {
-    if (raised < target) return (raised / target) * 100;
-    return 100;
-  };
-
   const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
     return props.extraInfo[current] != null;
   });
@@ -61,28 +57,11 @@ const OwnerPanel = (props: Props) => {
 
       <h2 className={styles.ownerName}>{props.ownerName}</h2>
       {props.targetAmount && (
-        <div className={styles.progressContainer}>
-          <div className={classnames(styles.progressBar, 'progress-bar')}>
-            <div
-              className={styles.myBar}
-              style={{
-                width: `${progressWidth(
-                  props.amountRaised,
-                  props.targetAmount
-                )}%`,
-                backgroundColor: props.progressBarColor,
-                //defaults to default color if no color is passed in
-              }}
-            >
-              {' '}
-            </div>
-          </div>
-          <div>
-            {/* TODO(jtmckibb): Add commas for easier readability */}$
-            {Math.floor(props.amountRaised) / 100} of $
-            {(Math.floor(props.targetAmount) / 100).toLocaleString()}
-          </div>
-        </div>
+        <ProgressBar
+          amountRaised={props.amountRaised}
+          targetAmount={props.targetAmount}
+          progressBarColor={props.progressBarColor}
+        />
       )}
 
       <div className={styles.buttonContainer}>
@@ -146,29 +125,6 @@ const OwnerPanel = (props: Props) => {
         sellerId={props.sellerId}
         sellerName={props.sellerName}
       />
-
-      {/* hide extra info section until needed */}
-      {/* <div className={styles.summaryContainer}>
-        <div>
-          <span className={styles.storeSummaryLabel}>Type: </span>
-          <span>Family-owned and operated</span>
-        </div>{' '}
-        <br />
-        <div>
-          <span className={styles.storeSummaryLabel}>Employees: </span>
-          <span>5</span>
-        </div>{' '}
-        <br />
-        <div>
-          <span className={styles.storeSummaryLabel}>Runaway: </span>
-          <span>3 months</span>
-        </div>{' '}
-        <br />
-        <div>
-          <span className={styles.storeSummaryLabel}>Breakeven: </span>
-          <span>$1000 / month</span>
-        </div>
-      </div> */}
 
       {/* hide social links until needed */}
       {/* <div className={styles.socialContainer}>
