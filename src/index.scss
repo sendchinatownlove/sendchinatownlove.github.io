@@ -53,6 +53,12 @@ h3 {
   &--filled {
     @include base-button;
     color: white;
+    background-color: $default-button-color;
+    border-color: $default-button-color;
+  }
+
+  &--filled:hover {
+    @include base-button;
     background-color: $standard-red;
     border-color: $standard-red;
   }
@@ -61,6 +67,13 @@ h3 {
     @include base-button;
     color: $default-button-color;
     background-color: white;
+  }
+
+  &--outlined:hover {
+    @include base-button;
+    color: $default-button-color;
+    background-color: $standard-red;
+    border-color: $default-button-color;
   }
 }
 
