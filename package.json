@@ -31,6 +31,7 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-share": "^4.1.0",
     "react-square-payment-form": "^0.6.2",
     "reactjs-popup": "^1.5.0",
     "redux": "^4.0.5",
@@ -67,6 +68,7 @@
   "devDependencies": {
     "@types/object-hash": "^1.3.1",
     "gh-pages": "^2.2.0",
-    "prettier": "2.0.2"
+    "prettier": "2.0.2",
+    "react-social-icons": "^4.1.0"
   }
 }
