@@ -13,16 +13,14 @@
 
 .merchantsContainer {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
 }
 
 .merchantCard {
   height: 475px;
   width: 350px;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
-  margin: 30px 0px;
+  margin: 30px;
   padding: 25px;
   font-size: 14px;
   background-color: white;

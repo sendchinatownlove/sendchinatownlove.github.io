@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 $default-button-color: black;
 $standard-red: #ab192e;
+$default-hover-red: #A9182E; 
 
 body {
   background-color: #e5e5e5;
@@ -121,8 +122,8 @@ h3 {
 
   &--filled:focus {
     color: white;
-    background-color: #dd678a;
-    border: 1px solid #dd678a;
+    background-color: $default-hover-red;
+    border: 1px solid $default-hover-red;
   }
 }
 
