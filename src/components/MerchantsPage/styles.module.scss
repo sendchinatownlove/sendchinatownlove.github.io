@@ -8,22 +8,34 @@
 }
 
 .storeInfoContainer {
-  padding: 0px 7vw 50px;
+  padding: 0px 3vw 50px 7vw;
+
+  @include for-phone-only {
+    padding: 0px 7vw 50px;
+  }
 }
 
 .merchantsContainer {
   display: flex;
   flex-wrap: wrap;
+
+  @include for-phone-only {
+    justify-content: center;
+  }
 }
 
 .merchantCard {
   height: 475px;
   width: 350px;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
-  margin: 30px;
+  margin: 30px 60px 30px 0;
   padding: 25px;
   font-size: 14px;
   background-color: white;
+  
+  @include for-phone-only {
+    margin: 30px;
+  }
 }
 
 .merchantCardLogo {
