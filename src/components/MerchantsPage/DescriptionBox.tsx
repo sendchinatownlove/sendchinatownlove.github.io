@@ -16,7 +16,7 @@ const TargetMerchantBox = () => (
         Currently struggling to pay rent, utility bill and employee wages
       </Bullets>
       <Bullets>
-        Do not have websites, online delivery service, or gift cards available
+        Do not have websites, online delivery service, or vouchers available
       </Bullets>
       <Bullets>
         Located in NYC Manhattan Chinatown, Flushing, or Bensonhurst

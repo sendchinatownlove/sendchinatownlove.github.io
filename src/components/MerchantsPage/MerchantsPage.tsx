@@ -66,7 +66,7 @@ const MerchantsPage: React.FC<{}> = () => {
               </p>
               <p>
                 Support local merchants by making a donation or purchasing a
-                gift card from them.
+                voucher from them.
               </p>
             </div>
             {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
