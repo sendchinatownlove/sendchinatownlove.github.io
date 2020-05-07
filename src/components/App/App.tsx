@@ -1,4 +1,3 @@
-import Home from '../Home';
 import SellerPage from '../SellerPage';
 import About from '../About';
 import MerchantsPage from '../MerchantsPage';
@@ -24,7 +23,6 @@ class App extends React.Component<{}> {
     return (
       <Router history={history}>
         <Switch>
-          <Route exact path="/" component={Home} />
           {
             // TODO(ArtyEmsee): add router config for this route
           }

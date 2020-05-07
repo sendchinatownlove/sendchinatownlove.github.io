@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import NavBar from '../Navbar';
 import styles from './styles.module.scss';
-import { Link } from 'react-router-dom';
 import ErrorImage from '../../images/404-error-image.png';
 
 interface Props {}
@@ -17,13 +16,17 @@ const ErrorPage = (props: Props) => {
         style={{ display: menuOpen ? 'hidden' : 'flex' }}
       >
         <img src={ErrorImage} className={styles.errorImage} alt="error" />
-        <h1 className={styles.mainHeader}>Dumpling Not Found!</h1>
+        <h1 className={styles.mainHeader}>
+          Sorry Your Dumpling Was Not Found!
+        </h1>
         <h3 className={styles.subHeader}>
-          The page you are trying to access does not exist or has been moved.
+          The page you are trying does not exist or has been moved.
         </h3>
-        <h3 className={styles.subHeader}>Try going back to the homepage.</h3>
+        <h3 className={styles.subHeader}>
+          Please try going back to the homepage.
+        </h3>
         <p className={styles.backToHome}>
-          <Link to="/">PLEASE GO TO HOMEPAGE</Link>
+          <a href="https://sendchinatownlove.com/">GO TO HOMEPAGE</a>
         </p>
       </div>
     </main>
