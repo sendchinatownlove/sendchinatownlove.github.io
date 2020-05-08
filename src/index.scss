@@ -47,7 +47,6 @@ h3 {
   border: 1px solid $default-button-color;
   min-width: 150px;
   text-transform: uppercase;
-  font-size: 14px;
   outline: none;
 }
 
@@ -73,9 +72,9 @@ h3 {
 
   &--outlined:hover {
     @include base-button;
-    color: $default-button-color;
-    background-color: $standard-red;
-    border-color: $default-button-color;
+    color: $standard-red;
+    background-color: white;
+    border-color: $standard-red;
   }
 }
 
