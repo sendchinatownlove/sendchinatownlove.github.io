@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 $default-button-color: black;
 $standard-red: #ab192e;
+$default-hover-red: #A9182E; 
 
 body {
   background-color: #e5e5e5;
   margin: 0;
-  font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Open Sans', 'Avenir', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -53,6 +55,12 @@ h3 {
   &--filled {
     @include base-button;
     color: white;
+    background-color: $default-button-color;
+    border-color: $default-button-color;
+  }
+
+  &--filled:hover {
+    @include base-button;
     background-color: $standard-red;
     border-color: $standard-red;
   }
@@ -61,6 +69,13 @@ h3 {
     @include base-button;
     color: $default-button-color;
     background-color: white;
+  }
+
+  &--outlined:hover {
+    @include base-button;
+    color: $default-button-color;
+    background-color: $standard-red;
+    border-color: $default-button-color;
   }
 }
 
@@ -120,8 +135,8 @@ h3 {
 
   &--filled:focus {
     color: white;
-    background-color: #dd678a;
-    border: 1px solid #dd678a;
+    background-color: $default-hover-red;
+    border: 1px solid $default-hover-red;
   }
 }
 

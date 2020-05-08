@@ -1,43 +1,97 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import Footer from '../Footer';
-import NavBar from './NavBar';
-import MerchantCard from './MerchantCard';
-import styles from './styles.module.scss';
 import { getSellers } from '../../utilities';
+import Footer from '../Footer';
+import NavBar from './MerchantNavBar';
+import MerchantCard from './MerchantCard';
+import DescriptionBox from './DescriptionBox';
+import ContributionBar from './ContributionBar';
+import styles from './styles.module.scss';
+import nycMapBackground from './images/nyc_3.png';
 
 const MerchantsPage: React.FC<{}> = () => {
   const [sellers, setSellers] = useState<any | null>();
+  const [filter, setFilter] = useState<any | null>();
+  const [totalDontations, setDonations] = useState(0);
+  const [totalGiftCards, setGiftCards] = useState(0);
 
   const fetchData = async () => {
-    const result = await getSellers();
-    setSellers(result.data);
+    const { data } = await getSellers();
+
+    const contributions = data.reduce(
+      (total: any, store: any) => {
+        return [
+          total[0] + store!.donation_amount,
+          total[1] + store!.gift_card_amount,
+        ];
+      },
+      [0, 0]
+    );
+
+    setSellers(data);
+    setFilter(data);
+    setDonations(contributions[0]);
+    setGiftCards(contributions[1]);
   };
 
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return sellers ? (
+  // TODO: replace this filter with a backend API call
+  const filterStoreType = (type: any) => {
+    if (type === 'all') {
+      setFilter(sellers);
+    } else {
+      const result = sellers.filter(
+        (store: any) => store!.cuisine_name === type
+      );
+      setFilter(result);
+    }
+  };
+
+  return filter ? (
     <React.Fragment>
       <div className={styles.container}>
-        <h2> Support our local merchants </h2>
-        <p>
-          Send Chinatown Love is intended to support our local businesses facing
-          financial loss. Make a difference today by donating or buying a gift
-          card.
-        </p>
+        <div className={styles.overlayContainer}>
+          <img src={nycMapBackground} className={styles.nycMap} alt="NYC MAP" />
+          <div className={styles.contentContainer}>
+            <div className={styles.textArea}>
+              <h2 style={{ fontWeight: 'bolder' }}>Our Chinatown</h2>
+              <br />
+              <p>
+                We are providing an online platform to low-tech, cash-only,
+                Asian-owned small businesses that have been disproportionately
+                impacted by COVID-19.
+              </p>
+              <p>
+                Support local merchants by making a donation or purchasing a
+                voucher from them.
+              </p>
+            </div>
+            {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
+            <div className={styles.storeInfo}>
+              <ContributionBar
+                totalDonations={totalDontations}
+                totalGiftCards={totalGiftCards}
+              />
+            </div>
+            <div className={styles.ownerPanel}>
+              <DescriptionBox />
+            </div>
+          </div>
+        </div>
 
-        <NavBar />
+        <div className={styles.storeInfoContainer}>
+          <NavBar filterStoreType={filterStoreType} />
 
-        <div className={styles.merchantsContainer}>
-          {sellers.map((store: any) => (
-            <MerchantCard storeInfo={store} />
-          ))}
+          <div className={styles.merchantsContainer}>
+            {filter.map((store: any) => (
+              <MerchantCard key={store!.seller_id} storeInfo={store} />
+            ))}
+          </div>
         </div>
       </div>
-
       <Footer />
     </React.Fragment>
   ) : null;

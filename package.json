@@ -26,7 +26,6 @@
     "i18next": "^19.4.4",
     "jshashes": "^1.0.8",
     "node-sass": "^4.13.1",
-    "object-hash": "^2.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-ga": "^2.7.0",
@@ -36,12 +35,12 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-square-payment-form": "^0.6.2",
-    "react-uuid": "^1.0.2",
     "reactjs-popup": "^1.5.0",
     "redux": "^4.0.5",
     "stripe": "^8.38.0",
     "styled-components": "^5.1.0",
     "typescript": "^3.8",
+    "uuid": "^8.0.0",
     "yarn": "^1.22.4"
   },
   "scripts": {
