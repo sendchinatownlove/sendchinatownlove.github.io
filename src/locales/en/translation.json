@@ -9,5 +9,16 @@
       "amount": "amount",
       "submit": "Next"
     }
+  },
+  "navBar": {
+    "header": {
+      "home": "HOME",
+      "merchants": "MERCHANTS",
+      "aboutUs": "ABOUT US"
+    },
+    "languages": {
+      "english": "ENG",
+      "chinese": "中文"
+    }
   }
 }

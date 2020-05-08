@@ -27,7 +27,7 @@ i18n
       en: {
         translation: EnTrans,
       },
-      jap: {
+      cn: {
         translation: CnTrans,
       },
     },

@@ -1,13 +1,24 @@
 {
   "paymentProcessing": {
     "amount": {
-      "header": "Please select an amount or enter a custom amount",
-      "label1": "Select an amount",
-      "label2": "Or enter an amount",
-      "minimum": "Minimum",
-      "maximum": "Maximum",
-      "amount": "amount",
-      "submit": "Next"
+      "header": "Please select an amount or enter a custom amount1",
+      "label1": "Select an amount1",
+      "label2": "Or enter an amount1",
+      "minimum": "Minimum1",
+      "maximum": "Maximum1",
+      "amount": "amount1",
+      "submit": "Next1"
+    }
+  },
+  "navBar": {
+    "header": {
+      "home": "HOME1",
+      "merchants": "MERCHANTS1",
+      "aboutUs": "ABOUT US1"
+    },
+    "languages": {
+      "english": "ENG1",
+      "chinese": "中文1"
     }
   }
 }
