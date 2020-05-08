@@ -13,12 +13,19 @@
   "navBar": {
     "header": {
       "home": "HOME",
-      "merchants": "MERCHANTS",
-      "aboutUs": "ABOUT US"
+      "merchants": "MERCHANTS"
     },
     "languages": {
       "english": "ENG",
       "chinese": "中文"
+    }
+  },
+  "errorPage": {
+    "body": {
+      "header": "Sorry Your Dumpling Was Not Found",
+      "subHeader1": "The page you are trying does not exist or has been moved.",
+      "subHeader2": "Please try going back to the homepage.",
+      "link": "GO TO HOMEPAGE"
     }
   }
 }
