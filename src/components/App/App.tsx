@@ -35,7 +35,7 @@ class App extends React.Component<{}> {
               {' '}
               <AboutPage />{' '}
             </Route>
-            <Route path="/sellers">
+            <Route path="/merchants">
               {' '}
               <MerchantsPage />
             </Route>

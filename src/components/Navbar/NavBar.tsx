@@ -75,7 +75,7 @@ const NavBar = (props: Props) => {
           i18nText="navBar.header.home"
           altText="HOME"
         />
-        <ReactNavLink to="/sellers" compact={hamburgerOpen}>
+        <ReactNavLink to="/merchants" compact={hamburgerOpen}>
           {t('navBar.header.merchants')}
         </ReactNavLink>
       </NavLinksContainer>
@@ -95,7 +95,7 @@ const NavBar = (props: Props) => {
             i18nText="navBar.header.home"
             altText="HOME"
           />
-          <ReactNavLink to="/sellers" compact={hamburgerOpen}>
+          <ReactNavLink to="/merchants" compact={hamburgerOpen}>
             {t('navBar.header.merchants')}
           </ReactNavLink>
           <LanguageContainer>
