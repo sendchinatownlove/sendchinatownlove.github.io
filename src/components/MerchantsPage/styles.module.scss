@@ -5,6 +5,10 @@
   max-width: 1440px;
   margin: 0 auto;
   font-size: 14px;
+
+  @include for-phone-only {
+    overflow-x: hidden;
+  }
 }
 
 .storeInfoContainer {
@@ -81,6 +85,7 @@
   @include for-phone-only {
     justify-items: center;
     padding-bottom: 0;
+    grid-template-columns: minmax(0, 100%);
   }
 }
 
@@ -93,6 +98,7 @@
   @include for-phone-only {
     grid-row: 1;
     grid-column: 1;
+    text-align: left;
   }
 }
 
