@@ -18,7 +18,7 @@ interface CompactProps {
 }
 
 const NavBar = (props: Props) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
   const changeLanguage = (e: MouseEvent, language: string) => {
@@ -51,7 +51,18 @@ const NavBar = (props: Props) => {
 
   const showCompactMenu = () => {
     return !props.menuOpen ? (
-      <MenuIcon onClick={(e) => props.setMenuOpen(true)} />
+      <HamburgerContainer>
+        <LanguageContainer>
+          <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
+            ENG
+          </LanguageButton>
+          <span>|</span>
+          <LanguageButton onClick={(e) => changeLanguage(e, 'cn')}>
+            中文
+          </LanguageButton>
+        </LanguageContainer>
+        <MenuIcon onClick={(e) => props.setMenuOpen(true)} />
+      </HamburgerContainer>
     ) : (
       <NavLinksContainer compact={hamburgerOpen}>
         <NavBarContainer>
@@ -65,10 +76,7 @@ const NavBar = (props: Props) => {
           altText="HOME"
         />
         <ReactNavLink to="/sellers" compact={hamburgerOpen}>
-          MERCHANTS
-        </ReactNavLink>
-        <ReactNavLink to="/about" compact={hamburgerOpen}>
-          ABOUT US
+          {t('navBar.header.merchants')}
         </ReactNavLink>
       </NavLinksContainer>
     );
@@ -88,10 +96,7 @@ const NavBar = (props: Props) => {
             altText="HOME"
           />
           <ReactNavLink to="/sellers" compact={hamburgerOpen}>
-            MERCHANTS
-          </ReactNavLink>
-          <ReactNavLink to="/about" compact={hamburgerOpen}>
-            ABOUT US
+            {t('navBar.header.merchants')}
           </ReactNavLink>
           <LanguageContainer>
             <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
@@ -139,7 +144,6 @@ const NavLinksContainer = styled.div`
     left: 0;
     right:0;
     background-color: white;
-    // height: 100%;
     z-index: 10;
   `
       : `
@@ -147,6 +151,13 @@ const NavLinksContainer = styled.div`
     justify-content: space-between;
   `}
 `;
+const HamburgerContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 125px;
+  justify-content: space-between;
+`;
+
 const NavLinkStyle = styled.a`
   text-decoration: none;
   color: black;
@@ -161,9 +172,8 @@ const NavLinkStyle = styled.a`
 
 const NavLink = (props: CompactProps) => {
   const { t } = useTranslation();
-  if (props.i18nText) console.log(t(props.i18nText));
   const text =
-    props.i18nText && !t(props.i18nText).includes('.')
+    props.i18nText && !t(props.i18nText).includes('navBar')
       ? t(props.i18nText)
       : props.altText;
   return <NavLinkStyle compact={props.compact}>{text}</NavLinkStyle>;
@@ -182,6 +192,7 @@ const LanguageButton = styled.div`
   color: #9e9e9e;
   font-size: 14px;
   cursor: pointer;
+  font-weight: 200;
 `;
 const ReactNavLink = styled(Link)`
   text-decoration: none;
