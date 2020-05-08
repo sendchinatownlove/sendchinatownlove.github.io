@@ -1,14 +1,15 @@
 .progressContainer {
   width: 100%;
-  margin-bottom: 10px;
+  padding: 15px 0;
 }
 
-.progressBar {
+.targetAmountBar {
   background-color: #dedede;
   height: 12px;
+  margin-bottom: 15px;
 }
 
-.myBar {
+.currentRaisedBar {
   background-color: #dd678a;
   z-index: 5;
   height: 12px;

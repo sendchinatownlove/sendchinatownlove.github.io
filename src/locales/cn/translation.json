@@ -1,0 +1,31 @@
+{
+  "paymentProcessing": {
+    "amount": {
+      "header": "Please select an amount or enter a custom amount",
+      "label1": "Select an amount",
+      "label2": "Or enter an amount",
+      "minimum": "Minimum",
+      "maximum": "Maximum",
+      "amount": "amount",
+      "submit": "Next"
+    }
+  },
+  "navBar": {
+    "header": {
+      "home": "HOME",
+      "merchants": "MERCHANTS"
+    },
+    "languages": {
+      "english": "ENG",
+      "chinese": "中文"
+    }
+  },
+  "errorPage": {
+    "body": {
+      "header": "Sorry Your Dumpling Was Not Found",
+      "subHeader1": "The page you are trying does not exist or has been moved.",
+      "subHeader2": "Please try going back to the homepage.",
+      "link": "GO TO HOMEPAGE"
+    }
+  }
+}

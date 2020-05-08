@@ -4,6 +4,7 @@ import HeroBanner from '../HeroBanner';
 import Footer from '../Footer';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
+import ErrorPage from '../404Page';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import styles from './styles.module.scss';
 import { getSeller } from '../../utilities';
@@ -12,11 +13,14 @@ import { useParams } from 'react-router-dom';
 const SellerPage: React.FC<{}> = () => {
   // fix typing
   const [seller, setSeller] = useState<any | null>();
+  const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
 
   const fetchData = async () => {
+    setLoading(true);
     const result = id && (await getSeller(id));
     setSeller(result.data);
+    setLoading(false);
   };
   useEffect(() => {
     fetchData();
@@ -70,7 +74,9 @@ const SellerPage: React.FC<{}> = () => {
       </main>
       <Footer />
     </div>
-  ) : null;
+  ) : (
+    <>{loading ? null : <ErrorPage />}</>
+  );
 };
 
 export default SellerPage;

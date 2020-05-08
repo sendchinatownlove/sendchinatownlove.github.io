@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import styles from './styles.module.scss';
-import Modal from '../Modal';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import Modal from '../Modal';
+import ProgressBar from '../ProgressBar';
+import styles from './styles.module.scss';
 import defaultOwnerImage from './assets/female.svg';
 import { withStyles, Theme } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import { SocialIcon } from 'react-social-icons';
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  TwitterShareButton,
+} from 'react-share';
 
 interface Props {
   imageSrc: string;
@@ -63,6 +69,11 @@ const OwnerPanel = (props: Props) => {
     return props.extraInfo[current] != null;
   });
 
+  const location = window.location.href;
+  const facebookQuote = 'Help raise money for ' + props.sellerName;
+  const socialIconBackgroundColor = '#a9182e';
+  const socialIconDimensions = { height: 50, width: 50 };
+
   return (
     <section className={classnames(styles.container, props.className)}>
       <figure className={styles.ownerContainer}>
@@ -79,6 +90,27 @@ const OwnerPanel = (props: Props) => {
 
       <h2 className={styles.ownerName}>{props.ownerName}</h2>
       {props.targetAmount && (
+
+  const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
+    return props.extraInfo[current] != null;
+  });
+
+  return (
+    <section className={classnames(styles.container, props.className)}>
+      <figure className={styles.ownerContainer}>
+        <img
+          className={styles.ownerImage}
+          src={
+            props.imageSrc
+              ? process.env.REACT_APP_BASE_URL + props.imageSrc
+              : defaultOwnerImage
+          }
+          alt={props.ownerName}
+        />
+      </figure>
+
+      <h2 className={styles.ownerName}>{props.ownerName}</h2>
+      {props.targetAmount && (<>
         <div className={styles.progressContainer}>
           <div className={classnames(styles.progressBar, 'progress-bar')}>
             <div
@@ -103,31 +135,44 @@ const OwnerPanel = (props: Props) => {
               title={
                 <React.Fragment>
                   <table>
-                    <tr>
-                      <td>
-                        <b>{props.numGiftCards}</b> gift cards
-                      </td>
-                      <td>
-                        <b>${Math.floor(props.giftCardAmount) / 100}</b>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <b>{props.numDonations}</b> donations
-                      </td>
-                      <td>
-                        <b>${Math.floor(props.donationAmount) / 100}</b>
-                      </td>
-                    </tr>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <b>{props.numGiftCards}</b> gift cards
+                        </td>
+                        <td>
+                          <b>${Math.floor(props.giftCardAmount) / 100}</b>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <b>{props.numDonations}</b> donations
+                        </td>
+                        <td>
+                          <b>${Math.floor(props.donationAmount) / 100}</b>
+                        </td>
+                      </tr>
+                    </tbody>
                   </table>
-                  </React.Fragment>
-              } enterTouchDelay={50} placement="top"
+                </React.Fragment>
+              }
+              enterTouchDelay={50} placement="top"
             >
-              <div><b>{props.numContributions}</b> supporters</div>
+              <div>
+                <b>{props.numContributions}</b> supporters
+              </div>
             </SupporterTooltip>
           </div>
         </div>
+        <ProgressBar
+        amountRaised={props.amountRaised}
+        targetAmount={props.targetAmount}
+        progressBarColor={props.progressBarColor}
+      />
+      </>
       )}
+
+      
 
       <div className={styles.buttonContainer}>
         {props.acceptDonations && (
@@ -145,7 +190,7 @@ const OwnerPanel = (props: Props) => {
             className={classnames(styles.button, 'button--outlined')}
             onClick={showModal}
           >
-            Gift Card
+            Voucher
           </button>
         )}
       </div>
@@ -182,14 +227,51 @@ const OwnerPanel = (props: Props) => {
           })}
         </div>
       ) : (
-          ''
-        )}
+        ''
+      )}
 
       <ModalBox
         purchaseType={purchaseType}
         sellerId={props.sellerId}
         sellerName={props.sellerName}
       />
+      {
+        <div className={styles.socialContainer}>
+          <div className={styles.socialIconContainer}>
+            <FacebookShareButton
+              url={location}
+              quote={facebookQuote}
+              className="share"
+            >
+              <SocialIcon
+                network="facebook"
+                bgColor={socialIconBackgroundColor}
+                style={socialIconDimensions}
+              />
+            </FacebookShareButton>
+          </div>
+
+          <div className={styles.socialIconContainer}>
+            <TwitterShareButton url={location} className="share">
+              <SocialIcon
+                network="twitter"
+                bgColor={socialIconBackgroundColor}
+                style={socialIconDimensions}
+              />
+            </TwitterShareButton>
+          </div>
+
+          <div className={styles.socialIconContainer}>
+            <EmailShareButton url={location} className="share">
+              <SocialIcon
+                network="email"
+                bgColor={socialIconBackgroundColor}
+                style={socialIconDimensions}
+              />
+            </EmailShareButton>
+          </div>
+        </div>
+      }
 
       {/* hide extra info section until needed */}
       {/* <div className={styles.summaryContainer}>
