@@ -59,6 +59,17 @@ $container-size: 160px;
   padding: 30px 20px;
 }
 
+.socialContainer {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0px 0px 0px;
+}
+
+.socialIconContainer {
+  display: inline;
+  margin: 0px 8px 0px 8px;
+}
+
 .storeSummaryLabel {
   font-weight: bold;
 }

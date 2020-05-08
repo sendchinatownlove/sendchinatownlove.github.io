@@ -6,6 +6,12 @@ import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
 import styles from './styles.module.scss';
 import defaultOwnerImage from './assets/female.svg';
+import { SocialIcon } from 'react-social-icons';
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  TwitterShareButton,
+} from 'react-share';
 
 interface Props {
   imageSrc: string;
@@ -40,6 +46,11 @@ const OwnerPanel = (props: Props) => {
   const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
     return props.extraInfo[current] != null;
   });
+
+  const location = window.location.href;
+  const facebookQuote = 'Help raise money for ' + props.sellerName;
+  const socialIconBackgroundColor = '#a9182e';
+  const socialIconDimensions = { height: 50, width: 50 };
 
   return (
     <section className={classnames(styles.container, props.className)}>
@@ -125,14 +136,43 @@ const OwnerPanel = (props: Props) => {
         sellerId={props.sellerId}
         sellerName={props.sellerName}
       />
+      {
+        <div className={styles.socialContainer}>
+          <div className={styles.socialIconContainer}>
+            <FacebookShareButton
+              url={location}
+              quote={facebookQuote}
+              className="share"
+            >
+              <SocialIcon
+                network="facebook"
+                bgColor={socialIconBackgroundColor}
+                style={socialIconDimensions}
+              />
+            </FacebookShareButton>
+          </div>
 
-      {/* hide social links until needed */}
-      {/* <div className={styles.socialContainer}>
-        <a href="#" className={classnames(styles.fa, 'fa fa-twitter')} />
-        <a href="#" className={classnames(styles.fa, 'fa fa-instagram')} />
-        <a href="#" className={classnames(styles.fa, 'fa fa-facebook')} />
-        <a href="#" className={classnames(styles.fa, 'fa fa-youtube')} />
-      </div> */}
+          <div className={styles.socialIconContainer}>
+            <TwitterShareButton url={location} className="share">
+              <SocialIcon
+                network="twitter"
+                bgColor={socialIconBackgroundColor}
+                style={socialIconDimensions}
+              />
+            </TwitterShareButton>
+          </div>
+
+          <div className={styles.socialIconContainer}>
+            <EmailShareButton url={location} className="share">
+              <SocialIcon
+                network="email"
+                bgColor={socialIconBackgroundColor}
+                style={socialIconDimensions}
+              />
+            </EmailShareButton>
+          </div>
+        </div>
+      }
 
       <div className={styles.mapsContainer}>
         {/* need to put in google API */}
