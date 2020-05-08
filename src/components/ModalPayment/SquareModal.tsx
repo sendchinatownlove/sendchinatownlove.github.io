@@ -104,7 +104,8 @@ const SquareModal = ({
   const purchaseTypePhrase =
     purchaseType === 'donation' ? 'Donation' : 'Voucher purchase';
 
-  const canSubmit = isChecked && name.length > 0 && email.length > 0;
+  const canSubmit =
+    isChecked && name.length > 0 && email.length > 0 && EMAIL_REGEX.test(email);
   return (
     <div className={styles.container}>
       <h2 className={styles.paymentHeader}>
@@ -139,7 +140,7 @@ const SquareModal = ({
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               placeholder="Email"
-              pattern={EMAIL_REGEX}
+              pattern={EMAIL_REGEX.source}
               required
             />
           </div>
