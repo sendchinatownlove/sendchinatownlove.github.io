@@ -131,7 +131,7 @@ const SquareModal = ({
             <span className={classnames('fa fa-envelope', styles.icons)} />
             <input
               name="email"
-              type="text"
+              type="email"
               className={classnames(
                 styles.email,
                 'modalInput--input',
