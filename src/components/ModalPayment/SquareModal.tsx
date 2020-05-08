@@ -18,7 +18,10 @@ import {
   useModalPaymentState,
   useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import {
+  EMAIL_REGEX,
+  SET_MODAL_VIEW,
+} from '../../utilities/hooks/ModalPaymentContext/constants';
 
 type Props = {
   purchaseType: string;
@@ -127,7 +130,7 @@ const SquareModal = ({
             <span className={classnames('fa fa-envelope', styles.icons)} />
             <input
               name="email"
-              type="email"
+              type="text"
               className={classnames(
                 styles.email,
                 'modalInput--input',
@@ -136,6 +139,8 @@ const SquareModal = ({
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               placeholder="Email"
+              pattern={EMAIL_REGEX}
+              required
             />
           </div>
         </div>
