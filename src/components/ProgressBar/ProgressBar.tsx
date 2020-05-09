@@ -67,7 +67,7 @@ const ProgressBar = ({
                   <tbody>
                     <tr>
                       <td>
-                        <b>{numGiftCards}</b> gift cards
+                        <b>{numGiftCards}</b> vouchers
                       </td>
                       <td>
                         <b>${Math.floor(giftCardAmount) / 100}</b>

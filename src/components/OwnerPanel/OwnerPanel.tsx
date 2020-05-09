@@ -184,37 +184,6 @@ const OwnerPanel = (props: Props) => {
         </div>
       }
 
-      {/* hide extra info section until needed */}
-      {/* <div className={styles.summaryContainer}>
-        <div>
-          <span className={styles.storeSummaryLabel}>Type: </span>
-          <span>Family-owned and operated</span>
-        </div>{' '}
-        <br />
-        <div>
-          <span className={styles.storeSummaryLabel}>Employees: </span>
-          <span>5</span>
-        </div>{' '}
-        <br />
-        <div>
-          <span className={styles.storeSummaryLabel}>Runaway: </span>
-          <span>3 months</span>
-        </div>{' '}
-        <br />
-        <div>
-          <span className={styles.storeSummaryLabel}>Breakeven: </span>
-          <span>$1000 / month</span>
-        </div>
-      </div> */}
-
-      {/* hide social links until needed */}
-      {/* <div className={styles.socialContainer}>
-        <a href="#" className={classnames(styles.fa, 'fa fa-twitter')} />
-        <a href="#" className={classnames(styles.fa, 'fa fa-instagram')} />
-        <a href="#" className={classnames(styles.fa, 'fa fa-facebook')} />
-        <a href="#" className={classnames(styles.fa, 'fa fa-youtube')} />
-      </div> */}
-
       <div className={styles.mapsContainer}>
         {/* need to put in google API */}
         {/* might need to use a react lib since it uses script tags */}
