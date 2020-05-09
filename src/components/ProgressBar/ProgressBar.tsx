@@ -55,43 +55,44 @@ const ProgressBar = ({
         </div>
       </div>
       <div className={styles.contributionInfo}>
-      <div>
-        ${(Math.floor(amountRaised) / 100).toLocaleString()} of $
-        {(Math.floor(targetAmount) / 100).toLocaleString()}
-      </div>
-      <div>
-      <SupporterTooltip
-              title={
-                <React.Fragment>
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <b>{numGiftCards}</b> gift cards
-                        </td>
-                        <td>
-                          <b>${Math.floor(giftCardAmount) / 100}</b>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>{numDonations}</b> donations
-                        </td>
-                        <td>
-                          <b>${Math.floor(donationAmount) / 100}</b>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </React.Fragment>
-              }
-              enterTouchDelay={50} placement="top"
-            >
-              <div>
-                <b>{numContributions}</b> supporters
-              </div>
-            </SupporterTooltip>
+        <div>
+          ${(Math.floor(amountRaised) / 100).toLocaleString()} of $
+          {(Math.floor(targetAmount) / 100).toLocaleString()}
+        </div>
+        <div>
+          <SupporterTooltip
+            title={
+              <React.Fragment>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <b>{numGiftCards}</b> gift cards
+                      </td>
+                      <td>
+                        <b>${Math.floor(giftCardAmount) / 100}</b>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <b>{numDonations}</b> donations
+                      </td>
+                      <td>
+                        <b>${Math.floor(donationAmount) / 100}</b>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </React.Fragment>
+            }
+            enterTouchDelay={50}
+            placement="top"
+          >
+            <div>
+              <b>{numContributions}</b> supporters
             </div>
+          </SupporterTooltip>
+        </div>
       </div>
     </div>
   );

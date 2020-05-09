@@ -74,15 +74,15 @@ const OwnerPanel = (props: Props) => {
       <h2 className={styles.ownerName}>{props.ownerName}</h2>
       {props.targetAmount && (
         <ProgressBar
-        amountRaised={props.amountRaised}
-        targetAmount={props.targetAmount}
-        progressBarColor={props.progressBarColor}
-        numContributions={props.numContributions}
-        numDonations={props.numDonations}
-        numGiftCards={props.numGiftCards}
-        donationAmount={props.donationAmount}
-        giftCardAmount={props.giftCardAmount}
-      />
+          amountRaised={props.amountRaised}
+          targetAmount={props.targetAmount}
+          progressBarColor={props.progressBarColor}
+          numContributions={props.numContributions}
+          numDonations={props.numDonations}
+          numGiftCards={props.numGiftCards}
+          donationAmount={props.donationAmount}
+          giftCardAmount={props.giftCardAmount}
+        />
       )}
 
       <div className={styles.buttonContainer}>
@@ -183,27 +183,6 @@ const OwnerPanel = (props: Props) => {
           </div>
         </div>
       }
-      {/*
-      return (
-    <section className={classnames(styles.container, props.className)}>
-      <figure className={styles.ownerContainer}>
-        <img
-          className={styles.ownerImage}
-          src={
-            props.imageSrc
-              ? process.env.REACT_APP_BASE_URL + props.imageSrc
-              : defaultOwnerImage
-          }
-          alt={props.ownerName}
-        />
-      </figure>
-
-      <h2 className={styles.ownerName}>{props.ownerName}</h2>
-      {props.targetAmount && (
-
-  const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
-    return props.extraInfo[current] != null;
-  });*/}
 
       {/* hide extra info section until needed */}
       {/* <div className={styles.summaryContainer}>
