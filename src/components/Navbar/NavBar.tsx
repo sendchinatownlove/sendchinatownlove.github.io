@@ -161,13 +161,19 @@ const HamburgerContainer = styled.div`
 const NavLinkStyle = styled.a`
   text-decoration: none;
   color: black;
+  transition: 0.1s;
   ${(props: CompactProps) =>
     props.compact &&
     `
     width: 100%;
     margin: 16px auto;
     text-align: center;
-  `}
+  `} :link {
+    color: black;
+  }
+  :hover {
+    color: #9e9e9e;
+  }
 `;
 
 const NavLink = (props: CompactProps) => {
@@ -176,7 +182,11 @@ const NavLink = (props: CompactProps) => {
     props.i18nText && !t(props.i18nText).includes('navBar')
       ? t(props.i18nText)
       : props.altText;
-  return <NavLinkStyle compact={props.compact}>{text}</NavLinkStyle>;
+  return (
+    <NavLinkStyle {...props} compact={props.compact}>
+      {text}
+    </NavLinkStyle>
+  );
 };
 
 const LanguageContainer = styled.div`
@@ -197,6 +207,7 @@ const LanguageButton = styled.div`
 const ReactNavLink = styled(Link)`
   text-decoration: none;
   color: black;
+  transition: 0.2s;
   ${(props: CompactProps) =>
     props.compact &&
     `
@@ -204,6 +215,13 @@ const ReactNavLink = styled(Link)`
     margin: 16px auto;
     text-align: center;
   `}
+  transition: 0.1s;
+  :link {
+    color: black;
+  }
+  :hover {
+    color: #9e9e9e;
+  }
 `;
 const Close = styled(CloseIcon)`
   cursor: pointer;
