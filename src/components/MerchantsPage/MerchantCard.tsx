@@ -44,6 +44,11 @@ const MerchantCard = ({ storeInfo }: Props) => {
             amountRaised={storeInfo!.amount_raised}
             targetAmount={storeInfo!.target_amount}
             progressBarColor={storeInfo!.progress_bar_color}
+            numContributions={storeInfo!.num_contributions}
+            numDonations={storeInfo!.num_donations}
+            numGiftCards={storeInfo!.num_gift_cards}
+            donationAmount={storeInfo!.donation_amount}
+            giftCardAmount={storeInfo!.gift_card_amount}
           />
         </div>
       </Link>

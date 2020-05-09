@@ -6,8 +6,6 @@ import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
 import styles from './styles.module.scss';
 import defaultOwnerImage from './assets/female.svg';
-import { withStyles, Theme } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
 import { SocialIcon } from 'react-social-icons';
 import {
   EmailShareButton,
@@ -50,21 +48,6 @@ const OwnerPanel = (props: Props) => {
     setPurchaseType(event.target.value);
   };
 
-  const progressWidth = (raised: number, target: number) => {
-    if (raised < target) return (raised / target) * 100;
-    return 100;
-  };
-
-  const SupporterTooltip = withStyles((theme: Theme) => ({
-    tooltip: {
-      backgroundColor: '#ffffff',
-      color: 'rgba(0, 0, 0, 0.87)',
-      width: 180,
-      fontSize: theme.typography.pxToRem(14),
-      border: '1px solid #dadde9',
-    },
-  }))(Tooltip);
-
   const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
     return props.extraInfo[current] != null;
   });
@@ -90,89 +73,17 @@ const OwnerPanel = (props: Props) => {
 
       <h2 className={styles.ownerName}>{props.ownerName}</h2>
       {props.targetAmount && (
-
-  const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
-    return props.extraInfo[current] != null;
-  });
-
-  return (
-    <section className={classnames(styles.container, props.className)}>
-      <figure className={styles.ownerContainer}>
-        <img
-          className={styles.ownerImage}
-          src={
-            props.imageSrc
-              ? process.env.REACT_APP_BASE_URL + props.imageSrc
-              : defaultOwnerImage
-          }
-          alt={props.ownerName}
-        />
-      </figure>
-
-      <h2 className={styles.ownerName}>{props.ownerName}</h2>
-      {props.targetAmount && (<>
-        <div className={styles.progressContainer}>
-          <div className={classnames(styles.progressBar, 'progress-bar')}>
-            <div
-              className={styles.myBar}
-              style={{
-                width: `${progressWidth(
-                  props.amountRaised,
-                  props.targetAmount
-                )}%`,
-                backgroundColor: props.progressBarColor,
-                //defaults to default color if no color is passed in
-              }}
-            >
-              {' '}
-            </div>
-          </div>
-          <div className={styles.contributionInfo}>
-            {/* TODO(jtmckibb): Add commas for easier readability */}$
-            {Math.floor(props.amountRaised) / 100} of $
-            {(Math.floor(props.targetAmount) / 100).toLocaleString()}
-            <SupporterTooltip
-              title={
-                <React.Fragment>
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <b>{props.numGiftCards}</b> gift cards
-                        </td>
-                        <td>
-                          <b>${Math.floor(props.giftCardAmount) / 100}</b>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>{props.numDonations}</b> donations
-                        </td>
-                        <td>
-                          <b>${Math.floor(props.donationAmount) / 100}</b>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </React.Fragment>
-              }
-              enterTouchDelay={50} placement="top"
-            >
-              <div>
-                <b>{props.numContributions}</b> supporters
-              </div>
-            </SupporterTooltip>
-          </div>
-        </div>
         <ProgressBar
         amountRaised={props.amountRaised}
         targetAmount={props.targetAmount}
         progressBarColor={props.progressBarColor}
+        numContributions={props.numContributions}
+        numDonations={props.numDonations}
+        numGiftCards={props.numGiftCards}
+        donationAmount={props.donationAmount}
+        giftCardAmount={props.giftCardAmount}
       />
-      </>
       )}
-
-      
 
       <div className={styles.buttonContainer}>
         {props.acceptDonations && (
@@ -272,6 +183,27 @@ const OwnerPanel = (props: Props) => {
           </div>
         </div>
       }
+      {/*
+      return (
+    <section className={classnames(styles.container, props.className)}>
+      <figure className={styles.ownerContainer}>
+        <img
+          className={styles.ownerImage}
+          src={
+            props.imageSrc
+              ? process.env.REACT_APP_BASE_URL + props.imageSrc
+              : defaultOwnerImage
+          }
+          alt={props.ownerName}
+        />
+      </figure>
+
+      <h2 className={styles.ownerName}>{props.ownerName}</h2>
+      {props.targetAmount && (
+
+  const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
+    return props.extraInfo[current] != null;
+  });*/}
 
       {/* hide extra info section until needed */}
       {/* <div className={styles.summaryContainer}>
