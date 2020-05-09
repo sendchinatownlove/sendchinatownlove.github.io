@@ -7,7 +7,7 @@ import { Router, Switch, Route } from 'react-router-dom';
 import React from 'react';
 import ReactGA from 'react-ga';
 
-const trackingId = process.env.REACT_APP_API_ENDPOINT!;
+const trackingId = process.env.REACT_APP_GA_TRACKING_ID!;
 ReactGA.initialize(trackingId);
 
 const history = createBrowserHistory();
