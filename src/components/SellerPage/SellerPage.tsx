@@ -32,7 +32,10 @@ const SellerPage = (props: Props) => {
   }, []);
   // TODO(ArtyEmsee): handle actual null states and loading
   return seller ? (
-    <div className={styles.container} style={{display: props.menuOpen ? "none": "inherit"}}>
+    <div
+      className={styles.container}
+      style={{ display: props.menuOpen ? 'none' : 'inherit' }}
+    >
       <SellerName>{seller.name}</SellerName>
       <div className={styles.contentContainer}>
         {/* TODO(ArtyEmsee): Fix object mapping */}
@@ -83,7 +86,15 @@ const SellerPage = (props: Props) => {
 
 export default SellerPage;
 
-const SellerName = styled.h1`
+const SellerName = styled.div`
   font-weight: 600;
-  margin: 0;
+  font-size: 32px;
+  max-width: 1200px;
+  margin: 12px auto;
+  margin-top: 24px;
+  width: 100%;
+  @include for-tablet-landscape-up {
+    width: 90%;
+    margin-top: 32px;
+  }
 `;
