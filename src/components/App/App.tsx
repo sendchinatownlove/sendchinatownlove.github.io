@@ -51,7 +51,7 @@ const App = () => {
           </Route>
         </Switch>
       </Suspense>
-      <Footer />
+      <Footer menuOpen={menuOpen} />
     </Router>
   );
 };
