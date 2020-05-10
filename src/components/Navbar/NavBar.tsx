@@ -168,7 +168,8 @@ const NavLinkStyle = styled.a`
     width: 100%;
     margin: 16px auto;
     text-align: center;
-  `} :link {
+  `}
+  :link {
     color: black;
   }
   :hover {
@@ -182,11 +183,7 @@ const NavLink = (props: CompactProps) => {
     props.i18nText && !t(props.i18nText).includes('navBar')
       ? t(props.i18nText)
       : props.altText;
-  return (
-    <NavLinkStyle {...props} compact={props.compact}>
-      {text}
-    </NavLinkStyle>
-  );
+  return <NavLinkStyle {...props} compact={props.compact}>{text}</NavLinkStyle>;
 };
 
 const LanguageContainer = styled.div`
@@ -199,10 +196,14 @@ const LanguageContainer = styled.div`
 `;
 const LanguageButton = styled.div`
   margin: 0;
+  transition: 0.1s;
   color: #9e9e9e;
   font-size: 14px;
   cursor: pointer;
   font-weight: 200;
+  :hover {
+    color: #a7182d;
+  }
 `;
 const ReactNavLink = styled(Link)`
   text-decoration: none;
@@ -215,7 +216,7 @@ const ReactNavLink = styled(Link)`
     margin: 16px auto;
     text-align: center;
   `}
-  transition: 0.1s;
+    transition: 0.1s;
   :link {
     color: black;
   }
