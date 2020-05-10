@@ -42,6 +42,9 @@ const FooterComponent = (props: Props) => {
 export default FooterComponent;
 
 const Container = styled.footer`
+  width: 90%;
+  max-width: 1280px;
+  margin: 0 auto;
   display: ${(props: Props) => (props.menuOpen ? 'none' : 'flex')};
   flex-direction: row;
   justify-content: space-between;
@@ -49,7 +52,6 @@ const Container = styled.footer`
   flex-wrap: wrap;
   background-color: ${(props: Props) =>
     props.theme === 'dark' ? '#f7f7f7' : '#ffffff'};
-  padding: 0 40px 0 40px;
 
   span {
     margin-left: 24px;

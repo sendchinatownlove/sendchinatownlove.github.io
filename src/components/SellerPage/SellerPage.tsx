@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import HeroBanner from '../HeroBanner';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import ErrorPage from '../404Page';
@@ -8,6 +7,8 @@ import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/
 import styles from './styles.module.scss';
 import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
+import Loader from '../Loader';
+import styled from 'styled-components';
 
 interface Props {
   menuOpen: boolean;
@@ -32,7 +33,7 @@ const SellerPage = (props: Props) => {
   // TODO(ArtyEmsee): handle actual null states and loading
   return seller ? (
     <div className={styles.container}>
-      <HeroBanner name={seller.name} />
+      <SellerName>{seller.name}</SellerName>
       <div className={styles.contentContainer}>
         {/* TODO(ArtyEmsee): Fix object mapping */}
         <StoreInfo
@@ -70,8 +71,19 @@ const SellerPage = (props: Props) => {
       </div>
     </div>
   ) : (
-    <>{loading ? null : <ErrorPage menuOpen={props.menuOpen} />}</>
+    <>
+      {loading ? (
+        <Loader isPage={true} />
+      ) : (
+        <ErrorPage menuOpen={props.menuOpen} />
+      )}
+    </>
   );
 };
 
 export default SellerPage;
+
+const SellerName = styled.h1`
+  font-weight: 600;
+  margin: 0;
+`;

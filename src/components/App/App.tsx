@@ -20,38 +20,45 @@ history.listen((location) => {
 // we could use template strings, but just to be safe we'll hardcode the
 // lazy imports
 const SellerPage = lazy(() => import('../SellerPage'));
-const AboutPage = lazy(() => import('../About'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const ErrorPage = lazy(() => import('../404Page'));
 
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const returnComponent = (child) => {
+    let component;
+    switch (child) {
+      case 'merchants':
+        component = <MerchantsPage menuOpen={menuOpen} />;
+        break;
+      case 'seller':
+        component = <SellerPage menuOpen={menuOpen} />;
+        break;
+      default:
+        component = <ErrorPage menuOpen={menuOpen} />;
+        break;
+    }
+
+    return (
+      <>
+        <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        {component}
+        <Footer menuOpen={menuOpen} />
+      </>
+    );
+  };
+
   return (
     <Router history={history}>
-      <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <Suspense fallback={<Loader isPage={true} />}>
         <Switch>
-          <Route path="/about">
-            {' '}
-            <AboutPage />{' '}
-          </Route>
-          <Route path="/merchants">
-            {' '}
-            <MerchantsPage />
-          </Route>
-          <Route path="/:id">
-            <SellerPage menuOpen={menuOpen} />
-          </Route>
-          <Route path="/:id#story">
-            <SellerPage menuOpen={menuOpen} />
-          </Route>
-          <Route>
-            <ErrorPage menuOpen={menuOpen} />
-          </Route>
+          <Route path="/merchants">{returnComponent('merchants')}</Route>
+          <Route path="/:id">{returnComponent('seller')}</Route>
+          <Route path="/:id#story">{returnComponent('seller')}</Route>
+          <Route>{returnComponent('error')}</Route>
         </Switch>
       </Suspense>
-      <Footer menuOpen={menuOpen} />
     </Router>
   );
 };
