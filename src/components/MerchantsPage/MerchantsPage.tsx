@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { getSellers } from '../../utilities';
-import Footer from '../Footer';
-import NavBar from './MerchantNavBar';
+import MerchantNavBar from './MerchantNavBar';
 import MerchantCard from './MerchantCard';
 import DescriptionBox from './DescriptionBox';
 import ContributionBar from './ContributionBar';
@@ -51,49 +50,46 @@ const MerchantsPage: React.FC<{}> = () => {
   };
 
   return filter ? (
-    <React.Fragment>
-      <div className={styles.container}>
-        <div className={styles.overlayContainer}>
-          <img src={nycMapBackground} className={styles.nycMap} alt="NYC MAP" />
-          <div className={styles.contentContainer}>
-            <div className={styles.textArea}>
-              <h2 style={{ fontWeight: 'bolder' }}>Our Chinatown</h2>
-              <br />
-              <p>
-                We are providing an online platform to low-tech, cash-only,
-                Asian-owned small businesses that have been disproportionately
-                impacted by COVID-19.
-              </p>
-              <p>
-                Support local merchants by making a donation or purchasing a
-                voucher from them.
-              </p>
-            </div>
-            {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
-            <div className={styles.storeInfo}>
-              <ContributionBar
-                totalDonations={totalDontations}
-                totalGiftCards={totalGiftCards}
-              />
-            </div>
-            <div className={styles.ownerPanel}>
-              <DescriptionBox />
-            </div>
+    <div className={styles.container}>
+      <div className={styles.overlayContainer}>
+        <img src={nycMapBackground} className={styles.nycMap} alt="NYC MAP" />
+        <div className={styles.contentContainer}>
+          <div className={styles.textArea}>
+            <h2 style={{ fontWeight: 'bolder' }}>Our Chinatown</h2>
+            <br />
+            <p>
+              We are providing an online platform to low-tech, cash-only,
+              Asian-owned small businesses that have been disproportionately
+              impacted by COVID-19.
+            </p>
+            <p>
+              Support local merchants by making a donation or purchasing a
+              voucher from them.
+            </p>
           </div>
-        </div>
-
-        <div className={styles.storeInfoContainer}>
-          <NavBar filterStoreType={filterStoreType} />
-
-          <div className={styles.merchantsContainer}>
-            {filter.map((store: any) => (
-              <MerchantCard key={store!.seller_id} storeInfo={store} />
-            ))}
+          {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
+          <div className={styles.storeInfo}>
+            <ContributionBar
+              totalDonations={totalDontations}
+              totalGiftCards={totalGiftCards}
+            />
+          </div>
+          <div className={styles.ownerPanel}>
+            <DescriptionBox />
           </div>
         </div>
       </div>
-      <Footer />
-    </React.Fragment>
+
+      <div className={styles.storeInfoContainer}>
+        <MerchantNavBar filterStoreType={filterStoreType} />
+
+        <div className={styles.merchantsContainer}>
+          {filter.map((store: any) => (
+            <MerchantCard key={store!.seller_id} storeInfo={store} />
+          ))}
+        </div>
+      </div>
+    </div>
   ) : null;
 };
 

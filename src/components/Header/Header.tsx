@@ -17,7 +17,7 @@ interface CompactProps {
   altText?: string;
 }
 
-const NavBar = (props: Props) => {
+const Header = (props: Props) => {
   const { t, i18n } = useTranslation();
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
@@ -65,10 +65,10 @@ const NavBar = (props: Props) => {
       </HamburgerContainer>
     ) : (
       <NavLinksContainer compact={hamburgerOpen}>
-        <NavBarContainer>
+        <HeaderContainer>
           <Image src={sclLogo} alt="Logo" />
           <Close onClick={(e) => props.setMenuOpen(false)} />
-        </NavBarContainer>
+        </HeaderContainer>
         <NavLink
           compact={hamburgerOpen}
           href="https://sendchinatownlove.com/"
@@ -83,7 +83,7 @@ const NavBar = (props: Props) => {
   };
 
   return (
-    <NavBarContainer>
+    <HeaderContainer>
       <Image src={sclLogo} alt="Logo" />
       {hamburgerOpen ? (
         showCompactMenu()
@@ -109,13 +109,13 @@ const NavBar = (props: Props) => {
           </LanguageContainer>
         </NavLinksContainer>
       )}
-    </NavBarContainer>
+    </HeaderContainer>
   );
 };
 
-export default NavBar;
+export default Header;
 
-const NavBarContainer = styled.div`
+const HeaderContainer = styled.div`
   background-color: transparent;
   display: flex;
   flex-direction: row;
@@ -168,8 +168,7 @@ const NavLinkStyle = styled.a`
     width: 100%;
     margin: 16px auto;
     text-align: center;
-  `}
-  :link {
+  `} :link {
     color: black;
   }
   :hover {
@@ -183,7 +182,11 @@ const NavLink = (props: CompactProps) => {
     props.i18nText && !t(props.i18nText).includes('navBar')
       ? t(props.i18nText)
       : props.altText;
-  return <NavLinkStyle {...props} compact={props.compact}>{text}</NavLinkStyle>;
+  return (
+    <NavLinkStyle {...props} compact={props.compact}>
+      {text}
+    </NavLinkStyle>
+  );
 };
 
 const LanguageContainer = styled.div`
@@ -216,7 +219,7 @@ const ReactNavLink = styled(Link)`
     margin: 16px auto;
     text-align: center;
   `}
-    transition: 0.1s;
+  transition: 0.1s;
   :link {
     color: black;
   }

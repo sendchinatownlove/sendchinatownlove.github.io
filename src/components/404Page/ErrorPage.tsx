@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
-import NavBar from '../Navbar';
+import React from 'react';
 import styled from 'styled-components';
 import ErrorImage from '../../images/404-error-image.png';
 
-interface Props {}
-interface CompactProps {
+interface Props {
   menuOpen: boolean;
 }
 
 const ErrorPage = (props: Props) => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <Container>
-      <NavBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      <Text menuOpen={menuOpen}>
+      <Text menuOpen={props.menuOpen}>
         <Error src={ErrorImage} alt="error" />
         <MainHeader> Sorry Your Dumpling Was Not Found! </MainHeader>
         <SubHeader>
@@ -50,7 +45,7 @@ const Text = styled.div`
   margin: 0 auto;
   width: 80%;
   text-align: center;
-  display: ${(props: CompactProps) => (props.menuOpen ? 'none' : 'flex')};
+  display: ${(props: Props) => (props.menuOpen ? 'none' : 'flex')};
   flex-direction: column;
   align-items: center;
   justify-content: center;

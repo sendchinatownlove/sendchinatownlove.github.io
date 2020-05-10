@@ -6,7 +6,7 @@ interface Props {
   filterStoreType: Function;
 }
 
-const NavBar = ({ filterStoreType }: Props) => {
+const MerchantNavBar = ({ filterStoreType }: Props) => {
   const [selected, setSelected] = useState('all');
 
   const setStoreType = (type: any, e: any) => {
@@ -45,7 +45,7 @@ const NavBar = ({ filterStoreType }: Props) => {
   );
 };
 
-export default NavBar;
+export default MerchantNavBar;
 
 const NavContainer = styled.div`
   display: flex;
