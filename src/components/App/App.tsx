@@ -1,8 +1,10 @@
 import { createBrowserHistory } from 'history';
 import { Router, Switch, Route } from 'react-router-dom';
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import ReactGA from 'react-ga';
 import Loader from '../Loader';
+import Header from '../Navbar';
+import Footer from '../Footer';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
@@ -23,41 +25,47 @@ history.listen((location) => {
 // we could use template strings, but just to be safe we'll hardcode the
 // lazy imports
 const SellerPage = lazy(() => import('../SellerPage'));
-const AboutPage = lazy(() => import('../About'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const ErrorPage = lazy(() => import('../404Page'));
 
-class App extends React.Component<{}> {
-  render() {
+const App = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const returnComponent = (child) => {
+    let component;
+    switch (child) {
+      case 'merchants':
+        component = <MerchantsPage menuOpen={menuOpen} />;
+        break;
+      case 'seller':
+        component = <SellerPage menuOpen={menuOpen} />;
+        break;
+      default:
+        component = <ErrorPage menuOpen={menuOpen} />;
+        break;
+    }
+
     return (
-      <Router history={history}>
-        <Suspense fallback={<Loader isPage={true} />}>
-          <Switch>
-            {
-              // TODO(ArtyEmsee): add router config for this route
-            }
-            <Route path="/about">
-              {' '}
-              <AboutPage />{' '}
-            </Route>
-            <Route path="/merchants">
-              {' '}
-              <MerchantsPage />
-            </Route>
-            <Route path="/:id">
-              <SellerPage />
-            </Route>
-            <Route path="/:id#story">
-              <SellerPage />
-            </Route>
-            <Route>
-              <ErrorPage />
-            </Route>
-          </Switch>
-        </Suspense>
-      </Router>
+      <>
+        <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        {component}
+        <Footer menuOpen={menuOpen} />
+      </>
     );
-  }
-}
+  };
+
+  return (
+    <Router history={history}>
+      <Suspense fallback={<Loader isPage={true} />}>
+        <Switch>
+          <Route path="/merchants">{returnComponent('merchants')}</Route>
+          <Route path="/:id">{returnComponent('seller')}</Route>
+          <Route path="/:id#story">{returnComponent('seller')}</Route>
+          <Route>{returnComponent('error')}</Route>
+        </Switch>
+      </Suspense>
+    </Router>
+  );
+};
 
 export default App;

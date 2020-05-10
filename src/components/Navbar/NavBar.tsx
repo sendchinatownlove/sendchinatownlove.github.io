@@ -121,6 +121,7 @@ const HeaderContainer = styled.header`
   flex-direction: row;
   justify-content: space-between;
   width: 90%;
+  max-width: 1280px;
   margin: 15px auto;
   align-items: center;
   font-family: futura;
