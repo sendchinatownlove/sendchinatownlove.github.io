@@ -32,7 +32,7 @@ const SellerPage = (props: Props) => {
   }, []);
   // TODO(ArtyEmsee): handle actual null states and loading
   return seller ? (
-    <div className={styles.container}>
+    <div className={styles.container} style={{display: props.menuOpen ? "none": "inherit"}}>
       <SellerName>{seller.name}</SellerName>
       <div className={styles.contentContainer}>
         {/* TODO(ArtyEmsee): Fix object mapping */}
