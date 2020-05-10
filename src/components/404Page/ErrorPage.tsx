@@ -8,7 +8,7 @@ interface CompactProps {
   menuOpen: boolean;
 }
 
-const ErrorPage = (props: Props) => {
+const ErrorPage = (props: CompactProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (

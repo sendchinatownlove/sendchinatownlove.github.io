@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import HeroBanner from '../HeroBanner';
-import Footer from '../Footer';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import ErrorPage from '../404Page';
@@ -9,8 +7,14 @@ import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/
 import styles from './styles.module.scss';
 import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
+import Loader from '../Loader';
+import styled from 'styled-components';
 
-const SellerPage: React.FC<{}> = () => {
+interface Props {
+  menuOpen: boolean;
+}
+
+const SellerPage = (props: Props) => {
   // fix typing
   const [seller, setSeller] = useState<any | null>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -29,49 +33,57 @@ const SellerPage: React.FC<{}> = () => {
   // TODO(ArtyEmsee): handle actual null states and loading
   return seller ? (
     <div className={styles.container}>
-      <main>
-        <HeroBanner name={seller.name} />
-        <div className={styles.contentContainer}>
-          {/* TODO(ArtyEmsee): Fix object mapping */}
-          <StoreInfo
-            seller={{
-              name: seller.name,
-              locations: seller.locations,
-              cuisineName: seller.cuisine_name,
-              story: seller.story,
-              summary: seller.summary,
-              hero_image_url: seller.hero_image_url,
+      <SellerName>{seller.name}</SellerName>
+      <div className={styles.contentContainer}>
+        {/* TODO(ArtyEmsee): Fix object mapping */}
+        <StoreInfo
+          seller={{
+            name: seller.name,
+            locations: seller.locations,
+            cuisineName: seller.cuisine_name,
+            story: seller.story,
+            summary: seller.summary,
+            hero_image_url: seller.hero_image_url,
+          }}
+        />
+        <ModalPaymentProvider>
+          <OwnerPanel
+            className={styles.ownerPanel}
+            acceptDonations={seller.accept_donations}
+            sellGiftCards={seller.sell_gift_cards}
+            amountRaised={seller.amount_raised}
+            targetAmount={seller.target_amount}
+            ownerName={seller.owner_name}
+            imageSrc={seller.owner_image_url}
+            sellerName={seller.name}
+            progressBarColor={seller.progress_bar_color}
+            extraInfo={{
+              Type: seller.business_type,
+              Employees: seller.num_employees,
+              Founded: seller.founded_year,
+              Website: seller.website_url,
+              Menu: seller.menu_url,
             }}
+            // TODO(jtmckibb): Should not crash here
+            sellerId={id!}
           />
-          <ModalPaymentProvider>
-            <OwnerPanel
-              className={styles.ownerPanel}
-              acceptDonations={seller.accept_donations}
-              sellGiftCards={seller.sell_gift_cards}
-              amountRaised={seller.amount_raised}
-              targetAmount={seller.target_amount}
-              ownerName={seller.owner_name}
-              imageSrc={seller.owner_image_url}
-              sellerName={seller.name}
-              progressBarColor={seller.progress_bar_color}
-              extraInfo={{
-                Type: seller.business_type,
-                Employees: seller.num_employees,
-                Founded: seller.founded_year,
-                Website: seller.website_url,
-                Menu: seller.menu_url,
-              }}
-              // TODO(jtmckibb): Should not crash here
-              sellerId={id!}
-            />
-          </ModalPaymentProvider>
-        </div>
-      </main>
-      <Footer />
+        </ModalPaymentProvider>
+      </div>
     </div>
   ) : (
-    <>{loading ? null : <ErrorPage />}</>
+    <>
+      {loading ? (
+        <Loader isPage={true} />
+      ) : (
+        <ErrorPage menuOpen={props.menuOpen} />
+      )}
+    </>
   );
 };
 
 export default SellerPage;
+
+const SellerName = styled.h1`
+  font-weight: 600;
+  margin: 0;
+`;

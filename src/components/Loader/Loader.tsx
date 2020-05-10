@@ -6,7 +6,7 @@ type Props = {
   isPage: Boolean;
 };
 
-const MenuItem: React.SFC<Props> = ({ isPage }: Props) => {
+const Loader: React.SFC<Props> = ({ isPage }: Props) => {
   return (
     <LoaderContainer isPage={isPage}>
       <CircularProgress />
@@ -14,7 +14,7 @@ const MenuItem: React.SFC<Props> = ({ isPage }: Props) => {
   );
 };
 
-export default MenuItem;
+export default Loader;
 
 const LoaderContainer = styled.div`
   width: 100%;
@@ -26,4 +26,9 @@ const LoaderContainer = styled.div`
   div {
     color: #ab192e;
   }
+`;
+
+export const LoaderFillerContainer = styled.div`
+  width: 100%;
+  height: 74vh;
 `;
