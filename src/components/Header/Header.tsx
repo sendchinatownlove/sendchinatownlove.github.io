@@ -125,6 +125,8 @@ const HeaderContainer = styled.header`
   margin: 15px auto;
   align-items: center;
   font-family: futura;
+  font-size: 14px;
+  font-family: Open Sans;
 `;
 const NavLinksContainer = styled.div`
   display: flex;
