@@ -12,7 +12,7 @@ import nycMapBackground from './images/nyc_3.png';
 const MerchantsPage: React.FC<{}> = () => {
   const [sellers, setSellers] = useState<any | null>();
   const [filter, setFilter] = useState<any | null>();
-  const [totalDontations, setDonations] = useState(0);
+  const [totalDonations, setDonations] = useState(0);
   const [totalGiftCards, setGiftCards] = useState(0);
 
   const fetchData = async () => {
@@ -72,7 +72,7 @@ const MerchantsPage: React.FC<{}> = () => {
             {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
             <div className={styles.storeInfo}>
               <ContributionBar
-                totalDonations={totalDontations}
+                totalDonations={totalDonations}
                 totalGiftCards={totalGiftCards}
               />
             </div>

@@ -18,6 +18,11 @@ interface Props {
   className?: string;
   amountRaised: number;
   targetAmount: number;
+  numContributions: number;
+  numDonations: number;
+  numGiftCards: number;
+  donationAmount: number;
+  giftCardAmount: number;
   acceptDonations: boolean;
   sellGiftCards: boolean;
   ownerName: string;
@@ -72,6 +77,11 @@ const OwnerPanel = (props: Props) => {
           amountRaised={props.amountRaised}
           targetAmount={props.targetAmount}
           progressBarColor={props.progressBarColor}
+          numContributions={props.numContributions}
+          numDonations={props.numDonations}
+          numGiftCards={props.numGiftCards}
+          donationAmount={props.donationAmount}
+          giftCardAmount={props.giftCardAmount}
         />
       )}
 
