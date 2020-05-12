@@ -44,12 +44,15 @@ const SquareModal = ({
   const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
 
-  const [isChecked, setChecked] = useState(false);
+  const [isTermsChecked, setTermsChecked] = useState(false);
+  const [isSubscriptionChecked, setSubscriptionChecked] = useState(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
 
-  const checkAgreement = () => setChecked(!isChecked);
+  const checkTermsAgreement = () => setTermsChecked(!isTermsChecked);
+  const checkSubscriptionAgreement = () =>
+    setSubscriptionChecked(!isSubscriptionChecked);
 
   const cardNonceResponseReceived = (errors: any[], nonce: string) => {
     setErrorsMessages([]);
@@ -71,6 +74,7 @@ const SquareModal = ({
       email,
       nonce,
       idempotency_key: idempotencyKey,
+      is_subscribed: isSubscriptionChecked,
     };
 
     return makeSquarePayment(nonce, sellerId, payment, buyer)
@@ -114,7 +118,7 @@ const SquareModal = ({
     purchaseType === 'donation' ? 'Donation' : 'Voucher purchase';
 
   const canSubmit =
-    isChecked && name.length > 0 && email.length > 0 && EMAIL_REGEX.test(email);
+    isTermsChecked && name.length > 0 && email.length > 0 && EMAIL_REGEX.test(email);
   return (
     <div className={styles.container}>
       <h2 className={styles.paymentHeader}>
@@ -184,11 +188,26 @@ const SquareModal = ({
                 <Checkbox
                   value="checkedA"
                   inputProps={{ 'aria-label': 'Checkbox A' }}
-                  onClick={checkAgreement}
-                  checked={isChecked}
+                  onClick={checkTermsAgreement}
+                  checked={isTermsChecked}
                 />
                 <span>
                   I agree with the <b>Terms & Conditions</b>
+                </span>
+              </label>
+            </div>
+            <div>
+              <label className={styles.termsAndConditions}>
+                <Checkbox
+                  value="checkedB"
+                  inputProps={{ 'aria-label': 'Checkbox B' }}
+                  onClick={checkSubscriptionAgreement}
+                  checked={isSubscriptionChecked}
+                />
+                <span>
+                  I'd like to receive email updates from Send Chinatown Love,
+                  such as when the merchant receives my donation/purchase or
+                  when a new merchant is onboarded
                 </span>
               </label>
             </div>

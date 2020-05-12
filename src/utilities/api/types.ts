@@ -28,6 +28,7 @@ export type Buyer = {
   email: string;
   nonce?: string;
   idempotency_key?: string;
+  is_subscribed: boolean;
   // address: string;
   // city: string;
   // stateForm: string;
