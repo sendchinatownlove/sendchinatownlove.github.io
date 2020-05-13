@@ -11,7 +11,7 @@ import {
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useTranslation } from 'react-i18next';
 
-interface Props {
+export interface Props {
   purchaseType: string;
   sellerId: string;
   sellerName: string;
@@ -46,7 +46,11 @@ export const Modal = (props: Props) => {
   ];
 
   return (
-    <form id="donation-form">
+    <form
+      id="donation-form"
+      className={classnames(styles.donationsContainer, 'modalForm--form')}
+      data-testid="Modal Amount"
+    >
       <div>
         <h2>{props.sellerName}</h2>
       </div>

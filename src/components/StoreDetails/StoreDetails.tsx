@@ -9,7 +9,7 @@ type Props = {
 };
 
 const StoreDetails: React.SFC<Props> = ({ className, story }) => (
-  <section className={className}>
+  <section className={className} data-testid="Story Header">
     <nav className={styles.navLinkContainer}>
       <NavLink
         className={styles.navLink}

@@ -4,15 +4,20 @@ import React, { lazy, Suspense } from 'react';
 import ReactGA from 'react-ga';
 import Loader from '../Loader';
 
-const trackingId = process.env.REACT_APP_GA_TRACKING_ID!;
-ReactGA.initialize(trackingId);
+const trackingId = process.env.REACT_APP_API_ENDPOINT!;
+// For Testing purposes: https://github.com/react-ga/react-ga/issues/322
+if (process.env.NODE_ENV === 'production') {
+  ReactGA.initialize(trackingId);
+}
 
 const history = createBrowserHistory();
 
 // Initialize google analytics page view tracking
 history.listen((location) => {
-  ReactGA.set({ page: location.pathname }); // Update the user's current page
-  ReactGA.pageview(location.pathname); // Record a pageview for the given page
+  if (process.env.NODE_ENV === 'production') {
+    ReactGA.set({ page: location.pathname }); // Update the user's current page
+    ReactGA.pageview(location.pathname); // Record a pageview for the given page
+  }
 });
 
 // we could use template strings, but just to be safe we'll hardcode the
