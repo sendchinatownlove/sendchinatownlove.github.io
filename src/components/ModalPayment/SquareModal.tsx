@@ -30,6 +30,11 @@ type Props = {
   idempotencyKey: string;
 };
 
+type ErrorMessage = {
+  code: string;
+  detail: string;
+};
+
 const SquareModal = ({
   purchaseType,
   sellerId,
@@ -76,19 +81,23 @@ const SquareModal = ({
       })
       .catch((err) => {
         if (err.response) {
-          const responseErrors = err.response.data.errors;
+          let responseErrors: ErrorMessage[] = [];
+          if (err.response.data.errors)
+            responseErrors = err.response.data.errors;
+          else if (err.response.data.message)
+            responseErrors = [
+              { code: 'GENERIC_DECLINE', detail: err.response.data.message },
+            ];
 
           const newErrors =
             responseErrors.length > 0
-              ? responseErrors.map(
-                  (error: { code: string; detail: string }) => {
-                    if (hasKey(SquareErrors, error.code)) {
-                      return SquareErrors[error.code];
-                    } else {
-                      return error.detail;
-                    }
+              ? responseErrors.map((error: ErrorMessage) => {
+                  if (hasKey(SquareErrors, error.code)) {
+                    return SquareErrors[error.code];
+                  } else {
+                    return error.detail;
                   }
-                )
+                })
               : [];
           setErrorsMessages(newErrors);
         }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import sclLogo from '../../images/logo-with-text.png';
+import { Logo } from '../Logos';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface CompactProps {
-  compact: boolean;
+  compact: string;
   href?: string;
   i18nText?: string;
   altText?: string;
@@ -64,18 +64,18 @@ const NavBar = (props: Props) => {
         <MenuIcon onClick={(e) => props.setMenuOpen(true)} />
       </HamburgerContainer>
     ) : (
-      <NavLinksContainer compact={hamburgerOpen}>
-        <NavBarContainer>
-          <Image src={sclLogo} alt="Logo" />
+      <NavLinksContainer compact={hamburgerOpen.toString()}>
+        <HeaderContainer>
+          <Logo />
           <Close onClick={(e) => props.setMenuOpen(false)} />
-        </NavBarContainer>
+        </HeaderContainer>
         <NavLink
-          compact={hamburgerOpen}
+          compact={hamburgerOpen.toString()}
           href="https://sendchinatownlove.com/"
           i18nText="navBar.header.home"
           altText="HOME"
         />
-        <ReactNavLink to="/merchants" compact={hamburgerOpen}>
+        <ReactNavLink to="/merchants" compact={hamburgerOpen.toString()}>
           {t('navBar.header.merchants')}
         </ReactNavLink>
       </NavLinksContainer>
@@ -83,19 +83,19 @@ const NavBar = (props: Props) => {
   };
 
   return (
-    <NavBarContainer>
-      <Image src={sclLogo} alt="Logo" />
+    <HeaderContainer>
+      <Logo />
       {hamburgerOpen ? (
         showCompactMenu()
       ) : (
-        <NavLinksContainer compact={hamburgerOpen}>
+        <NavLinksContainer compact={hamburgerOpen.toString()}>
           <NavLink
-            compact={hamburgerOpen}
+            compact={hamburgerOpen.toString()}
             href="https://sendchinatownlove.com/"
             i18nText="navBar.header.home"
             altText="HOME"
           />
-          <ReactNavLink to="/merchants" compact={hamburgerOpen}>
+          <ReactNavLink to="/merchants" compact={hamburgerOpen.toString()}>
             {t('navBar.header.merchants')}
           </ReactNavLink>
           <LanguageContainer>
@@ -109,34 +109,33 @@ const NavBar = (props: Props) => {
           </LanguageContainer>
         </NavLinksContainer>
       )}
-    </NavBarContainer>
+    </HeaderContainer>
   );
 };
 
 export default NavBar;
 
-const NavBarContainer = styled.div`
+const HeaderContainer = styled.header`
   background-color: transparent;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 90%;
+  max-width: 1280px;
   margin: 15px auto;
   align-items: center;
   font-family: futura;
+  font-size: 14px;
+  font-family: Open Sans;
 `;
-const Image = styled.img`
-  width: 150px;
-  height: 66px;
-`;
-
 const NavLinksContainer = styled.div`
   display: flex;
   flex-direction: ${(props: CompactProps) =>
-    props.compact ? `column` : 'row'};
-  width: ${(props: CompactProps) => (props.compact ? `100%` : '50%')};
+    props.compact === 'true' ? `column` : 'row'};
+  width: ${(props: CompactProps) =>
+    props.compact === 'true' ? `100%` : '50%'};
   ${(props: CompactProps) =>
-    props.compact
+    props.compact === 'true'
       ? `
     position: absolute;
     top: 0;
@@ -161,13 +160,19 @@ const HamburgerContainer = styled.div`
 const NavLinkStyle = styled.a`
   text-decoration: none;
   color: black;
+  transition: 0.1s;
   ${(props: CompactProps) =>
-    props.compact &&
+    props.compact === 'true' &&
     `
     width: 100%;
     margin: 16px auto;
     text-align: center;
-  `}
+  `} :link {
+    color: black;
+  }
+  :hover {
+    color: #9e9e9e;
+  }
 `;
 
 const NavLink = (props: CompactProps) => {
@@ -176,7 +181,11 @@ const NavLink = (props: CompactProps) => {
     props.i18nText && !t(props.i18nText).includes('navBar')
       ? t(props.i18nText)
       : props.altText;
-  return <NavLinkStyle compact={props.compact}>{text}</NavLinkStyle>;
+  return (
+    <NavLinkStyle {...props} compact={props.compact}>
+      {text}
+    </NavLinkStyle>
+  );
 };
 
 const LanguageContainer = styled.div`
@@ -189,21 +198,33 @@ const LanguageContainer = styled.div`
 `;
 const LanguageButton = styled.div`
   margin: 0;
+  transition: 0.1s;
   color: #9e9e9e;
   font-size: 14px;
   cursor: pointer;
   font-weight: 200;
+  :hover {
+    color: #a7182d;
+  }
 `;
 const ReactNavLink = styled(Link)`
   text-decoration: none;
   color: black;
+  transition: 0.2s;
   ${(props: CompactProps) =>
-    props.compact &&
+    props.compact === 'true' &&
     `
     width: 100%;
     margin: 16px auto;
     text-align: center;
   `}
+  transition: 0.1s;
+  :link {
+    color: black;
+  }
+  :hover {
+    color: #9e9e9e;
+  }
 `;
 const Close = styled(CloseIcon)`
   cursor: pointer;
