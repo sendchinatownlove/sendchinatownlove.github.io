@@ -1,11 +1,8 @@
-import SellerPage from '../SellerPage';
-import About from '../About';
-import MerchantsPage from '../MerchantsPage';
-import ErrorPage from '../404Page';
 import { createBrowserHistory } from 'history';
 import { Router, Switch, Route } from 'react-router-dom';
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactGA from 'react-ga';
+import Loader from '../Loader';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
@@ -23,20 +20,41 @@ history.listen((location) => {
   }
 });
 
+// we could use template strings, but just to be safe we'll hardcode the
+// lazy imports
+const SellerPage = lazy(() => import('../SellerPage'));
+const AboutPage = lazy(() => import('../About'));
+const MerchantsPage = lazy(() => import('../MerchantsPage'));
+const ErrorPage = lazy(() => import('../404Page'));
+
 class App extends React.Component<{}> {
   render() {
     return (
       <Router history={history}>
-        <Switch>
-          {
-            // TODO(ArtyEmsee): add router config for this route
-          }
-          <Route path="/about" component={About} />
-          <Route path="/sellers" component={MerchantsPage} />
-          <Route path="/:id" component={SellerPage} />
-          <Route path="/:id#story" component={SellerPage} />
-          <Route component={ErrorPage} />
-        </Switch>
+        <Suspense fallback={<Loader isPage={true} />}>
+          <Switch>
+            {
+              // TODO(ArtyEmsee): add router config for this route
+            }
+            <Route path="/about">
+              {' '}
+              <AboutPage />{' '}
+            </Route>
+            <Route path="/merchants">
+              {' '}
+              <MerchantsPage />
+            </Route>
+            <Route path="/:id">
+              <SellerPage />
+            </Route>
+            <Route path="/:id#story">
+              <SellerPage />
+            </Route>
+            <Route>
+              <ErrorPage />
+            </Route>
+          </Switch>
+        </Suspense>
       </Router>
     );
   }

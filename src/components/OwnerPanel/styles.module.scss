@@ -7,7 +7,7 @@ $container-size: 160px;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
   flex-direction: column;
   align-items: center;
-  padding: 18px;
+  padding: 18px 32px;
 }
 
 .ownerName {
@@ -31,23 +31,6 @@ $container-size: 160px;
   padding: 8px;
 }
 
-.progressContainer {
-  width: 100%;
-  padding: 15px;
-}
-
-.progressBar {
-  background-color: #dedede;
-  height: 12px;
-  margin-bottom: 15px;
-}
-
-.myBar {
-  background-color: #dd678a;
-  z-index: 5;
-  height: 12px;
-}
-
 .buttonContainer {
   flex-direction: row;
   text-align: center;
@@ -56,11 +39,13 @@ $container-size: 160px;
 
 .button {
   margin: 5px 10px;
-  font-weight: 500;
+  font-family: Open Sans, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
   letter-spacing: 0.05em;
   cursor: pointer;
   @include for-phone-only {
-    font-size: 14px;
+    font-size: 16px;
     height: 48px;
     width: 240px;
     margin-bottom: px;
@@ -72,6 +57,17 @@ $container-size: 160px;
   border-top: 1px solid #dedede;
   border-bottom: 1px solid #dedede;
   padding: 30px 20px;
+}
+
+.socialContainer {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0px 0px 0px;
+}
+
+.socialIconContainer {
+  display: inline;
+  margin: 0px 8px 0px 8px;
 }
 
 .storeSummaryLabel {
@@ -115,4 +111,8 @@ p {
   width: 100%;
   border-top: 1px solid #dedede;
   border-bottom: 1px solid #dedede;
+}
+
+table {
+  width: 100%;
 }

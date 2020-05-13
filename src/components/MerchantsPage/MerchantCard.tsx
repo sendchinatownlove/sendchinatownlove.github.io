@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './styles.module.scss';
 import { BrowsePageSeller } from '../../utilities/api';
-import temp from './temp.png';
 import ProgressBar from '../ProgressBar';
+import styled from 'styled-components';
+import styles from './styles.module.scss';
 
 export interface Props {
   storeInfo?: BrowsePageSeller;
@@ -25,23 +25,30 @@ const MerchantCard = ({ storeInfo }: Props) => {
         style={{ textDecoration: 'none', color: 'black' }}
       >
         <div className={styles.merchantCard}>
-          {/* TODO: update src with illustration of each merchant */}
-          <img className={styles.merchantCardLogo} src={temp} alt="Logo" />
-          <div className={styles.location}>
+          <img
+            className={styles.merchantCardLogo}
+            src={storeInfo!.hero_image_url}
+            alt="Logo"
+          />
+          <Location>
             {city}, {state}
-          </div>
-          <h3> {storeInfo!.name} </h3>
-          <div className={styles.sellerSummary}>
-            <p> {storeInfo!.summary} </p>
-          </div>
-          <div style={{ color: '#949494' }}>
-            {/* TODO: need to update "donation" phrase and the time stamp */}
+          </Location>
+          <h3>{storeInfo!.name}</h3>
+          <Summary>{storeInfo!.summary || storeInfo!.story}</Summary>
+          {/* TODO: need to update "donation" phrase and the time stamp */}
+          {/* <div style={{ color: '#949494' }}>
             Last donation 1h ago
-          </div>{' '}
+          </div> */}
           <br />
           <ProgressBar
             amountRaised={storeInfo!.amount_raised}
             targetAmount={storeInfo!.target_amount}
+            progressBarColor={storeInfo!.progress_bar_color}
+            numContributions={storeInfo!.num_contributions}
+            numDonations={storeInfo!.num_donations}
+            numGiftCards={storeInfo!.num_gift_cards}
+            donationAmount={storeInfo!.donation_amount}
+            giftCardAmount={storeInfo!.gift_card_amount}
           />
         </div>
       </Link>
@@ -50,3 +57,17 @@ const MerchantCard = ({ storeInfo }: Props) => {
 };
 
 export default MerchantCard;
+
+const Location = styled.div`
+  font-weight: bolder;
+  color: #46accc;
+`;
+
+const Summary = styled.p`
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 75px;
+`;

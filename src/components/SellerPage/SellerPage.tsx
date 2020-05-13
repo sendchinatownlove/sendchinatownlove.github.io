@@ -50,6 +50,11 @@ const SellerPage: React.FC<{}> = () => {
               sellGiftCards={seller.sell_gift_cards}
               amountRaised={seller.amount_raised}
               targetAmount={seller.target_amount}
+              numContributions={seller.num_contributions}
+              numDonations={seller.num_donations}
+              numGiftCards={seller.num_gift_cards}
+              donationAmount={seller.donation_amount}
+              giftCardAmount={seller.gift_card_amount}
               ownerName={seller.owner_name}
               imageSrc={seller.owner_image_url}
               sellerName={seller.name}

@@ -9,6 +9,7 @@ import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { useTranslation } from 'react-i18next';
 
 export interface Props {
   purchaseType: string;
@@ -17,6 +18,8 @@ export interface Props {
 }
 
 export const Modal = (props: Props) => {
+  const { t } = useTranslation();
+
   const { amount } = useModalPaymentState();
   const [isCustomAmount, setIsCustomAmount] = useState(false);
   const [selected, setSelected] = useState('');
@@ -52,10 +55,12 @@ export const Modal = (props: Props) => {
         <h2>{props.sellerName}</h2>
       </div>
 
-      <p>Please select an amount or enter a custom amount</p>
+      <p>{t('paymentProcessing.amount.header')}</p>
 
       <div className={styles.amountContainer}>
-        <label htmlFor="select-amount">Select an amount </label>
+        <label htmlFor="select-amount">
+          {t('paymentProcessing.amount.label1')}
+        </label>
         <br />
         <div className={styles.selectAmtContainer}>
           {buttonAmounts.map((amount) => (
@@ -74,7 +79,9 @@ export const Modal = (props: Props) => {
             </button>
           ))}
         </div>
-        <label htmlFor="custom-amount">Or enter an amount </label>
+        <label htmlFor="custom-amount">
+          {t('paymentProcessing.amount.label2')}
+        </label>
         <br />
         <input
           name="custom-amount"
@@ -91,16 +98,16 @@ export const Modal = (props: Props) => {
         />
         {Number(amount) < minAmount && isCustomAmount && (
           <div className={styles.errorMessage}>
-            Minimum{' '}
+            {t('paymentProcessing.amount.minimum')}{' '}
             {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
-            amount: $5
+            {t('paymentProcessing.amount.amount')}: $5
           </div>
         )}
         {Number(amount) > maxAmount && isCustomAmount && (
           <div className={styles.errorMessage}>
-            Maximum{' '}
+            {t('paymentProcessing.amount.maximum')}{' '}
             {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
-            amount: $10000
+            {t('paymentProcessing.amount.amount')}: $10000
           </div>
         )}
       </div>
@@ -111,7 +118,7 @@ export const Modal = (props: Props) => {
         onClick={openModal}
         disabled={Number(amount) < minAmount || Number(amount) > maxAmount}
       >
-        Next
+        {t('paymentProcessing.amount.submit')}
       </button>
     </form>
   );
