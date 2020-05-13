@@ -28,6 +28,7 @@ history.listen((location) => {
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const ErrorPage = lazy(() => import('../404Page'));
+const VoucherRedemptionPage = lazy(() => import('../../pages/VoucherRedemption'));
 
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,6 +44,9 @@ const App = () => {
         break;
       case 'seller':
         component = <SellerPage menuOpen={menuOpen} />;
+        break;
+      case 'voucher':
+        component = <VoucherRedemptionPage menuOpen={menuOpen} />;
         break;
       default:
         component = <ErrorPage menuOpen={menuOpen} />;
@@ -65,9 +69,10 @@ const App = () => {
       <Suspense fallback={<Loader isPage={true} />}>
         <Switch>
           <Route path="/all">{returnComponent('all')}</Route>
+          <Route path="/voucher">{returnComponent('voucher')}</Route>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>
-          <Route path="/:id#story">{returnComponent('seller')}</Route>
+          <Route path="/:id#story">{returnComponent('seller')}</Route> */}
           <Route>{returnComponent('error')}</Route>
         </Switch>
       </Suspense>
