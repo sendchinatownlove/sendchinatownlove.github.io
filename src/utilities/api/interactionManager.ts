@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Buyer, PaymentParams, SquareLineItems } from './types';
-import { charges, sellers } from './endpoints';
+import { charges, sellers, vouchers } from './endpoints';
 
 // Fix return typing
 export const getSellers = async () =>
@@ -105,3 +105,15 @@ export const makeSquarePayment = async (
       throw err;
     });
 };
+
+export const getVoucher = async (id: string) =>
+  axios
+    .get(vouchers + id)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const updateVoucher = async (id: string, amount: number) =>
+  axios
+    .put(vouchers + id, { amount })
+    .then((res) => res)
+    .catch((err) => err);
