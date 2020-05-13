@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
-import NavBar from '../Navbar';
+import React from 'react';
 import styled from 'styled-components';
 import ErrorImage from '../../images/404-error-image.png';
 
-interface Props {}
 interface CompactProps {
   menuOpen: boolean;
 }
 
 const ErrorPage = (props: CompactProps) => {
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <Container>
-      <NavBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      <Text menuOpen={menuOpen}>
+      <Text menuOpen={props.menuOpen}>
         <Error src={ErrorImage} alt="error" />
         <MainHeader> Sorry Your Dumpling Was Not Found! </MainHeader>
         <SubHeader>
