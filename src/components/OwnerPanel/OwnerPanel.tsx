@@ -12,10 +12,10 @@ import {
   FacebookShareButton,
   TwitterShareButton,
 } from 'react-share';
+import styled from 'styled-components';
 
 interface Props {
   imageSrc: string;
-  className?: string;
   amountRaised: number;
   targetAmount: number;
   numContributions: number;
@@ -58,7 +58,7 @@ const OwnerPanel = (props: Props) => {
   const socialIconDimensions = { height: 50, width: 50 };
 
   return (
-    <section className={classnames(styles.container, props.className)}>
+    <Container>
       <figure className={styles.ownerContainer}>
         <img
           className={styles.ownerImage}
@@ -189,8 +189,30 @@ const OwnerPanel = (props: Props) => {
         {/* might need to use a react lib since it uses script tags */}
         {/* https://www.npmjs.com/package/google-map-react */}
       </div>
-    </section>
+    </Container>
   );
 };
 
 export default OwnerPanel;
+
+const Container = styled.section`
+  display: flex;
+  width: 100%;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 32px;
+
+  order: 1;
+  grid-row: 1;
+  @media (min-width: 900px) {
+    position: sticky;
+    top: 20px;
+    order: 2;
+    grid-column: 2;
+  }
+  @media (max-width: 599px) {
+    font-size: 14px;
+    padding: 24px;
+  }
+`;

@@ -7,7 +7,6 @@ interface CompactProps {
 }
 
 const ErrorPage = (props: CompactProps) => {
-
   return (
     <Container>
       <Text menuOpen={props.menuOpen}>
