@@ -28,26 +28,6 @@
   }
 }
 
-.merchantCard {
-  height: 475px;
-  width: 350px;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
-  margin: 30px 60px 30px 0;
-  padding: 25px;
-  font-size: 14px;
-  background-color: white;
-  
-  @include for-phone-only {
-    margin: 30px;
-  }
-}
-
-.merchantCardLogo {
-  position: relative;
-  width: 100%;
-  margin: 0 0 15px 0;
-}
-
 .overlayContainer {
   display: grid;
   grid-template-rows: 1fr;
@@ -74,17 +54,16 @@
   // creating grid container for its own children components
   display: grid;
   grid-gap: 0 10%;
-  padding: 50px 7vw;
+  padding: 50px 7vw 0;
   background-color: transparent;
 
   @include for-tablet-landscape-up {
-    grid-template-columns: 2fr minmax(0, 400px);
+    grid-template-columns: 2fr minmax(0, 430px);
     grid-template-rows: 2fr minmax(0, 250px);
   }
 
   @include for-phone-only {
     justify-items: center;
-    padding-bottom: 0;
     grid-template-columns: minmax(0, 100%);
   }
 }
@@ -124,12 +103,5 @@
   @include for-phone-only {
     grid-row: 3;
     grid-column: 1;
-  }
-}
-
-@media only screen and (max-width: 450px) {
-  .merchantCard {
-    width: 90vw;
-    overflow: hidden;
   }
 }

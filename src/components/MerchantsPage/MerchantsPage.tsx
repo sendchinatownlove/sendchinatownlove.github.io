@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { getSellers } from '../../utilities';
+import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import Footer from '../Footer';
 import NavBar from './MerchantNavBar';
 import MerchantCard from './MerchantCard';
@@ -8,6 +9,8 @@ import DescriptionBox from './DescriptionBox';
 import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
+
+import DonationPoolBox from './DonationPool';
 
 const MerchantsPage: React.FC<{}> = () => {
   const [sellers, setSellers] = useState<any | null>();
@@ -81,6 +84,10 @@ const MerchantsPage: React.FC<{}> = () => {
             </div>
           </div>
         </div>
+        
+        <ModalPaymentProvider>
+          <DonationPoolBox />
+        </ModalPaymentProvider>
 
         <div className={styles.storeInfoContainer}>
           <NavBar filterStoreType={filterStoreType} />

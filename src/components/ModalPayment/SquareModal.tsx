@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import { Checkbox } from '@material-ui/core';
-
 import { SquarePaymentForm } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
 import styles from './styles.module.scss';
@@ -13,7 +12,6 @@ import {
   SquarePaymentParams,
   Buyer,
 } from '../../utilities/api';
-
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
@@ -99,7 +97,7 @@ const SquareModal = ({
     ? process.env.REACT_APP_SQUARE_LOCATION_ID
     : '';
   const purchaseTypePhrase =
-    purchaseType === 'donation' ? 'Donation' : 'Voucher purchase';
+    purchaseType === 'gift_card' ? 'Voucher purchase' : 'Donation';
 
   const canSubmit = isChecked && name.length > 0 && email.length > 0;
   return (
@@ -112,32 +110,27 @@ const SquareModal = ({
       <div className={styles.paymentContainer}>
         <h3>Payment Information</h3>
         <div className={styles.inputRow}>
-          <div className={styles.row}>
-            <span className={classnames('fa fa-user', styles.icons)} />
-            <input
-              name="name"
-              type="text"
-              className={classnames(styles.label, 'modalInput--input')}
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              placeholder="Name"
-            />
-          </div>
-          <div className={styles.row}>
-            <span className={classnames('fa fa-envelope', styles.icons)} />
-            <input
-              name="email"
-              type="email"
-              className={classnames(
-                styles.email,
-                'modalInput--input',
-                styles.label
-              )}
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              placeholder="Email"
-            />
-          </div>
+          <label htmlFor='name' className={styles.label}>Full Name</label>
+          <input
+            name="name"
+            type="text"
+            className={classnames(styles.textInput, 'modalInput--input')}
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            placeholder="Name"
+          />
+          <label htmlFor='email' className={styles.label}>Email</label>
+          <input
+            name="email"
+            type="email"
+            className={classnames(
+              'modalInput--input',
+              styles.textInput
+            )}
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            placeholder="Email"
+          />
         </div>
         <div className={styles.sqPaymentForm}>
           <SquarePaymentForm

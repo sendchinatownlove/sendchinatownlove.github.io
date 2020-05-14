@@ -48,6 +48,12 @@ export const Modal = (props: Props) => {
         <h2>{props.sellerName}</h2>
       </div>
 
+      {
+        props.purchaseType === 'donation-pool' && (
+          <p>All your donations will be distributed evenly amongst all of our merchants.</p>
+        )
+      }
+
       <p>Please select an amount or enter a custom amount</p>
 
       <div className={styles.amountContainer}>

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import styles from './styles.module.scss';
 import merchantIcon from './images/merchantIcon.png';
+import { MerchantCard } from './styles';
 
 const TargetMerchantBox = () => (
-  <Container className={styles.merchantCard}>
+  <MerchantCard className='descriptionBox'>
     <Icon src={merchantIcon} alt="target-merchant-img" />
     <h3>Meet our Target Merchant</h3>
     <List>
@@ -22,14 +22,10 @@ const TargetMerchantBox = () => (
         Located in NYC Manhattan Chinatown, Flushing, or Bensonhurst
       </Bullets>
     </List>
-  </Container>
+  </MerchantCard>
 );
 
 export default TargetMerchantBox;
-
-const Container = styled.div`
-  text-align: center;
-`;
 
 const Icon = styled.img`
   width: 45%;

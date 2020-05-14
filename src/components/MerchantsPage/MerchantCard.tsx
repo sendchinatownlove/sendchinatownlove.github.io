@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { BrowsePageSeller } from '../../utilities/api';
 import ProgressBar from '../ProgressBar';
 import styled from 'styled-components';
-import styles from './styles.module.scss';
+import { MerchantCard } from './styles';
 
 export interface Props {
   storeInfo?: BrowsePageSeller;
 }
 
-const MerchantCard = ({ storeInfo }: Props) => {
+const MerchantCardBox = ({ storeInfo }: Props) => {
   let city = '';
   let state = '';
 
@@ -24,9 +24,8 @@ const MerchantCard = ({ storeInfo }: Props) => {
         to={`/${storeInfo!.seller_id}`}
         style={{ textDecoration: 'none', color: 'black' }}
       >
-        <div className={styles.merchantCard}>
-          <img
-            className={styles.merchantCardLogo}
+        <MerchantCard>
+          <Logo
             src={storeInfo!.hero_image_url}
             alt="Logo"
           />
@@ -45,13 +44,13 @@ const MerchantCard = ({ storeInfo }: Props) => {
             targetAmount={storeInfo!.target_amount}
             progressBarColor={storeInfo!.progress_bar_color}
           />
-        </div>
+        </MerchantCard>
       </Link>
     </React.Fragment>
   );
 };
 
-export default MerchantCard;
+export default MerchantCardBox;
 
 const Location = styled.div`
   font-weight: bolder;
@@ -64,5 +63,11 @@ const Summary = styled.p`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 75px;
+  height: 65px;
+`;
+
+const Logo = styled.img`
+  position: relative;
+  width: 100%;
+  margin: 0 0 15px 0;
 `;
