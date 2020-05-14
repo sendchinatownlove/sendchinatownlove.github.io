@@ -45,9 +45,6 @@ const App = () => {
       case 'seller':
         component = <SellerPage menuOpen={menuOpen} />;
         break;
-      case 'voucher':
-        component = <VoucherRedemptionPage menuOpen={menuOpen} />;
-        break;
       default:
         component = <ErrorPage menuOpen={menuOpen} />;
         break;
@@ -69,7 +66,9 @@ const App = () => {
       <Suspense fallback={<Loader isPage={true} />}>
         <Switch>
           <Route path="/all">{returnComponent('all')}</Route>
-          <Route path="/voucher">{returnComponent('voucher')}</Route>
+          <Route path="/voucher">
+            <VoucherRedemptionPage/>
+          </Route>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>
           <Route path="/:id#story">{returnComponent('seller')}</Route> */}
