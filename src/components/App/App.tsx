@@ -27,7 +27,9 @@ history.listen((location) => {
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const ErrorPage = lazy(() => import('../404Page'));
-const VoucherRedemptionPage = lazy(() => import('../../pages/VoucherRedemption'));
+const VoucherRedemptionPage = lazy(() =>
+  import('../../pages/VoucherRedemption')
+);
 
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -60,7 +62,7 @@ const App = () => {
       <Suspense fallback={<Loader isPage={true} />}>
         <Switch>
           <Route path="/voucher">
-            <VoucherRedemptionPage/>
+            <VoucherRedemptionPage />
           </Route>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>

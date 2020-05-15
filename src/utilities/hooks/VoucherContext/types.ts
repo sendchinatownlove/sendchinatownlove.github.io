@@ -3,23 +3,23 @@
  *
  * @typedef {Object} DefaultVoucherState
  * @property {number} amount - amount (in cents)
- * @property {number} view - view 
+ * @property {number} view - view
  *
  */
 
 export type VoucherDetails = {
-  amount: string;
+  amount: number;
 };
 export type VoucherState = {
-  amount: string;
+  amount: number;
   view: number;
   voucher: VoucherDetails;
 };
 
 export const defaultState: VoucherState = {
-  amount: '',
+  amount: 0,
   view: -1,
   voucher: {
-    amount: ""
+    amount: 0,
   },
 };

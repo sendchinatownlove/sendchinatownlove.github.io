@@ -1,8 +1,4 @@
-import {
-  SET_VIEW,
-  SET_AMOUNT,
-  SET_VOUCHER_INFO
-} from './constants';
+import { SET_VIEW, SET_AMOUNT, SET_VOUCHER_INFO } from './constants';
 import { VoucherState } from './types';
 
 export interface Action {

@@ -45,9 +45,7 @@ function useVoucherState() {
 function useVoucherDispatch() {
   const context = React.useContext(VoucherDispatchContext);
   if (context === undefined) {
-    throw new Error(
-      'useVoucherDispatch must be used within a CountProvider'
-    );
+    throw new Error('useVoucherDispatch must be used within a CountProvider');
   }
   return context;
 }
