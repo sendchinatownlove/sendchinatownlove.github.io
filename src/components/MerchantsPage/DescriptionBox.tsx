@@ -4,7 +4,7 @@ import merchantIcon from './images/merchantIcon.png';
 import { MerchantCard } from './styles';
 
 const TargetMerchantBox = () => (
-  <MerchantCard className='descriptionBox'>
+  <MerchantCard className="descriptionBox">
     <Icon src={merchantIcon} alt="target-merchant-img" />
     <h3>Meet our Target Merchant</h3>
     <List>

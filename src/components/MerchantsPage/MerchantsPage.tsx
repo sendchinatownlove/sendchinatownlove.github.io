@@ -95,7 +95,7 @@ const MerchantsPage = (props: Props) => {
               </div>
             </div>
           </div>
-          
+
           <ModalPaymentProvider>
             <DontaionPool />
           </ModalPaymentProvider>

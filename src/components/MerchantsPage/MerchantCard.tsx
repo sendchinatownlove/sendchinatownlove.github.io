@@ -25,10 +25,7 @@ const MerchantCardBox = ({ storeInfo }: Props) => {
         style={{ textDecoration: 'none', color: 'black' }}
       >
         <MerchantCard>
-          <Logo
-            src={storeInfo!.hero_image_url}
-            alt="Logo"
-          />
+          <Logo src={storeInfo!.hero_image_url} alt="Logo" />
           <Location>
             {city}, {state}
           </Location>

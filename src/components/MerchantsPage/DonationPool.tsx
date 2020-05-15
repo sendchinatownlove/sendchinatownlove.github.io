@@ -4,7 +4,10 @@ import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentConte
 import styled from 'styled-components';
 import Modal from '../Modal';
 import Hero from './images/hero.png';
-import { phoneScreens, tabletScreens } from '../../utilities/general/responsive';
+import {
+  phoneScreens,
+  tabletScreens,
+} from '../../utilities/general/responsive';
 
 const ModalBox: any = Modal;
 
@@ -13,28 +16,34 @@ const DonationPoolBox = () => {
 
   const openModal = (e: any) => {
     e.preventDefault();
-    console.log('made it here')
+    console.log('made it here');
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
   };
 
   return (
     <React.Fragment>
-    <Container>
-      <ColumnContainer>
-        <h4>Checked out our merchants but not sure who to donate to first?</h4>
-        <span>You can support by donating to our donation pool!</span>
-        <span>All donations will be distributed evenly to our merchants.</span> <br/>
-        <button className='button--red-filled' onClick={openModal}>SUPPORT CHINATOWN</button>
-      </ColumnContainer>
-      <Image src={Hero} alt='banner' />
-    </Container>
+      <Container>
+        <ColumnContainer>
+          <h4>
+            Checked out our merchants but not sure who to donate to first?
+          </h4>
+          <span>You can support by donating to our donation pool!</span>
+          <span>
+            All donations will be distributed evenly to our merchants.
+          </span>{' '}
+          <br />
+          <button className="button--red-filled" onClick={openModal}>
+            SUPPORT CHINATOWN
+          </button>
+        </ColumnContainer>
+        <Image src={Hero} alt="banner" />
+      </Container>
 
-    <ModalBox
-      purchaseType={'donation'}
-      sellerId={'send-chinatown-love'}
-      sellerName={'Send Chinatown Love Fund'}
-    />
-
+      <ModalBox
+        purchaseType={'donation'}
+        sellerId={'send-chinatown-love'}
+        sellerName={'Send Chinatown Love Fund'}
+      />
     </React.Fragment>
   );
 };

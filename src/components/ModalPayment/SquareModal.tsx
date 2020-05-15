@@ -123,7 +123,9 @@ const SquareModal = ({
       <div className={styles.paymentContainer}>
         <h3>Payment Information</h3>
         <div className={styles.inputRow}>
-          <label htmlFor="name" className={styles.labelText}>Full Name</label>
+          <label htmlFor="name" className={styles.labelText}>
+            Full Name
+          </label>
           <input
             name="name"
             type="text"
@@ -132,14 +134,13 @@ const SquareModal = ({
             value={name}
             placeholder="Name"
           />
-          <label htmlFor="name" className={styles.labelText}>Email</label>
+          <label htmlFor="name" className={styles.labelText}>
+            Email
+          </label>
           <input
             name="email"
             type="email"
-            className={classnames(
-              'modalInput--input',
-              styles.inputText
-            )}
+            className={classnames('modalInput--input', styles.inputText)}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder="Email"
