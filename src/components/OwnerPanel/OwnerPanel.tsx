@@ -6,12 +6,23 @@ import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
 import styles from './styles.module.scss';
 import defaultOwnerImage from './assets/female.svg';
+import { SocialIcon } from 'react-social-icons';
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  TwitterShareButton,
+} from 'react-share';
+import styled from 'styled-components';
 
 interface Props {
   imageSrc: string;
-  className?: string;
   amountRaised: number;
   targetAmount: number;
+  numContributions: number;
+  numDonations: number;
+  numGiftCards: number;
+  donationAmount: number;
+  giftCardAmount: number;
   acceptDonations: boolean;
   sellGiftCards: boolean;
   ownerName: string;
@@ -41,8 +52,13 @@ const OwnerPanel = (props: Props) => {
     return props.extraInfo[current] != null;
   });
 
+  const location = window.location.href;
+  const facebookQuote = 'Help raise money for ' + props.sellerName;
+  const socialIconBackgroundColor = '#a9182e';
+  const socialIconDimensions = { height: 50, width: 50 };
+
   return (
-    <section className={classnames(styles.container, props.className)}>
+    <Container>
       <figure className={styles.ownerContainer}>
         <img
           className={styles.ownerImage}
@@ -61,6 +77,11 @@ const OwnerPanel = (props: Props) => {
           amountRaised={props.amountRaised}
           targetAmount={props.targetAmount}
           progressBarColor={props.progressBarColor}
+          numContributions={props.numContributions}
+          numDonations={props.numDonations}
+          numGiftCards={props.numGiftCards}
+          donationAmount={props.donationAmount}
+          giftCardAmount={props.giftCardAmount}
         />
       )}
 
@@ -89,7 +110,7 @@ const OwnerPanel = (props: Props) => {
           {validExtraInfo.map((current) => {
             if (current === 'Website' || current === 'Menu') {
               return (
-                <>
+                <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
                     {`${current}: `}
                     <a
@@ -101,18 +122,18 @@ const OwnerPanel = (props: Props) => {
                       {current}
                     </a>
                   </p>
-                </>
+                </React.Fragment>
               );
             } else
               return (
-                <>
+                <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
                     {`${current}: `}
                     <span className={styles.extraInfoValue}>
                       {props.extraInfo[current]}
                     </span>
                   </p>
-                </>
+                </React.Fragment>
               );
           })}
         </div>
@@ -125,22 +146,73 @@ const OwnerPanel = (props: Props) => {
         sellerId={props.sellerId}
         sellerName={props.sellerName}
       />
+      {
+        <div className={styles.socialContainer}>
+          <div className={styles.socialIconContainer}>
+            <FacebookShareButton
+              url={location}
+              quote={facebookQuote}
+              className="share"
+            >
+              <SocialIcon
+                network="facebook"
+                bgColor={socialIconBackgroundColor}
+                style={socialIconDimensions}
+              />
+            </FacebookShareButton>
+          </div>
 
-      {/* hide social links until needed */}
-      {/* <div className={styles.socialContainer}>
-        <a href="#" className={classnames(styles.fa, 'fa fa-twitter')} />
-        <a href="#" className={classnames(styles.fa, 'fa fa-instagram')} />
-        <a href="#" className={classnames(styles.fa, 'fa fa-facebook')} />
-        <a href="#" className={classnames(styles.fa, 'fa fa-youtube')} />
-      </div> */}
+          <div className={styles.socialIconContainer}>
+            <TwitterShareButton url={location} className="share">
+              <SocialIcon
+                network="twitter"
+                bgColor={socialIconBackgroundColor}
+                style={socialIconDimensions}
+              />
+            </TwitterShareButton>
+          </div>
+
+          <div className={styles.socialIconContainer}>
+            <EmailShareButton url={location} className="share">
+              <SocialIcon
+                network="email"
+                bgColor={socialIconBackgroundColor}
+                style={socialIconDimensions}
+              />
+            </EmailShareButton>
+          </div>
+        </div>
+      }
 
       <div className={styles.mapsContainer}>
         {/* need to put in google API */}
         {/* might need to use a react lib since it uses script tags */}
         {/* https://www.npmjs.com/package/google-map-react */}
       </div>
-    </section>
+    </Container>
   );
 };
 
 export default OwnerPanel;
+
+const Container = styled.section`
+  display: flex;
+  width: 100%;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 32px;
+
+  order: 1;
+  grid-row: 1;
+  @media (min-width: 900px) {
+    position: sticky;
+    top: 20px;
+    order: 2;
+    grid-column: 2;
+  }
+  @media (max-width: 599px) {
+    font-size: 14px;
+    padding: 24px;
+  }
+`;

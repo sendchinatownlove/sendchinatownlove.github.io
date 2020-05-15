@@ -1,5 +1,11 @@
+@import '../../responsive';
+
 .container {
   width: 100%;
+  margin-top: 16px;
+  @include for-tablet-landscape-up {
+    margin-top: 0;
+  }
 }
 .merchantIllustrationContainer {
   background: #a9122a;

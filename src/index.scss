@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 $default-button-color: black;
 $standard-red: #ab192e;
-$default-hover-red: #A9182E; 
+$default-hover-red: #a9182e;
 
 body {
-  background-color: #e5e5e5;
+  background-color: #ffffff;
   margin: 0;
   font-family: 'Open Sans', 'Avenir', -apple-system, BlinkMacSystemFont,
     'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
@@ -20,7 +20,7 @@ body {
 h1 {
   font-style: normal;
   font-weight: 500;
-  font-size: 48px;
+  font-size: 32px;
   line-height: 66px;
   margin: 0;
 }
@@ -28,7 +28,7 @@ h1 {
 h2 {
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 33px;
   margin: 0;
 }
@@ -47,7 +47,6 @@ h3 {
   border: 1px solid $default-button-color;
   min-width: 150px;
   text-transform: uppercase;
-  font-size: 14px;
   outline: none;
 }
 
@@ -84,9 +83,9 @@ h3 {
 
   &--outlined:hover {
     @include base-button;
-    color: $default-button-color;
-    background-color: $standard-red;
-    border-color: $default-button-color;
+    color: $standard-red;
+    background-color: white;
+    border-color: $standard-red;
   }
 }
 

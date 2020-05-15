@@ -1,7 +1,5 @@
 /*
- *
  * Responsive screen sizes
- *
  */
 const phoneScreens = 'max-width: 599px';
 const tabletScreens = 'max-width: 899px';

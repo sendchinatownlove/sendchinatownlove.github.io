@@ -16,13 +16,21 @@ import {
   useModalPaymentState,
   useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import {
+  EMAIL_REGEX,
+  SET_MODAL_VIEW,
+} from '../../utilities/hooks/ModalPaymentContext/constants';
 
 type Props = {
   purchaseType: string;
   sellerId: string;
   sellerName: string;
   idempotencyKey: string;
+};
+
+type ErrorMessage = {
+  code: string;
+  detail: string;
 };
 
 const SquareModal = ({
@@ -71,19 +79,23 @@ const SquareModal = ({
       })
       .catch((err) => {
         if (err.response) {
-          const responseErrors = err.response.data.errors;
+          let responseErrors: ErrorMessage[] = [];
+          if (err.response.data.errors)
+            responseErrors = err.response.data.errors;
+          else if (err.response.data.message)
+            responseErrors = [
+              { code: 'GENERIC_DECLINE', detail: err.response.data.message },
+            ];
 
           const newErrors =
             responseErrors.length > 0
-              ? responseErrors.map(
-                  (error: { code: string; detail: string }) => {
-                    if (hasKey(SquareErrors, error.code)) {
-                      return SquareErrors[error.code];
-                    } else {
-                      return error.detail;
-                    }
+              ? responseErrors.map((error: ErrorMessage) => {
+                  if (hasKey(SquareErrors, error.code)) {
+                    return SquareErrors[error.code];
+                  } else {
+                    return error.detail;
                   }
-                )
+                })
               : [];
           setErrorsMessages(newErrors);
         }
@@ -99,7 +111,8 @@ const SquareModal = ({
   const purchaseTypePhrase =
     purchaseType === 'gift_card' ? 'Voucher purchase' : 'Donation';
 
-  const canSubmit = isChecked && name.length > 0 && email.length > 0;
+  const canSubmit =
+    isChecked && name.length > 0 && email.length > 0 && EMAIL_REGEX.test(email);
   return (
     <div className={styles.container}>
       <h2 className={styles.paymentHeader}>
@@ -110,26 +123,28 @@ const SquareModal = ({
       <div className={styles.paymentContainer}>
         <h3>Payment Information</h3>
         <div className={styles.inputRow}>
-          <label htmlFor='name' className={styles.label}>Full Name</label>
+          <label htmlFor="name" className={styles.labelText}>Full Name</label>
           <input
             name="name"
             type="text"
-            className={classnames(styles.textInput, 'modalInput--input')}
+            className={classnames(styles.inputText, 'modalInput--input')}
             onChange={(e) => setName(e.target.value)}
             value={name}
             placeholder="Name"
           />
-          <label htmlFor='email' className={styles.label}>Email</label>
+          <label htmlFor="name" className={styles.labelText}>Email</label>
           <input
             name="email"
             type="email"
             className={classnames(
               'modalInput--input',
-              styles.textInput
+              styles.inputText
             )}
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder="Email"
+            pattern={EMAIL_REGEX.source}
+            required
           />
         </div>
         <div className={styles.sqPaymentForm}>

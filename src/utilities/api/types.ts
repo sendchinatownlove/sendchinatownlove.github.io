@@ -14,6 +14,7 @@ export type SquarePaymentParams = {
 };
 
 export type Location = {
+  seller_id: number;
   address1: string;
   address2: string;
   city: string;
@@ -51,6 +52,11 @@ export type BrowsePageSeller = {
   name: string;
   target_amount: number;
   amount_raised: number;
+  num_contributions: number;
+  num_donations: number;
+  num_gift_cards: number;
+  donation_amount: number;
+  gift_card_amount: number;
   progress_bar_color: string;
   summary: string;
   story: string;

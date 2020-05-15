@@ -1,7 +1,7 @@
 import * as React from 'react';
-import styled from 'styled-components';
-import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
+import styled from 'styled-components';
 import Modal from '../Modal';
 import Hero from './images/hero.png';
 import { phoneScreens, tabletScreens } from '../../utilities/general/responsive';
@@ -30,8 +30,8 @@ const DonationPoolBox = () => {
     </Container>
 
     <ModalBox
-      purchaseType={'donation-pool'}
-      sellerId={'donation-pool'}
+      purchaseType={'donation'}
+      sellerId={'send-chinatown-love'}
       sellerName={'Send Chinatown Love Fund'}
     />
 

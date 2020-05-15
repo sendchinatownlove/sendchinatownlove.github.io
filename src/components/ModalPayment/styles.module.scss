@@ -30,14 +30,6 @@
   text-decoration: underline;
 }
 
-.inputRow {
-  margin: 0 auto;
-  margin-bottom: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-
 .checkbox {
   margin-right: 15px;
   -webkit-appearance: none;
@@ -77,13 +69,29 @@
   background-color: white;
 }
 
-.label {
-  font-weight: 500;
-  text-transform: uppercase;
-  font-size: 14px;
+.inputRow {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.labelText {
+  font-weight: 500;
   color: #373F4A;
-  margin: 15px 0 5px;
+}
+
+.inputText {
+  font-size: 14px;
+  color: #373F4A;
+  border: 1px solid #e5e5e5;
+  margin: 5px 0 15px;
+  padding: 27px 15px;
+  width: 100%;
+  border-radius: 5px;
 }
 
 .textInput {
@@ -101,7 +109,7 @@
 }
 
 .textInput::placeholder {
-  color: #c1c1c1;
+  color: #e5e5e5;
 }
 
 .textInput:invalid {
@@ -135,7 +143,7 @@
 
   .inputRow {
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-around;
   }
 }

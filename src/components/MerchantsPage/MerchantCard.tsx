@@ -43,6 +43,11 @@ const MerchantCardBox = ({ storeInfo }: Props) => {
             amountRaised={storeInfo!.amount_raised}
             targetAmount={storeInfo!.target_amount}
             progressBarColor={storeInfo!.progress_bar_color}
+            numContributions={storeInfo!.num_contributions}
+            numDonations={storeInfo!.num_donations}
+            numGiftCards={storeInfo!.num_gift_cards}
+            donationAmount={storeInfo!.donation_amount}
+            giftCardAmount={storeInfo!.gift_card_amount}
           />
         </MerchantCard>
       </Link>
@@ -63,7 +68,7 @@ const Summary = styled.p`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 65px;
+  height: 62px;
 `;
 
 const Logo = styled.img`

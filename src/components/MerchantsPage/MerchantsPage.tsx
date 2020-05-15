@@ -1,21 +1,24 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { getSellers } from '../../utilities';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
-import Footer from '../Footer';
 import NavBar from './MerchantNavBar';
 import MerchantCard from './MerchantCard';
 import DescriptionBox from './DescriptionBox';
 import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
+import { LoaderFillerContainer } from '../Loader';
+import DontaionPool from './DonationPool';
+import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 
-import DonationPoolBox from './DonationPool';
+interface Props {
+  menuOpen: boolean;
+}
 
-const MerchantsPage: React.FC<{}> = () => {
+const MerchantsPage = (props: Props) => {
   const [sellers, setSellers] = useState<any | null>();
   const [filter, setFilter] = useState<any | null>();
-  const [totalDontations, setDonations] = useState(0);
+  const [totalDonations, setDonations] = useState(0);
   const [totalGiftCards, setGiftCards] = useState(0);
 
   const fetchData = async () => {
@@ -53,55 +56,65 @@ const MerchantsPage: React.FC<{}> = () => {
     }
   };
 
-  return filter ? (
-    <React.Fragment>
-      <div className={styles.container}>
-        <div className={styles.overlayContainer}>
-          <img src={nycMapBackground} className={styles.nycMap} alt="NYC MAP" />
-          <div className={styles.contentContainer}>
-            <div className={styles.textArea}>
-              <h2 style={{ fontWeight: 'bolder' }}>Our Chinatown</h2>
-              <br />
-              <p>
-                We are providing an online platform to low-tech, cash-only,
-                Asian-owned small businesses that have been disproportionately
-                impacted by COVID-19.
-              </p>
-              <p>
-                Support local merchants by making a donation or purchasing a
-                voucher from them.
-              </p>
-            </div>
-            {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
-            <div className={styles.storeInfo}>
-              <ContributionBar
-                totalDonations={totalDontations}
-                totalGiftCards={totalGiftCards}
-              />
-            </div>
-            <div className={styles.ownerPanel}>
-              <DescriptionBox />
+  return (
+    <div
+      className={styles.container}
+      style={{ display: props.menuOpen ? 'none' : 'inherit' }}
+    >
+      {filter ? (
+        <>
+          <div className={styles.overlayContainer}>
+            <img
+              src={nycMapBackground}
+              className={styles.nycMap}
+              alt="NYC MAP"
+            />
+            <div className={styles.contentContainer}>
+              <div className={styles.textArea}>
+                <h2 style={{ fontWeight: 'bolder' }}>Our Chinatown</h2>
+                <br />
+                <p>
+                  We are providing an online platform to low-tech, cash-only,
+                  Asian-owned small businesses that have been disproportionately
+                  impacted by COVID-19.
+                </p>
+                <p>
+                  Support local merchants by making a donation or purchasing a
+                  voucher from them.
+                </p>
+              </div>
+              {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
+              <div className={styles.storeInfo}>
+                <ContributionBar
+                  totalDonations={totalDonations}
+                  totalGiftCards={totalGiftCards}
+                />
+              </div>
+              <div className={styles.ownerPanel}>
+                <DescriptionBox />
+              </div>
             </div>
           </div>
-        </div>
-        
-        <ModalPaymentProvider>
-          <DonationPoolBox />
-        </ModalPaymentProvider>
+          
+          <ModalPaymentProvider>
+            <DontaionPool />
+          </ModalPaymentProvider>
 
-        <div className={styles.storeInfoContainer}>
-          <NavBar filterStoreType={filterStoreType} />
+          <div className={styles.storeInfoContainer}>
+            <NavBar filterStoreType={filterStoreType} />
 
-          <div className={styles.merchantsContainer}>
-            {filter.map((store: any) => (
-              <MerchantCard key={store!.seller_id} storeInfo={store} />
-            ))}
+            <div className={styles.merchantsContainer}>
+              {filter.map((store: any) => (
+                <MerchantCard key={store!.seller_id} storeInfo={store} />
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
-      <Footer />
-    </React.Fragment>
-  ) : null;
+        </>
+      ) : (
+        <LoaderFillerContainer />
+      )}
+    </div>
+  );
 };
 
 export default MerchantsPage;
