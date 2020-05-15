@@ -1,6 +1,7 @@
 import {
   SET_VIEW,
   SET_AMOUNT,
+  SET_VOUCHER_INFO
 } from './constants';
 import { VoucherState } from './types';
 
@@ -17,6 +18,8 @@ const VoucherReducer = (state: VoucherState, action: Action) => {
       return { ...state, view: payload };
     case SET_AMOUNT:
       return { ...state, amount: payload };
+    case SET_VOUCHER_INFO:
+      return { ...state, voucher: payload };
     default:
       return state;
   }
