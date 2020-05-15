@@ -23,6 +23,22 @@ export type Location = {
   phone_number: string;
 };
 
+export type GiftCardDetails = {
+  gift_card_id: string;
+  receipt_id: string;
+  expiration: string;
+  created_at: string;
+  updated_at: string;
+  seller_gift_card_id: string;
+};
+
+export type GiftCardAmounts = {
+  value: number;
+  gift_card_detail_id: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Buyer = {
   name: string;
   email: string;

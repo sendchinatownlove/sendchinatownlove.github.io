@@ -1,1 +1,1 @@
-export {default} from "./VoucherRedemption"
+export { default } from './VoucherRedemption';
