@@ -1,20 +1,19 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 // import StoreBanner from "./StoreBanner"
 // import Landing from "./Landing"
 // import Location from "./Location"
 // import { Logo } from '../../components/Logos';
-import Amount from "./Amount"
-import {VoucherProvider} from "../../utilities/hooks/VoucherContext/context"
+import Amount from './Amount';
+import { VoucherProvider } from '../../utilities/hooks/VoucherContext/context';
 
-interface Props {
-}
+interface Props {}
 
 const VoucherRedemption = (props: Props) => {
   return (
     <VoucherProvider>
       <Container>
-        <Amount/>
+        <Amount />
         {/* <StoreBanner/>
         <Landing/>
         <Location/>
@@ -23,10 +22,10 @@ const VoucherRedemption = (props: Props) => {
         </FooterContainer> */}
       </Container>
     </VoucherProvider>
-  )
-}
+  );
+};
 
-export default VoucherRedemption
+export default VoucherRedemption;
 
 const Container = styled.div`
   width: 100%;
@@ -34,7 +33,7 @@ const Container = styled.div`
   background-color: white;
   flex-direction: column
   height: 100%;
-`
+`;
 
 const FooterContainer = styled.div`
   width: 100%%;
@@ -42,4 +41,4 @@ const FooterContainer = styled.div`
   background-color: white;
   flex-direction: column
   justify-content: center;
-`
+`;
