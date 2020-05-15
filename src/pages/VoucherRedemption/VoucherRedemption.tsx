@@ -5,21 +5,24 @@ import styled from 'styled-components'
 // import Location from "./Location"
 // import { Logo } from '../../components/Logos';
 import Amount from "./Amount"
+import {VoucherProvider} from "../../utilities/hooks/VoucherContext/context"
 
 interface Props {
 }
 
 const VoucherRedemption = (props: Props) => {
   return (
-    <Container>
-      <Amount/>
-      {/* <StoreBanner/>
-      <Landing/>
-      <Location/>
-      <FooterContainer>
-        <Logo/>              
-      </FooterContainer> */}
-    </Container>
+    <VoucherProvider>
+      <Container>
+        <Amount/>
+        {/* <StoreBanner/>
+        <Landing/>
+        <Location/>
+        <FooterContainer>
+          <Logo/>              
+        </FooterContainer> */}
+      </Container>
+    </VoucherProvider>
   )
 }
 
