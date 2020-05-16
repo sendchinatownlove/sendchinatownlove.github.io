@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
-import styles from './styles.module.scss';
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 import { SquareErrors, hasKey } from '../../consts';
