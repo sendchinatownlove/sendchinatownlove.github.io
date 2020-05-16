@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import ErrorPage from '../404Page';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
@@ -45,7 +44,7 @@ const SellerPage = (props: Props) => {
             hero_image_url: seller.hero_image_url,
           }}
         />
-        <ModalPaymentProvider>
+        {/* <ModalPaymentProvider> */}
           <OwnerPanel
             acceptDonations={seller.accept_donations}
             sellGiftCards={seller.sell_gift_cards}
@@ -70,7 +69,7 @@ const SellerPage = (props: Props) => {
             // TODO(jtmckibb): Should not crash here
             sellerId={id!}
           />
-        </ModalPaymentProvider>
+        {/* </ModalPaymentProvider> */}
       </ContentContainer>
     </Container>
   ) : (

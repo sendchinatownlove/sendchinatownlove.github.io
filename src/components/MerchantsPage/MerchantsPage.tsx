@@ -10,7 +10,6 @@ import nycMapBackground from './images/nyc_3.png';
 import { LoaderFillerContainer } from '../Loader';
 
 import DonationPool from './DonationPool';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 
 interface Props {
   menuOpen: boolean;
@@ -96,10 +95,8 @@ const MerchantsPage = (props: Props) => {
               </div>
             </div>
           </div>
-
-          <ModalPaymentProvider>
-            <DonationPool />
-          </ModalPaymentProvider>
+          
+          <DonationPool />
 
           <div className={styles.storeInfoContainer}>
             <NavBar filterStoreType={filterStoreType} />
