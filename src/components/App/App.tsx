@@ -6,7 +6,6 @@ import Loader from '../Loader';
 import Header from '../Navbar';
 import Footer from '../Footer';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
-import { Modal } from '@material-ui/core';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
