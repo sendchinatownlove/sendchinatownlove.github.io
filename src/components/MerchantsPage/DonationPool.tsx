@@ -21,12 +21,6 @@ const DonationPoolBox = () => {
 
   return (
     <div>
-      <ModalBox
-        purchaseType={'donation'}
-        sellerId={'send-chinatown-love'}
-        sellerName={'Send Chinatown Love Fund'}
-      />
-
       <Container>
         <ColumnContainer>
           <h4>
@@ -42,6 +36,12 @@ const DonationPoolBox = () => {
           </button>
         </ColumnContainer>
         <Image src={Hero} alt="banner" />
+
+        <ModalBox
+          purchaseType={'donation'}
+          sellerId={'send-chinatown-love'}
+          sellerName={'Send Chinatown Love Fund'}
+        />
       </Container>
     </div>
   );
