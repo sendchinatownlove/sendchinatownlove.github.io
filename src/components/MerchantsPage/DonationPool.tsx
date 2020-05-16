@@ -16,7 +16,6 @@ const DonationPoolBox = () => {
 
   const openModal = (e: any) => {
     e.preventDefault();
-    console.log('made it here');
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
   };
 

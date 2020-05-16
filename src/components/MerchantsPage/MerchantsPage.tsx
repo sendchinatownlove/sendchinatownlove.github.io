@@ -8,7 +8,7 @@ import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
 import { LoaderFillerContainer } from '../Loader';
-import DontaionPool from './DonationPool';
+import DonationPool from './DonationPool';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 
 interface Props {
@@ -97,7 +97,7 @@ const MerchantsPage = (props: Props) => {
           </div>
 
           <ModalPaymentProvider>
-            <DontaionPool />
+            <DonationPool />
           </ModalPaymentProvider>
 
           <div className={styles.storeInfoContainer}>
