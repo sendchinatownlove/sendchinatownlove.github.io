@@ -97,9 +97,11 @@ const MerchantsPage = (props: Props) => {
             <NavBar filterStoreType={filterStoreType} />
 
             <div className={styles.merchantsContainer}>
-              {filter.map((store: any) => (
-                <MerchantCard key={store!.seller_id} storeInfo={store} />
-              ))}
+              {filter.map((store: any) =>
+                store!.seller_id != 'send-chinatown-love' ? (
+                  <MerchantCard key={store!.seller_id} storeInfo={store} />
+                ) : null
+              )}
             </div>
           </div>
         </>
