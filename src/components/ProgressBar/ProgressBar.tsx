@@ -63,7 +63,7 @@ const ProgressBar = ({
           <SupporterTooltip
             title={
               <React.Fragment>
-                <table>
+                <table className={styles.tooltipTable}>
                   <tbody>
                     <tr>
                       <td>
