@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import StoreBanner from './StoreBanner';
+import { Divider } from './styles';
 import { Logo } from '../../components/Logos';
 import { useVoucherDispatch } from '../../utilities/hooks/VoucherContext/context';
 import { SET_VIEW } from '../../utilities/hooks/VoucherContext/constants';
@@ -90,12 +91,6 @@ const Balance = styled.h1`
 
 const Code = styled.h3`
   margin: 12px auto;
-`;
-
-const Divider = styled.div`
-  border-bottom: 2px solid white;
-  margin: 12px auto;
-  width: 90%;
 `;
 
 const FooterContainer = styled.div`
