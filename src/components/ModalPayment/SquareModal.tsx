@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import { Checkbox } from '@material-ui/core';
-
 import { SquarePaymentForm } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
 import styles from './styles.module.scss';
@@ -13,7 +12,6 @@ import {
   SquarePaymentParams,
   Buyer,
 } from '../../utilities/api';
-
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
@@ -129,8 +127,6 @@ const SquareModal = ({
       <div className={styles.paymentContainer}>
         <h3>Payment Information</h3>
         <div className={styles.inputRow}>
-          <div className={styles.row}>
-            <span className={classnames('fa fa-user', styles.icons)} />
             <input
               name="name"
               type="text"
@@ -139,14 +135,10 @@ const SquareModal = ({
               value={name}
               placeholder="Name"
             />
-          </div>
-          <div className={styles.row}>
-            <span className={classnames('fa fa-envelope', styles.icons)} />
             <input
               name="email"
               type="email"
               className={classnames(
-                styles.email,
                 'modalInput--input',
                 styles.label
               )}
@@ -156,7 +148,6 @@ const SquareModal = ({
               pattern={EMAIL_REGEX.source}
               required
             />
-          </div>
         </div>
         <div className={styles.sqPaymentForm}>
           <SquarePaymentForm
@@ -193,21 +184,6 @@ const SquareModal = ({
                 />
                 <span>
                   I agree with the <b>Terms & Conditions</b>
-                </span>
-              </label>
-            </div>
-            <div>
-              <label className={styles.termsAndConditions}>
-                <Checkbox
-                  value="checkedB"
-                  inputProps={{ 'aria-label': 'Checkbox B' }}
-                  onClick={checkSubscriptionAgreement}
-                  checked={isSubscriptionChecked}
-                />
-                <span>
-                  I'd like to receive email updates from Send Chinatown Love,
-                  such as when the merchant receives my donation/purchase or
-                  when a new merchant is onboarded
                 </span>
               </label>
             </div>

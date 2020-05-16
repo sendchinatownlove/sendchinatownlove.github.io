@@ -8,7 +8,6 @@ import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
 import { LoaderFillerContainer } from '../Loader';
-
 import DonationPool from './DonationPool';
 
 interface Props {
