@@ -1,28 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-// import StoreBanner from "./StoreBanner"
-// import Landing from "./Landing"
-// import Location from "./Location"
-// import { Logo } from '../../components/Logos';
+import Landing from './Landing';
 import Amount from './Amount';
-import { VoucherProvider } from '../../utilities/hooks/VoucherContext/context';
+import { useVoucherState } from '../../utilities/hooks/VoucherContext/context';
 
 interface Props {}
 
 const VoucherRedemption = (props: Props) => {
-  return (
-    <VoucherProvider>
-      <Container>
-        <Amount />
-        {/* <StoreBanner/>
-        <Landing/>
-        <Location/>
-        <FooterContainer>
-          <Logo/>              
-        </FooterContainer> */}
-      </Container>
-    </VoucherProvider>
-  );
+  const { view } = useVoucherState();
+  return <Container>{view === 0 ? <Landing /> : <Amount />}</Container>;
 };
 
 export default VoucherRedemption;

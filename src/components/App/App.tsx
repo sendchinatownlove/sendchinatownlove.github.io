@@ -6,6 +6,7 @@ import Loader from '../Loader';
 import Header from '../Navbar';
 import Footer from '../Footer';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import { VoucherProvider } from '../../utilities/hooks/VoucherContext/context';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
@@ -69,7 +70,9 @@ const App = () => {
         <Switch>
           <Route path="/all">{returnComponent('all')}</Route>
           <Route path="/voucher">
-            <VoucherRedemptionPage />
+            <VoucherProvider>
+              <VoucherRedemptionPage />
+            </VoucherProvider>
           </Route>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>
