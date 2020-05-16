@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
-import {
-  phoneScreens,
-  tabletScreens,
-} from '../../utilities/general/responsive';
+// import {
+//   phoneScreens,
+//   tabletScreens,
+// } from '../../utilities/general/responsive';
 import Modal from '../Modal';
 import styled from 'styled-components';
 import Hero from './images/hero.png';
@@ -56,7 +56,7 @@ const Container = styled.div`
   object-fit: cover;
   margin: 35px 10vw 65px 7vw;
   justify-content: space-between;
-  @media (${tabletScreens}) {
+  @media (max-width: 899px) {
     max-height: 250px;
   }
 `;
@@ -71,7 +71,7 @@ const Image = styled.img`
   width: 48%;
   height: auto;
   object-fit: cover;
-  @media (${phoneScreens}) {
+  @media (max-width: 599px) {
     display: none;
   }
 `;
