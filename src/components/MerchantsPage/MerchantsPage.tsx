@@ -98,7 +98,7 @@ const MerchantsPage = (props: Props) => {
 
             <div className={styles.merchantsContainer}>
               {filter.map((store: any) =>
-                store!.seller_id != 'send-chinatown-love' ? (
+                store!.seller_id !== 'send-chinatown-love' ? (
                   <MerchantCard key={store!.seller_id} storeInfo={store} />
                 ) : null
               )}
