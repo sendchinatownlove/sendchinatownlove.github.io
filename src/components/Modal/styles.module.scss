@@ -1,62 +1,62 @@
-.donationsContainer {
-  height: 80%;
-  overflow-y: scroll;
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
-}
+// .donationsContainer {
+//   height: 80%;
+//   overflow-y: scroll;
+//   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+// }
 
-.amountContainer {
-  background-color: #f7f7f7;
-  padding: 25px 35px;
-}
+// .amountContainer {
+//   background-color: #f7f7f7;
+//   padding: 25px 35px;
+// }
 
-.selectAmtContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  margin: 15px 0px;
-}
+// .selectAmtContainer {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-evenly;
+//   flex-wrap: wrap;
+//   margin: 15px 0px;
+// }
 
-.customAmt {
-  width: 250px;
-}
+// .customAmt {
+//   width: 250px;
+// }
 
-.nextBtn {
-  position: relative;
-  float: right;
-  right: 0px;
-  bottom: -25px;
-}
+// .nextBtn {
+//   position: relative;
+//   float: right;
+//   right: 0px;
+//   bottom: -25px;
+// }
 
-.customAmt:invalid {
-  border: 1px solid red;
-}
+// .customAmt:invalid {
+//   border: 1px solid red;
+// }
 
-.errorMessage {
-  color: red;
-  font-size: 13px;
-}
+// .errorMessage {
+//   color: red;
+//   font-size: 13px;
+// }
 
-@media only screen and (max-width: 799px) {
-  .donationsContainer {
-    width: 85%;
-    height: 75vh;
-    overflow-y: scroll;
-  }
-}
+// @media only screen and (max-width: 799px) {
+//   .donationsContainer {
+//     width: 85%;
+//     height: 75vh;
+//     overflow-y: scroll;
+//   }
+// }
 
-@media only screen and (max-width: 450px) {
-  .donationsContainer {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-  }
+// @media only screen and (max-width: 450px) {
+//   .donationsContainer {
+//     width: 100%;
+//     height: 100%;
+//     overflow-x: hidden;
+//   }
 
-  form button {
-    background-color: white;
-  }
+//   form button {
+//     background-color: white;
+//   }
 
-  .customAmt {
-    width: 100%;
-  }
-}
+//   .customAmt {
+//     width: 100%;
+//   }
+// }

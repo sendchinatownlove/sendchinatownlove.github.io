@@ -21,6 +21,8 @@ import {
   SET_MODAL_VIEW,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 
+import styled from 'styled-components';
+
 type Props = {
   purchaseType: string;
   sellerId: string;
@@ -118,37 +120,36 @@ const SquareModal = ({
   const canSubmit =
     isTermsChecked && name.length > 0 && email.length > 0 && EMAIL_REGEX.test(email);
   return (
-    <div className={styles.container}>
-      <h2 className={styles.paymentHeader}>
+    <div>
+      <h2>
         Complete your {purchaseTypePhrase.toLowerCase()}
       </h2>
       <p>Please add your payment information below</p>
 
-      <div className={styles.paymentContainer}>
+      <PaymentContainer>
         <h3>Payment Information</h3>
-        <div className={styles.inputRow}>
-            <input
+        <RowFormat>
+            <LabelText htmlFor="name">Full Name</LabelText>
+            <InputText
               name="name"
               type="text"
-              className={classnames(styles.label, 'modalInput--input')}
+              className='modalInput--input'
               onChange={(e) => setName(e.target.value)}
               value={name}
               placeholder="Name"
             />
-            <input
+            <LabelText htmlFor="email">Email</LabelText>
+            <InputText
               name="email"
               type="email"
-              className={classnames(
-                'modalInput--input',
-                styles.label
-              )}
+              className='modalInput--input'
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               placeholder="Email"
               pattern={EMAIL_REGEX.source}
               required
             />
-        </div>
+        </RowFormat>
         <div className={styles.sqPaymentForm}>
           <SquarePaymentForm
             sandbox={
@@ -175,7 +176,7 @@ const SquareModal = ({
             </span>
             <p />
             <div>
-              <label className={styles.termsAndConditions}>
+              <TermsAndConditions>
                 <Checkbox
                   value="checkedA"
                   inputProps={{ 'aria-label': 'Checkbox A' }}
@@ -185,7 +186,7 @@ const SquareModal = ({
                 <span>
                   I agree with the <b>Terms & Conditions</b>
                 </span>
-              </label>
+              </TermsAndConditions>
             </div>
             {purchaseTypePhrase === 'Donation' ? (
               <p>
@@ -202,21 +203,96 @@ const SquareModal = ({
                 Chinatown Love Inc. will not be able to refund your purchase.
               </p>
             )}
-            <div className={styles.btnRow}>
-              <button
+            <ButtonRow>
+              <BackButton
                 type="button"
                 className={classnames('modalButton--back', styles.backBtn)}
                 onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 0 })}
               >
                 ᐸ Back
-              </button>
+              </BackButton>
               <SubmissionButton canSubmit={canSubmit} />
-            </div>
+            </ButtonRow>
           </SquarePaymentForm>
         </div>
-      </div>
+      </PaymentContainer>
     </div>
   );
 };
 
 export default SquareModal;
+
+const PaymentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  div {
+    width: 100%;
+  }
+
+  @media (max-width: 450px) {
+    // TODO: FIX THIS. WHY DO I NEED TO DO THIS TO MAKE IT FIT?
+    // IS THE WHOLE APP BEING CUT OFF? FIND OUT PRONTO
+    // CHECKED: IT IS. FIND OUT WHY! 
+    margin-bottom: 150px;
+  }
+`;
+
+const RowFormat = styled.div`
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+`;
+
+const LabelText = styled.label`
+  font-weight: 500;
+  color: #373f4a;
+`;
+
+const InputText = styled.input`
+  font-size: 14px;
+  color: #373f4a;
+  border: 1px solid #e5e5e5;
+  margin: 5px 0 15px;
+  padding: 27px 15px;
+  width: 100%;
+  border-radius: 5px;
+
+  ::placeholder { 
+    color: #e5e5e5;
+  }
+
+  :invalid {
+    color: #fa755a;
+  }
+`;
+
+const TermsAndConditions = styled.label`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 10px;
+
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
+const ButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-between;
+  margin-bottom: 25px;
+`;
+
+const BackButton = styled.button`
+  width: 75px;
+  font-size: 13px;
+  background-color: white;
+`;
