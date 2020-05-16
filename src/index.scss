@@ -58,6 +58,17 @@ h3 {
     border-color: $default-button-color;
   }
 
+  &--red-filled {
+    @include base-button;
+    border: 1px solid $standard-red;
+    background-color: $standard-red;
+    width: 250px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+  }
+
   &--filled:hover {
     @include base-button;
     background-color: $standard-red;

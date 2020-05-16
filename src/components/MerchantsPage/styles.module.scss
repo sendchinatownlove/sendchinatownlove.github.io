@@ -74,11 +74,11 @@
   // creating grid container for its own children components
   display: grid;
   grid-gap: 0 10%;
-  padding: 50px 7vw;
+  padding: 50px 7vw 0;
   background-color: transparent;
 
   @include for-tablet-landscape-up {
-    grid-template-columns: 2fr minmax(0, 400px);
+    grid-template-columns: 2fr minmax(0, 430px);
     grid-template-rows: 2fr minmax(0, 250px);
   }
 
