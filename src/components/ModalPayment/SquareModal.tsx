@@ -149,7 +149,7 @@ const SquareModal = ({
               required
             />
         </RowFormat>
-        <div className={styles.sqPaymentForm}>
+        <div>
           <SquarePaymentForm
             sandbox={
               !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
@@ -168,8 +168,8 @@ const SquareModal = ({
             </div>
 
             <br />
-            <h3 className={styles.text}>Checkout details</h3>
-            <span className={styles.text}>
+            <h3>Checkout details</h3>
+            <span>
               {' '}
               {purchaseTypePhrase} of <b>${amount}</b> to {sellerName}{' '}
             </span>
@@ -205,7 +205,7 @@ const SquareModal = ({
             <ButtonRow>
               <BackButton
                 type="button"
-                className={classnames('modalButton--back', styles.backBtn)}
+                className={'modalButton--back'}
                 onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 0 })}
               >
                 ᐸ Back
