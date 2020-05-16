@@ -5,6 +5,7 @@ import ReactGA from 'react-ga';
 import Loader from '../Loader';
 import Header from '../Navbar';
 import Footer from '../Footer';
+import { VoucherProvider } from '../../utilities/hooks/VoucherContext/context';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
@@ -62,7 +63,9 @@ const App = () => {
       <Suspense fallback={<Loader isPage={true} />}>
         <Switch>
           <Route path="/voucher">
-            <VoucherRedemptionPage />
+            <VoucherProvider>
+              <VoucherRedemptionPage />
+            </VoucherProvider>
           </Route>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>

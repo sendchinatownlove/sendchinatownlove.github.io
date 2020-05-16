@@ -1,21 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
+import StoreBanner from './StoreBanner';
+import { Logo } from '../../components/Logos';
+import { useVoucherDispatch } from '../../utilities/hooks/VoucherContext/context';
+import { SET_VIEW } from '../../utilities/hooks/VoucherContext/constants';
 
 interface Props {}
+interface ButtonProps {
+  color?: String;
+}
 
 const LandingCard = (props: Props) => {
+  const dispatch = useVoucherDispatch();
+
+  const setView = (e) => {
+    dispatch({ type: SET_VIEW, payload: 1 });
+  };
+
   return (
     <Container>
-      <Prompt>
-        <span />
-        <span>Your available balance</span>
-        <span>?</span>
-      </Prompt>
-      <Balance>$100.00</Balance>
-      <Code>
-        Voucher Code: <b> AH2-TA</b>
-      </Code>
-      <NextButton>Click to begin redeeming your voucher</NextButton>
+      <StoreBanner />
+      <CardContainer>
+        <SubText>
+          Your available balance
+          <span>?</span>
+        </SubText>
+        <Balance>$100.00</Balance>
+        <Code>
+          Voucher Code: <b> AH2-TA</b>
+        </Code>
+        <Divider />
+        <Button onClick={setView}>Click to begin redeeming your voucher</Button>
+      </CardContainer>
+      <br />
+      <Button color="#ab192e">
+        6221 Fort Hamilton Pkwy, Brooklyn, NY 11219
+      </Button>
+      ;
+      <FooterContainer>
+        <Logo />
+      </FooterContainer>
     </Container>
   );
 };
@@ -23,22 +47,62 @@ const LandingCard = (props: Props) => {
 export default LandingCard;
 
 const Container = styled.div`
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
+`;
+
+const CardContainer = styled.div`
+  width: 90%;
+  max-width: 320px;
+  margin: 0 auto;
+  min-height: 350px;
   background-color: #ab192e;
   color: white;
   display: flex;
   flex-direction: column;
+  border-radius: 15px;
 `;
 
-const Prompt = styled.div`
+const SubText = styled.div`
+  width: 90%;
+  margin: 12px auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  span {
+    justify-self: flex-end;
+    margin: 12px;
+  }
 `;
 
-const Balance = styled.h1``;
+const Button = styled(SubText)`
+  cursor: pointer;
+  ${(props: ButtonProps) => props.color && `color: ${props.color}`}
+`;
 
-const Code = styled.h3``;
+const Balance = styled.h1`
+  font-weight: 700;
+  font-size: 50px;
+  margin: 24px auto;
+`;
 
-const NextButton = styled.div``;
+const Code = styled.h3`
+  margin: 12px auto;
+`;
+
+const Divider = styled.div`
+  border-bottom: 2px solid white;
+  margin: 12px auto;
+  width: 90%;
+`;
+
+const FooterContainer = styled.div`
+  width: 100%;
+  margin: 12px auto;
+  background-color: white;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+`;
