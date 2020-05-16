@@ -25,7 +25,7 @@ export const Modal = (props: Props) => {
 
   const closeModal = (e: any) => {
     e.preventDefault();
-    dispatch({ type: CLOSE_MODAL, payload: undefined });
+    dispatch({ type: CLOSE_MODAL, payload: -1 });
   };
 
   return (

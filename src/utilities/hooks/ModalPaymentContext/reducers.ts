@@ -3,7 +3,9 @@ import {
   SET_AMOUNT,
   CLOSE_MODAL,
   CLEAR_FORMS,
+  SET_SELLER_DATA
 } from './constants';
+
 import { defaultState, ModalPaymentState } from './types';
 
 export interface Action {
@@ -19,8 +21,10 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
       return { ...state, modalView: payload };
     case SET_AMOUNT:
       return { ...state, amount: payload };
+    case SET_SELLER_DATA:
+      return { ...state, sellerData: payload };
     case CLOSE_MODAL:
-      return defaultState;
+      return { ...state, modalView: -1, customInput: false, amount: '' };
     case CLEAR_FORMS:
       return defaultState;
     default:

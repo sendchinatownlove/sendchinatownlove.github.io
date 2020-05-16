@@ -67,4 +67,8 @@ export type BrowsePageSeller = {
   locations?: Location[];
   hero_image_url: string;
   business_type: string;
+  num_employees: number;
+  founded_year: number;
+  website_url: string;
+  menu_url: string;
 };

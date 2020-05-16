@@ -134,7 +134,7 @@ const SquareModal = ({
             value={name}
             placeholder="Name"
           />
-          <label htmlFor="name" className={styles.labelText}>
+          <label htmlFor="email" className={styles.labelText}>
             Email
           </label>
           <input

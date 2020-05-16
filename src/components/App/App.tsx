@@ -5,6 +5,7 @@ import ReactGA from 'react-ga';
 import Loader from '../Loader';
 import Header from '../Navbar';
 import Footer from '../Footer';
+import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
@@ -47,9 +48,11 @@ const App = () => {
 
     return (
       <>
-        <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-        {component}
-        <Footer menuOpen={menuOpen} />
+        <ModalPaymentProvider>
+          <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+          {component}
+          <Footer menuOpen={menuOpen} />
+        </ModalPaymentProvider>
       </>
     );
   };

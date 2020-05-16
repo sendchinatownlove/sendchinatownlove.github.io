@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import ErrorPage from '../404Page';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import {
+  useModalPaymentState,
+  useModalPaymentDispatch
+} from '../../utilities/hooks/ModalPaymentContext/context';
+import { SET_SELLER_DATA } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
@@ -15,14 +19,17 @@ interface Props {
 
 const SellerPage = (props: Props) => {
   // fix typing
-  const [seller, setSeller] = useState<any | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
+
+  const dispatch = useModalPaymentDispatch();
+  const { sellerData } = useModalPaymentState();
+  let seller = sellerData;
 
   const fetchData = async () => {
     setLoading(true);
     const result = id && (await getSeller(id));
-    setSeller(result.data);
+    await dispatch({ type: SET_SELLER_DATA, payload: result.data })
     setLoading(false);
   };
   useEffect(() => {
@@ -30,6 +37,7 @@ const SellerPage = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // TODO(ArtyEmsee): handle actual null states and loading
+
   return seller ? (
     <Container menuOpen={props.menuOpen}>
       <SellerName>{seller.name}</SellerName>
@@ -45,7 +53,7 @@ const SellerPage = (props: Props) => {
             hero_image_url: seller.hero_image_url,
           }}
         />
-        <ModalPaymentProvider>
+        {/* <ModalPaymentProvider> */}
           <OwnerPanel
             acceptDonations={seller.accept_donations}
             sellGiftCards={seller.sell_gift_cards}
@@ -70,7 +78,7 @@ const SellerPage = (props: Props) => {
             // TODO(jtmckibb): Should not crash here
             sellerId={id!}
           />
-        </ModalPaymentProvider>
+        {/* </ModalPaymentProvider> */}
       </ContentContainer>
     </Container>
   ) : (
