@@ -5,11 +5,11 @@ import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentConte
 //   phoneScreens,
 //   tabletScreens,
 // } from '../../utilities/general/responsive';
-// import Modal from '../Modal';
+import Modal from '../Modal';
 import styled from 'styled-components';
 import Hero from './images/hero.png';
 
-// const ModalBox: any = Modal;
+const ModalBox: any = Modal;
 
 const DonationPoolBox = () => {
   const dispatch = useModalPaymentDispatch();
@@ -20,7 +20,13 @@ const DonationPoolBox = () => {
   };
 
   return (
-    <React.Fragment>
+    <div>
+      <ModalBox
+        purchaseType={'donation'}
+        sellerId={'send-chinatown-love'}
+        sellerName={'Send Chinatown Love Fund'}
+      />
+
       <Container>
         <ColumnContainer>
           <h4>
@@ -37,13 +43,7 @@ const DonationPoolBox = () => {
         </ColumnContainer>
         <Image src={Hero} alt="banner" />
       </Container>
-
-      {/* <ModalBox
-        purchaseType={'donation'}
-        sellerId={'send-chinatown-love'}
-        sellerName={'Send Chinatown Love Fund'}
-      /> */}
-    </React.Fragment>
+    </div>
   );
 };
 
