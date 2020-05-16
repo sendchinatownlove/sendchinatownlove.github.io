@@ -18,7 +18,7 @@ export type VoucherState = {
 
 export const defaultState: VoucherState = {
   amount: 0,
-  view: -1,
+  view: 0,
   voucher: {
     amount: 0,
   },

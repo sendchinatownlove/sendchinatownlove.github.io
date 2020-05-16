@@ -78,7 +78,8 @@ const Amount = (props: Props) => {
       </MessageConatiner>
       <Footer>
         <Text>
-          Voucher Code: <b>AH2-TA</b>
+          {' '}
+          Voucher Code: <b>AH2-TA</b>{' '}
         </Text>
         <NextButton onClick={(e) => setView(2)}>Next</NextButton>
       </Footer>
