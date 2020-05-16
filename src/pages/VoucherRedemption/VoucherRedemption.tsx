@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Landing from './Landing';
 import Amount from './Amount';
 import Confirm from './Confirm';
+import Complete from './Complete';
 import { useVoucherState } from '../../utilities/hooks/VoucherContext/context';
 
 interface Props {}
@@ -16,6 +17,8 @@ const VoucherRedemption = (props: Props) => {
         return <Amount />;
       case 2:
         return <Confirm />;
+      case 3:
+        return <Complete />;
       default:
         return <Landing />;
     }
