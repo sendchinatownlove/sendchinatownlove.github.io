@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { getSellers } from '../../utilities';
+import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import { LoaderFillerContainer } from '../Loader';
 import NavBar from './MerchantNavBar';
 import MerchantCard from './MerchantCard';
 import DescriptionBox from './DescriptionBox';
 import ContributionBar from './ContributionBar';
-import styles from './styles.module.scss';
-import nycMapBackground from './images/nyc_3.png';
-import { LoaderFillerContainer } from '../Loader';
 import DonationPool from './DonationPool';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import nycMapBackground from './images/nyc_3.png';
+import styles from './styles.module.scss';
 
 interface Props {
   menuOpen: boolean;

@@ -1,15 +1,15 @@
 import React from 'react';
 import classnames from 'classnames';
 import { v4 as uuid } from 'uuid';
-import styles from './styles.module.scss';
-import ModalAmount from '../ModalAmount';
-import { SquareModal } from '../ModalPayment';
-import ModalConfirmation from '../ModalConfirmation';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext/context';
 import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
+import ModalAmount from '../ModalAmount';
+import { SquareModal } from '../ModalPayment';
+import ModalConfirmation from '../ModalConfirmation';
+import styles from './styles.module.scss';
 
 export interface Props {
   purchaseType: string;

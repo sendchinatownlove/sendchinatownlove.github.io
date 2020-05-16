@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
-import styled from 'styled-components';
-import Modal from '../Modal';
-import Hero from './images/hero.png';
 import {
   phoneScreens,
   tabletScreens,
 } from '../../utilities/general/responsive';
+import Modal from '../Modal';
+import styled from 'styled-components';
+import Hero from './images/hero.png';
 
 const ModalBox: any = Modal;
 

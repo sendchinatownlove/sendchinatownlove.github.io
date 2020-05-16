@@ -1,9 +1,9 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import styles from './styles.module.scss';
 import confirmationPic from './chinatown-logo.png';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
+import styles from './styles.module.scss';
 
 export type Props = {
   purchaseType: string;
