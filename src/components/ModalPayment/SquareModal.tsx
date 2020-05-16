@@ -118,7 +118,10 @@ const SquareModal = ({
     purchaseType === 'donation' ? 'Donation' : 'Voucher purchase';
 
   const canSubmit =
-    isTermsChecked && name.length > 0 && email.length > 0 && EMAIL_REGEX.test(email);
+    isTermsChecked &&
+    name.length > 0 &&
+    email.length > 0 &&
+    EMAIL_REGEX.test(email);
   return (
     <div className={styles.container}>
       <h2 className={styles.paymentHeader}>

@@ -46,10 +46,10 @@ export const Modal = (props: Props) => {
   ];
 
   return (
-    <form
-      id="donation-form"
-      className={classnames(styles.donationsContainer, 'modalForm--form')}
-      data-testid="Modal Amount"
+    <div
+    // id="donation-form"
+    // className={classnames(styles.donationsContainer, 'modalForm--form')}
+    // data-testid="Modal Amount"
     >
       <div>
         <h2>{props.sellerName}</h2>
@@ -120,7 +120,7 @@ export const Modal = (props: Props) => {
       >
         {t('paymentProcessing.amount.submit')}
       </button>
-    </form>
+    </div>
   );
 };
 
