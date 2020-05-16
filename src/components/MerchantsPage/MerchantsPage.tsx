@@ -96,7 +96,7 @@ const MerchantsPage = (props: Props) => {
             </div>
           </div>
           
-          <DonationPool />
+          {/* <DonationPool /> */}
 
           <div className={styles.storeInfoContainer}>
             <NavBar filterStoreType={filterStoreType} />
