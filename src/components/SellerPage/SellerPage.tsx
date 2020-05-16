@@ -77,7 +77,7 @@ const SellerName = styled.div`
   margin-top: 24px;
   width: 100%;
   @media (min-width: 900px) {
-    width: 90%;
+    width: 100%;
     margin-top: 32px;
   }
 `;
