@@ -9,7 +9,7 @@ import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/consta
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import styled from 'styled-components';
 
-const ModalBox: any = Modal;
+// const ModalBox: any = Modal;
 
 const DonationPoolBox = () => {
   const dispatch = useModalPaymentDispatch();
@@ -35,7 +35,7 @@ const DonationPoolBox = () => {
             SUPPORT CHINATOWN
           </button>
 
-          <ModalBox
+          <Modal
             purchaseType={'donation'}
             sellerId={'send-chinatown-love'}
             sellerName={'Send Chinatown Love Fund'}
