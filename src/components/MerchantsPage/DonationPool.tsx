@@ -16,7 +16,6 @@ const DonationPoolBox = () => {
 
   const openModal = (e: any) => {
     e.preventDefault();
-    console.log('made it here');
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
   };
 
@@ -32,7 +31,7 @@ const DonationPoolBox = () => {
             All donations will be distributed evenly to our merchants.
           </span>{' '}
           <br />
-          <button className="button--red-filled" onClick={openModal}>
+          <button className="button--redFilled" onClick={openModal}>
             SUPPORT CHINATOWN
           </button>
         </ColumnContainer>

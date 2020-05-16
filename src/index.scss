@@ -64,7 +64,7 @@ h3 {
     border-color: $standard-red;
   }
 
-  &--red-filled {
+  &--redFilled {
     @include base-button;
     border: 1px solid $standard-red;
     background-color: $standard-red;
