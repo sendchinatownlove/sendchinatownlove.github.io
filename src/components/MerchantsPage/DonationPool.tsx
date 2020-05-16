@@ -34,14 +34,14 @@ const DonationPoolBox = () => {
           <button onClick={openModal}>
             SUPPORT CHINATOWN
           </button>
+
+          <ModalBox
+            purchaseType={'donation'}
+            sellerId={'send-chinatown-love'}
+            sellerName={'Send Chinatown Love Fund'}
+          />
         </ColumnContainer>
         <Image src={Hero} alt="banner" />
-
-        <ModalBox
-          purchaseType={'donation'}
-          sellerId={'send-chinatown-love'}
-          sellerName={'Send Chinatown Love Fund'}
-        />
       </Container>
     </div>
   );
