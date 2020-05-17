@@ -1,15 +1,13 @@
 import * as React from 'react';
 import Hero from './images/hero.png';
 import Modal from '../Modal';
-// import {
-//   phoneScreens,
-//   tabletScreens,
-// } from '../../utilities/general/responsive';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
+import {
+  phoneScreens,
+  tabletScreens,
+} from '../../utilities/general/responsive';
 import styled from 'styled-components';
-
-// const ModalBox: any = Modal;
 
 const DonationPoolBox = () => {
   const dispatch = useModalPaymentDispatch();
@@ -56,7 +54,7 @@ const Container = styled.div`
   object-fit: cover;
   margin: 35px 10vw 65px 7vw;
   justify-content: space-between;
-  @media (max-width: 899px) {
+  @media (${tabletScreens}) {
     max-height: 250px;
   }
 `;
@@ -71,7 +69,7 @@ const Image = styled.img`
   width: 48%;
   height: auto;
   object-fit: cover;
-  @media (max-width: 599px) {
+  @media (${phoneScreens}) {
     display: none;
   }
 `;
