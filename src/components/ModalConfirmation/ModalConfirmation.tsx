@@ -26,7 +26,7 @@ const ModalConfirmation = (props: Props) => {
       <ThankYouImage src={confirmationPic} alt="Logo" />
 
       <FinishButton
-        className='modalButton--filled'
+        className="modalButton--filled"
         onClick={() => dispatch({ type: CLOSE_MODAL, payload: undefined })}
       >
         Finish

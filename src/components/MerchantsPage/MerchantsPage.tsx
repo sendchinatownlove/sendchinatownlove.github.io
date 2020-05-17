@@ -94,7 +94,7 @@ const MerchantsPage = (props: Props) => {
               </div>
             </div>
           </div>
-          
+
           <DonationPoolBox />
 
           <div className={styles.storeInfoContainer}>

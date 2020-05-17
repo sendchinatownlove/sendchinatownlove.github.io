@@ -1,4 +1,3 @@
-
 /*
  * Responsive screen sizes
  */

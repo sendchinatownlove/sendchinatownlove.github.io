@@ -122,34 +122,32 @@ const SquareModal = ({
     EMAIL_REGEX.test(email);
   return (
     <div>
-      <h2>
-        Complete your {purchaseTypePhrase.toLowerCase()}
-      </h2>
+      <h2>Complete your {purchaseTypePhrase.toLowerCase()}</h2>
       <p>Please add your payment information below</p>
 
       <PaymentContainer>
         <h3>Payment Information</h3>
         <RowFormat>
-            <LabelText htmlFor="name">Full Name</LabelText>
-            <InputText
-              name="name"
-              type="text"
-              className='modalInput--input'
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              placeholder="Name"
-            />
-            <LabelText htmlFor="email">Email</LabelText>
-            <InputText
-              name="email"
-              type="email"
-              className='modalInput--input'
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              placeholder="Email"
-              pattern={EMAIL_REGEX.source}
-              required
-            />
+          <LabelText htmlFor="name">Full Name</LabelText>
+          <InputText
+            name="name"
+            type="text"
+            className="modalInput--input"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            placeholder="Name"
+          />
+          <LabelText htmlFor="email">Email</LabelText>
+          <InputText
+            name="email"
+            type="email"
+            className="modalInput--input"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            placeholder="Email"
+            pattern={EMAIL_REGEX.source}
+            required
+          />
         </RowFormat>
         <SquareFormContainer>
           <SquarePaymentForm
@@ -195,9 +193,9 @@ const SquareModal = ({
                 checked={isSubscriptionChecked}
               />
               <span>
-                I'd like to receive email updates from Send Chinatown Love,
-                such as when the merchant receives my donation/purchase or
-                when a new merchant is onboarded
+                I'd like to receive email updates from Send Chinatown Love, such
+                as when the merchant receives my donation/purchase or when a new
+                merchant is onboarded
               </span>
             </CheckboxContainer>
             {purchaseTypePhrase === 'Donation' ? (
@@ -245,7 +243,7 @@ const PaymentContainer = styled.div`
   @media (max-width: 450px) {
     // TODO: FIX THIS. WHY DO I NEED TO DO THIS TO MAKE IT FIT?
     // IS THE WHOLE APP BEING CUT OFF? FIND OUT PRONTO
-    // CHECKED: IT IS. FIND OUT WHY! 
+    // CHECKED: IT IS. FIND OUT WHY!
     margin-bottom: 150px;
   }
 `;
@@ -261,7 +259,6 @@ const RowFormat = styled.div`
 `;
 
 const LabelText = styled.label`
-  font-weight: 500;
   color: #373f4a;
 `;
 
@@ -274,7 +271,7 @@ const InputText = styled.input`
   width: 100%;
   border-radius: 5px;
 
-  ::placeholder { 
+  ::placeholder {
     color: #cdcdcd;
   }
 
@@ -310,8 +307,8 @@ const BackButton = styled.button`
 `;
 
 const SquareFormContainer = styled.div`
-  font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-              'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-              sans-serif;
-  font-size: 15px;
+  h3, span, p {
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+  }
 `;

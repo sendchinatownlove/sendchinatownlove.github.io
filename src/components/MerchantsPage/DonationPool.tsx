@@ -29,14 +29,14 @@ const DonationPoolBox = () => {
             All donations will be distributed evenly to our merchants.
           </span>{' '}
           <br />
-          <button className={"button--red-filled"}  onClick={openModal}>
+          <button className={'button--red-filled'} onClick={openModal}>
             SUPPORT CHINATOWN
           </button>
-
           <Modal
             purchaseType={'donation'}
             sellerId={'send-chinatown-love'}
             sellerName={'Send Chinatown Love Fund'}
+            costPerMeal={0}
           />
         </ColumnContainer>
         <Image src={Hero} alt="banner" />

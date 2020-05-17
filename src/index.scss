@@ -138,7 +138,7 @@ h3 {
 
   &--nonfunctional {
     @include modal-button;
-    border: 1px solid #grey;
+    border: 1px solid grey;
     background-color: grey;
     color: white;
     border-radius: 25px;
