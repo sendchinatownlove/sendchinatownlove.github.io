@@ -27,7 +27,7 @@ const NavBar = (props: Props) => {
   };
 
   const handleResize = () => {
-    if (window.innerWidth < 767) {
+    if (window.innerWidth < 767 && !props.menuOpen) {
       setHamburgerOpen(true);
     } else {
       setHamburgerOpen(false);
@@ -75,7 +75,11 @@ const NavBar = (props: Props) => {
           i18nText="navBar.header.home"
           altText="HOME"
         />
-        <ReactNavLink to="/merchants" compact={hamburgerOpen.toString()}>
+        <ReactNavLink
+          to="/merchants"
+          compact={hamburgerOpen.toString()}
+          onClick={(e) => props.setMenuOpen(false)}
+        >
           {t('navBar.header.merchants')}
         </ReactNavLink>
         <NavLink
