@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
   useVoucherState,
   useVoucherDispatch,
@@ -7,23 +6,12 @@ import {
 import { SET_VIEW } from '../../utilities/hooks/VoucherContext/constants';
 import {
   AmountContainer,
-  MessageConatiner,
   Text,
   Footer,
   NextButton,
-  Divider,
 } from './styles';
 
 interface Props {}
-interface TextProps {
-  bold?: String;
-  color?: String;
-  size?: String;
-  width?: String;
-  align?: String;
-  padding?: String;
-}
-
 const Amount = (props: Props) => {
   const { amount, voucher } = useVoucherState();
   const dispatch = useVoucherDispatch();
@@ -44,7 +32,7 @@ const Amount = (props: Props) => {
       </AmountContainer>
       <AmountContainer>
         <Text bold="true" size="24px">
-          $ {(voucher.amount - amount).toFixed(2)}
+          $ {(voucher.amount/100 - amount).toFixed(2)}
         </Text>
         <Text size="16px">Remaining voucher balance</Text>
       </AmountContainer>
