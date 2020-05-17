@@ -25,6 +25,7 @@ interface Props {
   giftCardAmount: number;
   acceptDonations: boolean;
   sellGiftCards: boolean;
+  costPerMeal: number;
   ownerName: string;
   sellerId: string;
   sellerName: string;
@@ -104,6 +105,15 @@ const OwnerPanel = (props: Props) => {
             Voucher
           </button>
         )}
+        {props.costPerMeal !== null && (
+          <button
+            value="buy_meal"
+            className={classnames(styles.button, 'button--redfilled')}
+            onClick={showModal}
+          >
+            Gift a meal
+          </button>
+        )}
       </div>
       {validExtraInfo !== [] ? (
         <div className={styles.extraInfoContainer}>
@@ -145,6 +155,7 @@ const OwnerPanel = (props: Props) => {
         purchaseType={purchaseType}
         sellerId={props.sellerId}
         sellerName={props.sellerName}
+        costPerMeal={props.costPerMeal}
       />
       {
         <div className={styles.socialContainer}>
