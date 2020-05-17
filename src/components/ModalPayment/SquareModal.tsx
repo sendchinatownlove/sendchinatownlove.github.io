@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import classnames from 'classnames';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
@@ -149,7 +148,7 @@ const SquareModal = ({
               required
             />
         </RowFormat>
-        <div>
+        <SquareFormContainer>
           <SquarePaymentForm
             sandbox={
               !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
@@ -174,19 +173,30 @@ const SquareModal = ({
               {purchaseTypePhrase} of <b>${amount}</b> to {sellerName}{' '}
             </span>
             <p />
-            <div>
-              <TermsAndConditions>
-                <Checkbox
-                  value="checkedA"
-                  inputProps={{ 'aria-label': 'Checkbox A' }}
-                  onClick={checkTermsAgreement}
-                  checked={isTermsChecked}
-                />
-                <span>
-                  I agree with the <b>Terms & Conditions</b>
-                </span>
-              </TermsAndConditions>
-            </div>
+            <CheckboxContainer>
+              <Checkbox
+                value="checkedA"
+                inputProps={{ 'aria-label': 'Checkbox A' }}
+                onClick={checkTermsAgreement}
+                checked={isTermsChecked}
+              />
+              <span>
+                I agree with the <b>Terms & Conditions</b>
+              </span>
+            </CheckboxContainer>
+            <CheckboxContainer>
+              <Checkbox
+                value="checkedB"
+                inputProps={{ 'aria-label': 'Checkbox B' }}
+                onClick={checkSubscriptionAgreement}
+                checked={isSubscriptionChecked}
+              />
+              <span>
+                I'd like to receive email updates from Send Chinatown Love,
+                such as when the merchant receives my donation/purchase or
+                when a new merchant is onboarded
+              </span>
+            </CheckboxContainer>
             {purchaseTypePhrase === 'Donation' ? (
               <p>
                 By proceeding with your transaction, you understand that you are
@@ -213,7 +223,7 @@ const SquareModal = ({
               <SubmissionButton canSubmit={canSubmit} />
             </ButtonRow>
           </SquarePaymentForm>
-        </div>
+        </SquareFormContainer>
       </PaymentContainer>
     </div>
   );
@@ -255,14 +265,14 @@ const LabelText = styled.label`
 const InputText = styled.input`
   font-size: 14px;
   color: #373f4a;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #dedede;
   margin: 5px 0 15px;
   padding: 27px 15px;
   width: 100%;
   border-radius: 5px;
 
   ::placeholder { 
-    color: #e5e5e5;
+    color: #cdcdcd;
   }
 
   :invalid {
@@ -270,7 +280,7 @@ const InputText = styled.input`
   }
 `;
 
-const TermsAndConditions = styled.label`
+const CheckboxContainer = styled.label`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -294,4 +304,11 @@ const BackButton = styled.button`
   width: 75px;
   font-size: 13px;
   background-color: white;
+`;
+
+const SquareFormContainer = styled.div`
+  font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+              'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+              sans-serif;
+  font-size: 15px;
 `;
