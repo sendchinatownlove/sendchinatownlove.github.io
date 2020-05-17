@@ -1,0 +1,83 @@
+.amountContainer {
+  background-color: #f7f7f7;
+  padding: 25px 35px;
+}
+
+.selectAmtContainer {
+  padding-top: 30px;
+  margin: auto;
+}
+
+.separator {
+  margin: 0px 20px 0px 20px;
+}
+
+.customAmt {
+  width: 200px;
+}
+
+.nextBtn {
+  position: relative;
+  float: right;
+  right: 0px;
+  bottom: -25px;
+}
+
+.customAmt:invalid {
+  border: 1px solid red;
+}
+
+.total {
+  float: right;
+}
+
+.illustrationsContainer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.illustrationLeading {
+  width: 45%;
+  float: left;
+}
+
+.illustrationTrailing {
+  width: 45%;
+  float: right;
+}
+
+.explantionContainer {
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.explanation {
+  font-size: 14px;
+  width: 45%;
+}
+
+@media only screen and (max-width: 799px) {
+  .donationsContainer {
+    width: 85%;
+    height: 75vh;
+    overflow-y: scroll;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .donationsContainer {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  form button {
+    background-color: white;
+  }
+
+  .customAmt {
+    width: 100%;
+  }
+}

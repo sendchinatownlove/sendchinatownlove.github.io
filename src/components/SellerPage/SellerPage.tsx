@@ -48,6 +48,7 @@ const SellerPage = (props: Props) => {
           <OwnerPanel
             acceptDonations={seller.accept_donations}
             sellGiftCards={seller.sell_gift_cards}
+            costPerMeal={seller.cost_per_meal}
             amountRaised={seller.amount_raised}
             targetAmount={seller.target_amount}
             numContributions={seller.num_contributions}

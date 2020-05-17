@@ -87,6 +87,13 @@ h3 {
     background-color: white;
     border-color: $standard-red;
   }
+
+  &--redfilled {
+    @include base-button;
+    color: white;
+    background-color: $standard-red;
+    border-color: $standard-red;
+  }
 }
 
 @mixin modal-button {
@@ -127,6 +134,15 @@ h3 {
     font-weight: bold;
     letter-spacing: 0.1em;
     cursor: pointer;
+  }
+
+  &--nonfunctional {
+    @include modal-button;
+    border: 1px solid #grey;
+    background-color: grey;
+    color: white;
+    border-radius: 25px;
+    font-weight: bold;
   }
 
   &--selected {
