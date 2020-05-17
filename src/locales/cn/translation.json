@@ -35,6 +35,15 @@
       "voucherText2": " All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase.",
       "back": "Back",
       "submit": "Confirm"
+    },
+    "confirmation": {
+      "header": "Thank you!",
+      "subHeader1": "We appreciate your support. We'll ",
+      "voucherText1": "email you your voucher when ",
+      "voucherText2": " opens back up!",
+      "donationText1": "let you know when ",
+      "donationText2": " receives your donation!",
+      "finish": "Finish"
     }
   },
   "buyMeal": {
