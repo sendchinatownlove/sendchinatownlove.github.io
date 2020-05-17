@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import StoreBanner from './StoreBanner';
 import { Divider } from './styles';
 import { Logo } from '../../components/Logos';
-import { useVoucherDispatch } from '../../utilities/hooks/VoucherContext/context';
+import { useVoucherState, useVoucherDispatch } from '../../utilities/hooks/VoucherContext/context';
 import { SET_VIEW } from '../../utilities/hooks/VoucherContext/constants';
 
 interface Props {}
@@ -12,6 +12,7 @@ interface ButtonProps {
 }
 
 const LandingCard = (props: Props) => {
+  const { voucher } = useVoucherState();
   const dispatch = useVoucherDispatch();
 
   const setView = (e) => {
@@ -26,9 +27,9 @@ const LandingCard = (props: Props) => {
           Your available balance
           <span>?</span>
         </SubText>
-        <Balance>$100.00</Balance>
+        <Balance>${(voucher.amount/100).toFixed(2)}</Balance>
         <Code>
-          Voucher Code: <b> AH2-TA</b>
+          Voucher Code: <b>{voucher.seller_gift_card_id}</b>
         </Code>
         <Divider />
         <Button onClick={setView}>Click to begin redeeming your voucher</Button>

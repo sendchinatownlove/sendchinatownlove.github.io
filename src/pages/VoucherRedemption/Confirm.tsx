@@ -50,7 +50,7 @@ const Amount = (props: Props) => {
           Voucher balance
         </Text>
         <Text size="16px" width="50%" align="flex-end">
-          ${(voucher.amount / 100).toFixed(2)}
+          ${(voucher.amount /100).toFixed(2)}
         </Text>
       </MessageConatiner>
       <MessageConatiner>
@@ -58,7 +58,7 @@ const Amount = (props: Props) => {
           Redemption Amount
         </Text>
         <Text size="16px" width="50%" align="flex-end">
-          ${(amount / 100).toFixed(2)}
+          ${(amount/1).toFixed(2)}
         </Text>
       </MessageConatiner>
       <Divider />
@@ -67,13 +67,13 @@ const Amount = (props: Props) => {
           Remaining balance
         </Text>
         <Text bold="true" size="24px" width="50%" align="flex-end">
-          ${(voucher.amount - amount).toFixed(2)}
+          ${(voucher.amount/100 - amount).toFixed(2)}
         </Text>
       </MessageConatiner>
       <VoucherContainer>
         <Text>
           {' '}
-          Voucher Code: <b>AH2-TA</b>{' '}
+          Voucher Code: <b>{voucher.seller_gift_card_id}</b>{' '}
         </Text>
       </VoucherContainer>
       <Footer>
