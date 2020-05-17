@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import { Checkbox } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 import { SquarePaymentForm } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
@@ -41,6 +42,7 @@ const SquareModal = ({
   sellerName,
   idempotencyKey,
 }: Props) => {
+  const { t } = useTranslation();
   const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
 
@@ -125,12 +127,13 @@ const SquareModal = ({
   return (
     <div className={styles.container}>
       <h2 className={styles.paymentHeader}>
-        Complete your {purchaseTypePhrase.toLowerCase()}
+        {t('paymentProcessing.payment.header')}{' '}
+        {purchaseTypePhrase.toLowerCase()}
       </h2>
-      <p>Please add your payment information below</p>
+      <p>{t('paymentProcessing.payment.subHeader')}</p>
 
       <div className={styles.paymentContainer}>
-        <h3>Payment Information</h3>
+        <h3>{t('paymentProcessing.payment.label1')}</h3>
         <div className={styles.inputRow}>
           <div className={styles.row}>
             <span className={classnames('fa fa-user', styles.icons)} />
@@ -140,7 +143,7 @@ const SquareModal = ({
               className={classnames(styles.label, 'modalInput--input')}
               onChange={(e) => setName(e.target.value)}
               value={name}
-              placeholder="Name"
+              placeholder={t('paymentProcessing.payment.namePlaceHolder')}
             />
           </div>
           <div className={styles.row}>
@@ -155,7 +158,7 @@ const SquareModal = ({
               )}
               onChange={(e) => setEmail(e.target.value)}
               value={email}
-              placeholder="Email"
+              placeholder={t('paymentProcessing.payment.emailPlaceHolder')}
               pattern={EMAIL_REGEX.source}
               required
             />
@@ -180,7 +183,9 @@ const SquareModal = ({
             </div>
 
             <br />
-            <h3 className={styles.text}>Checkout details</h3>
+            <h3 className={styles.text}>
+              {t('paymentProcessing.payment.label2')}
+            </h3>
             <span className={styles.text}>
               {' '}
               {purchaseTypePhrase} of <b>${amount}</b> to {sellerName}{' '}
@@ -195,7 +200,8 @@ const SquareModal = ({
                   checked={isTermsChecked}
                 />
                 <span>
-                  I agree with the <b>Terms & Conditions</b>
+                  {t('paymentProcessing.payment.agree')}{' '}
+                  <b>{t('paymentProcessing.payment.terms')}</b>
                 </span>
               </label>
             </div>
@@ -207,26 +213,18 @@ const SquareModal = ({
                   onClick={checkSubscriptionAgreement}
                   checked={isSubscriptionChecked}
                 />
-                <span>
-                  I'd like to receive email updates from Send Chinatown Love,
-                  such as when the merchant receives my donation/purchase or
-                  when a new merchant is onboarded
-                </span>
+                <span> {t('paymentProcessing.payment.emailText')} </span>
               </label>
             </div>
             {purchaseTypePhrase === 'Donation' ? (
               <p>
-                By proceeding with your transaction, you understand that you are
-                making a donation to {sellerName}. No goods or services were
-                exchanged for this donation.
+                {t('paymentProcessing.payment.donationText1')} {sellerName}.{' '}
+                {t('paymentProcessing.payment.donationText2')}
               </p>
             ) : (
               <p>
-                By proceeding with your purchase, you understand that the
-                voucher card is not redeemable for cash and can only be used at{' '}
-                {sellerName}. All purchases are final. In the event that the
-                merchant is no longer open at the time of redemption, Send
-                Chinatown Love Inc. will not be able to refund your purchase.
+                {t('paymentProcessing.payment.voucherText1')}
+                {sellerName}. {t('paymentProcessing.payment.voucherText2')}
               </p>
             )}
             <div className={styles.btnRow}>
@@ -235,7 +233,7 @@ const SquareModal = ({
                 className={classnames('modalButton--back', styles.backBtn)}
                 onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 0 })}
               >
-                ᐸ Back
+                ᐸ {t('paymentProcessing.payment.back')}
               </button>
               <SubmissionButton canSubmit={canSubmit} />
             </div>

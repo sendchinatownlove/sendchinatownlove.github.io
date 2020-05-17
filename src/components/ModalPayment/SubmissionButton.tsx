@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Context } from 'react-square-payment-form';
+import { BaseButton } from '../../components/BaseComponents';
 
 type Props = {
   canSubmit: boolean;
@@ -17,14 +18,14 @@ const SubmissionButton = ({ canSubmit }: Props) => {
   submittable = canSubmit;
 
   return (
-    <button
-      type="button"
-      className={'modalButton--filled'}
+    <BaseButton.ModalButton
+      buttonType="filled"
       onClick={handleSubmit}
       disabled={!submittable}
-    >
-      Confirm
-    </button>
+      i18nKey="payment"
+      i18nText="paymentProcessing.payment.submit"
+      altText="Confirm"
+    />
   );
 };
 

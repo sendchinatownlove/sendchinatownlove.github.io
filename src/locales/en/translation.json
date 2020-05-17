@@ -18,6 +18,23 @@
       "maximum": "Maximum",
       "amount": "amount",
       "submit": "Next"
+    },
+    "payment": {
+      "header": "Complete your ",
+      "subHeader": "Please add your payment information below",
+      "label1": "Payment Information",
+      "label2": "Checkout details",
+      "namePlaceHolder": "Name",
+      "emailPlaceHolder": "Email",
+      "agree": "I agree with the",
+      "terms": "Terms & Conditions",
+      "emailText": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded",
+      "donationText1": "By proceeding with your transaction, you understand that you are making a donation to ",
+      "donationText2": "No goods or services were exchanged for this donation.",
+      "voucherText1": "By proceeding with your purchase, you understand that the voucher card is not redeemable for cash and can only be used at ",
+      "voucherText2": " All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase.",
+      "back": "Back",
+      "submit": "Confirm"
     }
   },
   "buyMeal": {
