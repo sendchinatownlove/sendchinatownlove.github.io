@@ -28,6 +28,7 @@ type Props = {
   sellerId: string;
   sellerName: string;
   idempotencyKey: string;
+  costPerMeal: number;
 };
 
 type ErrorMessage = {
@@ -40,6 +41,7 @@ const SquareModal = ({
   sellerId,
   sellerName,
   idempotencyKey,
+  costPerMeal,
 }: Props) => {
   const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
@@ -62,13 +64,15 @@ const SquareModal = ({
       return;
     }
 
+    // 'buy_meal' is still respresented as a gift card when calling the API
     const payment: SquarePaymentParams = {
       amount: Number(amount) * 100,
       currency: 'usd',
-      item_type: purchaseType,
+      item_type: purchaseType === 'buy_meal' ? 'gift_card' : purchaseType,
       quantity: 1,
     };
 
+    const is_distribution = purchaseType === 'buy_meal';
     const buyer: Buyer = {
       name,
       email,
@@ -77,7 +81,7 @@ const SquareModal = ({
       is_subscribed: isSubscriptionChecked,
     };
 
-    return makeSquarePayment(nonce, sellerId, payment, buyer)
+    return makeSquarePayment(nonce, sellerId, payment, buyer, is_distribution)
       .then((res) => {
         if (res.status === 200) {
           dispatch({ type: SET_MODAL_VIEW, payload: 2 });
@@ -114,8 +118,24 @@ const SquareModal = ({
   const locationId = process.env.REACT_APP_SQUARE_LOCATION_ID
     ? process.env.REACT_APP_SQUARE_LOCATION_ID
     : '';
-  const purchaseTypePhrase =
-    purchaseType === 'donation' ? 'Donation' : 'Voucher purchase';
+
+  const purchaseTypePhrase = (shouldLowerCase) => {
+    switch (purchaseType) {
+      case 'donation':
+        return shouldLowerCase ? 'donation': 'Donation';
+      case 'gift_card':
+        return shouldLowerCase ? 'voucher purchase' : 'Voucher purchase';
+      case 'buy_meal':
+        return 'Gift a Meal purchase';
+      default:
+        return 'Donation';
+    }
+  };
+
+  const numberOfMeals = Number(amount) / costPerMeal;
+  const mealText = numberOfMeals > 1 ? 'meals' : 'meal';
+  const numberOfMealsText =
+    purchaseType === 'buy_meal' ? `(${numberOfMeals} ${mealText})` : '';
 
   const canSubmit =
     isTermsChecked &&
@@ -125,7 +145,7 @@ const SquareModal = ({
   return (
     <div className={styles.container}>
       <h2 className={styles.paymentHeader}>
-        Complete your {purchaseTypePhrase.toLowerCase()}
+        Complete your {purchaseTypePhrase(true)}
       </h2>
       <p>Please add your payment information below</p>
 
@@ -183,7 +203,11 @@ const SquareModal = ({
             <h3 className={styles.text}>Checkout details</h3>
             <span className={styles.text}>
               {' '}
-              {purchaseTypePhrase} of <b>${amount}</b> to {sellerName}{' '}
+              {purchaseTypePhrase(false)} of{' '}
+              <b>
+                ${amount} {numberOfMealsText}
+              </b>{' '}
+              to {sellerName}{' '}
             </span>
             <p />
             <div>
@@ -214,14 +238,14 @@ const SquareModal = ({
                 </span>
               </label>
             </div>
-            {purchaseTypePhrase === 'Donation' ? (
-              <p>
+            {purchaseType === 'donation' ? (
+              <p className={styles.termsAndConditionsText}>
                 By proceeding with your transaction, you understand that you are
                 making a donation to {sellerName}. No goods or services were
                 exchanged for this donation.
               </p>
             ) : (
-              <p>
+              <p className={styles.termsAndConditionsText}>
                 By proceeding with your purchase, you understand that the
                 voucher card is not redeemable for cash and can only be used at{' '}
                 {sellerName}. All purchases are final. In the event that the

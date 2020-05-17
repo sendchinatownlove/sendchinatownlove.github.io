@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-import {
-  useModalPaymentDispatch,
-} from '../../utilities/hooks/ModalPaymentContext/context';
+import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
@@ -80,11 +78,11 @@ export const Modal = (props: Props) => {
             onChange={(e) => {
               handleAmount(e.target.value, true, '');
             }}
-            value={numberOfMeals === 0 ? "" : String(numberOfMeals)}
+            value={numberOfMeals === 0 ? '' : String(numberOfMeals)}
             placeholder="# of meals"
             min="1"
           />
-          <span className={styles.separator}>X</span>
+          <span className={styles.separator}>✕</span>
           <button
             type="button"
             className={'modalButton--nonfunctional'}

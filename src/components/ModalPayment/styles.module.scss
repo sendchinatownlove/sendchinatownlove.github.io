@@ -5,6 +5,8 @@
 }
 
 .paymentHeader {
+  font-weight: bold;
+  font-size: 26px;
   width: 80%;
 }
 
@@ -29,6 +31,12 @@
 
 .termsAndConditions:hover {
   text-decoration: underline;
+}
+
+.termsAndConditionsText {
+  line-height: 1.5em;
+  opacity: 0.7;
+  font-size: 12px;
 }
 
 .inputRow {
