@@ -1,6 +1,7 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 import ModalAmount from '../ModalAmount';
+import ModalBuyMeal from '../ModalBuyMeal';
 import { SquareModal } from '../ModalPayment';
 import ModalConfirmation from '../ModalConfirmation';
 import {
@@ -14,6 +15,7 @@ export interface Props {
   purchaseType: string;
   sellerId: string;
   sellerName: string;
+  costPerMeal: number;
 }
 
 export interface ModalProps {
@@ -36,7 +38,12 @@ export const Modal = (props: Props) => {
         <CloseButton onClick={closeModal}>×</CloseButton>
       </CloseButtonContainer>
       <ViewContainer>
-        {modalView === 0 && <ModalAmount {...props} />}
+       {modalView === 0 && props.purchaseType !== 'buy_meal' && (
+          <ModalAmount {...props} />
+        )}
+        {modalView === 0 && props.purchaseType === 'buy_meal' && (
+          <ModalBuyMeal {...props} />
+        )}
         {modalView === 1 && (
           <SquareModal {...props} idempotencyKey={idempotencyKey} />
         )}
