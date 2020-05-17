@@ -116,7 +116,7 @@ const ContentContainer = styled.div`
   max-width: 1200px;
   min-height: 1200px;
   @media (min-width: 900px) {
-    grid-template-columns: 2fr minmax(250px, 1fr);
+    grid-template-columns: 1fr minmax(405px, 1fr);
     display: grid;
     grid-column-gap: 69px;
   }
