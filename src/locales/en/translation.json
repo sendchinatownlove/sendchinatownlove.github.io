@@ -1,5 +1,8 @@
 {
   "sellerPage": {
+    "storeDetails": {
+      "story": "Story"
+    },
     "ownerPanel": {
       "donation": "Donation",
       "voucher": "Voucher",
