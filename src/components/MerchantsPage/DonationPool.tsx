@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Hero from './images/hero.png';
-// import Modal from '../Modal';
+import Modal from '../Modal';
 // import {
 //   phoneScreens,
 //   tabletScreens,
@@ -31,15 +31,15 @@ const DonationPoolBox = () => {
             All donations will be distributed evenly to our merchants.
           </span>{' '}
           <br />
-          <button onClick={openModal}>
+          <button className="button--red-filled"  onClick={openModal}>
             SUPPORT CHINATOWN
           </button>
 
-          {/* <Modal
+          <Modal
             purchaseType={'donation'}
             sellerId={'send-chinatown-love'}
             sellerName={'Send Chinatown Love Fund'}
-          /> */}
+          />
         </ColumnContainer>
         <Image src={Hero} alt="banner" />
       </Container>
