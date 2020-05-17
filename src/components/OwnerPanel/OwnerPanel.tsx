@@ -141,11 +141,11 @@ const OwnerPanel = (props: Props) => {
         ''
       )}
 
-      {/* <ModalBox
+      <ModalBox
         purchaseType={purchaseType}
         sellerId={props.sellerId}
         sellerName={props.sellerName}
-      /> */}
+      />
       {
         <div className={styles.socialContainer}>
           <div className={styles.socialIconContainer}>
