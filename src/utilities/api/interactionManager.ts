@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Buyer, PaymentParams, SquarePaymentParams } from './types';
-import { charges, sellers } from './endpoints';
+import { charges, sellers, vouchers } from './endpoints';
 
 // Fix return typing
 export const getSellers = async () =>
@@ -105,3 +105,35 @@ export const makeSquarePayment = async (
       throw err;
     });
 };
+
+
+// Fix return typing
+export const getVoucher = async (id: string) => (
+{
+  "id": 191,
+  "seller_id": 35,
+  "item_type": "gift_card",
+  "created_at": "2020-05-17T02:10:30.095Z",
+  "updated_at": "2020-05-17T02:10:30.095Z",
+  "payment_intent_id": 183,
+  "refunded": false,
+  "purchaser_id": 68,
+  "gift_card_detail": {
+    "id": 43,
+    "gift_card_id": "4bf2565e-8b77-478a-9de3-9cc00a89b6da",
+    "receipt_id": null,
+    "expiration": "2021-05-17",
+    "created_at": "2020-05-17T02:10:30.115Z",
+    "updated_at": "2020-05-17T04:51:14.895Z",
+    "item_id": 191,
+    "seller_gift_card_id": "#UKO-TM",
+    "recipient_id": 68,
+    "amount": 5000
+  }
+}
+)
+
+  // axios
+  //   .get(vouchers + id)
+  //   .then((res) => res)
+  //   .catch((err) => err);

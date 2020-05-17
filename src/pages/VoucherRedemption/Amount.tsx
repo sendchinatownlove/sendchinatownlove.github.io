@@ -35,7 +35,7 @@ const Amount = (props: Props) => {
 
   const handleAmount = (e) => {
     setError('');
-    if (e.target.value > voucher.amount)
+    if (e.target.value*100 > voucher.amount)
       return setError('Please enter a valid amount');
     dispatch({ type: SET_AMOUNT, payload: e.target.value });
   };
@@ -75,7 +75,7 @@ const Amount = (props: Props) => {
         </Text>
         <Text size="16px" width="50%">
           <Text color="black" width="100%" align="flex-end" padding="true">
-            $ {(voucher.amount - amount).toFixed(2)}
+            $ {((voucher.amount/100) - amount).toFixed(2)}
           </Text>
           <Text align="flex-end" width="80px">
             Remaining
@@ -85,7 +85,7 @@ const Amount = (props: Props) => {
       <Footer>
         <Text>
           {' '}
-          Voucher Code: <b>AH2-TA</b>{' '}
+          Voucher Code: <b>{voucher.seller_gift_card_id}</b>{' '}
         </Text>
         <NextButton onClick={(e) => setView(2)}>Next</NextButton>
       </Footer>
