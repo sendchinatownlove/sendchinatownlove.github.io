@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-import classnames from 'classnames';
-import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
-import Modal from '../Modal';
-import ProgressBar from '../ProgressBar';
-import styles from './styles.module.scss';
-import defaultOwnerImage from './assets/female.svg';
-import { SocialIcon } from 'react-social-icons';
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import {
   EmailShareButton,
   FacebookShareButton,
   TwitterShareButton,
 } from 'react-share';
-import styled from 'styled-components';
+import { SocialIcon } from 'react-social-icons';
+
+import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
+import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+
+import Modal from '../Modal';
+import ProgressBar from '../ProgressBar';
+
+import styles from './styles.module.scss';
+import defaultOwnerImage from './assets/female.svg';
+import { BaseColors, BaseButton } from '../BaseComponents';
 
 interface Props {
   imageSrc: string;
@@ -36,6 +40,14 @@ interface Props {
 interface State {
   show: boolean;
   purchaseType: string;
+}
+
+interface PaymentButtonProps {
+  value: string;
+  onClick: (e) => void;
+  filling?: string;
+  i18nText?: string;
+  altText?: string;
 }
 
 const ModalBox: any = Modal;
@@ -88,31 +100,31 @@ const OwnerPanel = (props: Props) => {
 
       <div className={styles.buttonContainer}>
         {props.acceptDonations && (
-          <button
+          <PaymentButton
             value="donation"
-            className={classnames(styles.button, 'button--filled')}
+            filling="filled"
             onClick={showModal}
-          >
-            Donation
-          </button>
+            i18nText="sellerPage.ownerPanel.donation"
+            altText="Donation"
+          />
         )}
         {props.sellGiftCards && (
-          <button
+          <PaymentButton
             value="gift_card"
-            className={classnames(styles.button, 'button--outlined')}
+            filling="outlined"
             onClick={showModal}
-          >
-            Voucher
-          </button>
+            i18nText="sellerPage.ownerPanel.voucher"
+            altText="Voucher"
+          />
         )}
         {props.costPerMeal !== null && (
-          <button
+          <PaymentButton
             value="buy_meal"
-            className={classnames(styles.button, 'button--redfilled')}
+            filling="red-filled"
             onClick={showModal}
-          >
-            Gift a meal
-          </button>
+            i18nText="sellerPage.ownerPanel.gift"
+            altText="Gift a Meal"
+          />
         )}
       </div>
       {validExtraInfo !== [] ? (
@@ -227,3 +239,59 @@ const Container = styled.section`
     padding: 24px;
   }
 `;
+
+const PaymentButtonStyles = styled(BaseButton.BaseButton)`
+  margin: 5px 10px;
+  font-family: Open Sans, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  @media (max-width: 599px) {
+    font-size: 16px;
+    height: 48px;
+    width: 240px;
+    margin-bottom: px;
+  }
+
+  ${(props: PaymentButtonProps) => {
+    switch (props.filling) {
+      case 'filled':
+        return `
+          color: white;
+          background-color: ${BaseColors.defaultButtonColor};
+          border-color: ${BaseColors.defaultButtonColor};
+          :hover {
+            background-color: ${BaseColors.standardRed};
+            border-color: ${BaseColors.standardRed};
+          }
+        `;
+      case 'outlined':
+        return `
+          color: ${BaseColors.defaultButtonColor};
+          background-color: white;
+          :hover {
+            color: ${BaseColors.standardRed};
+            background-color: white;
+            border-color: ${BaseColors.standardRed};
+          }
+        `;
+      case 'red-filled':
+        return `
+          background-color: ${BaseColors.standardRed};
+          border-color: ${BaseColors.standardRed};
+        `;
+      default:
+        return;
+    }
+  }}
+`;
+
+const PaymentButton = (props: PaymentButtonProps) => {
+  const { t } = useTranslation();
+  const text =
+    props.i18nText && !t(props.i18nText).includes('ownerPanel')
+      ? t(props.i18nText)
+      : props.altText;
+  return <PaymentButtonStyles {...props}>{text}</PaymentButtonStyles>;
+};

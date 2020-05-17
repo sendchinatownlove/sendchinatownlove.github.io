@@ -1,4 +1,11 @@
 {
+  "sellerPage": {
+    "ownerPanel": {
+      "donation": "Donation",
+      "voucher": "Voucher",
+      "gift": "Gift a Meal"
+    }
+  },
   "paymentProcessing": {
     "amount": {
       "header": "Please select an amount or enter a custom amount",

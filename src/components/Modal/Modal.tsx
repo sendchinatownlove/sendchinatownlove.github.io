@@ -38,7 +38,7 @@ export const Modal = (props: Props) => {
         <CloseButton onClick={closeModal}>×</CloseButton>
       </CloseButtonContainer>
       <ViewContainer>
-       {modalView === 0 && props.purchaseType !== 'buy_meal' && (
+        {modalView === 0 && props.purchaseType !== 'buy_meal' && (
           <ModalAmount {...props} />
         )}
         {modalView === 0 && props.purchaseType === 'buy_meal' && (
