@@ -29,7 +29,7 @@ const DonationPoolBox = () => {
             All donations will be distributed evenly to our merchants.
           </span>{' '}
           <br />
-          <button className="button--red-filled"  onClick={openModal}>
+          <button className={"button--red-filled"}  onClick={openModal}>
             SUPPORT CHINATOWN
           </button>
 
