@@ -4,7 +4,7 @@ import Modal from '../Modal';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import {
-  phoneScreens,
+  smallScreens,
   tabletScreens,
 } from '../../utilities/general/responsive';
 import { useTranslation } from 'react-i18next';
@@ -71,7 +71,7 @@ const Image = styled.img`
   width: 48%;
   height: auto;
   object-fit: cover;
-  @media (${phoneScreens}) {
+  @media (${smallScreens}) {
     display: none;
   }
 `;

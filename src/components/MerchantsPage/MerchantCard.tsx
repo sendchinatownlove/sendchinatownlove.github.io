@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BrowsePageSeller } from '../../utilities/api';
 import ProgressBar from '../ProgressBar';
 import styled from 'styled-components';
-import { phoneScreens } from '../../utilities/general/responsive';
+import { smallScreens } from '../../utilities/general/responsive';
 
 export interface Props {
   storeInfo?: BrowsePageSeller;
@@ -82,7 +82,7 @@ export const MerchantCard = styled.div`
         height: 475px;
         text-align: center;
     }
-    @media (${phoneScreens}) {
+    @media (${smallScreens}) {
         margin: 30px;
         width: 85vw;
         &.descriptionBox {

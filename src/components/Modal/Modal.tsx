@@ -9,6 +9,7 @@ import {
   useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext/context';
 import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { phoneScreens, tabletScreens } from '../../utilities/general/responsive';
 import styled from 'styled-components';
 
 export interface Props {
@@ -58,14 +59,15 @@ export const DonationsContainer = styled.div`
   height: 80%;
   overflow-y: scroll;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  z-index: 10;
 
-  @media only screen and (max-width: 799px) {
+  @media only screen and (${tabletScreens}) {
     width: 85%;
     height: 75vh;
     overflow-y: scroll;
   }
 
-  @media only screen and (max-width: 450px) {
+  @media only screen and (${phoneScreens}) {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
