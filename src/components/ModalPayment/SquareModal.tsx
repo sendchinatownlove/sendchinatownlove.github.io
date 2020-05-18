@@ -112,14 +112,33 @@ const SquareModal = ({
   const locationId = process.env.REACT_APP_SQUARE_LOCATION_ID
     ? process.env.REACT_APP_SQUARE_LOCATION_ID
     : '';
-  const purchaseTypePhrase =
-    purchaseType === 'donation' ? 'Donation' : 'Voucher purchase';
 
   const canSubmit =
     isTermsChecked &&
     name.length > 0 &&
     email.length > 0 &&
     EMAIL_REGEX.test(email);
+
+  const purchaseTypePhrase =
+    purchaseType === 'donation' ? 'Donation' : 'Voucher purchase';
+
+  const disclaimerLanguage = {
+    voucher: `By proceeding with your purchase, you understand that the voucher card 
+              is not redeemable for cash and can only be used at ${sellerName}. All 
+              purchases are final. In the event that the merchant is no longer open 
+              at the time of redemption, Send Chinatown Love Inc. will not be able 
+              to refund your purchase. Balance displayed in the voucher may or may not 
+              represent the final balance. Final balance information is subject to 
+              ${sellerName}'s most recent records.`,
+    donation: `By proceeding with your transaction, you understand that you are
+              making a donation to ${sellerName}. No goods or services were
+              exchanged for this donation.`,
+    donationPool: `By proceeding with your transaction, you understand that 
+                  you are making a donation to all merchants partnered with Send Chinatown Love 
+                  Inc. The full donation pool will be split among these merchants. No goods or 
+                  services were exchanged for this donation`,
+  };
+
   return (
     <div>
       <h2>Complete your {purchaseTypePhrase.toLowerCase()}</h2>
@@ -166,7 +185,6 @@ const SquareModal = ({
                 <li key={`sq-error-${errorMessage}`}>{errorMessage}</li>
               ))}
             </div>
-
             <br />
             <h3>Checkout details</h3>
             <span>
@@ -198,21 +216,13 @@ const SquareModal = ({
                 merchant is onboarded
               </span>
             </CheckboxContainer>
-            {purchaseTypePhrase === 'Donation' ? (
-              <p>
-                By proceeding with your transaction, you understand that you are
-                making a donation to {sellerName}. No goods or services were
-                exchanged for this donation.
-              </p>
-            ) : (
-              <p>
-                By proceeding with your purchase, you understand that the
-                voucher card is not redeemable for cash and can only be used at{' '}
-                {sellerName}. All purchases are final. In the event that the
-                merchant is no longer open at the time of redemption, Send
-                Chinatown Love Inc. will not be able to refund your purchase.
-              </p>
-            )}
+            <p>
+              {purchaseTypePhrase === 'Donation'
+                ? sellerId === 'send-chinatown-love'
+                  ? disclaimerLanguage.donationPool
+                  : disclaimerLanguage.donation
+                : disclaimerLanguage.voucher}
+            </p>
             <ButtonRow>
               <BackButton
                 type="button"
@@ -307,7 +317,9 @@ const BackButton = styled.button`
 `;
 
 const SquareFormContainer = styled.div`
-  h3, span, p {
+  h3,
+  span,
+  p {
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 15px;
   }

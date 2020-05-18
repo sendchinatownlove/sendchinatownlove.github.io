@@ -42,7 +42,7 @@ const ProgressBar = ({
 
   return (
     <ProgressBarContainer>
-      <TargetAmountBar className='progress-bar'>
+      <TargetAmountBar className="progress-bar">
         <CurrentProgressBar
           style={{
             width: `${progressWidth(amountRaised, targetAmount)}%`,
