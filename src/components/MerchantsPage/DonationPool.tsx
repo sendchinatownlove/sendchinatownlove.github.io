@@ -59,7 +59,7 @@ const Container = styled.div`
   margin: 35px 10vw 55px 7vw;
   justify-content: space-between;
   @media (${tabletScreens}) {
-    max-height: 400px;
+    max-height: 500px;
     margin: 0 7vw 55px;
   }
 
