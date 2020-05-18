@@ -12,17 +12,11 @@ import {
   Footer,
   NextButton,
   Divider,
+  Voucher,
+  Bold,
 } from './styles';
 
 interface Props {}
-interface TextProps {
-  bold?: String;
-  color?: String;
-  size?: String;
-  width?: String;
-  align?: String;
-  padding?: String;
-}
 
 const Amount = (props: Props) => {
   const { amount, voucher } = useVoucherState();
@@ -39,18 +33,13 @@ const Amount = (props: Props) => {
           {`< Back`}
         </Text>
       </AmountContainer>
-      <AmountContainer>
-        <Text bold="true" size="24px">
-          Complete Your Purchase
-        </Text>
-      </AmountContainer>
-
+      <Header> Complete Your Purchase</Header>
       <MessageConatiner>
         <Text size="16px" width="50%">
           Voucher balance
         </Text>
         <Text size="16px" width="50%" align="flex-end">
-          ${(voucher.amount /100).toFixed(2)}
+          ${(voucher.amount / 100).toFixed(2)}
         </Text>
       </MessageConatiner>
       <MessageConatiner>
@@ -58,7 +47,7 @@ const Amount = (props: Props) => {
           Redemption Amount
         </Text>
         <Text size="16px" width="50%" align="flex-end">
-          ${(amount/1).toFixed(2)}
+          ${(amount / 1).toFixed(2)}
         </Text>
       </MessageConatiner>
       <Divider />
@@ -67,14 +56,13 @@ const Amount = (props: Props) => {
           Remaining balance
         </Text>
         <Text bold="true" size="24px" width="50%" align="flex-end">
-          ${(voucher.amount/100 - amount).toFixed(2)}
+          ${(voucher.amount / 100 - amount).toFixed(2)}
         </Text>
       </MessageConatiner>
       <VoucherContainer>
-        <Text>
-          {' '}
-          Voucher Code: <b>{voucher.seller_gift_card_id}</b>{' '}
-        </Text>
+        <Voucher>
+          Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>{' '}
+        </Voucher>
       </VoucherContainer>
       <Footer>
         <Text color="#ab192e" bold="true" width="50%" textAlign="center">
@@ -95,6 +83,13 @@ const Container = styled.div`
   color: black;
   display: flex;
   flex-direction: column;
+`;
+const Header = styled.div`
+  text-align: center;
+  width: 100%;
+  margin: 24px auto;
+  font-size: 24px;
+  font-weight: 600;
 `;
 
 const VoucherContainer = styled.div`

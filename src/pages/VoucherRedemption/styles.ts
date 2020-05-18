@@ -27,10 +27,21 @@ const MessageConatiner = styled.div`
   margin-bottom: 12px;
   width: 95%;
 `;
+
+const Voucher = styled.h3`
+  width: 90%;
+  margin: 12px auto;
+  text-align: center;
+`;
+const Bold = styled.span`
+  font-weight: 600;
+  word-wrap: break-word;
+`;
 const Text = styled.div`
-  margin: 0 auto;
   display: flex;
   flex-direction: row;
+  margin: 0 auto;
+  word-wrap: break-word;
   ${(props: TextProps) => props.size && `font-size: ${props.size};`}
   ${(props: TextProps) => props.bold === 'true' && `font-weight: 600;`}
   ${(props: TextProps) => props.color && `color: ${props.color};`}
@@ -38,6 +49,9 @@ const Text = styled.div`
   ${(props: TextProps) => props.align && `justify-content: ${props.align};`}
   ${(props: TextProps) => props.textAlign && `text-align: ${props.textAlign};`}
   ${(props: TextProps) => props.padding === 'true' && `padding-right: 5px;`}
+  span {
+    font-weight: 700;
+  }
 `;
 
 const Footer = styled.div`
@@ -68,4 +82,13 @@ const Divider = styled.div`
   width: 90%;
 `;
 
-export { AmountContainer, MessageConatiner, Text, Footer, NextButton, Divider };
+export {
+  AmountContainer,
+  MessageConatiner,
+  Text,
+  Footer,
+  NextButton,
+  Divider,
+  Voucher,
+  Bold,
+};

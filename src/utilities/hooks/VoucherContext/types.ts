@@ -18,6 +18,10 @@ export type VoucherDetails = {
   recipient_id: number;
   seller_gift_card_id: string;
   updated_at: string;
+  ownerName: string;
+  ownerImage: string;
+  sellerID: string;
+  locations: Array<number | null>;
 };
 export type VoucherState = {
   amount: number;
@@ -30,14 +34,18 @@ export const defaultState: VoucherState = {
   view: 0,
   voucher: {
     amount: 0,
-    created_at: "",
-    expiration: "",
-    gift_card_id: "",
+    created_at: '',
+    expiration: '',
+    gift_card_id: '',
     id: -1,
     item_id: -1,
-    receipt_id: "",
+    receipt_id: '',
     recipient_id: -1,
-    seller_gift_card_id: "",
-    updated_at: ""
+    seller_gift_card_id: '',
+    updated_at: '',
+    ownerName: '',
+    ownerImage: '',
+    sellerID: '',
+    locations: [],
   },
 };
