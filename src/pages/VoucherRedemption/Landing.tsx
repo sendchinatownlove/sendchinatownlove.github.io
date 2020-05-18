@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import StoreBanner from './StoreBanner';
-import { Divider } from './styles';
-import { Logo } from '../../components/Logos';
-import { useVoucherState, useVoucherDispatch } from '../../utilities/hooks/VoucherContext/context';
+import { Divider, Voucher, Bold } from './styles';
+import Logo from '../../components/Logos/image/LogoTextDown.png';
+import {
+  useVoucherState,
+  useVoucherDispatch,
+} from '../../utilities/hooks/VoucherContext/context';
 import { SET_VIEW } from '../../utilities/hooks/VoucherContext/constants';
 
 interface Props {}
@@ -21,26 +23,22 @@ const LandingCard = (props: Props) => {
 
   return (
     <Container>
-      <StoreBanner />
       <CardContainer>
         <SubText>
           Your available balance
           <span>?</span>
         </SubText>
-        <Balance>${(voucher.amount/100).toFixed(2)}</Balance>
-        <Code>
-          Voucher Code: <b>{voucher.seller_gift_card_id}</b>
-        </Code>
+        <Balance>${(voucher.amount / 100).toFixed(2)}</Balance>
+        <Voucher>
+          Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>
+        </Voucher>
         <Divider />
         <Button onClick={setView}>Click to begin redeeming your voucher</Button>
       </CardContainer>
       <br />
-      <Button color="#ab192e">
-        6221 Fort Hamilton Pkwy, Brooklyn, NY 11219
-      </Button>
-      ;
+      <Button color="#ab192e">{voucher.locations[0]}</Button>;
       <FooterContainer>
-        <Logo />
+        <Image src={Logo} />
       </FooterContainer>
     </Container>
   );
@@ -52,7 +50,6 @@ const Container = styled.div`
   width: 100%;
   margin: 0 auto;
 `;
-
 const CardContainer = styled.div`
   width: 90%;
   max-width: 320px;
@@ -64,7 +61,6 @@ const CardContainer = styled.div`
   flex-direction: column;
   border-radius: 15px;
 `;
-
 const SubText = styled.div`
   width: 90%;
   margin: 12px auto;
@@ -78,22 +74,18 @@ const SubText = styled.div`
     margin: 12px;
   }
 `;
-
 const Button = styled(SubText)`
   cursor: pointer;
   ${(props: ButtonProps) => props.color && `color: ${props.color}`}
 `;
-
 const Balance = styled.h1`
   font-weight: 700;
   font-size: 50px;
   margin: 24px auto;
 `;
-
-const Code = styled.h3`
-  margin: 12px auto;
+const Image = styled.img`
+  width: 75px;
 `;
-
 const FooterContainer = styled.div`
   width: 100%;
   margin: 12px auto;

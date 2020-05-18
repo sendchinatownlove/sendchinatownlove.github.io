@@ -1,28 +1,47 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+
 import Landing from './Landing';
 import Amount from './Amount';
 import Confirm from './Confirm';
 import Complete from './Complete';
-import { useVoucherState, useVoucherDispatch } from '../../utilities/hooks/VoucherContext/context';
+import StoreBanner from './StoreBanner';
+import {
+  useVoucherState,
+  useVoucherDispatch,
+} from '../../utilities/hooks/VoucherContext/context';
 import { SET_VOUCHER_INFO } from '../../utilities/hooks/VoucherContext/constants';
 
-import { getVoucher } from '../../utilities/api/interactionManager';
+import { getVoucher, getSeller } from '../../utilities/api/interactionManager';
 
 interface Props {}
 
 const VoucherRedemption = (props: Props) => {
   const { view } = useVoucherState();
   const dispatch = useVoucherDispatch();
+  const params = useLocation();
 
   const fetchData = async () => {
-    const data = await getVoucher("4bf2565e-8b77-478a-9de3-9cc00a89b6da");
-    dispatch({ type: SET_VOUCHER_INFO, payload: data.gift_card_detail});
-  }
+    const {
+      data: { gift_card_detail, seller_id },
+    } = await getVoucher(params.pathname.replace('/voucher/', ''));
+    const merchantData = await getSeller(seller_id);
+
+    const voucher = {
+      ...gift_card_detail,
+      ownerName: merchantData.data.owner_name,
+      ownerImage: merchantData.data.owner_image_url,
+      sellerID: seller_id,
+      locations: merchantData.data.locations,
+    };
+
+    dispatch({ type: SET_VOUCHER_INFO, payload: voucher });
+  };
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, []);
 
   const showView = () => {
     switch (view) {
@@ -36,7 +55,12 @@ const VoucherRedemption = (props: Props) => {
         return <Landing />;
     }
   };
-  return <Container>{showView()}</Container>;
+  return (
+    <Container>
+      <StoreBanner />
+      {showView()}
+    </Container>
+  );
 };
 
 export default VoucherRedemption;
