@@ -9,6 +9,7 @@ import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
 import { LoaderFillerContainer } from '../Loader';
 import DonationPoolBox from './DonationPool';
+import styled from 'styled-components';
 
 interface Props {
   menuOpen: boolean;
@@ -94,20 +95,22 @@ const MerchantsPage = (props: Props) => {
               </div>
             </div>
           </div>
+          
+          <MerchantInfoContainer>
+            <DonationPoolBox />
 
-          <DonationPoolBox />
+            <div className={styles.storeInfoContainer}>
+              <NavBar filterStoreType={filterStoreType} />
 
-          <div className={styles.storeInfoContainer}>
-            <NavBar filterStoreType={filterStoreType} />
-
-            <div className={styles.merchantsContainer}>
-              {filter.map((store: any) =>
-                store!.seller_id !== 'send-chinatown-love' ? (
-                  <MerchantCard key={store!.seller_id} storeInfo={store} />
-                ) : null
-              )}
+              <div className={styles.merchantsContainer}>
+                {filter.map((store: any) =>
+                  store!.seller_id !== 'send-chinatown-love' ? (
+                    <MerchantCard key={store!.seller_id} storeInfo={store} />
+                  ) : null
+                )}
+              </div>
             </div>
-          </div>
+          </MerchantInfoContainer>
         </>
       ) : (
         <LoaderFillerContainer />
@@ -117,3 +120,12 @@ const MerchantsPage = (props: Props) => {
 };
 
 export default MerchantsPage;
+
+const MerchantInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 599px) {
+    flex-direction: column-reverse;
+  }
+`;
