@@ -45,6 +45,11 @@ export const Modal = (props: Props) => {
     { value: '100', text: '$100' },
   ];
 
+  const headerText =
+    props.purchaseType === 'donation'
+      ? t('purchase.donation')
+      : t('purchase.voucher');
+
   return (
     <form
       id="donation-form"
@@ -52,7 +57,9 @@ export const Modal = (props: Props) => {
       data-testid="Modal Amount"
     >
       <div>
-        <h2>{props.sellerName}</h2>
+        <h1>
+          {headerText} {props.sellerName}
+        </h1>
       </div>
 
       <p>{t('paymentProcessing.amount.header')}</p>

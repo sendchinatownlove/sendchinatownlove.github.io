@@ -46,7 +46,6 @@ export const Modal = (props: Props) => {
       <div>
         <h1>{t('buyMeal.header') + props.sellerName}</h1>
       </div>
-
       <p>{t('buyMeal.subheader')}</p>
 
       <div className={styles.illustrationsContainer}>

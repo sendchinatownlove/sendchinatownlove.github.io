@@ -122,7 +122,7 @@ const SquareModal = ({
   const purchaseTypePhrase = (shouldLowerCase) => {
     switch (purchaseType) {
       case 'donation':
-        return shouldLowerCase ? 'donation': 'Donation';
+        return shouldLowerCase ? 'donation' : 'Donation';
       case 'gift_card':
         return shouldLowerCase ? 'voucher purchase' : 'Voucher purchase';
       case 'buy_meal':
