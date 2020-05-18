@@ -19,7 +19,7 @@ body {
 
 h1 {
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 32px;
   line-height: 66px;
   margin: 0;
@@ -165,6 +165,7 @@ h3 {
   width: 40px;
   padding: 0;
   outline: none;
+  z-index: 2;
 }
 
 .closeButton {
@@ -187,7 +188,7 @@ h3 {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 5;
+  z-index: 1;
   padding: 50px;
   width: 725px;
 }
@@ -203,6 +204,9 @@ h3 {
   padding: 10px;
   font-size: 12px;
   outline: none;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
 }
 
 .modalInput {
