@@ -24,7 +24,9 @@ const DonationPoolBox = () => {
       <Container>
         <ColumnContainer>
           <h4>
-            {t('Checked out our merchants but not sure who to donate to first?')}
+            {t(
+              'Checked out our merchants but not sure who to donate to first?'
+            )}
           </h4>
           <span>{t('You can support by donating to our donation pool!')}</span>
           <span>
@@ -87,7 +89,6 @@ const Image = styled.img`
   height: auto;
   object-fit: cover;
   @media (${smallScreens}) {
-    // display: none;
     width: 100%;
   }
 `;

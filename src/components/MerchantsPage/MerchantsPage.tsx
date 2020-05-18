@@ -9,6 +9,7 @@ import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
 import { LoaderFillerContainer } from '../Loader';
 import DonationPoolBox from './DonationPool';
+import { smallScreens } from '../../utilities/general/responsive';
 import styled from 'styled-components';
 
 interface Props {
@@ -95,7 +96,7 @@ const MerchantsPage = (props: Props) => {
               </div>
             </div>
           </div>
-          
+
           <MerchantInfoContainer>
             <DonationPoolBox />
 
@@ -125,7 +126,7 @@ const MerchantInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 599px) {
+  @media (${smallScreens}) {
     flex-direction: column-reverse;
   }
 `;
