@@ -4,7 +4,6 @@ import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentConte
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
-import styles from './styles.module.scss';
 import defaultOwnerImage from './assets/female.svg';
 import { SocialIcon } from 'react-social-icons';
 import {
@@ -13,6 +12,7 @@ import {
   TwitterShareButton,
 } from 'react-share';
 import styled from 'styled-components';
+import styles from './styles.module.scss';
 
 interface Props {
   imageSrc: string;
@@ -25,6 +25,7 @@ interface Props {
   giftCardAmount: number;
   acceptDonations: boolean;
   sellGiftCards: boolean;
+  costPerMeal: number;
   ownerName: string;
   sellerId: string;
   sellerName: string;
@@ -104,6 +105,15 @@ const OwnerPanel = (props: Props) => {
             Voucher
           </button>
         )}
+        {props.costPerMeal !== null && (
+          <button
+            value="buy_meal"
+            className={classnames(styles.button, 'button--redfilled')}
+            onClick={showModal}
+          >
+            Gift a meal
+          </button>
+        )}
       </div>
       {validExtraInfo !== [] ? (
         <div className={styles.extraInfoContainer}>
@@ -145,6 +155,7 @@ const OwnerPanel = (props: Props) => {
         purchaseType={purchaseType}
         sellerId={props.sellerId}
         sellerName={props.sellerName}
+        costPerMeal={props.costPerMeal}
       />
       {
         <div className={styles.socialContainer}>

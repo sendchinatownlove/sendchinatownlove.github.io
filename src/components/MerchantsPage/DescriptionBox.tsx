@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { MerchantCard } from './MerchantCard';
 import merchantIcon from './images/merchantIcon.png';
-import { MerchantCard } from './styles';
 
 const TargetMerchantBox = () => (
   <MerchantCard className="descriptionBox">

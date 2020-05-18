@@ -19,7 +19,7 @@ body {
 
 h1 {
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 32px;
   line-height: 66px;
   margin: 0;
@@ -36,7 +36,7 @@ h2 {
 h3 {
   font-style: normal;
   font-weight: 500;
-  font-size: 22px;
+  font-size: 24px;
   line-height: 24px;
   margin-bottom: 15px;
 }
@@ -56,6 +56,17 @@ h3 {
     color: white;
     background-color: $default-button-color;
     border-color: $default-button-color;
+  }
+
+  &--red-filled {
+    @include base-button;
+    border: 1px solid $standard-red;
+    background-color: $standard-red;
+    width: 250px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    cursor: pointer;
   }
 
   &--filled:hover {
@@ -85,6 +96,13 @@ h3 {
     @include base-button;
     color: $standard-red;
     background-color: white;
+    border-color: $standard-red;
+  }
+
+  &--redfilled {
+    @include base-button;
+    color: white;
+    background-color: $standard-red;
     border-color: $standard-red;
   }
 }
@@ -129,6 +147,15 @@ h3 {
     cursor: pointer;
   }
 
+  &--nonfunctional {
+    @include modal-button;
+    border: 1px solid grey;
+    background-color: grey;
+    color: white;
+    border-radius: 25px;
+    font-weight: bold;
+  }
+
   &--selected {
     @include modal-button;
     color: white;
@@ -160,6 +187,7 @@ h3 {
   width: 40px;
   padding: 0;
   outline: none;
+  z-index: 2;
 }
 
 .closeButton {
@@ -182,7 +210,7 @@ h3 {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 5;
+  z-index: 1;
   padding: 50px;
   width: 725px;
 }
@@ -198,6 +226,9 @@ h3 {
   padding: 10px;
   font-size: 12px;
   outline: none;
+  border-radius: 4px;
+  border-width: 1px;
+  border-style: solid;
 }
 
 .modalInput {

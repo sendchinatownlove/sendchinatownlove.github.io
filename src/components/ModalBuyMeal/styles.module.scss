@@ -4,15 +4,16 @@
 }
 
 .selectAmtContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  margin: 15px 0px;
+  padding-top: 30px;
+  margin: auto;
+}
+
+.separator {
+  margin: 0px 20px 0px 20px;
 }
 
 .customAmt {
-  width: 250px;
+  width: 200px;
 }
 
 .nextBtn {
@@ -26,9 +27,35 @@
   border: 1px solid red;
 }
 
-.errorMessage {
-  color: red;
-  font-size: 13px;
+.total {
+  float: right;
+}
+
+.illustrationsContainer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.illustrationLeading {
+  width: 45%;
+  float: left;
+}
+
+.illustrationTrailing {
+  width: 45%;
+  float: right;
+}
+
+.explantionContainer {
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.explanation {
+  font-size: 14px;
+  width: 45%;
 }
 
 @media only screen and (max-width: 799px) {

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import classnames from 'classnames';
-import styles from './styles.module.scss';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, Theme } from '@material-ui/core/styles';
+
+import styled from 'styled-components';
 
 interface Props {
   amountRaised: number;
@@ -41,10 +41,9 @@ const ProgressBar = ({
   };
 
   return (
-    <div className={styles.progressContainer}>
-      <div className={classnames(styles.targetAmountBar, 'progress-bar')}>
-        <div
-          className={styles.currentRaisedBar}
+    <ProgressBarContainer>
+      <TargetAmountBar className="progress-bar">
+        <CurrentProgressBar
           style={{
             width: `${progressWidth(amountRaised, targetAmount)}%`,
             backgroundColor: progressBarColor,
@@ -52,9 +51,9 @@ const ProgressBar = ({
           }}
         >
           {' '}
-        </div>
-      </div>
-      <div className={styles.contributionInfo}>
+        </CurrentProgressBar>
+      </TargetAmountBar>
+      <ContributionInfoContainer>
         <div>
           ${(Math.floor(amountRaised) / 100).toLocaleString()} of $
           {(Math.floor(targetAmount) / 100).toLocaleString()}
@@ -63,7 +62,7 @@ const ProgressBar = ({
           <SupporterTooltip
             title={
               <React.Fragment>
-                <table>
+                <ToolTipTable>
                   <tbody>
                     <tr>
                       <td>
@@ -82,7 +81,7 @@ const ProgressBar = ({
                       </td>
                     </tr>
                   </tbody>
-                </table>
+                </ToolTipTable>
               </React.Fragment>
             }
             enterTouchDelay={50}
@@ -93,9 +92,35 @@ const ProgressBar = ({
             </div>
           </SupporterTooltip>
         </div>
-      </div>
-    </div>
+      </ContributionInfoContainer>
+    </ProgressBarContainer>
   );
 };
 
 export default ProgressBar;
+
+const ProgressBarContainer = styled.div`
+  width: 100%;
+  padding: 15px 0;
+`;
+
+const TargetAmountBar = styled.div`
+  background-color: #dedede;
+  height: 12px;
+  margin-bottom: 15px;
+`;
+
+const CurrentProgressBar = styled.div`
+  background-color: #dd678a;
+  z-index: 5;
+  height: 12px;
+`;
+
+const ContributionInfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ToolTipTable = styled.table`
+  width: 100%;
+`;

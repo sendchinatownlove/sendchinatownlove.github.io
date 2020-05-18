@@ -28,6 +28,7 @@ export type Buyer = {
   email: string;
   nonce?: string;
   idempotency_key?: string;
+  is_subscribed: boolean;
   // address: string;
   // city: string;
   // stateForm: string;
@@ -71,4 +72,5 @@ export type BrowsePageSeller = {
   founded_year: number;
   website_url: string;
   menu_url: string;
+  cost_per_meal: number;
 };

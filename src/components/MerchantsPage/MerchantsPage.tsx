@@ -8,8 +8,8 @@ import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
 import { LoaderFillerContainer } from '../Loader';
-import DonationPool from './DonationPool';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import DonationPoolBox from './DonationPool';
+// import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 
 interface Props {
   menuOpen: boolean;
@@ -96,17 +96,17 @@ const MerchantsPage = (props: Props) => {
             </div>
           </div>
 
-          <ModalPaymentProvider>
-            <DonationPool />
-          </ModalPaymentProvider>
+          <DonationPoolBox />
 
           <div className={styles.storeInfoContainer}>
             <NavBar filterStoreType={filterStoreType} />
 
             <div className={styles.merchantsContainer}>
-              {filter.map((store: any) => (
-                <MerchantCard key={store!.seller_id} storeInfo={store} />
-              ))}
+              {filter.map((store: any) =>
+                store!.seller_id !== 'send-chinatown-love' ? (
+                  <MerchantCard key={store!.seller_id} storeInfo={store} />
+                ) : null
+              )}
             </div>
           </div>
         </>
