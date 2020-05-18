@@ -7,9 +7,11 @@ import {
   phoneScreens,
   tabletScreens,
 } from '../../utilities/general/responsive';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 const DonationPoolBox = () => {
+  const { t } = useTranslation();
   const dispatch = useModalPaymentDispatch();
 
   const openModal = (e: any) => {
@@ -22,15 +24,15 @@ const DonationPoolBox = () => {
       <Container>
         <ColumnContainer>
           <h4>
-            Checked out our merchants but not sure who to donate to first?
+            {t('Checked out our merchants but not sure who to donate to first?')}
           </h4>
-          <span>You can support by donating to our donation pool!</span>
+          <span>{t('You can support by donating to our donation pool!')}</span>
           <span>
-            All donations will be distributed evenly to our merchants.
+            {t('All donations will be distributed evenly to our merchants.')}
           </span>{' '}
           <br />
           <button className={'button--red-filled'} onClick={openModal}>
-            SUPPORT CHINATOWN
+            {t('SUPPORT CHINATOWN')}
           </button>
           <Modal
             purchaseType={'donation'}

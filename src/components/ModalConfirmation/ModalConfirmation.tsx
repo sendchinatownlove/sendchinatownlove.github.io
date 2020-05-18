@@ -12,16 +12,23 @@ export type Props = {
 
 const ModalConfirmation = (props: Props) => {
   const dispatch = useModalPaymentDispatch();
+  const confirmationText = () => {
+    switch (props.purchaseType) {
+      case 'donation':
+        return `We appreciate your support. We'll let you know when ${props.sellerName} receives your donation!`;
+      case 'gift_card':
+        return `We appreciate your support. We'll email you your voucher when ${props.sellerName} opens back up!`;
+      case 'buy_meal':
+        return `We appreciate your support for ${props.sellerName} and for those in need! Please check your email for your receipt.`;
+      default:
+        return `We appreciate your support. We'll email you your voucher when ${props.sellerName} opens back up!`;
+    }
+  };
 
   return (
     <Container data-testid="Modal Confirmation">
       <h2>Thank you!</h2>
-      <p>
-        We appreciate your support. We'll{' '}
-        {props.purchaseType === 'gift_card'
-          ? `email you your voucher when ${props.sellerName} opens back up!`
-          : `let you know when ${props.sellerName} receives your donation!`}
-      </p>
+      <p>{confirmationText()}</p>
 
       <ThankYouImage src={confirmationPic} alt="Logo" />
 

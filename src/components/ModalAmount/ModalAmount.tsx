@@ -44,15 +44,20 @@ export const Modal = (props: Props) => {
     { value: '100', text: '$100' },
   ];
 
+  const headerText =
+    props.purchaseType === 'donation'
+      ? t('purchase.donation')
+      : t('purchase.voucher');
+
   return (
     <ContentContainer
       id="donation-form"
       className={'modalForm--form'}
       data-testid="Modal Amount"
     >
-      <div>
-        <h2>{props.sellerName}</h2>
-      </div>
+      <h3>
+        {headerText} {props.sellerName}
+      </h3>
 
       <p>{t('paymentProcessing.amount.header')}</p>
 
@@ -154,6 +159,7 @@ const SelectAmtContainer = styled.div`
 
 const CustomAmountInput = styled.input`
   width: 250px;
+  border: 1px solid #e5e5e5;
 
   :invalid {
     border: 1px solid red;

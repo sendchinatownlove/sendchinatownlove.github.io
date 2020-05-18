@@ -26,6 +26,7 @@ type Props = {
   sellerId: string;
   sellerName: string;
   idempotencyKey: string;
+  costPerMeal: number;
 };
 
 type ErrorMessage = {
@@ -38,6 +39,7 @@ const SquareModal = ({
   sellerId,
   sellerName,
   idempotencyKey,
+  costPerMeal,
 }: Props) => {
   const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
@@ -60,13 +62,15 @@ const SquareModal = ({
       return;
     }
 
+    // 'buy_meal' is still respresented as a gift card when calling the API
     const payment: SquarePaymentParams = {
       amount: Number(amount) * 100,
       currency: 'usd',
-      item_type: purchaseType,
+      item_type: purchaseType === 'buy_meal' ? 'gift_card' : purchaseType,
       quantity: 1,
     };
 
+    const is_distribution = purchaseType === 'buy_meal';
     const buyer: Buyer = {
       name,
       email,
@@ -75,7 +79,7 @@ const SquareModal = ({
       is_subscribed: isSubscriptionChecked,
     };
 
-    return makeSquarePayment(nonce, sellerId, payment, buyer)
+    return makeSquarePayment(nonce, sellerId, payment, buyer, is_distribution)
       .then((res) => {
         if (res.status === 200) {
           dispatch({ type: SET_MODAL_VIEW, payload: 2 });
@@ -113,14 +117,29 @@ const SquareModal = ({
     ? process.env.REACT_APP_SQUARE_LOCATION_ID
     : '';
 
+  const purchaseTypePhrase = (shouldLowerCase) => {
+    switch (purchaseType) {
+      case 'donation':
+        return shouldLowerCase ? 'donation' : 'Donation';
+      case 'gift_card':
+        return shouldLowerCase ? 'voucher purchase' : 'Voucher purchase';
+      case 'buy_meal':
+        return 'Gift a Meal purchase';
+      default:
+        return 'Donation';
+    }
+  };
+
+  const numberOfMeals = Number(amount) / costPerMeal;
+  const mealText = numberOfMeals > 1 ? 'meals' : 'meal';
+  const numberOfMealsText =
+    purchaseType === 'buy_meal' ? `(${numberOfMeals} ${mealText})` : '';
+
   const canSubmit =
     isTermsChecked &&
     name.length > 0 &&
     email.length > 0 &&
     EMAIL_REGEX.test(email);
-
-  const purchaseTypePhrase =
-    purchaseType === 'donation' ? 'Donation' : 'Voucher purchase';
 
   const disclaimerLanguage = {
     voucher: `By proceeding with your purchase, you understand that the voucher card 
@@ -141,7 +160,7 @@ const SquareModal = ({
 
   return (
     <div>
-      <h2>Complete your {purchaseTypePhrase.toLowerCase()}</h2>
+      <h3>Complete your {purchaseTypePhrase(true)}</h3>
       <p>Please add your payment information below</p>
 
       <PaymentContainer>
@@ -189,7 +208,11 @@ const SquareModal = ({
             <h3>Checkout details</h3>
             <span>
               {' '}
-              {purchaseTypePhrase} of <b>${amount}</b> to {sellerName}{' '}
+              {purchaseTypePhrase(false)} of{' '}
+              <b>
+                ${amount} {numberOfMealsText}
+              </b>{' '}
+              to {sellerName}{' '}
             </span>
             <p />
             <CheckboxContainer>
@@ -217,7 +240,7 @@ const SquareModal = ({
               </span>
             </CheckboxContainer>
             <p>
-              {purchaseTypePhrase === 'Donation'
+              {purchaseType === 'donation'
                 ? sellerId === 'send-chinatown-love'
                   ? disclaimerLanguage.donationPool
                   : disclaimerLanguage.donation
@@ -248,13 +271,6 @@ const PaymentContainer = styled.div`
 
   div {
     width: 100%;
-  }
-
-  @media (max-width: 450px) {
-    // TODO: FIX THIS. WHY DO I NEED TO DO THIS TO MAKE IT FIT?
-    // IS THE WHOLE APP BEING CUT OFF? FIND OUT PRONTO
-    // CHECKED: IT IS. FIND OUT WHY!
-    margin-bottom: 150px;
   }
 `;
 
@@ -322,5 +338,9 @@ const SquareFormContainer = styled.div`
   p {
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 15px;
+  }
+
+  h3 {
+    font-size: 24px;
   }
 `;

@@ -46,7 +46,6 @@ export const Modal = (props: Props) => {
       <div>
         <h1>{t('buyMeal.header') + props.sellerName}</h1>
       </div>
-
       <p>{t('buyMeal.subheader')}</p>
 
       <div className={styles.illustrationsContainer}>
@@ -82,7 +81,7 @@ export const Modal = (props: Props) => {
             placeholder="# of meals"
             min="1"
           />
-          <span className={styles.separator}>X</span>
+          <span className={styles.separator}>✕</span>
           <button
             type="button"
             className={'modalButton--nonfunctional'}
