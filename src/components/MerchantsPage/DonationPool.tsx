@@ -54,17 +54,28 @@ const Container = styled.div`
   display: flex;
   max-height: 225px;
   object-fit: cover;
-  margin: 35px 10vw 65px 7vw;
+  margin: 35px 10vw 55px 7vw;
   justify-content: space-between;
   @media (${tabletScreens}) {
-    max-height: 250px;
+    max-height: 350px;
+    margin-right: 7vw;
   }
 `;
 
 const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1.25em 2rem 1.5rem;
+  padding: 1rem 2rem 1.5rem;
+
+  @media (${tabletScreens}) {
+    > span {
+      margin: 2.5px;
+    }
+
+    > button {
+      width: 100%;
+    }
+  }
 `;
 
 const Image = styled.img`
