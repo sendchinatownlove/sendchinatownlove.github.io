@@ -6,7 +6,7 @@ import {
   CreditCardCVVInput,
 } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
-import styles from './styles.module.scss';
+import styled from 'styled-components';
 
 type Props = {};
 
@@ -15,19 +15,30 @@ const SquareCardForm = (props: Props) => {
     <fieldset className="sq-fieldset">
       <CreditCardNumberInput />
 
-      <div className={styles.squareCardRow}>
-        <div className={styles.squareCardRowItem}>
+      <SquareCardRow>
+        <SquareCardItem>
           <CreditCardExpirationDateInput />
-        </div>
-        <div className={styles.squareCardRowItem}>
+        </SquareCardItem>
+        <SquareCardItem>
           <CreditCardCVVInput />
-        </div>
-        <div className={styles.squareCardRowItem}>
+        </SquareCardItem>
+        <SquareCardItem>
           <CreditCardPostalCodeInput />
-        </div>
-      </div>
+        </SquareCardItem>
+      </SquareCardRow>
     </fieldset>
   );
 };
 
 export default SquareCardForm;
+
+const SquareCardRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100% !important;
+`;
+
+const SquareCardItem = styled.div`
+  width: 30% !important;
+`;

@@ -8,6 +8,7 @@ import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
 import { LoaderFillerContainer } from '../Loader';
+import DonationPoolBox from './DonationPool';
 
 interface Props {
   menuOpen: boolean;
@@ -93,6 +94,9 @@ const MerchantsPage = (props: Props) => {
               </div>
             </div>
           </div>
+
+          <DonationPoolBox />
+
           <div className={styles.storeInfoContainer}>
             <NavBar filterStoreType={filterStoreType} />
 

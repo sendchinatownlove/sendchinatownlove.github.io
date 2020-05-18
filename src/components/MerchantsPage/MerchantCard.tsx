@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { BrowsePageSeller } from '../../utilities/api';
 import ProgressBar from '../ProgressBar';
 import styled from 'styled-components';
-import styles from './styles.module.scss';
+import { smallScreens } from '../../utilities/general/responsive';
 
 export interface Props {
   storeInfo?: BrowsePageSeller;
 }
 
-const MerchantCard = ({ storeInfo }: Props) => {
+const MerchantCardBox = ({ storeInfo }: Props) => {
   let city = '';
   let state = '';
 
@@ -24,16 +24,12 @@ const MerchantCard = ({ storeInfo }: Props) => {
         to={`/${storeInfo!.seller_id}`}
         style={{ textDecoration: 'none', color: 'black' }}
       >
-        <div className={styles.merchantCard}>
-          <img
-            className={styles.merchantCardLogo}
-            src={storeInfo!.hero_image_url}
-            alt="Logo"
-          />
+        <MerchantCard>
+          <Logo src={storeInfo!.hero_image_url} alt="Logo" />
           <Location>
             {city}, {state}
           </Location>
-          <h3>{storeInfo!.name}</h3>
+          <StoreName>{storeInfo!.name}</StoreName>
           <Summary>{storeInfo!.summary || storeInfo!.story}</Summary>
           {/* TODO: need to update "donation" phrase and the time stamp */}
           {/* <div style={{ color: '#949494' }}>
@@ -50,24 +46,63 @@ const MerchantCard = ({ storeInfo }: Props) => {
             donationAmount={storeInfo!.donation_amount}
             giftCardAmount={storeInfo!.gift_card_amount}
           />
-        </div>
+        </MerchantCard>
       </Link>
     </React.Fragment>
   );
 };
 
-export default MerchantCard;
+export default MerchantCardBox;
 
-const Location = styled.div`
+const Location = styled.h4`
   font-weight: bolder;
-  color: #46accc;
+  color: #1e7c9a;
+  font-size: 15px;
 `;
 
-const Summary = styled.p`
+const Summary = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 75px;
+  height: 61px;
+`;
+
+export const MerchantCard = styled.div`
+    height: 475px;
+    width: 350px;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+    margin: 30px 60px 30px 0;
+    padding: 25px;
+    font-size: 14px;
+    background-color: white;
+    &.descriptionBox {
+        width: 430px;
+        height: 475px;
+        text-align: center;
+    }
+    @media (${smallScreens}) {
+        margin: 30px;
+        width: 85vw;
+        &.descriptionBox {
+            width: 85vw;
+            height: auto;
+    }
+`;
+
+const StoreName = styled.h3`
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  color: #1e1e1e;
+`;
+
+const Logo = styled.img`
+  position: relative;
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 15px;
 `;

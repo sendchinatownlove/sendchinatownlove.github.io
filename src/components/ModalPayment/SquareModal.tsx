@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import classnames from 'classnames';
 import { Checkbox } from '@material-ui/core';
-
 import { SquarePaymentForm } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
-import styles from './styles.module.scss';
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 import { SquareErrors, hasKey } from '../../consts';
@@ -13,7 +10,6 @@ import {
   SquarePaymentParams,
   Buyer,
 } from '../../utilities/api';
-
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
@@ -22,6 +18,8 @@ import {
   EMAIL_REGEX,
   SET_MODAL_VIEW,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
+
+import styled from 'styled-components';
 
 type Props = {
   purchaseType: string;
@@ -142,46 +140,54 @@ const SquareModal = ({
     name.length > 0 &&
     email.length > 0 &&
     EMAIL_REGEX.test(email);
+
+  const disclaimerLanguage = {
+    voucher: `By proceeding with your purchase, you understand that the voucher card 
+              is not redeemable for cash and can only be used at ${sellerName}. All 
+              purchases are final. In the event that the merchant is no longer open 
+              at the time of redemption, Send Chinatown Love Inc. will not be able 
+              to refund your purchase. Balance displayed in the voucher may or may not 
+              represent the final balance. Final balance information is subject to 
+              ${sellerName}'s most recent records.`,
+    donation: `By proceeding with your transaction, you understand that you are
+              making a donation to ${sellerName}. No goods or services were
+              exchanged for this donation.`,
+    donationPool: `By proceeding with your transaction, you understand that 
+                  you are making a donation to all merchants partnered with Send Chinatown Love 
+                  Inc. The full donation pool will be split among these merchants. No goods or 
+                  services were exchanged for this donation`,
+  };
+
   return (
-    <div className={styles.container}>
-      <h2 className={styles.paymentHeader}>
-        Complete your {purchaseTypePhrase(true)}
-      </h2>
+    <div>
+      <h3>Complete your {purchaseTypePhrase(true)}</h3>
       <p>Please add your payment information below</p>
 
-      <div className={styles.paymentContainer}>
+      <PaymentContainer>
         <h3>Payment Information</h3>
-        <div className={styles.inputRow}>
-          <div className={styles.row}>
-            <span className={classnames('fa fa-user', styles.icons)} />
-            <input
-              name="name"
-              type="text"
-              className={classnames(styles.label, 'modalInput--input')}
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              placeholder="Name"
-            />
-          </div>
-          <div className={styles.row}>
-            <span className={classnames('fa fa-envelope', styles.icons)} />
-            <input
-              name="email"
-              type="email"
-              className={classnames(
-                styles.email,
-                'modalInput--input',
-                styles.label
-              )}
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              placeholder="Email"
-              pattern={EMAIL_REGEX.source}
-              required
-            />
-          </div>
-        </div>
-        <div className={styles.sqPaymentForm}>
+        <RowFormat>
+          <LabelText htmlFor="name">Full Name</LabelText>
+          <InputText
+            name="name"
+            type="text"
+            className="modalInput--input"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            placeholder="Name"
+          />
+          <LabelText htmlFor="email">Email</LabelText>
+          <InputText
+            name="email"
+            type="email"
+            className="modalInput--input"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            placeholder="Email"
+            pattern={EMAIL_REGEX.source}
+            required
+          />
+        </RowFormat>
+        <SquareFormContainer>
           <SquarePaymentForm
             sandbox={
               !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
@@ -198,10 +204,9 @@ const SquareModal = ({
                 <li key={`sq-error-${errorMessage}`}>{errorMessage}</li>
               ))}
             </div>
-
             <br />
-            <h3 className={styles.text}>Checkout details</h3>
-            <span className={styles.text}>
+            <h3>Checkout details</h3>
+            <span>
               {' '}
               {purchaseTypePhrase(false)} of{' '}
               <b>
@@ -210,64 +215,132 @@ const SquareModal = ({
               to {sellerName}{' '}
             </span>
             <p />
-            <div>
-              <label className={styles.termsAndConditions}>
-                <Checkbox
-                  value="checkedA"
-                  inputProps={{ 'aria-label': 'Checkbox A' }}
-                  onClick={checkTermsAgreement}
-                  checked={isTermsChecked}
-                />
-                <span>
-                  I agree with the <b>Terms & Conditions</b>
-                </span>
-              </label>
-            </div>
-            <div>
-              <label className={styles.termsAndConditions}>
-                <Checkbox
-                  value="checkedB"
-                  inputProps={{ 'aria-label': 'Checkbox B' }}
-                  onClick={checkSubscriptionAgreement}
-                  checked={isSubscriptionChecked}
-                />
-                <span>
-                  I'd like to receive email updates from Send Chinatown Love,
-                  such as when the merchant receives my donation/purchase or
-                  when a new merchant is onboarded
-                </span>
-              </label>
-            </div>
-            {purchaseType === 'donation' ? (
-              <p className={styles.termsAndConditionsText}>
-                By proceeding with your transaction, you understand that you are
-                making a donation to {sellerName}. No goods or services were
-                exchanged for this donation.
-              </p>
-            ) : (
-              <p className={styles.termsAndConditionsText}>
-                By proceeding with your purchase, you understand that the
-                voucher card is not redeemable for cash and can only be used at{' '}
-                {sellerName}. All purchases are final. In the event that the
-                merchant is no longer open at the time of redemption, Send
-                Chinatown Love Inc. will not be able to refund your purchase.
-              </p>
-            )}
-            <div className={styles.btnRow}>
-              <button
+            <CheckboxContainer>
+              <Checkbox
+                value="checkedA"
+                inputProps={{ 'aria-label': 'Checkbox A' }}
+                onClick={checkTermsAgreement}
+                checked={isTermsChecked}
+              />
+              <span>
+                I agree with the <b>Terms & Conditions</b>
+              </span>
+            </CheckboxContainer>
+            <CheckboxContainer>
+              <Checkbox
+                value="checkedB"
+                inputProps={{ 'aria-label': 'Checkbox B' }}
+                onClick={checkSubscriptionAgreement}
+                checked={isSubscriptionChecked}
+              />
+              <span>
+                I'd like to receive email updates from Send Chinatown Love, such
+                as when the merchant receives my donation/purchase or when a new
+                merchant is onboarded
+              </span>
+            </CheckboxContainer>
+            <p>
+              {purchaseType === 'donation'
+                ? sellerId === 'send-chinatown-love'
+                  ? disclaimerLanguage.donationPool
+                  : disclaimerLanguage.donation
+                : disclaimerLanguage.voucher}
+            </p>
+            <ButtonRow>
+              <BackButton
                 type="button"
-                className={classnames('modalButton--back', styles.backBtn)}
+                className={'modalButton--back'}
                 onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 0 })}
               >
                 ᐸ Back
-              </button>
+              </BackButton>
               <SubmissionButton canSubmit={canSubmit} />
-            </div>
+            </ButtonRow>
           </SquarePaymentForm>
-        </div>
-      </div>
+        </SquareFormContainer>
+      </PaymentContainer>
     </div>
   );
 };
 
 export default SquareModal;
+
+const PaymentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  div {
+    width: 100%;
+  }
+`;
+
+const RowFormat = styled.div`
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+`;
+
+const LabelText = styled.label`
+  color: #373f4a;
+`;
+
+const InputText = styled.input`
+  font-size: 14px;
+  color: #373f4a;
+  border: 1px solid #dedede;
+  margin: 5px 0 15px;
+  padding: 27px 15px;
+  width: 100%;
+  border-radius: 5px;
+
+  ::placeholder {
+    color: #cdcdcd;
+  }
+
+  :invalid {
+    color: #fa755a;
+  }
+`;
+
+const CheckboxContainer = styled.label`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 10px;
+
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
+const ButtonRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-between;
+  margin-bottom: 25px;
+`;
+
+const BackButton = styled.button`
+  width: 75px;
+  font-size: 13px;
+  background-color: white;
+`;
+
+const SquareFormContainer = styled.div`
+  h3,
+  span,
+  p {
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+`;

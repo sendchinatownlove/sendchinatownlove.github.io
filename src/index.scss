@@ -36,7 +36,7 @@ h2 {
 h3 {
   font-style: normal;
   font-weight: 500;
-  font-size: 22px;
+  font-size: 24px;
   line-height: 24px;
   margin-bottom: 15px;
 }
@@ -56,6 +56,17 @@ h3 {
     color: white;
     background-color: $default-button-color;
     border-color: $default-button-color;
+  }
+
+  &--red-filled {
+    @include base-button;
+    border: 1px solid $standard-red;
+    background-color: $standard-red;
+    width: 250px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    cursor: pointer;
   }
 
   &--filled:hover {
@@ -127,7 +138,7 @@ h3 {
 
   &--nonfunctional {
     @include modal-button;
-    border: 1px solid #grey;
+    border: 1px solid grey;
     background-color: grey;
     color: white;
     border-radius: 25px;

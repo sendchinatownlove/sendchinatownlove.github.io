@@ -1,7 +1,5 @@
 import React from 'react';
-import classnames from 'classnames';
 import { v4 as uuid } from 'uuid';
-import styles from './styles.module.scss';
 import ModalAmount from '../ModalAmount';
 import ModalBuyMeal from '../ModalBuyMeal';
 import { SquareModal } from '../ModalPayment';
@@ -11,6 +9,8 @@ import {
   useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext/context';
 import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { phoneScreens, tabletScreens } from '../../utilities/general/responsive';
+import styled from 'styled-components';
 
 export interface Props {
   purchaseType: string;
@@ -31,9 +31,9 @@ export const Modal = (props: Props) => {
   };
 
   return (
-    <div
+    <DonationsContainer
       id="donation-form"
-      className={classnames(styles.donationsContainer, 'modalForm--form')}
+      className={'modalForm--form'}
       style={{ display: modalView > -1 ? 'block' : 'none' }}
     >
       <button className={'closeButton--close'} onClick={closeModal}>
@@ -49,8 +49,27 @@ export const Modal = (props: Props) => {
         <SquareModal {...props} idempotencyKey={idempotencyKey} />
       )}
       {modalView === 2 && <ModalConfirmation {...props} />}
-    </div>
+    </DonationsContainer>
   );
 };
 
 export default Modal;
+
+export const DonationsContainer = styled.div`
+  height: 80%;
+  overflow-y: scroll;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+
+  @media only screen and (${tabletScreens}) {
+    width: 85%;
+    height: 75vh;
+    overflow-y: scroll;
+  }
+
+  @media only screen and (${phoneScreens}) {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+`;
