@@ -27,6 +27,7 @@
   @include for-phone-only {
     grid-template-columns: 1fr;
     justify-content: center;
+    grid-gap: 10px;
   }
 }
 
@@ -110,6 +111,7 @@
     grid-row: 1;
     grid-column: 1;
     text-align: left;
+    margin: 0 3vw;
   }
 }
 
@@ -135,6 +137,7 @@
   @include for-phone-only {
     grid-row: 3;
     grid-column: 1;
+    margin: 0 3vw;
   }
 }
 
