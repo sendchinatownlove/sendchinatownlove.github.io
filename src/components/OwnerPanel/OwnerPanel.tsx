@@ -68,7 +68,16 @@ const OwnerPanel = ({ seller }: Props) => {
 
       <h2 className={styles.ownerName}>{seller.owner_name}</h2>
       {seller.target_amount && (
-        <ProgressBar />
+        <ProgressBar
+          amountRaised={seller.amount_raised}
+          targetAmount={seller.target_amount}
+          progressBarColor={seller.progress_bar_color}
+          numContributions={seller.num_contributions}
+          numDonations={seller.num_donations}
+          numGiftCards={seller.num_gift_cards}
+          donationAmount={seller.donation_amount}
+          giftCardAmount={seller.gift_card_amount}
+        />
       )}
 
       <div className={styles.buttonContainer}>
