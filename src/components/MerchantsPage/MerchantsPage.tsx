@@ -125,7 +125,7 @@ export default MerchantsPage;
 const MerchantInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 1250px;
+  max-width: 1300px;
   margin: 0 auto;
 
   @media (${smallScreens}) {

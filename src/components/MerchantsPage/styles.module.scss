@@ -2,7 +2,7 @@
 
 .container {
   background-color: white;
-  max-width: 1250px;
+  max-width: 1300px;
   margin: 0 auto;
   font-size: 14px;
 
@@ -21,34 +21,18 @@
 
 .merchantsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 350px);
-  grid-gap: 50px;
+  grid-template-columns: repeat(auto-fit, 350px);
+  grid-gap: 5.75%;
+
+  @media (max-width: 1300px) {
+    grid-gap: 5%;
+  }
 
   @include for-phone-only {
     grid-template-columns: 1fr;
     justify-content: center;
     grid-gap: 10px;
   }
-}
-
-.merchantCard {
-  height: 475px;
-  width: 350px;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
-  margin: 30px 60px 30px 0;
-  padding: 25px;
-  font-size: 14px;
-  background-color: white;
-
-  @include for-phone-only {
-    margin: 30px;
-  }
-}
-
-.merchantCardLogo {
-  position: relative;
-  width: 100%;
-  margin: 0 0 15px 0;
 }
 
 .overlayContainer {
@@ -138,12 +122,5 @@
     grid-row: 3;
     grid-column: 1;
     margin: 0 3vw;
-  }
-}
-
-@media only screen and (max-width: 450px) {
-  .merchantCard {
-    width: 90vw;
-    overflow: hidden;
   }
 }
