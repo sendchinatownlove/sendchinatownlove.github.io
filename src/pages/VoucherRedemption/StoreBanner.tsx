@@ -30,7 +30,7 @@ const StoreBanner = (props: Props) => {
 export default StoreBanner;
 
 const Container = styled.div`
-  width: ${(props: ContainerProps) => (props.isOnLandingPage ? '100%' : '95%')};
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: ${(props: ContainerProps) =>
@@ -38,6 +38,8 @@ const Container = styled.div`
   margin: ${(props: ContainerProps) => (props.isOnLandingPage ? '24px' : '0')}
     auto;
   ${(props: ContainerProps) => props.isOnLandingPage && 'height: 100px;'}
+  ${(props: ContainerProps) => !props.isOnLandingPage && 'border-bottom: 1px solid #f7f7f7;'}
+  ${(props: ContainerProps) => !props.isOnLandingPage && 'padding: 10px 2.5%;'}
   color: black;
   text-align: center;
 `;
