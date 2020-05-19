@@ -125,8 +125,11 @@ export default MerchantsPage;
 const MerchantInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 1250px;
+  margin: 0 auto;
 
   @media (${smallScreens}) {
     flex-direction: column-reverse;
   }
 `;
+

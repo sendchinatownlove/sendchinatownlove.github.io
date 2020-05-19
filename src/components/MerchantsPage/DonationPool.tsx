@@ -57,15 +57,16 @@ const Container = styled.div`
   display: flex;
   max-height: 225px;
   object-fit: cover;
-  margin: 35px 10vw 55px 7vw;
+  margin: 35px 3vw 55px;
   justify-content: space-between;
+  with: 100%;
   @media (${tabletScreens}) {
     max-height: 550px;
-    margin: 0 7vw 55px;
   }
 
   @media (${smallScreens}) {
     flex-direction: column-reverse;
+    margin-top: 0;
   }
 `;
 
