@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Hero from './images/hero.png';
+import Hero from './images/skyline-hero.png';
 import Modal from '../Modal';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
@@ -24,7 +24,9 @@ const DonationPoolBox = () => {
       <Container>
         <ColumnContainer>
           <h4>
-            {t('Checked out our merchants but not sure who to donate to first?')}
+            {t(
+              'Checked out our merchants but not sure who to donate to first?'
+            )}
           </h4>
           <span>{t('You can support by donating to our donation pool!')}</span>
           <span>
@@ -34,15 +36,16 @@ const DonationPoolBox = () => {
           <button className={'button--red-filled'} onClick={openModal}>
             {t('SUPPORT CHINATOWN')}
           </button>
-          <Modal
-            purchaseType={'donation'}
-            sellerId={'send-chinatown-love'}
-            sellerName={'Send Chinatown Love Fund'}
-            costPerMeal={0}
-          />
         </ColumnContainer>
         <Image src={Hero} alt="banner" />
       </Container>
+
+      <Modal
+        purchaseType={'donation'}
+        sellerId={'send-chinatown-love'}
+        sellerName={'Send Chinatown Love Fund'}
+        costPerMeal={0}
+      />
     </div>
   );
 };
@@ -57,8 +60,12 @@ const Container = styled.div`
   margin: 35px 10vw 55px 7vw;
   justify-content: space-between;
   @media (${tabletScreens}) {
-    max-height: 350px;
-    margin-right: 7vw;
+    max-height: 550px;
+    margin: 0 7vw 55px;
+  }
+
+  @media (${smallScreens}) {
+    flex-direction: column-reverse;
   }
 `;
 
@@ -83,6 +90,6 @@ const Image = styled.img`
   height: auto;
   object-fit: cover;
   @media (${smallScreens}) {
-    display: none;
+    width: 100%;
   }
 `;

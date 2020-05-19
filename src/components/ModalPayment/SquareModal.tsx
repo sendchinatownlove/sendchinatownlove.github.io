@@ -140,23 +140,32 @@ const SquareModal = ({
     name.length > 0 &&
     email.length > 0 &&
     EMAIL_REGEX.test(email);
+  
+  const disclaimerLanguage = (type: any) => {
+    if (sellerId === 'send-chinatown-love') type = 'donation-pool';
 
-  const disclaimerLanguage = {
-    voucher: `By proceeding with your purchase, you understand that the voucher card 
-              is not redeemable for cash and can only be used at ${sellerName}. All 
-              purchases are final. In the event that the merchant is no longer open 
-              at the time of redemption, Send Chinatown Love Inc. will not be able 
-              to refund your purchase. Balance displayed in the voucher may or may not 
-              represent the final balance. Final balance information is subject to 
-              ${sellerName}'s most recent records.`,
-    donation: `By proceeding with your transaction, you understand that you are
-              making a donation to ${sellerName}. No goods or services were
-              exchanged for this donation.`,
-    donationPool: `By proceeding with your transaction, you understand that 
-                  you are making a donation to all merchants partnered with Send Chinatown Love 
-                  Inc. The full donation pool will be split among these merchants. No goods or 
-                  services were exchanged for this donation`,
-  };
+    switch(type) {
+      case 'donation':
+        return `By proceeding with your transaction, you understand that you are
+        making a donation to ${sellerName}. No goods or services were
+        exchanged for this donation.`
+      case 'donation-pool':
+        return `By proceeding with your transaction, you understand that 
+        you are making a donation to all merchants partnered with Send Chinatown Love 
+        Inc. The full donation pool will be split among these merchants. No goods or 
+        services were exchanged for this donation`
+      case 'gift_card':
+        return `By proceeding with your purchase, you understand that the voucher card 
+        is not redeemable for cash and can only be used at ${sellerName}. All 
+        purchases are final. In the event that the merchant is no longer open 
+        at the time of redemption, Send Chinatown Love Inc. will not be able 
+        to refund your purchase. Balance displayed in the voucher may or may not 
+        represent the final balance. Final balance information is subject to 
+        ${sellerName}'s most recent records.`
+      default: 
+        break;
+    }
+  }
 
   return (
     <div>
@@ -240,11 +249,9 @@ const SquareModal = ({
               </span>
             </CheckboxContainer>
             <p>
-              {purchaseType === 'donation'
-                ? sellerId === 'send-chinatown-love'
-                  ? disclaimerLanguage.donationPool
-                  : disclaimerLanguage.donation
-                : disclaimerLanguage.voucher}
+              {
+                disclaimerLanguage(purchaseType)
+              }
             </p>
             <ButtonRow>
               <BackButton

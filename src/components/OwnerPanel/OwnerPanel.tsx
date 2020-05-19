@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import classnames from 'classnames';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { BrowsePageSeller } from '../../utilities/api/types';
 import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
@@ -15,22 +16,7 @@ import styled from 'styled-components';
 import styles from './styles.module.scss';
 
 interface Props {
-  imageSrc: string;
-  amountRaised: number;
-  targetAmount: number;
-  numContributions: number;
-  numDonations: number;
-  numGiftCards: number;
-  donationAmount: number;
-  giftCardAmount: number;
-  acceptDonations: boolean;
-  sellGiftCards: boolean;
-  costPerMeal: number;
-  ownerName: string;
-  sellerId: string;
-  sellerName: string;
-  progressBarColor: string;
-  extraInfo: { [prop: string]: any };
+  seller: BrowsePageSeller;
 }
 
 interface State {
@@ -40,7 +26,7 @@ interface State {
 
 const ModalBox: any = Modal;
 
-const OwnerPanel = (props: Props) => {
+const OwnerPanel = ( { seller }: Props) => {
   const dispatch = useModalPaymentDispatch();
   const [purchaseType, setPurchaseType] = useState('');
 
@@ -49,12 +35,20 @@ const OwnerPanel = (props: Props) => {
     setPurchaseType(event.target.value);
   };
 
-  const validExtraInfo = Object.keys(props.extraInfo).filter((current) => {
-    return props.extraInfo[current] != null;
+  const extraInfo  = {
+    Type: seller.business_type,
+    Employees: seller.num_employees,
+    Founded: seller.founded_year,
+    Website: seller.website_url,
+    Menu: seller.menu_url,
+  };
+
+  const validExtraInfo = Object.keys(extraInfo).filter((current) => {
+    return extraInfo[current] != null;
   });
 
   const location = window.location.href;
-  const facebookQuote = 'Help raise money for ' + props.sellerName;
+  const facebookQuote = 'Help raise money for ' + seller?.name;
   const socialIconBackgroundColor = '#a9182e';
   const socialIconDimensions = { height: 50, width: 50 };
 
@@ -64,30 +58,30 @@ const OwnerPanel = (props: Props) => {
         <img
           className={styles.ownerImage}
           src={
-            props.imageSrc
-              ? process.env.REACT_APP_BASE_URL + props.imageSrc
+            seller?.owner_image_url
+              ? process.env.REACT_APP_BASE_URL + seller?.owner_image_url
               : defaultOwnerImage
           }
-          alt={props.ownerName}
+          alt={seller.name}
         />
       </figure>
 
-      <h2 className={styles.ownerName}>{props.ownerName}</h2>
-      {props.targetAmount && (
+      <h2 className={styles.ownerName}>{seller.name}</h2>
+      {seller.target_amount && (
         <ProgressBar
-          amountRaised={props.amountRaised}
-          targetAmount={props.targetAmount}
-          progressBarColor={props.progressBarColor}
-          numContributions={props.numContributions}
-          numDonations={props.numDonations}
-          numGiftCards={props.numGiftCards}
-          donationAmount={props.donationAmount}
-          giftCardAmount={props.giftCardAmount}
+          amountRaised={seller.amount_raised}
+          targetAmount={seller.target_amount}
+          progressBarColor={seller.progress_bar_color}
+          numContributions={seller.num_contributions}
+          numDonations={seller.num_donations}
+          numGiftCards={seller.num_gift_cards}
+          donationAmount={seller.donation_amount}
+          giftCardAmount={seller.gift_card_amount}
         />
       )}
 
       <div className={styles.buttonContainer}>
-        {props.acceptDonations && (
+        {seller.accept_donations && (
           <button
             value="donation"
             className={classnames(styles.button, 'button--filled')}
@@ -96,7 +90,7 @@ const OwnerPanel = (props: Props) => {
             Donation
           </button>
         )}
-        {props.sellGiftCards && (
+        {seller.sell_gift_cards && (
           <button
             value="gift_card"
             className={classnames(styles.button, 'button--outlined')}
@@ -105,7 +99,7 @@ const OwnerPanel = (props: Props) => {
             Voucher
           </button>
         )}
-        {props.costPerMeal !== null && (
+        {seller.cost_per_meal !== null && (
           <button
             value="buy_meal"
             className={classnames(styles.button, 'button--redfilled')}
@@ -125,7 +119,7 @@ const OwnerPanel = (props: Props) => {
                     {`${current}: `}
                     <a
                       className={styles.extraInfoValue}
-                      href={`http://${props.extraInfo[current]}`}
+                      href={`http://${extraInfo[current]}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -140,7 +134,7 @@ const OwnerPanel = (props: Props) => {
                   <p key={current} className={styles.extraInfoKey}>
                     {`${current}: `}
                     <span className={styles.extraInfoValue}>
-                      {props.extraInfo[current]}
+                      {extraInfo[current]}
                     </span>
                   </p>
                 </React.Fragment>
@@ -153,9 +147,9 @@ const OwnerPanel = (props: Props) => {
 
       <ModalBox
         purchaseType={purchaseType}
-        sellerId={props.sellerId}
-        sellerName={props.sellerName}
-        costPerMeal={props.costPerMeal}
+        sellerId={seller.seller_id}
+        sellerName={seller.name}
+        costPerMeal={seller.cost_per_meal}
       />
       {
         <div className={styles.socialContainer}>

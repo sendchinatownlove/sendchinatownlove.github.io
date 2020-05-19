@@ -9,7 +9,8 @@ import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
 import { LoaderFillerContainer } from '../Loader';
 import DonationPoolBox from './DonationPool';
-// import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import { smallScreens } from '../../utilities/general/responsive';
+import styled from 'styled-components';
 
 interface Props {
   menuOpen: boolean;
@@ -33,6 +34,8 @@ const MerchantsPage = (props: Props) => {
       },
       [0, 0]
     );
+
+    console.log('HEY', data);
 
     setSellers(data);
     setFilter(data);
@@ -96,19 +99,21 @@ const MerchantsPage = (props: Props) => {
             </div>
           </div>
 
-          <DonationPoolBox />
+          <MerchantInfoContainer>
+            <DonationPoolBox />
 
-          <div className={styles.storeInfoContainer}>
-            <NavBar filterStoreType={filterStoreType} />
+            <div className={styles.storeInfoContainer}>
+              <NavBar filterStoreType={filterStoreType} />
 
-            <div className={styles.merchantsContainer}>
-              {filter.map((store: any) =>
-                store!.seller_id !== 'send-chinatown-love' ? (
-                  <MerchantCard key={store!.seller_id} storeInfo={store} />
-                ) : null
-              )}
+              <div className={styles.merchantsContainer}>
+                {filter.map((store: any) =>
+                  store!.seller_id !== 'send-chinatown-love' ? (
+                    <MerchantCard key={store!.seller_id} storeInfo={store} />
+                  ) : null
+                )}
+              </div>
             </div>
-          </div>
+          </MerchantInfoContainer>
         </>
       ) : (
         <LoaderFillerContainer />
@@ -118,3 +123,12 @@ const MerchantsPage = (props: Props) => {
 };
 
 export default MerchantsPage;
+
+const MerchantInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (${smallScreens}) {
+    flex-direction: column-reverse;
+  }
+`;

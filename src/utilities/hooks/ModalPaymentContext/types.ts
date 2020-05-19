@@ -9,9 +9,7 @@
  *
  */
 
-import {
-  BrowsePageSeller, 
-} from '../../api/types';
+import { BrowsePageSeller } from '../../api/types';
 
 export type ModalPaymentState = {
   amount: string;
@@ -44,11 +42,11 @@ export const defaultState: ModalPaymentState = {
     owner_name: '',
     owner_image_url: '',
     hero_image_url: '',
-    business_type: '', 
+    business_type: '',
     num_employees: 0,
     founded_year: 0,
     website_url: '',
     menu_url: '',
     cost_per_meal: 0,
-  }
+  },
 };

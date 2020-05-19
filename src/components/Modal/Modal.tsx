@@ -9,7 +9,10 @@ import {
   useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext/context';
 import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
-import { phoneScreens, tabletScreens } from '../../utilities/general/responsive';
+import {
+  phoneScreens,
+  tabletScreens,
+} from '../../utilities/general/responsive';
 import styled from 'styled-components';
 
 export interface Props {
