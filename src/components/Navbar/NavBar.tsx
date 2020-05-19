@@ -78,6 +78,12 @@ const NavBar = (props: Props) => {
         <ReactNavLink to="/merchants" compact={hamburgerOpen.toString()}>
           {t('navBar.header.merchants')}
         </ReactNavLink>
+        <NavLink
+          compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/resource-center.html"
+          i18nText="RESOURCES"
+          altText="RESOURCES"
+        />
       </NavLinksContainer>
     );
   };
@@ -98,6 +104,12 @@ const NavBar = (props: Props) => {
           <ReactNavLink to="/merchants" compact={hamburgerOpen.toString()}>
             {t('navBar.header.merchants')}
           </ReactNavLink>
+          <NavLink
+            compact={hamburgerOpen.toString()}
+            href="https://www.sendchinatownlove.com/resource-center.html"
+            i18nText="RESOURCES"
+            altText="RESOURCES"
+          />
           <LanguageContainer>
             <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
               ENG
@@ -105,7 +117,7 @@ const NavBar = (props: Props) => {
             <span>|</span>
             <LanguageButton onClick={(e) => changeLanguage(e, 'cn')}>
               中文
-            </LanguageButton>
+            </LanguageButton>            
           </LanguageContainer>
         </NavLinksContainer>
       )}
