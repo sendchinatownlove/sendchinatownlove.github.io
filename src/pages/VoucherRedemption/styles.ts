@@ -9,6 +9,9 @@ interface TextProps {
   textAlign?: String;
   padding?: String;
 }
+interface ContainerProps {
+  height?: string;
+}
 
 const AmountContainer = styled.div`
   width: 95%;
@@ -55,6 +58,7 @@ const Text = styled.div`
 `;
 
 const Footer = styled.div`
+  ${(props: ContainerProps) => props.height && `height: ${props.height};`}
   background: #f7f7f7;
   display: flex;
   flex-direction: column;

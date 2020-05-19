@@ -16,17 +16,9 @@ const Amount = (props: Props) => {
   };
 
   return (
-    <Footer>
+    <Footer height="90vh">
       <AmountContainer>
-        <Text width="100%" align="flex-start" onClick={(e) => setView(2)}>
-          {`< Back`}
-        </Text>
-      </AmountContainer>
-      <AmountContainer>
-        <Text bold="true" size="24px">
-          {' '}
-          Redemption Complete{' '}
-        </Text>
+        <Text bold="true" size="24px">Redemption Complete</Text>
       </AmountContainer>
       <AmountContainer>
         <Text bold="true" size="24px">
@@ -35,7 +27,7 @@ const Amount = (props: Props) => {
         <Text size="16px">Remaining voucher balance</Text>
       </AmountContainer>
       <br />
-      <Text size="24px" bold="true" width="80%" textAlign="center">
+      <Text size="24px" bold="true" width="80%" align="center">
         Thank you for dining at {voucher.ownerName}!
       </Text>
       <br />
