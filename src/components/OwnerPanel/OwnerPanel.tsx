@@ -4,7 +4,6 @@ import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentConte
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
-import styles from './styles.module.scss';
 import defaultOwnerImage from './assets/female.svg';
 import { SocialIcon } from 'react-social-icons';
 import {
@@ -13,6 +12,7 @@ import {
   TwitterShareButton,
 } from 'react-share';
 import styled from 'styled-components';
+import styles from './styles.module.scss';
 
 interface Props {
   imageSrc: string;

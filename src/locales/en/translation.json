@@ -3,7 +3,7 @@
     "amount": {
       "header": "Please select an amount or enter a custom amount",
       "label1": "Select an amount",
-      "label2": "Or enter an amount",
+      "label2": "Or enter any amount",
       "minimum": "Minimum",
       "maximum": "Maximum",
       "amount": "amount",
@@ -17,6 +17,10 @@
     "explanationFirst": "By gifting a meal, your donation will still go directly to the merchant.",
     "explanationSecond": "Our partners will then distribute vouchers with those who can benefit the most from a free meal.",
     "totalLabel": "Total: "
+  },
+  "purchase": {
+    "donation": "Donation for ",
+    "voucher": "Voucher for "
   },
   "navBar": {
     "header": {

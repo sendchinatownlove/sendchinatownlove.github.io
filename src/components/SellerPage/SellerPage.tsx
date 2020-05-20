@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import ErrorPage from '../404Page';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
@@ -45,33 +44,33 @@ const SellerPage = (props: Props) => {
             hero_image_url: seller.hero_image_url,
           }}
         />
-        <ModalPaymentProvider>
-          <OwnerPanel
-            acceptDonations={seller.accept_donations}
-            sellGiftCards={seller.sell_gift_cards}
-            costPerMeal={seller.cost_per_meal}
-            amountRaised={seller.amount_raised}
-            targetAmount={seller.target_amount}
-            numContributions={seller.num_contributions}
-            numDonations={seller.num_donations}
-            numGiftCards={seller.num_gift_cards}
-            donationAmount={seller.donation_amount}
-            giftCardAmount={seller.gift_card_amount}
-            ownerName={seller.owner_name}
-            imageSrc={seller.owner_image_url}
-            sellerName={seller.name}
-            progressBarColor={seller.progress_bar_color}
-            extraInfo={{
-              Type: seller.business_type,
-              Employees: seller.num_employees,
-              Founded: seller.founded_year,
-              Website: seller.website_url,
-              Menu: seller.menu_url,
-            }}
-            // TODO(jtmckibb): Should not crash here
-            sellerId={id!}
-          />
-        </ModalPaymentProvider>
+        {/* <ModalPaymentProvider> */}
+        <OwnerPanel
+          acceptDonations={seller.accept_donations}
+          sellGiftCards={seller.sell_gift_cards}
+          costPerMeal={seller.cost_per_meal}
+          amountRaised={seller.amount_raised}
+          targetAmount={seller.target_amount}
+          numContributions={seller.num_contributions}
+          numDonations={seller.num_donations}
+          numGiftCards={seller.num_gift_cards}
+          donationAmount={seller.donation_amount}
+          giftCardAmount={seller.gift_card_amount}
+          ownerName={seller.owner_name}
+          imageSrc={seller.owner_image_url}
+          sellerName={seller.name}
+          progressBarColor={seller.progress_bar_color}
+          extraInfo={{
+            Type: seller.business_type,
+            Employees: seller.num_employees,
+            Founded: seller.founded_year,
+            Website: seller.website_url,
+            Menu: seller.menu_url,
+          }}
+          // TODO(jtmckibb): Should not crash here
+          sellerId={id!}
+        />
+        {/* </ModalPaymentProvider> */}
       </ContentContainer>
     </Container>
   ) : (

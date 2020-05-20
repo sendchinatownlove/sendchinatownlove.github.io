@@ -128,9 +128,8 @@ const HeaderContainer = styled.header`
   max-width: 1280px;
   margin: 15px auto;
   align-items: center;
-  font-family: futura;
   font-size: 14px;
-  font-family: Open Sans;
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
 `;
 const NavLinksContainer = styled.div`
   display: flex;
