@@ -52,7 +52,6 @@ export const Modal = (props: Props) => {
   return (
     <ContentContainer
       id="donation-form"
-      className={'modalForm--form'}
       data-testid="Modal Amount"
     >
       <h3>

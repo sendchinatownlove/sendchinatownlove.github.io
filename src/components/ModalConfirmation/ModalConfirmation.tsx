@@ -25,7 +25,7 @@ const ModalConfirmation = (props: Props) => {
       case 'buy_meal':
         return `We appreciate your support for ${props.sellerName} and for those in need! Please check your email for your receipt.`;
       default:
-        break;
+        return `Thank you for your support.`;
     }
   };
 
