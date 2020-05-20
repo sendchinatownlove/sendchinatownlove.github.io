@@ -140,6 +140,7 @@ const MerchantInfoContainer = styled.div`
 
 const FlyerContainer = styled.div`
   margin: 3vw 7vw;
+  font-weight: bold;
   
   a {
     color: #a7182d;
