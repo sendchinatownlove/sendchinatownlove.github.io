@@ -178,7 +178,8 @@ const NavLinkStyle = styled.a`
     width: 100%;
     margin: 16px auto;
     text-align: center;
-  `} :link {
+  `}
+  :link {
     color: black;
   }
   :hover {
@@ -221,7 +222,7 @@ const LanguageButton = styled.div`
 const ReactNavLink = styled(Link)`
   text-decoration: none;
   color: black;
-  transition: 0.2s;
+  transition: 0.1s;
   ${(props: CompactProps) =>
     props.compact === 'true' &&
     `
@@ -229,7 +230,6 @@ const ReactNavLink = styled(Link)`
     margin: 16px auto;
     text-align: center;
   `}
-  transition: 0.1s;
   :link {
     color: black;
   }
