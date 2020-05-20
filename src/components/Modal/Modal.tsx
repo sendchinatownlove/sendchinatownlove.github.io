@@ -59,7 +59,7 @@ export const Modal = (props: Props) => {
 export default Modal;
 
 export const DonationsContainer = styled.div`
-  height: 80%;
+  height: 50%;
   overflow-y: scroll;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
   z-index: 10;

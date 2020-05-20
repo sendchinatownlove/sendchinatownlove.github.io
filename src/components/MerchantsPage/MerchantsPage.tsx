@@ -7,6 +7,7 @@ import DescriptionBox from './DescriptionBox';
 import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
+import sclFlyerEnglish from './images/scl-flyer-english.png'
 import { LoaderFillerContainer } from '../Loader';
 import DonationPoolBox from './DonationPool';
 import { smallScreens } from '../../utilities/general/responsive';
@@ -112,6 +113,12 @@ const MerchantsPage = (props: Props) => {
               </div>
             </div>
           </MerchantInfoContainer>
+
+          <FlyerContainer>
+            <p>
+              Know of any business owners that fit our target merchant? <a download href={sclFlyerEnglish}>Download our flyer to share with them.</a>
+            </p>
+          </FlyerContainer>
         </>
       ) : (
         <LoaderFillerContainer />
@@ -128,5 +135,20 @@ const MerchantInfoContainer = styled.div`
 
   @media (${smallScreens}) {
     flex-direction: column-reverse;
+  }
+`;
+
+const FlyerContainer = styled.div`
+  margin: 3vw 7vw;
+  font-weight: bold;
+  
+  a {
+    color: #a7182d;
+    text-decoration: none;
+
+    :hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 `;
