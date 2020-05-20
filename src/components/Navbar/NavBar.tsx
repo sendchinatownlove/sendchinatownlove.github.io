@@ -78,6 +78,12 @@ const NavBar = (props: Props) => {
         <ReactNavLink to="/merchants" compact={hamburgerOpen.toString()}>
           {t('navBar.header.merchants')}
         </ReactNavLink>
+        <NavLink
+          compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/resource-center.html"
+          i18nText="RESOURCES"
+          altText="RESOURCES"
+        />
       </NavLinksContainer>
     );
   };
@@ -98,6 +104,12 @@ const NavBar = (props: Props) => {
           <ReactNavLink to="/merchants" compact={hamburgerOpen.toString()}>
             {t('navBar.header.merchants')}
           </ReactNavLink>
+          <NavLink
+            compact={hamburgerOpen.toString()}
+            href="https://www.sendchinatownlove.com/resource-center.html"
+            i18nText="RESOURCES"
+            altText="RESOURCES"
+          />
           <LanguageContainer>
             <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
               ENG
@@ -166,7 +178,8 @@ const NavLinkStyle = styled.a`
     width: 100%;
     margin: 16px auto;
     text-align: center;
-  `} :link {
+  `}
+  :link {
     color: black;
   }
   :hover {
@@ -209,7 +222,7 @@ const LanguageButton = styled.div`
 const ReactNavLink = styled(Link)`
   text-decoration: none;
   color: black;
-  transition: 0.2s;
+  transition: 0.1s;
   ${(props: CompactProps) =>
     props.compact === 'true' &&
     `
@@ -217,7 +230,6 @@ const ReactNavLink = styled(Link)`
     margin: 16px auto;
     text-align: center;
   `}
-  transition: 0.1s;
   :link {
     color: black;
   }
