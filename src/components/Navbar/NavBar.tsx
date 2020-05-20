@@ -117,7 +117,7 @@ const NavBar = (props: Props) => {
             <span>|</span>
             <LanguageButton onClick={(e) => changeLanguage(e, 'cn')}>
               中文
-            </LanguageButton>            
+            </LanguageButton>
           </LanguageContainer>
         </NavLinksContainer>
       )}
