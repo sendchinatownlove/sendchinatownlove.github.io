@@ -22,7 +22,7 @@
 .merchantsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, 350px);
-  grid-gap: 5.75%;
+  grid-gap: 6.25%;
 
   @media (max-width: 1300px) {
     grid-gap: 5%;

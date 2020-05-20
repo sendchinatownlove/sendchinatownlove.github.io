@@ -24,7 +24,6 @@ const SellerPage = (props: Props) => {
 
   const dispatch = useModalPaymentDispatch();
   const { sellerData } = useModalPaymentState();
-  let seller = sellerData;
 
   const fetchData = async () => {
     setLoading(true);
@@ -39,9 +38,9 @@ const SellerPage = (props: Props) => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return seller ? (
+  return sellerData && sellerData.id !== 0 ? (
     <Container menuOpen={props.menuOpen}>
-      <SellerName>{seller.name}</SellerName>
+      <SellerName>{sellerData.name}</SellerName>
       <ContentContainer>
         {/* TODO(ArtyEmsee): Fix object mapping */}
         <StoreInfo seller={sellerData} />

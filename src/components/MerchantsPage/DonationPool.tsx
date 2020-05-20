@@ -59,7 +59,6 @@ const Container = styled.div`
   object-fit: cover;
   margin: 35px 3vw 55px;
   justify-content: space-between;
-  with: 100%;
   @media (${tabletScreens}) {
     max-height: 550px;
   }

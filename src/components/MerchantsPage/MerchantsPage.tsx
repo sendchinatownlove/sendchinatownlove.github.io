@@ -132,4 +132,3 @@ const MerchantInfoContainer = styled.div`
     flex-direction: column-reverse;
   }
 `;
-
