@@ -1,21 +1,15 @@
 import * as React from 'react';
 import confirmationPic from './chinatown-logo.png';
-import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
-import {
-  CLOSE_MODAL,
-  UPDATE_SELLER_DATA,
-} from '../../utilities/hooks/ModalPaymentContext/constants';
-import { getSeller } from '../../utilities';
 import styled from 'styled-components';
 
 export type Props = {
   purchaseType: string;
   sellerId: string;
   sellerName: string;
+  closeModal: Function;
 };
 
 const ModalConfirmation = (props: Props) => {
-  const dispatch = useModalPaymentDispatch();
   const confirmationText = () => {
     switch (props.purchaseType) {
       case 'donation':
@@ -25,15 +19,8 @@ const ModalConfirmation = (props: Props) => {
       case 'buy_meal':
         return `We appreciate your support for ${props.sellerName} and for those in need! Please check your email for your receipt.`;
       default:
-        return `Thank you for your support.`;
+        return `Unexpected occurrence.`;
     }
-  };
-
-  const finishModal = async (e: any) => {
-    e.preventDefault();
-    const { data } = props.sellerId && (await getSeller(props.sellerId));
-    dispatch({ type: UPDATE_SELLER_DATA, payload: data.amount_raised });
-    dispatch({ type: CLOSE_MODAL, payload: undefined });
   };
 
   return (
@@ -45,7 +32,7 @@ const ModalConfirmation = (props: Props) => {
 
       <FinishButton
         className="modalButton--filled"
-        onClick={(e) => finishModal(e)}
+        onClick={(e) => props.closeModal(e)}
       >
         Finish
       </FinishButton>

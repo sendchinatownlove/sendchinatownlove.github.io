@@ -28,7 +28,7 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
         ...state,
         sellerData: {
           ...state.sellerData,
-          amount_raised: payload.amount_raised,
+          amount_raised: payload,
         },
       };
     case CLOSE_MODAL:
