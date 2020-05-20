@@ -2,15 +2,15 @@ import * as React from 'react';
 import styles from './styles.module.scss';
 import StoreDetails from '../StoreDetails';
 import classnames from 'classnames';
-import { Location, Seller } from '../../utilities';
+import { Location, BrowsePageSeller } from '../../utilities';
 import defaultStoreFront from './misc-store.png';
 
 type Props = {
-  seller: Seller;
+  seller: BrowsePageSeller;
 };
 
 export const StoreInfo: React.SFC<Props> = ({ seller }) => {
-  const { summary, story, cuisineName, locations } = seller;
+  const { summary, story, cuisine_name, locations } = seller;
   return (
     <section className={classnames(styles.container)} data-testid="Store Info">
       {
@@ -25,7 +25,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
         />
       }
 
-      <div className={styles.nationality}>{cuisineName}</div>
+      <div className={styles.nationality}>{cuisine_name}</div>
       <div>
         {locations &&
           locations.map((location: Location) => (

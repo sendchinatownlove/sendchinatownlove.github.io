@@ -8,7 +8,11 @@ import {
   useModalPaymentState,
   useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext/context';
-import { CLOSE_MODAL } from '../../utilities/hooks/ModalPaymentContext/constants';
+import {
+  CLOSE_MODAL,
+  UPDATE_SELLER_DATA,
+} from '../../utilities/hooks/ModalPaymentContext/constants';
+import { getSeller } from '../../utilities';
 import {
   phoneScreens,
   tabletScreens,
@@ -28,8 +32,12 @@ export const Modal = (props: Props) => {
   const { modalView } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
 
-  const closeModal = (e: any) => {
+  const closeModal = async (e: any) => {
     e.preventDefault();
+    if (modalView === 2) {
+      const { data } = props.sellerId && (await getSeller(props.sellerId));
+      dispatch({ type: UPDATE_SELLER_DATA, payload: data.amount_raised });
+    }
     dispatch({ type: CLOSE_MODAL, payload: undefined });
   };
 
@@ -51,7 +59,7 @@ export const Modal = (props: Props) => {
       {modalView === 1 && (
         <SquareModal {...props} idempotencyKey={idempotencyKey} />
       )}
-      {modalView === 2 && <ModalConfirmation {...props} />}
+      {modalView === 2 && <ModalConfirmation {...props} closeModal={closeModal}/>}
     </DonationsContainer>
   );
 };
@@ -59,7 +67,7 @@ export const Modal = (props: Props) => {
 export default Modal;
 
 export const DonationsContainer = styled.div`
-  height: 50%;
+  height: 80%;
   overflow-y: scroll;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
   z-index: 10;

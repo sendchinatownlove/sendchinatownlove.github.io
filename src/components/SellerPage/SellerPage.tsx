@@ -3,6 +3,11 @@ import { useEffect, useState } from 'react';
 import { StoreInfo } from '../StoreInfo';
 import OwnerPanel from '../OwnerPanel';
 import ErrorPage from '../404Page';
+import {
+  useModalPaymentState,
+  useModalPaymentDispatch,
+} from '../../utilities/hooks/ModalPaymentContext/context';
+import { SET_SELLER_DATA } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
@@ -14,63 +19,32 @@ interface Props {
 
 const SellerPage = (props: Props) => {
   // fix typing
-  const [seller, setSeller] = useState<any | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
+
+  const dispatch = useModalPaymentDispatch();
+  const { sellerData } = useModalPaymentState();
 
   const fetchData = async () => {
     setLoading(true);
     const result = id && (await getSeller(id));
-    setSeller(result.data);
+    await dispatch({
+      type: SET_SELLER_DATA,
+      payload: result.data,
+    });
     setLoading(false);
   };
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // TODO(ArtyEmsee): handle actual null states and loading
-  return seller ? (
+  return sellerData && sellerData.id !== 0 ? (
     <Container menuOpen={props.menuOpen}>
-      <SellerName>{seller.name}</SellerName>
+      <SellerName>{sellerData.name}</SellerName>
       <ContentContainer>
         {/* TODO(ArtyEmsee): Fix object mapping */}
-        <StoreInfo
-          seller={{
-            name: seller.name,
-            locations: seller.locations,
-            cuisineName: seller.cuisine_name,
-            story: seller.story,
-            summary: seller.summary,
-            hero_image_url: seller.hero_image_url,
-          }}
-        />
-        {/* <ModalPaymentProvider> */}
-        <OwnerPanel
-          acceptDonations={seller.accept_donations}
-          sellGiftCards={seller.sell_gift_cards}
-          costPerMeal={seller.cost_per_meal}
-          amountRaised={seller.amount_raised}
-          targetAmount={seller.target_amount}
-          numContributions={seller.num_contributions}
-          numDonations={seller.num_donations}
-          numGiftCards={seller.num_gift_cards}
-          donationAmount={seller.donation_amount}
-          giftCardAmount={seller.gift_card_amount}
-          ownerName={seller.owner_name}
-          imageSrc={seller.owner_image_url}
-          sellerName={seller.name}
-          progressBarColor={seller.progress_bar_color}
-          extraInfo={{
-            Type: seller.business_type,
-            Employees: seller.num_employees,
-            Founded: seller.founded_year,
-            Website: seller.website_url,
-            Menu: seller.menu_url,
-          }}
-          // TODO(jtmckibb): Should not crash here
-          sellerId={id!}
-        />
-        {/* </ModalPaymentProvider> */}
+        <StoreInfo seller={sellerData} />
+        <OwnerPanel seller={sellerData} />
       </ContentContainer>
     </Container>
   ) : (

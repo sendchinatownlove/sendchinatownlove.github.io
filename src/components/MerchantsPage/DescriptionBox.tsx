@@ -28,7 +28,7 @@ const TargetMerchantBox = () => (
 export default TargetMerchantBox;
 
 const Icon = styled.img`
-  width: 45%;
+  width: 35%;
 `;
 
 const List = styled.ul`

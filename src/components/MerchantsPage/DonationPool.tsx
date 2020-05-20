@@ -36,14 +36,15 @@ const DonationPoolBox = () => {
           <button className={'button--red-filled'} onClick={openModal}>
             {t('SUPPORT CHINATOWN')}
           </button>
-          <Modal
-            purchaseType={'donation'}
-            sellerId={'send-chinatown-love'}
-            sellerName={'Send Chinatown Love Fund'}
-            costPerMeal={0}
-          />
         </ColumnContainer>
         <Image src={Hero} alt="banner" />
+
+        <Modal
+          purchaseType={'donation'}
+          sellerId={'send-chinatown-love'}
+          sellerName={'Send Chinatown Love Fund'}
+          costPerMeal={0}
+        />
       </Container>
     </div>
   );
@@ -56,15 +57,15 @@ const Container = styled.div`
   display: flex;
   max-height: 225px;
   object-fit: cover;
-  margin: 35px 10vw 55px 7vw;
+  margin: 35px 3vw 55px;
   justify-content: space-between;
   @media (${tabletScreens}) {
-    max-height: 400px;
-    margin: 0 7vw 55px;
+    max-height: 550px;
   }
 
   @media (${smallScreens}) {
     flex-direction: column-reverse;
+    margin-top: 0;
   }
 `;
 

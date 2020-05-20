@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
+import { useTranslation } from 'react-i18next';
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 import { SquareErrors, hasKey } from '../../consts';
@@ -18,7 +19,6 @@ import {
   EMAIL_REGEX,
   SET_MODAL_VIEW,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
-
 import styled from 'styled-components';
 
 type Props = {
@@ -41,6 +41,7 @@ const SquareModal = ({
   idempotencyKey,
   costPerMeal,
 }: Props) => {
+  const { t } = useTranslation();
   const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
 
@@ -141,21 +142,30 @@ const SquareModal = ({
     email.length > 0 &&
     EMAIL_REGEX.test(email);
 
-  const disclaimerLanguage = {
-    voucher: `By proceeding with your purchase, you understand that the voucher card 
-              is not redeemable for cash and can only be used at ${sellerName}. All 
-              purchases are final. In the event that the merchant is no longer open 
-              at the time of redemption, Send Chinatown Love Inc. will not be able 
-              to refund your purchase. Balance displayed in the voucher may or may not 
-              represent the final balance. Final balance information is subject to 
-              ${sellerName}'s most recent records.`,
-    donation: `By proceeding with your transaction, you understand that you are
-              making a donation to ${sellerName}. No goods or services were
-              exchanged for this donation.`,
-    donationPool: `By proceeding with your transaction, you understand that 
-                  you are making a donation to all merchants partnered with Send Chinatown Love 
-                  Inc. The full donation pool will be split among these merchants. No goods or 
-                  services were exchanged for this donation`,
+  const setDisclaimerLanguage = (type: string) => {
+    if (sellerId === 'send-chinatown-love') type = 'donation-pool';
+
+    switch (type) {
+      case 'donation':
+        return t(`By proceeding with your transaction, you understand that you are
+          making a donation to ${sellerName}. No goods or services were
+          exchanged for this donation.`);
+      case 'donation-pool':
+        return t(`By proceeding with your transaction, you understand that 
+          you are making a donation to all merchants partnered with Send Chinatown Love 
+          Inc. The full donation pool will be split among these merchants. No goods or 
+          services were exchanged for this donation.`);
+      case 'gift_card':
+        return t(`By proceeding with your purchase, you understand that the voucher card 
+          is not redeemable for cash and can only be used at ${sellerName}. All 
+          purchases are final. In the event that the merchant is no longer open 
+          at the time of redemption, Send Chinatown Love Inc. will not be able 
+          to refund your purchase. Balance displayed in the voucher may or may not 
+          represent the final balance. Final balance information is subject to 
+          ${sellerName}'s most recent records.`);
+      default:
+        break;
+    }
   };
 
   return (
@@ -239,13 +249,7 @@ const SquareModal = ({
                 merchant is onboarded
               </span>
             </CheckboxContainer>
-            <p>
-              {purchaseType === 'donation'
-                ? sellerId === 'send-chinatown-love'
-                  ? disclaimerLanguage.donationPool
-                  : disclaimerLanguage.donation
-                : disclaimerLanguage.voucher}
-            </p>
+            <p>{setDisclaimerLanguage(purchaseType)}</p>
             <ButtonRow>
               <BackButton
                 type="button"

@@ -2,7 +2,7 @@
 
 .container {
   background-color: white;
-  max-width: 1440px;
+  max-width: 1300px;
   margin: 0 auto;
   font-size: 14px;
 
@@ -12,7 +12,7 @@
 }
 
 .storeInfoContainer {
-  padding: 0px 3vw 50px 7vw;
+  padding: 0px 3vw 50px;
 
   @include for-phone-only {
     padding: 0px 7vw 30px;
@@ -20,32 +20,19 @@
 }
 
 .merchantsContainer {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 350px);
+  grid-gap: 6.25%;
+
+  @media (max-width: 1300px) {
+    grid-gap: 5%;
+  }
 
   @include for-phone-only {
+    grid-template-columns: 1fr;
     justify-content: center;
+    grid-gap: 10px;
   }
-}
-
-.merchantCard {
-  height: 475px;
-  width: 350px;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
-  margin: 30px 60px 30px 0;
-  padding: 25px;
-  font-size: 14px;
-  background-color: white;
-
-  @include for-phone-only {
-    margin: 30px;
-  }
-}
-
-.merchantCardLogo {
-  position: relative;
-  width: 100%;
-  margin: 0 0 15px 0;
 }
 
 .overlayContainer {
@@ -57,8 +44,15 @@
   grid-row: 1;
   grid-column: 1;
   height: 55%;
-  width: 100%;
   object-fit: cover;
+
+  // to break the image out of the parent container
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 
   @include for-phone-only {
     height: 35%;
@@ -74,11 +68,13 @@
   // creating grid container for its own children components
   display: grid;
   grid-gap: 0 10%;
-  padding: 50px 7vw 0;
+  padding: 50px 3vw 0;
   background-color: transparent;
+  width: 100%;
+  margin: 0 auto;
 
   @include for-tablet-landscape-up {
-    grid-template-columns: 2fr minmax(0, 430px);
+    grid-template-columns: 2fr;
     grid-template-rows: 2fr minmax(0, 250px);
   }
 
@@ -99,6 +95,7 @@
     grid-row: 1;
     grid-column: 1;
     text-align: left;
+    margin: 0 3vw;
   }
 }
 
@@ -124,12 +121,6 @@
   @include for-phone-only {
     grid-row: 3;
     grid-column: 1;
-  }
-}
-
-@media only screen and (max-width: 450px) {
-  .merchantCard {
-    width: 90vw;
-    overflow: hidden;
+    margin: 0 3vw;
   }
 }
