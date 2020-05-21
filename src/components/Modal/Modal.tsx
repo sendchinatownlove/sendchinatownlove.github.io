@@ -49,7 +49,7 @@ export const Modal = (props: Props) => {
         {modalView === 0 && props.purchaseType !== 'buy_meal' && (
           <ModalAmount {...props} />
         )}
-        {modalView === 0 && props.purchaseType == 'buy_meal' && (
+        {modalView === 0 && props.purchaseType === 'buy_meal' && (
           <ModalBuyMeal {...props} />
         )}
         {modalView === 1 && (
