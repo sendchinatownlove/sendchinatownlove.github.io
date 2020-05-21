@@ -53,6 +53,10 @@ const NavContainer = styled.div`
   max-width: 500px;
   margin-bottom: 50px;
 
+  @media (max-width: 599px) {
+    margin: 25px 0;
+  }
+
   @media (max-width: 450px) {
     display: none;
   }

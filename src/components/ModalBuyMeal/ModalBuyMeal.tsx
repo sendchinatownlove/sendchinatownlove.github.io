@@ -38,11 +38,7 @@ export const Modal = (props: Props) => {
   const totalAmount = { value: totalMealPrice, text: '$' + totalMealPrice };
 
   return (
-    <form
-      id="donation-form"
-      className={classnames(styles.donationsContainer, 'modalForm--form')}
-      data-testid="Modal Amount"
-    >
+    <form data-testid="ModalBuyMeal">
       <div>
         <h1>{t('buyMeal.header') + props.sellerName}</h1>
       </div>

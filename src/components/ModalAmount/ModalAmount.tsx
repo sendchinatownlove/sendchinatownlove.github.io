@@ -37,6 +37,11 @@ export const Modal = (props: Props) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
   };
 
+  const validAmount = (value: string) => {
+    const r = /^[0-9]+$/;
+    return r.test(value)
+  }
+
   const buttonAmounts = [
     { value: '10', text: '$10' },
     { value: '25', text: '$25' },
@@ -91,6 +96,7 @@ export const Modal = (props: Props) => {
           onChange={(e) => {
             handleAmount(e.target.value, true, '');
           }}
+          onKeyDown={ (evt) => (evt.key === 'e' || evt.key === '+' || evt.key === '-' || evt.key === '.') && evt.preventDefault() }
           value={isCustomAmount ? amount : ''}
           placeholder="$"
           min="5"
@@ -116,7 +122,7 @@ export const Modal = (props: Props) => {
         type="button"
         className={'modalButton--filled'}
         onClick={openModal}
-        disabled={Number(amount) < minAmount || Number(amount) > maxAmount}
+        disabled={Number(amount) < minAmount || Number(amount) > maxAmount || !validAmount(amount)}
       >
         {t('paymentProcessing.amount.submit')}
       </NextButton>
@@ -127,17 +133,7 @@ export const Modal = (props: Props) => {
 export default Modal;
 
 const ContentContainer = styled.form`
-  @media (max-width: 799px) {
-    width: 85%;
-    height: 75vh;
-    overflow-y: scroll;
-  }
-
-  @media (max-width: 450px) {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-  }
+  height: 360px;
 `;
 
 const AmountContainer = styled.div`
