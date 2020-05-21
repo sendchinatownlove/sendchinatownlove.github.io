@@ -24,17 +24,15 @@ const DonationPoolBox = () => {
       <Container>
         <ColumnContainer>
           <h4>
-            {t(
-              'Checked out our merchants but not sure who to donate to first?'
-            )}
+            {t('donationPool.header')}
           </h4>
-          <span>{t('You can support by donating to our donation pool!')}</span>
+          <span>{t('donationPool.description1')}</span>
           <span>
-            {t('All donations will be distributed evenly to our merchants.')}
+            {t('donationPool.description2')}
           </span>{' '}
           <br />
           <button className={'button--red-filled'} onClick={openModal}>
-            {t('SUPPORT CHINATOWN')}
+            {t('donationPool.button')}
           </button>
         </ColumnContainer>
         <Image src={Hero} alt="banner" />

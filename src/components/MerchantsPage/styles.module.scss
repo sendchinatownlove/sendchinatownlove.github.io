@@ -146,7 +146,7 @@ a.redLink {
   color: $standard-red;
   text-decoration: none;
 
-  :hover {
+  &:hover {
     cursor: pointer;
     text-decoration: underline;
   }

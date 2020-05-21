@@ -18,7 +18,8 @@ interface Props {
 const MerchantsPage = (props: Props) => {
   const { t } = useTranslation();
 
-  const flyerZip: string = process.env.PUBLIC_URL + './assets/scl-flyer-english-and-chinese.zip';
+  const flyerZip: string =
+    process.env.PUBLIC_URL + './assets/send-chinatown-love-flyers.zip';
 
   const [sellers, setSellers] = useState<any | null>();
   const [filter, setFilter] = useState<any | null>();
@@ -31,8 +32,8 @@ const MerchantsPage = (props: Props) => {
     const contributions = data.reduce(
       (total: any, store: any) => {
         return [
-          total[0] + store!.donation_amount,
-          total[1] + store!.gift_card_amount,
+          total[0] + store.donation_amount,
+          total[1] + store.gift_card_amount,
         ];
       },
       [0, 0]
@@ -54,7 +55,7 @@ const MerchantsPage = (props: Props) => {
       setFilter(sellers);
     } else {
       const result = sellers.filter(
-        (store: any) => store!.cuisine_name === type
+        (store: any) => store.cuisine_name === type
       );
       setFilter(result);
     }
@@ -75,21 +76,12 @@ const MerchantsPage = (props: Props) => {
             />
             <div className={styles.contentContainer}>
               <div className={styles.textArea}>
-                <h2 style={{ fontWeight: 'bolder' }}>Our Chinatown</h2>
+                <h2 style={{ fontWeight: 'bolder' }}>
+                  {t('merchantsPage.platformInfoHeader')}
+                </h2>
                 <br />
-                <p>
-                  {t(`
-                    We are providing an online platform to low-tech, cash-only,
-                    Asian-owned small businesses that have been disproportionately
-                    impacted by COVID-19.
-                  `)}
-                </p>
-                <p>
-                  {t(`
-                    Support local merchants by making a donation or purchasing a
-                    voucher from them.
-                  `)}
-                </p>
+                <p>{t('merchantsPage.platformInfoDescription')}</p>
+                <p>{t('merchantsPage.platformInfoAction')}</p>
               </div>
               {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
               <div className={styles.storeInfo}>
@@ -122,9 +114,9 @@ const MerchantsPage = (props: Props) => {
 
           <div className={styles.flyerContainer}>
             <p>
-              {t(`Know of any business owners that fit our target merchant? `)}
+              {t('merchantsPage.flyerAsk') + ' '}
               <a className={styles.redLink} download href={flyerZip}>
-                {t(`Download our flyer to share with them.`)}
+                {t('merchantsPage.flyerDownload')}
               </a>
             </p>
           </div>
