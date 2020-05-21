@@ -1,4 +1,5 @@
 @import '../../responsive';
+@import '../../index.scss';
 
 .container {
   background-color: white;
@@ -22,16 +23,15 @@
 .merchantsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, 350px);
-  grid-gap: 6.25%;
+  grid-gap: 6.25vmin;
 
   @media (max-width: 1300px) {
-    grid-gap: 5%;
+    grid-gap: 5vmin;
   }
 
   @include for-phone-only {
     grid-template-columns: 1fr;
     justify-content: center;
-    grid-gap: 10px;
   }
 }
 
@@ -123,4 +123,34 @@
     grid-column: 1;
     margin: 0 3vw;
   }
+}
+
+.merchantInfoContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 1300px;
+  margin: 0 auto;
+
+  @include for-phone-only {
+    flex-direction: column-reverse;
+  }
+}
+
+.flyerContainer {
+  margin: 3vh 7vw;
+  font-weight: bold;
+} 
+
+a.redLink {
+  color: $standard-red;
+  text-decoration: none;
+
+  :hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.donationPoolTitle {
+  font-size: 18px;
 }

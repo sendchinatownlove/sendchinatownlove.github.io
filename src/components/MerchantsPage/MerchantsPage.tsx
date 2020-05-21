@@ -7,17 +7,19 @@ import DescriptionBox from './DescriptionBox';
 import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import nycMapBackground from './images/nyc_3.png';
-import sclFlyerEnglish from './images/scl-flyer-english.png';
 import { LoaderFillerContainer } from '../Loader';
 import DonationPoolBox from './DonationPool';
-import { smallScreens } from '../../utilities/general/responsive';
-import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   menuOpen: boolean;
 }
 
 const MerchantsPage = (props: Props) => {
+  const { t } = useTranslation();
+
+  const flyerZip: string = process.env.PUBLIC_URL + './assets/scl-flyer-english-and-chinese.zip';
+
   const [sellers, setSellers] = useState<any | null>();
   const [filter, setFilter] = useState<any | null>();
   const [totalDonations, setDonations] = useState(0);
@@ -76,13 +78,17 @@ const MerchantsPage = (props: Props) => {
                 <h2 style={{ fontWeight: 'bolder' }}>Our Chinatown</h2>
                 <br />
                 <p>
-                  We are providing an online platform to low-tech, cash-only,
-                  Asian-owned small businesses that have been disproportionately
-                  impacted by COVID-19.
+                  {t(`
+                    We are providing an online platform to low-tech, cash-only,
+                    Asian-owned small businesses that have been disproportionately
+                    impacted by COVID-19.
+                  `)}
                 </p>
                 <p>
-                  Support local merchants by making a donation or purchasing a
-                  voucher from them.
+                  {t(`
+                    Support local merchants by making a donation or purchasing a
+                    voucher from them.
+                  `)}
                 </p>
               </div>
               {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
@@ -98,7 +104,7 @@ const MerchantsPage = (props: Props) => {
             </div>
           </div>
 
-          <MerchantInfoContainer>
+          <div className={styles.merchantInfoContainer}>
             <DonationPoolBox />
 
             <div className={styles.storeInfoContainer}>
@@ -106,22 +112,22 @@ const MerchantsPage = (props: Props) => {
 
               <div className={styles.merchantsContainer}>
                 {filter.map((store: any) =>
-                  store!.seller_id !== 'send-chinatown-love' ? (
-                    <MerchantCard key={store!.seller_id} storeInfo={store} />
+                  store.seller_id !== 'send-chinatown-love' ? (
+                    <MerchantCard key={store.seller_id} storeInfo={store} />
                   ) : null
                 )}
               </div>
             </div>
-          </MerchantInfoContainer>
+          </div>
 
-          <FlyerContainer>
+          <div className={styles.flyerContainer}>
             <p>
-              Know of any business owners that fit our target merchant?{' '}
-              <a download href={sclFlyerEnglish}>
-                Download our flyer to share with them.
+              {t(`Know of any business owners that fit our target merchant? `)}
+              <a className={styles.redLink} download href={flyerZip}>
+                {t(`Download our flyer to share with them.`)}
               </a>
             </p>
-          </FlyerContainer>
+          </div>
         </>
       ) : (
         <LoaderFillerContainer />
@@ -131,29 +137,3 @@ const MerchantsPage = (props: Props) => {
 };
 
 export default MerchantsPage;
-
-const MerchantInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 1300px;
-  margin: 0 auto;
-
-  @media (${smallScreens}) {
-    flex-direction: column-reverse;
-  }
-`;
-
-const FlyerContainer = styled.div`
-  margin: 3vw 7vw;
-  font-weight: bold;
-
-  a {
-    color: #a7182d;
-    text-decoration: none;
-
-    :hover {
-      cursor: pointer;
-      text-decoration: underline;
-    }
-  }
-`;

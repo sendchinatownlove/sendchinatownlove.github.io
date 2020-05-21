@@ -94,6 +94,10 @@ h3 {
     background-color: $standard-red;
     border-color: $standard-red;
   }
+
+  &--text-larger {
+    font-size: 14px;;
+  }
 }
 
 @mixin modal-button {
