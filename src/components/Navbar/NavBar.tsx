@@ -5,6 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import { Logo } from '../Logos';
 import { useTranslation } from 'react-i18next';
+import { matchPath } from 'react-router';
 
 interface Props {
   menuOpen: boolean;
@@ -15,6 +16,7 @@ interface CompactProps {
   href?: string;
   i18nText?: string;
   altText?: string;
+  active?: string;
 }
 
 const NavBar = (props: Props) => {
@@ -34,6 +36,11 @@ const NavBar = (props: Props) => {
       props.setMenuOpen(false);
     }
   };
+
+  const isMerchantsPathActive = !!matchPath(
+    window.location.pathname,
+    '/merchants'
+  );
 
   useEffect(() => {
     if (window.innerWidth < 767) {
@@ -101,7 +108,11 @@ const NavBar = (props: Props) => {
             i18nText="navBar.header.home"
             altText="HOME"
           />
-          <ReactNavLink to="/merchants" compact={hamburgerOpen.toString()}>
+          <ReactNavLink
+            to="/merchants"
+            compact={hamburgerOpen.toString()}
+            active={isMerchantsPathActive.toString()}
+          >
             {t('navBar.header.merchants')}
           </ReactNavLink>
           <NavLink
@@ -222,12 +233,18 @@ const ReactNavLink = styled(Link)`
   text-decoration: none;
   color: black;
   transition: 0.1s;
+  padding: 0px 4px 2px 4px;
   ${(props: CompactProps) =>
     props.compact === 'true' &&
     `
     width: 100%;
     margin: 16px auto;
     text-align: center;
+  `}
+  ${(props: CompactProps) =>
+    props.active === 'true' &&
+    `
+    border-bottom: 1.5px #9e9e9e solid;
   `} :link {
     color: black;
   }
