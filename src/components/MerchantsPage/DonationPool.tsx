@@ -57,10 +57,15 @@ const Container = styled.div`
   display: flex;
   max-height: 230px;
   object-fit: cover;
-  margin: 35px 3vw 55px;
+  margin: 35px 0 55px;
   justify-content: space-between;
+
+  @media (max-width: 1350px) {
+    margin: 35px 35px 55px;
+  }
+
   @media (${tabletScreens}) {
-    max-height: 325px;
+    max-height: 300px;
   }
 
   @media (${smallScreens}) {
@@ -77,7 +82,7 @@ const ColumnContainer = styled.div`
 
   @media (${tabletScreens}) {
     > span {
-      margin: 2.5px;
+      margin: 2.5px 0;
     }
 
     > button {
