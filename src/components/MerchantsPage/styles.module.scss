@@ -2,7 +2,7 @@
 
 .container {
   background-color: white;
-  max-width: 1300px;
+  max-width: 1250px;
   margin: 0 auto;
   font-size: 14px;
 
@@ -12,7 +12,9 @@
 }
 
 .storeInfoContainer {
-  padding: 0px 3vw 50px;
+  @media (max-width: 1350px) {
+    padding: 0px 35px 50px;
+  }
 
   @include for-phone-only {
     padding: 0px 7vw 30px;
@@ -21,11 +23,11 @@
 
 .merchantsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 350px);
-  grid-gap: 6.25%;
+  grid-template-columns: repeat(auto-fill, 350px);
+  grid-gap: 2.5rem 6rem;
 
-  @media (max-width: 1300px) {
-    grid-gap: 5%;
+  @media (max-width: 1350px) {
+    grid-gap: 2.5rem 5%;
   }
 
   @include for-phone-only {
@@ -38,6 +40,7 @@
 .overlayContainer {
   display: grid;
   grid-template-rows: 1fr;
+  max-height: 1100px;
 }
 
 .nycMap {
@@ -68,10 +71,14 @@
   // creating grid container for its own children components
   display: grid;
   grid-gap: 0 10%;
-  padding: 50px 3vw 0;
+  padding: 50px 0 0;
   background-color: transparent;
   width: 100%;
   margin: 0 auto;
+
+  @media (max-width: 1350px) {
+    padding: 50px 35px 0;
+  }
 
   @include for-tablet-landscape-up {
     grid-template-columns: 2fr;

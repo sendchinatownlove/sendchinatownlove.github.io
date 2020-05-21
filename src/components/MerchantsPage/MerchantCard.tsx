@@ -80,6 +80,7 @@ export const MerchantCard = styled.div`
         width: 430px;
         height: 475px;
         text-align: center;
+        margin: 0 auto;
     }
     @media (${smallScreens}) {
         margin: 30px;

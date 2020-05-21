@@ -23,11 +23,11 @@ const DonationPoolBox = () => {
     <div>
       <Container>
         <ColumnContainer>
-          <h4>
+          <h2 style={{margin: '10px 0', fontWeight: 'bolder'}}>
             {t(
               'Checked out our merchants but not sure who to donate to first?'
             )}
-          </h4>
+          </h2>
           <span>{t('You can support by donating to our donation pool!')}</span>
           <span>
             {t('All donations will be distributed evenly to our merchants.')}
@@ -55,17 +55,23 @@ export default DonationPoolBox;
 const Container = styled.div`
   border: 1px solid #e5e5e5;
   display: flex;
-  max-height: 225px;
+  max-height: 230px;
   object-fit: cover;
-  margin: 35px 3vw 55px;
+  margin: 35px 0 55px;
   justify-content: space-between;
+
+  @media (max-width: 1350px) {
+    margin: 35px 35px 55px;
+  }
+
   @media (${tabletScreens}) {
-    max-height: 550px;
+    max-height: 300px;
   }
 
   @media (${smallScreens}) {
     flex-direction: column-reverse;
     margin-top: 0;
+    max-height: 500px;
   }
 `;
 
@@ -76,7 +82,7 @@ const ColumnContainer = styled.div`
 
   @media (${tabletScreens}) {
     > span {
-      margin: 2.5px;
+      margin: 2.5px 0;
     }
 
     > button {
