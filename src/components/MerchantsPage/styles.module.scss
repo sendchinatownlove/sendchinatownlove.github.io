@@ -23,15 +23,16 @@
 .merchantsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, 350px);
-  grid-gap: 6.25vmin;
+  grid-gap: 6.25%;
 
   @media (max-width: 1300px) {
-    grid-gap: 5vmin;
+    grid-gap: 5%;
   }
 
   @include for-phone-only {
     grid-template-columns: 1fr;
     justify-content: center;
+    grid-gap: 10px;
   }
 }
 
@@ -149,8 +150,4 @@ a.redLink {
     cursor: pointer;
     text-decoration: underline;
   }
-}
-
-.donationPoolTitle {
-  font-size: 18px;
 }

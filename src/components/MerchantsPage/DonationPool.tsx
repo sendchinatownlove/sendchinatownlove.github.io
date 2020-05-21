@@ -9,7 +9,6 @@ import {
 } from '../../utilities/general/responsive';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import styles from './styles.module.scss';
 
 const DonationPoolBox = () => {
   const { t } = useTranslation();
@@ -24,7 +23,7 @@ const DonationPoolBox = () => {
     <div>
       <Container>
         <ColumnContainer>
-          <h4 className={styles.donationPoolTitle}>
+          <h4>
             {t(
               'Checked out our merchants but not sure who to donate to first?'
             )}
@@ -34,7 +33,7 @@ const DonationPoolBox = () => {
             {t('All donations will be distributed evenly to our merchants.')}
           </span>{' '}
           <br />
-          <button className={'button--red-filled button--text-larger'} onClick={openModal}>
+          <button className={'button--red-filled'} onClick={openModal}>
             {t('SUPPORT CHINATOWN')}
           </button>
         </ColumnContainer>
