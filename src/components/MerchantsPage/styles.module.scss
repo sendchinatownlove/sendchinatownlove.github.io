@@ -13,6 +13,7 @@
 
 .storeInfoContainer {
   padding: 0px 3vw 50px;
+  min-height: min-content;
 
   @include for-phone-only {
     padding: 0px 7vw 30px;
@@ -21,11 +22,12 @@
 
 .merchantsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 350px);
-  grid-gap: 6.25%;
+  grid-template-columns: repeat(auto-fill, 350px);
+  grid-gap: 2.5rem 6.5%;
+  grid-auto-rows: min-content;
 
-  @media (max-width: 1300px) {
-    grid-gap: 5%;
+  @media (max-width: 1299px) {
+    grid-gap: 2.5rem 3.5%;
   }
 
   @include for-phone-only {
