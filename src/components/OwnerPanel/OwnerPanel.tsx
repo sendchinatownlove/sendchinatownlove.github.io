@@ -6,6 +6,8 @@ import { BrowsePageSeller } from '../../utilities/api/types';
 import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
+import ClipboardIcon from 'react-clipboard-icon';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { SocialIcon } from 'react-social-icons';
 import {
   EmailShareButton,
@@ -51,6 +53,17 @@ const OwnerPanel = ({ seller }: Props) => {
   const facebookQuote = 'Help raise money for ' + seller.name;
   const socialIconBackgroundColor = '#a9182e';
   const socialIconDimensions = { height: 50, width: 50 };
+
+  const clipboardStyle = {
+    fill: 'white',
+    display: 'inline',
+    borderRadius: '50%',
+    backgroundColor: '#a9182e',
+    border: '1px solid #a9182e',
+    padding: '0px 8px 0px 16px',
+    position: 'relative',
+    top: '20px',
+  };
 
   return (
     <Container>
@@ -185,6 +198,15 @@ const OwnerPanel = ({ seller }: Props) => {
                 style={socialIconDimensions}
               />
             </EmailShareButton>
+          </div>
+
+          <div className={styles.socialIconContainer}>
+            <CopyToClipboard text={location}>
+              <ClipboardIcon
+                size={socialIconDimensions.height}
+                style={clipboardStyle}
+              />
+            </CopyToClipboard>
           </div>
         </div>
       }

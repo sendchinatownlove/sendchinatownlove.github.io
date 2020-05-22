@@ -27,6 +27,8 @@
     "jshashes": "^1.0.8",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
+    "react-clipboard-icon": "^1.1.0",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
     "react-ga": "^2.7.0",
     "react-i18next": "^11.4.0",
