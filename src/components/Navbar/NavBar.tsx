@@ -95,6 +95,12 @@ const NavBar = (props: Props) => {
           i18nText="RESOURCES"
           altText="RESOURCES"
         />
+        <NavLink
+          compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/press"
+          i18nText="PRESS"
+          altText="PRESS"
+        />
       </NavLinksContainer>
     );
   };
@@ -124,6 +130,12 @@ const NavBar = (props: Props) => {
             href="https://www.sendchinatownlove.com/resource-center.html"
             i18nText="RESOURCES"
             altText="RESOURCES"
+          />
+          <NavLink
+            compact={hamburgerOpen.toString()}
+            href="https://www.sendchinatownlove.com/press"
+            i18nText="PRESS"
+            altText="PRESS"
           />
           <LanguageContainer>
             <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
