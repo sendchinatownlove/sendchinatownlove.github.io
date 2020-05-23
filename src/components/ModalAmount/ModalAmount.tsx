@@ -39,8 +39,8 @@ export const Modal = (props: Props) => {
 
   const validAmount = (value: string) => {
     const r = /^[0-9]+$/;
-    return r.test(value)
-  }
+    return r.test(value);
+  };
 
   const buttonAmounts = [
     { value: '10', text: '$10' },
@@ -56,9 +56,9 @@ export const Modal = (props: Props) => {
 
   return (
     <ContentContainer id="donation-form" data-testid="Modal Amount">
-      <h3>
+      <Header>
         {headerText} {props.sellerName}
-      </h3>
+      </Header>
 
       <p>{t('paymentProcessing.amount.header')}</p>
 
@@ -88,20 +88,27 @@ export const Modal = (props: Props) => {
           {t('paymentProcessing.amount.label2')}
         </label>
         <br />
-        <CustomAmountInput
-          name="custom-amount"
-          type="number"
-          onFocus={(e) => handleAmount('', true, '')}
-          className={'modalInput--input'}
-          onChange={(e) => {
-            handleAmount(e.target.value, true, '');
-          }}
-          onKeyDown={ (evt) => (evt.key === 'e' || evt.key === '+' || evt.key === '-' || evt.key === '.') && evt.preventDefault() }
-          value={isCustomAmount ? amount : ''}
-          placeholder="$"
-          min="5"
-          max="10000"
-        />
+        <CustomAmountContainer>
+          <CustomAmountInput
+            name="custom-amount"
+            type="number"
+            onFocus={(e) => handleAmount('', true, '')}
+            className={'modalInput--input'}
+            onChange={(e) => {
+              handleAmount(e.target.value, true, '');
+            }}
+            onKeyDown={(evt) =>
+              (evt.key === 'e' ||
+                evt.key === '+' ||
+                evt.key === '-' ||
+                evt.key === '.') &&
+              evt.preventDefault()
+            }
+            value={isCustomAmount ? amount : ''}
+            min="5"
+            max="10000"
+          />
+        </CustomAmountContainer>
         {Number(amount) < minAmount && isCustomAmount && (
           <ErrorMessage>
             {t('paymentProcessing.amount.minimum')}{' '}
@@ -122,7 +129,11 @@ export const Modal = (props: Props) => {
         type="button"
         className={'modalButton--filled'}
         onClick={openModal}
-        disabled={Number(amount) < minAmount || Number(amount) > maxAmount || !validAmount(amount)}
+        disabled={
+          Number(amount) < minAmount ||
+          Number(amount) > maxAmount ||
+          !validAmount(amount)
+        }
       >
         {t('paymentProcessing.amount.submit')}
       </NextButton>
@@ -139,6 +150,7 @@ const ContentContainer = styled.form`
 const AmountContainer = styled.div`
   background-color: #f7f7f7;
   padding: 25px 35px;
+  margin-top: 30px;
 `;
 
 const SelectAmtContainer = styled.div`
@@ -149,9 +161,24 @@ const SelectAmtContainer = styled.div`
   margin: 15px 0px;
 `;
 
+const CustomAmountContainer = styled.div`
+  position: relative;
+  display: inline;
+
+  :before {
+    content: '$';
+    position: absolute;
+    top: 0;
+    left: 8px;
+    z-index: 1;
+  }
+`;
+
 const CustomAmountInput = styled.input`
   width: 250px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #121212;
+  margin-top: 8px;
+  padding-left: 2em;
 
   :invalid {
     border: 1px solid red;
@@ -172,4 +199,10 @@ const NextButton = styled.button`
   float: right;
   right: 0px;
   bottom: -25px;
+`;
+
+const Header = styled.div`
+  font-family: 'Open Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
 `;

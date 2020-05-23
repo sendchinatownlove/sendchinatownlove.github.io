@@ -151,17 +151,17 @@ const SquareModal = ({
           making a donation to ${sellerName}. No goods or services were
           exchanged for this donation.`);
       case 'donation-pool':
-        return t(`By proceeding with your transaction, you understand that 
-          you are making a donation to all merchants partnered with Send Chinatown Love 
-          Inc. The full donation pool will be split among these merchants. No goods or 
+        return t(`By proceeding with your transaction, you understand that
+          you are making a donation to all merchants partnered with Send Chinatown Love
+          Inc. The full donation pool will be split among these merchants. No goods or
           services were exchanged for this donation.`);
       case 'gift_card':
-        return t(`By proceeding with your purchase, you understand that the voucher card 
-          is not redeemable for cash and can only be used at ${sellerName}. All 
-          purchases are final. In the event that the merchant is no longer open 
-          at the time of redemption, Send Chinatown Love Inc. will not be able 
-          to refund your purchase. Balance displayed in the voucher may or may not 
-          represent the final balance. Final balance information is subject to 
+        return t(`By proceeding with your purchase, you understand that the voucher card
+          is not redeemable for cash and can only be used at ${sellerName}. All
+          purchases are final. In the event that the merchant is no longer open
+          at the time of redemption, Send Chinatown Love Inc. will not be able
+          to refund your purchase. Balance displayed in the voucher may or may not
+          represent the final balance. Final balance information is subject to
           ${sellerName}'s most recent records.`);
       default:
         break;
@@ -170,11 +170,11 @@ const SquareModal = ({
 
   return (
     <div>
-      <h3>Complete your {purchaseTypePhrase(true)}</h3>
+      <Header>Complete your {purchaseTypePhrase(true)}</Header>
       <p>Please add your payment information below</p>
 
       <PaymentContainer>
-        <h3>Payment Information</h3>
+        <Subheader>Payment Information</Subheader>
         <RowFormat>
           <LabelText htmlFor="name">Full Name</LabelText>
           <InputText
@@ -215,7 +215,7 @@ const SquareModal = ({
               ))}
             </div>
             <br />
-            <h3>Checkout details</h3>
+            <Subheader>Checkout details</Subheader>
             <span>
               {' '}
               {purchaseTypePhrase(false)} of{' '}
@@ -249,7 +249,7 @@ const SquareModal = ({
                 merchant is onboarded
               </span>
             </CheckboxContainer>
-            <p>{setDisclaimerLanguage(purchaseType)}</p>
+            <Disclaimer>{setDisclaimerLanguage(purchaseType)}</Disclaimer>
             <ButtonRow>
               <BackButton
                 type="button"
@@ -272,6 +272,7 @@ export default SquareModal;
 const PaymentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 30px;
 
   div {
     width: 100%;
@@ -347,4 +348,26 @@ const SquareFormContainer = styled.div`
   h3 {
     font-size: 24px;
   }
+`;
+
+const Header = styled.div`
+  font-family: 'Open Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+`;
+
+const Subheader = styled.div`
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 18px;
+`;
+
+const Disclaimer = styled.div`
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  padding: 0px 0px 0px 40px;
+  margin: 30px 0px 30px 0px;
+  opacity: 0.7;
 `;
