@@ -14,7 +14,7 @@ const ContributionBar = ({ totalDonations, totalGiftCards }: Props) => {
 
   return (
     <Container>
-      <Heading>Total Raised</Heading>
+      <Heading>Total Raised: ${Math.floor((totalDonations + totalGiftCards) / 100).toLocaleString()}</Heading>
       <Contributions
         style={{
           background: `linear-gradient(-45deg, #dd678a ${progressWidth(

@@ -6,18 +6,21 @@ import MerchantCard from './MerchantCard';
 import DescriptionBox from './DescriptionBox';
 import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
-import nycMapBackground from './images/nyc_3.png';
+// import nycMapBackground from './images/nyc_3.png';
 import sclFlyerEnglish from './images/scl-flyer-english.png';
 import { LoaderFillerContainer } from '../Loader';
 import DonationPoolBox from './DonationPool';
 import { smallScreens } from '../../utilities/general/responsive';
 import styled from 'styled-components';
+import { getWebsiteImages } from '../StoreDetails/StoreImages';
 
 interface Props {
   menuOpen: boolean;
 }
 
 const MerchantsPage = (props: Props) => {
+  const websiteImages = getWebsiteImages();
+
   const [sellers, setSellers] = useState<any | null>();
   const [filter, setFilter] = useState<any | null>();
   const [totalDonations, setDonations] = useState(0);
@@ -67,7 +70,7 @@ const MerchantsPage = (props: Props) => {
         <>
           <div className={styles.overlayContainer}>
             <img
-              src={nycMapBackground}
+              src={websiteImages.merchantHero}
               className={styles.nycMap}
               alt="NYC MAP"
             />

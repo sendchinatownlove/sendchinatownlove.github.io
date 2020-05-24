@@ -5,6 +5,7 @@ import ReactGA from 'react-ga';
 import Loader from '../Loader';
 import Header from '../Navbar';
 import Footer from '../Footer';
+import ScrollToTop from '../ScrollToTop';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
@@ -49,6 +50,7 @@ const App = () => {
     return (
       <>
         <ModalPaymentProvider>
+          <ScrollToTop />
           <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
           {component}
           <Footer menuOpen={menuOpen} />

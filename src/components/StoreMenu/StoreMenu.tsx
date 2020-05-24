@@ -1,23 +1,16 @@
 import * as React from 'react';
-import MenuItem from '../MenuItem';
-
-interface Item {
-  name: string;
-  description: string;
-  imageSrc?: string;
-}
+import { BrowsePageSeller } from '../../utilities';
 
 export interface Props {
-  menuItems: Item[];
+  getStoreImages: Function;
+  seller: BrowsePageSeller;
 }
 
-const StoreMenu: React.SFC<Props> = ({ menuItems }) => {
+const StoreMenu: React.SFC<Props> = ({ seller, getStoreImages }) => {
+  const images = getStoreImages(seller.seller_id);
+
   return (
-    <section>
-      {menuItems.map((item, index) => {
-        return <MenuItem {...item} key={`menu-item-${index}`} />;
-      })}
-    </section>
+    <section>{<img src={images.menu} alt="store-menu" width="100%" />}</section>
   );
 };
 

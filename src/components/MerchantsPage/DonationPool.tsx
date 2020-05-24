@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Hero from './images/skyline-hero.png';
+// import Hero from './images/skyline-hero.png';
 import Modal from '../Modal';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
@@ -7,10 +7,12 @@ import {
   smallScreens,
   tabletScreens,
 } from '../../utilities/general/responsive';
+import { getWebsiteImages } from '../StoreDetails/StoreImages';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 const DonationPoolBox = () => {
+  const websiteImages = getWebsiteImages();
   const { t } = useTranslation();
   const dispatch = useModalPaymentDispatch();
 
@@ -23,7 +25,7 @@ const DonationPoolBox = () => {
     <div>
       <Container>
         <ColumnContainer>
-          <h2 style={{margin: '10px 0', fontWeight: 'bolder'}}>
+          <h2 style={{ margin: '10px 0', fontWeight: 'bolder' }}>
             {t(
               'Checked out our merchants but not sure who to donate to first?'
             )}
@@ -37,7 +39,7 @@ const DonationPoolBox = () => {
             {t('SUPPORT CHINATOWN')}
           </button>
         </ColumnContainer>
-        <Image src={Hero} alt="banner" />
+        <Image src={websiteImages.skyline} alt="banner" />
 
         <Modal
           purchaseType={'donation'}

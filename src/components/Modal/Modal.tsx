@@ -59,7 +59,9 @@ export const Modal = (props: Props) => {
       {modalView === 1 && (
         <SquareModal {...props} idempotencyKey={idempotencyKey} />
       )}
-      {modalView === 2 && <ModalConfirmation {...props} closeModal={closeModal}/>}
+      {modalView === 2 && (
+        <ModalConfirmation {...props} closeModal={closeModal} />
+      )}
     </DonationsContainer>
   );
 };
