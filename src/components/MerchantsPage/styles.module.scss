@@ -145,8 +145,17 @@
 }
 
 .flyerContainer {
-  margin: 3vh 7vw;
+  $flyer-margin: 3rem;
+
+  margin-top: $flyer-margin;
+  margin-bottom: $flyer-margin;
+  font-size: 120%;
   font-weight: bold;
+
+  @include for-phone-only {
+    margin-left: $flyer-margin;
+    margin-right: $flyer-margin;
+  }
 }
 
 a.redLink {
