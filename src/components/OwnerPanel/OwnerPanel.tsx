@@ -156,8 +156,8 @@ const OwnerPanel = ({ seller }: Props) => {
           })}
         </div>
       ) : (
-          ''
-        )}
+        ''
+      )}
 
       <ModalBox
         purchaseType={purchaseType}

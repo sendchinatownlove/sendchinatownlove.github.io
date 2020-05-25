@@ -32,7 +32,12 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
         },
       };
     case CLOSE_MODAL:
-      return { ...state, modalView: -1, customInput: false, amount: '' };
+      return {
+        ...state,
+        modalView: -1,
+        customInput: false,
+        amount: defaultState.amount,
+      };
     case CLEAR_FORMS:
       return defaultState;
     default:
