@@ -25,9 +25,9 @@ export interface Props {
 export interface ModalProps {
   modalView: number;
 }
-const idempotencyKey = uuid();
 
 export const Modal = (props: Props) => {
+  const idempotencyKey = uuid();
   const { modalView } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
 
