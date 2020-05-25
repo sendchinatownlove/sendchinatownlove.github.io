@@ -39,7 +39,7 @@ const App = () => {
         component = <MerchantsPage menuOpen={menuOpen} />;
         break;
       case 'merchants':
-        component = <Redirect to="/all"></Redirect>;
+        component = <Redirect to="/all" />;
         break;
       case 'seller':
         component = <SellerPage menuOpen={menuOpen} />;
