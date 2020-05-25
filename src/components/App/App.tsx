@@ -1,5 +1,5 @@
 import { createBrowserHistory } from 'history';
-import { Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import React, { lazy, Suspense, useState } from 'react';
 import ReactGA from 'react-ga';
 import Loader from '../Loader';
@@ -35,8 +35,11 @@ const App = () => {
   const returnComponent = (child) => {
     let component;
     switch (child) {
-      case 'merchants':
+      case 'all':
         component = <MerchantsPage menuOpen={menuOpen} />;
+        break;
+      case 'merchants':
+        component = <Redirect to="/all" />;
         break;
       case 'seller':
         component = <SellerPage menuOpen={menuOpen} />;
@@ -61,6 +64,7 @@ const App = () => {
     <Router history={history}>
       <Suspense fallback={<Loader isPage={true} />}>
         <Switch>
+          <Route path="/all">{returnComponent('all')}</Route>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>
           <Route path="/:id#story">{returnComponent('seller')}</Route>
