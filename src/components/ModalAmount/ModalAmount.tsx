@@ -60,6 +60,9 @@ export const Modal = (props: Props) => {
         {headerText} {props.sellerName}
       </Header>
 
+      {props.sellerId === 'send-chinatown-love' && (
+        <p>{t('donationPool.description2')}</p>
+      )}
       <p>{t('paymentProcessing.amount.header')}</p>
 
       <AmountContainer>
