@@ -107,6 +107,7 @@ h3 {
 
 .modalButton {
   &--back {
+    background: none;
     font-size: 12px;
     border: none;
     padding: 0px;
@@ -140,7 +141,6 @@ h3 {
   &--nonfunctional {
     @include modal-button;
     border: 1px solid grey;
-    background-color: grey;
     color: white;
     border-radius: 25px;
     font-weight: bold;
