@@ -37,16 +37,19 @@ const Container = styled.div`
     props.isOnLandingPage ? 'column' : 'row'};
   margin: ${(props: ContainerProps) => (props.isOnLandingPage ? '24px' : '0')}
     auto;
-  ${(props: ContainerProps) => props.isOnLandingPage && 'height: 100px;'}
-  ${(props: ContainerProps) => !props.isOnLandingPage && 'border-bottom: 1px solid #f7f7f7;'}
-  ${(props: ContainerProps) => !props.isOnLandingPage && 'padding: 10px 2.5%;'}
+  ${(props: ContainerProps) =>
+    !props.isOnLandingPage && 'border-bottom: 1px solid #f7f7f7;'}
+  ${(props: ContainerProps) =>
+    !props.isOnLandingPage && 'padding: 10px 2.5%;'}
   color: black;
   text-align: center;
 `;
 const Header = styled.h1`
   ${(props: ContainerProps) => !props.isOnLandingPage && 'margin-left: 15px;'};
-  ${(props: ContainerProps) => !props.isOnLandingPage && 'font-size: 22px;'}
-  font-weight: 700;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 30px;
 `;
 const OwnerImage = styled.img`
   width: ${(props: ContainerProps) =>
