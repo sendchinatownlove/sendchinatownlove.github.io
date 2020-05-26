@@ -55,8 +55,8 @@ const ProgressBar = ({
       </TargetAmountBar>
       <ContributionInfoContainer>
         <div>
-          ${(Math.floor(amountRaised) / 100).toLocaleString()} of $
-          {(Math.floor(targetAmount) / 100).toLocaleString()}
+          ${Math.floor(amountRaised / 100).toLocaleString()} of $
+          {Math.floor(targetAmount / 100).toLocaleString()}
         </div>
         <div>
           <SupporterTooltip
