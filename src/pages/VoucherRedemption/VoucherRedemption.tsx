@@ -13,13 +13,17 @@ import {
 } from '../../utilities/hooks/VoucherContext/context';
 import { SET_VOUCHER_INFO } from '../../utilities/hooks/VoucherContext/constants';
 import Loader from '../../components/Loader';
+import NYCBackdrop from '../../images/nyc-background.png';
 
 import { getVoucher, getSeller } from '../../utilities/api/interactionManager';
 
 interface Props {}
+interface ContainerProps {
+  view: Number;
+}
 
 const VoucherRedemption = (props: Props) => {
-  const { view, voucher } = useVoucherState();
+  const { view } = useVoucherState();
   const dispatch = useVoucherDispatch();
   const params = useHistory();
   const [loading, setLoading] = useState(false);
@@ -65,13 +69,14 @@ const VoucherRedemption = (props: Props) => {
     }
   };
   return (
-    <Container>
-      {loading && voucher.sellerID.length > 1 ? (
+    <Container view={view}>
+      {loading ? (
         <Loader isPage={true} />
       ) : (
         <>
           <StoreBanner />
           {showView()}
+          {/* {view === 0 && <Backdrop src={NYCBackdrop}/>} */}
         </>
       )}
     </Container>
@@ -83,7 +88,17 @@ export default VoucherRedemption;
 const Container = styled.div`
   width: 100%;
   margin: 0 auto;
-  background-color: white;
-  flex-direction: column
-  height: 100%;
+  ${(props: ContainerProps) =>
+    props.view === 0 &&
+    `
+    background-image: url(${NYCBackdrop});
+    background-size: 1780.75px 905px;
+  `}
+  height: 100vh;
+  background-color: transparent;
+  flex-direction: column;
+  * {
+    z-index: 10;
+  }
+  overflow-x: hidden;
 `;

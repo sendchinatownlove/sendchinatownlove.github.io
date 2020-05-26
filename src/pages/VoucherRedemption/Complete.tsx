@@ -18,7 +18,9 @@ const Amount = (props: Props) => {
   return (
     <Footer height="90vh">
       <AmountContainer>
-        <Text bold="true" size="24px">Redemption Complete</Text>
+        <Text bold="true" size="24px">
+          Redemption Complete
+        </Text>
       </AmountContainer>
       <AmountContainer>
         <Text bold="true" size="24px">

@@ -9,6 +9,9 @@ interface TextProps {
   textAlign?: String;
   padding?: String;
 }
+interface VoucherInfoProps {
+  showInfo?: Boolean;
+}
 interface ContainerProps {
   height?: string;
 }
@@ -31,10 +34,12 @@ const MessageConatiner = styled.div`
   width: 95%;
 `;
 
-const Voucher = styled.h3`
-  width: 90%;
-  margin: 12px auto;
+const Voucher = styled.div`
+  width: 100%;
   text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
 `;
 const Bold = styled.span`
   font-weight: 600;
@@ -81,7 +86,8 @@ const NextButton = styled.button`
 `;
 
 const Divider = styled.div`
-  border-bottom: 2px solid #f7f7f7;
+  border-bottom: 1px solid
+    ${(props: VoucherInfoProps) => (!props.showInfo ? 'white' : 'transparent')};
   margin: 12px auto;
   width: 90%;
 `;
