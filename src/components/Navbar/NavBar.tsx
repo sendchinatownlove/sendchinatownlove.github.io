@@ -59,7 +59,7 @@ const NavBar = (props: Props) => {
   const showCompactMenu = () => {
     return !props.menuOpen ? (
       <HamburgerContainer>
-        <LanguageContainer>
+        <LanguageContainer compact={hamburgerOpen.toString()}>
           <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
             ENG
           </LanguageButton>
@@ -137,7 +137,7 @@ const NavBar = (props: Props) => {
             i18nText="PRESS"
             altText="PRESS"
           />
-          <LanguageContainer>
+          <LanguageContainer compact={hamburgerOpen.toString()}>
             <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
               ENG
             </LanguageButton>
@@ -170,8 +170,7 @@ const NavLinksContainer = styled.div`
   display: flex;
   flex-direction: ${(props: CompactProps) =>
     props.compact === 'true' ? `column` : 'row'};
-  width: ${(props: CompactProps) =>
-    props.compact === 'true' ? `100%` : '50%'};
+  width: 100%;
   ${(props: CompactProps) =>
     props.compact === 'true'
       ? `
@@ -184,8 +183,8 @@ const NavLinksContainer = styled.div`
     z-index: 10;
   `
       : `
-    max-width: 400px;
-    justify-content: space-between;
+    max-width: 600px;
+    justify-content: flex-end;
   `}
 `;
 const HamburgerContainer = styled.div`
@@ -199,6 +198,7 @@ const NavLinkStyle = styled.a`
   text-decoration: none;
   color: black;
   transition: 0.1s;
+  margin: 0 20px;
   ${(props: CompactProps) =>
     props.compact === 'true' &&
     `
@@ -233,6 +233,8 @@ const LanguageContainer = styled.div`
   justify-content: space-between;
   font-size: 13px;
   width: 78px;
+  margin-left: 20px;
+  ${(props: CompactProps) => props.compact === 'true' && 'margin-right: 20px;'}
 `;
 const LanguageButton = styled.div`
   margin: 0;
@@ -244,12 +246,13 @@ const LanguageButton = styled.div`
   :hover {
     color: #a7182d;
   }
+  width: 35px;
 `;
 const ReactNavLink = styled(Link)`
   text-decoration: none;
   color: black;
   transition: 0.1s;
-  padding: 0px 4px 2px 4px;
+  margin: 0 20px;
   ${(props: CompactProps) =>
     props.compact === 'true' &&
     `
