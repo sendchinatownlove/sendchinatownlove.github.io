@@ -20,7 +20,7 @@ export const Modal = (props: Props) => {
   const { t } = useTranslation();
 
   const { amount } = useModalPaymentState();
-  const [isCustomAmount, setIsCustomAmount] = useState(false);
+  const [isCustomAmount, setIsCustomAmount] = useState(true);
   const [selected, setSelected] = useState('');
   const dispatch = useModalPaymentDispatch();
   const minAmount = 5;

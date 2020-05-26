@@ -53,6 +53,7 @@ const OwnerPanel = ({ seller }: Props) => {
   const facebookQuote = 'Help raise money for ' + seller.name;
   const socialIconBackgroundColor = '#a9182e';
   const socialIconDimensions = { height: 50, width: 50 };
+  const costPerMealDollars = seller.cost_per_meal / 100;
 
   const clipboardStyle = {
     fill: 'white',
@@ -162,7 +163,7 @@ const OwnerPanel = ({ seller }: Props) => {
         purchaseType={purchaseType}
         sellerId={seller.seller_id}
         sellerName={seller.name}
-        costPerMeal={seller.cost_per_meal}
+        costPerMeal={costPerMealDollars}
       />
       {
         <div className={styles.socialContainer}>
