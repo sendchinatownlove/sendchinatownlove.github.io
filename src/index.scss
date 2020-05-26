@@ -98,15 +98,20 @@ h3 {
 }
 
 @mixin modal-button {
+  font-family: 'Open Sans';
+
   padding: 8px;
   width: 120px;
   border-radius: 75px;
   font-size: 12px;
+  text-transform: uppercase;
   outline: none;
 }
 
 .modalButton {
   &--back {
+    font-family: 'Open Sans';
+
     background: none;
     font-size: 12px;
     border: none;
@@ -114,6 +119,7 @@ h3 {
     margin: 10px 0px;
     width: 120px;
     font-weight: bold;
+    text-transform: uppercase;
     outline: none;
     letter-spacing: 0.1em;
     cursor: pointer;
