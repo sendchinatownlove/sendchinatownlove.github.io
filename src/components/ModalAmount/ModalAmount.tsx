@@ -73,6 +73,7 @@ export const Modal = (props: Props) => {
         <SelectAmtContainer>
           {buttonAmounts.map((amount) => (
             <button
+              key={amount.text}
               type="button"
               className={
                 selected === amount.text
