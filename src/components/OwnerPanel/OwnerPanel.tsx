@@ -132,7 +132,11 @@ const OwnerPanel = ({ seller }: Props) => {
         {seller.cost_per_meal !== null && (
           <button
             value="buy_meal"
-            className={classnames(styles.button, 'button--redfilled')}
+            className={classnames(
+              styles.button,
+              styles.giftAMealButton,
+              'button--redfilled'
+            )}
             onClick={giftMealClickHander}
           >
             Gift a meal
