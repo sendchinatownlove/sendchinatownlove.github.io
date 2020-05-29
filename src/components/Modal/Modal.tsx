@@ -83,6 +83,7 @@ const ModalContainer = styled.div`
   max-height: 85vh;
   width: 725px;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  height: 65%;
 
   @media only screen and (max-width: 799px) {
     width: 85%;
