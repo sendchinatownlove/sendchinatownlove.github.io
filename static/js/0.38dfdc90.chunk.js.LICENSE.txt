@@ -4,6 +4,11 @@
   http://jedwatson.github.io/classnames
 */
 
+/**
+ * @license
+ * Lodash lodash.com/license | Underscore.js 1.8.3 underscorejs.org/LICENSE
+ */
+
 /**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
  * @version 1.16.1
