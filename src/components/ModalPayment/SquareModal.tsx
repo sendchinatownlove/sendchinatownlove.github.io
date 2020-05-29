@@ -330,6 +330,10 @@ const CheckboxContainer = styled.label`
   :hover {
     text-decoration: underline;
   }
+
+  > span { 
+    padding: 9px 9px 9px 0px
+  }
 `;
 
 const ButtonRow = styled.div`
@@ -357,6 +361,7 @@ const SquareFormContainer = styled.div`
   h3 {
     font-size: 24px;
   }
+  
 `;
 
 const Header = styled.div`
@@ -376,7 +381,7 @@ const Disclaimer = styled.div`
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
   font-weight: 300;
-  padding: 0px 0px 0px 40px;
+  padding: 0px 0px 0px 0px;
   margin: 30px 0px 30px 0px;
   opacity: 0.7;
 `;
