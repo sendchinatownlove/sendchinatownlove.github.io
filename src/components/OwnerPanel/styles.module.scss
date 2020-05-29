@@ -33,7 +33,7 @@ $container-size: 160px;
 
 .buttonContainer {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: auto;
   grid-template-columns: 1fr 1fr;
   row-gap: 30px;
   column-gap: 20px;
