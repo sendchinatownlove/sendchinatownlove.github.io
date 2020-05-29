@@ -9,6 +9,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import walletImage from './wallet.png';
 import cardImage from './card.png';
+import ReactPixel from 'react-facebook-pixel';
 
 export interface Props {
   purchaseType: string;
@@ -30,6 +31,9 @@ export const Modal = (props: Props) => {
   };
 
   const openModal = (e: any) => {
+    ReactPixel.trackCustom('GiftMealPaymentNextButtonClick', {
+      numberOfMeals: numberOfMeals,
+    });
     e.preventDefault();
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
   };
