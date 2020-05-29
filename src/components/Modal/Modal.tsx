@@ -14,6 +14,7 @@ import {
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { getSeller } from '../../utilities';
 import styled from 'styled-components';
+import ReactPixel from 'react-facebook-pixel';
 
 export interface Props {
   purchaseType: string;
@@ -32,6 +33,7 @@ export const Modal = (props: Props) => {
   const dispatch = useModalPaymentDispatch();
 
   const closeModal = async (e: any) => {
+    ReactPixel.trackCustom('ModalCloseButtonClick', {});
     e.preventDefault();
     if (modalView === 2) {
       const { data } = props.sellerId && (await getSeller(props.sellerId));

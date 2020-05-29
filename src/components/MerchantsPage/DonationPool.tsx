@@ -9,12 +9,14 @@ import {
 } from '../../utilities/general/responsive';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import ReactPixel from 'react-facebook-pixel';
 
 const DonationPoolBox = () => {
   const { t } = useTranslation();
   const dispatch = useModalPaymentDispatch();
 
   const openModal = (e: any) => {
+    ReactPixel.trackCustom('DonationPoolButtonClick', {});
     e.preventDefault();
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
   };
