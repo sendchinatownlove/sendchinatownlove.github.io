@@ -9,6 +9,7 @@ import {
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import ReactPixel from 'react-facebook-pixel';
 
 export interface Props {
   purchaseType: string;
@@ -33,6 +34,7 @@ export const Modal = (props: Props) => {
   };
 
   const openModal = (e: any) => {
+    ReactPixel.trackCustom('PaymentNextButtonClick', { amount: amount });
     e.preventDefault();
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
   };
