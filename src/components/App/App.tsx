@@ -6,6 +6,7 @@ import Loader from '../Loader';
 import Header from '../Navbar';
 import Footer from '../Footer';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import ReactPixel from 'react-facebook-pixel';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
@@ -28,6 +29,13 @@ history.listen((location) => {
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const ErrorPage = lazy(() => import('../404Page'));
+
+const options = {
+  autoConfig: true, // set pixel's autoConfig
+  debug: true, // enable logs
+};
+const pixelId = process.env.REACT_APP_FB_PIXEL_ID!;
+ReactPixel.init(pixelId, undefined, options);
 
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);

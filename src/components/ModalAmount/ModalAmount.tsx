@@ -9,6 +9,7 @@ import {
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import ReactPixel from 'react-facebook-pixel';
 
 export interface Props {
   purchaseType: string;
@@ -33,6 +34,7 @@ export const Modal = (props: Props) => {
   };
 
   const openModal = (e: any) => {
+    ReactPixel.trackCustom('PaymentNextButtonClick', { amount: amount });
     e.preventDefault();
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
   };
@@ -73,6 +75,7 @@ export const Modal = (props: Props) => {
         <SelectAmtContainer>
           {buttonAmounts.map((amount) => (
             <button
+              key={amount.text}
               type="button"
               className={
                 selected === amount.text
@@ -206,6 +209,6 @@ const NextButton = styled.button`
 
 const Header = styled.div`
   font-family: 'Open Sans', sans-serif;
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 600;
 `;

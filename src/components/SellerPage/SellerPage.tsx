@@ -12,11 +12,13 @@ import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
 import styled from 'styled-components';
+import ReactPixel from 'react-facebook-pixel';
 
 interface Props {
   menuOpen: boolean;
 }
 
+ReactPixel.trackCustom('SellerPageView', {});
 const SellerPage = (props: Props) => {
   // fix typing
   const [loading, setLoading] = useState<boolean>(false);
