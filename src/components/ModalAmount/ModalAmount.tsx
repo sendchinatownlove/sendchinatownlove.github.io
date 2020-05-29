@@ -206,6 +206,6 @@ const NextButton = styled.button`
 
 const Header = styled.div`
   font-family: 'Open Sans', sans-serif;
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 600;
 `;
