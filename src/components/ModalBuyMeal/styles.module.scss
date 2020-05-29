@@ -1,4 +1,4 @@
-@import "../../responsive";
+@import '../../responsive';
 
 .amountContainer {
   background-color: #f7f7f7;
@@ -65,11 +65,33 @@
 .illustrationLeading {
   width: 45%;
   float: left;
+  max-width: 100%;
+  height: auto;
+}
+
+@media only screen and (max-width: 450px) {
+  .illustrationLeading {
+    width: 45%;
+    height: 100%;
+    float: left;
+    max-width: 100%;
+  }
 }
 
 .illustrationTrailing {
   width: 45%;
   float: right;
+  max-width: 100%;
+  height: auto;
+}
+
+@media only screen and (max-width: 450px) {
+  .illustrationTrailing {
+    width: 45%;
+    height: 100%;
+    float: right;
+    max-width: 100%;
+  }
 }
 
 .explantionContainer {
