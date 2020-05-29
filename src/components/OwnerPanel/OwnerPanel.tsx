@@ -114,7 +114,7 @@ const OwnerPanel = ({ seller }: Props) => {
         {seller.accept_donations && (
           <button
             value="donation"
-            className={classnames(styles.button, 'button--filled')}
+            className={classnames(styles.button, seller.cost_per_meal && styles.moreThanTwoButtons, 'button--filled')}
             onClick={donationClickHander}
           >
             Donation
@@ -134,8 +134,7 @@ const OwnerPanel = ({ seller }: Props) => {
             value="buy_meal"
             className={classnames(
               styles.button,
-              styles.giftAMealButton,
-              'button--redfilled'
+              'button--outlined'
             )}
             onClick={giftMealClickHander}
           >
