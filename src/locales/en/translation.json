@@ -73,5 +73,19 @@
     "bullet3": "Currently struggling to pay rent, utility bill and employee wages",
     "bullet4": "Do not have websites, online delivery service, or vouchers available",
     "bullet5": "Located in NYC Manhattan Chinatown, Flushing, or Bensonhurst"
+  },
+  "storeDetails": {
+    "storyHeader": "Story"
+  },
+  "ownerPanel": {
+    "donation": "Donation",
+    "voucher": "Voucher",
+    "extraInfo": {
+      "Type": "Type",
+      "Employees": "Employees",
+      "Founded": "Founded",
+      "Website": "Website",
+      "Menu": "Menu"
+    }
   }
 }

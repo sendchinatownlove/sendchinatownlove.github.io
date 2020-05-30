@@ -16,6 +16,7 @@ import {
 } from 'react-share';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   seller: BrowsePageSeller;
@@ -29,6 +30,8 @@ interface State {
 const ModalBox: any = Modal;
 
 const OwnerPanel = ({ seller }: Props) => {
+  const { t } = useTranslation();
+
   const dispatch = useModalPaymentDispatch();
   const [purchaseType, setPurchaseType] = useState('');
 
@@ -101,7 +104,7 @@ const OwnerPanel = ({ seller }: Props) => {
             className={classnames(styles.button, 'button--filled')}
             onClick={showModal}
           >
-            Donation
+            {t('ownerPanel.donation')}
           </button>
         )}
         {seller.sell_gift_cards && (
@@ -110,7 +113,7 @@ const OwnerPanel = ({ seller }: Props) => {
             className={classnames(styles.button, 'button--outlined')}
             onClick={showModal}
           >
-            Voucher
+            {t('ownerPanel.voucher')}
           </button>
         )}
         {seller.cost_per_meal !== null && (
@@ -130,7 +133,7 @@ const OwnerPanel = ({ seller }: Props) => {
               return (
                 <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
-                    {`${current}: `}
+                    {`${t('ownerPanel.extraInfo.'+ current)}: `}
                     <a
                       className={styles.extraInfoValue}
                       href={`http://${extraInfo[current]}`}
@@ -146,7 +149,7 @@ const OwnerPanel = ({ seller }: Props) => {
               return (
                 <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
-                    {`${current}: `}
+                    {`${t('ownerPanel.extraInfo.'+ current)}: `}
                     <span className={styles.extraInfoValue}>
                       {extraInfo[current]}
                     </span>
