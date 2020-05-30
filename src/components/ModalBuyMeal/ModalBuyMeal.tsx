@@ -46,6 +46,7 @@ export const Modal = (props: Props) => {
 
   const totalMealPrice = numberOfMeals * props.costPerMeal;
   const totalAmount = { value: totalMealPrice, text: '$' + totalMealPrice };
+  const COST_LIMIT = 10000;
 
   return (
     <form data-testid="ModalBuyMeal">
@@ -111,7 +112,7 @@ export const Modal = (props: Props) => {
         type="button"
         className={classnames(styles.nextBtn, 'modalButton--filled')}
         onClick={openModal}
-        disabled={numberOfMeals < 1}
+        disabled={numberOfMeals < 1 || numberOfMeals > COST_LIMIT / props.costPerMeal}
       >
         {t('paymentProcessing.amount.submit')}
       </button>
