@@ -4,11 +4,11 @@ import {
   useVoucherState,
   useVoucherDispatch,
 } from '../../utilities/hooks/VoucherContext/context';
+import defaultStoreFront from '../../images/misc-store.png';
 import {
   SET_AMOUNT,
   SET_VIEW,
 } from '../../utilities/hooks/VoucherContext/constants';
-import ImageSrc from '../../images/sample-banner.png';
 import {
   AmountContainer,
   MessageConatiner,
@@ -28,6 +28,7 @@ interface TextProps {
   align?: String;
   padding?: String;
 }
+
 
 const Amount = (props: Props) => {
   const { amount, voucher } = useVoucherState();
@@ -54,7 +55,14 @@ const Amount = (props: Props) => {
         </Text>
       </AmountContainer>
 
-      <Image src={ImageSrc} alt="Logo" />
+      <Image 
+        src={
+          voucher.storeImage
+            ? process.env.REACT_APP_BASE_URL + voucher.storeImage
+            : defaultStoreFront
+        }
+        alt={`${voucher.ownerName} Illustration`}
+      />
       <AmountContainer>
         <Text bold="true" size="24px">
           ${voucher.amount === 0 ? '0.00' : (voucher.amount / 100).toFixed(2)}

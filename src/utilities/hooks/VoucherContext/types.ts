@@ -20,6 +20,7 @@ export type VoucherDetails = {
   updated_at: string;
   ownerName: string;
   ownerImage: string;
+  storeImage: string;
   sellerID: string;
   locations: Array<number | null>;
 };
@@ -45,6 +46,7 @@ export const defaultState: VoucherState = {
     updated_at: '',
     ownerName: '',
     ownerImage: '',
+    storeImage: '',
     sellerID: '',
     locations: [],
   },

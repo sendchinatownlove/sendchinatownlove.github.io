@@ -14,7 +14,6 @@ import {
 import { SET_VOUCHER_INFO } from '../../utilities/hooks/VoucherContext/constants';
 import Loader from '../../components/Loader';
 import NYCBackdrop from '../../images/nyc-background.png';
-
 import { getVoucher, getSeller } from '../../utilities/api/interactionManager';
 
 interface Props {}
@@ -39,6 +38,7 @@ const VoucherRedemption = (props: Props) => {
         ...gift_card_detail,
         ownerName: merchantData.data.owner_name,
         ownerImage: merchantData.data.owner_image_url,
+        storeImage: merchantData.data.hero_image_url,
         sellerID: seller_id,
         locations: merchantData.data.locations,
       };
