@@ -54,6 +54,8 @@ const VoucherRedemption = (props: Props) => {
   useEffect(() => {
     setLoading(true);
     fetchData();
+
+    // eslint-disable-next-line
   }, []);
 
   const showView = () => {

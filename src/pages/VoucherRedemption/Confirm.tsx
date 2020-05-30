@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   useVoucherState,
   useVoucherDispatch,
 } from '../../utilities/hooks/VoucherContext/context';
-import { SET_VIEW } from '../../utilities/hooks/VoucherContext/constants';
+import {
+  SET_VIEW,
+  SET_VOUCHER_INFO,
+  SET_AMOUNT,
+} from '../../utilities/hooks/VoucherContext/constants';
+import {
+  updateVoucher,
+  getSeller,
+} from '../../utilities/api/interactionManager';
 import MoreInfo from './MoreInfo';
+import Loader from '../../components/Loader';
 import {
   AmountContainer,
   MessageConatiner,
@@ -26,9 +35,39 @@ interface ContainerProps {
 const Amount = (props: Props) => {
   const { amount, voucher } = useVoucherState();
   const dispatch = useVoucherDispatch();
+  const [loading, setLoading] = useState(false);
 
-  const setView = (view) => {
-    dispatch({ type: SET_VIEW, payload: view });
+  const setView = async (view) => dispatch({ type: SET_VIEW, payload: view });
+
+  const confirm = async (e) => {
+    setLoading(true);
+
+    try {
+      const {
+        data: { gift_card_detail, seller_id },
+      } = await updateVoucher(
+        voucher.gift_card_id,
+        voucher.amount - amount * 100
+      );
+      const merchantData = await getSeller(seller_id);
+
+      const newVoucher = {
+        ...gift_card_detail,
+        ownerName: merchantData.data.owner_name,
+        ownerImage: merchantData.data.owner_image_url,
+        storeImage: merchantData.data.hero_image_url,
+        sellerID: seller_id,
+        locations: merchantData.data.locations,
+      };
+
+      dispatch({ type: SET_VOUCHER_INFO, payload: newVoucher });
+      dispatch({ type: SET_AMOUNT, payload: gift_card_detail.amount });
+      setLoading(false);
+      setView(3);
+    } catch (e) {
+      console.log('error: ', e);
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,7 +116,9 @@ const Amount = (props: Props) => {
           Please show your phone to the merchant cashier to confirm the
           purchase.
         </Text>
-        <NextButton onClick={(e) => setView(3)}>Next</NextButton>
+        <NextButton onClick={confirm}>
+          {loading ? <Loader /> : 'Next'}
+        </NextButton>
       </Footer>
     </Container>
   );

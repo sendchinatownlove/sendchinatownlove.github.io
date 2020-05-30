@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Divider, Voucher, Bold } from './styles';
 import Logo from '../../components/Logos/image/LogoTextDown.png';
@@ -12,9 +12,6 @@ import { SET_VIEW } from '../../utilities/hooks/VoucherContext/constants';
 interface Props {}
 interface ButtonProps {
   color?: String;
-}
-interface VoucherInfoProps {
-  showInfo?: Boolean;
 }
 const LandingCard = (props: Props) => {
   const { voucher } = useVoucherState();

@@ -3,7 +3,10 @@ import {
   useVoucherState,
   useVoucherDispatch,
 } from '../../utilities/hooks/VoucherContext/context';
-import { SET_VIEW } from '../../utilities/hooks/VoucherContext/constants';
+import {
+  SET_AMOUNT,
+  SET_VIEW,
+} from '../../utilities/hooks/VoucherContext/constants';
 import { AmountContainer, Text, Footer, NextButton } from './styles';
 
 interface Props {}
@@ -11,8 +14,9 @@ const Amount = (props: Props) => {
   const { amount, voucher } = useVoucherState();
   const dispatch = useVoucherDispatch();
 
-  const setView = (view) => {
-    dispatch({ type: SET_VIEW, payload: view });
+  const setView = (e) => {
+    dispatch({ type: SET_AMOUNT, payload: 0 });
+    dispatch({ type: SET_VIEW, payload: 0 });
   };
 
   return (
@@ -24,7 +28,7 @@ const Amount = (props: Props) => {
       </AmountContainer>
       <AmountContainer>
         <Text bold="true" size="24px">
-          $ {(voucher.amount / 100 - amount).toFixed(2)}
+          $ {(amount / 100).toFixed(2)}
         </Text>
         <Text size="16px">Remaining voucher balance</Text>
       </AmountContainer>
