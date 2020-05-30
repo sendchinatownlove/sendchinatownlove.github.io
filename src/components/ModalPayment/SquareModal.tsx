@@ -7,11 +7,7 @@ import { useTranslation } from 'react-i18next';
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 import { SquareErrors, hasKey } from '../../consts';
-import {
-  makeSquarePayment,
-  SquareLineItems,
-  Buyer,
-} from '../../utilities/api';
+import { makeSquarePayment, SquareLineItems, Buyer } from '../../utilities/api';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
@@ -70,20 +66,25 @@ const SquareModal = ({
     }
 
     // 'buy_meal' is still respresented as a gift card when calling the API
-    const payment: SquareLineItems = purchaseType === 'buy_meal' ? times(() => ({
-      amount: Number(costPerMeal) * 100,
-      currency: 'usd',
-      item_type: 'gift_card',
-      quantity: 1,
-    }), numberOfMeals)
-      : [
-        {
-          amount: Number(amount) * 100,
-          currency: 'usd',
-          item_type: purchaseType,
-          quantity: 1,
-        }
-      ]
+    const payment: SquareLineItems =
+      purchaseType === 'buy_meal'
+        ? times(
+            () => ({
+              amount: Number(costPerMeal) * 100,
+              currency: 'usd',
+              item_type: 'gift_card',
+              quantity: 1,
+            }),
+            numberOfMeals
+          )
+        : [
+            {
+              amount: Number(amount) * 100,
+              currency: 'usd',
+              item_type: purchaseType,
+              quantity: 1,
+            },
+          ];
 
     const is_distribution = purchaseType === 'buy_meal';
     const buyer: Buyer = {
@@ -331,8 +332,8 @@ const CheckboxContainer = styled.label`
     text-decoration: underline;
   }
 
-  > span { 
-    padding: 9px 9px 9px 0px
+  > span {
+    padding: 9px 9px 9px 0px;
   }
 `;
 
@@ -361,7 +362,6 @@ const SquareFormContainer = styled.div`
   h3 {
     font-size: 24px;
   }
-  
 `;
 
 const Header = styled.div`
