@@ -4,18 +4,18 @@ import { Buyer, PaymentParams, SquarePaymentParams } from './types';
 import { charges, sellers } from './endpoints';
 
 // Fix return typing
-export const getSellers = async () =>
-  axios
-    .get(sellers)
-    .then((res) => res)
-    .catch((err) => err);
+export const getSellers = async (lang?: string): Promise<any> => {
+  return await axios.get(sellers, {
+    params: { locale: localeFromLanguage(lang) },
+  });
+};
 
 // Fix return typing
-export const getSeller = async (id: string) =>
-  axios
-    .get(sellers + id)
-    .then((res) => res)
-    .catch((err) => err);
+export const getSeller = async (id: string, lang?: string): Promise<any> => {
+  return await axios.get(sellers + id, {
+    params: { locale: localeFromLanguage(lang) },
+  });
+};
 
 // TODO(ArtyEmsee): add typing for stripe elements
 export const makePayment = async (
@@ -105,3 +105,13 @@ export const makeSquarePayment = async (
       throw err;
     });
 };
+
+function localeFromLanguage(language?: string) {
+  switch (language) {
+    case 'cn':
+      return 'zh-CN';
+    case 'en':
+    default:
+      return 'en';
+  }
+}

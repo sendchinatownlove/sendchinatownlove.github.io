@@ -12,12 +12,15 @@ import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   menuOpen: boolean;
 }
 
 const SellerPage = (props: Props) => {
+  const { i18n } = useTranslation();
+
   // fix typing
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
@@ -25,19 +28,21 @@ const SellerPage = (props: Props) => {
   const dispatch = useModalPaymentDispatch();
   const { sellerData } = useModalPaymentState();
 
-  const fetchData = async () => {
+  const fetchData = async (lang?) => {
     setLoading(true);
-    const result = id && (await getSeller(id));
+    const result = id && (await getSeller(id, lang));
     await dispatch({
       type: SET_SELLER_DATA,
       payload: result.data,
     });
     setLoading(false);
   };
+
   useEffect(() => {
-    fetchData();
+    fetchData(i18n.language);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [i18n.language]);
+
   return sellerData && sellerData.id !== 0 ? (
     <Container menuOpen={props.menuOpen}>
       <SellerName>{sellerData.name}</SellerName>
