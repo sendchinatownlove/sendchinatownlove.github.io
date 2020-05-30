@@ -17,6 +17,7 @@ import {
 import styled from 'styled-components';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
+import ReactPixel from 'react-facebook-pixel';
 
 interface Props {
   seller: BrowsePageSeller;
@@ -38,6 +39,21 @@ const OwnerPanel = ({ seller }: Props) => {
   const showModal = (event: any) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
     setPurchaseType(event.target.value);
+  };
+
+  const donationClickHander = (event: any) => {
+    ReactPixel.trackCustom('DonationButtonClick', {});
+    showModal(event);
+  };
+
+  const voucherClickHander = (event: any) => {
+    ReactPixel.trackCustom('VoucherButtonClick', {});
+    showModal(event);
+  };
+
+  const giftMealClickHander = (event: any) => {
+    ReactPixel.trackCustom('GiftMealButtonClick', {});
+    showModal(event);
   };
 
   const extraInfo = {
@@ -101,8 +117,12 @@ const OwnerPanel = ({ seller }: Props) => {
         {seller.accept_donations && (
           <button
             value="donation"
-            className={classnames(styles.button, 'button--filled')}
-            onClick={showModal}
+            className={classnames(
+              styles.button,
+              seller.cost_per_meal && styles.moreThanTwoButtons,
+              'button--filled'
+            )}
+            onClick={donationClickHander}
           >
             {t('ownerPanel.donation')}
           </button>
@@ -111,7 +131,7 @@ const OwnerPanel = ({ seller }: Props) => {
           <button
             value="gift_card"
             className={classnames(styles.button, 'button--outlined')}
-            onClick={showModal}
+            onClick={voucherClickHander}
           >
             {t('ownerPanel.voucher')}
           </button>
@@ -119,8 +139,8 @@ const OwnerPanel = ({ seller }: Props) => {
         {seller.cost_per_meal !== null && (
           <button
             value="buy_meal"
-            className={classnames(styles.button, 'button--redfilled')}
-            onClick={showModal}
+            className={classnames(styles.button, 'button--outlined')}
+            onClick={giftMealClickHander}
           >
             Gift a meal
           </button>

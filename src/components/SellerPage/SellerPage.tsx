@@ -13,11 +13,13 @@ import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import ReactPixel from 'react-facebook-pixel';
 
 interface Props {
   menuOpen: boolean;
 }
 
+ReactPixel.trackCustom('SellerPageView', {});
 const SellerPage = (props: Props) => {
   const { i18n } = useTranslation();
 

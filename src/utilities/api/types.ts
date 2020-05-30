@@ -13,6 +13,8 @@ export type SquarePaymentParams = {
   quantity: number;
 };
 
+export type SquareLineItems = Array<SquarePaymentParams>;
+
 export type Location = {
   seller_id: number;
   address1: string;

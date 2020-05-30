@@ -10,11 +10,13 @@ import nycMapBackground from './images/nyc_3.png';
 import { LoaderFillerContainer } from '../Loader';
 import DonationPoolBox from './DonationPool';
 import { useTranslation } from 'react-i18next';
+import ReactPixel from 'react-facebook-pixel';
 
 interface Props {
   menuOpen: boolean;
 }
 
+ReactPixel.trackCustom('MerchantsPageView', {});
 const MerchantsPage = (props: Props) => {
   const { t, i18n } = useTranslation();
 

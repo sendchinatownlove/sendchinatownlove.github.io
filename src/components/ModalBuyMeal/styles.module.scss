@@ -1,20 +1,43 @@
+@import '../../responsive';
+
 .amountContainer {
   background-color: #f7f7f7;
   padding: 25px 35px;
 }
 
 .selectAmtContainer {
+  display: flex;
+  align-items: center;
+
   padding-top: 30px;
   margin: auto;
+
+  @include for-phone-only {
+    flex-direction: column;
+  }
+}
+
+.selectAmt {
+  display: flex;
+  align-items: center;
+
+  @include for-phone-only {
+    margin-bottom: 30px;
+  }
 }
 
 .separator {
-  margin: 0px 20px 0px 20px;
+  margin: 0 15px;
 }
 
 .customAmt {
   width: 100%;
   max-width: 250px;
+}
+
+.costPerMeal {
+  border-color: #9e9e9e;
+  background-color: #9e9e9e;
 }
 
 .nextBtn {
@@ -29,7 +52,8 @@
 }
 
 .total {
-  float: right;
+  flex-grow: 1;
+  text-align: center;
 }
 
 .illustrationsContainer {
@@ -41,11 +65,33 @@
 .illustrationLeading {
   width: 45%;
   float: left;
+  max-width: 100%;
+  height: auto;
+}
+
+@media only screen and (max-width: 450px) {
+  .illustrationLeading {
+    width: 45%;
+    height: 100%;
+    float: left;
+    max-width: 100%;
+  }
 }
 
 .illustrationTrailing {
   width: 45%;
   float: right;
+  max-width: 100%;
+  height: auto;
+}
+
+@media only screen and (max-width: 450px) {
+  .illustrationTrailing {
+    width: 45%;
+    height: 100%;
+    float: right;
+    max-width: 100%;
+  }
 }
 
 .explantionContainer {

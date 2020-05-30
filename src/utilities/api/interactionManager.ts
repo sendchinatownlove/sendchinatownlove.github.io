@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
-import { Buyer, PaymentParams, SquarePaymentParams } from './types';
+import { Buyer, PaymentParams, SquareLineItems } from './types';
 import { charges, sellers } from './endpoints';
 
 // Fix return typing
@@ -74,7 +74,7 @@ export const makePayment = async (
 export const makeSquarePayment = async (
   nonce: string,
   sellerId: string,
-  payment: SquarePaymentParams,
+  payment: SquareLineItems,
   buyer: Buyer,
   isDistribution: boolean
 ) => {
@@ -88,7 +88,7 @@ export const makeSquarePayment = async (
       {
         is_square: true,
         nonce,
-        line_items: [payment],
+        line_items: payment,
         email,
         name,
         seller_id: sellerId,
