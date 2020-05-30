@@ -17,7 +17,7 @@ const StoreMerch: React.SFC<Props> = ({ seller, getStoreImages }) => {
         designed by our Send Chinatown Love designers.
       </p>
       <Button className="button--filled">
-        check out shunfa merch {' '}
+        check out the merch {' '}
         <i className='fa fa-external-link'></i>
       </Button>
     </MerchContainer>

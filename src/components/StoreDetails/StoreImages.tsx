@@ -9,7 +9,6 @@ export const getStoreImages = (sellerId: string| null) => {
 
   let images = {
     hero: `https://storage.googleapis.com/sendchinatownlove-assets/public/assets/${sellerId}/${sellerId}-hero.png`,
-    gallery: galleryArray,
     menu: `https://storage.googleapis.com/sendchinatownlove-assets/public/assets/${sellerId}/${sellerId}-menu.png`,
     ownerImg: `https://storage.googleapis.com/sendchinatownlove-assets/public/assets/${sellerId}/${sellerId}-owner.png`,
   };

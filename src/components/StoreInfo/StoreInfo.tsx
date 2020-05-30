@@ -19,9 +19,9 @@ type Props = {
 export const StoreInfo: React.SFC<Props> = ({ seller }) => {
   const { summary, story, cuisine_name, locations } = seller;
 
-  const storeNavItems = ['story', 'menu', 'gallery', 'merch', 'share'];
+  const storeNavItems = ['story', 'menu', 'gallery', 'share'];
 
-  const [currentMerchantView, setMerchantView] = useState('gallery');
+  const [currentMerchantView, setMerchantView] = useState('story');
 
   const switchMerchantView = () => {
     switch (currentMerchantView) {

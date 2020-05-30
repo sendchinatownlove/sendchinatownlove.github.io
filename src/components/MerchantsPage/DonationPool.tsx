@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import Hero from './images/skyline-hero.png';
 import Modal from '../Modal';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
@@ -26,17 +25,12 @@ const DonationPoolBox = () => {
       <Container>
         <ColumnContainer>
           <h2 style={{ margin: '10px 0', fontWeight: 'bolder' }}>
-            {t(
-              'Checked out our merchants but not sure who to donate to first?'
-            )}
+            {t('donationPool.header')}
           </h2>
-          <span>{t('You can support by donating to our donation pool!')}</span>
-          <span>
-            {t('All donations will be distributed evenly to our merchants.')}
-          </span>{' '}
-          <br />
+          <span>{t('donationPool.description1')}</span>
+          <span>{t('donationPool.description2')}</span> <br />
           <button className={'button--red-filled'} onClick={openModal}>
-            {t('SUPPORT CHINATOWN')}
+            {t('donationPool.button')}
           </button>
         </ColumnContainer>
         <Image src={websiteImages.skyline} alt="banner" />

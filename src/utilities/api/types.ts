@@ -73,4 +73,5 @@ export type BrowsePageSeller = {
   website_url: string;
   menu_url: string;
   cost_per_meal: number;
+  gallery_image_urls: string[];
 };

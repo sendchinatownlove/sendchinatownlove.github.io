@@ -39,5 +39,18 @@
       "subHeader2": "Please try going back to the homepage.",
       "link": "GO TO HOMEPAGE"
     }
+  },
+  "merchantsPage": {
+    "platformInfoHeader": "Our Chinatown",
+    "platformInfoDescription": "We are providing an online platform to low-tech, cash-only, Asian-owned small businesses that have been disproportionately impacted by COVID-19.",
+    "platformInfoAction": "Support local merchants by making a donation or purchasing a voucher from them.",
+    "flyerAsk": "Know of any business owners that fit our target merchant?",
+    "flyerDownload": "Download our flyer to share with them."
+  },
+  "donationPool": {
+    "header": "Checked out our merchants but not sure who to donate to first?",
+    "description1": "You can support by donating to our donation pool!",
+    "description2": "All donations will be distributed evenly to our merchants.",
+    "button": "SUPPORT CHINATOWN!"
   }
 }

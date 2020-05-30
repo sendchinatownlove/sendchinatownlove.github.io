@@ -13,10 +13,6 @@ import {
   UPDATE_SELLER_DATA,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { getSeller } from '../../utilities';
-import {
-  phoneScreens,
-  tabletScreens,
-} from '../../utilities/general/responsive';
 import styled from 'styled-components';
 
 export interface Props {
@@ -26,6 +22,9 @@ export interface Props {
   costPerMeal: number;
 }
 
+export interface ModalProps {
+  modalView: number;
+}
 const idempotencyKey = uuid();
 
 export const Modal = (props: Props) => {
@@ -42,47 +41,81 @@ export const Modal = (props: Props) => {
   };
 
   return (
-    <DonationsContainer
-      id="donation-form"
-      className={'modalForm--form'}
-      style={{ display: modalView > -1 ? 'block' : 'none' }}
-    >
-      <button className={'closeButton--close'} onClick={closeModal}>
-        ×
-      </button>
-      {modalView === 0 && props.purchaseType !== 'buy_meal' && (
-        <ModalAmount {...props} />
-      )}
-      {modalView === 0 && props.purchaseType === 'buy_meal' && (
-        <ModalBuyMeal {...props} />
-      )}
-      {modalView === 1 && (
-        <SquareModal {...props} idempotencyKey={idempotencyKey} />
-      )}
-      {modalView === 2 && (
-        <ModalConfirmation {...props} closeModal={closeModal} />
-      )}
-    </DonationsContainer>
+    <ModalContainer modalView={modalView}>
+      <CloseButtonContainer>
+        <CloseButton onClick={closeModal}>×</CloseButton>
+      </CloseButtonContainer>
+      <ViewContainer>
+        {modalView === 0 && props.purchaseType !== 'buy_meal' && (
+          <ModalAmount {...props} />
+        )}
+        {modalView === 0 && props.purchaseType === 'buy_meal' && (
+          <ModalBuyMeal {...props} />
+        )}
+        {modalView === 1 && (
+          <SquareModal {...props} idempotencyKey={idempotencyKey} />
+        )}
+        {modalView === 2 && (
+          <ModalConfirmation {...props} closeModal={closeModal} />
+        )}
+      </ViewContainer>
+    </ModalContainer>
   );
 };
 
 export default Modal;
 
-export const DonationsContainer = styled.div`
-  height: 80%;
-  overflow-y: scroll;
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
-  z-index: 10;
+const ModalContainer = styled.div`
+  display: ${(props: ModalProps) => (props.modalView > -1 ? 'flex' : 'none')};
+  flex-direction: column;
+  margin: 0 auto;
 
-  @media only screen and (${tabletScreens}) {
+  background-color: white;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  padding-bottom: 40px;
+
+  max-height: 85vh;
+  width: 725px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+
+  @media only screen and (max-width: 799px) {
     width: 85%;
-    height: 75vh;
-    overflow-y: scroll;
   }
 
-  @media only screen and (${phoneScreens}) {
+  @media only screen and (max-width: 450px) {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+  }
+`;
+const ViewContainer = styled.div`
+  overflow-y: scroll;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  padding: 0 50px;
+
+  @media only screen and (max-width: 450px) {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
   }
+`;
+const CloseButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+`;
+const CloseButton = styled.button`
+  width: 40px;
+  font-weight: bold;
+  font-size: 30px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
 `;

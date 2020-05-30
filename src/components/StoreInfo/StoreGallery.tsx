@@ -8,33 +8,27 @@ export interface Props {
   seller: BrowsePageSeller;
 }
 
-const StoreGallery: React.SFC<Props> = ({ seller, getStoreImages }) => {
-  const images = getStoreImages(seller.seller_id);
-  const gallery = images.gallery;
-
-  const hideImage = (e) => {
-    return (e.target.style.display = 'none');
-  };
+const StoreGallery: React.SFC<Props> = ({ seller }) => {
+  const gallery = seller.gallery_image_urls;
 
   const [viewImage, setViewImage] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  const view = (url: string) => {
+  const expandImage = (url: string) => {
     setViewImage(url);
     setShowModal(true)
   }
 
-  return (
+  return gallery && (
     <GalleryContainer>
       {gallery.map((image, idx) => {
-        return idx !== 0 && (
+        return (
           <img
             key={image}
             src={image}
-            className={`item-${idx}`}
+            className={`item-${idx+1}`}
             alt="store-menu"
-            onError={hideImage}
-            onClick={() => view(image)}
+            onClick={() => expandImage(image)}
           />
         );
       })}
@@ -76,6 +70,8 @@ const GalleryModal = styled.div`
 
   img {
       width: 48vw;
+      max-height: 90vh; 
+      object-fit: cover;
   }
 
   @media (max-width: 650px) {
@@ -119,6 +115,16 @@ const GalleryContainer = styled.div`
       grid-row: span 1;
       width: 200px;
       height: 200px;
+    }
+  }
+
+  @media (max-width: 450px) {
+    > img {
+      width: 100%;
+    }
+
+    .item-1 {
+      width: 100%;
     }
   }
 `;
