@@ -5,6 +5,7 @@ import {
   useVoucherDispatch,
 } from '../../utilities/hooks/VoucherContext/context';
 import defaultStoreFront from '../../images/misc-store.png';
+import MoreInfo from './MoreInfo';
 import {
   SET_AMOUNT,
   SET_VIEW,
@@ -28,7 +29,6 @@ interface TextProps {
   align?: String;
   padding?: String;
 }
-
 
 const Amount = (props: Props) => {
   const { amount, voucher } = useVoucherState();
@@ -55,7 +55,7 @@ const Amount = (props: Props) => {
         </Text>
       </AmountContainer>
 
-      <Image 
+      <Image
         src={
           voucher.storeImage
             ? process.env.REACT_APP_BASE_URL + voucher.storeImage
@@ -63,11 +63,13 @@ const Amount = (props: Props) => {
         }
         alt={`${voucher.ownerName} Illustration`}
       />
-      <AmountContainer>
+      <AmountContainer bringToTheFront>
         <Text bold="true" size="24px">
           ${voucher.amount === 0 ? '0.00' : (voucher.amount / 100).toFixed(2)}
         </Text>
-        <Text size="16px">Current balance</Text>
+        <CurrentBalanceRow size="16px">
+          Current balance <MoreInfo showShadow={true} />
+        </CurrentBalanceRow>
       </AmountContainer>
       <AmountContainer>
         <Text size="18px">How much are you spending today?</Text>
@@ -110,6 +112,9 @@ const Container = styled.div`
   color: black;
   display: flex;
   flex-direction: column;
+`;
+const CurrentBalanceRow = styled(Text)`
+  justify-content: center;
 `;
 const Image = styled.img`
   width: 100%;

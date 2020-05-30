@@ -4,7 +4,6 @@ import { useVoucherState } from '../../utilities/hooks/VoucherContext/context';
 import Logo from '../../components/Logos/image/PureLogo.png';
 import DefaultOwnerImage from '../../images/female.svg';
 
-
 interface Props {}
 interface ContainerProps {
   isOnLandingPage: boolean;
@@ -20,9 +19,11 @@ const StoreBanner = (props: Props) => {
       <OwnerImage
         isOnLandingPage={isOnLandingPage}
         src={
-          isOnLandingPage ? (
-            voucher?.ownerImage ? process.env.REACT_APP_BASE_URL + voucher?.ownerImage : DefaultOwnerImage
-          ) : Logo
+          isOnLandingPage
+            ? voucher?.ownerImage
+              ? process.env.REACT_APP_BASE_URL + voucher?.ownerImage
+              : DefaultOwnerImage
+            : Logo
         }
       />
       <Header isOnLandingPage={isOnLandingPage}>
@@ -62,7 +63,8 @@ const OwnerImage = styled.img`
     props.isOnLandingPage ? '150px' : '55px'};
   // height: ${(props: ContainerProps) =>
     props.isOnLandingPage ? '150px' : '100px'};
-  ${(props: ContainerProps) => props.isOnLandingPage && 'border: 5px solid white;'}
+  ${(props: ContainerProps) =>
+    props.isOnLandingPage && 'border: 5px solid white;'}
   ${(props: ContainerProps) => props.isOnLandingPage && 'border-radius: 100%;'}
   ${(props: ContainerProps) => props.isOnLandingPage && 'background: white;'}
 `;

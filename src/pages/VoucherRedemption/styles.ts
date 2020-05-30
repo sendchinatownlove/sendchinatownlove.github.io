@@ -14,6 +14,7 @@ interface VoucherInfoProps {
 }
 interface ContainerProps {
   height?: string;
+  bringToTheFront?: boolean;
 }
 
 const AmountContainer = styled.div`
@@ -24,6 +25,8 @@ const AmountContainer = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
+  ${(props: ContainerProps) =>
+    props.bringToTheFront && 'z-index: 150!important;'}
 `;
 const MessageConatiner = styled.div`
   display: flex;
@@ -50,6 +53,7 @@ const Text = styled.div`
   flex-direction: row;
   margin: 0 auto;
   word-wrap: break-word;
+  position: relative;
   ${(props: TextProps) => props.size && `font-size: ${props.size};`}
   ${(props: TextProps) => props.bold === 'true' && `font-weight: 600;`}
   ${(props: TextProps) => props.color && `color: ${props.color};`}

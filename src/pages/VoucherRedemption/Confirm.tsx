@@ -5,6 +5,7 @@ import {
   useVoucherDispatch,
 } from '../../utilities/hooks/VoucherContext/context';
 import { SET_VIEW } from '../../utilities/hooks/VoucherContext/constants';
+import MoreInfo from './MoreInfo';
 import {
   AmountContainer,
   MessageConatiner,
@@ -17,6 +18,10 @@ import {
 } from './styles';
 
 interface Props {}
+interface ContainerProps {
+  height?: string;
+  bringToTheFront?: boolean;
+}
 
 const Amount = (props: Props) => {
   const { amount, voucher } = useVoucherState();
@@ -33,7 +38,10 @@ const Amount = (props: Props) => {
           {`< Back`}
         </Text>
       </AmountContainer>
-      <Header> Complete Your Purchase</Header>
+      <Header>
+        Complete Your Purchase
+        <MoreInfo marginLeft="35px" showShadow={true} />
+      </Header>
       <MessageConatiner>
         <Text size="16px" width="50%">
           Voucher balance
@@ -85,11 +93,18 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const Header = styled.div`
+  position: relative;
+  display: flex;
   text-align: center;
   width: 100%;
   margin: 24px auto;
   font-size: 24px;
+  line-height: 22px;
   font-weight: 600;
+  justify-content: center;
+  ${(props: ContainerProps) =>
+    props.bringToTheFront && 'z-index: 150!important;'}
+  z-index: 150!important;
 `;
 
 const VoucherContainer = styled.div`

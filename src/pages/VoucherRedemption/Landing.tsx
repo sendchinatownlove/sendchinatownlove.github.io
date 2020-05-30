@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Divider, Voucher, Bold } from './styles';
 import Logo from '../../components/Logos/image/LogoTextDown.png';
+import MoreInfo from './MoreInfo';
 import {
   useVoucherState,
   useVoucherDispatch,
@@ -18,7 +19,6 @@ interface VoucherInfoProps {
 const LandingCard = (props: Props) => {
   const { voucher } = useVoucherState();
   const dispatch = useVoucherDispatch();
-  const [showInfo, setShowInfo] = useState(false);
 
   const setView = (e) => {
     dispatch({ type: SET_VIEW, payload: 1 });
@@ -27,46 +27,18 @@ const LandingCard = (props: Props) => {
   return (
     <Container>
       <CardContainer>
-        <VoucherContent showInfo={showInfo}>
-          {showInfo ? (
-            <SubText showInfo={showInfo}>
-              <span>
-                By proceeding with your purchase, you understand that the
-                voucher card is not redeemable for cash and can only be used at
-                Shunfa Bakery. All purchases are final. In the event that the
-                merchant is no longer open at the time of redemption, Send
-                Chinatown Love Inc. will not be able to refund your purchase.
-                Balance displayed in the voucher may or may not represent the
-                final balance. Final balance information is subject to{' '}
-                {voucher.ownerName}'s most recent records.
-              </span>
-              <MoreInfoButton
-                showInfo={showInfo}
-                onClick={(e) => setShowInfo(!showInfo)}
-              >
-                ?
-              </MoreInfoButton>
-            </SubText>
-          ) : (
-            <>
-              <SubText showInfo={showInfo}>
-                Your available balance
-                <MoreInfoButton
-                  showInfo={showInfo}
-                  onClick={(e) => setShowInfo(!showInfo)}
-                >
-                  ?
-                </MoreInfoButton>
-              </SubText>
-              <Balance>${(voucher.amount / 100).toFixed(2)}</Balance>
-              <Voucher>
-                Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>
-              </Voucher>
-              <br />
-            </>
-          )}
+        <VoucherContent>
+          <SubText>
+            <SupportingText>Your available balance</SupportingText>
+            <MoreInfo />
+          </SubText>
+          <Balance>${(voucher.amount / 100).toFixed(2)}</Balance>
+          <Voucher>
+            Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>
+          </Voucher>
+          <br />
         </VoucherContent>
-        <Divider showInfo={showInfo} />
+        <Divider />
         <Button onClick={setView}>Click to begin redeeming your voucher</Button>
         <br />
       </CardContainer>
@@ -86,6 +58,7 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 const CardContainer = styled.div`
+  position: relative;
   width: 307px;
   margin: 0 auto;
   height: 342px;
@@ -95,24 +68,6 @@ const CardContainer = styled.div`
   flex-direction: column;
   border-radius: 15px;
   justify-content: space-between;
-`;
-const SubText = styled.div`
-  text-align: center;
-  font-size: 16px;
-  line-height: 22px;
-  display: flex;
-  flex-direction: row;
-  justify-content: ${(props: VoucherInfoProps) =>
-    !props.showInfo ? `center` : `space-between`};
-  position: relative;
-  showInfo={showInfo}
-  color: ${(props: VoucherInfoProps) => (!props.showInfo ? `white` : `black`)};
-  span {    
-    font-size: 11px;
-    text-align: left;
-    width: 228px;
-    padding-left: 10px;
-  }
 `;
 const VoucherContent = styled.div`
   width: 90%;
@@ -126,18 +81,20 @@ const VoucherContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: ${(props: VoucherInfoProps) =>
-    props.showInfo ? `white` : `#ab192e`};
+  background-color: #ab192e;
 `;
-const MoreInfoButton = styled.div`
-  position: absolute;
-  right: 10px;
-  border: 1px solid transparent;
-  color: ${(props: VoucherInfoProps) => (props.showInfo ? `white` : `#ab192e`)};
-  background-color: ${(props: VoucherInfoProps) =>
-    props.showInfo ? `#ab192e` : `white`};
-  border-radius: 50%;
-  width: 25px;
+const SubText = styled.div`
+  font-size: 16px;
+  line-height: 22px;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: center;
+`;
+const SupportingText = styled.span`
+  z-index: 100 !important;
 `;
 const Button = styled.div`
   cursor: pointer;
@@ -147,6 +104,7 @@ const Button = styled.div`
   text-align: center;
 `;
 const Balance = styled.div`
+  z-index: 0 !important;
   font-weight: 600;
   font-size: 50px;
   line-height: 68px;
