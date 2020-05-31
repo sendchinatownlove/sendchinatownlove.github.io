@@ -10,11 +10,7 @@ const StoreMenu: React.SFC<Props> = ({ seller, getStoreImages }) => {
   const images = getStoreImages(seller.seller_id);
 
   return (
-    <section>
-      {
-        <img src={images.menu} alt="store-menu" width="100%" />
-      }
-    </section>
+    <section>{<img src={images.menu} alt="store-menu" width="100%" />}</section>
   );
 };
 

@@ -112,7 +112,9 @@ export const Modal = (props: Props) => {
         type="button"
         className={classnames(styles.nextBtn, 'modalButton--filled')}
         onClick={openModal}
-        disabled={numberOfMeals < 1 || numberOfMeals > COST_LIMIT / props.costPerMeal}
+        disabled={
+          numberOfMeals < 1 || numberOfMeals > COST_LIMIT / props.costPerMeal
+        }
       >
         {t('paymentProcessing.amount.submit')}
       </button>

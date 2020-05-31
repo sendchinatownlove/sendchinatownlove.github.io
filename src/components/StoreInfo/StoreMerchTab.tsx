@@ -17,8 +17,7 @@ const StoreMerch: React.SFC<Props> = ({ seller, getStoreImages }) => {
         designed by our Send Chinatown Love designers.
       </p>
       <Button className="button--filled">
-        check out the merch {' '}
-        <i className='fa fa-external-link'></i>
+        check out the merch <i className="fa fa-external-link"></i>
       </Button>
     </MerchContainer>
   );
@@ -42,6 +41,6 @@ const Button = styled.div`
   cursor: pointer;
 
   @media (max-width: 550px) {
-      width: 100%;
+    width: 100%;
   }
 `;

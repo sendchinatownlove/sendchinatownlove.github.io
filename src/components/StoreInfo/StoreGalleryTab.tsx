@@ -15,8 +15,8 @@ const StoreGallery: React.SFC<Props> = ({ seller }) => {
 
   const expandImage = (url: string) => {
     setViewImage(url);
-    setShowModal(true)
-  }
+    setShowModal(true);
+  };
 
   return gallery.length > 0 ? (
     <GalleryContainer>
@@ -25,42 +25,38 @@ const StoreGallery: React.SFC<Props> = ({ seller }) => {
           <img
             key={image}
             src={image}
-            className={`item-${idx+1}`}
+            className={`item-${idx + 1}`}
             alt="store-menu"
             onClick={() => expandImage(image)}
           />
         );
       })}
       <GalleryModal style={{ display: showModal ? 'block' : 'none' }}>
-        <CloseButton onClick={() => setShowModal(false)}>
-            ×
-        </CloseButton>
-        <img src={viewImage} alt='modal view' />
+        <CloseButton onClick={() => setShowModal(false)}>×</CloseButton>
+        <img src={viewImage} alt="modal view" />
       </GalleryModal>
     </GalleryContainer>
   ) : (
-    <React.Fragment>
-      Stay tuned, photos coming soon!
-    </React.Fragment>
+    <React.Fragment>Stay tuned, photos coming soon!</React.Fragment>
   );
 };
 
 export default StoreGallery;
 
 const CloseButton = styled.button`
-    position: fixed;
-    right: 0;
-    top: 0;
-    height: 47px; 
-    width: 47px;
-    border-radius: 5px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 47px;
+  width: 47px;
+  border-radius: 5px;
 
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 30px;
-    border: none;
-    outline: none;
-    z-index: 2;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 30px;
+  border: none;
+  outline: none;
+  z-index: 2;
 `;
 
 const GalleryModal = styled.div`
@@ -72,15 +68,15 @@ const GalleryModal = styled.div`
   z-index: 1;
 
   img {
-      width: 48vw;
-      max-height: 90vh; 
-      object-fit: cover;
+    width: 48vw;
+    max-height: 90vh;
+    object-fit: cover;
   }
 
   @media (max-width: 650px) {
-      img {
-          width: 95vw;
-      }
+    img {
+      width: 95vw;
+    }
   }
 `;
 
@@ -96,7 +92,7 @@ const GalleryContainer = styled.div`
     cursor: pointer;
 
     :hover {
-        opacity: .70;
+      opacity: 0.7;
     }
   }
 
