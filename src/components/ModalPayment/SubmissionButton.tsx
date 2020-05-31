@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Context } from 'react-square-payment-form';
+import ReactPixel from 'react-facebook-pixel';
 
 type Props = {
   canSubmit: boolean;
@@ -10,6 +11,7 @@ const SubmissionButton = ({ canSubmit }: Props) => {
   var [submittable] = useState(false);
 
   const handleSubmit = (evt: { preventDefault: () => void }) => {
+    ReactPixel.trackCustom('PaymentConfirmButtonClick', {});
     evt.preventDefault();
     context.onCreateNonce();
   };

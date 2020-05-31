@@ -6,9 +6,10 @@ import {
   smallScreens,
   tabletScreens,
 } from '../../utilities/general/responsive';
-import { getWebsiteImages } from '../StoreDetails/StoreImages';
+import { getWebsiteImages } from '../StoreInfo/StoreImages';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import ReactPixel from 'react-facebook-pixel';
 
 const DonationPoolBox = () => {
   const websiteImages = getWebsiteImages();
@@ -16,6 +17,7 @@ const DonationPoolBox = () => {
   const dispatch = useModalPaymentDispatch();
 
   const openModal = (e: any) => {
+    ReactPixel.trackCustom('DonationPoolButtonClick', {});
     e.preventDefault();
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
   };

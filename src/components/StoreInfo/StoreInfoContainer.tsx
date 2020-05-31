@@ -4,13 +4,13 @@ import classnames from 'classnames';
 import styled from 'styled-components';
 import { Location, BrowsePageSeller } from '../../utilities';
 import StoreStory from '../StoreStory';
-import StoreMenu from '../StoreMenu';
-import StoreGallery from './StoreGallery';
-import StoreMerch from './StoreMerch';
+import StoreMenu from './StoreMenuTab';
+import StoreGallery from './StoreGalleryTab';
+import StoreMerch from './StoreMerchTab';
 import styles from './styles.module.scss';
 import defaultStoreFront from './misc-store.png';
 
-import { getStoreImages } from '../StoreDetails/StoreImages';
+import { getStoreImages } from './StoreImages';
 
 type Props = {
   seller: BrowsePageSeller;
@@ -21,12 +21,12 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
 
   const storeNavItems = ['story', 'menu', 'gallery', 'share'];
 
-  const [currentMerchantView, setMerchantView] = useState('story');
+  const [currentMerchantView, setMerchantView] = useState('gallery'); //switch back to 'story' l8r
 
   const switchMerchantView = () => {
     switch (currentMerchantView) {
       case 'gallery':
-        return <StoreGallery seller={seller} getStoreImages={getStoreImages} />;
+        return <StoreGallery seller={seller} />;
       case 'menu':
         return <StoreMenu seller={seller} getStoreImages={getStoreImages} />;
       case 'merch':

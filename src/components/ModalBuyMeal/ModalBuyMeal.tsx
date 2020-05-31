@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
+import {
+  useModalPaymentDispatch,
+  useModalPaymentState,
+} from '../../utilities/hooks/ModalPaymentContext/context';
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
@@ -9,6 +12,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import walletImage from './wallet.png';
 import cardImage from './card.png';
+import ReactPixel from 'react-facebook-pixel';
 
 export interface Props {
   purchaseType: string;
@@ -19,8 +23,11 @@ export interface Props {
 
 export const Modal = (props: Props) => {
   const { t } = useTranslation();
+  const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
-  const [numberOfMeals, setNumberOfMeals] = useState(0);
+  const [numberOfMeals, setNumberOfMeals] = useState(
+    amount ? parseInt(amount, 10) : 0
+  );
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
     const valueInt = parseInt(value, 10);
@@ -30,12 +37,16 @@ export const Modal = (props: Props) => {
   };
 
   const openModal = (e: any) => {
+    ReactPixel.trackCustom('GiftMealPaymentNextButtonClick', {
+      numberOfMeals: numberOfMeals,
+    });
     e.preventDefault();
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
   };
 
   const totalMealPrice = numberOfMeals * props.costPerMeal;
   const totalAmount = { value: totalMealPrice, text: '$' + totalMealPrice };
+  const COST_LIMIT = 10000;
 
   return (
     <form data-testid="ModalBuyMeal">
@@ -65,26 +76,31 @@ export const Modal = (props: Props) => {
         <label htmlFor="select-amount">{t('buyMeal.prompt')}</label>
         <br />
         <div className={styles.selectAmtContainer}>
-          <input
-            name="custom-amount"
-            type="number"
-            onFocus={(e) => handleAmount('', true, '')}
-            className={classnames(styles.customAmt, 'modalInput--input')}
-            onChange={(e) => {
-              handleAmount(e.target.value, true, '');
-            }}
-            value={numberOfMeals === 0 ? '' : String(numberOfMeals)}
-            placeholder="# of meals"
-            min="1"
-          />
-          <span className={styles.separator}>✕</span>
-          <button
-            type="button"
-            className={'modalButton--nonfunctional'}
-            disabled={true}
-          >
-            {'$' + props.costPerMeal}
-          </button>
+          <div className={styles.selectAmt}>
+            <input
+              name="custom-amount"
+              type="number"
+              onFocus={(e) => handleAmount('', true, '')}
+              className={classnames(styles.customAmt, 'modalInput--input')}
+              onChange={(e) => {
+                handleAmount(e.target.value, true, '');
+              }}
+              value={numberOfMeals === 0 ? '' : String(numberOfMeals)}
+              placeholder="# of meals"
+              min="1"
+            />
+            <span className={styles.separator}>✕</span>
+            <button
+              type="button"
+              className={classnames(
+                styles.costPerMeal,
+                'modalButton--nonfunctional'
+              )}
+              disabled={true}
+            >
+              {'$' + props.costPerMeal}
+            </button>
+          </div>
           <label className={styles.total}>
             {t('buyMeal.totalLabel')} <b>{totalAmount.text}</b>
           </label>
@@ -96,7 +112,7 @@ export const Modal = (props: Props) => {
         type="button"
         className={classnames(styles.nextBtn, 'modalButton--filled')}
         onClick={openModal}
-        disabled={numberOfMeals < 1}
+        disabled={numberOfMeals < 1 || numberOfMeals > COST_LIMIT / props.costPerMeal}
       >
         {t('paymentProcessing.amount.submit')}
       </button>

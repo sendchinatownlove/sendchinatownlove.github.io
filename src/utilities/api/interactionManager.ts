@@ -1,21 +1,21 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
-import { Buyer, PaymentParams, SquarePaymentParams } from './types';
+import { Buyer, PaymentParams, SquareLineItems } from './types';
 import { charges, sellers } from './endpoints';
 
 // Fix return typing
-export const getSellers = async () =>
-  axios
-    .get(sellers)
-    .then((res) => res)
-    .catch((err) => err);
+export const getSellers = async (lang?: string): Promise<any> => {
+  return await axios.get(sellers, {
+    params: { locale: localeFromLanguage(lang) },
+  });
+};
 
 // Fix return typing
-export const getSeller = async (id: string) =>
-  axios
-    .get(sellers + id)
-    .then((res) => res)
-    .catch((err) => err);
+export const getSeller = async (id: string, lang?: string): Promise<any> => {
+  return await axios.get(sellers + id, {
+    params: { locale: localeFromLanguage(lang) },
+  });
+};
 
 // TODO(ArtyEmsee): add typing for stripe elements
 export const makePayment = async (
@@ -74,7 +74,7 @@ export const makePayment = async (
 export const makeSquarePayment = async (
   nonce: string,
   sellerId: string,
-  payment: SquarePaymentParams,
+  payment: SquareLineItems,
   buyer: Buyer,
   isDistribution: boolean
 ) => {
@@ -88,7 +88,7 @@ export const makeSquarePayment = async (
       {
         is_square: true,
         nonce,
-        line_items: [payment],
+        line_items: payment,
         email,
         name,
         seller_id: sellerId,
@@ -105,3 +105,13 @@ export const makeSquarePayment = async (
       throw err;
     });
 };
+
+function localeFromLanguage(language?: string) {
+  switch (language) {
+    case 'cn':
+      return 'zh-CN';
+    case 'en':
+    default:
+      return 'en';
+  }
+}

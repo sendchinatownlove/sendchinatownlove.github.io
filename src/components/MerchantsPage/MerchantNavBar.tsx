@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   filterStoreType: Function;
 }
 
 const NavBar = ({ filterStoreType }: Props) => {
+  const { t } = useTranslation();
+  
   const [selected, setSelected] = useState('all');
 
   const setStoreType = (type: any, e: any) => {
@@ -16,9 +19,9 @@ const NavBar = ({ filterStoreType }: Props) => {
   };
 
   const storeTypes = [
-    { value: 'all', text: 'All' },
-    { value: 'Bakery', text: 'Bakery' },
-    { value: 'Chinese', text: 'Restaurant' },
+    { value: 'all', text: t('merchantNavBar.all') },
+    { value: 'Bakery', text: t('merchantNavBar.bakery') },
+    { value: 'Chinese', text: t('merchantNavBar.restaurant') },
     // { value: 'grocery', text: 'Grocery' },
     // { value: 'salon', text: 'Salon' },
   ];

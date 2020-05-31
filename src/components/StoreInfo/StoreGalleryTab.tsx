@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { BrowsePageSeller } from '../../utilities';
 
 export interface Props {
-  getStoreImages: Function;
   seller: BrowsePageSeller;
 }
 
@@ -19,7 +18,7 @@ const StoreGallery: React.SFC<Props> = ({ seller }) => {
     setShowModal(true)
   }
 
-  return gallery && (
+  return gallery.length > 0 ? (
     <GalleryContainer>
       {gallery.map((image, idx) => {
         return (
@@ -39,6 +38,10 @@ const StoreGallery: React.SFC<Props> = ({ seller }) => {
         <img src={viewImage} alt='modal view' />
       </GalleryModal>
     </GalleryContainer>
+  ) : (
+    <React.Fragment>
+      Stay tuned, photos coming soon!
+    </React.Fragment>
   );
 };
 
@@ -88,8 +91,8 @@ const GalleryContainer = styled.div`
 
   > img {
     object-fit: cover;
-    width: 225px;
-    height: 225px;
+    width: 200px;
+    height: 200px;
     cursor: pointer;
 
     :hover {
@@ -100,31 +103,41 @@ const GalleryContainer = styled.div`
   .item-1 {
     grid-column: span 2;
     grid-row: span 2;
-    width: 465px;
-    height: 465px;
+    width: 415px;
+    height: 415px;
   }
 
-  @media (max-width: 1250px) {
+  @media (max-width: 1290px) {
     > img {
-      width: 200px;
-      height: 200px;
+      width: 22.25vw;
+      height: 22.25vw;
     }
 
     .item-1 {
       grid-column: span 1;
       grid-row: span 1;
-      width: 200px;
-      height: 200px;
+      width: 22.25vw;
+      height: 22.25vw;
     }
   }
 
-  @media (max-width: 450px) {
+  @media (max-width: 900px) {
     > img {
       width: 100%;
     }
 
     .item-1 {
       width: 100%;
+    }
+  }
+
+  @media (max-width: 450px) {
+    > img {
+      height: 250px;
+    }
+
+    .item-1 {
+      height: 250px;
     }
   }
 `;

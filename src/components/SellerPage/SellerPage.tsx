@@ -12,12 +12,17 @@ import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import ReactPixel from 'react-facebook-pixel';
 
 interface Props {
   menuOpen: boolean;
 }
 
+ReactPixel.trackCustom('SellerPageView', {});
 const SellerPage = (props: Props) => {
+  const { i18n } = useTranslation();
+
   // fix typing
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
@@ -25,17 +30,18 @@ const SellerPage = (props: Props) => {
   const dispatch = useModalPaymentDispatch();
   const { sellerData } = useModalPaymentState();
 
-  const fetchData = async () => {
+  const fetchData = async (lang?) => {
     setLoading(true);
-    const result = id && (await getSeller(id));
+    const result = id && (await getSeller(id, lang));
     await dispatch({
       type: SET_SELLER_DATA,
       payload: result.data,
     });
     setLoading(false);
   };
+
   useEffect(() => {
-    fetchData();
+    fetchData(i18n.language);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return sellerData && !loading ? (
@@ -90,8 +96,7 @@ const ContentContainer = styled.div`
   max-width: 1200px;
   min-height: 1200px;
   @media (min-width: 900px) {
-    // grid-template-columns: 1fr minmax(405px, 1fr);
-    grid-template-columns: 1fr 405px;
+    grid-template-columns: 1fr 464px;
     display: grid;
     grid-column-gap: 69px;
   }

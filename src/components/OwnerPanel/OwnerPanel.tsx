@@ -16,6 +16,8 @@ import {
 } from 'react-share';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
+import { useTranslation } from 'react-i18next';
+import ReactPixel from 'react-facebook-pixel';
 
 interface Props {
   seller: BrowsePageSeller;
@@ -29,12 +31,29 @@ interface State {
 const ModalBox: any = Modal;
 
 const OwnerPanel = ({ seller }: Props) => {
+  const { t } = useTranslation();
+
   const dispatch = useModalPaymentDispatch();
   const [purchaseType, setPurchaseType] = useState('');
 
   const showModal = (event: any) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
     setPurchaseType(event.target.value);
+  };
+
+  const donationClickHander = (event: any) => {
+    ReactPixel.trackCustom('DonationButtonClick', {});
+    showModal(event);
+  };
+
+  const voucherClickHander = (event: any) => {
+    ReactPixel.trackCustom('VoucherButtonClick', {});
+    showModal(event);
+  };
+
+  const giftMealClickHander = (event: any) => {
+    ReactPixel.trackCustom('GiftMealButtonClick', {});
+    showModal(event);
   };
 
   const extraInfo = {
@@ -53,6 +72,7 @@ const OwnerPanel = ({ seller }: Props) => {
   const facebookQuote = 'Help raise money for ' + seller.name;
   const socialIconBackgroundColor = '#a9182e';
   const socialIconDimensions = { height: 50, width: 50 };
+  const costPerMealDollars = seller.cost_per_meal / 100;
 
   const clipboardStyle = {
     fill: 'white',
@@ -97,26 +117,30 @@ const OwnerPanel = ({ seller }: Props) => {
         {seller.accept_donations && (
           <button
             value="donation"
-            className={classnames(styles.button, 'button--filled')}
-            onClick={showModal}
+            className={classnames(
+              styles.button,
+              seller.cost_per_meal && styles.moreThanTwoButtons,
+              'button--filled'
+            )}
+            onClick={donationClickHander}
           >
-            Donation
+            {t('ownerPanel.donation')}
           </button>
         )}
         {seller.sell_gift_cards && (
           <button
             value="gift_card"
             className={classnames(styles.button, 'button--outlined')}
-            onClick={showModal}
+            onClick={voucherClickHander}
           >
-            Voucher
+            {t('ownerPanel.voucher')}
           </button>
         )}
         {seller.cost_per_meal !== null && (
           <button
             value="buy_meal"
-            className={classnames(styles.button, 'button--redfilled')}
-            onClick={showModal}
+            className={classnames(styles.button, 'button--outlined')}
+            onClick={giftMealClickHander}
           >
             Gift a meal
           </button>
@@ -129,7 +153,7 @@ const OwnerPanel = ({ seller }: Props) => {
               return (
                 <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
-                    {`${current}: `}
+                    {`${t('ownerPanel.extraInfo.'+ current)}: `}
                     <a
                       className={styles.extraInfoValue}
                       href={`http://${extraInfo[current]}`}
@@ -145,7 +169,7 @@ const OwnerPanel = ({ seller }: Props) => {
               return (
                 <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
-                    {`${current}: `}
+                    {`${t('ownerPanel.extraInfo.'+ current)}: `}
                     <span className={styles.extraInfoValue}>
                       {extraInfo[current]}
                     </span>
@@ -162,7 +186,7 @@ const OwnerPanel = ({ seller }: Props) => {
         purchaseType={purchaseType}
         sellerId={seller.seller_id}
         sellerName={seller.name}
-        costPerMeal={seller.cost_per_meal}
+        costPerMeal={costPerMealDollars}
       />
       {
         <div className={styles.socialContainer}>

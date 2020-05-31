@@ -8,16 +8,18 @@ import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import { LoaderFillerContainer } from '../Loader';
 import DonationPoolBox from './DonationPool';
-import { getWebsiteImages } from '../StoreDetails/StoreImages';
+import { getWebsiteImages } from '../StoreInfo/StoreImages';
 import { useTranslation } from 'react-i18next';
+import ReactPixel from 'react-facebook-pixel';
 
 interface Props {
   menuOpen: boolean;
 }
 
+ReactPixel.trackCustom('MerchantsPageView', {});
 const MerchantsPage = (props: Props) => {
   const websiteImages = getWebsiteImages();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const flyerZip: string =
     process.env.PUBLIC_URL + './assets/send-chinatown-love-flyers.zip';
@@ -27,8 +29,8 @@ const MerchantsPage = (props: Props) => {
   const [totalDonations, setDonations] = useState(0);
   const [totalGiftCards, setGiftCards] = useState(0);
 
-  const fetchData = async () => {
-    const { data } = await getSellers();
+  const fetchData = async (lang?) => {
+    const { data } = await getSellers(lang);
 
     const contributions = data.reduce(
       (total: any, store: any) => {
@@ -47,8 +49,8 @@ const MerchantsPage = (props: Props) => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(i18n.language);
+  }, [i18n.language]);
 
   // TODO: replace this filter with a backend API call
   const filterStoreType = (type: any) => {

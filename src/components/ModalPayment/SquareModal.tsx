@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { times } from 'lodash/fp';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
@@ -8,7 +9,7 @@ import SubmissionButton from './SubmissionButton';
 import { SquareErrors, hasKey } from '../../consts';
 import {
   makeSquarePayment,
-  SquarePaymentParams,
+  SquareLineItems,
   Buyer,
 } from '../../utilities/api';
 import {
@@ -55,6 +56,11 @@ const SquareModal = ({
   const checkSubscriptionAgreement = () =>
     setSubscriptionChecked(!isSubscriptionChecked);
 
+  const numberOfMeals = Number(amount) / costPerMeal;
+  const mealText = numberOfMeals > 1 ? 'meals' : 'meal';
+  const numberOfMealsText =
+    purchaseType === 'buy_meal' ? `(${numberOfMeals} ${mealText})` : '';
+
   const cardNonceResponseReceived = (errors: any[], nonce: string) => {
     setErrorsMessages([]);
 
@@ -64,12 +70,20 @@ const SquareModal = ({
     }
 
     // 'buy_meal' is still respresented as a gift card when calling the API
-    const payment: SquarePaymentParams = {
-      amount: Number(amount) * 100,
+    const payment: SquareLineItems = purchaseType === 'buy_meal' ? times(() => ({
+      amount: Number(costPerMeal) * 100,
       currency: 'usd',
-      item_type: purchaseType === 'buy_meal' ? 'gift_card' : purchaseType,
+      item_type: 'gift_card',
       quantity: 1,
-    };
+    }), numberOfMeals)
+      : [
+        {
+          amount: Number(amount) * 100,
+          currency: 'usd',
+          item_type: purchaseType,
+          quantity: 1,
+        }
+      ]
 
     const is_distribution = purchaseType === 'buy_meal';
     const buyer: Buyer = {
@@ -130,11 +144,6 @@ const SquareModal = ({
         return 'Donation';
     }
   };
-
-  const numberOfMeals = Number(amount) / costPerMeal;
-  const mealText = numberOfMeals > 1 ? 'meals' : 'meal';
-  const numberOfMealsText =
-    purchaseType === 'buy_meal' ? `(${numberOfMeals} ${mealText})` : '';
 
   const canSubmit =
     isTermsChecked &&
@@ -321,6 +330,10 @@ const CheckboxContainer = styled.label`
   :hover {
     text-decoration: underline;
   }
+
+  > span { 
+    padding: 9px 9px 9px 0px
+  }
 `;
 
 const ButtonRow = styled.div`
@@ -348,6 +361,7 @@ const SquareFormContainer = styled.div`
   h3 {
     font-size: 24px;
   }
+  
 `;
 
 const Header = styled.div`
@@ -367,7 +381,7 @@ const Disclaimer = styled.div`
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
   font-weight: 300;
-  padding: 0px 0px 0px 40px;
+  padding: 0px 0px 0px 0px;
   margin: 30px 0px 30px 0px;
   opacity: 0.7;
 `;
