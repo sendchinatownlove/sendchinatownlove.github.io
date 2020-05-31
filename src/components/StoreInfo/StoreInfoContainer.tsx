@@ -21,7 +21,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
 
   const storeNavItems = ['story', 'menu', 'gallery', 'share'];
 
-  const [currentMerchantView, setMerchantView] = useState('gallery'); //switch back to 'story' l8r
+  const [currentMerchantView, setMerchantView] = useState('story');
 
   const switchMerchantView = () => {
     switch (currentMerchantView) {
