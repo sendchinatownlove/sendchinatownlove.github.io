@@ -10,6 +10,16 @@
       "submit": "Next"
     }
   },
+  "navBar": {
+    "header": {
+      "home": "HOME",
+      "merchants": "MERCHANTS"
+    },
+    "languages": {
+      "english": "ENG",
+      "chinese": "中文"
+    }
+  },
   "buyMeal": {
     "header": "Gift a meal for ",
     "subheader": "Send Chinatown Love will connect merchants with local organizations that will distribute your gifted meals to a community in need.",
@@ -21,16 +31,6 @@
   "purchase": {
     "donation": "Donation for ",
     "voucher": "Voucher for "
-  },
-  "navBar": {
-    "header": {
-      "home": "HOME",
-      "merchants": "MERCHANTS"
-    },
-    "languages": {
-      "english": "ENG",
-      "chinese": "中文"
-    }
   },
   "errorPage": {
     "body": {
@@ -47,10 +47,45 @@
     "flyerAsk": "Know of any business owners that fit our target merchant?",
     "flyerDownload": "Download our flyer to share with them."
   },
+  "merchantNavBar": {
+    "all": "All",
+    "bakery": "Bakery",
+    "restaurant": "Restaurant",
+    "grocery": "Grocery",
+    "salon": "Salon"
+  },
   "donationPool": {
     "header": "Checked out our merchants but not sure who to donate to first?",
     "description1": "You can support by donating to our donation pool!",
     "description2": "All donations will be distributed evenly to our merchants.",
     "button": "SUPPORT CHINATOWN!"
+  },
+  "contributionBar": {
+    "header": "Total Raised",
+    "vouchers": "VOUCHERS",
+    "donations": "DONATIONS",
+    "footer": "100% of all proceeds go to the businesses, and we cover the credit card processing fees."
+  },
+  "descriptionBox": {
+    "header": "Meet our Target Merchant",
+    "bullet1": "Asian immigrant-owned small businesses",
+    "bullet2": "Not fluent in English, run cash-only establishments, and not tech-savvy",
+    "bullet3": "Currently struggling to pay rent, utility bill and employee wages",
+    "bullet4": "Do not have websites, online delivery service, or vouchers available",
+    "bullet5": "Located in NYC Manhattan Chinatown, Flushing, or Bensonhurst"
+  },
+  "storeDetails": {
+    "storyHeader": "Story"
+  },
+  "ownerPanel": {
+    "donation": "Donation",
+    "voucher": "Voucher",
+    "extraInfo": {
+      "Type": "Type",
+      "Employees": "Employees",
+      "Founded": "Founded",
+      "Website": "Website",
+      "Menu": "Menu"
+    }
   }
 }

@@ -3,7 +3,7 @@
     "amount": {
       "header": "Please select an amount or enter a custom amount",
       "label1": "Select an amount",
-      "label2": "Or enter an amount",
+      "label2": "Or enter any amount",
       "minimum": "Minimum",
       "maximum": "Maximum",
       "amount": "amount",
@@ -20,12 +20,72 @@
       "chinese": "中文"
     }
   },
+  "buyMeal": {
+    "header": "Gift a meal for ",
+    "subheader": "Send Chinatown Love will connect merchants with local organizations that will distribute your gifted meals to our community in need.",
+    "prompt": "Please enter how many meals to gift",
+    "explanationFirst": "By gifting a meal, your donation will still go directly to the merchant.",
+    "explanationSecond": "Our partners will then distribute vouchers with those who can benefit the most from a free meal.",
+    "totalLabel": "Total: "
+  },
+  "purchase": {
+    "donation": "Donation for ",
+    "voucher": "Voucher for "
+  },
   "errorPage": {
     "body": {
       "header": "Sorry Your Dumpling Was Not Found",
       "subHeader1": "The page you are trying does not exist or has been moved.",
       "subHeader2": "Please try going back to the homepage.",
       "link": "GO TO HOMEPAGE"
+    }
+  },
+  "merchantsPage": {
+    "platformInfoHeader": "我们的中国城",
+    "platformInfoDescription": "我们会提供网上平台去帮助一些受到疫情影响的传统的，不会使用科技的，只收现金的亚洲华人商家。",
+    "platformInfoAction": "我们将会通过募集接受捐款或礼品券去帮助他们",
+    "flyerAsk": "Know of any business owners that fit our target merchant?",
+    "flyerDownload": "Download our flyer to share with them."
+  },
+  "merchantNavBar": {
+    "all": "所有的店铺",
+    "bakery": "烘焙店",
+    "restaurant": "餐馆",
+    "grocery": "杂货店",
+    "salon": "美发店"
+  },
+  "donationPool": {
+    "header": "如果你不太缺点捐款给那个商家？",
+    "description1": "我们会把你的捐款平均分配给商家",
+    "description2": "",
+    "button": "请支持中国城!"
+  },
+  "contributionBar": {
+    "header": "筹款总额",
+    "vouchers": "代金券",
+    "donations": "捐款",
+    "footer": "所有的收益将会到所需的商家手里，免信用卡手续费"
+  },
+  "descriptionBox": {
+    "header": "我们目标商人有",
+    "bullet1": "亚洲移民创办的小生意",
+    "bullet2": "英语上不流畅，以现金收入为主，或者不太懂网上新科技的商人",
+    "bullet3": "现在财务受困，影响到付房租，付水电费，及发工资给员工的能力",
+    "bullet4": "沒有网址，网上外卖，或接受礼品券的服务",
+    "bullet5": "在纽约中国城，法拉盛，及八大道等"
+  },
+  "storeDetails": {
+    "storyHeader": "背景简介"
+  },
+  "ownerPanel": {
+    "donation": "捐赠",
+    "voucher": "购买礼品卡",
+    "extraInfo": {
+      "Type": "商业类型",
+      "Employees": "员工人数",
+      "Founded": "创办于",
+      "Website": "Website",
+      "Menu": "Menu"
     }
   }
 }
