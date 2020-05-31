@@ -55,6 +55,9 @@ $container-size: 160px;
   font-size: 16px;
   letter-spacing: 0.05em;
   cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   &.moreThanTwoButtons,
   &:only-child {
@@ -65,12 +68,12 @@ $container-size: 160px;
   &:active,
   &:hover {
     min-width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   @include for-phone-only {
     font-size: 16px;
-    padding-left: 10px;
-    padding-right: 10px;
   }
 }
 
