@@ -28,7 +28,7 @@ const AmountContainer = styled.div`
   ${(props: ContainerProps) =>
     props.bringToTheFront && 'z-index: 150!important;'}
 `;
-const MessageConatiner = styled.div`
+const MessageContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -96,13 +96,21 @@ const Divider = styled.div`
   width: 90%;
 `;
 
+const Disclaimer = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #A8192E;
+  padding-bottom: 3vh;
+`;
+
 export {
   AmountContainer,
-  MessageConatiner,
+  MessageContainer,
   Text,
   Footer,
   NextButton,
   Divider,
   Voucher,
   Bold,
+  Disclaimer
 };

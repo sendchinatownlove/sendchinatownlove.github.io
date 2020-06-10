@@ -7,7 +7,7 @@ import {
   useVoucherState,
   useVoucherDispatch,
 } from '../../utilities/hooks/VoucherContext/context';
-import { SET_VIEW } from '../../utilities/hooks/VoucherContext/constants';
+import { SET_VIEW, SET_AMOUNT } from '../../utilities/hooks/VoucherContext/constants';
 
 interface Props {}
 interface ButtonProps {
@@ -17,8 +17,14 @@ const LandingCard = (props: Props) => {
   const { voucher } = useVoucherState();
   const dispatch = useVoucherDispatch();
 
-  const setView = (e) => {
-    dispatch({ type: SET_VIEW, payload: 1 });
+  const setView = () => {
+    if (voucher.single_use) {
+      dispatch({ type: SET_AMOUNT, payload: voucher.amount/100 });
+      dispatch({ type: SET_VIEW, payload: 2 });
+    }
+    else {
+      dispatch({ type: SET_VIEW, payload: 1 });
+    }
   };
 
   return (

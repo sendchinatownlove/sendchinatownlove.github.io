@@ -12,7 +12,7 @@ import {
 } from '../../utilities/hooks/VoucherContext/constants';
 import {
   AmountContainer,
-  MessageConatiner,
+  MessageContainer,
   Text,
   Footer,
   NextButton,
@@ -81,7 +81,7 @@ const Amount = (props: Props) => {
           max="10000"
         />
       </AmountContainer>
-      <MessageConatiner>
+      <MessageContainer>
         <Text size="16px" color="#DD678A" width="50%">
           {error}
         </Text>
@@ -93,7 +93,7 @@ const Amount = (props: Props) => {
             Remaining
           </Text>
         </Text>
-      </MessageConatiner>
+      </MessageContainer>
       <Footer>
         <Voucher>
           Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>{' '}

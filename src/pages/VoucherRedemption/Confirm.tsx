@@ -17,11 +17,12 @@ import MoreInfo from './MoreInfo';
 import Loader from '../../components/Loader';
 import {
   AmountContainer,
-  MessageConatiner,
+  MessageContainer,
   Text,
   Footer,
   NextButton,
   Divider,
+  Disclaimer,
 } from './styles';
 
 interface Props {}
@@ -71,7 +72,11 @@ const Amount = (props: Props) => {
   return (
     <Container>
       <AmountContainer>
-        <Text width="100%" align="flex-start" onClick={(e) => setView(1)}>
+        <Text
+          width="100%"
+          align="flex-start"
+          onClick={(e) => setView(voucher.single_use ? 0 : 1)}
+        >
           {`< Back`}
         </Text>
       </AmountContainer>
@@ -79,31 +84,44 @@ const Amount = (props: Props) => {
         Complete Your Purchase
         <MoreInfo marginLeft="35px" showShadow={true} />
       </Header>
-      <MessageConatiner>
+      {!voucher.single_use ? (
+        <MessageContainer>
+          <Text size="16px" width="50%">
+            Voucher balance
+          </Text>
+          <Text size="16px" width="50%" align="flex-end">
+            ${(voucher.amount / 100).toFixed(2)}
+          </Text>
+        </MessageContainer>
+      ) : (
+        ''
+      )}
+      <MessageContainer>
         <Text size="16px" width="50%">
-          Voucher balance
-        </Text>
-        <Text size="16px" width="50%" align="flex-end">
-          ${(voucher.amount / 100).toFixed(2)}
-        </Text>
-      </MessageConatiner>
-      <MessageConatiner>
-        <Text size="16px" width="50%">
-          Redemption Amount
+          {voucher.single_use
+            ? 'Single-use voucher balance'
+            : 'Redemption Amount'}
         </Text>
         <Text size="16px" width="50%" align="flex-end">
           ${(amount / 1).toFixed(2)}
         </Text>
-      </MessageConatiner>
+      </MessageContainer>
       <Divider />
-      <MessageConatiner>
-        <Text size="16px" width="50%">
-          Remaining balance
-        </Text>
-        <Text bold="true" size="24px" width="50%" align="flex-end">
-          ${(voucher.amount / 100 - amount).toFixed(2)}
-        </Text>
-      </MessageConatiner>
+      {!voucher.single_use ? (
+        <MessageContainer>
+          <Text size="16px" width="50%">
+            Remaining balance
+          </Text>
+          <Text bold="true" size="24px" width="50%" align="flex-end">
+            ${(voucher.amount / 100 - amount).toFixed(2)}
+          </Text>
+        </MessageContainer>
+      ) : (
+        <Disclaimer>
+          <strong>Note:</strong> Any remaining balance will not be redeemable
+          after this purchase
+        </Disclaimer>
+      )}
       <VoucherContainer>
         <Text>
           {' '}
