@@ -81,8 +81,16 @@ const Amount = (props: Props) => {
         </Text>
       </AmountContainer>
       <Header>
-        Complete Your Purchase
-        <MoreInfo marginLeft="35px" showShadow={true} inverted={true}/>
+        {voucher.single_use ? (
+          <Text size="18px" width="70%">
+            Are you ready to redeem your voucher?
+          </Text>
+        ) : (
+          <Text size="22px">
+            Complete Your Purchase
+          </Text>
+        )}
+        <MoreInfo marginLeft="35px" showShadow={true} inverted={true} />
       </Header>
       {!voucher.single_use ? (
         <MessageContainer>
