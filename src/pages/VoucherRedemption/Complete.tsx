@@ -20,7 +20,7 @@ const Amount = (props: Props) => {
   };
 
   return (
-    <Footer height="90vh">
+    <Footer height="90vh" style={{flex: 1}}>
       <AmountContainer>
         <Text bold="true" size="24px">
           Redemption Complete

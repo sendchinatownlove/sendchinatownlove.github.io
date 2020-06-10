@@ -18,6 +18,7 @@ import {
   NextButton,
   Voucher,
   Bold,
+  FlexFillSpace,
 } from './styles';
 
 interface Props {}
@@ -75,30 +76,33 @@ const Amount = (props: Props) => {
           Current balance <MoreInfo showShadow={true} inverted={true} />
         </CurrentBalanceRow>
       </AmountContainer>
-      <AmountContainer>
-        <Text size="18px">How much are you spending today?</Text>
-        <InputWrapper>
-          <AmountInput
-            onChange={handleAmount}
-            placeholder={'0.00'}
-            type="number"
-            error={!!error}
-          />
-        </InputWrapper>
-      </AmountContainer>
-      <MessageContainer>
-        <Text size="16px" color="#DD678A" width="50%">
-          {error}
-        </Text>
-        <Text size="16px" width="50%">
-          <Text color="black" width="100%" align="flex-end" padding="true">
-            $ {(voucher.amount / 100 - amount).toFixed(2)}
+      <InputAreaWrapper>
+        <AmountContainer>
+          <Text size="18px">How much are you spending today?</Text>
+          <InputWrapper>
+            <AmountInput
+              onChange={handleAmount}
+              placeholder={'0.00'}
+              type="number"
+              error={!!error}
+            />
+          </InputWrapper>
+        </AmountContainer>
+        <MessageContainer>
+          <Text size="16px" color="#DD678A" width="50%">
+            {error}
           </Text>
-          <Text align="flex-end" width="80px">
-            Remaining
+          <Text size="16px" width="50%">
+            <Text color="black" width="100%" align="flex-end" padding="true">
+              $ {(voucher.amount / 100 - amount).toFixed(2)}
+            </Text>
+            <Text align="flex-end" width="80px">
+              Remaining
+            </Text>
           </Text>
-        </Text>
-      </MessageContainer>
+        </MessageContainer>
+      </InputAreaWrapper>
+      <FlexFillSpace></FlexFillSpace>
       <Footer>
         <Voucher>
           Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>{' '}
@@ -119,6 +123,7 @@ const Container = styled.div`
   color: black;
   display: flex;
   flex-direction: column;
+  flex: 1;
 `;
 const CurrentBalanceRow = styled(Text)`
   justify-content: center;
@@ -145,4 +150,10 @@ const AmountInput = styled.input`
   border: 1px solid
     ${(props: InputProps) => (props.error ? '#DD678A' : 'black')};
   border-radius: 5px;
+`;
+const InputAreaWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;

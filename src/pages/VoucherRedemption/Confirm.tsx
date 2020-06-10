@@ -24,6 +24,7 @@ import {
   Divider,
   Disclaimer,
   Bold,
+  FlexFillSpace,
 } from './styles';
 
 interface Props {}
@@ -136,6 +137,7 @@ const Amount = (props: Props) => {
           Voucher Code: &nbsp; <Bold>{voucher.seller_gift_card_id}</Bold>
         </Text>
       </VoucherContainer>
+      <FlexFillSpace></FlexFillSpace>
       <Footer>
         <Text color="#ab192e" bold="true" width="50%" textAlign="center">
           Please show your phone to the merchant cashier to confirm the
@@ -157,6 +159,7 @@ const Container = styled.div`
   color: black;
   display: flex;
   flex-direction: column;
+  flex: 1;
 `;
 const Header = styled.div`
   position: relative;

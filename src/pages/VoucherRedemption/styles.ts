@@ -104,6 +104,10 @@ const Disclaimer = styled.div`
   padding-bottom: 3vh;
 `;
 
+const FlexFillSpace = styled.div`
+  flex: 1;
+`;
+
 export {
   AmountContainer,
   MessageContainer,
@@ -113,5 +117,6 @@ export {
   Divider,
   Voucher,
   Bold,
-  Disclaimer
+  Disclaimer,
+  FlexFillSpace
 };
