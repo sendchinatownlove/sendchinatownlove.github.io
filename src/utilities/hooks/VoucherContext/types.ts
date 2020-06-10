@@ -23,6 +23,7 @@ export type VoucherDetails = {
   storeImage: string;
   sellerID: string;
   locations: Array<number | null>;
+  single_use: boolean;
 };
 export type VoucherState = {
   amount: number;
@@ -49,5 +50,6 @@ export const defaultState: VoucherState = {
     storeImage: '',
     sellerID: '',
     locations: [],
+    single_use: false
   },
 };

@@ -26,7 +26,7 @@ const LandingCard = (props: Props) => {
       <CardContainer>
         <VoucherContent>
           <SubText>
-            <SupportingText>Your available balance</SupportingText>
+            <SupportingText>{voucher.single_use ? 'Single-use voucher balance' : 'Your available balance'}</SupportingText>
             <MoreInfo />
           </SubText>
           <Balance>${(voucher.amount / 100).toFixed(2)}</Balance>
