@@ -47,6 +47,7 @@ const Voucher = styled.div`
 const Bold = styled.span`
   font-weight: 600;
   word-wrap: break-word;
+  word-break: break-all;
 `;
 const Text = styled.div`
   display: flex;
@@ -77,7 +78,7 @@ const Footer = styled.div`
 `;
 
 const NextButton = styled.button`
-  background: black;
+  background: ${props => props.disabled ? 'grey' : 'black'};
   color: white;
   font-size: 18px;
   border-radius: 32px;

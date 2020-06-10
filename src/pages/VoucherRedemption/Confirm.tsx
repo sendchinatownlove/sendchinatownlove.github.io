@@ -23,6 +23,7 @@ import {
   NextButton,
   Divider,
   Disclaimer,
+  Bold,
 } from './styles';
 
 interface Props {}
@@ -132,8 +133,7 @@ const Amount = (props: Props) => {
       )}
       <VoucherContainer>
         <Text>
-          {' '}
-          Voucher Code: <b>{voucher.seller_gift_card_id}</b>{' '}
+          Voucher Code: &nbsp; <Bold>{voucher.seller_gift_card_id}</Bold>
         </Text>
       </VoucherContainer>
       <Footer>

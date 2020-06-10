@@ -77,7 +77,7 @@ const VoucherContent = styled.div`
   border-radius: 12px;
   margin-top: -7.5px;
   padding-top: 5px;
-  height: 270px;
+  height: ${(props: VoucherInfoProps) => props.showInfo ? '270px' : '25px'};
   display: flex;
   flex-direction: column;
   justify-content: space-between;

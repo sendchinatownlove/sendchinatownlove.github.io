@@ -30,6 +30,10 @@ interface TextProps {
   padding?: String;
 }
 
+interface InputProps {
+  error?: Boolean;
+}
+
 const Amount = (props: Props) => {
   const { amount, voucher } = useVoucherState();
   const dispatch = useVoucherDispatch();
@@ -38,7 +42,7 @@ const Amount = (props: Props) => {
 
   const handleAmount = (e) => {
     setError('');
-    if (e.target.value * 100 > voucher.amount)
+    if (e.target.value * 100 > voucher.amount || e.target.value * 100 < 5)
       return setError('Please enter a valid amount');
     dispatch({ type: SET_AMOUNT, payload: e.target.value });
   };
@@ -73,13 +77,14 @@ const Amount = (props: Props) => {
       </AmountContainer>
       <AmountContainer>
         <Text size="18px">How much are you spending today?</Text>
-        <AmountInput
-          onChange={handleAmount}
-          value={amount === 0 ? '' : amount}
-          placeholder={'$0.00'}
-          min="5"
-          max="10000"
-        />
+        <InputWrapper>
+          <AmountInput
+            onChange={handleAmount}
+            placeholder={'0.00'}
+            type="number"
+            error={!!error}
+          />
+        </InputWrapper>
       </AmountContainer>
       <MessageContainer>
         <Text size="16px" color="#DD678A" width="50%">
@@ -98,7 +103,9 @@ const Amount = (props: Props) => {
         <Voucher>
           Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>{' '}
         </Voucher>
-        <NextButton onClick={(e) => setView(2)}>Next</NextButton>
+        <NextButton onClick={(e) => setView(2)} disabled={!!error}>
+          Next
+        </NextButton>
       </Footer>
     </Container>
   );
@@ -121,12 +128,21 @@ const Image = styled.img`
   max-width: 600px;
   margin: 0 auto;
 `;
+const InputWrapper = styled.div`
+  position: relative;
+  &:before {
+    position: absolute;
+    padding: 32px 0px 0px 16px;
+    content: '$';
+  }
+`;
 const AmountInput = styled.input`
-  padding: 12px;
+  padding: 12px 12px 12px 32px;
   height: 64px;
   font-size: 16px;
   width: 100%;
   margin: 12px auto;
-  border: 1px solid black;
+  border: 1px solid
+    ${(props: InputProps) => (props.error ? '#DD678A' : 'black')};
   border-radius: 5px;
 `;
