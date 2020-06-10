@@ -8,6 +8,7 @@ interface TextProps {
   align?: String;
   textAlign?: String;
   padding?: String;
+  wide?: Boolean;
 }
 interface VoucherInfoProps {
   showInfo?: Boolean;
@@ -62,6 +63,7 @@ const Text = styled.div`
   ${(props: TextProps) => props.align && `justify-content: ${props.align};`}
   ${(props: TextProps) => props.textAlign && `text-align: ${props.textAlign};`}
   ${(props: TextProps) => props.padding === 'true' && `padding-right: 5px;`}
+  ${(props: TextProps) => props.wide && `letter-spacing: 3px;`}
   span {
     font-weight: 700;
   }

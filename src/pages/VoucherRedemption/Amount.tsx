@@ -55,8 +55,15 @@ const Amount = (props: Props) => {
   return (
     <Container>
       <AmountContainer>
-        <Text width="100%" align="flex-start" onClick={(e) => setView(0)}>
-          {`< Cancel`}
+        <Text
+          width="100%"
+          align="flex-start"
+          color="#474747"
+          bold="true"
+          wide
+          onClick={(e) => setView(0)}
+        >
+          {`< CANCEL`}
         </Text>
       </AmountContainer>
 
@@ -73,7 +80,7 @@ const Amount = (props: Props) => {
           ${voucher.amount === 0 ? '0.00' : (voucher.amount / 100).toFixed(2)}
         </Text>
         <CurrentBalanceRow size="16px">
-          Current balance <MoreInfo showShadow={true} inverted={true} />
+          Current balance <MoreInfo showShadow inverted />
         </CurrentBalanceRow>
       </AmountContainer>
       <InputAreaWrapper>

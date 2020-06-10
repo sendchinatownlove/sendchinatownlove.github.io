@@ -77,9 +77,12 @@ const Amount = (props: Props) => {
         <Text
           width="100%"
           align="flex-start"
+          color="#474747"
+          bold="true"
+          wide
           onClick={(e) => setView(voucher.single_use ? 0 : 1)}
         >
-          {`< Back`}
+          {`< BACK`}
         </Text>
       </AmountContainer>
       <Header>
