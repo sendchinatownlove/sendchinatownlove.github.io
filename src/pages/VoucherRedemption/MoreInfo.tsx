@@ -5,15 +5,18 @@ import { useVoucherState } from '../../utilities/hooks/VoucherContext/context';
 interface Props {
   showShadow?: Boolean;
   marginLeft?: string;
+  inverted?: Boolean;
 }
 interface VoucherInfoProps {
   showInfo?: Boolean;
   showShadow?: Boolean;
   marginLeft?: string;
+  inverted?: Boolean;
 }
 const LandingCard = (props: Props) => {
   const { voucher } = useVoucherState();
   const [showInfo, setShowInfo] = useState(false);
+
   return (
     <VoucherContent
       showInfo={showInfo}
@@ -33,6 +36,7 @@ const LandingCard = (props: Props) => {
       )}
       <MoreInfoButton
         showInfo={showInfo}
+        inverted={props.inverted}
         onClick={(e) => setShowInfo(!showInfo)}
       >
         ?
@@ -42,6 +46,27 @@ const LandingCard = (props: Props) => {
 };
 
 export default LandingCard;
+
+const getColor = (foreground: Boolean, showInfo?: Boolean, inverted?: Boolean): string => {
+  const white = 'white';
+  const red = '#ab192e';
+
+  if (!inverted) {
+    if (foreground) {
+      return !showInfo ? red : white;
+    }
+    else {
+      return !showInfo ? white : red;
+    }
+  } else {
+    if (foreground) {
+      return white;
+    }
+    else {
+      return red;
+    }
+  }
+};
 
 const VoucherContent = styled.div`
   z-index: 150 !important;
@@ -82,9 +107,10 @@ const MoreInfoButton = styled.div`
   position: absolute;
   right: 10px;
   border: 1px solid transparent;
-  color: ${(props: VoucherInfoProps) => (props.showInfo ? `white` : `#ab192e`)};
+  color: ${(props: VoucherInfoProps) =>
+    getColor(true, props.showInfo, props.inverted)};
   background-color: ${(props: VoucherInfoProps) =>
-    props.showInfo ? `#ab192e` : `white`};
+    getColor(false, props.showInfo, props.inverted)};
   border-radius: 50%;
   width: 25px;
   text-align: center;

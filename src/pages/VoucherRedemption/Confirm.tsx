@@ -63,8 +63,8 @@ const Amount = (props: Props) => {
       dispatch({ type: SET_AMOUNT, payload: gift_card_detail.amount });
       setLoading(false);
       setView(3);
-    } catch (e) {
-      console.log('error: ', e);
+    } catch (err) {
+      console.log('error: ', err);
       setLoading(false);
     }
   };
@@ -82,7 +82,7 @@ const Amount = (props: Props) => {
       </AmountContainer>
       <Header>
         Complete Your Purchase
-        <MoreInfo marginLeft="35px" showShadow={true} />
+        <MoreInfo marginLeft="35px" showShadow={true} inverted={true}/>
       </Header>
       {!voucher.single_use ? (
         <MessageContainer>

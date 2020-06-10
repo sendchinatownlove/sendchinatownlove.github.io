@@ -46,7 +46,7 @@ const LandingCard = (props: Props) => {
         <br />
       </CardContainer>
       <br />
-      <Button color="#ab192e">{voucher.locations[0]}</Button>;
+      <Button color="#ab192e">{voucher.locations[0]}</Button>
       <FooterContainer>
         <Image src={Logo} />
       </FooterContainer>

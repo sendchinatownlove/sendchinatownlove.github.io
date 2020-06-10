@@ -68,7 +68,7 @@ const Amount = (props: Props) => {
           ${voucher.amount === 0 ? '0.00' : (voucher.amount / 100).toFixed(2)}
         </Text>
         <CurrentBalanceRow size="16px">
-          Current balance <MoreInfo showShadow={true} />
+          Current balance <MoreInfo showShadow={true} inverted={true} />
         </CurrentBalanceRow>
       </AmountContainer>
       <AmountContainer>
