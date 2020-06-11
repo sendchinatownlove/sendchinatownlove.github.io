@@ -9,7 +9,7 @@ interface Props {
 
 const ContributionBar = ({ totalDonations, totalGiftCards }: Props) => {
   const { t } = useTranslation();
-  
+
   const progressWidth = (raised: number, total: number) => {
     if (raised < total) return (raised / total) * 100;
     return 100;
@@ -36,9 +36,7 @@ const ContributionBar = ({ totalDonations, totalGiftCards }: Props) => {
           <b>${(Math.floor(totalDonations) / 100).toLocaleString()}</b>
         </span>
       </TextContainer>
-      <p>
-        {t('contributionBar.footer')}
-      </p>
+      <p>{t('contributionBar.footer')}</p>
     </Container>
   );
 };

@@ -50,6 +50,6 @@ export const defaultState: VoucherState = {
     storeImage: '',
     sellerID: '',
     locations: [],
-    single_use: false
+    single_use: false,
   },
 };

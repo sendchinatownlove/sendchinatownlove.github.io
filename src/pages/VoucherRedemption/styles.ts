@@ -80,7 +80,7 @@ const Footer = styled.div`
 `;
 
 const NextButton = styled.button`
-  background: ${props => props.disabled ? 'grey' : 'black'};
+  background: ${(props) => (props.disabled ? 'grey' : 'black')};
   color: white;
   font-size: 18px;
   border-radius: 32px;
@@ -101,7 +101,7 @@ const Divider = styled.div`
 const Disclaimer = styled.div`
   text-align: center;
   font-size: 16px;
-  color: #A8192E;
+  color: #a8192e;
   padding-bottom: 3vh;
 `;
 
@@ -119,5 +119,5 @@ export {
   Voucher,
   Bold,
   Disclaimer,
-  FlexFillSpace
+  FlexFillSpace,
 };

@@ -7,7 +7,10 @@ import {
   useVoucherState,
   useVoucherDispatch,
 } from '../../utilities/hooks/VoucherContext/context';
-import { SET_VIEW, SET_AMOUNT } from '../../utilities/hooks/VoucherContext/constants';
+import {
+  SET_VIEW,
+  SET_AMOUNT,
+} from '../../utilities/hooks/VoucherContext/constants';
 
 interface Props {}
 interface ButtonProps {
@@ -19,10 +22,9 @@ const LandingCard = (props: Props) => {
 
   const setView = () => {
     if (voucher.single_use) {
-      dispatch({ type: SET_AMOUNT, payload: voucher.amount/100 });
+      dispatch({ type: SET_AMOUNT, payload: voucher.amount / 100 });
       dispatch({ type: SET_VIEW, payload: 2 });
-    }
-    else {
+    } else {
       dispatch({ type: SET_VIEW, payload: 1 });
     }
   };
@@ -32,7 +34,11 @@ const LandingCard = (props: Props) => {
       <CardContainer>
         <VoucherContent>
           <SubText>
-            <SupportingText>{voucher.single_use ? 'Single-use voucher balance' : 'Your available balance'}</SupportingText>
+            <SupportingText>
+              {voucher.single_use
+                ? 'Single-use voucher balance'
+                : 'Your available balance'}
+            </SupportingText>
             <MoreInfo />
           </SubText>
           <Balance>${(voucher.amount / 100).toFixed(2)}</Balance>

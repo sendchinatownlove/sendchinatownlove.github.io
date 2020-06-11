@@ -91,9 +91,7 @@ const Amount = (props: Props) => {
             Are you ready to redeem your voucher?
           </Text>
         ) : (
-          <Text size="22px">
-            Complete Your Purchase
-          </Text>
+          <Text size="22px">Complete Your Purchase</Text>
         )}
         <MoreInfo marginLeft="35px" showShadow={true} inverted={true} />
       </Header>

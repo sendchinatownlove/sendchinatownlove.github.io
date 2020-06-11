@@ -153,7 +153,7 @@ const OwnerPanel = ({ seller }: Props) => {
               return (
                 <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
-                    {`${t('ownerPanel.extraInfo.'+ current)}: `}
+                    {`${t('ownerPanel.extraInfo.' + current)}: `}
                     <a
                       className={styles.extraInfoValue}
                       href={`http://${extraInfo[current]}`}
@@ -169,7 +169,7 @@ const OwnerPanel = ({ seller }: Props) => {
               return (
                 <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
-                    {`${t('ownerPanel.extraInfo.'+ current)}: `}
+                    {`${t('ownerPanel.extraInfo.' + current)}: `}
                     <span className={styles.extraInfoValue}>
                       {extraInfo[current]}
                     </span>

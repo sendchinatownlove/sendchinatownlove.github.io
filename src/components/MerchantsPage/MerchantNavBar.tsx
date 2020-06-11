@@ -9,7 +9,7 @@ interface Props {
 
 const NavBar = ({ filterStoreType }: Props) => {
   const { t } = useTranslation();
-  
+
   const [selected, setSelected] = useState('all');
 
   const setStoreType = (type: any, e: any) => {
