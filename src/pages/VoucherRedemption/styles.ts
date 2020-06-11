@@ -93,8 +93,7 @@ const NextButton = styled.button`
 `;
 
 const Divider = styled.div`
-  border-bottom: 1px solid
-    ${(props: VoucherInfoProps) => (!props.showInfo ? 'white' : 'transparent')};
+  border-bottom: 2px solid #f7f7f7;
   margin: 12px auto;
   width: 90%;
 `;

@@ -43,7 +43,7 @@ const Amount = (props: Props) => {
 
   const handleAmount = (e) => {
     setError('');
-    if (e.target.value * 100 > voucher.amount || e.target.value * 100 < 5)
+    if (e.target.value * 100 > voucher.amount || e.target.value * 100 < 1)
       return setError('Please enter a valid amount');
     dispatch({ type: SET_AMOUNT, payload: e.target.value });
   };
