@@ -68,7 +68,7 @@ const GalleryContainer = styled.div`
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1175px) {
     > img {
       width: 100%;
     }
