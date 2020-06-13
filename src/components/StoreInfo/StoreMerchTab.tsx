@@ -3,13 +3,12 @@ import styled from 'styled-components';
 import { BrowsePageSeller } from '../../utilities';
 
 export interface Props {
-  getStoreImages: Function;
   seller: BrowsePageSeller;
 }
 
-const StoreMerch: React.SFC<Props> = ({ seller, getStoreImages }) => {
-  //   const images = getStoreImages(seller.seller_id);
+// TODO: Add translation to this page
 
+const StoreMerch: React.SFC<Props> = ({ seller }) => {
   return (
     <MerchContainer>
       <p>

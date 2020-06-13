@@ -6,7 +6,7 @@ import {
   smallScreens,
   tabletScreens,
 } from '../../utilities/general/responsive';
-import { getWebsiteImages } from '../StoreInfo/StoreImages';
+import { getWebsiteImages } from '../../utilities/general/StoreImages';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';

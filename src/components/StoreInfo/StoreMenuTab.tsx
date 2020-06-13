@@ -1,17 +1,20 @@
 import * as React from 'react';
 import { BrowsePageSeller } from '../../utilities';
+import styled from 'styled-components';
 
 export interface Props {
-  getStoreImages: Function;
   seller: BrowsePageSeller;
 }
 
-const StoreMenu: React.SFC<Props> = ({ seller, getStoreImages }) => {
-  const images = getStoreImages(seller.seller_id);
+const StoreMenu: React.SFC<Props> = ({ seller }) => {
 
   return (
-    <section>{<img src={images.menu} alt="store-menu" width="100%" />}</section>
+    <section>{<MenuImg src={seller.menu_url} alt="store-menu" />}</section>
   );
 };
 
 export default StoreMenu;
+
+const MenuImg = styled.img`
+  width: 100%;
+`;

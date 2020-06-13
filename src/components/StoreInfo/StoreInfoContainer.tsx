@@ -10,8 +10,6 @@ import StoreMerch from './StoreMerchTab';
 import styles from './styles.module.scss';
 import defaultStoreFront from './misc-store.png';
 
-import { getStoreImages } from './StoreImages';
-
 type Props = {
   seller: BrowsePageSeller;
 };
@@ -28,9 +26,9 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
       case 'gallery':
         return <StoreGallery seller={seller} />;
       case 'menu':
-        return <StoreMenu seller={seller} getStoreImages={getStoreImages} />;
+        return <StoreMenu seller={seller} />;
       case 'merch':
-        return <StoreMerch seller={seller} getStoreImages={getStoreImages} />;
+        return <StoreMerch seller={seller} />;
       case 'share':
         // TODO: plug in the share page that Dan creates
         return;
