@@ -22,13 +22,17 @@ export type VoucherDetails = {
   ownerImage: string;
   storeImage: string;
   sellerID: string;
-  locations: Array<number | null>;
   single_use: boolean;
+  location: LocationInfo;
 };
 export type VoucherState = {
   amount: number;
   view: number;
   voucher: VoucherDetails;
+};
+export type LocationInfo = {
+  line1: string;
+  line2: string;
 };
 
 export const defaultState: VoucherState = {
@@ -49,7 +53,10 @@ export const defaultState: VoucherState = {
     ownerImage: '',
     storeImage: '',
     sellerID: '',
-    locations: [],
     single_use: false,
+    location: {
+      line1: '',
+      line2: '',
+    },
   },
 };

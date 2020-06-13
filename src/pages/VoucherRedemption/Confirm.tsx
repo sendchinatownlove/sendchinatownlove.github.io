@@ -26,6 +26,7 @@ import {
   Bold,
   FlexFillSpace,
 } from './styles';
+import { getLocationInfo } from '../../utilities/hooks/helpers';
 
 interface Props {}
 interface ContainerProps {
@@ -58,7 +59,7 @@ const Amount = (props: Props) => {
         ownerImage: merchantData.data.owner_image_url,
         storeImage: merchantData.data.hero_image_url,
         sellerID: seller_id,
-        locations: merchantData.data.locations,
+        location: getLocationInfo(merchantData),
       };
 
       dispatch({ type: SET_VOUCHER_INFO, payload: newVoucher });
