@@ -47,6 +47,15 @@ const LandingCard = (props: Props) => {
 
 export default LandingCard;
 
+/**
+ * Get the appropriate color of an element on the MoreInfo tooltip
+ *
+ * @param foreground whether the item is in the foreground or background of the icon
+ * @param showInfo whether the full help text is popped open
+ * @param inverted whether to invert the icon as red-on-white, instead of the usual white-on-red
+ *
+ * @remarks The logic in this function is left intentionally verbose for clarity
+ */
 const getColor = (
   foreground: Boolean,
   showInfo?: Boolean,
