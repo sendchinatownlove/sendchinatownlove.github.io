@@ -4,12 +4,13 @@ import styled from 'styled-components';
 
 export interface Props {
   seller: BrowsePageSeller;
+  expandImage: Function;
 }
 
-const StoreMenu: React.SFC<Props> = ({ seller }) => {
+const StoreMenu: React.SFC<Props> = ({ seller, expandImage }) => {
 
   return (
-    <section>{<MenuImg src={seller.menu_url} alt="store-menu" />}</section>
+    <section>{<MenuImg src={seller.menu_url} alt="store-menu" onClick={() => expandImage(seller.menu_url)}/>}</section>
   );
 };
 

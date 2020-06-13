@@ -17,6 +17,16 @@ type Props = {
 export const StoreInfo: React.SFC<Props> = ({ seller }) => {
   const { summary, story, cuisine_name, locations } = seller;
 
+  // modal functionality for menu and gallery tabs 
+  const [viewImage, setViewImage] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
+  const expandImage = (url: string) => {
+    setViewImage(url);
+    setShowModal(true);
+  };
+
+  // logic for nav bar & tab switching
   const storeNavItems = ['story', 'menu', 'gallery', 'share'];
 
   const [currentMerchantView, setMerchantView] = useState('story');
@@ -24,9 +34,9 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
   const switchMerchantView = () => {
     switch (currentMerchantView) {
       case 'gallery':
-        return <StoreGallery seller={seller} />;
+        return <StoreGallery seller={seller} expandImage={expandImage} />;
       case 'menu':
-        return <StoreMenu seller={seller} />;
+        return <StoreMenu seller={seller} expandImage={expandImage}/>;
       case 'merch':
         return <StoreMerch seller={seller} />;
       case 'share':
@@ -78,6 +88,12 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
         ))}
       </StoreNavContainer>
       {switchMerchantView()}
+
+
+      <ImageModal style={{ display: showModal ? 'block' : 'none' }}>
+        <CloseButton onClick={() => setShowModal(false)}>×</CloseButton>
+        <img src={viewImage} alt="modal view" />
+      </ImageModal>
     </section>
   );
 };
@@ -120,4 +136,42 @@ const NavButton = styled.button`
     color: #dd678a;
     font-weight: 900;
   }
+`;
+
+
+const ImageModal = styled.div`
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+
+  img {
+    width: 48vw;
+    max-height: 90vh;
+    object-fit: cover;
+  }
+
+  @media (max-width: 650px) {
+    img {
+      width: 95vw;
+    }
+  }
+`;
+
+const CloseButton = styled.button`
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 47px;
+  width: 47px;
+  border-radius: 5px;
+
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 30px;
+  border: none;
+  outline: none;
+  z-index: 2;
 `;

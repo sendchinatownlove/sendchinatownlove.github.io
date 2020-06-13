@@ -1,22 +1,15 @@
 import * as React from 'react';
-import { useState } from 'react';
+// import { useState } from 'react';
 import styled from 'styled-components';
 import { BrowsePageSeller } from '../../utilities';
 
 export interface Props {
   seller: BrowsePageSeller;
+  expandImage: Function;
 }
 
-const StoreGallery: React.SFC<Props> = ({ seller }) => {
+const StoreGallery: React.SFC<Props> = ({ seller, expandImage }) => {
   const gallery = seller.gallery_image_urls;
-
-  const [viewImage, setViewImage] = useState('');
-  const [showModal, setShowModal] = useState(false);
-
-  const expandImage = (url: string) => {
-    setViewImage(url);
-    setShowModal(true);
-  };
 
   return gallery.length > 0 ? (
     <GalleryContainer>
@@ -31,10 +24,6 @@ const StoreGallery: React.SFC<Props> = ({ seller }) => {
           />
         );
       })}
-      <GalleryModal style={{ display: showModal ? 'block' : 'none' }}>
-        <CloseButton onClick={() => setShowModal(false)}>×</CloseButton>
-        <img src={viewImage} alt="modal view" />
-      </GalleryModal>
     </GalleryContainer>
   ) : (
     <React.Fragment>Stay tuned, photos coming soon!</React.Fragment>
@@ -42,43 +31,6 @@ const StoreGallery: React.SFC<Props> = ({ seller }) => {
 };
 
 export default StoreGallery;
-
-const CloseButton = styled.button`
-  position: fixed;
-  right: 0;
-  top: 0;
-  height: 47px;
-  width: 47px;
-  border-radius: 5px;
-
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 30px;
-  border: none;
-  outline: none;
-  z-index: 2;
-`;
-
-const GalleryModal = styled.div`
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-
-  img {
-    width: 48vw;
-    max-height: 90vh;
-    object-fit: cover;
-  }
-
-  @media (max-width: 650px) {
-    img {
-      width: 95vw;
-    }
-  }
-`;
 
 const GalleryContainer = styled.div`
   display: grid;
