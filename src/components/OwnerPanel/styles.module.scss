@@ -45,6 +45,7 @@ $container-size: 160px;
 
   @include for-phone-only {
     row-gap: 27px;
+    column-gap: 12px;
   }
 }
 
@@ -54,12 +55,21 @@ $container-size: 160px;
   font-size: 16px;
   letter-spacing: 0.05em;
   cursor: pointer;
-  min-width: auto;
   white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   &.moreThanTwoButtons,
   &:only-child {
     grid-column: 1 / span 2;
+  }
+
+  &,
+  &:active,
+  &:hover {
+    min-width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   @include for-phone-only {

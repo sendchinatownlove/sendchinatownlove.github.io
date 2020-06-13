@@ -3,7 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import styled from 'styled-components';
 
 type Props = {
-  isPage: Boolean;
+  isPage?: Boolean;
 };
 
 const Loader: React.SFC<Props> = ({ isPage }: Props) => {
