@@ -27,7 +27,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
   };
 
   // logic for nav bar & tab switching
-  const storeNavItems = ['story', 'menu', 'gallery', 'share'];
+  const storeNavItems = ['story', 'menu', 'gallery'];
 
   const [currentMerchantView, setMerchantView] = useState('story');
 
