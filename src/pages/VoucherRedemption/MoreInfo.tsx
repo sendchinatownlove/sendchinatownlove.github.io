@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import { useVoucherState } from '../../utilities/hooks/VoucherContext/context';
 
 interface Props {
-  showShadow?: Boolean;
+  showShadow?: boolean;
   marginLeft?: string;
-  inverted?: Boolean;
+  inverted?: boolean;
 }
 interface VoucherInfoProps {
-  showInfo?: Boolean;
-  showShadow?: Boolean;
+  showInfo?: boolean;
+  showShadow?: boolean;
   marginLeft?: string;
-  inverted?: Boolean;
+  inverted?: boolean;
 }
 const LandingCard = (props: Props) => {
   const { voucher } = useVoucherState();
@@ -57,9 +57,9 @@ export default LandingCard;
  * @remarks The logic in this function is left intentionally verbose for clarity
  */
 const getColor = (
-  foreground: Boolean,
-  showInfo?: Boolean,
-  inverted?: Boolean
+  foreground: boolean,
+  showInfo?: boolean,
+  inverted?: boolean
 ): string => {
   const white = 'white';
   const red = '#ab192e';

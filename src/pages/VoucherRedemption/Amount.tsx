@@ -23,16 +23,16 @@ import {
 
 interface Props {}
 interface TextProps {
-  bold?: String;
-  color?: String;
-  size?: String;
-  width?: String;
-  align?: String;
-  padding?: String;
+  bold?: string;
+  color?: string;
+  size?: string;
+  width?: string;
+  align?: string;
+  padding?: string;
 }
 
 interface InputProps {
-  error?: Boolean;
+  error?: boolean;
 }
 
 const Amount = (props: Props) => {

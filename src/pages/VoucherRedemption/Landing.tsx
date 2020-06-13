@@ -14,7 +14,7 @@ import {
 
 interface Props {}
 interface ButtonProps {
-  color?: String;
+  color?: string;
 }
 const LandingCard = (props: Props) => {
   const { voucher } = useVoucherState();

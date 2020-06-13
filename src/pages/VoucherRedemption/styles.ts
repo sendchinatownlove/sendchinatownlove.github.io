@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
 interface TextProps {
-  bold?: String;
-  color?: String;
-  size?: String;
-  width?: String;
-  align?: String;
-  textAlign?: String;
-  padding?: String;
-  wide?: Boolean;
+  bold?: string;
+  color?: string;
+  size?: string;
+  width?: string;
+  align?: string;
+  textAlign?: string;
+  padding?: string;
+  wide?: boolean;
 }
 interface VoucherInfoProps {
-  showInfo?: Boolean;
+  showInfo?: boolean;
 }
 interface ContainerProps {
   height?: string;
