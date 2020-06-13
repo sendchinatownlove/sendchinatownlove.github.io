@@ -48,5 +48,6 @@ export const defaultState: ModalPaymentState = {
     website_url: '',
     menu_url: '',
     cost_per_meal: 0,
+    gallery_image_urls: [],
   },
 };

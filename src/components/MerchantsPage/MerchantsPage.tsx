@@ -6,9 +6,9 @@ import MerchantCard from './MerchantCard';
 import DescriptionBox from './DescriptionBox';
 import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
-import nycMapBackground from './images/nyc_3.png';
 import { LoaderFillerContainer } from '../Loader';
 import DonationPoolBox from './DonationPool';
+import { getWebsiteImages } from '../../utilities/general/StoreImages';
 import { useTranslation } from 'react-i18next';
 import ReactPixel from 'react-facebook-pixel';
 
@@ -18,6 +18,7 @@ interface Props {
 
 ReactPixel.trackCustom('MerchantsPageView', {});
 const MerchantsPage = (props: Props) => {
+  const websiteImages = getWebsiteImages();
   const { t, i18n } = useTranslation();
 
   const flyerZip: string =
@@ -72,7 +73,7 @@ const MerchantsPage = (props: Props) => {
         <>
           <div className={styles.overlayContainer}>
             <img
-              src={nycMapBackground}
+              src={websiteImages.merchantHero}
               className={styles.nycMap}
               alt="NYC MAP"
             />

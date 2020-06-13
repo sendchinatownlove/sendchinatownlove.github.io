@@ -9,7 +9,7 @@ interface Props {
 
 const ContributionBar = ({ totalDonations, totalGiftCards }: Props) => {
   const { t } = useTranslation();
-  
+
   const progressWidth = (raised: number, total: number) => {
     if (raised < total) return (raised / total) * 100;
     return 100;
@@ -17,7 +17,10 @@ const ContributionBar = ({ totalDonations, totalGiftCards }: Props) => {
 
   return (
     <Container>
-      <Heading>{t('contributionBar.header')}</Heading>
+      <Heading>
+        {t('contributionBar.header')}: $
+        {Math.floor((totalDonations + totalGiftCards) / 100).toLocaleString()}
+      </Heading>
       <Contributions
         style={{
           background: `linear-gradient(-45deg, #dd678a ${progressWidth(
@@ -36,9 +39,7 @@ const ContributionBar = ({ totalDonations, totalGiftCards }: Props) => {
           <b>${(Math.floor(totalDonations) / 100).toLocaleString()}</b>
         </span>
       </TextContainer>
-      <p>
-        {t('contributionBar.footer')}
-      </p>
+      <p>{t('contributionBar.footer')}</p>
     </Container>
   );
 };

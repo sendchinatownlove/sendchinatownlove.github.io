@@ -1,1 +1,1 @@
-export * from './StoreInfo';
+export * from './StoreInfoContainer';

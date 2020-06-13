@@ -166,7 +166,7 @@ h3 {
     border: 1px solid grey;
   }
 
-  &--filled:focus {
+  &--filled:enabled:hover {
     color: white;
     background-color: $default-hover-red;
     border: 1px solid $default-hover-red;
