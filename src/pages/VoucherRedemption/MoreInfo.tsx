@@ -24,7 +24,13 @@ const LandingCard = (props: Props) => {
       marginLeft={props.marginLeft}
     >
       {showInfo && (
-        <SubText showInfo={showInfo}>
+        <SubText
+          showInfo={showInfo}
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowInfo(!showInfo);
+          }}
+        >
           By proceeding with your purchase, you understand that the voucher card
           is not redeemable for cash and can only be used at Shunfa Bakery. All
           purchases are final. In the event that the merchant is no longer open
@@ -37,7 +43,10 @@ const LandingCard = (props: Props) => {
       <MoreInfoButton
         showInfo={showInfo}
         inverted={props.inverted}
-        onClick={(e) => setShowInfo(!showInfo)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowInfo(!showInfo);
+        }}
       >
         ?
       </MoreInfoButton>

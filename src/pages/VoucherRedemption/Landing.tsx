@@ -31,7 +31,7 @@ const LandingCard = (props: Props) => {
 
   return (
     <Container>
-      <CardContainer>
+      <CardContainer onClick={setView}>
         <VoucherContent>
           <SubText>
             <SupportingText>
@@ -48,7 +48,7 @@ const LandingCard = (props: Props) => {
           <br />
         </VoucherContent>
         <Divider />
-        <Button onClick={setView}>Click to begin redeeming your voucher</Button>
+        <Button>Click to begin redeeming your voucher</Button>
         <br />
       </CardContainer>
       <br />
