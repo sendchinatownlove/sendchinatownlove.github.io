@@ -20,18 +20,22 @@ const Amount = (props: Props) => {
   };
 
   return (
-    <Footer height="90vh">
+    <Footer height="90vh" style={{ flex: 1 }}>
       <AmountContainer>
         <Text bold="true" size="24px">
           Redemption Complete
         </Text>
       </AmountContainer>
-      <AmountContainer>
-        <Text bold="true" size="24px">
-          $ {(amount / 100).toFixed(2)}
-        </Text>
-        <Text size="16px">Remaining voucher balance</Text>
-      </AmountContainer>
+      {!voucher.single_use ? (
+        <AmountContainer>
+          <Text bold="true" size="24px">
+            $ {(amount / 100).toFixed(2)}
+          </Text>
+          <Text size="16px">Remaining voucher balance</Text>
+        </AmountContainer>
+      ) : (
+        ''
+      )}
       <br />
       <Text size="24px" bold="true" width="80%" align="center">
         Thank you for dining at {voucher.ownerName}!

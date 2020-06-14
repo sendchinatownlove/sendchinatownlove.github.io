@@ -17,11 +17,14 @@ import MoreInfo from './MoreInfo';
 import Loader from '../../components/Loader';
 import {
   AmountContainer,
-  MessageConatiner,
+  MessageContainer,
   Text,
   Footer,
   NextButton,
   Divider,
+  Disclaimer,
+  Bold,
+  FlexFillSpace,
 } from './styles';
 
 interface Props {}
@@ -62,8 +65,8 @@ const Amount = (props: Props) => {
       dispatch({ type: SET_AMOUNT, payload: gift_card_detail.amount });
       setLoading(false);
       setView(3);
-    } catch (e) {
-      console.log('error: ', e);
+    } catch (err) {
+      console.log('error: ', err);
       setLoading(false);
     }
   };
@@ -71,45 +74,71 @@ const Amount = (props: Props) => {
   return (
     <Container>
       <AmountContainer>
-        <Text width="100%" align="flex-start" onClick={(e) => setView(1)}>
-          {`< Back`}
+        <Text
+          width="100%"
+          align="flex-start"
+          color="#474747"
+          bold="true"
+          wide
+          onClick={(e) => setView(voucher.single_use ? 0 : 1)}
+        >
+          {`< BACK`}
         </Text>
       </AmountContainer>
       <Header>
-        Complete Your Purchase
-        <MoreInfo marginLeft="35px" showShadow={true} />
+        {voucher.single_use ? (
+          <Text size="18px" width="70%">
+            Are you ready to redeem your voucher?
+          </Text>
+        ) : (
+          <Text size="22px">Complete Your Purchase</Text>
+        )}
+        <MoreInfo marginLeft="35px" showShadow={true} inverted={true} />
       </Header>
-      <MessageConatiner>
+      {!voucher.single_use ? (
+        <MessageContainer>
+          <Text size="16px" width="50%">
+            Voucher balance
+          </Text>
+          <Text size="16px" width="50%" align="flex-end">
+            ${(voucher.amount / 100).toFixed(2)}
+          </Text>
+        </MessageContainer>
+      ) : (
+        ''
+      )}
+      <MessageContainer>
         <Text size="16px" width="50%">
-          Voucher balance
-        </Text>
-        <Text size="16px" width="50%" align="flex-end">
-          ${(voucher.amount / 100).toFixed(2)}
-        </Text>
-      </MessageConatiner>
-      <MessageConatiner>
-        <Text size="16px" width="50%">
-          Redemption Amount
+          {voucher.single_use
+            ? 'Single-use voucher balance'
+            : 'Redemption Amount'}
         </Text>
         <Text size="16px" width="50%" align="flex-end">
           ${(amount / 1).toFixed(2)}
         </Text>
-      </MessageConatiner>
+      </MessageContainer>
       <Divider />
-      <MessageConatiner>
-        <Text size="16px" width="50%">
-          Remaining balance
-        </Text>
-        <Text bold="true" size="24px" width="50%" align="flex-end">
-          ${(voucher.amount / 100 - amount).toFixed(2)}
-        </Text>
-      </MessageConatiner>
+      {!voucher.single_use ? (
+        <MessageContainer>
+          <Text size="16px" width="50%">
+            Remaining balance
+          </Text>
+          <Text bold="true" size="24px" width="50%" align="flex-end">
+            ${(voucher.amount / 100 - amount).toFixed(2)}
+          </Text>
+        </MessageContainer>
+      ) : (
+        <Disclaimer>
+          <strong>Note:</strong> Any remaining balance will not be redeemable
+          after this purchase
+        </Disclaimer>
+      )}
       <VoucherContainer>
         <Text>
-          {' '}
-          Voucher Code: <b>{voucher.seller_gift_card_id}</b>{' '}
+          Voucher Code: &nbsp; <Bold>{voucher.seller_gift_card_id}</Bold>
         </Text>
       </VoucherContainer>
+      <FlexFillSpace></FlexFillSpace>
       <Footer>
         <Text color="#ab192e" bold="true" width="50%" textAlign="center">
           Please show your phone to the merchant cashier to confirm the
@@ -131,6 +160,7 @@ const Container = styled.div`
   color: black;
   display: flex;
   flex-direction: column;
+  flex: 1;
 `;
 const Header = styled.div`
   position: relative;

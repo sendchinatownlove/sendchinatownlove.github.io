@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
 interface TextProps {
-  bold?: String;
-  color?: String;
-  size?: String;
-  width?: String;
-  align?: String;
-  textAlign?: String;
-  padding?: String;
+  bold?: string;
+  color?: string;
+  size?: string;
+  width?: string;
+  align?: string;
+  textAlign?: string;
+  padding?: string;
+  wide?: boolean;
 }
 interface VoucherInfoProps {
-  showInfo?: Boolean;
+  showInfo?: boolean;
 }
 interface ContainerProps {
   height?: string;
@@ -28,7 +29,7 @@ const AmountContainer = styled.div`
   ${(props: ContainerProps) =>
     props.bringToTheFront && 'z-index: 150!important;'}
 `;
-const MessageConatiner = styled.div`
+const MessageContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -47,6 +48,7 @@ const Voucher = styled.div`
 const Bold = styled.span`
   font-weight: 600;
   word-wrap: break-word;
+  word-break: break-all;
 `;
 const Text = styled.div`
   display: flex;
@@ -61,6 +63,7 @@ const Text = styled.div`
   ${(props: TextProps) => props.align && `justify-content: ${props.align};`}
   ${(props: TextProps) => props.textAlign && `text-align: ${props.textAlign};`}
   ${(props: TextProps) => props.padding === 'true' && `padding-right: 5px;`}
+  ${(props: TextProps) => props.wide && `letter-spacing: 3px;`}
   span {
     font-weight: 700;
   }
@@ -77,7 +80,7 @@ const Footer = styled.div`
 `;
 
 const NextButton = styled.button`
-  background: black;
+  background: ${(props) => (props.disabled ? 'grey' : 'black')};
   color: white;
   font-size: 18px;
   border-radius: 32px;
@@ -90,19 +93,31 @@ const NextButton = styled.button`
 `;
 
 const Divider = styled.div`
-  border-bottom: 1px solid
-    ${(props: VoucherInfoProps) => (!props.showInfo ? 'white' : 'transparent')};
+  border-bottom: 2px solid #f7f7f7;
   margin: 12px auto;
   width: 90%;
 `;
 
+const Disclaimer = styled.div`
+  text-align: center;
+  font-size: 16px;
+  color: #a8192e;
+  padding-bottom: 3vh;
+`;
+
+const FlexFillSpace = styled.div`
+  flex: 1;
+`;
+
 export {
   AmountContainer,
-  MessageConatiner,
+  MessageContainer,
   Text,
   Footer,
   NextButton,
   Divider,
   Voucher,
   Bold,
+  Disclaimer,
+  FlexFillSpace,
 };

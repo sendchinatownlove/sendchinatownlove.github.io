@@ -117,7 +117,7 @@ export const updateVoucher = async (id: string, amount: number) =>
     .put(vouchers + id, { amount })
     .then((res) => res)
     .catch((err) => err);
-          
+
 function localeFromLanguage(language?: string) {
   switch (language) {
     case 'cn':

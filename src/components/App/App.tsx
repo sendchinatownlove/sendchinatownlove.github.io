@@ -86,7 +86,7 @@ const App = () => {
           </Route>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>
-          <Route path="/:id#story">{returnComponent('seller')}</Route> */}
+          <Route path="/:id#story">{returnComponent('seller')}</Route>
           <Route>{returnComponent('error')}</Route>
         </Switch>
       </Suspense>

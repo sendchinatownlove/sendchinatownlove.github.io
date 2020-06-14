@@ -98,9 +98,7 @@ const Container = styled.div`
   `}
   height: 100vh;
   background-color: transparent;
+  display: flex;
   flex-direction: column;
-  * {
-    z-index: 10;
-  }
   overflow-x: hidden;
 `;
