@@ -52,7 +52,11 @@ const LandingCard = (props: Props) => {
         <br />
       </CardContainer>
       <br />
-      <Button color="#ab192e">{voucher.locations[0]}</Button>
+      <Button color="#ab192e">
+        {voucher.location.line1}
+        <br></br>
+        {voucher.location.line2}
+      </Button>
       <FooterContainer>
         <Image src={Logo} />
       </FooterContainer>
@@ -107,9 +111,9 @@ const SupportingText = styled.span`
 `;
 const Button = styled.div`
   cursor: pointer;
-  ${(props: ButtonProps) => props.color && `color: ${props.color}`}
+  ${(props: ButtonProps) => `color: ${props.color ?? ''};`}
   font-size: 13px;
-  line-height: 18px;
+  line-height: 1.5;
   text-align: center;
 `;
 const Balance = styled.div`
