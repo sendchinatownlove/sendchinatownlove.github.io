@@ -21,7 +21,7 @@ import {
   FlexFillSpace,
 } from './styles';
 
-interface Props {}
+interface Props { }
 interface TextProps {
   bold?: string;
   color?: string;
@@ -43,13 +43,17 @@ const Amount = (props: Props) => {
 
   const handleAmount = (e) => {
     setError('');
-    if (e.target.value * 100 > voucher.amount || e.target.value * 100 < 1)
+    if (e.target.value * 100 > voucher.amount || e.target.value < 0)
       return setError('Please enter a valid amount');
     dispatch({ type: SET_AMOUNT, payload: e.target.value });
   };
 
   const setView = (view) => {
     dispatch({ type: SET_VIEW, payload: view });
+  };
+
+  const setAmount = (amount) => {
+    dispatch({ type: SET_AMOUNT, payload: amount });
   };
 
   return (
@@ -61,7 +65,10 @@ const Amount = (props: Props) => {
           color="#474747"
           bold="true"
           wide
-          onClick={(e) => setView(0)}
+          onClick={(e) => {
+            setAmount(0);
+            setView(0);
+          }}
         >
           {`< CANCEL`}
         </Text>
@@ -88,6 +95,7 @@ const Amount = (props: Props) => {
           <Text size="18px">How much are you spending today?</Text>
           <InputWrapper>
             <AmountInput
+              value={amount === 0 ? '' : amount}
               onChange={handleAmount}
               placeholder={'0.00'}
               type="number"
@@ -114,7 +122,7 @@ const Amount = (props: Props) => {
         <Voucher>
           Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>{' '}
         </Voucher>
-        <NextButton onClick={(e) => setView(2)} disabled={!!error}>
+        <NextButton onClick={(e) => setView(2)} disabled={!!error || amount <= 0}>
           Next
         </NextButton>
       </Footer>
