@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { times } from 'lodash/fp';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
@@ -47,6 +47,7 @@ const SquareModal = ({
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
+  const [canSubmit, setCanSubmit] = useState(false);
 
   const checkTermsAgreement = () => setTermsChecked(!isTermsChecked);
   const checkSubscriptionAgreement = () =>
@@ -95,6 +96,7 @@ const SquareModal = ({
       is_subscribed: isSubscriptionChecked,
     };
 
+    setCanSubmit(false)
     return makeSquarePayment(nonce, sellerId, payment, buyer, is_distribution)
       .then((res) => {
         if (res.status === 200) {
@@ -146,11 +148,12 @@ const SquareModal = ({
     }
   };
 
-  const canSubmit =
-    isTermsChecked &&
-    name.length > 0 &&
-    email.length > 0 &&
-    EMAIL_REGEX.test(email);
+  useEffect(() => {
+    setCanSubmit(isTermsChecked &&
+      name.length > 0 &&
+      email.length > 0 &&
+      EMAIL_REGEX.test(email));
+  }, [isTermsChecked, name, email])
 
   const setDisclaimerLanguage = (type: string) => {
     if (sellerId === 'send-chinatown-love') type = 'donation-pool';
