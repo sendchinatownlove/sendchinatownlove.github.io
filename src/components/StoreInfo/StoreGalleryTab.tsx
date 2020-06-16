@@ -35,6 +35,7 @@ const GalleryContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 15px;
+  max-width: 632px;
 
   > img {
     object-fit: cover;
@@ -55,20 +56,17 @@ const GalleryContainer = styled.div`
   }
 
   @media (max-width: 1290px) {
-    > img {
-      width: 22.25vw;
-      height: 22.25vw;
-    }
-
     .item-1 {
       grid-column: span 1;
       grid-row: span 1;
-      width: 22.25vw;
-      height: 22.25vw;
+      width: 200px;
+      height: 200px;
     }
   }
 
   @media (max-width: 1175px) {
+    max-width: 100%;
+
     > img {
       width: 100%;
     }

@@ -17,7 +17,7 @@ type Props = {
 export const StoreInfo: React.SFC<Props> = ({ seller }) => {
   const { summary, story, cuisine_name, locations } = seller;
 
-  // modal functionality for menu and gallery tabs 
+  // modal functionality for menu and gallery tabs
   const [viewImage, setViewImage] = useState('');
   const [showModal, setShowModal] = useState(false);
 
@@ -27,7 +27,11 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
   };
 
   // logic for nav bar & tab switching
-  const storeNavItems = ['story', 'menu', 'gallery'];
+  const storeNavItems = [
+    story && 'story',
+    seller.menu_url && 'menu',
+    seller.gallery_image_urls.length > 0 && 'gallery',
+  ];
 
   const [currentMerchantView, setMerchantView] = useState('story');
 
@@ -36,7 +40,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
       case 'gallery':
         return <StoreGallery seller={seller} expandImage={expandImage} />;
       case 'menu':
-        return <StoreMenu seller={seller} expandImage={expandImage}/>;
+        return <StoreMenu seller={seller} expandImage={expandImage} />;
       case 'merch':
         return <StoreMerch seller={seller} />;
       case 'share':
@@ -77,18 +81,20 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
       </div>
       <p>{summary}</p>
       <StoreNavContainer>
-        {storeNavItems.map((value) => (
-          <NavButton
-            key={`${value}-nav-link`}
-            className={value === currentMerchantView ? 'active' : ''}
-            onClick={() => setMerchantView(value)}
-          >
-            {value}
-          </NavButton>
-        ))}
+        {storeNavItems.map(
+          (value) =>
+            value && (
+              <NavButton
+                key={`${value}-nav-link`}
+                className={value === currentMerchantView ? 'active' : ''}
+                onClick={() => setMerchantView(value)}
+              >
+                {value}
+              </NavButton>
+            )
+        )}
       </StoreNavContainer>
       {switchMerchantView()}
-
 
       <ImageModal style={{ display: showModal ? 'block' : 'none' }}>
         <CloseButton onClick={() => setShowModal(false)}>×</CloseButton>
@@ -137,7 +143,6 @@ const NavButton = styled.button`
     font-weight: 900;
   }
 `;
-
 
 const ImageModal = styled.div`
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
