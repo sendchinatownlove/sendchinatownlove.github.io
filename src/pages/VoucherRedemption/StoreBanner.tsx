@@ -40,6 +40,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  ${(props: ContainerProps) => (props.isOnLandingPage && 'min-height: 200px;')}
   flex-direction: ${(props: ContainerProps) =>
     props.isOnLandingPage ? 'column' : 'row'};
   margin: ${(props: ContainerProps) => (props.isOnLandingPage ? '24px' : '0')}

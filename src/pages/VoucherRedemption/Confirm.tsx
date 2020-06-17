@@ -140,7 +140,7 @@ const Amount = (props: Props) => {
         </Text>
       </VoucherContainer>
       <FlexFillSpace></FlexFillSpace>
-      <Footer>
+      <Footer height="220px">
         <Text color="#ab192e" bold="true" width="50%" textAlign="center">
           Please show your phone to the merchant cashier to confirm the
           purchase.
@@ -170,6 +170,7 @@ const Header = styled.div`
   width: 100%;
   margin: 24px auto;
   font-size: 24px;
+  min-height: 22px;
   line-height: 22px;
   font-weight: 600;
   justify-content: center;

@@ -21,13 +21,13 @@ const Amount = (props: Props) => {
 
   return (
     <Footer height="90vh" style={{ flex: 1 }}>
-      <AmountContainer>
+      <AmountContainer height="35px">
         <Text bold="true" size="24px">
           Redemption Complete
         </Text>
       </AmountContainer>
       {!voucher.single_use ? (
-        <AmountContainer>
+        <AmountContainer height="55px">
           <Text bold="true" size="24px">
             $ {(amount / 100).toFixed(2)}
           </Text>
