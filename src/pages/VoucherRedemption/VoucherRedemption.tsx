@@ -37,9 +37,8 @@ const VoucherRedemption = (props: Props) => {
 
       const voucher = {
         ...gift_card_detail,
-        ownerName: merchantData.data.owner_name,
-        ownerImage: merchantData.data.owner_image_url,
         storeImage: merchantData.data.hero_image_url,
+        storeName: merchantData.data.name,
         sellerID: seller_id,
         location: getLocationInfo(merchantData),
       };

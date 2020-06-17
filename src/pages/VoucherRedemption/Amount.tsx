@@ -21,7 +21,7 @@ import {
   FlexFillSpace,
 } from './styles';
 
-interface Props { }
+interface Props {}
 interface TextProps {
   bold?: string;
   color?: string;
@@ -80,7 +80,7 @@ const Amount = (props: Props) => {
             ? process.env.REACT_APP_BASE_URL + voucher.storeImage
             : defaultStoreFront
         }
-        alt={`${voucher.ownerName} Illustration`}
+        alt={`${voucher.storeName} Illustration`}
       />
       <AmountContainer bringToTheFront>
         <Text bold="true" size="24px">
@@ -122,7 +122,10 @@ const Amount = (props: Props) => {
         <Voucher>
           Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>{' '}
         </Voucher>
-        <NextButton onClick={(e) => setView(2)} disabled={!!error || amount <= 0}>
+        <NextButton
+          onClick={(e) => setView(2)}
+          disabled={!!error || amount <= 0}
+        >
           Next
         </NextButton>
       </Footer>

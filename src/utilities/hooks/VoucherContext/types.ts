@@ -18,9 +18,8 @@ export type VoucherDetails = {
   recipient_id: number;
   seller_gift_card_id: string;
   updated_at: string;
-  ownerName: string;
-  ownerImage: string;
   storeImage: string;
+  storeName: string;
   sellerID: string;
   single_use: boolean;
   location: LocationInfo;
@@ -49,9 +48,8 @@ export const defaultState: VoucherState = {
     recipient_id: -1,
     seller_gift_card_id: '',
     updated_at: '',
-    ownerName: '',
-    ownerImage: '',
     storeImage: '',
+    storeName: '',
     sellerID: '',
     single_use: false,
     location: {

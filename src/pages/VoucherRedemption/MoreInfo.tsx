@@ -37,7 +37,7 @@ const LandingCard = (props: Props) => {
           at the time of redemption, Send Chinatown Love Inc. will not be able
           to refund your purchase. Balance displayed in the voucher may or may
           not represent the final balance. Final balance information is subject
-          to {voucher.ownerName}'s most recent records.
+          to {voucher.storeName}'s most recent records.
         </SubText>
       )}
       <MoreInfoButton
