@@ -38,7 +38,7 @@ const Amount = (props: Props) => {
       )}
       <br />
       <Text size="24px" bold="true" width="80%" align="center">
-        Thank you for dining at {voucher.ownerName}!
+        Thank you for dining at {voucher.storeName}!
       </Text>
       <br />
       <br />
