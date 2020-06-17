@@ -6,14 +6,6 @@ import { BrowsePageSeller } from '../../utilities/api/types';
 import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
-import ClipboardIcon from 'react-clipboard-icon';
-import CopyToClipboard from 'react-copy-to-clipboard';
-import { SocialIcon } from 'react-social-icons';
-import {
-  EmailShareButton,
-  FacebookShareButton,
-  TwitterShareButton,
-} from 'react-share';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -68,22 +60,7 @@ const OwnerPanel = ({ seller }: Props) => {
     return extraInfo[current] != null;
   });
 
-  const location = window.location.href;
-  const facebookQuote = 'Help raise money for ' + seller.name;
-  const socialIconBackgroundColor = '#a9182e';
-  const socialIconDimensions = { height: 50, width: 50 };
   const costPerMealDollars = seller.cost_per_meal / 100;
-
-  const clipboardStyle = {
-    fill: 'white',
-    display: 'inline',
-    borderRadius: '50%',
-    backgroundColor: '#a9182e',
-    border: '1px solid #a9182e',
-    padding: '0px 8px 0px 16px',
-    position: 'relative',
-    top: '20px',
-  };
 
   return (
     <Container>
@@ -179,8 +156,8 @@ const OwnerPanel = ({ seller }: Props) => {
           })}
         </div>
       ) : (
-        ''
-      )}
+          ''
+        )}
 
       <ModalBox
         purchaseType={purchaseType}
@@ -188,52 +165,6 @@ const OwnerPanel = ({ seller }: Props) => {
         sellerName={seller.name}
         costPerMeal={costPerMealDollars}
       />
-      {
-        <div className={styles.socialContainer}>
-          <div className={styles.socialIconContainer}>
-            <FacebookShareButton
-              url={location}
-              quote={facebookQuote}
-              className="share"
-            >
-              <SocialIcon
-                network="facebook"
-                bgColor={socialIconBackgroundColor}
-                style={socialIconDimensions}
-              />
-            </FacebookShareButton>
-          </div>
-
-          <div className={styles.socialIconContainer}>
-            <TwitterShareButton url={location} className="share">
-              <SocialIcon
-                network="twitter"
-                bgColor={socialIconBackgroundColor}
-                style={socialIconDimensions}
-              />
-            </TwitterShareButton>
-          </div>
-
-          <div className={styles.socialIconContainer}>
-            <EmailShareButton url={location} className="share">
-              <SocialIcon
-                network="email"
-                bgColor={socialIconBackgroundColor}
-                style={socialIconDimensions}
-              />
-            </EmailShareButton>
-          </div>
-
-          <div className={styles.socialIconContainer}>
-            <CopyToClipboard text={location}>
-              <ClipboardIcon
-                size={socialIconDimensions.height}
-                style={clipboardStyle}
-              />
-            </CopyToClipboard>
-          </div>
-        </div>
-      }
 
       <div className={styles.mapsContainer}>
         {/* need to put in google API */}
