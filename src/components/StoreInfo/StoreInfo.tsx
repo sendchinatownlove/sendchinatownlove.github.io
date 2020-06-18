@@ -11,6 +11,9 @@ type Props = {
 
 export const StoreInfo: React.SFC<Props> = ({ seller }) => {
   const { summary, story, cuisine_name, locations } = seller;
+  // temp
+  console.log(seller)
+  // temp
   return (
     <section className={classnames(styles.container)} data-testid="Store Info">
       {
