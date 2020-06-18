@@ -68,33 +68,47 @@ const OwnerPanel = ({ seller }: Props) => {
   return (
     <Container>
 
-      <figure className={styles.ownerContainer}>
-        <img
-          className={styles.ownerImage}
-          src={
-            seller?.owner_image_url
-              ? process.env.REACT_APP_BASE_URL + seller?.owner_image_url
-              : defaultOwnerImage
-          }
-          alt={seller.owner_name}
-        />
-      </figure>
+      <div className={styles.subsection}>
+        {dummy.isOpen && (
+          <div className={styles.nowOpenFlag}>
+            Now Open
+          </div>
+        )}
 
-      <h2 className={styles.ownerName}>{seller.owner_name}</h2>
-      {seller.target_amount && (
-        <ProgressBar
-          amountRaised={seller.amount_raised}
-          targetAmount={seller.target_amount}
-          progressBarColor={seller.progress_bar_color}
-          numContributions={seller.num_contributions}
-          numDonations={seller.num_donations}
-          numGiftCards={seller.num_gift_cards}
-          donationAmount={seller.donation_amount}
-          giftCardAmount={seller.gift_card_amount}
-        />
+        <figure className={styles.ownerContainer}>
+          <img
+            className={styles.ownerImage}
+            src={
+              seller?.owner_image_url
+                ? process.env.REACT_APP_BASE_URL + seller?.owner_image_url
+                : defaultOwnerImage
+            }
+            alt={seller.owner_name}
+          />
+        </figure>
+
+        <h2 className={styles.ownerName}>{seller.owner_name}</h2>
+        {seller.target_amount && (
+          <ProgressBar
+            amountRaised={seller.amount_raised}
+            targetAmount={seller.target_amount}
+            progressBarColor={seller.progress_bar_color}
+            numContributions={seller.num_contributions}
+            numDonations={seller.num_donations}
+            numGiftCards={seller.num_gift_cards}
+            donationAmount={seller.donation_amount}
+            giftCardAmount={seller.gift_card_amount}
+          />
+        )}
+        <DonationSection seller={seller} showModal={showModal} />
+      </div>
+
+      {dummy.isOpen && (
+        <div className={styles.subsection}>
+          hi!
+        </div>
       )}
-      
-      <DonationSection seller={seller} showModal={showModal} />
+
 
       <ModalBox
         purchaseType={purchaseType}
@@ -112,6 +126,7 @@ export default OwnerPanel;
 const Container = styled.section`
   order: 1;
   grid-row: 1;
+  width: 100%;
   @media (min-width: 900px) {
     position: sticky;
     top: 20px;
@@ -119,26 +134,3 @@ const Container = styled.section`
     grid-column: 2;
   }
 `;
-
-
-// const Container = styled.section`
-//   display: flex;
-//   width: 100%;
-//   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
-//   flex-direction: column;
-//   align-items: center;
-//   padding: 18px 32px;
-
-//   order: 1;
-//   grid-row: 1;
-//   @media (min-width: 900px) {
-//     position: sticky;
-//     top: 20px;
-//     order: 2;
-//     grid-column: 2;
-//   }
-//   @media (max-width: 599px) {
-//     font-size: 14px;
-//     padding: 24px;
-//   }
-// `;
