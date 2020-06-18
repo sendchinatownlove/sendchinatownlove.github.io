@@ -64,8 +64,8 @@ const DonationSection = ({ seller, showModal }: Props) => {
                 )}
             </div>
         </React.Fragment>
-      )
+      );
 
-}
+};
 
-export default DonationSection
+export default DonationSection;

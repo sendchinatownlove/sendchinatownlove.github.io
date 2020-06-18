@@ -7,9 +7,10 @@ import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
-// import classnames from 'classnames';
+import classnames from 'classnames';
 
 import DonationSection from './DonationSection'
+import OrderNow from './OrderNow'
 
 
 //
@@ -57,6 +58,8 @@ const OwnerPanel = ({ seller }: Props) => {
 
   const dispatch = useModalPaymentDispatch();
   const [purchaseType, setPurchaseType] = useState('');
+  const [showOrderNow, toggleOrderNow] = useState(true);
+
 
   const showModal = (event: any) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
@@ -104,9 +107,14 @@ const OwnerPanel = ({ seller }: Props) => {
       </div>
 
       {dummy.isOpen && (
-        <div className={styles.subsection}>
-          hi!
-        </div>
+        <React.Fragment>
+          { showOrderNow && <OrderNow dummy={dummy} /> }
+          <button>{
+            showOrderNow 
+            ? <><p>Hide</p></>
+            : <><p >Order Now</p></>
+          }</button>
+        </React.Fragment>
       )}
 
 

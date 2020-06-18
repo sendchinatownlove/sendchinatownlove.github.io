@@ -103,7 +103,56 @@ $container-size: 160px;
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
+  font-size: 14px;
   font-weight: 700;
+  letter-spacing: 0.15em;
   color: #fff;
   background-color: #f8ba17;
+}
+
+.openNowSection {
+  
+  &__open {
+    margin-top: 20px;
+  }
+}
+
+.orderNow {
+  display: grid;
+  position: relative;
+  margin-top: 20px;
+
+  &__bold {
+    font-weight: bold;
+  }
+
+  &__smaller {
+    font-size: 15px;
+  }
+
+  p {
+    margin-top: 0;
+  }
+
+  &__hoursSect {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-column-gap: 16px;
+    margin-bottom: 32px;
+
+    p {
+      margin-top: 0;
+    }
+  }
+
+  &__hours {
+    display: grid;
+    align-items: start;
+    grid-auto-rows: auto;
+    grid-template-columns: 1fr 2fr;
+
+    p {
+      margin: 0 auto 0 0;
+    }
+  }
 }
