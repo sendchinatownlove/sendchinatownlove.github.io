@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 import { SquareErrors, hasKey } from '../../consts';
-import { makeSquarePayment, SquareLineItems, Buyer } from '../../utilities/api';
+import { makeSquarePayment, SquareLineItems, Buyer, getSeller } from '../../utilities/api';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
@@ -31,7 +31,7 @@ type ErrorMessage = {
   detail: string;
 };
 
-const SquareModal = ({
+const SquareModal = async ({
   purchaseType,
   sellerId,
   sellerName,
@@ -128,12 +128,19 @@ const SquareModal = ({
       });
   };
 
-  const applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID
-    ? process.env.REACT_APP_SQUARE_APPLICATION_ID
-    : '';
-  const locationId = process.env.REACT_APP_SQUARE_LOCATION_ID
-    ? process.env.REACT_APP_SQUARE_LOCATION_ID
-    : '';
+  const seller = await getSeller(sellerId);
+  const sellerNPLocationId = seller.non_profit_location_id;
+
+  let applicationId;
+  let locationId;
+  if (purchaseType === 'buy_meal' && sellerNPLocationId == process.env.THINK_CHINATOWN_LOCATION_ID) {
+    applicationId = process.env.THINK_CHINATOWN_APPLICATION_ID ?? '';
+    locationId = process.env.THINK_CHINATOWN_LOCATION_ID ?? '';
+  }
+  else {
+    applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';
+    locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
+  }
 
   const purchaseTypePhrase = (shouldLowerCase) => {
     switch (purchaseType) {
