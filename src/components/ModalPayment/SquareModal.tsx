@@ -38,7 +38,7 @@ const SquareModal = ({
   sellerName,
   idempotencyKey,
   costPerMeal,
-  nonProfitLocationId
+  nonProfitLocationId,
 }: Props) => {
   const { t } = useTranslation();
   const { amount } = useModalPaymentState();
@@ -98,7 +98,7 @@ const SquareModal = ({
       is_subscribed: isSubscriptionChecked,
     };
 
-    setCanSubmit(false)
+    setCanSubmit(false);
     return makeSquarePayment(nonce, sellerId, payment, buyer, is_distribution)
       .then((res) => {
         if (res.status === 200) {
@@ -130,13 +130,14 @@ const SquareModal = ({
       });
   };
 
-  let applicationId;
-  let locationId;
-  if (purchaseType === 'buy_meal' && nonProfitLocationId === process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID) {
+  let applicationId, locationId;
+  if (
+    purchaseType === 'buy_meal' &&
+    nonProfitLocationId === process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID
+  ) {
     applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
-  }
-  else {
+  } else {
     applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
   }
@@ -155,11 +156,13 @@ const SquareModal = ({
   };
 
   useEffect(() => {
-    setCanSubmit(isTermsChecked &&
-      name.length > 0 &&
-      email.length > 0 &&
-      EMAIL_REGEX.test(email));
-  }, [isTermsChecked, name, email])
+    setCanSubmit(
+      isTermsChecked &&
+        name.length > 0 &&
+        email.length > 0 &&
+        EMAIL_REGEX.test(email)
+    );
+  }, [isTermsChecked, name, email]);
 
   const setDisclaimerLanguage = (type: string) => {
     if (sellerId === 'send-chinatown-love') type = 'donation-pool';
