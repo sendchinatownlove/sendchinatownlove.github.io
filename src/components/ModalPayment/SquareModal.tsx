@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 import { SquareErrors, hasKey } from '../../consts';
-import { makeSquarePayment, SquareLineItems, Buyer, getSeller } from '../../utilities/api';
+import { makeSquarePayment, SquareLineItems, Buyer } from '../../utilities/api';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
@@ -24,6 +24,7 @@ type Props = {
   sellerName: string;
   idempotencyKey: string;
   costPerMeal: number;
+  nonProfitLocationId?: string;
 };
 
 type ErrorMessage = {
@@ -31,12 +32,13 @@ type ErrorMessage = {
   detail: string;
 };
 
-const SquareModal = async ({
+const SquareModal = ({
   purchaseType,
   sellerId,
   sellerName,
   idempotencyKey,
   costPerMeal,
+  nonProfitLocationId
 }: Props) => {
   const { t } = useTranslation();
   const { amount } = useModalPaymentState();
@@ -66,7 +68,7 @@ const SquareModal = async ({
       return;
     }
 
-    // 'buy_meal' is still respresented as a gift card when calling the API
+    // 'buy_meal' is still represented as a gift card when calling the API
     const payment: SquareLineItems =
       purchaseType === 'buy_meal'
         ? times(
@@ -128,14 +130,12 @@ const SquareModal = async ({
       });
   };
 
-  const seller = await getSeller(sellerId);
-  const sellerNPLocationId = seller.non_profit_location_id;
-
   let applicationId;
   let locationId;
-  if (purchaseType === 'buy_meal' && sellerNPLocationId == process.env.THINK_CHINATOWN_LOCATION_ID) {
-    applicationId = process.env.THINK_CHINATOWN_APPLICATION_ID ?? '';
-    locationId = process.env.THINK_CHINATOWN_LOCATION_ID ?? '';
+  console.log(purchaseType, nonProfitLocationId, process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID, process.env.REACT_APP_SQUARE_APPLICATION_ID)
+  if (purchaseType === 'buy_meal' && nonProfitLocationId === process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID) {
+    applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
+    locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
   }
   else {
     applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';

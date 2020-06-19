@@ -41,17 +41,17 @@ const OwnerPanel = ({ seller }: Props) => {
     setPurchaseType(event.target.value);
   };
 
-  const donationClickHander = (event: any) => {
+  const donationClickHandler = (event: any) => {
     ReactPixel.trackCustom('DonationButtonClick', {});
     showModal(event);
   };
 
-  const voucherClickHander = (event: any) => {
+  const voucherClickHandler = (event: any) => {
     ReactPixel.trackCustom('VoucherButtonClick', {});
     showModal(event);
   };
 
-  const giftMealClickHander = (event: any) => {
+  const giftMealClickHandler = (event: any) => {
     ReactPixel.trackCustom('GiftMealButtonClick', {});
     showModal(event);
   };
@@ -122,7 +122,7 @@ const OwnerPanel = ({ seller }: Props) => {
               seller.cost_per_meal && styles.moreThanTwoButtons,
               'button--filled'
             )}
-            onClick={donationClickHander}
+            onClick={donationClickHandler}
           >
             {t('ownerPanel.donation')}
           </button>
@@ -131,7 +131,7 @@ const OwnerPanel = ({ seller }: Props) => {
           <button
             value="gift_card"
             className={classnames(styles.button, 'button--outlined')}
-            onClick={voucherClickHander}
+            onClick={voucherClickHandler}
           >
             {t('ownerPanel.voucher')}
           </button>
@@ -140,7 +140,7 @@ const OwnerPanel = ({ seller }: Props) => {
           <button
             value="buy_meal"
             className={classnames(styles.button, 'button--outlined')}
-            onClick={giftMealClickHander}
+            onClick={giftMealClickHandler}
           >
             Gift a meal
           </button>
@@ -165,7 +165,7 @@ const OwnerPanel = ({ seller }: Props) => {
                   </p>
                 </React.Fragment>
               );
-            } else
+            } else {
               return (
                 <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
@@ -176,6 +176,7 @@ const OwnerPanel = ({ seller }: Props) => {
                   </p>
                 </React.Fragment>
               );
+            }
           })}
         </div>
       ) : (
@@ -187,6 +188,7 @@ const OwnerPanel = ({ seller }: Props) => {
         sellerId={seller.seller_id}
         sellerName={seller.name}
         costPerMeal={costPerMealDollars}
+        nonProfitLocationId={seller.non_profit_location_id}
       />
       {
         <div className={styles.socialContainer}>
