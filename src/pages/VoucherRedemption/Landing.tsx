@@ -69,6 +69,7 @@ export default LandingCard;
 const Container = styled.div`
   width: 100%;
   margin: 0 auto;
+  min-height: 530px;
 `;
 const CardContainer = styled.div`
   position: relative;
