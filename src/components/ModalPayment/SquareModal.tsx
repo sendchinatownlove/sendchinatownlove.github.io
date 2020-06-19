@@ -132,7 +132,6 @@ const SquareModal = ({
 
   let applicationId;
   let locationId;
-  console.log(purchaseType, nonProfitLocationId, process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID, process.env.REACT_APP_SQUARE_APPLICATION_ID)
   if (purchaseType === 'buy_meal' && nonProfitLocationId === process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID) {
     applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
