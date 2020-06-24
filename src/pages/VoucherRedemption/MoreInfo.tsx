@@ -91,6 +91,7 @@ const getColor = (
 const VoucherContent = styled.div`
   z-index: 150 !important;
   width: 285px;
+  min-height: 270px;
   position: absolute;
   margin: 0 auto;
   border: 1px solid transparent;

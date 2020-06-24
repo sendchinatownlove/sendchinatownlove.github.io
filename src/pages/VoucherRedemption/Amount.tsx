@@ -6,6 +6,7 @@ import {
 } from '../../utilities/hooks/VoucherContext/context';
 import defaultStoreFront from '../../images/misc-store.png';
 import MoreInfo from './MoreInfo';
+import StoreBanner from './StoreBanner';
 import {
   SET_AMOUNT,
   SET_VIEW,
@@ -58,7 +59,8 @@ const Amount = (props: Props) => {
 
   return (
     <Container>
-      <AmountContainer>
+      <StoreBanner />
+      <AmountContainer height="25px">
         <Text
           width="100%"
           align="flex-start"
@@ -175,5 +177,5 @@ const InputAreaWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 160px;
+  min-height: 175px;
 `;

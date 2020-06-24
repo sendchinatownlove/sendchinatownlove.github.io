@@ -40,15 +40,14 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  ${(props: ContainerProps) => (props.isOnLandingPage && 'min-height: 200px;')}
+  ${(props: ContainerProps) => props.isOnLandingPage && 'min-height: 200px;'}
   flex-direction: ${(props: ContainerProps) =>
     props.isOnLandingPage ? 'column' : 'row'};
   margin: ${(props: ContainerProps) => (props.isOnLandingPage ? '24px' : '0')}
     auto;
   ${(props: ContainerProps) =>
     !props.isOnLandingPage && 'border-bottom: 1px solid #f7f7f7;'}
-  ${(props: ContainerProps) =>
-    !props.isOnLandingPage && 'padding: 10px 2.5%;'}
+  ${(props: ContainerProps) => !props.isOnLandingPage && 'padding: 10px 2.5%;'}
   color: black;
   text-align: center;
 `;
@@ -63,7 +62,7 @@ const OwnerImage = styled.img`
   width: ${(props: ContainerProps) =>
     props.isOnLandingPage ? '150px' : '55px'};
   height: ${(props: ContainerProps) =>
-    props.isOnLandingPage ? '150px' : '100px'};
+    props.isOnLandingPage ? '150px' : '55px'};
   ${(props: ContainerProps) =>
     props.isOnLandingPage && 'border: 5px solid white;'}
   ${(props: ContainerProps) => props.isOnLandingPage && 'border-radius: 100%;'}

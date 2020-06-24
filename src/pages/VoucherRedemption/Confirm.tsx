@@ -9,6 +9,7 @@ import {
   SET_VOUCHER_INFO,
   SET_AMOUNT,
 } from '../../utilities/hooks/VoucherContext/constants';
+import StoreBanner from './StoreBanner';
 import {
   updateVoucher,
   getSeller,
@@ -75,6 +76,7 @@ const Amount = (props: Props) => {
 
   return (
     <Container>
+      <StoreBanner />
       <AmountContainer>
         <Text
           width="100%"
