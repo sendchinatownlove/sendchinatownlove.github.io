@@ -6,7 +6,6 @@ import Landing from './Landing';
 import Amount from './Amount';
 import Confirm from './Confirm';
 import Complete from './Complete';
-import StoreBanner from './StoreBanner';
 import {
   useVoucherState,
   useVoucherDispatch,
@@ -76,7 +75,6 @@ const VoucherRedemption = (props: Props) => {
         <Loader isPage={true} />
       ) : (
         <>
-          <StoreBanner />
           {showView()}
           {/* {view === 0 && <Backdrop src={NYCBackdrop}/>} */}
         </>

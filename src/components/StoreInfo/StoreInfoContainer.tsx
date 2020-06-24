@@ -32,7 +32,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
     story && 'story',
     seller.menu_url && 'menu',
     seller.gallery_image_urls.length > 0 && 'gallery',
-    'share'
+    'share',
   ];
 
   const [currentMerchantView, setMerchantView] = useState('story');
