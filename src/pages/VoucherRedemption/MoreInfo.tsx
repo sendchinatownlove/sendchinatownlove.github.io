@@ -111,7 +111,7 @@ const VoucherContent = styled.div`
   ${(props: VoucherInfoProps) =>
     props.marginLeft && `margin-left: ${props.marginLeft}`};
 `;
-const SubText = styled.div`
+const SubText = styled.span`
   display: flex;
   flex-direction: row;
   position: relative;

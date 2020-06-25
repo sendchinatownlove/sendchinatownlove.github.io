@@ -12,25 +12,18 @@ import {
   SET_VIEW,
 } from '../../utilities/hooks/VoucherContext/constants';
 import {
-  AmountContainer,
-  MessageContainer,
+  ViewContainer,
+  MainView,
+  SubViewContainer,
+  BackButton,
+  StoreFrontImage,
   Text,
   Footer,
-  NextButton,
-  Voucher,
-  Bold,
-  FlexFillSpace,
-} from './styles';
+  FooterLabel,
+  SubmitButton,
+} from './style';
 
 interface Props {}
-interface TextProps {
-  bold?: string;
-  color?: string;
-  size?: string;
-  width?: string;
-  align?: string;
-  padding?: string;
-}
 
 interface InputProps {
   error?: boolean;
@@ -57,79 +50,62 @@ const Amount = (props: Props) => {
     dispatch({ type: SET_AMOUNT, payload: amount });
   };
 
+  const backToLanding = (e) => {
+    setAmount(0);
+    setView(0);
+  };
+
   return (
     <Container>
       <StoreBanner />
-      <AmountContainer height="25px">
-        <Text
-          width="100%"
-          align="flex-start"
-          color="#474747"
-          bold="true"
-          wide
-          onClick={(e) => {
-            setAmount(0);
-            setView(0);
-          }}
-        >
-          {`< CANCEL`}
-        </Text>
-      </AmountContainer>
-
-      <Image
-        src={
-          voucher.storeImage
-            ? process.env.REACT_APP_BASE_URL + voucher.storeImage
-            : defaultStoreFront
-        }
-        alt={`${voucher.storeName} Illustration`}
-      />
-      <AmountContainer bringToTheFront height="60px">
-        <Text bold="true" size="24px">
-          ${voucher.amount === 0 ? '0.00' : (voucher.amount / 100).toFixed(2)}
-        </Text>
-        <CurrentBalanceRow size="16px">
-          Current balance <MoreInfo showShadow inverted />
-        </CurrentBalanceRow>
-      </AmountContainer>
-      <InputAreaWrapper>
-        <AmountContainer>
-          <Text size="18px">How much are you spending today?</Text>
-          <InputWrapper>
-            <AmountInput
-              value={amount === 0 ? '' : amount}
-              onChange={handleAmount}
-              placeholder={'0.00'}
-              type="number"
-              error={!!error}
-            />
-          </InputWrapper>
-        </AmountContainer>
-        <MessageContainer>
-          <Text size="16px" color="#DD678A" width="50%">
-            {error}
+      <MainView>
+        <BackButton onClick={backToLanding}>CANCEL</BackButton>
+        <StoreFrontImage
+          src={
+            voucher.storeImage
+              ? process.env.REACT_APP_BASE_URL + voucher.storeImage
+              : defaultStoreFront
+          }
+          alt={`${voucher.storeName} Illustration`}
+        />
+        <BalanceContainer>
+          <Text>
+            ${voucher.amount === 0 ? '0.00' : (voucher.amount / 100).toFixed(2)}
           </Text>
-          <Text size="16px" width="50%">
-            <Text color="black" width="100%" align="flex-end" padding="true">
-              $ {(voucher.amount / 100 - amount).toFixed(2)}
-            </Text>
-            <Text align="flex-end" width="80px">
-              Remaining
-            </Text>
-          </Text>
-        </MessageContainer>
-      </InputAreaWrapper>
-      <FlexFillSpace></FlexFillSpace>
-      <Footer height="200px">
-        <Voucher>
-          Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>{' '}
-        </Voucher>
-        <NextButton
+          <CurrentBalanceContainer>
+            Current balance <MoreInfo showShadow inverted />
+          </CurrentBalanceContainer>
+        </BalanceContainer>
+        <InputContainer>
+          <SubViewContainer>
+            <Text>How much are you spending today?</Text>
+            <InputWrapper>
+              <AmountInput
+                value={amount === 0 ? '' : amount}
+                onChange={handleAmount}
+                placeholder={'0.00'}
+                type="number"
+                error={!!error}
+              />
+            </InputWrapper>
+          </SubViewContainer>
+          <MessagesContainer>
+            <ErrorMessage>{error} </ErrorMessage>
+            <RemainingMessage>
+              <Text>$ {(voucher.amount / 100 - amount).toFixed(2)}</Text>
+              <Text> Remaining</Text>
+            </RemainingMessage>
+          </MessagesContainer>
+        </InputContainer>
+      </MainView>
+      <Footer>
+        <FooterLabel>{voucher.seller_gift_card_id}</FooterLabel>
+        <SubmitButton
           onClick={(e) => setView(2)}
           disabled={!!error || amount <= 0}
         >
           Next
-        </NextButton>
+        </SubmitButton>
       </Footer>
     </Container>
   );
@@ -137,22 +113,34 @@ const Amount = (props: Props) => {
 
 export default Amount;
 
-const Container = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  color: black;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+// CONTAINERS
+const Container = styled(ViewContainer)`
+  border-top: 3px solid #f7f7f7;
+  min-height: 100%;
 `;
-const CurrentBalanceRow = styled(Text)`
+const BalanceContainer = styled(SubViewContainer)`
+  width: 160px;
+  min-height: 60px;
+  margin: 0 auto;
+  padding: 24px 0;
+`;
+const CurrentBalanceContainer = styled(SubViewContainer)`
+  flex-direction: row;
   justify-content: center;
+  div {
+    margin-left: -40px;
+  }
 `;
-const Image = styled.img`
-  width: 100%;
-  max-width: 600px;
-  min-height: 220px;
+const InputContainer = styled(SubViewContainer)`
   margin: 0 auto;
+  width: 100%;
+  min-height: 160px;
+  margin-bottom: 24px;
+`;
+const MessagesContainer = styled(SubViewContainer)`
+  flex-direction: row;
+  width: 100%;
+  min-height: 24px;
 `;
 const InputWrapper = styled.div`
   position: relative;
@@ -162,6 +150,8 @@ const InputWrapper = styled.div`
     content: '$';
   }
 `;
+
+// COMPONENTS
 const AmountInput = styled.input`
   padding: 12px 12px 12px 32px;
   min-height: 64px;
@@ -172,10 +162,11 @@ const AmountInput = styled.input`
     ${(props: InputProps) => (props.error ? '#DD678A' : 'black')};
   border-radius: 5px;
 `;
-const InputAreaWrapper = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 175px;
+const ErrorMessage = styled(Text)`
+  color: #dd678a;
+  width: 50%;
+`;
+const RemainingMessage = styled.div`
+  width: 50%;
+  text-align: right;
 `;

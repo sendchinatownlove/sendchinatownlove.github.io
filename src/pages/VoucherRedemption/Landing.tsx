@@ -11,7 +11,7 @@ import {
   SET_VIEW,
   SET_AMOUNT,
 } from '../../utilities/hooks/VoucherContext/constants';
-import { ViewContainer, SubViewContainer, Text, Footer } from './style';
+import { ViewContainer, SubViewContainer, Text } from './style';
 
 interface Props {}
 
@@ -87,6 +87,15 @@ const CardFooter = styled(SubViewContainer)`
   margin: 0 auto;
   justify-content: space-between;
   min-height: 130px;
+`;
+const Footer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  margin: 16px auto;
 `;
 const SubText = styled.div`
   display: flex;
