@@ -92,7 +92,9 @@ const OwnerPanel = ({ seller }: Props) => {
           className={styles.ownerImage}
           src={
             seller?.owner_image_url
-              ? process.env.REACT_APP_BASE_URL + seller?.owner_image_url
+              ? seller.owner_image_url
+              : seller?.logo_image_url
+              ? seller.logo_image_url
               : defaultOwnerImage
           }
           alt={seller.owner_name}

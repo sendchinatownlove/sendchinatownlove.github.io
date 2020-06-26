@@ -56,9 +56,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
       {
         <img
           src={
-            seller.hero_image_url
-              ? process.env.REACT_APP_BASE_URL + seller.hero_image_url
-              : defaultStoreFront
+            seller.hero_image_url ? seller.hero_image_url : defaultStoreFront
           }
           alt={`${seller.name} Illustration`}
           className={styles.merchantIllustration}
