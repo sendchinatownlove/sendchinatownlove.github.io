@@ -130,7 +130,6 @@ const NavButton = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
-  width: 100px;
 
   &:first-child {
     margin-left: 0;
