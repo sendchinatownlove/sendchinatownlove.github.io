@@ -7,26 +7,38 @@ import {
   useVoucherState,
   useVoucherDispatch,
 } from '../../utilities/hooks/VoucherContext/context';
-import { SET_VIEW } from '../../utilities/hooks/VoucherContext/constants';
+import {
+  SET_VIEW,
+  SET_AMOUNT,
+} from '../../utilities/hooks/VoucherContext/constants';
 
 interface Props {}
 interface ButtonProps {
-  color?: String;
+  color?: string;
 }
 const LandingCard = (props: Props) => {
   const { voucher } = useVoucherState();
   const dispatch = useVoucherDispatch();
 
-  const setView = (e) => {
-    dispatch({ type: SET_VIEW, payload: 1 });
+  const setView = () => {
+    if (voucher.single_use) {
+      dispatch({ type: SET_AMOUNT, payload: voucher.amount / 100 });
+      dispatch({ type: SET_VIEW, payload: 2 });
+    } else {
+      dispatch({ type: SET_VIEW, payload: 1 });
+    }
   };
 
   return (
     <Container>
-      <CardContainer>
+      <CardContainer onClick={setView}>
         <VoucherContent>
           <SubText>
-            <SupportingText>Your available balance</SupportingText>
+            <SupportingText>
+              {voucher.single_use
+                ? 'Single-use voucher balance'
+                : 'Your available balance'}
+            </SupportingText>
             <MoreInfo />
           </SubText>
           <Balance>${(voucher.amount / 100).toFixed(2)}</Balance>
@@ -36,11 +48,15 @@ const LandingCard = (props: Props) => {
           <br />
         </VoucherContent>
         <Divider />
-        <Button onClick={setView}>Click to begin redeeming your voucher</Button>
+        <Button>Click to begin redeeming your voucher</Button>
         <br />
       </CardContainer>
       <br />
-      <Button color="#ab192e">{voucher.locations[0]}</Button>;
+      <Button color="#ab192e">
+        {voucher.location.line1}
+        <br></br>
+        {voucher.location.line2}
+      </Button>
       <FooterContainer>
         <Image src={Logo} />
       </FooterContainer>
@@ -53,6 +69,7 @@ export default LandingCard;
 const Container = styled.div`
   width: 100%;
   margin: 0 auto;
+  min-height: 530px;
 `;
 const CardContainer = styled.div`
   position: relative;
@@ -95,9 +112,9 @@ const SupportingText = styled.span`
 `;
 const Button = styled.div`
   cursor: pointer;
-  ${(props: ButtonProps) => props.color && `color: ${props.color}`}
+  ${(props: ButtonProps) => `color: ${props.color ?? ''};`}
   font-size: 13px;
-  line-height: 18px;
+  line-height: 1.5;
   text-align: center;
 `;
 const Balance = styled.div`

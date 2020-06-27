@@ -110,12 +110,12 @@ $container-size: 160px;
   background-color: #f8ba17;
 }
 
-.openNowSection {
+// .openNowSection {
   
-  &__open {
-    margin-top: 20px;
-  }
-}
+//   &__open {
+//     margin-top: 20px;
+//   }
+// }
 
 .orderNow {
   display: grid;
@@ -154,5 +154,12 @@ $container-size: 160px;
     p {
       margin: 0 auto 0 0;
     }
+  }
+
+  &__button {
+    text-transform: uppercase;
+    border-radius: 100px;
+    border: none;
+    background-color: #fff;
   }
 }

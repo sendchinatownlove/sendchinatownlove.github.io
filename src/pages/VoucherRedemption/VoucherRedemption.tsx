@@ -15,6 +15,7 @@ import { SET_VOUCHER_INFO } from '../../utilities/hooks/VoucherContext/constants
 import Loader from '../../components/Loader';
 import NYCBackdrop from '../../images/nyc-background.png';
 import { getVoucher, getSeller } from '../../utilities/api/interactionManager';
+import { getLocationInfo } from '../../utilities/hooks/helpers';
 
 interface Props {}
 interface ContainerProps {
@@ -36,11 +37,10 @@ const VoucherRedemption = (props: Props) => {
 
       const voucher = {
         ...gift_card_detail,
-        ownerName: merchantData.data.owner_name,
-        ownerImage: merchantData.data.owner_image_url,
         storeImage: merchantData.data.hero_image_url,
+        storeName: merchantData.data.name,
         sellerID: seller_id,
-        locations: merchantData.data.locations,
+        location: getLocationInfo(merchantData),
       };
 
       dispatch({ type: SET_VOUCHER_INFO, payload: voucher });
@@ -98,9 +98,7 @@ const Container = styled.div`
   `}
   height: 100vh;
   background-color: transparent;
+  display: flex;
   flex-direction: column;
-  * {
-    z-index: 10;
-  }
   overflow-x: hidden;
 `;

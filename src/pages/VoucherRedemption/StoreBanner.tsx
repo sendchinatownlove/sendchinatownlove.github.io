@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useVoucherState } from '../../utilities/hooks/VoucherContext/context';
 import Logo from '../../components/Logos/image/PureLogo.png';
-import DefaultOwnerImage from '../../images/female.svg';
+import DefaultStoreImage from '../../images/misc-store.png';
 
 interface Props {}
 interface ContainerProps {
@@ -20,15 +20,15 @@ const StoreBanner = (props: Props) => {
         isOnLandingPage={isOnLandingPage}
         src={
           isOnLandingPage
-            ? voucher?.ownerImage
-              ? process.env.REACT_APP_BASE_URL + voucher?.ownerImage
-              : DefaultOwnerImage
+            ? voucher?.storeImage
+              ? process.env.REACT_APP_BASE_URL + voucher?.storeImage
+              : DefaultStoreImage
             : Logo
         }
       />
       <Header isOnLandingPage={isOnLandingPage}>
         {isOnLandingPage && 'Welcome to '}
-        {voucher.ownerName}
+        {voucher.storeName}
       </Header>
     </Container>
   );
@@ -40,6 +40,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  ${(props: ContainerProps) => (props.isOnLandingPage && 'min-height: 200px;')}
   flex-direction: ${(props: ContainerProps) =>
     props.isOnLandingPage ? 'column' : 'row'};
   margin: ${(props: ContainerProps) => (props.isOnLandingPage ? '24px' : '0')}
@@ -61,7 +62,7 @@ const Header = styled.h1`
 const OwnerImage = styled.img`
   width: ${(props: ContainerProps) =>
     props.isOnLandingPage ? '150px' : '55px'};
-  // height: ${(props: ContainerProps) =>
+  height: ${(props: ContainerProps) =>
     props.isOnLandingPage ? '150px' : '100px'};
   ${(props: ContainerProps) =>
     props.isOnLandingPage && 'border: 5px solid white;'}

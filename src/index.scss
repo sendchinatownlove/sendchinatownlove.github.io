@@ -164,9 +164,10 @@ h3 {
   &--outline:disabled {
     background-color: grey;
     border: 1px solid grey;
+    cursor: default;
   }
 
-  &--filled:focus {
+  &--filled:enabled:hover {
     color: white;
     background-color: $default-hover-red;
     border: 1px solid $default-hover-red;

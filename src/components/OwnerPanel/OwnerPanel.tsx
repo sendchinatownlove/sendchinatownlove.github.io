@@ -83,7 +83,7 @@ const OwnerPanel = ({ seller }: Props) => {
             className={styles.ownerImage}
             src={
               seller?.owner_image_url
-                ? process.env.REACT_APP_BASE_URL + seller?.owner_image_url
+                ? seller?.owner_image_url
                 : defaultOwnerImage
             }
             alt={seller.owner_name}
@@ -109,10 +109,10 @@ const OwnerPanel = ({ seller }: Props) => {
       {dummy.isOpen && (
         <React.Fragment>
           { showOrderNow && <OrderNow dummy={dummy} /> }
-          <button>{
+          <button className={classnames(styles.button, styles.orderNow__button)}>{
             showOrderNow 
-            ? <><p>Hide</p></>
-            : <><p >Order Now</p></>
+              ? <><p>Hide</p></>
+              : <><p >Order Now</p></>
           }</button>
         </React.Fragment>
       )}

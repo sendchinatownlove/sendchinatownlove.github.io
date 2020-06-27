@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Hero from './images/skyline-hero.png';
 import Modal from '../Modal';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
@@ -7,11 +6,13 @@ import {
   smallScreens,
   tabletScreens,
 } from '../../utilities/general/responsive';
+import { getWebsiteImages } from '../../utilities/general/StoreImages';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
 const DonationPoolBox = () => {
+  const websiteImages = getWebsiteImages();
   const { t } = useTranslation();
   const dispatch = useModalPaymentDispatch();
 
@@ -34,7 +35,7 @@ const DonationPoolBox = () => {
             {t('donationPool.button')}
           </button>
         </ColumnContainer>
-        <Image src={Hero} alt="banner" />
+        <Image src={websiteImages.skyline} alt="banner" />
 
         <Modal
           purchaseType={'donation'}

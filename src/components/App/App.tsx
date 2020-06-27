@@ -5,6 +5,7 @@ import ReactGA from 'react-ga';
 import Loader from '../Loader';
 import Header from '../Navbar';
 import Footer from '../Footer';
+import ScrollToTop from '../ScrollToTop';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import ReactPixel from 'react-facebook-pixel';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext/context';
@@ -64,6 +65,7 @@ const App = () => {
     return (
       <>
         <ModalPaymentProvider>
+          <ScrollToTop />
           <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
           {component}
           <Footer menuOpen={menuOpen} />
@@ -84,7 +86,7 @@ const App = () => {
           </Route>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>
-          <Route path="/:id#story">{returnComponent('seller')}</Route> */}
+          <Route path="/:id#story">{returnComponent('seller')}</Route>
           <Route>{returnComponent('error')}</Route>
         </Switch>
       </Suspense>

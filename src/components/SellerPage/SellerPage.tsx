@@ -44,10 +44,7 @@ const SellerPage = (props: Props) => {
     fetchData(i18n.language);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.language]);
-
-  console.log(id)
-
-  return sellerData && sellerData.id !== 0 ? (
+  return sellerData && !loading ? (
     <Container menuOpen={props.menuOpen}>
       <SellerName>{sellerData.name}</SellerName>
       <ContentContainer>
