@@ -82,7 +82,7 @@ const Amount = (props: Props) => {
         }
         alt={`${voucher.storeName} Illustration`}
       />
-      <AmountContainer bringToTheFront>
+      <AmountContainer bringToTheFront height="60px">
         <Text bold="true" size="24px">
           ${voucher.amount === 0 ? '0.00' : (voucher.amount / 100).toFixed(2)}
         </Text>
@@ -118,7 +118,7 @@ const Amount = (props: Props) => {
         </MessageContainer>
       </InputAreaWrapper>
       <FlexFillSpace></FlexFillSpace>
-      <Footer>
+      <Footer height="200px">
         <Voucher>
           Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>{' '}
         </Voucher>
@@ -149,6 +149,7 @@ const CurrentBalanceRow = styled(Text)`
 const Image = styled.img`
   width: 100%;
   max-width: 600px;
+  min-height: 220px;
   margin: 0 auto;
 `;
 const InputWrapper = styled.div`
@@ -161,7 +162,7 @@ const InputWrapper = styled.div`
 `;
 const AmountInput = styled.input`
   padding: 12px 12px 12px 32px;
-  height: 64px;
+  min-height: 64px;
   font-size: 16px;
   width: 100%;
   margin: 12px auto;
@@ -174,4 +175,5 @@ const InputAreaWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: 160px;
 `;

@@ -7,6 +7,7 @@ import StoreStory from '../StoreStory';
 import StoreMenu from './StoreMenuTab';
 import StoreGallery from './StoreGalleryTab';
 import StoreMerch from './StoreMerchTab';
+import StoreSocial from './StoreSocialTab';
 import styles from './styles.module.scss';
 import defaultStoreFront from './misc-store.png';
 
@@ -31,6 +32,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
     story && 'story',
     seller.menu_url && 'menu',
     seller.gallery_image_urls.length > 0 && 'gallery',
+    'share'
   ];
 
   const [currentMerchantView, setMerchantView] = useState('story');
@@ -44,8 +46,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
       case 'merch':
         return <StoreMerch seller={seller} />;
       case 'share':
-        // TODO: plug in the share page that Dan creates
-        return;
+        return <StoreSocial seller={seller} />;
       default:
         return <StoreStory story={story} />;
     }

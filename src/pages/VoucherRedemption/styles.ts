@@ -28,8 +28,11 @@ const AmountContainer = styled.div`
   text-align: center;
   ${(props: ContainerProps) =>
     props.bringToTheFront && 'z-index: 150!important;'}
+  ${(props: ContainerProps) =>
+    props.height && `min-height: ${props.height};`}
 `;
 const MessageContainer = styled.div`
+  min-height: 22px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -70,7 +73,7 @@ const Text = styled.div`
 `;
 
 const Footer = styled.div`
-  ${(props: ContainerProps) => props.height && `height: ${props.height};`}
+  ${(props: ContainerProps) => props.height && `min-height: ${props.height};`}
   background: #f7f7f7;
   display: flex;
   flex-direction: column;
