@@ -4,11 +4,12 @@ import styled from 'styled-components';
 
 type Props = {
   isPage?: boolean;
+  size?: string;
 };
 
-const Loader: React.SFC<Props> = ({ isPage }: Props) => {
+const Loader: React.SFC<Props> = ({ isPage, size }: Props) => {
   return (
-    <LoaderContainer isPage={isPage}>
+    <LoaderContainer isPage={isPage} size={size}>
       <CircularProgress />
     </LoaderContainer>
   );
@@ -25,6 +26,12 @@ const LoaderContainer = styled.div`
   height: ${(props: Props) => (props.isPage ? '100vh' : '100%')};
   div {
     color: #ab192e;
+    ${(props: Props) =>
+      props.size &&
+      `
+      width: ${props.size}!important;
+      height: ${props.size}!important;
+    `};
   }
 `;
 
