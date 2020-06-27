@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-import {
-  useModalPaymentDispatch,
-  useModalPaymentState,
-} from '../../utilities/hooks/ModalPaymentContext/context';
+import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
@@ -23,11 +20,10 @@ export interface Props {
 
 export const Modal = (props: Props) => {
   const { t } = useTranslation();
-  const { amount } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
-  const [numberOfMeals, setNumberOfMeals] = useState(
-    amount ? parseInt(amount, 10) : 0
-  );
+
+  // set initial number of meals to 1
+  const [numberOfMeals, setNumberOfMeals] = useState(1);
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
     const valueInt = parseInt(value, 10);
