@@ -8,9 +8,16 @@ export interface Props {
 }
 
 const StoreMenu: React.SFC<Props> = ({ seller, expandImage }) => {
-
   return (
-    <section>{<MenuImg src={seller.menu_url} alt="store-menu" onClick={() => expandImage(seller.menu_url)}/>}</section>
+    <section>
+      {
+        <MenuImg
+          src={seller.menu_url}
+          alt="store-menu"
+          onClick={() => expandImage(seller.menu_url)}
+        />
+      }
+    </section>
   );
 };
 
