@@ -20,10 +20,9 @@ const NavBar = ({ filterStoreType }: Props) => {
 
   const storeTypes = [
     { value: 'all', text: t('merchantNavBar.all') },
-    { value: 'Bakery', text: t('merchantNavBar.bakery') },
-    { value: 'Chinese', text: t('merchantNavBar.restaurant') },
-    // { value: 'grocery', text: 'Grocery' },
-    // { value: 'salon', text: 'Salon' },
+    { value: 'Brooklyn', text: t('merchantNavBar.brooklyn') },
+    { value: 'New York', text: t('merchantNavBar.manhattan') },
+    { value: 'Floral Park' || 'Flushing', text: t('merchantNavBar.queens') },
   ];
 
   return (

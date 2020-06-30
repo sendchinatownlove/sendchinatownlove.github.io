@@ -49,10 +49,9 @@
   },
   "merchantNavBar": {
     "all": "All",
-    "bakery": "Bakery",
-    "restaurant": "Restaurant",
-    "grocery": "Grocery",
-    "salon": "Salon"
+    "brooklyn": "Brooklyn",
+    "manhattan": "Manhattan",
+    "queens": "Queens"
   },
   "donationPool": {
     "header": "Checked out our merchants but not sure who to donate to first?",

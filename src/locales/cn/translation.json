@@ -49,10 +49,9 @@
   },
   "merchantNavBar": {
     "all": "所有的店铺",
-    "bakery": "烘焙店",
-    "restaurant": "餐馆",
-    "grocery": "杂货店",
-    "salon": "美发店"
+    "brooklyn": "布鲁克林区",
+    "manhattan": "曼哈顿",
+    "queens": "皇后区"
   },
   "donationPool": {
     "header": "如果你不太确定捐款给哪个商家？",
