@@ -186,7 +186,7 @@ const Disclaimer = styled(SubViewContainer)`
 const DisclaimerText = styled(SubViewContainer)`
   width: 50%;
   text-align: center;
-  margin: 0 auto;
+  margin: 16px auto;
   color: #ab192e;
   font-weight: 600;
   font-size: 20px;

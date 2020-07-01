@@ -6,7 +6,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 const ViewContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  justify-content: space-between;
   width: 100%;
 `;
 const SubViewContainer = styled.div`

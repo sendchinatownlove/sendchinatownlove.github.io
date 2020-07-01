@@ -116,7 +116,6 @@ export default Amount;
 // CONTAINERS
 const Container = styled(ViewContainer)`
   border-top: 3px solid #f7f7f7;
-  min-height: 100%;
 `;
 const BalanceContainer = styled(SubViewContainer)`
   width: 160px;
