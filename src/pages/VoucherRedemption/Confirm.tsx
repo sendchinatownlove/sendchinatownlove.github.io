@@ -23,7 +23,6 @@ import {
   BackButton,
   Text,
   Footer,
-  FooterLabel,
   SubmitButton,
 } from './style';
 import { getLocationInfo } from '../../utilities/hooks/helpers';
@@ -122,11 +121,10 @@ const Amount = (props: Props) => {
         </BalanceContainer>
       </MainView>
       <Footer>
-        <FooterLabel>
-          {' '}
+        <DisclaimerText>
           Please show your phone to the merchant cashier to confirm the
-          purchase.{' '}
-        </FooterLabel>
+          purchase.
+        </DisclaimerText>
         <SubmitButton onClick={confirm}>
           {loading ? <Loader size="22px" /> : 'Next'}
         </SubmitButton>
@@ -138,12 +136,14 @@ const Amount = (props: Props) => {
 export default Amount;
 
 const Header = styled(SubViewContainer)`
+  flex-direction: row;
   font-weight: 600;
   font-size: 22px;
   min-height: 22px;
   line-height: 22px;
+  justify-content: center;
   div {
-    margin-left: 110px;
+    margin-left: 35px;
   }
 `;
 const BalanceContainer = styled(SubViewContainer)`
@@ -182,4 +182,12 @@ const Disclaimer = styled(SubViewContainer)`
   min-height: 60px;
   margin: 0 auto;
   padding: 24px 0;
+`;
+const DisclaimerText = styled(SubViewContainer)`
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+  color: #ab192e;
+  font-weight: 600;
+  font-size: 20px;
 `;
