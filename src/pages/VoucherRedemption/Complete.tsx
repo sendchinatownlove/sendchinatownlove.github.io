@@ -50,6 +50,7 @@ export default Amount;
 
 const MainView = styled(Footer)`
   min-height: 90%;
+  padding: 0 5%;
   justify-content: space-around;
 `;
 

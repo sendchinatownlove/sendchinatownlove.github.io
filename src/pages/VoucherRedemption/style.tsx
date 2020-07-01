@@ -21,6 +21,7 @@ const MainView = styled(SubViewContainer)`
 const Footer = styled.div`
   width: 100%;
   min-height: 175px;
+  height: 100%;
   background: #f7f7f7;
   display: flex;
   flex-direction: column;
