@@ -96,7 +96,7 @@ const SquareModal = ({
       is_subscribed: isSubscriptionChecked,
     };
 
-    setCanSubmit(false)
+    setCanSubmit(false);
     return makeSquarePayment(nonce, sellerId, payment, buyer, is_distribution)
       .then((res) => {
         if (res.status === 200) {
@@ -149,11 +149,13 @@ const SquareModal = ({
   };
 
   useEffect(() => {
-    setCanSubmit(isTermsChecked &&
-      name.length > 0 &&
-      email.length > 0 &&
-      EMAIL_REGEX.test(email));
-  }, [isTermsChecked, name, email])
+    setCanSubmit(
+      isTermsChecked &&
+        name.length > 0 &&
+        email.length > 0 &&
+        EMAIL_REGEX.test(email)
+    );
+  }, [isTermsChecked, name, email]);
 
   const setDisclaimerLanguage = (type: string) => {
     if (sellerId === 'send-chinatown-love') type = 'donation-pool';
