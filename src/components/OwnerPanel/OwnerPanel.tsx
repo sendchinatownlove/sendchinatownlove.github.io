@@ -135,7 +135,7 @@ const OwnerPanel = ({ seller }: Props) => {
                     {`${t('ownerPanel.extraInfo.' + current)}: `}
                     <a
                       className={styles.extraInfoValue}
-                      href={`http://${extraInfo[current]}`}
+                      href={`${extraInfo[current]}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
