@@ -32,7 +32,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
     story && 'story',
     seller.menu_url && 'menu',
     seller.gallery_image_urls.length > 0 && 'gallery',
-    'share'
+    'share',
   ];
 
   const [currentMerchantView, setMerchantView] = useState('story');
@@ -57,9 +57,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
       {
         <img
           src={
-            seller.hero_image_url
-              ? process.env.REACT_APP_BASE_URL + seller.hero_image_url
-              : defaultStoreFront
+            seller.hero_image_url ? seller.hero_image_url : defaultStoreFront
           }
           alt={`${seller.name} Illustration`}
           className={styles.merchantIllustration}
@@ -133,7 +131,6 @@ const NavButton = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
-  width: 100px;
 
   &:first-child {
     margin-left: 0;

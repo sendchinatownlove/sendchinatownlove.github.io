@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Divider, Voucher, Bold } from './styles';
 import Logo from '../../components/Logos/image/LogoTextDown.png';
 import MoreInfo from './MoreInfo';
+import StoreBanner from './StoreBanner';
 import {
   useVoucherState,
   useVoucherDispatch,
@@ -11,11 +11,10 @@ import {
   SET_VIEW,
   SET_AMOUNT,
 } from '../../utilities/hooks/VoucherContext/constants';
+import { ViewContainer, SubViewContainer, Text } from './style';
 
 interface Props {}
-interface ButtonProps {
-  color?: string;
-}
+
 const LandingCard = (props: Props) => {
   const { voucher } = useVoucherState();
   const dispatch = useVoucherDispatch();
@@ -30,7 +29,8 @@ const LandingCard = (props: Props) => {
   };
 
   return (
-    <Container>
+    <ViewContainer>
+      <StoreBanner />
       <CardContainer onClick={setView}>
         <VoucherContent>
           <SubText>
@@ -42,80 +42,80 @@ const LandingCard = (props: Props) => {
             <MoreInfo />
           </SubText>
           <Balance>${(voucher.amount / 100).toFixed(2)}</Balance>
-          <Voucher>
-            Voucher Code: <Bold>{voucher.seller_gift_card_id}</Bold>
-          </Voucher>
-          <br />
         </VoucherContent>
-        <Divider />
-        <Button>Click to begin redeeming your voucher</Button>
-        <br />
+        <CardFooter>
+          <VoucherCode>Voucher Code: {voucher.seller_gift_card_id}</VoucherCode>
+          <Divider />
+          <Button>Click to begin redeeming your voucher</Button>
+          <br />
+        </CardFooter>
       </CardContainer>
       <br />
-      <Button color="#ab192e">
+      <Button>
         {voucher.location.line1}
         <br></br>
         {voucher.location.line2}
       </Button>
-      <FooterContainer>
+      <Footer>
         <Image src={Logo} />
-      </FooterContainer>
-    </Container>
+      </Footer>
+    </ViewContainer>
   );
 };
 
 export default LandingCard;
 
-const Container = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  min-height: 530px;
-`;
-const CardContainer = styled.div`
-  position: relative;
+const CardContainer = styled(SubViewContainer)`
+  padding-top: 5px;
   width: 307px;
   margin: 0 auto;
-  height: 342px;
+  min-height: 342px;
   background-color: #ab192e;
   color: white;
-  display: flex;
-  flex-direction: column;
   border-radius: 15px;
   justify-content: space-between;
 `;
-const VoucherContent = styled.div`
+const VoucherContent = styled(SubViewContainer)`
+  width: 90%;
+  padding-top: 5px;
+  margin: 0 auto;
+  justify-content: space-between;
+  min-height: 150px;
+`;
+const CardFooter = styled(SubViewContainer)`
   width: 90%;
   margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: -15px;
-  border: 1px solid transparent;
-  border-radius: 12px;
-  padding-top: 5px;
-  height: 270px;
+  justify-content: space-between;
+  min-height: 130px;
+`;
+const Footer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: #ab192e;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  margin: 16px auto;
 `;
 const SubText = styled.div`
-  font-size: 16px;
-  line-height: 22px;
   display: flex;
-  flex-direction: row;
-  color: white;
-  width: 90%;
   margin: 0 auto;
   justify-content: center;
 `;
 const SupportingText = styled.span`
   z-index: 100 !important;
 `;
+const Divider = styled.div`
+  width: 90%;
+  margin: 10px auto;
+  border-top: white 2px solid;
+`;
 const Button = styled.div`
   cursor: pointer;
-  ${(props: ButtonProps) => `color: ${props.color ?? ''};`}
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 18px;
   text-align: center;
+  align-items: center;
 `;
 const Balance = styled.div`
   z-index: 0 !important;
@@ -130,11 +130,6 @@ const Balance = styled.div`
 const Image = styled.img`
   width: 75px;
 `;
-const FooterContainer = styled.div`
-  width: 100%;
-  margin: 12px auto;
-  background-color: transparent;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+const VoucherCode = styled(Text)`
+  word-break: break-all;
 `;

@@ -9,6 +9,7 @@ import {
   SET_VOUCHER_INFO,
   SET_AMOUNT,
 } from '../../utilities/hooks/VoucherContext/constants';
+import StoreBanner from './StoreBanner';
 import {
   updateVoucher,
   getSeller,
@@ -16,23 +17,17 @@ import {
 import MoreInfo from './MoreInfo';
 import Loader from '../../components/Loader';
 import {
-  AmountContainer,
-  MessageContainer,
+  ViewContainer,
+  SubViewContainer,
+  MainView,
+  BackButton,
   Text,
   Footer,
-  NextButton,
-  Divider,
-  Disclaimer,
-  Bold,
-  FlexFillSpace,
-} from './styles';
+  SubmitButton,
+} from './style';
 import { getLocationInfo } from '../../utilities/hooks/helpers';
 
 interface Props {}
-interface ContainerProps {
-  height?: string;
-  bringToTheFront?: boolean;
-}
 
 const Amount = (props: Props) => {
   const { amount, voucher } = useVoucherState();
@@ -73,119 +68,126 @@ const Amount = (props: Props) => {
     }
   };
 
+  const backToAmount = (e) => setView(voucher.single_use ? 0 : 1);
+
   return (
-    <Container>
-      <AmountContainer>
-        <Text
-          width="100%"
-          align="flex-start"
-          color="#474747"
-          bold="true"
-          wide
-          onClick={(e) => setView(voucher.single_use ? 0 : 1)}
-        >
-          {`< BACK`}
-        </Text>
-      </AmountContainer>
-      <Header>
-        {voucher.single_use ? (
-          <Text size="18px" width="70%">
-            Are you ready to redeem your voucher?
-          </Text>
-        ) : (
-          <Text size="22px">Complete Your Purchase</Text>
-        )}
-        <MoreInfo marginLeft="35px" showShadow={true} inverted={true} />
-      </Header>
-      {!voucher.single_use ? (
-        <MessageContainer>
-          <Text size="16px" width="50%">
-            Voucher balance
-          </Text>
-          <Text size="16px" width="50%" align="flex-end">
-            ${(voucher.amount / 100).toFixed(2)}
-          </Text>
-        </MessageContainer>
-      ) : (
-        ''
-      )}
-      <MessageContainer>
-        <Text size="16px" width="50%">
-          {voucher.single_use
-            ? 'Single-use voucher balance'
-            : 'Redemption Amount'}
-        </Text>
-        <Text size="16px" width="50%" align="flex-end">
-          ${(amount / 1).toFixed(2)}
-        </Text>
-      </MessageContainer>
-      <Divider />
-      {!voucher.single_use ? (
-        <MessageContainer>
-          <Text size="16px" width="50%">
-            Remaining balance
-          </Text>
-          <Text bold="true" size="24px" width="50%" align="flex-end">
-            ${(voucher.amount / 100 - amount).toFixed(2)}
-          </Text>
-        </MessageContainer>
-      ) : (
-        <Disclaimer>
-          <strong>Note:</strong> Any remaining balance will not be redeemable
-          after this purchase
-        </Disclaimer>
-      )}
-      <VoucherContainer>
-        <Text>
-          Voucher Code: &nbsp; <Bold>{voucher.seller_gift_card_id}</Bold>
-        </Text>
-      </VoucherContainer>
-      <FlexFillSpace></FlexFillSpace>
-      <Footer height="220px">
-        <Text color="#ab192e" bold="true" width="50%" textAlign="center">
+    <ViewContainer>
+      <MainView>
+        <StoreBanner />
+        <BackButton onClick={backToAmount}>BACK</BackButton>
+        <Header>
+          {voucher.single_use ? (
+            <Text>Are you ready to redeem your voucher?</Text>
+          ) : (
+            <Text>Complete Your Purchase</Text>
+          )}
+          <MoreInfo showShadow={true} inverted={true} />
+        </Header>
+        <BalanceContainer>
+          {!voucher.single_use ? (
+            <BalanceRow>
+              <Text>Voucher balance</Text>
+              <Text>${(voucher.amount / 100).toFixed(2)}</Text>
+            </BalanceRow>
+          ) : (
+            ''
+          )}
+          <BalanceRow>
+            <Text>
+              {voucher.single_use
+                ? 'Single-use voucher balance'
+                : 'Redemption Amount'}
+            </Text>
+            <Text>${(amount / 1).toFixed(2)}</Text>
+          </BalanceRow>
+          <Divider />
+          {!voucher.single_use ? (
+            <BalanceRow>
+              <Text>Remaining balance</Text>
+              <Text>${(voucher.amount / 100 - amount).toFixed(2)}</Text>
+            </BalanceRow>
+          ) : (
+            <Disclaimer>
+              <strong>Note:</strong> Any remaining balance will not be
+              redeemable after this purchase
+            </Disclaimer>
+          )}
+          <VoucherContainer>
+            <Text>
+              {' '}
+              Voucher Code: &nbsp; <b>{voucher.seller_gift_card_id}</b>{' '}
+            </Text>
+          </VoucherContainer>
+        </BalanceContainer>
+      </MainView>
+      <Footer>
+        <DisclaimerText>
           Please show your phone to the merchant cashier to confirm the
           purchase.
-        </Text>
-        <NextButton onClick={confirm}>
-          {loading ? <Loader /> : 'Next'}
-        </NextButton>
+        </DisclaimerText>
+        <SubmitButton onClick={confirm}>
+          {loading ? <Loader size="22px" /> : 'Next'}
+        </SubmitButton>
       </Footer>
-    </Container>
+    </ViewContainer>
   );
 };
 
 export default Amount;
 
-const Container = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  color: black;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-`;
-const Header = styled.div`
-  position: relative;
-  display: flex;
-  text-align: center;
-  width: 100%;
-  margin: 24px auto;
-  font-size: 24px;
+const Header = styled(SubViewContainer)`
+  flex-direction: row;
+  font-weight: 600;
+  font-size: 22px;
   min-height: 22px;
   line-height: 22px;
-  font-weight: 600;
   justify-content: center;
-  ${(props: ContainerProps) =>
-    props.bringToTheFront && 'z-index: 150!important;'}
-  z-index: 150!important;
+  div {
+    margin-left: 35px;
+  }
+`;
+const BalanceContainer = styled(SubViewContainer)`
+  min-height: 300px;
+  justify-content: space-around;
+  margin: 16px auto;
+  margin-bottom: 24px;
+  width: 100%;
+`;
+const BalanceRow = styled(SubViewContainer)`
+  font-size: 18px;
+  min-height: 25px;
+  line-height: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 const VoucherContainer = styled.div`
-  width: 90%;
-  margin: 24px auto;
-  color: black;
-  display: flex;
+  display: inline-flex;
+  min-height: 70px;
+  border: 1px solid #d9d9d9;
+  box-sizing: border-box;
+  border-radius: 8px;
+  word-break: break-all;
   justify-content: center;
-  padding: 16px;
-  border: 2px solid #f7f7f7;
-  border-radius: 12px;
+  margin: 16px auto;
+  span {
+    width: 50%;
+  }
+`;
+const Divider = styled.div`
+  border-bottom: 2px solid #f7f7f7;
+`;
+const Disclaimer = styled(SubViewContainer)`
+  width: 160px;
+  min-height: 60px;
+  margin: 0 auto;
+  padding: 24px 0;
+`;
+const DisclaimerText = styled(SubViewContainer)`
+  width: 50%;
+  text-align: center;
+  margin: 16px auto;
+  color: #ab192e;
+  font-weight: 600;
+  font-size: 20px;
 `;

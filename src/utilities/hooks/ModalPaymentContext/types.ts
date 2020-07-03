@@ -49,6 +49,7 @@ export const defaultState: ModalPaymentState = {
     menu_url: '',
     cost_per_meal: 0,
     gallery_image_urls: [],
-    non_profit_location_id: ''
+    non_profit_location_id: '',
+    logo_image_url: '',
   },
 };

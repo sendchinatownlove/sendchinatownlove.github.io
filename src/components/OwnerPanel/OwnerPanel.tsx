@@ -69,7 +69,9 @@ const OwnerPanel = ({ seller }: Props) => {
           className={styles.ownerImage}
           src={
             seller?.owner_image_url
-              ? process.env.REACT_APP_BASE_URL + seller?.owner_image_url
+              ? seller.owner_image_url
+              : seller?.logo_image_url
+              ? seller.logo_image_url
               : defaultOwnerImage
           }
           alt={seller.owner_name}
@@ -133,7 +135,7 @@ const OwnerPanel = ({ seller }: Props) => {
                     {`${t('ownerPanel.extraInfo.' + current)}: `}
                     <a
                       className={styles.extraInfoValue}
-                      href={`http://${extraInfo[current]}`}
+                      href={`${extraInfo[current]}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -157,8 +159,8 @@ const OwnerPanel = ({ seller }: Props) => {
           })}
         </div>
       ) : (
-          ''
-        )}
+        ''
+      )}
 
       <ModalBox
         purchaseType={purchaseType}
