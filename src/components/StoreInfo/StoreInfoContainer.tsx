@@ -10,12 +10,16 @@ import StoreMerch from './StoreMerchTab';
 import StoreSocial from './StoreSocialTab';
 import styles from './styles.module.scss';
 import defaultStoreFront from './misc-store.png';
+import { useMedia } from 'use-media'
+import OrderNow from '../OwnerPanel/OrderNow'
+import { dummy } from '../OwnerPanel/dummy'
 
 type Props = {
   seller: BrowsePageSeller;
 };
 
 export const StoreInfo: React.SFC<Props> = ({ seller }) => {
+  const showAltLayout = useMedia({maxWidth: 900})
   const { summary, story, cuisine_name, locations, website_url } = seller;
 
   // modal functionality for menu and gallery tabs
@@ -94,8 +98,10 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
         <div className={styles.websiteUrl}>
           <a href={`http://${website_url}`} target='_blank' className={styles.websiteUrl}>{website_url}</a>
         </div>
+
+        {showAltLayout && <OrderNow dummy={dummy} showingAltLayout={true} />}
       </div>
-      
+
       <p>{summary}</p>
       <StoreNavContainer>
         {storeNavItems.map(

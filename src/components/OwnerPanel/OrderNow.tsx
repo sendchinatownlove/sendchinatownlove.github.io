@@ -2,9 +2,10 @@ import React from 'react'
 import classnames from 'classnames';
 import styles from './styles.module.scss';
 
-const OrderNow = ({ dummy }) => {
+const OrderNow = ({ dummy, showingAltLayout }) => {
     return (
         <div className={classnames(styles.subsection, styles.orderNow)}>
+            {showingAltLayout ? 'yassss' : ''}
             <div className={styles.orderNow__hoursSect}>
                 <p className={styles.orderNow__bold}>Hours: </p>
                 <div className={styles.orderNow__hours}>

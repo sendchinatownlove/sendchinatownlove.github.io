@@ -46,7 +46,6 @@ const OwnerPanel = ({ seller }: Props) => {
       {
         showAltLayout
           ? <Panel>
-
               <div className={styles.subsection}>
                 {dummy.isOpen && (
                   <div className={styles.nowOpenFlag}>
@@ -84,7 +83,7 @@ const OwnerPanel = ({ seller }: Props) => {
 
               {dummy.isOpen && (
                 <React.Fragment>
-                  { showOrderNow && <OrderNow dummy={dummy} /> }
+                  { showOrderNow && <OrderNow dummy={dummy} showingAltLayout={false} /> }
                   <button 
                     className={classnames(styles.button, styles.orderNow__button)}
                     onClick={() => toggleOrderNow(!showOrderNow)}
