@@ -92,5 +92,6 @@ export type BrowsePageSeller = {
   menu_url: string;
   cost_per_meal: number;
   gallery_image_urls: string[];
+  non_profit_location_id: string;
   logo_image_url: string;
 };

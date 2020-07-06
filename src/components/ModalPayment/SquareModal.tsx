@@ -24,6 +24,7 @@ type Props = {
   sellerName: string;
   idempotencyKey: string;
   costPerMeal: number;
+  nonProfitLocationId?: string;
 };
 
 type ErrorMessage = {
@@ -37,6 +38,7 @@ const SquareModal = ({
   sellerName,
   idempotencyKey,
   costPerMeal,
+  nonProfitLocationId,
 }: Props) => {
   const { t } = useTranslation();
   const { amount } = useModalPaymentState();
@@ -66,7 +68,7 @@ const SquareModal = ({
       return;
     }
 
-    // 'buy_meal' is still respresented as a gift card when calling the API
+    // 'buy_meal' is still represented as a gift card when calling the API
     const payment: SquareLineItems =
       purchaseType === 'buy_meal'
         ? times(
@@ -128,12 +130,17 @@ const SquareModal = ({
       });
   };
 
-  const applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID
-    ? process.env.REACT_APP_SQUARE_APPLICATION_ID
-    : '';
-  const locationId = process.env.REACT_APP_SQUARE_LOCATION_ID
-    ? process.env.REACT_APP_SQUARE_LOCATION_ID
-    : '';
+  let applicationId, locationId;
+  if (
+    purchaseType === 'buy_meal' &&
+    nonProfitLocationId === process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID
+  ) {
+    applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
+    locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
+  } else {
+    applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';
+    locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
+  }
 
   const purchaseTypePhrase = (shouldLowerCase) => {
     switch (purchaseType) {
