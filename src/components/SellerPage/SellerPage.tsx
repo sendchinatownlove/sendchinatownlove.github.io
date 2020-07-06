@@ -103,6 +103,7 @@ const ContentContainer = styled.div`
     font-size: 14px;
     margin: 32px 0px;
     margin-top: 0;
+    padding-bottom: 25px;
   }
   `;
   

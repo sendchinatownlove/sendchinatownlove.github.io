@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const StoreInfo: React.SFC<Props> = ({ seller }) => {
-  const { summary, story, cuisine_name, locations } = seller;
+  const { summary, story, cuisine_name, locations, website_url } = seller;
 
   // modal functionality for menu and gallery tabs
   const [viewImage, setViewImage] = useState('');
@@ -66,20 +66,36 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
         />
       }
 
-      <div className={styles.nationality}>{cuisine_name}</div>
-      <div>
-        {locations &&
-          locations.map((location: Location) => (
-            <React.Fragment key={location.seller_id}>
-              <div className={styles.address}>{location.address1}</div>
-              <div className={styles.address}>{location.address2}</div>
-              <div className={styles.address}>
-                {location.city}, {location.state} {location.zip_code}
-              </div>
-              <div className={styles.address}>{location.phone_number}</div>
-            </React.Fragment>
-          ))}
+      <div className={styles.information}>
+        {
+          seller.owner_image_url
+            ? <img
+                className={styles.ownerImage}
+                src={seller?.owner_image_url}
+                alt={seller.owner_name}
+              />
+            : null
+        }
+
+        <div className={styles.nationality}>{cuisine_name}</div>
+        <div>
+          {locations &&
+            locations.map((location: Location) => (
+              <React.Fragment key={location.seller_id}>
+                <div className={styles.address}>{location.address1}</div>
+                <div className={styles.address}>{location.address2}</div>
+                <div className={styles.address}>
+                  {location.city}, {location.state} {location.zip_code}
+                </div>
+                <div className={styles.address}>{location.phone_number}</div>
+              </React.Fragment>
+            ))}
+        </div>
+        <div className={styles.websiteUrl}>
+          <a href={`http://${website_url}`} target='_blank' className={styles.websiteUrl}>{website_url}</a>
+        </div>
       </div>
+      
       <p>{summary}</p>
       <StoreNavContainer>
         {storeNavItems.map(

@@ -6,6 +6,9 @@
   @include for-tablet-landscape-up {
     margin-top: 0;
   }
+  @media (max-width: 900px) {
+    padding-bottom: 25px;
+  }
 }
 .merchantIllustrationContainer {
   background: #a9122a;
@@ -38,4 +41,30 @@ p {
 
 .storeDetails {
   margin-top: 50px;
+}
+
+.websiteUrl {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  text-decoration-line: underline;
+  margin-top: 12px;
+  color: #A8192E;
+}
+
+.information {
+  position: relative;
+}
+
+.ownerImage {
+  display: none;
+
+  @media (max-width: 900px) {
+      display: inline;
+      width: 100px;
+      height: 100px;
+      // border-radius: 100%;
+      position: absolute;
+      right: 50px;
+  }
 }
