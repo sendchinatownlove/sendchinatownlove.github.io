@@ -110,13 +110,6 @@ $container-size: 160px;
   background-color: #f8ba17;
 }
 
-// .openNowSection {
-  
-//   &__open {
-//     margin-top: 20px;
-//   }
-// }
-
 .orderNow {
   display: grid;
   position: relative;
@@ -157,9 +150,33 @@ $container-size: 160px;
   }
 
   &__button {
-    text-transform: uppercase;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%);
+    padding: 10px 100px;
     border-radius: 100px;
-    border: none;
     background-color: #fff;
+    box-shadow: 0px 3px 4px -2px rgba(0, 0, 0, 0.2); //0 4px 2px -2px gray;
+    border: none;
+    text-transform: uppercase;
+
+    &:hover, &:active, &:focus {
+      padding: 10px 100px;
+      outline: none;
+    }
+
+    img {
+      position: absolute;
+      right: 25px;
+    }
   }
+}
+
+.flipped {
+  transform: rotate(180deg);
+}
+
+.unflipped {
+  transform: rotate(0deg)
 }

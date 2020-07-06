@@ -8,7 +8,7 @@ import defaultOwnerImage from './assets/female.svg';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
 import classnames from 'classnames';
-
+import chevron from './assets/chevron.svg'
 import DonationSection from './DonationSection'
 import OrderNow from './OrderNow'
 
@@ -109,11 +109,17 @@ const OwnerPanel = ({ seller }: Props) => {
       {dummy.isOpen && (
         <React.Fragment>
           { showOrderNow && <OrderNow dummy={dummy} /> }
-          <button className={classnames(styles.button, styles.orderNow__button)}>{
-            showOrderNow 
-              ? <><p>Hide</p></>
-              : <><p >Order Now</p></>
-          }</button>
+          <button 
+            className={classnames(styles.button, styles.orderNow__button)}
+            onClick={() => toggleOrderNow(!showOrderNow)}
+          >
+            {
+              showOrderNow 
+                ? 'Hide'
+                : 'Order Now'
+            }
+            <img src={chevron} alt="chevron" className={showOrderNow ? styles.flipped : styles.unflipped} />
+          </button>
         </React.Fragment>
       )}
 
@@ -132,6 +138,7 @@ const OwnerPanel = ({ seller }: Props) => {
 export default OwnerPanel;
 
 const Container = styled.section`
+  position: relative;
   order: 1;
   grid-row: 1;
   width: 100%;
