@@ -68,12 +68,12 @@ export default SellerPage;
 
 const Container = styled.div`
   background: white;
-  min-height: 1500px;
   max-width: 1440px;
   margin: 0 auto;
   width: 90%;
   ${(props: Props) => props.menuOpen && 'display: none;'}
-`;
+  `;
+// min-height: 1500px;
 
 const SellerName = styled.div`
   font-weight: 600;
@@ -94,7 +94,6 @@ const ContentContainer = styled.div`
   flex-direction: column-reverse;
   margin: 0 auto;
   max-width: 1200px;
-  min-height: 1200px;
   @media (min-width: 900px) {
     grid-template-columns: 1fr 464px;
     display: grid;
@@ -105,4 +104,6 @@ const ContentContainer = styled.div`
     margin: 32px 0px;
     margin-top: 0;
   }
-`;
+  `;
+  
+  // min-height: 1200px;
