@@ -58,7 +58,7 @@ const MerchantsPage = (props: Props) => {
       setFilter(sellers);
     } else {
       const result = sellers.filter(
-        (store: any) => store.cuisine_name === type
+        (store: any) => store.locations[0].city === type
       );
       setFilter(result);
     }
