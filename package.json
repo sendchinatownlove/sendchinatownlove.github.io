@@ -48,6 +48,7 @@
     "stripe": "^8.38.0",
     "styled-components": "^5.1.0",
     "typescript": "^3.8",
+    "use-media": "^1.4.0",
     "uuid": "^8.0.0",
     "yarn": "^1.22.4"
   },

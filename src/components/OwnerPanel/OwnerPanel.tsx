@@ -8,13 +8,11 @@ import defaultOwnerImage from './assets/female.svg';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
 import classnames from 'classnames';
-import chevron from './assets/chevron.svg'
-import DonationSection from './DonationSection'
-import OrderNow from './OrderNow'
+import chevron from './assets/chevron.svg';
+import DonationButtons from '../DonationButtons';
+import OrderNow from './OrderNow';
 
-
-//
-// temp
+////////////////////////////// temp
 const dummy = {
   isOpen: true, // create utility function to determine if currently open
   openHours: [ // create utility function to store hours in tuples
@@ -40,8 +38,7 @@ const dummy = {
     }
   ]
 }
-// temp
-//
+////////////////////////////// temp
 
 interface Props {
   seller: BrowsePageSeller;
@@ -59,7 +56,6 @@ const OwnerPanel = ({ seller }: Props) => {
   const dispatch = useModalPaymentDispatch();
   const [purchaseType, setPurchaseType] = useState('');
   const [showOrderNow, toggleOrderNow] = useState(true);
-
 
   const showModal = (event: any) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
@@ -103,7 +99,7 @@ const OwnerPanel = ({ seller }: Props) => {
             giftCardAmount={seller.gift_card_amount}
           />
         )}
-        <DonationSection seller={seller} showModal={showModal} />
+        <DonationButtons seller={seller} showModal={showModal} />
       </div>
 
       {dummy.isOpen && (
