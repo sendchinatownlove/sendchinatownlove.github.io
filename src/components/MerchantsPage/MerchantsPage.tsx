@@ -58,7 +58,7 @@ const MerchantsPage = (props: Props) => {
       setFilter(sellers);
     } else {
       const result = sellers.filter(
-        (store: any) => store!.locations[0].city === type
+        (store: any) => store!.locations.length > 0 && store!.locations[0].city === type
       );
       setFilter(result);
     }
