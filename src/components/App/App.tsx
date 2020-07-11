@@ -84,6 +84,10 @@ const App = () => {
               <VoucherRedemptionPage />
             </VoucherProvider>
           </Route>
+          <Route path='/gift-a-meal' component={() => {
+              window.location.href = 'https://www.gofundme.com/f/gift-a-meal';
+              return null;
+          }}/>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>
           <Route path="/:id#story">{returnComponent('seller')}</Route>
