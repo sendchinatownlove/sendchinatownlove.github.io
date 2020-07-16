@@ -1,68 +1,52 @@
 import React from 'react';
-import ProgressBar from '../../ProgressBar';
+import CampaignProgressBar from './CampaignProgressBar';
 import styled from 'styled-components';
 import {
-    smallScreens,
-    tabletScreens,
+  smallScreens,
+  tabletScreens,
 } from '../../../utilities/general/responsive';
 import campaignDefaultImage from '../images/campaign_default.png';
 import apexLogo from '../images/apex-logo.png';
 import melonpannaLogo from '../images/melonpanna-logo.png';
 
 // In the final implementation, campaign will be object declared in types.ts
-const CampaignListItem = (campaign: String) => {
-    return (
-        <Container>
-            <ColumnContainer>
-                <img
-                    src={campaignDefaultImage}
-                    alt="campaign_image"
-                />
-            </ColumnContainer>
-            <ColumnContainer>
-                <Location>
-                    Sunset Park, Brooklyn
-                    </Location>
-                <Name>
-                    Melonpanna Tea & Shot x APEX for the Youth
-                    </Name>
-                <Description>
-                    Partnering with APEX for the Youth, we hope to raise 200 meals for underserved Asian and immigrant youth from low-income families.
-                    </Description>
-                <TimeStamp>
-                    Last contribution made 1h ago
-                    </TimeStamp>
-                <ProgressBar
-                    amountRaised={100}
-                    targetAmount={1000}
-                    progressBarColor={'#CF6E8A'}
-                    numContributions={20}
-                    numDonations={10}
-                    numGiftCards={10}
-                    donationAmount={50}
-                    giftCardAmount={50}
-                />
-            </ColumnContainer>
-            <ColumnContainer>
-                <ImagesContainer>
-                    <img
-                        src={apexLogo}
-                        alt="merchant_logo"
-                    />
-                    <img
-                        src={melonpannaLogo}
-                        alt="distributor_logo"
-                    />
-                </ImagesContainer>
-                <Button className='button--filled'>
-                    Visit merchant
-                    </Button>
-                <Button className={'button--outlined'}>
-                    Gift a meal
-                    </Button>
-            </ColumnContainer>
-        </Container>
-    );
+interface Props {
+  campaign: String;
+}
+
+const CampaignListItem = (campaign: Props) => {
+  return (
+    <Container>
+      <ColumnContainer>
+        <img src={campaignDefaultImage} alt="campaign_image" />
+      </ColumnContainer>
+      <ColumnContainer>
+        <Location>Sunset Park, Brooklyn</Location>
+        <Name>Melonpanna Tea & Shot x APEX for the Youth</Name>
+        <Description>
+          Partnering with APEX for the Youth, we hope to raise 200 meals for
+          underserved Asian and immigrant youth from low-income families.
+        </Description>
+        {/* Testing values */}
+        <CampaignProgressBar
+          isActive={true}
+          numContributions={73}
+          targetAmount={100}
+          progressBarColor={'#CF6E8A'}
+          lastContributionTime={new Date('07/21/2020 20:05:00')}
+          endDate={new Date('07/23/2020')}
+        />
+      </ColumnContainer>
+      <ColumnContainer>
+        <ImagesContainer>
+          <img src={apexLogo} alt="merchant_logo" />
+          <img src={melonpannaLogo} alt="distributor_logo" />
+        </ImagesContainer>
+        <Button className="button--filled">Visit merchant</Button>
+        <Button className={'button--outlined'}>Gift a meal</Button>
+      </ColumnContainer>
+    </Container>
+  );
 };
 
 export default CampaignListItem;
@@ -107,46 +91,36 @@ const ColumnContainer = styled.div`
 `;
 
 const Location = styled.div`
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 20px;
-    letter-spacing: 0.02em;
-    color: #1E7C9A;
-    margin-bottom: 15px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+  color: #1e7c9a;
+  margin-bottom: 15px;
 `;
 
 const Name = styled.div`
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 22px;
-    letter-spacing: 0.02em;
-    color: #000000;
-    margin-bottom: 18px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  color: #000000;
+  margin-bottom: 18px;
 `;
 
 const Description = styled.div`
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 20px;
-    letter-spacing: 0.02em;
-    color: #1E1E1E;
-    margin-bottom: 50px;
-`;
-
-const TimeStamp = styled.div`
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 18px;
-    letter-spacing: 0.02em;
-    color: #9E9E9E;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+  color: #1e1e1e;
+  margin-bottom: 50px;
 `;
 
 const Button = styled.div`
