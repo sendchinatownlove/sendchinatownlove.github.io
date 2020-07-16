@@ -6,6 +6,7 @@
     max-width: 1250px;
     margin: 0 auto;
     font-size: 14px;
+    height: 100vh;
   
     @include for-phone-only {
       overflow-x: hidden;

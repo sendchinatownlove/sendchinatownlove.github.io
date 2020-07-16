@@ -23,25 +23,25 @@ import melonpannaLogo from '../images/melonpanna-logo.png';
             <ColumnContainer>
                 <Location>
                     Sunset Park, Brooklyn
-                    </Location>
+                </Location>
                 <Name>
                     Melonpanna Tea & Shot x APEX for the Youth
-                    </Name>
+                </Name>
                 <Description>
                     Partnering with APEX for the Youth, we hope to raise 200 meals for underserved Asian and immigrant youth from low-income families.
-                    </Description>
+                </Description>
                 <TimeStamp>
                     Last contribution made 1h ago
-                    </TimeStamp>
+                </TimeStamp>
                 <ProgressBar
-                    amountRaised={100}
-                    targetAmount={1000}
-                    progressBarColor={'#CF6E8A'}
-                    numContributions={20}
-                    numDonations={10}
-                    numGiftCards={10}
-                    donationAmount={50}
-                    giftCardAmount={50}
+                  amountRaised={100}
+                  targetAmount={1000}
+                  progressBarColor={'#CF6E8A'}
+                  numContributions={20}
+                  numDonations={10}
+                  numGiftCards={10}
+                  donationAmount={50}
+                  giftCardAmount={50}
                 />
             </ColumnContainer>
             <ColumnContainer>
@@ -72,7 +72,6 @@ const Container = styled.div`
   border-bottom: 1px solid #e5e5e5;
   display: flex;
   max-height: 350px;
-  object-fit: cover;
   margin: 35px 0 55px;
   justify-content: space-between;
 
@@ -85,9 +84,11 @@ const Container = styled.div`
   }
 
   @media (${smallScreens}) {
-    flex-direction: column-reverse;
-    margin-top: 0;
-    max-height: 500px;
+    max-height: 575px;
+    flex-direction: column;
+    margin: 0 17px;
+    position: relative;
+    padding-top: 15px;
   }
 `;
 
@@ -104,6 +105,16 @@ const ColumnContainer = styled.div`
     > button {
       width: 100%;
     }
+
+    @media (${smallScreens}) {
+      padding: .5rem 1rem .75rem;
+
+      > img {
+        height: 103px;
+        object-fit: cover;
+        object-position: 0 25%;
+      }
+    }
   }
 `;
 
@@ -116,6 +127,10 @@ const Location = styled.div`
     letter-spacing: 0.02em;
     color: #1E7C9A;
     margin-bottom: 15px;
+
+    @media (${smallScreens}) {
+      font-size: 14px;
+    }
 `;
 
 const Name = styled.div`
@@ -127,6 +142,10 @@ const Name = styled.div`
     letter-spacing: 0.02em;
     color: #000000;
     margin-bottom: 18px;
+
+    @media (${smallScreens}) {
+      width: 70%;
+    }
 `;
 
 const Description = styled.div`
@@ -138,6 +157,11 @@ const Description = styled.div`
     letter-spacing: 0.02em;
     color: #1E1E1E;
     margin-bottom: 50px;
+
+    @media (${smallScreens}) {
+      font-size: 14px;
+      margin-bottom: 34px;
+    }
 `;
 
 const TimeStamp = styled.div`
@@ -162,6 +186,7 @@ const Button = styled.div`
   letter-spacing: 0.05em;
 
   @media (max-width: 550px) {
+    font-size: 14px;
     width: 100%;
   }
 `;
@@ -170,4 +195,13 @@ const ImagesContainer = styled.span`
   align-self: right;
   margin-bottom: 60px;
   align-self: flex-end;
+
+  @media (${smallScreens}) {
+    position: absolute;
+    top: 132px;
+
+    img {
+      height: 35px;
+    }
+  }
 `;

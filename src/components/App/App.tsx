@@ -59,7 +59,7 @@ const App = () => {
         component = <SellerPage menuOpen={menuOpen} />;
         break;
       case 'giftameal':
-        component = <GiftAMealPage />
+        component = <GiftAMealPage menuOpen={menuOpen} />
         break;
       default:
         component = <ErrorPage menuOpen={menuOpen} />;

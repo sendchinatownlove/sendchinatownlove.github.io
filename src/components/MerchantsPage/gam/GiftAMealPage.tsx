@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 import CampaignListItem from './CampaignListItem'
 
 interface Props {
-
+    menuOpen: boolean;
 }
 
 const GiftAMealPage = (props: Props) => {
@@ -40,20 +40,11 @@ const GiftAMealPage = (props: Props) => {
         fetchData(i18n.language);
     }, [i18n.language]);
 
-    // TODO: replace this filter with a backend API call
-    const filterStoreType = (type: any) => {
-        if (type === 'all') {
-        setFilter(sellers);
-        } else {
-        const result = sellers.filter(
-            (store: any) => store!.locations.length > 0 && store!.locations[0].city === type
-        );
-        setFilter(result);
-        }
-    };
-
     return (
-        <div className={styles.container}>
+        <div 
+            className={styles.container}
+            style={{ display: props.menuOpen ? 'none' : 'inherit' }}    
+        >
             Gift A Meal Page
 
             <CampaignListItem />
