@@ -10,7 +10,8 @@ import apexLogo from '../images/apex-logo.png';
 import melonpannaLogo from '../images/melonpanna-logo.png';
 
 // In the final implementation, campaign will be object declared in types.ts
-const CampaignListItem = (campaign: String) => {
+// const CampaignListItem = (campaign: String) => {
+  const CampaignListItem = () => {
     return (
         <Container>
             <ColumnContainer>

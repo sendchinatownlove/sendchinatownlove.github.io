@@ -1,0 +1,13 @@
+@import '../../../responsive';
+@import '../../../index.scss';
+
+.container {
+    background-color: white;
+    max-width: 1250px;
+    margin: 0 auto;
+    font-size: 14px;
+  
+    @include for-phone-only {
+      overflow-x: hidden;
+    }
+  }
