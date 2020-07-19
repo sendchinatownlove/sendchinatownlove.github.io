@@ -9,8 +9,8 @@ import Complete from './Complete';
 import {
   useVoucherState,
   useVoucherDispatch,
-} from '../../utilities/hooks/VoucherContext/context';
-import { SET_VOUCHER_INFO } from '../../utilities/hooks/VoucherContext/constants';
+  VoucherConstants
+} from '../../utilities/hooks/VoucherContext';
 import Loader from '../../components/Loader';
 import NYCBackdrop from '../../images/nyc-background.png';
 import { getVoucher, getSeller } from '../../utilities/api/interactionManager';
@@ -22,13 +22,13 @@ interface ContainerProps {
 }
 
 const VoucherRedemption = (props: Props) => {
-  const { view } = useVoucherState();
-  const dispatch = useVoucherDispatch();
+  const { view } = useVoucherState(null);
+  const dispatch = useVoucherDispatch(null);
   const params = useHistory();
   const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
-    try {
+    try {      
       const {
         data: { gift_card_detail, seller_id },
       } = await getVoucher(params.location.pathname.replace('/voucher/', ''));
@@ -40,11 +40,11 @@ const VoucherRedemption = (props: Props) => {
         storeName: merchantData.data.name,
         sellerID: seller_id,
         location: getLocationInfo(merchantData),
-      };
-
-      dispatch({ type: SET_VOUCHER_INFO, payload: voucher });
+      };      
+      dispatch({ type: VoucherConstants.SET_VOUCHER_INFO, payload: voucher });
       setLoading(false);
-    } catch {
+    } catch (e){
+      console.log("error: "+JSON.stringify(e));
       params.push('/');
       setLoading(false);
     }
@@ -53,7 +53,6 @@ const VoucherRedemption = (props: Props) => {
   useEffect(() => {
     setLoading(true);
     fetchData();
-
     // eslint-disable-next-line
   }, []);
 

@@ -8,7 +8,7 @@ import Footer from '../Footer';
 import ScrollToTop from '../ScrollToTop';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import ReactPixel from 'react-facebook-pixel';
-import { VoucherProvider } from '../../utilities/hooks/VoucherContext/context';
+import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
