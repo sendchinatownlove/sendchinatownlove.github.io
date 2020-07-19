@@ -3,14 +3,11 @@ import styled from 'styled-components';
 import {
   useVoucherState,
   useVoucherDispatch,
-} from '../../utilities/hooks/VoucherContext/context';
+  VoucherConstants
+} from '../../utilities/hooks/VoucherContext';
 import defaultStoreFront from '../../images/misc-store.png';
 import MoreInfo from './MoreInfo';
 import StoreBanner from './StoreBanner';
-import {
-  SET_AMOUNT,
-  SET_VIEW,
-} from '../../utilities/hooks/VoucherContext/constants';
 import {
   ViewContainer,
   MainView,
@@ -30,8 +27,8 @@ interface InputProps {
 }
 
 const Amount = (props: Props) => {
-  const { amount, voucher } = useVoucherState();
-  const dispatch = useVoucherDispatch();
+  const { amount, voucher } = useVoucherState(null);
+  const dispatch = useVoucherDispatch(null);
 
   const [error, setError] = useState('');
 
@@ -39,15 +36,15 @@ const Amount = (props: Props) => {
     setError('');
     if (e.target.value * 100 > voucher.amount || e.target.value < 0)
       return setError('Please enter a valid amount');
-    dispatch({ type: SET_AMOUNT, payload: e.target.value });
+    dispatch({ type: VoucherConstants.SET_AMOUNT, payload: e.target.value });
   };
 
   const setView = (view) => {
-    dispatch({ type: SET_VIEW, payload: view });
+    dispatch({ type: VoucherConstants.SET_VIEW, payload: view });
   };
 
   const setAmount = (amount) => {
-    dispatch({ type: SET_AMOUNT, payload: amount });
+    dispatch({ type: VoucherConstants.SET_AMOUNT, payload: amount });
   };
 
   const backToLanding = (e) => {

@@ -6,48 +6,53 @@
  */
 
 import React from 'react';
-import { defaultState } from './types';
-import VoucherReducer, { Action } from './reducers';
+import { Action } from './reducers';
 
-// CONTEXT
-const VoucherStateContext = React.createContext(defaultState);
-const VoucherDispatchContext = React.createContext(
-  (() => null) as React.Dispatch<Action>
-);
+type ProviderProps = {children: React.ReactNode}
 
-/**
- * Voucher Provider
- *
- * @param {node} children - return the react components that are the going to use the context
- * @return {node} The context that holds all state props/methods
- *
- */
 
-const VoucherProvider = (props: any) => {
-  const [state, dispatch] = React.useReducer(VoucherReducer, defaultState);
+export default function VoucherStore(reducer, initialState) {
 
-  return (
-    <VoucherStateContext.Provider value={state}>
-      <VoucherDispatchContext.Provider value={dispatch}>
-        {props.children}
-      </VoucherDispatchContext.Provider>
-    </VoucherStateContext.Provider>
+  // CONTEXT
+  const VoucherStateContext = React.createContext(initialState);
+  const VoucherDispatchContext = React.createContext(
+    (() => null) as React.Dispatch<Action>
   );
-};
 
-function useVoucherState() {
-  const context = React.useContext(VoucherStateContext);
-  if (context === undefined) {
-    throw new Error('useVoucherState must be used within a CountProvider');
-  }
-  return context;
-}
-function useVoucherDispatch() {
-  const context = React.useContext(VoucherDispatchContext);
-  if (context === undefined) {
-    throw new Error('useVoucherDispatch must be used within a CountProvider');
-  }
-  return context;
-}
+  /**
+   * Voucher Provider
+   *
+   * @param {node} children - return the react components that are the going to use the context
+   * @return {node} The context that holds all state props/methods
+   *
+   */
 
-export { VoucherProvider, useVoucherDispatch, useVoucherState };
+  const VoucherProvider = ({children}: any) => {
+    const [state, dispatch] = React.useReducer(reducer, initialState);
+
+    return (
+      <VoucherDispatchContext.Provider value={dispatch}>
+        <VoucherStateContext.Provider value={state}>
+          {children}
+        </VoucherStateContext.Provider>
+      </VoucherDispatchContext.Provider>
+    );
+  };
+
+  function useVoucherState() {
+    const context = React.useContext(VoucherStateContext);
+    if (context === undefined) {
+      throw new Error('useVoucherState must be used within a CountProvider');
+    }
+    return context;
+  }
+  function useVoucherDispatch() {
+    const context = React.useContext(VoucherDispatchContext);
+    if (context === undefined) {
+      throw new Error('useVoucherDispatch must be used within a CountProvider');
+    }
+    return context;
+  }
+
+  return [VoucherProvider, useVoucherState, useVoucherDispatch]
+}

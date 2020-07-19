@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useVoucherState } from '../../utilities/hooks/VoucherContext/context';
+import { useVoucherState } from '../../utilities/hooks/VoucherContext';
 
 interface Props {
   showShadow?: boolean;
@@ -14,7 +14,7 @@ interface VoucherInfoProps {
   inverted?: boolean;
 }
 const LandingCard = (props: Props) => {
-  const { voucher } = useVoucherState();
+  const { voucher } = useVoucherState(null);
   const [showInfo, setShowInfo] = useState(false);
 
   return (
