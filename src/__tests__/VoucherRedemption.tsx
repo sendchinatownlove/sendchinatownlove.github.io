@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { renderIntegration } from '../utilities/testing/render';
 import VoucherPage from '../pages/VoucherRedemption';
-import { cleanup } from '@testing-library/react';
+import { cleanup, fireEvent } from '@testing-library/react';
 import {
   VoucherProvider,
   VoucherTypes,
@@ -73,6 +73,32 @@ jest.mock('../utilities/api/interactionManager', () => {
     },
   };
 
+  const voucherUpdateResponse: any = {
+    id: 4,
+    seller_id: 'shunfa-bakery',
+    item_type: null,
+    created_at: '2020-07-19T23:15:00.544Z',
+    updated_at: '2020-07-19T23:15:00.544Z',
+    payment_intent_id: 4,
+    refunded: false,
+    purchaser_id: 1,
+    gift_card_detail: {
+      id: 1,
+      gift_card_id:
+        'rphtgeghnxtenpficladyeaklccdkqmxldcshuodqpvaujlshfoxizldomrhpbje',
+      receipt_id: null,
+      expiration: null,
+      created_at: '2020-07-19T23:15:00.582Z',
+      updated_at: '2020-07-19T23:15:00.582Z',
+      item_id: 4,
+      seller_gift_card_id:
+        'crlmuwcorvfwrhnzdfkdjkjhwwitqqwnhhelyahrctehykfustgvrbalipvwiaus',
+      recipient_id: 1,
+      single_use: false,
+      amount: 300,
+    },
+  };
+
   return {
     ...jest.requireActual('../utilities/api/interactionManager'),
     getSeller: jest.fn(() => ({
@@ -80,6 +106,9 @@ jest.mock('../utilities/api/interactionManager', () => {
     })),
     getVoucher: jest.fn(() => ({
       data: voucherResponse,
+    })),
+    updateVoucher: jest.fn(() => ({
+      data: voucherUpdateResponse,
     })),
   };
 });
@@ -131,5 +160,104 @@ describe('Voucher Page', () => {
     expect(CodeLabel).toBeInTheDocument();
     expect(Code).toBeInTheDocument();
     expect(NextButton).toBeInTheDocument();
+  });
+
+  test('should display VoucherPage Amount prompt when clicking "Click to being to being reddeming your voucher"', async () => {
+    const { findByText, findAllByText } = renderIntegration(
+      '/voucher/123asdf',
+      renderVoucher(providerValues)
+    );
+
+    const NextButton = await findByText(
+      'Click to begin redeeming your voucher'
+    );
+
+    fireEvent.click(NextButton);
+
+    const Header = await findByText(`Shunfa Bakery`, { exact: false });
+    const CurrentBalanceHeader = await findByText('Current balance');
+    const Amount = await findAllByText('25.00', { exact: false });
+    const Prompt = await findByText('How much are you spending today?');
+    const Code = await findByText('123asdf', { exact: false });
+    const CodeLabel = await findByText('Voucher Code', { exact: false });
+    const Next = await findByText('Next', { exact: false });
+
+    expect(CurrentBalanceHeader).toBeInTheDocument();
+    expect(Header).toBeInTheDocument();
+    expect(Prompt).toBeInTheDocument();
+    expect(Amount.length).toBe(2);
+    expect(CodeLabel).toBeInTheDocument();
+    expect(Code).toBeInTheDocument();
+    expect(Next).toBeInTheDocument();
+  });
+
+  test('should display VoucherPage Confirm prompt when clicking "Next"', async () => {
+    const { findByText, findByPlaceholderText } = renderIntegration(
+      '/voucher/123asdf',
+      renderVoucher(providerValues)
+    );
+
+    const NextButton = await findByText(
+      'Click to begin redeeming your voucher'
+    );
+    fireEvent.click(NextButton);
+
+    const Input = await findByPlaceholderText(`0.00`, { exact: false });
+    const Next = await findByText('Next', { exact: false });
+    fireEvent.change(Input, { target: { value: 22 } });
+    fireEvent.click(Next);
+
+    const Header = await findByText(`Shunfa Bakery`, { exact: false });
+    const PageHeader = await findByText('Complete Your Purchase');
+    const VoucherBalance = await findByText('25.00', { exact: false });
+    const RemainingBalance = await findByText('3.00', { exact: false });
+    const RedemptionAmount = await findByText('22.00', { exact: false });
+    const Code = await findByText('123asdf', { exact: false });
+    const CodeLabel = await findByText('Voucher Code', { exact: false });
+    const ButtonLabel = await findByText(
+      'Please show your phone to the merchant cashier to confirm the purchase.',
+      { exact: false }
+    );
+    const Next1 = await findByText('Next', { exact: false });
+
+    expect(PageHeader).toBeInTheDocument();
+    expect(Header).toBeInTheDocument();
+    expect(VoucherBalance).toBeInTheDocument();
+    expect(RemainingBalance).toBeInTheDocument();
+    expect(RedemptionAmount).toBeInTheDocument();
+    expect(CodeLabel).toBeInTheDocument();
+    expect(ButtonLabel).toBeInTheDocument();
+    expect(Code).toBeInTheDocument();
+    expect(Next1).toBeInTheDocument();
+  });
+
+  test('should display VoucherPage Completed prompt', async () => {
+    const { findByText, findByPlaceholderText } = renderIntegration(
+      '/voucher/123asdf',
+      renderVoucher(providerValues)
+    );
+
+    const NextButton = await findByText(
+      'Click to begin redeeming your voucher'
+    );
+    fireEvent.click(NextButton);
+
+    const Input = await findByPlaceholderText(`0.00`, { exact: false });
+    const Next = await findByText('Next', { exact: false });
+    fireEvent.change(Input, { target: { value: 22 } });
+    fireEvent.click(Next);
+
+    const Next1 = await findByText('Next', { exact: false });
+    fireEvent.click(Next1);
+
+    const PageHeader = await findByText('Redemption Complete');
+    const RemainingBalance = await findByText('3.00', { exact: false });
+    const ButtonLabel = await findByText(
+      'Thank you for dining at Shunfa Bakery!'
+    );
+
+    expect(PageHeader).toBeInTheDocument();
+    expect(RemainingBalance).toBeInTheDocument();
+    expect(ButtonLabel).toBeInTheDocument();
   });
 });
