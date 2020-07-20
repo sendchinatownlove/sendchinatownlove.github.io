@@ -9,7 +9,7 @@ import Complete from './Complete';
 import {
   useVoucherState,
   useVoucherDispatch,
-  VoucherConstants
+  VoucherConstants,
 } from '../../utilities/hooks/VoucherContext';
 import Loader from '../../components/Loader';
 import NYCBackdrop from '../../images/nyc-background.png';
@@ -28,7 +28,7 @@ const VoucherRedemption = (props: Props) => {
   const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
-    try {      
+    try {
       const {
         data: { gift_card_detail, seller_id },
       } = await getVoucher(params.location.pathname.replace('/voucher/', ''));
@@ -40,11 +40,11 @@ const VoucherRedemption = (props: Props) => {
         storeName: merchantData.data.name,
         sellerID: seller_id,
         location: getLocationInfo(merchantData),
-      };      
+      };
       dispatch({ type: VoucherConstants.SET_VOUCHER_INFO, payload: voucher });
       setLoading(false);
-    } catch (e){
-      console.log("error: "+JSON.stringify(e));
+    } catch (e) {
+      console.log('error: ' + JSON.stringify(e));
       params.push('/');
       setLoading(false);
     }

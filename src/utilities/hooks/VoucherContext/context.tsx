@@ -8,11 +8,9 @@
 import React from 'react';
 import { Action } from './reducers';
 
-type ProviderProps = {children: React.ReactNode}
-
+type ProviderProps = { children: React.ReactNode };
 
 export default function VoucherStore(reducer, initialState) {
-
   // CONTEXT
   const VoucherStateContext = React.createContext(initialState);
   const VoucherDispatchContext = React.createContext(
@@ -27,7 +25,7 @@ export default function VoucherStore(reducer, initialState) {
    *
    */
 
-  const VoucherProvider = ({children}: any) => {
+  const VoucherProvider = ({ children }: any) => {
     const [state, dispatch] = React.useReducer(reducer, initialState);
 
     return (
@@ -54,5 +52,5 @@ export default function VoucherStore(reducer, initialState) {
     return context;
   }
 
-  return [VoucherProvider, useVoucherState, useVoucherDispatch]
+  return [VoucherProvider, useVoucherState, useVoucherDispatch];
 }

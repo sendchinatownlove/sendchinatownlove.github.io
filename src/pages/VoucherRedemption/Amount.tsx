@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   useVoucherState,
   useVoucherDispatch,
-  VoucherConstants
+  VoucherConstants,
 } from '../../utilities/hooks/VoucherContext';
 import defaultStoreFront from '../../images/misc-store.png';
 import MoreInfo from './MoreInfo';
