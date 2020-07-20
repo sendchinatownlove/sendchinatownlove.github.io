@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   useVoucherState,
   useVoucherDispatch,
-  VoucherConstants
+  VoucherConstants,
 } from '../../utilities/hooks/VoucherContext';
 import StoreBanner from './StoreBanner';
 import {
@@ -30,7 +30,8 @@ const Amount = (props: Props) => {
   const dispatch = useVoucherDispatch(null);
   const [loading, setLoading] = useState(false);
 
-  const setView = async (view) => dispatch({ type: VoucherConstants.SET_VIEW, payload: view });
+  const setView = async (view) =>
+    dispatch({ type: VoucherConstants.SET_VIEW, payload: view });
 
   const confirm = async (e) => {
     setLoading(true);
@@ -54,8 +55,14 @@ const Amount = (props: Props) => {
         location: getLocationInfo(merchantData),
       };
 
-      dispatch({ type: VoucherConstants.SET_VOUCHER_INFO, payload: newVoucher });
-      dispatch({ type: VoucherConstants.SET_AMOUNT, payload: gift_card_detail.amount });
+      dispatch({
+        type: VoucherConstants.SET_VOUCHER_INFO,
+        payload: newVoucher,
+      });
+      dispatch({
+        type: VoucherConstants.SET_AMOUNT,
+        payload: gift_card_detail.amount,
+      });
       setLoading(false);
       setView(3);
     } catch (err) {

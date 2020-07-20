@@ -6,7 +6,7 @@ import StoreBanner from './StoreBanner';
 import {
   useVoucherState,
   useVoucherDispatch,
-  VoucherConstants
+  VoucherConstants,
 } from '../../utilities/hooks/VoucherContext';
 import { ViewContainer, SubViewContainer, Text } from './style';
 
@@ -17,7 +17,10 @@ const LandingCard = (props: Props) => {
   const dispatch = useVoucherDispatch(null);
   const setView = () => {
     if (voucher.single_use) {
-      dispatch({ type: VoucherConstants.SET_AMOUNT, payload: voucher.amount / 100 });
+      dispatch({
+        type: VoucherConstants.SET_AMOUNT,
+        payload: voucher.amount / 100,
+      });
       dispatch({ type: VoucherConstants.SET_VIEW, payload: 2 });
     } else {
       dispatch({ type: VoucherConstants.SET_VIEW, payload: 1 });
