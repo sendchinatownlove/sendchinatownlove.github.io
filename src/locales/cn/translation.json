@@ -26,7 +26,15 @@
     "prompt": "Please enter how many meals to gift",
     "explanationFirst": "By gifting a meal, your donation will still go directly to the merchant.",
     "explanationSecond": "Our partners will then distribute vouchers with those who can benefit the most from a free meal.",
-    "totalLabel": "Total: "
+    "totalLabel": "Total: ",
+    "endsIn": "Ends in",
+    "ended": "Ended",
+    "days": "days",
+    "lastContributionMade": "Last contribution made",
+    "ago": "ago",
+    "toTarget": "to target",
+    "outOf": "out of",
+    "meals": "meals"
   },
   "purchase": {
     "donation": "Donation for ",
