@@ -1,9 +1,13 @@
-import React, { useEffect, useState }  from 'react';
-import { getWebsiteImages } from '../../../utilities/general/StoreImages';
-import { getSellers } from '../../../utilities';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 import CampaignListItem from './CampaignListItem'
+
+import gam_hero from '../images/gam_hero.png'
+import gam_1 from '../images/gam_1.svg'
+import gam_2 from '../images/gam_2.svg'
+import gam_3 from '../images/gam_3.svg'
+import gam_4 from '../images/gam_4.svg'
 
 interface Props {
     menuOpen: boolean;
@@ -12,40 +16,42 @@ interface Props {
 const GiftAMealPage = (props: Props) => {
     const { t, i18n } = useTranslation();
 
-    const [sellers, setSellers] = useState<any | null>();
-    const [filter, setFilter] = useState<any | null>();
-    const [totalDonations, setDonations] = useState(0);
-    const [totalGiftCards, setGiftCards] = useState(0);
-
-    const fetchData = async (lang?) => {
-        const { data } = await getSellers(lang);
-
-        const contributions = data.reduce(
-        (total: any, store: any) => {
-            return [
-            total[0] + store.donation_amount,
-            total[1] + store.gift_card_amount,
-            ];
-        },
-        [0, 0]
-        );
-
-        setSellers(data);
-        setFilter(data);
-        setDonations(contributions[0]);
-        setGiftCards(contributions[1]);
-    };
-
-    useEffect(() => {
-        fetchData(i18n.language);
-    }, [i18n.language]);
-
     return (
         <div 
             className={styles.container}
             style={{ display: props.menuOpen ? 'none' : 'inherit' }}    
         >
-            Gift A Meal Page
+
+            <div className={styles.header}>
+                <img
+                    src={gam_hero}
+                    className={styles.hero}
+                    alt="meal overlay illustration"
+                />
+                <div className={styles.main}>
+                    <div>
+                        <h3 style={{ fontWeight: 'bolder' }}>Gift a Meal</h3>
+                        <p>Double the impact of your donation by gifting meals from our merchants to local organizations that will distribute your gifted meals to our community in need.</p>
+                    </div>
+                </div>
+                <div className={styles.sub}>
+                    <div className={styles.instructions}>
+                        {
+                            [
+                                ['Donate to Gift-a-Meal', gam_1],
+                                ['100% of donations still go directly to our merchants', gam_2],
+                                ['Vouchers are donated to our community parnters', gam_3],
+                                ['Partners distribute to individuals in need', gam_4],
+                            ].map(([text, icon], idx) => generateStep(idx + 1, text, icon))
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <br />
+            <button className={styles.backButton}>Back to merchants</button>
+
+            <h5 className={styles.campaignHeader}>Active Gift-a-Meal</h5>
 
             <CampaignListItem />
         </div>
@@ -53,3 +59,13 @@ const GiftAMealPage = (props: Props) => {
 }
 
 export default GiftAMealPage
+
+const generateStep = (n, text, icon) => {
+    return <div className={styles.step} key={n} >
+        <img src={icon} alt="icon" />
+        <div className={styles.stepText}>
+            <p>Step {n}</p>
+            <p>{text}</p>
+        </div>
+    </div>
+}
