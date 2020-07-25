@@ -47,6 +47,20 @@ const MerchantGiftCards = () => {
                 <h1>Voucher Tracker</h1>
                 <h2>Melonpanna Tea and Shot</h2>
             </div>
+            <div className={styles.metadataHeader}>
+                <div className={styles.metadataBlock}>
+                    <h1>Last Updated</h1>
+                    <h2>2020-07-09</h2>
+                </div>
+                <div className={styles.metadataBlock}>
+                    <h1>Active Vouchers</h1>
+                    <h2>2</h2>
+                </div>
+                <div className={styles.metadataBlock}>
+                    <h1>Total Balance</h1>
+                    <h2>$100</h2>
+                </div>
+            </div>
             <div>
             <p>Hello World!</p>
             {giftCards &&
