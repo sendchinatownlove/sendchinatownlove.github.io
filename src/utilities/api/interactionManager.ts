@@ -118,6 +118,12 @@ export const updateVoucher = async (id: string, amount: number) =>
     .then((res) => res)
     .catch((err) => err);
 
+export const getMerchantGiftCards = async (seller_id: string, secret: string) =>
+  axios
+    .get(sellers + seller_id + '/gift_cards/' + secret)
+    .then((res) => res)
+    .catch((err) => err)
+
 function localeFromLanguage(language?: string) {
   switch (language) {
     case 'cn':

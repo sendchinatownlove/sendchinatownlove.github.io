@@ -34,6 +34,9 @@ const ErrorPage = lazy(() => import('../404Page'));
 const VoucherRedemptionPage = lazy(() =>
   import('../../pages/VoucherRedemption')
 );
+const MerchantGiftCardsPage = lazy(() =>
+  import('../../pages/MerchantGiftCards')
+);
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
@@ -83,6 +86,9 @@ const App = () => {
             <VoucherProvider>
               <VoucherRedemptionPage />
             </VoucherProvider>
+          </Route>
+          <Route path="/portal">
+              <MerchantGiftCardsPage />
           </Route>
           <Route path='/gift-a-meal' component={() => {
               window.location.href = 'https://www.gofundme.com/f/gift-a-meal';
