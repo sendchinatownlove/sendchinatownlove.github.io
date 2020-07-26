@@ -236,3 +236,20 @@ h3 {
     @include modal-input;
   }
 }
+
+.filterable-table-container {
+  font-family: "Open Sans";
+
+  .header-row {
+    display: grid;
+    grid-template-columns: 80vw 1vw 10vw;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0px;
+  }
+
+  input.filter-input {
+    width: 60vw;
+    height: 50px;
+  }
+}

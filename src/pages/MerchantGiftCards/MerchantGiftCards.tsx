@@ -3,17 +3,29 @@ import { useHistory } from 'react-router-dom';
 import { getMerchantGiftCards } from '../../utilities/api/interactionManager';
 import Loader from '../../components/Loader/Loader';
 import styles from './styles.module.scss'
+import { sellers } from '../../utilities/api/endpoints'
+import Pagination from 'react-bootstrap/Pagination'
+const FilterableTable = require('react-filterable-table');
 
 const MerchantGiftCards = () => {
   const params = useHistory();
+  let urlParams = params.location.pathname.match(/\/[^/]+/g) as string[];
+  urlParams = urlParams.map((param) => param.replace('/', ''));
+
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [giftCards, setGiftCards] = useState<any | null>();
 
+  const fields = [
+    { name: 'seller_gift_card_id', displayName: 'Voucher ID', inputFilterable: true, sortable: true },
+    { name: 'value', displayName: 'Amount', inputFilterable: true, sortable: true },
+    { name: 'email', displayName: 'Email', inputFilterable: true, sortable: true },
+    { name: 'created_at', displayName: 'Date Created', inputFilterable: true, sortable: true },
+    { name: 'expiration', displayName: 'Expiration', inputFilterable: true, sortable: true }
+  ]
+
   const fetchData = async () => {
     try {
-      let urlParams = params.location.pathname.match(/\/[^/]+/g) as string[];
-      urlParams = urlParams.map((param) => param.replace('/', ''));
       const { data } = await getMerchantGiftCards(urlParams[1], urlParams[2]);
 
       if (!data) {
@@ -61,11 +73,18 @@ const MerchantGiftCards = () => {
                     <h2>$100</h2>
                 </div>
             </div>
-            <div>
-            <p>Hello World!</p>
-            {giftCards &&
-                giftCards.map((card) => <p>{card.seller_gift_card_id}</p>)}
-            </div>
+            <FilterableTable
+                namespace="Gift Cards"
+                initialSort="seller_gift_card_id"
+                // data={giftCards}
+                dataEndpoint={sellers + urlParams[1] + '/gift_cards/' + urlParams[2]}
+                fields={fields}
+                noRecordsMessage="There are no people to display"
+                noFilteredRecordsMessage="No people match your filters!"
+                topPagerVisible={false}
+                pageSize={20}
+                pageSizes={null}
+            />
         </>
       )}
     </>
