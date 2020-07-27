@@ -13,6 +13,10 @@ const MerchantGiftCards = () => {
   const params = useHistory();
   let urlParams = params.location.pathname.match(/\/[^/]+/g) as string[];
   urlParams = urlParams.map((param) => param.replace('/', ''));
+  const metadata = {
+    sellerId: urlParams[0],
+    secretId: urlParams[2],
+  };
 
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -68,11 +72,13 @@ const MerchantGiftCards = () => {
 
   const fetchData = async () => {
     try {
-      const { data } = await getMerchantGiftCards(urlParams[1], urlParams[2]);
-      const seller = (await getSeller(urlParams[1])).data;
+      const giftCardData = (
+        await getMerchantGiftCards(metadata.sellerId, metadata.secretId)
+      ).data;
+      const sellerData = (await getSeller(metadata.sellerId)).data;
 
-      setGiftCards(data);
-      setSeller(seller);
+      setGiftCards(giftCardData);
+      setSeller(sellerData);
     } catch {
       setError(true);
     }

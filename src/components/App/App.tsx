@@ -87,7 +87,7 @@ const App = () => {
               <VoucherRedemptionPage />
             </VoucherProvider>
           </Route>
-          <Route path="/portal">
+          <Route path="/:seller_id/dashboard/:secret_id">
               <MerchantGiftCardsPage />
           </Route>
           <Route path='/gift-a-meal' component={() => {
