@@ -99,5 +99,10 @@
     "header": "Not sure who to donate to?",
     "description": "To support every merchant on this page, contribute to our donation pool. We distribute funds evenly across all businesses.",
     "button": "DONATE"
+  },
+  "gamBox": {
+    "header": "Learn about Gift-a-Meal",
+    "description": "Double the impact of your donation by gifting meals from our merchants to local organizations that will distribute your gifted meals to our community in need.",
+    "button": "GIFT MEAL"
   }
 }
