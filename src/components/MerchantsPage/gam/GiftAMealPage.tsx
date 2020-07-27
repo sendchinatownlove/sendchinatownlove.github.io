@@ -53,12 +53,12 @@ const GiftAMealPage = (props: Props) => {
 
             <h5 className={styles.campaignHeader}>Active Gift-a-Meal</h5>
 
-            {/* <CampaignListItem />
-            <CampaignListItem /> */}
+            <CampaignListItem />
+            <CampaignListItem />
 
             <h5 className={styles.campaignHeader}>Past Gift-a-Meal</h5>
 
-            {/* <CampaignListItem /> */}
+            <CampaignListItem />
     
         </div>
     )

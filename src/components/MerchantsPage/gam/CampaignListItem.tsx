@@ -11,59 +11,59 @@ import melonpannaLogo from '../images/melonpanna-logo.png';
 
 // In the final implementation, campaign will be object declared in types.ts
 // const CampaignListItem = (campaign: String) => {
-  const CampaignListItem = () => {
-    return (
-        <Container>
-            <ColumnContainer>
+const CampaignListItem = () => {
+  return (
+    <Container>
+        <ColumnContainer>
+            <img
+                src={campaignDefaultImage}
+                alt="campaign_image"
+            />
+        </ColumnContainer>
+        <ColumnContainer>
+            <Location>
+                Sunset Park, Brooklyn
+            </Location>
+            <Name>
+                Melonpanna Tea & Shot x APEX for the Youth
+            </Name>
+            <Description>
+                Partnering with APEX for the Youth, we hope to raise 200 meals for underserved Asian and immigrant youth from low-income families.
+            </Description>
+            <TimeStamp>
+                Last contribution made 1h ago
+            </TimeStamp>
+            <ProgressBar
+              amountRaised={100}
+              targetAmount={1000}
+              progressBarColor={'#CF6E8A'}
+              numContributions={20}
+              numDonations={10}
+              numGiftCards={10}
+              donationAmount={50}
+              giftCardAmount={50}
+            />
+        </ColumnContainer>
+        <ColumnContainer>
+            <ImagesContainer>
                 <img
-                    src={campaignDefaultImage}
-                    alt="campaign_image"
+                    src={apexLogo}
+                    alt="merchant_logo"
                 />
-            </ColumnContainer>
-            <ColumnContainer>
-                <Location>
-                    Sunset Park, Brooklyn
-                </Location>
-                <Name>
-                    Melonpanna Tea & Shot x APEX for the Youth
-                </Name>
-                <Description>
-                    Partnering with APEX for the Youth, we hope to raise 200 meals for underserved Asian and immigrant youth from low-income families.
-                </Description>
-                <TimeStamp>
-                    Last contribution made 1h ago
-                </TimeStamp>
-                <ProgressBar
-                  amountRaised={100}
-                  targetAmount={1000}
-                  progressBarColor={'#CF6E8A'}
-                  numContributions={20}
-                  numDonations={10}
-                  numGiftCards={10}
-                  donationAmount={50}
-                  giftCardAmount={50}
+                <img
+                    src={melonpannaLogo}
+                    alt="distributor_logo"
                 />
-            </ColumnContainer>
-            <ColumnContainer>
-                <ImagesContainer>
-                    <img
-                        src={apexLogo}
-                        alt="merchant_logo"
-                    />
-                    <img
-                        src={melonpannaLogo}
-                        alt="distributor_logo"
-                    />
-                </ImagesContainer>
-                <Button className='button--filled'>
-                    Visit merchant
-                    </Button>
-                <Button className={'button--outlined'}>
-                    Gift a meal
-                    </Button>
-            </ColumnContainer>
-        </Container>
-    );
+            </ImagesContainer>
+            <Button className='button--filled'>
+                Visit merchant
+                </Button>
+            <Button className={'button--outlined'}>
+                Gift a meal
+                </Button>
+        </ColumnContainer>
+    </Container>
+  );
 };
 
 export default CampaignListItem;
@@ -74,10 +74,6 @@ const Container = styled.div`
   max-height: 350px;
   margin: 35px 0 55px;
   justify-content: space-between;
-
-  @media (max-width: 1350px) {
-    margin: 35px 35px 55px;
-  }
 
   @media (${tabletScreens}) {
     max-height: 300px;
