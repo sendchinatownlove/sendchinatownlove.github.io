@@ -30,7 +30,7 @@ history.listen((location) => {
 // lazy imports
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
-const GiftAMealPage = lazy(() => import('../MerchantsPage/gam/GiftAMealPage'))
+const GiftAMealPage = lazy(() => import('../MerchantsPage/gam/GiftAMealPage'));
 const ErrorPage = lazy(() => import('../404Page'));
 const VoucherRedemptionPage = lazy(() =>
   import('../../pages/VoucherRedemption')
@@ -59,7 +59,7 @@ const App = () => {
         component = <SellerPage menuOpen={menuOpen} />;
         break;
       case 'giftameal':
-        component = <GiftAMealPage menuOpen={menuOpen} />
+        component = <GiftAMealPage menuOpen={menuOpen} />;
         break;
       default:
         component = <ErrorPage menuOpen={menuOpen} />;
@@ -88,10 +88,13 @@ const App = () => {
               <VoucherRedemptionPage />
             </VoucherProvider>
           </Route>
-          <Route path='/gift-a-meal' component={() => {
+          <Route
+            path="/gift-a-meal"
+            component={() => {
               window.location.href = 'https://www.gofundme.com/f/gift-a-meal';
               return null;
-          }}/>
+            }}
+          />
           <Route path="/gift-a-meal-page">{returnComponent('giftameal')}</Route>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>

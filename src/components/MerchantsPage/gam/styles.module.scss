@@ -26,20 +26,29 @@
   align-items: center;
   z-index: 2;
 
-  & > div { max-width: 385px; }
+  & > div {
+    max-width: 385px;
+  }
 
-  p { font-size: 18px; }
+  p {
+    font-size: 18px;
+  }
 
   @include for-phone-only {
     align-items: flex-start;
 
-    & > div { max-width: 264px; }
+    & > div {
+      max-width: 264px;
+    }
 
-    h3 { font-size: 33px; }
-    
-    p { font-size: 15px; }
+    h3 {
+      font-size: 33px;
+    }
+
+    p {
+      font-size: 15px;
+    }
   }
-
 }
 
 .hero {
@@ -106,12 +115,13 @@
   }
 
   @media (max-width: 900px) {
-    img { width: 50px }
+    img {
+      width: 50px;
+    }
   }
 }
 
 .stepText {
-  
   p {
     color: white;
     margin: 0;
@@ -126,7 +136,7 @@
     text-transform: uppercase;
   }
 
-  :last-child{
+  :last-child {
     font-weight: 600;
   }
 }
@@ -147,7 +157,7 @@
   background-color: transparent;
 
   &:hover {
-    color: $standard-red
+    color: $standard-red;
   }
 
   @include for-phone-only {
