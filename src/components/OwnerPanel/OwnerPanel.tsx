@@ -6,16 +6,9 @@ import { BrowsePageSeller } from '../../utilities/api/types';
 import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
-import ClipboardIcon from 'react-clipboard-icon';
-import CopyToClipboard from 'react-copy-to-clipboard';
-import { SocialIcon } from 'react-social-icons';
-import {
-  EmailShareButton,
-  FacebookShareButton,
-  TwitterShareButton,
-} from 'react-share';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
+import { useTranslation } from 'react-i18next';
 import ReactPixel from 'react-facebook-pixel';
 
 interface Props {
@@ -30,6 +23,8 @@ interface State {
 const ModalBox: any = Modal;
 
 const OwnerPanel = ({ seller }: Props) => {
+  const { t } = useTranslation();
+
   const dispatch = useModalPaymentDispatch();
   const [purchaseType, setPurchaseType] = useState('');
 
@@ -38,17 +33,17 @@ const OwnerPanel = ({ seller }: Props) => {
     setPurchaseType(event.target.value);
   };
 
-  const donationClickHander = (event: any) => {
+  const donationClickHandler = (event: any) => {
     ReactPixel.trackCustom('DonationButtonClick', {});
     showModal(event);
   };
 
-  const voucherClickHander = (event: any) => {
+  const voucherClickHandler = (event: any) => {
     ReactPixel.trackCustom('VoucherButtonClick', {});
     showModal(event);
   };
 
-  const giftMealClickHander = (event: any) => {
+  const giftMealClickHandler = (event: any) => {
     ReactPixel.trackCustom('GiftMealButtonClick', {});
     showModal(event);
   };
@@ -65,22 +60,7 @@ const OwnerPanel = ({ seller }: Props) => {
     return extraInfo[current] != null;
   });
 
-  const location = window.location.href;
-  const facebookQuote = 'Help raise money for ' + seller.name;
-  const socialIconBackgroundColor = '#a9182e';
-  const socialIconDimensions = { height: 50, width: 50 };
   const costPerMealDollars = seller.cost_per_meal / 100;
-
-  const clipboardStyle = {
-    fill: 'white',
-    display: 'inline',
-    borderRadius: '50%',
-    backgroundColor: '#a9182e',
-    border: '1px solid #a9182e',
-    padding: '0px 8px 0px 16px',
-    position: 'relative',
-    top: '20px',
-  };
 
   return (
     <Container>
@@ -89,8 +69,8 @@ const OwnerPanel = ({ seller }: Props) => {
           className={styles.ownerImage}
           src={
             seller?.owner_image_url
-              ? process.env.REACT_APP_BASE_URL + seller?.owner_image_url
-              : defaultOwnerImage
+              ?? seller?.logo_image_url
+              ?? defaultOwnerImage
           }
           alt={seller.owner_name}
         />
@@ -119,25 +99,25 @@ const OwnerPanel = ({ seller }: Props) => {
               seller.cost_per_meal && styles.moreThanTwoButtons,
               'button--filled'
             )}
-            onClick={donationClickHander}
+            onClick={donationClickHandler}
           >
-            Donation
+            {t('ownerPanel.donation')}
           </button>
         )}
         {seller.sell_gift_cards && (
           <button
             value="gift_card"
             className={classnames(styles.button, 'button--outlined')}
-            onClick={voucherClickHander}
+            onClick={voucherClickHandler}
           >
-            Voucher
+            {t('ownerPanel.voucher')}
           </button>
         )}
         {seller.cost_per_meal !== null && (
           <button
             value="buy_meal"
             className={classnames(styles.button, 'button--outlined')}
-            onClick={giftMealClickHander}
+            onClick={giftMealClickHandler}
           >
             Gift a meal
           </button>
@@ -150,10 +130,10 @@ const OwnerPanel = ({ seller }: Props) => {
               return (
                 <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
-                    {`${current}: `}
+                    {`${t('ownerPanel.extraInfo.' + current)}: `}
                     <a
                       className={styles.extraInfoValue}
-                      href={`http://${extraInfo[current]}`}
+                      href={`${extraInfo[current]}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -162,17 +142,18 @@ const OwnerPanel = ({ seller }: Props) => {
                   </p>
                 </React.Fragment>
               );
-            } else
+            } else {
               return (
                 <React.Fragment key={current}>
                   <p key={current} className={styles.extraInfoKey}>
-                    {`${current}: `}
+                    {`${t('ownerPanel.extraInfo.' + current)}: `}
                     <span className={styles.extraInfoValue}>
                       {extraInfo[current]}
                     </span>
                   </p>
                 </React.Fragment>
               );
+            }
           })}
         </div>
       ) : (
@@ -184,53 +165,8 @@ const OwnerPanel = ({ seller }: Props) => {
         sellerId={seller.seller_id}
         sellerName={seller.name}
         costPerMeal={costPerMealDollars}
+        nonProfitLocationId={seller.non_profit_location_id}
       />
-      {
-        <div className={styles.socialContainer}>
-          <div className={styles.socialIconContainer}>
-            <FacebookShareButton
-              url={location}
-              quote={facebookQuote}
-              className="share"
-            >
-              <SocialIcon
-                network="facebook"
-                bgColor={socialIconBackgroundColor}
-                style={socialIconDimensions}
-              />
-            </FacebookShareButton>
-          </div>
-
-          <div className={styles.socialIconContainer}>
-            <TwitterShareButton url={location} className="share">
-              <SocialIcon
-                network="twitter"
-                bgColor={socialIconBackgroundColor}
-                style={socialIconDimensions}
-              />
-            </TwitterShareButton>
-          </div>
-
-          <div className={styles.socialIconContainer}>
-            <EmailShareButton url={location} className="share">
-              <SocialIcon
-                network="email"
-                bgColor={socialIconBackgroundColor}
-                style={socialIconDimensions}
-              />
-            </EmailShareButton>
-          </div>
-
-          <div className={styles.socialIconContainer}>
-            <CopyToClipboard text={location}>
-              <ClipboardIcon
-                size={socialIconDimensions.height}
-                style={clipboardStyle}
-              />
-            </CopyToClipboard>
-          </div>
-        </div>
-      }
 
       <div className={styles.mapsContainer}>
         {/* need to put in google API */}

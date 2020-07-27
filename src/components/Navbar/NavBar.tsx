@@ -29,7 +29,7 @@ const NavBar = (props: Props) => {
   };
 
   const handleResize = () => {
-    if (window.innerWidth < 767 && !props.menuOpen) {
+    if (window.innerWidth < 1025 && !props.menuOpen) {
       setHamburgerOpen(true);
     } else {
       setHamburgerOpen(false);
@@ -43,7 +43,7 @@ const NavBar = (props: Props) => {
   );
 
   useEffect(() => {
-    if (window.innerWidth < 767) {
+    if (window.innerWidth < 1025) {
       setHamburgerOpen(true);
     } else {
       setHamburgerOpen(false);
@@ -63,7 +63,7 @@ const NavBar = (props: Props) => {
           <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
             ENG
           </LanguageButton>
-          <span>|</span>
+          <span>|&nbsp;</span>
           <LanguageButton onClick={(e) => changeLanguage(e, 'cn')}>
             中文
           </LanguageButton>
@@ -91,6 +91,12 @@ const NavBar = (props: Props) => {
         </ReactNavLink>
         <NavLink
           compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/about.html"
+          i18nText="OUR STORY"
+          altText="OUR STORY"
+        />
+        <NavLink
+          compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/resource-center.html"
           i18nText="RESOURCES"
           altText="RESOURCES"
@@ -104,7 +110,6 @@ const NavBar = (props: Props) => {
       </NavLinksContainer>
     );
   };
-
   return (
     <HeaderContainer>
       <Logo />
@@ -127,6 +132,12 @@ const NavBar = (props: Props) => {
           </ReactNavLink>
           <NavLink
             compact={hamburgerOpen.toString()}
+            href="https://www.sendchinatownlove.com/about.html"
+            i18nText="OUR STORY"
+            altText="OUR STORY"
+          />
+          <NavLink
+            compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/resource-center.html"
             i18nText="RESOURCES"
             altText="RESOURCES"
@@ -141,7 +152,7 @@ const NavBar = (props: Props) => {
             <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
               ENG
             </LanguageButton>
-            <span>|</span>
+            <span>|&nbsp;</span>
             <LanguageButton onClick={(e) => changeLanguage(e, 'cn')}>
               中文
             </LanguageButton>
@@ -183,7 +194,7 @@ const NavLinksContainer = styled.div`
     z-index: 10;
   `
       : `
-    max-width: 600px;
+    max-width: 620px;
     justify-content: flex-end;
   `}
 `;

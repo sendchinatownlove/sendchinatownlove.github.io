@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { times } from 'lodash/fp';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
@@ -7,11 +7,7 @@ import { useTranslation } from 'react-i18next';
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 import { SquareErrors, hasKey } from '../../consts';
-import {
-  makeSquarePayment,
-  SquareLineItems,
-  Buyer,
-} from '../../utilities/api';
+import { makeSquarePayment, SquareLineItems, Buyer } from '../../utilities/api';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
@@ -28,6 +24,7 @@ type Props = {
   sellerName: string;
   idempotencyKey: string;
   costPerMeal: number;
+  nonProfitLocationId?: string;
 };
 
 type ErrorMessage = {
@@ -41,6 +38,7 @@ const SquareModal = ({
   sellerName,
   idempotencyKey,
   costPerMeal,
+  nonProfitLocationId,
 }: Props) => {
   const { t } = useTranslation();
   const { amount } = useModalPaymentState();
@@ -51,6 +49,7 @@ const SquareModal = ({
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
+  const [canSubmit, setCanSubmit] = useState(false);
 
   const checkTermsAgreement = () => setTermsChecked(!isTermsChecked);
   const checkSubscriptionAgreement = () =>
@@ -69,21 +68,26 @@ const SquareModal = ({
       return;
     }
 
-    // 'buy_meal' is still respresented as a gift card when calling the API
-    const payment: SquareLineItems = purchaseType === 'buy_meal' ? times(() => ({
-      amount: Number(costPerMeal) * 100,
-      currency: 'usd',
-      item_type: 'gift_card',
-      quantity: 1,
-    }), numberOfMeals)
-      : [
-        {
-          amount: Number(amount) * 100,
-          currency: 'usd',
-          item_type: purchaseType,
-          quantity: 1,
-        }
-      ]
+    // 'buy_meal' is still represented as a gift card when calling the API
+    const payment: SquareLineItems =
+      purchaseType === 'buy_meal'
+        ? times(
+            () => ({
+              amount: Number(costPerMeal) * 100,
+              currency: 'usd',
+              item_type: 'gift_card',
+              quantity: 1,
+            }),
+            numberOfMeals
+          )
+        : [
+            {
+              amount: Number(amount) * 100,
+              currency: 'usd',
+              item_type: purchaseType,
+              quantity: 1,
+            },
+          ];
 
     const is_distribution = purchaseType === 'buy_meal';
     const buyer: Buyer = {
@@ -94,6 +98,7 @@ const SquareModal = ({
       is_subscribed: isSubscriptionChecked,
     };
 
+    setCanSubmit(false);
     return makeSquarePayment(nonce, sellerId, payment, buyer, is_distribution)
       .then((res) => {
         if (res.status === 200) {
@@ -125,12 +130,17 @@ const SquareModal = ({
       });
   };
 
-  const applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID
-    ? process.env.REACT_APP_SQUARE_APPLICATION_ID
-    : '';
-  const locationId = process.env.REACT_APP_SQUARE_LOCATION_ID
-    ? process.env.REACT_APP_SQUARE_LOCATION_ID
-    : '';
+  let applicationId, locationId;
+  if (
+    purchaseType === 'buy_meal' &&
+    nonProfitLocationId === process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID
+  ) {
+    applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
+    locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
+  } else {
+    applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';
+    locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
+  }
 
   const purchaseTypePhrase = (shouldLowerCase) => {
     switch (purchaseType) {
@@ -145,11 +155,14 @@ const SquareModal = ({
     }
   };
 
-  const canSubmit =
-    isTermsChecked &&
-    name.length > 0 &&
-    email.length > 0 &&
-    EMAIL_REGEX.test(email);
+  useEffect(() => {
+    setCanSubmit(
+      isTermsChecked &&
+        name.length > 0 &&
+        email.length > 0 &&
+        EMAIL_REGEX.test(email)
+    );
+  }, [isTermsChecked, name, email]);
 
   const setDisclaimerLanguage = (type: string) => {
     if (sellerId === 'send-chinatown-love') type = 'donation-pool';
@@ -331,8 +344,8 @@ const CheckboxContainer = styled.label`
     text-decoration: underline;
   }
 
-  > span { 
-    padding: 9px 9px 9px 0px
+  > span {
+    padding: 9px 9px 9px 0px;
   }
 `;
 
@@ -361,7 +374,6 @@ const SquareFormContainer = styled.div`
   h3 {
     font-size: 24px;
   }
-  
 `;
 
 const Header = styled.div`

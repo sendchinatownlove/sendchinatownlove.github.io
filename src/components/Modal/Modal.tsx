@@ -21,6 +21,7 @@ export interface Props {
   sellerId: string;
   sellerName: string;
   costPerMeal: number;
+  nonProfitLocationId?: string;
 }
 
 export interface ModalProps {

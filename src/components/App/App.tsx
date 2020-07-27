@@ -5,8 +5,10 @@ import ReactGA from 'react-ga';
 import Loader from '../Loader';
 import Header from '../Navbar';
 import Footer from '../Footer';
+import ScrollToTop from '../ScrollToTop';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import ReactPixel from 'react-facebook-pixel';
+import { VoucherProvider } from '../../utilities/hooks/VoucherContext/context';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
@@ -29,6 +31,9 @@ history.listen((location) => {
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const ErrorPage = lazy(() => import('../404Page'));
+const VoucherRedemptionPage = lazy(() =>
+  import('../../pages/VoucherRedemption')
+);
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
@@ -60,6 +65,7 @@ const App = () => {
     return (
       <>
         <ModalPaymentProvider>
+          <ScrollToTop />
           <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
           {component}
           <Footer menuOpen={menuOpen} />
@@ -73,6 +79,15 @@ const App = () => {
       <Suspense fallback={<Loader isPage={true} />}>
         <Switch>
           <Route path="/all">{returnComponent('all')}</Route>
+          <Route path="/voucher/:id">
+            <VoucherProvider>
+              <VoucherRedemptionPage />
+            </VoucherProvider>
+          </Route>
+          <Route path='/gift-a-meal' component={() => {
+              window.location.href = 'https://www.gofundme.com/f/gift-a-meal';
+              return null;
+          }}/>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>
           <Route path="/:id#story">{returnComponent('seller')}</Route>

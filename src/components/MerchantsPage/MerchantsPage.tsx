@@ -6,9 +6,9 @@ import MerchantCard from './MerchantCard';
 import DescriptionBox from './DescriptionBox';
 import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
-import nycMapBackground from './images/nyc_3.png';
 import { LoaderFillerContainer } from '../Loader';
 import DonationPoolBox from './DonationPool';
+import { getWebsiteImages } from '../../utilities/general/StoreImages';
 import { useTranslation } from 'react-i18next';
 import ReactPixel from 'react-facebook-pixel';
 
@@ -18,7 +18,8 @@ interface Props {
 
 ReactPixel.trackCustom('MerchantsPageView', {});
 const MerchantsPage = (props: Props) => {
-  const { t } = useTranslation();
+  const websiteImages = getWebsiteImages();
+  const { t, i18n } = useTranslation();
 
   const flyerZip: string =
     process.env.PUBLIC_URL + './assets/send-chinatown-love-flyers.zip';
@@ -28,8 +29,8 @@ const MerchantsPage = (props: Props) => {
   const [totalDonations, setDonations] = useState(0);
   const [totalGiftCards, setGiftCards] = useState(0);
 
-  const fetchData = async () => {
-    const { data } = await getSellers();
+  const fetchData = async (lang?) => {
+    const { data } = await getSellers(lang);
 
     const contributions = data.reduce(
       (total: any, store: any) => {
@@ -48,8 +49,8 @@ const MerchantsPage = (props: Props) => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(i18n.language);
+  }, [i18n.language]);
 
   // TODO: replace this filter with a backend API call
   const filterStoreType = (type: any) => {
@@ -57,7 +58,7 @@ const MerchantsPage = (props: Props) => {
       setFilter(sellers);
     } else {
       const result = sellers.filter(
-        (store: any) => store.cuisine_name === type
+        (store: any) => store!.locations.length > 0 && store!.locations[0].city === type
       );
       setFilter(result);
     }
@@ -72,7 +73,7 @@ const MerchantsPage = (props: Props) => {
         <>
           <div className={styles.overlayContainer}>
             <img
-              src={nycMapBackground}
+              src={websiteImages.merchantHero}
               className={styles.nycMap}
               alt="NYC MAP"
             />

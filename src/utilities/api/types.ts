@@ -25,6 +25,22 @@ export type Location = {
   phone_number: string;
 };
 
+export type GiftCardDetails = {
+  gift_card_id: string;
+  receipt_id: string;
+  expiration: string;
+  created_at: string;
+  updated_at: string;
+  seller_gift_card_id: string;
+};
+
+export type GiftCardAmounts = {
+  value: number;
+  gift_card_detail_id: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Buyer = {
   name: string;
   email: string;
@@ -75,4 +91,7 @@ export type BrowsePageSeller = {
   website_url: string;
   menu_url: string;
   cost_per_meal: number;
+  gallery_image_urls: string[];
+  non_profit_location_id: string;
+  logo_image_url: string;
 };

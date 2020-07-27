@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   totalDonations: number;
@@ -7,6 +8,8 @@ interface Props {
 }
 
 const ContributionBar = ({ totalDonations, totalGiftCards }: Props) => {
+  const { t } = useTranslation();
+
   const progressWidth = (raised: number, total: number) => {
     if (raised < total) return (raised / total) * 100;
     return 100;
@@ -14,7 +17,10 @@ const ContributionBar = ({ totalDonations, totalGiftCards }: Props) => {
 
   return (
     <Container>
-      <Heading>Total Raised</Heading>
+      <Heading>
+        {t('contributionBar.header')}: $
+        {Math.floor((totalDonations + totalGiftCards) / 100).toLocaleString()}
+      </Heading>
       <Contributions
         style={{
           background: `linear-gradient(-45deg, #dd678a ${progressWidth(
@@ -25,18 +31,15 @@ const ContributionBar = ({ totalDonations, totalGiftCards }: Props) => {
       />
       <TextContainer>
         <span>
-          VOUCHERS:{' '}
+          {t('contributionBar.vouchers')}:{' '}
           <b>${(Math.floor(totalGiftCards) / 100).toLocaleString()}</b>
         </span>
         <span>
-          DONATIONS:{' '}
+          {t('contributionBar.donations')}:{' '}
           <b>${(Math.floor(totalDonations) / 100).toLocaleString()}</b>
         </span>
       </TextContainer>
-      <p>
-        100% of all proceeds go to the businesses, and we cover the credit card
-        processing fees.
-      </p>
+      <p>{t('contributionBar.footer')}</p>
     </Container>
   );
 };
