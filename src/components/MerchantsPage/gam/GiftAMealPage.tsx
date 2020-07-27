@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 import CampaignListItem from './CampaignListItem'
 
-import gam_hero from '../images/gam_hero.png'
-import gam_1 from '../images/gam_1.svg'
-import gam_2 from '../images/gam_2.svg'
-import gam_3 from '../images/gam_3.svg'
-import gam_4 from '../images/gam_4.svg'
+import illustrated_flatlay_hero from '../images/illustrated_flatlay_hero.png'
+import gam_icon_step1 from '../images/gam_icon_step1.svg'
+import gam_icon_step2 from '../images/gam_icon_step2.svg'
+import gam_icon_step3 from '../images/gam_icon_step3.svg'
+import gam_icon_step4 from '../images/gam_icon_step4.svg'
 
 interface Props {
     menuOpen: boolean;
@@ -24,7 +24,7 @@ const GiftAMealPage = (props: Props) => {
 
             <div className={styles.header}>
                 <img
-                    src={gam_hero}
+                    src={illustrated_flatlay_hero}
                     className={styles.hero}
                     alt="meal overlay illustration"
                 />
@@ -38,10 +38,10 @@ const GiftAMealPage = (props: Props) => {
                     <div className={styles.instructions}>
                         {
                             [
-                                ['Donate to Gift-a-Meal', gam_1],
-                                ['100% of donations still go directly to our merchants', gam_2],
-                                ['Vouchers are donated to our community parnters', gam_3],
-                                ['Partners distribute to individuals in need', gam_4],
+                                ['Donate to Gift-a-Meal', gam_icon_step1],
+                                ['100% of donations still go directly to our merchants', gam_icon_step2],
+                                ['Vouchers are donated to our community parnters', gam_icon_step3],
+                                ['Partners distribute to individuals in need', gam_icon_step4],
                             ].map(([text, icon], idx) => generateStep(idx + 1, text, icon))
                         }
                     </div>
