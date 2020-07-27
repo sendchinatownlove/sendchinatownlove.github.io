@@ -6,9 +6,11 @@
   max-width: 1250px;
   margin: 0 auto;
   font-size: 14px;
+  padding: 0 35px;
 
   @include for-phone-only {
     overflow-x: hidden;
+    padding: 0 20px;
   }
 }
 
@@ -24,13 +26,18 @@
   align-items: center;
   z-index: 2;
 
-  & > div {
-    max-width: 385px;
+  & > div { max-width: 385px; }
+
+  p { font-size: 18px; }
+
+  @include for-phone-only {
+    align-items: flex-start;
+
+    & > div { max-width: 264px; }
+    h3 { font-size: 33px; }
+    p { font-size: 15px; }
   }
 
-  p {
-    font-size: 18px;
-  }
 }
 
 .hero {
@@ -46,6 +53,10 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+
+  @include for-phone-only {
+    width: 185vw;
+  }
 }
 
 .sub {
@@ -53,6 +64,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 35px;
+
+  @media (max-width: 900px) {
+    padding: 0 20px;
+  }
 
   // to break out of the parent container
   position: relative;
@@ -68,13 +84,28 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 20px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat((2, 1fr));
+    grid-row-gap: 15px;
+    justify-items: center;
+  }
 }
 
 .step {
   display: grid;
   grid-template-columns: min-content 1fr;
-  grid-column-gap: 20px;
+  grid-column-gap: 10px;
   max-width: 225px;
+
+  @include for-tablet-portrait-up {
+    min-width: 225px;
+  }
+
+  @media (max-width: 900px) {
+    img { width: 50px }
+  }
 }
 
 .stepText {
@@ -83,6 +114,10 @@
     color: white;
     margin: 0;
     font-size: 15px;
+
+    @media (max-width: 900px) {
+      font-size: 11px;
+    }
   }
 
   :first-child {
@@ -112,6 +147,11 @@
   &:hover {
     color: $standard-red
   }
+
+  @include for-phone-only {
+    font-size: 14px;
+    padding-right: 0;
+  }
 }
 
 .campaignHeader {
@@ -120,4 +160,8 @@
   width: 100%;
   border-bottom: 1px solid #e5e5e5;
   padding-bottom: 50px;
+
+  @include for-phone-only {
+    font-size: 16px;
+  }
 }
