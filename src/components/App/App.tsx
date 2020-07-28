@@ -34,8 +34,8 @@ const ErrorPage = lazy(() => import('../404Page'));
 const VoucherRedemptionPage = lazy(() =>
   import('../../pages/VoucherRedemption')
 );
-const MerchantGiftCardsPage = lazy(() =>
-  import('../../pages/MerchantGiftCards')
+const MerchantVoucherDashboard = lazy(() =>
+  import('../../pages/MerchantVoucherDashboard')
 );
 
 const options = {
@@ -88,7 +88,7 @@ const App = () => {
             </VoucherProvider>
           </Route>
           <Route path="/:seller_id/dashboard/:secret_id">
-              <MerchantGiftCardsPage />
+              <MerchantVoucherDashboard />
           </Route>
           <Route path='/gift-a-meal' component={() => {
               window.location.href = 'https://www.gofundme.com/f/gift-a-meal';

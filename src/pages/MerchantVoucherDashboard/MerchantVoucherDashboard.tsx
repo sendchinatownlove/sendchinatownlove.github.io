@@ -9,7 +9,7 @@ import styles from './styles.module.scss';
 import ErrorPage from '../../components/404Page';
 const FilterableTable = require('react-filterable-table');
 
-const MerchantGiftCards = () => {
+const MerchantVoucherDashboard = () => {
   const params = useHistory();
   let urlParams = params.location.pathname.match(/\/[^/]+/g) as string[];
   urlParams = urlParams.map((param) => param.replace('/', ''));
@@ -142,4 +142,4 @@ const MerchantGiftCards = () => {
   );
 };
 
-export default MerchantGiftCards;
+export default MerchantVoucherDashboard;
