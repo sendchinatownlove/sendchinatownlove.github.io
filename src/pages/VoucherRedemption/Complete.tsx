@@ -2,7 +2,7 @@ import React from 'react';
 import {
   useVoucherState,
   useVoucherDispatch,
-} from '../../utilities/hooks/VoucherContext/context';
+} from '../../utilities/hooks/VoucherContext';
 import {
   SET_AMOUNT,
   SET_VIEW,
@@ -18,8 +18,8 @@ import {
 import StoreBanner from './StoreBanner';
 
 const Amount = () => {
-  const { amount, voucher } = useVoucherState();
-  const dispatch = useVoucherDispatch();
+  const { amount, voucher } = useVoucherState(null);
+  const dispatch = useVoucherDispatch(null);
 
   const setView = (e) => {
     dispatch({ type: SET_AMOUNT, payload: 0 });

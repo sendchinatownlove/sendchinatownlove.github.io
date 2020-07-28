@@ -3,12 +3,8 @@ import styled from 'styled-components';
 import {
   useVoucherState,
   useVoucherDispatch,
-} from '../../utilities/hooks/VoucherContext/context';
-import {
-  SET_VIEW,
-  SET_VOUCHER_INFO,
-  SET_AMOUNT,
-} from '../../utilities/hooks/VoucherContext/constants';
+  VoucherConstants,
+} from '../../utilities/hooks/VoucherContext';
 import StoreBanner from './StoreBanner';
 import {
   updateVoucher,
@@ -30,11 +26,12 @@ import { getLocationInfo } from '../../utilities/hooks/helpers';
 interface Props {}
 
 const Amount = (props: Props) => {
-  const { amount, voucher } = useVoucherState();
-  const dispatch = useVoucherDispatch();
+  const { amount, voucher } = useVoucherState(null);
+  const dispatch = useVoucherDispatch(null);
   const [loading, setLoading] = useState(false);
 
-  const setView = async (view) => dispatch({ type: SET_VIEW, payload: view });
+  const setView = async (view) =>
+    dispatch({ type: VoucherConstants.SET_VIEW, payload: view });
 
   const confirm = async (e) => {
     setLoading(true);
@@ -58,8 +55,14 @@ const Amount = (props: Props) => {
         location: getLocationInfo(merchantData),
       };
 
-      dispatch({ type: SET_VOUCHER_INFO, payload: newVoucher });
-      dispatch({ type: SET_AMOUNT, payload: gift_card_detail.amount });
+      dispatch({
+        type: VoucherConstants.SET_VOUCHER_INFO,
+        payload: newVoucher,
+      });
+      dispatch({
+        type: VoucherConstants.SET_AMOUNT,
+        payload: gift_card_detail.amount,
+      });
       setLoading(false);
       setView(3);
     } catch (err) {

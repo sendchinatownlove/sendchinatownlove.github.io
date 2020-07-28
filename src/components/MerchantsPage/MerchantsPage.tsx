@@ -57,8 +57,9 @@ const MerchantsPage = (props: Props) => {
     if (type === 'all') {
       setFilter(sellers);
     } else {
-      let result = sellers.filter(
-        (store: any) => store!.locations.length > 0 && store!.locations[0].city === type
+      const result = sellers.filter(
+        (store: any) =>
+          store!.locations.length > 0 && store!.locations[0].city === type
       );
       if (type === 'Floral Park') {
         const flushing = sellers.filter(
