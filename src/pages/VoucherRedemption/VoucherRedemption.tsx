@@ -28,7 +28,7 @@ const VoucherRedemption = (props: Props) => {
   const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
-    try {
+    try {      
       const {
         data: { gift_card_detail, seller_id },
       } = await getVoucher(params.location.pathname.replace('/voucher/', ''));
