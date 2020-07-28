@@ -8,8 +8,6 @@
 import React from 'react';
 import { Action } from './reducers';
 
-type ProviderProps = { children: React.ReactNode };
-
 export default function VoucherStore(reducer, initialState) {
   // CONTEXT
   const VoucherStateContext = React.createContext(initialState);

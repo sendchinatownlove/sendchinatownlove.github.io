@@ -6,7 +6,7 @@ import Loader from '../Loader';
 import Header from '../Navbar';
 import Footer from '../Footer';
 import ScrollToTop from '../ScrollToTop';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext';
 import ReactPixel from 'react-facebook-pixel';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
 
