@@ -119,7 +119,7 @@ beforeAll(() => {
 
 afterEach(() => cleanup());
 
-const renderVoucher = (providerValues) => (
+const renderVoucher = () => (
   <VoucherProvider>
     <VoucherPage />
   </VoucherProvider>
@@ -140,7 +140,7 @@ describe('Voucher Page', () => {
   test('should display VoucherPage with succesful GET /voucher request', async () => {
     const { findByText } = renderIntegration(
       '/voucher/123asdf',
-      renderVoucher(providerValues)
+      renderVoucher()
     );
 
     const HeaderLabel = await findByText(`Welcome to`, { exact: false });
