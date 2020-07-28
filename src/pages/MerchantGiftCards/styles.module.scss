@@ -44,19 +44,22 @@
 
 .metadataHeader {
     width: 100%;
-    height: 13vh;
-    min-height: 70px;
     background: $light-red;
 
+    @media only screen and (min-width: 750px) {
+        height: 13vh;
+    }
+
     display: grid;
-    grid-template-columns: 20vw 20vw 20vw;
-    column-gap: 12vw;
+    grid-template-columns: 25vw 25vw 25vw;
+    column-gap: 7vw;
     justify-content: center;
     align-items: center;
 }
 
 .metadataBlock {
     padding: 10px;
+    flex: 1;
     
     & > h1 {
         font-family: "Open Sans";
@@ -75,5 +78,11 @@
         font-size: 24px;
         line-height: 33px;
         letter-spacing: -0.01em;
+    }
+}
+
+.noBreak {
+    @media only screen and (min-width: 500px) {
+        white-space: nowrap;
     }
 }

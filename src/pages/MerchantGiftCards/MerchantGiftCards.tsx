@@ -38,36 +38,37 @@ const MerchantGiftCards = () => {
   const fields = [
     {
       name: 'seller_gift_card_id',
-      displayName: 'Voucher ID',
+      displayName: 'Voucher Code \n 礼品券号码',
       inputFilterable: true,
       sortable: true,
     },
     {
       name: 'email',
-      displayName: 'Email',
+      displayName: 'Email \n 电子邮件',
       inputFilterable: true,
       sortable: true,
     },
     {
       name: 'value',
-      displayName: 'Amount',
+      displayName: 'Original Amount \n 购买金额',
       inputFilterable: true,
       sortable: true,
       render: renderAmount,
     },
     {
       name: 'created_at',
-      displayName: 'Date Created',
+      displayName: 'Date Purchased \n 购买日期',
       inputFilterable: true,
       sortable: true,
       render: renderDate,
     },
-    {
+    /* {
       name: 'expiration',
       displayName: 'Expiration',
       inputFilterable: true,
       sortable: true,
     },
+    Uncomment if we want expiration */
   ];
 
   const fetchData = async () => {
@@ -101,20 +102,20 @@ const MerchantGiftCards = () => {
       ) : (
         <>
           <div className={styles.header}>
-            <h1>Voucher Tracker</h1>
+            <h1>Voucher Tracker <span className={styles.noBreak}>礼品券记录</span></h1>
             <h2>{seller.name}</h2>
           </div>
           <div className={styles.metadataHeader}>
             <div className={styles.metadataBlock}>
-              <h1>Last Updated</h1>
+              <h1>LAST UPDATED <span className={styles.noBreak}>上次更新时间</span></h1>
               <h2>{renderDate({ value: new Date() })}</h2>
             </div>
             <div className={styles.metadataBlock}>
-              <h1>Active Vouchers</h1>
+              <h1>ACTIVE VOUCHERS <span className={styles.noBreak}>可使用的礼品券数量</span></h1>
               <h2>{giftCards && giftCards.length}</h2>
             </div>
             <div className={styles.metadataBlock}>
-              <h1>Total Balance</h1>
+              <h1>TOTAL BALANCE <span className={styles.noBreak}>总结余</span></h1>
               <h2>
                 {renderAmount({
                   value: giftCards.reduce((acc, cur) => acc + cur.value, 0),

@@ -247,10 +247,11 @@ h3 {
 
   .header-row {
     display: grid;
-    grid-template-columns: 80vw 1vw 10vw;
+    grid-template-columns: 4fr 0px 1fr;
     align-items: center;
     justify-content: center;
     padding: 10px 0px;
+    max-width: 1200px;
 
     .filter-container {
       display: flex;
@@ -275,6 +276,7 @@ h3 {
 
   thead {
     background: $very-light-grey;
+    white-space: pre-line;
   }
 
   .fa-sort {
