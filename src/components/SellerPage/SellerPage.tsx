@@ -6,8 +6,8 @@ import ErrorPage from '../404Page';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-} from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_SELLER_DATA } from '../../utilities/hooks/ModalPaymentContext/constants';
+  ModalPaymentConstants
+} from '../../utilities/hooks/ModalPaymentContext';
 import { getSeller } from '../../utilities';
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
@@ -27,14 +27,14 @@ const SellerPage = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
 
-  const dispatch = useModalPaymentDispatch();
-  const { sellerData } = useModalPaymentState();
+  const dispatch = useModalPaymentDispatch(null);
+  const { sellerData } = useModalPaymentState(null);
 
   const fetchData = async (lang?) => {
     setLoading(true);
     const result = id && (await getSeller(id, lang));
     await dispatch({
-      type: SET_SELLER_DATA,
+      type: ModalPaymentConstants.SET_SELLER_DATA,
       payload: result.data,
     });
     setLoading(false);

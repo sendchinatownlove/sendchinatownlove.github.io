@@ -8,8 +8,6 @@
 import React from 'react';
 import { Action } from './reducers';
 
-type ProviderProps = { children: React.ReactNode };
-
 /**
  * Modal Payment Store
  *
@@ -35,7 +33,7 @@ export default function ModalPaymentStore(reducer, intialState) {
    * @return {node} The context that holds all state props/methods
    *
    */
-  const ModalPaymentProvider = ({ children }: ProviderProps) => (
+  const ModalPaymentProvider = ({ children }: any) => (
     <ModalPaymentStateContext.Provider value={state}>
       <ModalPaymentDispatchContext.Provider value={dispatch}>
         {children}

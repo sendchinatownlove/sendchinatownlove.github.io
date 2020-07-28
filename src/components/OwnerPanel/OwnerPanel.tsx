@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { useModalPaymentDispatch, ModalPaymentConstants } from '../../utilities/hooks/ModalPaymentContext';
 import { BrowsePageSeller } from '../../utilities/api/types';
 import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
@@ -25,11 +24,11 @@ const ModalBox: any = Modal;
 const OwnerPanel = ({ seller }: Props) => {
   const { t } = useTranslation();
 
-  const dispatch = useModalPaymentDispatch();
+  const dispatch = useModalPaymentDispatch(null);
   const [purchaseType, setPurchaseType] = useState('');
 
   const showModal = (event: any) => {
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 0 });
     setPurchaseType(event.target.value);
   };
 
