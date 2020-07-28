@@ -8,7 +8,7 @@ export interface Action {
 
 const VoucherReducer = (state: VoucherState, action: Action) => {
   const { type, payload } = action;
-  
+
   switch (type) {
     case SET_VIEW:
       return { ...state, view: payload };
