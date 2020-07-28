@@ -8,41 +8,32 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
-const DonationHighlightBox = () => {
+const GiftMealHighlightBox = () => {
   const websiteImages = getWebsiteImages();
   const { t } = useTranslation();
-  const dispatch = useModalPaymentDispatch();
 
-  const openModal = (e: any) => {
-    ReactPixel.trackCustom('DonationPoolButtonClick', {});
-    e.preventDefault();
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+  const onButtonClick = (e: any) => {
+    ReactPixel.trackCustom('GiftMealBoxButtonClick', {});
+    // TODO: Add router to open GAM page
   };
 
   return (
     <Container>
-      <Image src={websiteImages.donationPoolHero} alt="banner" />
+      <Image src={websiteImages.gamHero} alt="banner" />
 
       <ColumnContainer>
-        <Header>{t('donationBox.header')}</Header>
-        <Description>{t('donationBox.description')}</Description>
+        <Header>{t('gamBox.header')}</Header>
+        <Description>{t('gamBox.description')}</Description>
       </ColumnContainer>
 
-      <Button className={'button--outlined'} onClick={openModal}>
-        {t('donationBox.button')}
+      <Button className={'button--filled'} onClick={onButtonClick}>
+        {t('gamBox.button')}
       </Button>
-
-      <Modal
-        purchaseType={'donation'}
-        sellerId={'send-chinatown-love'}
-        sellerName={'Send Chinatown Love Fund'}
-        costPerMeal={0}
-      />
     </Container>
   );
 };
 
-export default DonationHighlightBox;
+export default GiftMealHighlightBox;
 
 const Container = styled.div`
   flex-direction: column;
@@ -70,7 +61,7 @@ const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: left;
-  padding: 30px 32px 36px 32px;
+  padding: 30px 32px 16px 32px;
 
   @media (${smallScreens}) {
     padding: 16px 18px;
