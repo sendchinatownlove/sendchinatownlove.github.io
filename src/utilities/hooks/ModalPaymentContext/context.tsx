@@ -24,7 +24,6 @@ export default function ModalPaymentStore(reducer, intialState) {
   const ModalPaymentDispatchContext = React.createContext(
     (() => null) as React.Dispatch<Action>
   );
-  const [state, dispatch] = React.useReducer(reducer, intialState);
 
   /**
    * Modal Provider
@@ -33,13 +32,17 @@ export default function ModalPaymentStore(reducer, intialState) {
    * @return {node} The context that holds all state props/methods
    *
    */
-  const ModalPaymentProvider = ({ children }: any) => (
-    <ModalPaymentStateContext.Provider value={state}>
+  const ModalPaymentProvider = ({ children }: any) => {    
+    const [state, dispatch] = React.useReducer(reducer, intialState);
+    
+    return (
       <ModalPaymentDispatchContext.Provider value={dispatch}>
-        {children}
+        <ModalPaymentStateContext.Provider value={state}>
+          {children}
+        </ModalPaymentStateContext.Provider>
       </ModalPaymentDispatchContext.Provider>
-    </ModalPaymentStateContext.Provider>
-  );
+    );
+  }
 
   function useModalPaymentState() {
     const context = React.useContext(ModalPaymentStateContext);

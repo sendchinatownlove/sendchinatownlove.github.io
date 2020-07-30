@@ -1,14 +1,7 @@
 import React from 'react';
-import { ModalPaymentProvider } from '../utilities/hooks/ModalPaymentContext/context';
+import { ModalPaymentProvider } from '../utilities/hooks/ModalPaymentContext';
 import ModalPage, { Props } from '../components/ModalAmount';
 import { render } from '@testing-library/react';
-
-jest.mock('../utilities/hooks/ModalPaymentContext/context', () => {
-  return {
-    ...jest.requireActual('../utilities/hooks/ModalPaymentContext/context'),
-    useModalPaymentDispatch: jest.fn(() => jest.fn()),
-  };
-});
 
 const renderModal = (props: Props) => {
   return render(

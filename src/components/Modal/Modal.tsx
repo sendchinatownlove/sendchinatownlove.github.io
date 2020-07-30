@@ -7,11 +7,8 @@ import ModalConfirmation from '../ModalConfirmation';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-} from '../../utilities/hooks/ModalPaymentContext/context';
-import {
-  CLOSE_MODAL,
-  UPDATE_SELLER_DATA,
-} from '../../utilities/hooks/ModalPaymentContext/constants';
+  ModalPaymentConstants
+} from '../../utilities/hooks/ModalPaymentContext';
 import { getSeller } from '../../utilities';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
@@ -30,17 +27,17 @@ export interface ModalProps {
 
 export const Modal = (props: Props) => {
   const idempotencyKey = uuid();
-  const { modalView } = useModalPaymentState();
-  const dispatch = useModalPaymentDispatch();
+  const { modalView } = useModalPaymentState(null);
+  const dispatch = useModalPaymentDispatch(null);
 
   const closeModal = async (e: any) => {
     ReactPixel.trackCustom('ModalCloseButtonClick', {});
     e.preventDefault();
     if (modalView === 2) {
       const { data } = props.sellerId && (await getSeller(props.sellerId));
-      dispatch({ type: UPDATE_SELLER_DATA, payload: data.amount_raised });
+      dispatch({ type: ModalPaymentConstants.UPDATE_SELLER_DATA, payload: data.amount_raised });
     }
-    dispatch({ type: CLOSE_MODAL, payload: undefined });
+    dispatch({ type: ModalPaymentConstants.CLOSE_MODAL, payload: undefined });
   };
 
   return (

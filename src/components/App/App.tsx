@@ -66,14 +66,12 @@ const App = () => {
     }
 
     return (
-      <>
-        <ModalPaymentProvider>
-          <ScrollToTop />
-          <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-          {component}
-          <Footer menuOpen={menuOpen} />
-        </ModalPaymentProvider>
-      </>
+      <ModalPaymentProvider>
+        <ScrollToTop />
+        <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        {component}
+        <Footer menuOpen={menuOpen} />
+      </ModalPaymentProvider>
     );
   };
 

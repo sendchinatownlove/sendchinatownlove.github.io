@@ -22,13 +22,12 @@ interface Props {
 ReactPixel.trackCustom('SellerPageView', {});
 const SellerPage = (props: Props) => {
   const { i18n } = useTranslation();
+  const dispatch = useModalPaymentDispatch(null);
+  const { sellerData } = useModalPaymentState(null);
 
   // fix typing
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
-
-  const dispatch = useModalPaymentDispatch(null);
-  const { sellerData } = useModalPaymentState(null);
 
   const fetchData = async (lang?) => {
     setLoading(true);
