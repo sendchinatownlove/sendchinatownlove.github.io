@@ -273,7 +273,7 @@ const SquareModal = ({
               <BackButton
                 type="button"
                 className={'modalButton--back'}
-                onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 0 })}
+                onClick={() => dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 0 })}
               >
                 ᐸ Back
               </BackButton>
