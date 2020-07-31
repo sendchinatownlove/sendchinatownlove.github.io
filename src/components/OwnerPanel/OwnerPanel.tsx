@@ -68,9 +68,9 @@ const OwnerPanel = ({ seller }: Props) => {
         <img
           className={styles.ownerImage}
           src={
-            seller?.owner_image_url
-              ?? seller?.logo_image_url
-              ?? defaultOwnerImage
+            seller?.owner_image_url ??
+            seller?.logo_image_url ??
+            defaultOwnerImage
           }
           alt={seller.owner_name}
         />

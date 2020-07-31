@@ -8,7 +8,7 @@ import Footer from '../Footer';
 import ScrollToTop from '../ScrollToTop';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import ReactPixel from 'react-facebook-pixel';
-import { VoucherProvider } from '../../utilities/hooks/VoucherContext/context';
+import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
 
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
@@ -90,10 +90,13 @@ const App = () => {
           <Route path="/:seller_id/dashboard/:secret_id">
               <MerchantVoucherDashboard />
           </Route>
-          <Route path='/gift-a-meal' component={() => {
+          <Route
+            path="/gift-a-meal"
+            component={() => {
               window.location.href = 'https://www.gofundme.com/f/gift-a-meal';
               return null;
-          }}/>
+            }}
+          />
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>
           <Route path="/:id#story">{returnComponent('seller')}</Route>
