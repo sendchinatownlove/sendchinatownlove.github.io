@@ -34,6 +34,9 @@ const ErrorPage = lazy(() => import('../404Page'));
 const VoucherRedemptionPage = lazy(() =>
   import('../../pages/VoucherRedemption')
 );
+const MerchantVoucherDashboard = lazy(() =>
+  import('../../pages/MerchantVoucherDashboard')
+);
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
@@ -83,6 +86,9 @@ const App = () => {
             <VoucherProvider>
               <VoucherRedemptionPage />
             </VoucherProvider>
+          </Route>
+          <Route path="/:seller_id/dashboard/:secret_id">
+              <MerchantVoucherDashboard />
           </Route>
           <Route
             path="/gift-a-meal"
