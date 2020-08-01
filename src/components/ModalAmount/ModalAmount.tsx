@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-  ModalPaymentConstants
+  ModalPaymentConstants,
 } from '../../utilities/hooks/ModalPaymentContext';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
