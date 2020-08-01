@@ -165,7 +165,7 @@ describe('Voucher Page', () => {
   test('should display VoucherPage Amount prompt when clicking "Click to being to being reddeming your voucher"', async () => {
     const { findByText, findAllByText } = renderIntegration(
       '/voucher/123asdf',
-      renderVoucher(providerValues)
+      renderVoucher()
     );
 
     const NextButton = await findByText(
@@ -194,7 +194,7 @@ describe('Voucher Page', () => {
   test('should display VoucherPage Confirm prompt when clicking "Next"', async () => {
     const { findByText, findByPlaceholderText } = renderIntegration(
       '/voucher/123asdf',
-      renderVoucher(providerValues)
+      renderVoucher()
     );
 
     const NextButton = await findByText(
@@ -234,7 +234,7 @@ describe('Voucher Page', () => {
   test('should display VoucherPage Completed prompt', async () => {
     const { findByText, findByPlaceholderText } = renderIntegration(
       '/voucher/123asdf',
-      renderVoucher(providerValues)
+      renderVoucher()
     );
 
     const NextButton = await findByText(
