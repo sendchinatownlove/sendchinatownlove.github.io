@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import { useModalPaymentDispatch, ModalPaymentConstants } from '../../utilities/hooks/ModalPaymentContext';
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+} from '../../utilities/hooks/ModalPaymentContext';
 import { BrowsePageSeller } from '../../utilities/api/types';
 import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';

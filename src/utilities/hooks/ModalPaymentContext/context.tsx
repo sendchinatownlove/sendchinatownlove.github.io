@@ -32,9 +32,9 @@ export default function ModalPaymentStore(reducer, intialState) {
    * @return {node} The context that holds all state props/methods
    *
    */
-  const ModalPaymentProvider = ({ children }: any) => {    
+  const ModalPaymentProvider = ({ children }: any) => {
     const [state, dispatch] = React.useReducer(reducer, intialState);
-    
+
     return (
       <ModalPaymentDispatchContext.Provider value={dispatch}>
         <ModalPaymentStateContext.Provider value={state}>
@@ -42,7 +42,7 @@ export default function ModalPaymentStore(reducer, intialState) {
         </ModalPaymentStateContext.Provider>
       </ModalPaymentDispatchContext.Provider>
     );
-  }
+  };
 
   function useModalPaymentState() {
     const context = React.useContext(ModalPaymentStateContext);
