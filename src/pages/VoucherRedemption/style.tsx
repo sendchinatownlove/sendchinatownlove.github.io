@@ -8,6 +8,7 @@ const ViewContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  min-height: 100%;
 `;
 const SubViewContainer = styled.div`
   position: relative;
@@ -20,7 +21,8 @@ const MainView = styled(SubViewContainer)`
 `;
 const Footer = styled.div`
   width: 100%;
-  min-height: 175px;
+  height: 100%;
+  // min-height: 175px;
   height: 100%;
   background: #f7f7f7;
   display: flex;
@@ -32,6 +34,7 @@ const BackButtonStyle = styled.span`
   font-weight: bold;
   font-size: 15px;
   line-height: 20px;
+  min-height: 20px;
   margin: 12px 0;
   display: flex;
   align-items: center;
@@ -58,7 +61,7 @@ const FooterLabelStyle = styled.div`
   display: inline;
   margin: 15px auto;
   min-height: 30px;
-  width: 50%;
+  width: 75%;
   word-break: break-all;
 `;
 const FooterLabel = (props) => (

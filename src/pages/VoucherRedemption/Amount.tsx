@@ -116,7 +116,7 @@ const Container = styled(ViewContainer)`
 `;
 const BalanceContainer = styled(SubViewContainer)`
   width: 160px;
-  min-height: 60px;
+  min-height: 92px;
   margin: 0 auto;
   padding: 24px 0;
 `;

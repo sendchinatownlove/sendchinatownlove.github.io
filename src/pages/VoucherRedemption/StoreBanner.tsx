@@ -57,6 +57,7 @@ const Header = styled.h1`
   font-weight: bold;
   font-size: 22px;
   line-height: 30px;
+  min-height: 65px;
 `;
 const OwnerImage = styled.img`
   width: ${(props: ContainerProps) =>
