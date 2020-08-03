@@ -84,7 +84,7 @@ const Amount = (props: Props) => {
           ) : (
             <Text>Complete Your Purchase</Text>
           )}
-          <MoreInfo showShadow={true} inverted={true} marginLeft="45px"/>
+          <MoreInfo showShadow={true} inverted={true} marginLeft="45px" />
         </Header>
         <BalanceContainer>
           {!voucher.single_use ? (

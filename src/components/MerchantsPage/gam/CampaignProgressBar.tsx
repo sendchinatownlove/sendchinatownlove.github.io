@@ -34,7 +34,9 @@ const CampaignProgressBar = ({
 
   // "Last contribution made 2h ago"
   const timeSinceLastContribution = Date.now() - lastContributionTime.getTime();
-  const lastContributionTimeAsPresentable = (timeSinceLastContribution: number) => {
+  const lastContributionTimeAsPresentable = (
+    timeSinceLastContribution: number
+  ) => {
     const minutesSinceLastConstribution =
       timeSinceLastContribution / (1000 * 60);
     if (minutesSinceLastConstribution < 60) {
