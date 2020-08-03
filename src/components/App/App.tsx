@@ -95,7 +95,7 @@ const App = () => {
               return null;
             }}
           />
-          <Route path="/gift-a-meal-page">{returnComponent('giftameal')}</Route>
+          <Route path="/gift-a-meal-home">{returnComponent('giftameal')}</Route>
           <Route path="/merchants">{returnComponent('merchants')}</Route>
           <Route path="/:id">{returnComponent('seller')}</Route>
           <Route path="/:id#story">{returnComponent('seller')}</Route>

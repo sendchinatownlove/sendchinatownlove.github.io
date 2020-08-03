@@ -92,12 +92,11 @@
 
 .instructions {
   max-width: 1250px;
-  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 20px;
 
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     grid-template-columns: repeat((2, 1fr));
     grid-row-gap: 15px;
     justify-items: center;
@@ -114,7 +113,7 @@
     min-width: 225px;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     img {
       width: 50px;
     }
@@ -127,7 +126,7 @@
     margin: 0;
     font-size: 15px;
 
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
       font-size: 11px;
     }
   }

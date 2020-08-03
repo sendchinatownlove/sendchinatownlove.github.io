@@ -57,10 +57,6 @@ const Container = styled.div`
   justify-content: space-between;
 
   @media (${tabletScreens}) {
-    max-height: 300px;
-  }
-
-  @media (${smallScreens}) {
     max-height: 575px;
     flex-direction: column;
     margin: 0 17px;
@@ -75,6 +71,8 @@ const ColumnContainer = styled.div`
   padding: 1rem 2rem 1.5rem;
 
   @media (${tabletScreens}) {
+    padding: 0.5rem 1rem 0.75rem;
+
     > span {
       margin: 2.5px 0;
     }
@@ -83,14 +81,10 @@ const ColumnContainer = styled.div`
       width: 100%;
     }
 
-    @media (${smallScreens}) {
-      padding: 0.5rem 1rem 0.75rem;
-
-      > img {
-        height: 103px;
-        object-fit: cover;
-        object-position: 0 25%;
-      }
+    > img {
+      height: 103px;
+      object-fit: cover;
+      object-position: 0 25%;
     }
   }
 `;
@@ -105,7 +99,7 @@ const Location = styled.div`
   color: #1e7c9a;
   margin-bottom: 15px;
 
-  @media (${smallScreens}) {
+  @media (${tabletScreens}) {
     font-size: 14px;
   }
 `;
@@ -120,7 +114,7 @@ const Name = styled.div`
   color: #000000;
   margin-bottom: 18px;
 
-  @media (${smallScreens}) {
+  @media (${tabletScreens}) {
     width: 70%;
   }
 `;
@@ -135,7 +129,7 @@ const Description = styled.div`
   color: #1e1e1e;
   margin-bottom: 50px;
 
-  @media (${smallScreens}) {
+  @media (${tabletScreens}) {
     font-size: 14px;
     margin-bottom: 34px;
   }
@@ -173,12 +167,12 @@ const ImagesContainer = styled.span`
   margin-bottom: 60px;
   align-self: flex-end;
 
-  @media (${smallScreens}) {
+  @media (${tabletScreens}) {
     position: absolute;
     top: 132px;
 
     img {
-      height: 35px;
+      height: 25px;
     }
   }
 `;
