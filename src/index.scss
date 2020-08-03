@@ -240,7 +240,7 @@ h3 {
 }
 
 .filterable-table-container {
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -279,7 +279,8 @@ h3 {
     white-space: pre-line;
   }
 
-  .fa { // filter arrows
+  .fa {
+    // filter arrows
     margin-left: 1vw;
   }
 
@@ -293,7 +294,7 @@ h3 {
       cursor: pointer;
       border: 1px solid $light-grey;
       border-radius: 3px;
-    
+
       &:hover {
         background: $light-red;
       }
@@ -315,5 +316,4 @@ h3 {
       }
     }
   }
-
 }

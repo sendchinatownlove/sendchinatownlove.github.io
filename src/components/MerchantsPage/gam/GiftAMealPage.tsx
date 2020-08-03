@@ -54,18 +54,12 @@ const GiftAMealPage = (props: Props) => {
           </div>
         </div>
       </div>
-
       <br />
       <button className={styles.backButton}>Back to merchants</button>
-
       <h5 className={styles.campaignHeader}>Active Gift-a-Meal</h5>
-
-      <CampaignListItem />
-      <CampaignListItem />
-
+      // active campaigns here
       <h5 className={styles.campaignHeader}>Past Gift-a-Meal</h5>
-
-      <CampaignListItem />
+      // past campaigns here
     </div>
   );
 };

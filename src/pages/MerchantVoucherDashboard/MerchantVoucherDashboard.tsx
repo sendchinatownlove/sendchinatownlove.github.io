@@ -156,7 +156,7 @@ export default MerchantVoucherDashboard;
 
 /**
  * Filterable Table Props
- * 
+ *
  * From the react-filterable-table documentation
  */
 interface FTRenderProps {

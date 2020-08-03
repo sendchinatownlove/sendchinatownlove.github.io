@@ -3,86 +3,86 @@
 @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
 
 .header {
-    width: 100%;
-    height: 20vh;
-    min-height: 70px;
-    background: $standard-red;
+  width: 100%;
+  height: 20vh;
+  min-height: 70px;
+  background: $standard-red;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    & > h1 {
-        padding-left: 6vw;
-        padding-bottom: 1vh;
+  & > h1 {
+    padding-left: 6vw;
+    padding-bottom: 1vh;
 
-        font-family: "Open Sans";
-        font-style: normal;
-        font-weight: bold;
-        font-size: 32px;
-        line-height: 44px;
-        letter-spacing: -0.01em;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 44px;
+    letter-spacing: -0.01em;
 
-        color: white;
-    }
+    color: white;
+  }
 
-    & > h2 {
-        padding-left: 6vw;
+  & > h2 {
+    padding-left: 6vw;
 
-        font-family: "Open Sans";
-        font-style: normal;
-        font-weight: normal;
-        font-size: 18px;
-        line-height: 25px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
 
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 
-        color: white;
-    }
+    color: white;
+  }
 }
 
 .metadataHeader {
-    width: 100%;
-    background: $light-red;
+  width: 100%;
+  background: $light-red;
 
-    @media only screen and (min-width: 750px) {
-        height: 13vh;
-    }
+  @media only screen and (min-width: 750px) {
+    height: 13vh;
+  }
 
-    display: grid;
-    grid-template-columns: 25vw 25vw 25vw;
-    column-gap: 7vw;
-    justify-content: center;
-    align-items: center;
+  display: grid;
+  grid-template-columns: 25vw 25vw 25vw;
+  column-gap: 7vw;
+  justify-content: center;
+  align-items: center;
 }
 
 .metadataBlock {
-    padding: 10px;
-    flex: 1;
-    
-    & > h1 {
-        font-family: "Open Sans";
-        font-style: normal;
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 22px;
+  padding: 10px;
+  flex: 1;
 
-        text-transform: uppercase;
-    }
+  & > h1 {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
 
-    & > h2 {
-        font-family: "Open Sans";
-        font-style: normal;
-        font-weight: bold;
-        font-size: 24px;
-        line-height: 33px;
-        letter-spacing: -0.01em;
-    }
+    text-transform: uppercase;
+  }
+
+  & > h2 {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 33px;
+    letter-spacing: -0.01em;
+  }
 }
 
 .noBreak {
-    @media only screen and (min-width: 500px) {
-        white-space: nowrap;
-    }
+  @media only screen and (min-width: 500px) {
+    white-space: nowrap;
+  }
 }
