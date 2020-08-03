@@ -6,25 +6,24 @@ import StoreBanner from './StoreBanner';
 import {
   useVoucherState,
   useVoucherDispatch,
-} from '../../utilities/hooks/VoucherContext/context';
-import {
-  SET_VIEW,
-  SET_AMOUNT,
-} from '../../utilities/hooks/VoucherContext/constants';
+  VoucherConstants,
+} from '../../utilities/hooks/VoucherContext';
 import { ViewContainer, SubViewContainer, Text } from './style';
 
 interface Props {}
 
 const LandingCard = (props: Props) => {
-  const { voucher } = useVoucherState();
-  const dispatch = useVoucherDispatch();
-
+  const { voucher } = useVoucherState(null);
+  const dispatch = useVoucherDispatch(null);
   const setView = () => {
     if (voucher.single_use) {
-      dispatch({ type: SET_AMOUNT, payload: voucher.amount / 100 });
-      dispatch({ type: SET_VIEW, payload: 2 });
+      dispatch({
+        type: VoucherConstants.SET_AMOUNT,
+        payload: voucher.amount / 100,
+      });
+      dispatch({ type: VoucherConstants.SET_VIEW, payload: 2 });
     } else {
-      dispatch({ type: SET_VIEW, payload: 1 });
+      dispatch({ type: VoucherConstants.SET_VIEW, payload: 1 });
     }
   };
 
@@ -115,6 +114,7 @@ const Button = styled.div`
   font-size: 13px;
   line-height: 18px;
   text-align: center;
+  min-height: 40px;
   align-items: center;
 `;
 const Balance = styled.div`

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useVoucherState } from '../../utilities/hooks/VoucherContext/context';
+import { useVoucherState } from '../../utilities/hooks/VoucherContext';
 import Logo from '../../components/Logos/image/PureLogo.png';
 import DefaultStoreImage from '../../images/misc-store.png';
 
@@ -10,7 +10,7 @@ interface ContainerProps {
 }
 
 const StoreBanner = (props: Props) => {
-  const { view, voucher } = useVoucherState();
+  const { view, voucher } = useVoucherState(null);
 
   const isOnLandingPage = view === 0;
 
@@ -57,6 +57,7 @@ const Header = styled.h1`
   font-weight: bold;
   font-size: 22px;
   line-height: 30px;
+  min-height: 65px;
 `;
 const OwnerImage = styled.img`
   width: ${(props: ContainerProps) =>

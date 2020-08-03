@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressBar from '../../ProgressBar';
+import CampaignProgressBar from './CampaignProgressBar';
 import styled from 'styled-components';
 import {
   smallScreens,
@@ -10,7 +10,12 @@ import apexLogo from '../images/apex-logo.png';
 import melonpannaLogo from '../images/melonpanna-logo.png';
 
 // In the final implementation, campaign will be object declared in types.ts
-const CampaignListItem = (campaign: String) => {
+
+interface Props {
+  campaign: String;
+}
+
+const CampaignListItem = (campaign: Props) => {
   return (
     <Container>
       <ColumnContainer>
@@ -23,16 +28,14 @@ const CampaignListItem = (campaign: String) => {
           Partnering with APEX for the Youth, we hope to raise 200 meals for
           underserved Asian and immigrant youth from low-income families.
         </Description>
-        <TimeStamp>Last contribution made 1h ago</TimeStamp>
-        <ProgressBar
-          amountRaised={100}
-          targetAmount={1000}
+        {/* Testing values */}
+        <CampaignProgressBar
+          isActive={true}
+          numContributions={73}
+          targetAmount={100}
           progressBarColor={'#CF6E8A'}
-          numContributions={20}
-          numDonations={10}
-          numGiftCards={10}
-          donationAmount={50}
-          giftCardAmount={50}
+          lastContributionTime={new Date('07/21/2020 20:05:00')}
+          endDate={new Date('07/23/2020')}
         />
       </ColumnContainer>
       <ColumnContainer>

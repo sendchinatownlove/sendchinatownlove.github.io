@@ -3,12 +3,8 @@ import styled from 'styled-components';
 import {
   useVoucherState,
   useVoucherDispatch,
-} from '../../utilities/hooks/VoucherContext/context';
-import {
-  SET_VIEW,
-  SET_VOUCHER_INFO,
-  SET_AMOUNT,
-} from '../../utilities/hooks/VoucherContext/constants';
+  VoucherConstants,
+} from '../../utilities/hooks/VoucherContext';
 import StoreBanner from './StoreBanner';
 import {
   updateVoucher,
@@ -30,11 +26,12 @@ import { getLocationInfo } from '../../utilities/hooks/helpers';
 interface Props {}
 
 const Amount = (props: Props) => {
-  const { amount, voucher } = useVoucherState();
-  const dispatch = useVoucherDispatch();
+  const { amount, voucher } = useVoucherState(null);
+  const dispatch = useVoucherDispatch(null);
   const [loading, setLoading] = useState(false);
 
-  const setView = async (view) => dispatch({ type: SET_VIEW, payload: view });
+  const setView = async (view) =>
+    dispatch({ type: VoucherConstants.SET_VIEW, payload: view });
 
   const confirm = async (e) => {
     setLoading(true);
@@ -58,8 +55,14 @@ const Amount = (props: Props) => {
         location: getLocationInfo(merchantData),
       };
 
-      dispatch({ type: SET_VOUCHER_INFO, payload: newVoucher });
-      dispatch({ type: SET_AMOUNT, payload: gift_card_detail.amount });
+      dispatch({
+        type: VoucherConstants.SET_VOUCHER_INFO,
+        payload: newVoucher,
+      });
+      dispatch({
+        type: VoucherConstants.SET_AMOUNT,
+        payload: gift_card_detail.amount,
+      });
       setLoading(false);
       setView(3);
     } catch (err) {
@@ -81,7 +84,7 @@ const Amount = (props: Props) => {
           ) : (
             <Text>Complete Your Purchase</Text>
           )}
-          <MoreInfo showShadow={true} inverted={true} />
+          <MoreInfo showShadow={true} inverted={true} marginLeft="45px"/>
         </Header>
         <BalanceContainer>
           {!voucher.single_use ? (
@@ -142,9 +145,6 @@ const Header = styled(SubViewContainer)`
   min-height: 22px;
   line-height: 22px;
   justify-content: center;
-  div {
-    margin-left: 35px;
-  }
 `;
 const BalanceContainer = styled(SubViewContainer)`
   min-height: 300px;
@@ -184,7 +184,7 @@ const Disclaimer = styled(SubViewContainer)`
   padding: 24px 0;
 `;
 const DisclaimerText = styled(SubViewContainer)`
-  width: 50%;
+  width: 75%;
   text-align: center;
   margin: 16px auto;
   color: #ab192e;

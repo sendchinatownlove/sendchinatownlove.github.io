@@ -61,6 +61,12 @@ const MerchantsPage = (props: Props) => {
         (store: any) =>
           store!.locations.length > 0 && store!.locations[0].city === type
       );
+      if (type === 'Floral Park') {
+        const flushing = sellers.filter(
+          (store: any) => store!.locations.length > 0 && store!.locations[0].city === 'Flushing'
+        );
+        result.push(...flushing);
+      }
       setFilter(result);
     }
   };
