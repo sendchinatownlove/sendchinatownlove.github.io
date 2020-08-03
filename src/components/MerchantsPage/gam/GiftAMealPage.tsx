@@ -1,7 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
-import CampaignListItem from './CampaignListItem';
 
 import illustrated_flatlay_hero from '../images/illustrated_flatlay_hero.png';
 import gam_icon_step1 from '../images/gam_icon_step1.svg';
@@ -14,7 +12,6 @@ interface Props {
 }
 
 const GiftAMealPage = (props: Props) => {
-  const { t, i18n } = useTranslation();
 
   return (
     <div
