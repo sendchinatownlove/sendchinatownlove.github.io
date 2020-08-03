@@ -84,7 +84,7 @@ const Amount = (props: Props) => {
           ) : (
             <Text>Complete Your Purchase</Text>
           )}
-          <MoreInfo showShadow={true} inverted={true} />
+          <MoreInfo showShadow={true} inverted={true} marginLeft="45px"/>
         </Header>
         <BalanceContainer>
           {!voucher.single_use ? (
@@ -145,9 +145,6 @@ const Header = styled(SubViewContainer)`
   min-height: 22px;
   line-height: 22px;
   justify-content: center;
-  div {
-    margin-left: 35px;
-  }
 `;
 const BalanceContainer = styled(SubViewContainer)`
   min-height: 300px;
@@ -187,7 +184,7 @@ const Disclaimer = styled(SubViewContainer)`
   padding: 24px 0;
 `;
 const DisclaimerText = styled(SubViewContainer)`
-  width: 50%;
+  width: 75%;
   text-align: center;
   margin: 16px auto;
   color: #ab192e;

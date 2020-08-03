@@ -114,6 +114,7 @@ const Button = styled.div`
   font-size: 13px;
   line-height: 18px;
   text-align: center;
+  min-height: 40px;
   align-items: center;
 `;
 const Balance = styled.div`
