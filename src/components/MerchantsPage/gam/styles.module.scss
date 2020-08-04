@@ -94,12 +94,18 @@
   max-width: 1250px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 20px;
+  grid-column-gap: 40px;
 
   @media (max-width: 1000px) {
-    grid-template-columns: repeat((2, 1fr));
+    grid-auto-flow: column;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-row-gap: 15px;
     justify-items: center;
+  }
+
+  @include for-phone-only {
+    grid-column-gap: 20px;
   }
 }
 
@@ -126,8 +132,8 @@
     margin: 0;
     font-size: 15px;
 
-    @media (max-width: 1000px) {
-      font-size: 11px;
+    @include for-phone-only {
+      font-size: 11px
     }
   }
 
