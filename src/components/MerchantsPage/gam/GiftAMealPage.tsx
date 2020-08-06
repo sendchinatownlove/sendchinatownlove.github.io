@@ -1,17 +1,39 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
+import { getCampaigns } from '../../../utilities';
+import { useHistory } from 'react-router-dom';
 
 import illustrated_flatlay_hero from '../images/illustrated_flatlay_hero.png';
 import gam_icon_step1 from '../images/gam_icon_step1.svg';
 import gam_icon_step2 from '../images/gam_icon_step2.svg';
 import gam_icon_step3 from '../images/gam_icon_step3.svg';
 import gam_icon_step4 from '../images/gam_icon_step4.svg';
+import CampaignListItem from './CampaignListItem';
 
 interface Props {
   menuOpen: boolean;
 }
 
 const GiftAMealPage = (props: Props) => {
+  const [activeCampaigns, setActiveCampaigns] = useState([]);
+  const [pastCampaigns, setPastCampaigns] = useState([]);
+
+  const fetchData = async () => {
+    const campaignData = await getCampaigns();
+    const active = campaignData.data.filter(
+      (campaign: any) => campaign.active && campaign.valid
+    );
+    setActiveCampaigns(active);
+    const past = campaignData.data.filter((campaign: any) => !campaign.active);
+    setPastCampaigns(past);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const history = useHistory();
 
   return (
     <div
@@ -52,11 +74,24 @@ const GiftAMealPage = (props: Props) => {
         </div>
       </div>
       <br />
-      <button className={styles.backButton}>Back to merchants</button>
+      <button
+        className={styles.backButton}
+        onClick={() => {
+          history.goBack();
+        }}
+      >
+        Back to merchants
+      </button>
       <h5 className={styles.campaignHeader}>Active Gift-a-Meal</h5>
-      // active campaigns here
+      {activeCampaigns.map((campaign: any) => (
+        // TODO: pass campaign data to CampaignListItem
+        <CampaignListItem campaign={''} />
+      ))}
       <h5 className={styles.campaignHeader}>Past Gift-a-Meal</h5>
-      // past campaigns here
+      {pastCampaigns.map((campaign: any) => (
+        // TODO: pass campaign data to CampaignListItem
+        <CampaignListItem campaign={''} />
+      ))}
     </div>
   );
 };

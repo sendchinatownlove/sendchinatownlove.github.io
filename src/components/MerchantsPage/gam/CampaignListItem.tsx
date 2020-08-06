@@ -2,8 +2,7 @@ import React from 'react';
 import CampaignProgressBar from './CampaignProgressBar';
 import styled from 'styled-components';
 import {
-  smallScreens,
-  tabletScreens,
+  tabletScreens
 } from '../../../utilities/general/responsive';
 import campaignDefaultImage from '../images/campaign_default.png';
 import apexLogo from '../images/apex-logo.png';
@@ -104,6 +103,7 @@ const Location = styled.div`
 
   @media (${tabletScreens}) {
     font-size: 14px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -118,6 +118,7 @@ const Name = styled.div`
   margin-bottom: 18px;
 
   @media (${tabletScreens}) {
+    margin-bottom: 10px;
     width: 70%;
   }
 `;
@@ -134,18 +135,8 @@ const Description = styled.div`
 
   @media (${tabletScreens}) {
     font-size: 14px;
-    margin-bottom: 34px;
+    margin-bottom: 10px;
   }
-`;
-
-const TimeStamp = styled.div`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
-  letter-spacing: 0.02em;
-  color: #9e9e9e;
 `;
 
 const Button = styled.div`
@@ -162,6 +153,7 @@ const Button = styled.div`
   @media (max-width: 550px) {
     font-size: 14px;
     width: 100%;
+    margin-bottom: 10px;
   }
 `;
 
@@ -173,6 +165,7 @@ const ImagesContainer = styled.span`
   @media (${tabletScreens}) {
     position: absolute;
     top: 132px;
+    margin-bottom: 30px;
 
     img {
       height: 25px;
