@@ -10,6 +10,7 @@ import apexLogo from '../images/apex-logo.png';
 import melonpannaLogo from '../images/melonpanna-logo.png';
 
 // In the final implementation, campaign will be object declared in types.ts
+
 interface Props {
   campaign: String;
 }
@@ -55,22 +56,15 @@ const Container = styled.div`
   border-bottom: 1px solid #e5e5e5;
   display: flex;
   max-height: 350px;
-  object-fit: cover;
   margin: 35px 0 55px;
   justify-content: space-between;
 
-  @media (max-width: 1350px) {
-    margin: 35px 35px 55px;
-  }
-
   @media (${tabletScreens}) {
-    max-height: 300px;
-  }
-
-  @media (${smallScreens}) {
-    flex-direction: column-reverse;
-    margin-top: 0;
-    max-height: 500px;
+    max-height: 575px;
+    flex-direction: column;
+    margin: 0 17px;
+    position: relative;
+    padding-top: 15px;
   }
 `;
 
@@ -80,12 +74,20 @@ const ColumnContainer = styled.div`
   padding: 1rem 2rem 1.5rem;
 
   @media (${tabletScreens}) {
+    padding: 0.5rem 1rem 0.75rem;
+
     > span {
       margin: 2.5px 0;
     }
 
     > button {
       width: 100%;
+    }
+
+    > img {
+      height: 103px;
+      object-fit: cover;
+      object-position: 0 25%;
     }
   }
 `;
@@ -99,6 +101,10 @@ const Location = styled.div`
   letter-spacing: 0.02em;
   color: #1e7c9a;
   margin-bottom: 15px;
+
+  @media (${tabletScreens}) {
+    font-size: 14px;
+  }
 `;
 
 const Name = styled.div`
@@ -110,6 +116,10 @@ const Name = styled.div`
   letter-spacing: 0.02em;
   color: #000000;
   margin-bottom: 18px;
+
+  @media (${tabletScreens}) {
+    width: 70%;
+  }
 `;
 
 const Description = styled.div`
@@ -121,6 +131,21 @@ const Description = styled.div`
   letter-spacing: 0.02em;
   color: #1e1e1e;
   margin-bottom: 50px;
+
+  @media (${tabletScreens}) {
+    font-size: 14px;
+    margin-bottom: 34px;
+  }
+`;
+
+const TimeStamp = styled.div`
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  color: #9e9e9e;
 `;
 
 const Button = styled.div`
@@ -135,6 +160,7 @@ const Button = styled.div`
   letter-spacing: 0.05em;
 
   @media (max-width: 550px) {
+    font-size: 14px;
     width: 100%;
   }
 `;
@@ -143,4 +169,13 @@ const ImagesContainer = styled.span`
   align-self: right;
   margin-bottom: 60px;
   align-self: flex-end;
+
+  @media (${tabletScreens}) {
+    position: absolute;
+    top: 132px;
+
+    img {
+      height: 25px;
+    }
+  }
 `;
