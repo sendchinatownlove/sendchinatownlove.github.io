@@ -40,19 +40,23 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  min-height: ${(props: ContainerProps) => props.isOnLandingPage ? '200px' : '100px'};
+  min-height: ${(props: ContainerProps) =>
+    props.isOnLandingPage ? '200px' : '100px'};
   flex-direction: ${(props: ContainerProps) =>
     props.isOnLandingPage ? 'column' : 'row'};
   margin: ${(props: ContainerProps) => (props.isOnLandingPage ? '24px' : '0')}
     auto;
   ${(props: ContainerProps) =>
     !props.isOnLandingPage && 'border-bottom: 1px solid #f7f7f7;'}
-  ${(props: ContainerProps) => !props.isOnLandingPage && 'padding: 10px 2.5%;'}
+  ${(props: ContainerProps) =>
+    !props.isOnLandingPage && 'padding: 10px 2.5%;'}
   color: black;
   text-align: center;
 `;
 const Header = styled.div`
-  ${(props: ContainerProps) => !props.isOnLandingPage && `
+  ${(props: ContainerProps) =>
+    !props.isOnLandingPage &&
+    `
     margin-left: 15px;
     max-width: 307px;
   `};

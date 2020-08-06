@@ -88,7 +88,7 @@ const App = () => {
             </VoucherProvider>
           </Route>
           <Route path="/:seller_id/dashboard/:secret_id">
-              <MerchantVoucherDashboard />
+            <MerchantVoucherDashboard />
           </Route>
           <Route
             path="/gift-a-meal"
