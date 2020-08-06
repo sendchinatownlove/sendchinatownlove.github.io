@@ -80,9 +80,11 @@ const Amount = (props: Props) => {
         <BackButton onClick={backToAmount}>BACK</BackButton>
         <Header>
           <HeaderText>
-            {voucher.single_use ? "Are you ready to redeem your voucher?" : "Complete Your Purchase"}
-          </HeaderText>          
-          <MoreInfo showShadow={true} inverted={true} marginLeft="45px"/>
+            {voucher.single_use
+              ? 'Are you ready to redeem your voucher?'
+              : 'Complete Your Purchase'}
+          </HeaderText>
+          <MoreInfo showShadow={true} inverted={true} marginLeft="45px" />
         </Header>
         <BalanceContainer>
           {!voucher.single_use ? (
@@ -175,7 +177,7 @@ const VoucherContainer = styled.div`
   justify-content: center;
   margin: 16px auto;
   span {
-    width: 80%;
+    width: 95%;
   }
 `;
 const Divider = styled.div`
