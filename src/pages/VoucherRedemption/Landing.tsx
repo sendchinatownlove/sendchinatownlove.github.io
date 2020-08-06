@@ -28,7 +28,7 @@ const LandingCard = (props: Props) => {
   };
 
   return (
-    <ViewContainer>
+    <MainViewContainer>
       <StoreBanner />
       <CardContainer onClick={setView}>
         <VoucherContent>
@@ -58,12 +58,15 @@ const LandingCard = (props: Props) => {
       <Footer>
         <Image src={Logo} />
       </Footer>
-    </ViewContainer>
+    </MainViewContainer>
   );
 };
 
 export default LandingCard;
 
+const MainViewContainer = styled(ViewContainer)`
+  height: 100vh;
+`;
 const CardContainer = styled(SubViewContainer)`
   padding-top: 5px;
   width: 307px;
@@ -93,6 +96,7 @@ const Footer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  min-height: 175px;
   text-align: center;
   margin: 16px auto;
 `;
@@ -114,7 +118,7 @@ const Button = styled.div`
   font-size: 13px;
   line-height: 18px;
   text-align: center;
-  min-height: 40px;
+  min-height: 75px;
   align-items: center;
 `;
 const Balance = styled.div`

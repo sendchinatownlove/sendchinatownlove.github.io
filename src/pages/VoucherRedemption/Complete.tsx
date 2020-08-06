@@ -27,7 +27,7 @@ const Amount = () => {
   };
 
   return (
-    <CompleteContainer>
+    <ViewContainer>
       <StoreBanner />
       <MainView>
         <BoldText>Redemption Complete</BoldText>
@@ -42,18 +42,14 @@ const Amount = () => {
         <BoldText> Thank you for dining at {voucher.storeName}! </BoldText>
         <SubmitButton onClick={(e) => setView(0)}>Finish</SubmitButton>
       </MainView>
-    </CompleteContainer>
+    </ViewContainer>
   );
 };
 
 export default Amount;
 
-const CompleteContainer = styled(ViewContainer)`
-  height: 100%;
-`;
-
 const MainView = styled(Footer)`
-  height: 100%;
+  min-height: 100vh;
   padding: 0 5%;
   justify-content: space-around;
 `;

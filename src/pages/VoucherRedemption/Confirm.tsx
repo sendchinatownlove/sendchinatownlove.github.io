@@ -74,17 +74,15 @@ const Amount = (props: Props) => {
   const backToAmount = (e) => setView(voucher.single_use ? 0 : 1);
 
   return (
-    <ViewContainer>
+    <Container>
       <MainView>
         <StoreBanner />
         <BackButton onClick={backToAmount}>BACK</BackButton>
         <Header>
-          {voucher.single_use ? (
-            <Text>Are you ready to redeem your voucher?</Text>
-          ) : (
-            <Text>Complete Your Purchase</Text>
-          )}
-          <MoreInfo showShadow={true} inverted={true} marginLeft="45px" />
+          <HeaderText>
+            {voucher.single_use ? "Are you ready to redeem your voucher?" : "Complete Your Purchase"}
+          </HeaderText>          
+          <MoreInfo showShadow={true} inverted={true} marginLeft="45px"/>
         </Header>
         <BalanceContainer>
           {!voucher.single_use ? (
@@ -132,12 +130,15 @@ const Amount = (props: Props) => {
           {loading ? <Loader size="22px" /> : 'Next'}
         </SubmitButton>
       </Footer>
-    </ViewContainer>
+    </Container>
   );
 };
 
 export default Amount;
 
+const Container = styled(ViewContainer)`
+  min-height: 500px;
+`;
 const Header = styled(SubViewContainer)`
   flex-direction: row;
   font-weight: 600;
@@ -145,6 +146,9 @@ const Header = styled(SubViewContainer)`
   min-height: 22px;
   line-height: 22px;
   justify-content: center;
+`;
+const HeaderText = styled(Text)`
+  width: 50%;
 `;
 const BalanceContainer = styled(SubViewContainer)`
   min-height: 300px;
@@ -171,7 +175,7 @@ const VoucherContainer = styled.div`
   justify-content: center;
   margin: 16px auto;
   span {
-    width: 50%;
+    width: 80%;
   }
 `;
 const Divider = styled.div`

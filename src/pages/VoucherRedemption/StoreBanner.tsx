@@ -40,7 +40,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  ${(props: ContainerProps) => props.isOnLandingPage && 'min-height: 200px;'}
+  min-height: ${(props: ContainerProps) => props.isOnLandingPage ? '200px' : '100px'};
   flex-direction: ${(props: ContainerProps) =>
     props.isOnLandingPage ? 'column' : 'row'};
   margin: ${(props: ContainerProps) => (props.isOnLandingPage ? '24px' : '0')}
@@ -51,13 +51,15 @@ const Container = styled.div`
   color: black;
   text-align: center;
 `;
-const Header = styled.h1`
-  ${(props: ContainerProps) => !props.isOnLandingPage && 'margin-left: 15px;'};
+const Header = styled.div`
+  ${(props: ContainerProps) => !props.isOnLandingPage && `
+    margin-left: 15px;
+    max-width: 307px;
+  `};
   font-style: normal;
   font-weight: bold;
   font-size: 22px;
   line-height: 30px;
-  min-height: 65px;
 `;
 const OwnerImage = styled.img`
   width: ${(props: ContainerProps) =>
