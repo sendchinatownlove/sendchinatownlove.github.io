@@ -19,7 +19,7 @@
   grid-template-rows: 300px 215px;
 }
 
-.main {
+.header_text {
   grid-row: 1;
   grid-column: 1;
   display: flex;
@@ -92,11 +92,12 @@
 
 .instructions {
   max-width: 1250px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 
   @media (max-width: 1000px) {
+    display: grid;
     grid-auto-flow: column;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -133,7 +134,7 @@
     font-size: 15px;
 
     @include for-phone-only {
-      font-size: 11px
+      font-size: 11px;
     }
   }
 
@@ -180,5 +181,65 @@
 
   @include for-phone-only {
     font-size: 16px;
+  }
+}
+
+.noCampaign {
+  align-items: center;
+  border: 1px solid #E5E5E5;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 30px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    margin-bottom: 15px;
+
+    & > div {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.noCampaignText {
+
+  :first-child {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+    letter-spacing: 0.02em;
+  
+    @include for-phone-only {
+      font-size: 14px;
+      line-height: 19px;
+    }
+  }
+
+  :last-child {
+    font-size: 15px;
+
+    @include for-phone-only {
+      font-size: 12px;
+    }
+  }
+}
+
+.giftButton {
+  justify-self: flex-end;
+  text-align: center;
+  width: 240px;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  margin-bottom: 18px;
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  width: 100%;
+
+  @media (max-width: 550px) {
+    font-size: 14px;
+    width: 100%;
   }
 }
