@@ -32,7 +32,7 @@ const LandingCard = (props: Props) => {
           }}
         >
           By proceeding with your purchase, you understand that the voucher card
-          is not redeemable for cash and can only be used at Shunfa Bakery. All
+          is not redeemable for cash and can only be used at {voucher.storeName}. All
           purchases are final. In the event that the merchant is no longer open
           at the time of redemption, Send Chinatown Love Inc. will not be able
           to refund your purchase. Balance displayed in the voucher may or may

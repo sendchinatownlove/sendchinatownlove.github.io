@@ -93,7 +93,6 @@ const Container = styled.div`
     background-image: url(${NYCBackdrop});
     background-size: 1780.75px 905px;
   `}
-  height: 100vh;
   background-color: transparent;
   display: flex;
   flex-direction: column;
