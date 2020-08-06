@@ -169,17 +169,16 @@ const BalanceRow = styled(SubViewContainer)`
 `;
 const VoucherContainer = styled.div`
   display: inline-flex;
-  min-height: 70px;
+  min-height: 30px;
   border: 1px solid #d9d9d9;
   box-sizing: border-box;
   border-radius: 8px;
   word-break: break-all;
   justify-content: center;
   margin: 16px auto;
-  width: 95%;
-  span {
-    width: 95%;
-  }
+  align-items: center;
+  padding: 8px 16px;
+  max-width: 80%;
 `;
 const Divider = styled.div`
   border-bottom: 2px solid #f7f7f7;
