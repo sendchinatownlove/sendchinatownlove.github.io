@@ -176,6 +176,7 @@ const VoucherContainer = styled.div`
   word-break: break-all;
   justify-content: center;
   margin: 16px auto;
+  width: 95%;
   span {
     width: 95%;
   }
