@@ -186,7 +186,7 @@
 
 .noCampaign {
   align-items: center;
-  border: 1px solid #E5E5E5;
+  border: 1px solid #e5e5e5;
   display: grid;
   grid-template-columns: 2fr 1fr;
   padding: 30px;
@@ -202,14 +202,13 @@
 }
 
 .noCampaignText {
-
   :first-child {
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
     line-height: 33px;
     letter-spacing: 0.02em;
-  
+
     @include for-phone-only {
       font-size: 14px;
       line-height: 19px;
@@ -241,5 +240,58 @@
   @media (max-width: 550px) {
     font-size: 14px;
     width: 100%;
+  }
+}
+
+// instructions modal styling
+
+.modalSub {
+  background-color: $standard-red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 10px;
+  margin: 20px 0;
+}
+
+.modalInstructions {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 5px;
+
+  @media (max-width: 900px) {
+    grid-auto-flow: column;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: 15px;
+    justify-items: center;
+  }
+}
+
+.modalStep {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-column-gap: 5px;
+  width: 145px;
+
+  img {
+    width: 35px;
+  }
+}
+
+.modalStepText {
+  p {
+    color: white;
+    margin: 0;
+    font-size: 11px;
+  }
+
+  :first-child {
+    text-transform: uppercase;
+  }
+
+  :last-child {
+    font-weight: 600;
   }
 }
