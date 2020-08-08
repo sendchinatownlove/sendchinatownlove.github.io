@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { getCampaigns } from '../../../utilities';
-import { useHistory } from 'react-router-dom';
 
 import illustrated_flatlay_hero from '../images/illustrated_flatlay_hero.png';
 import gam_icon_step1 from '../images/gam_icon_step1.svg';
@@ -10,6 +9,7 @@ import gam_icon_step2 from '../images/gam_icon_step2.svg';
 import gam_icon_step3 from '../images/gam_icon_step3.svg';
 import gam_icon_step4 from '../images/gam_icon_step4.svg';
 import CampaignListItem from './CampaignListItem';
+import VideoComponent from './VideoComponent';
 
 interface Props {
   menuOpen: boolean;
@@ -33,8 +33,6 @@ const GiftAMealPage = (props: Props) => {
     fetchData();
     // eslint-disable-next-line
   }, []);
-
-  const history = useHistory();
 
   return (
     <div
@@ -77,23 +75,25 @@ const GiftAMealPage = (props: Props) => {
       <br />
       <button
         className={styles.backButton}
-        onClick={() => {
-          history.goBack();
+        onClick={(e) => {
+          e.preventDefault();
+          window.location.href = '/all';
         }}
       >
         Back to merchants
       </button>
       <h5 className={styles.campaignHeader}>Active Gift-a-Meal</h5>
       {activeCampaigns.map((campaign: any) => (
-        // TODO: pass campaign data to CampaignListItem
         <CampaignListItem campaign={campaign} />
       ))}
+
+      <VideoComponent videoId="FYlUOhzYlRM"></VideoComponent>
+
       <h5 className={styles.campaignHeader}>Past Gift-a-Meal</h5>
       {pastCampaigns.map((campaign: any) => (
-        // TODO: pass campaign data to CampaignListItem
         <CampaignListItem campaign={campaign} />
       ))}
-    </div>
+    </div >
   );
 };
 
