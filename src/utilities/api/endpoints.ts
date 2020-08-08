@@ -4,3 +4,4 @@ export const sellers = baseUrl + 'sellers/';
 export const charges = baseUrl + 'charges';
 export const vouchers = baseUrl + 'gift_cards/';
 export const campaigns = baseUrl + 'campaigns/';
+export const distributors = baseUrl + 'distributors/';

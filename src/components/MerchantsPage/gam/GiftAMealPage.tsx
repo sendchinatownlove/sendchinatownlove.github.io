@@ -31,6 +31,7 @@ const GiftAMealPage = (props: Props) => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   const history = useHistory();
@@ -85,12 +86,12 @@ const GiftAMealPage = (props: Props) => {
       <h5 className={styles.campaignHeader}>Active Gift-a-Meal</h5>
       {activeCampaigns.map((campaign: any) => (
         // TODO: pass campaign data to CampaignListItem
-        <CampaignListItem campaign={''} />
+        <CampaignListItem campaign={campaign} />
       ))}
       <h5 className={styles.campaignHeader}>Past Gift-a-Meal</h5>
       {pastCampaigns.map((campaign: any) => (
         // TODO: pass campaign data to CampaignListItem
-        <CampaignListItem campaign={''} />
+        <CampaignListItem campaign={campaign} />
       ))}
     </div>
   );
