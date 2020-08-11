@@ -109,10 +109,14 @@
     "header": "爱心餐",
     "description": "让你的爱心有更大的影响力，捐献给我们的商家以提供爱心餐给社区公益团体，发送给有需要的人。",
     "subheading": {
-      "step1": "第一步：捐款给爱心餐活动",
-      "step2": "第二步：捐款收益全数归给我们的商家",
-      "step3": "第三步：我们将餐券捐给社区公益团体",
-      "step4": "第四步：社区公益团体发送餐点给有需要的人"
+      "step1": "第一步：",
+      "step1Text": "捐款给爱心餐活动",
+      "step2": "第二步：",
+      "step2Text": "捐款收益全数归给我们的商家",
+      "step3": "第三步：",
+      "step3Text": "我们将餐券捐给社区公益团体",
+      "step4": "第四步：",
+      "step4Text": "社区公益团体发送餐点给有需要的人"
     },
     "backButton": "回到商家页面",
     "giftButton": "Gift Meal",
@@ -129,5 +133,16 @@
       "viewButton": "查看商家",
       "giftButton": "捐爱心餐"
     }
+  },
+  "buyMealPool": {
+    "header": "爱心餐",
+    "description": {
+      "weAre": "我们与",
+      "andRestaurants": "以及受到 COVID-19 疫情影响的餐厅合作，捐爱心餐给需要的团体。",
+      "allItTakes": "五美金就能响应。"
+    },
+    "prompt": "Please enter how many meals to gift",
+    "totalLabel": "Total: ",
+    "next": "Next"
   }
 }

@@ -7,6 +7,7 @@ import CampaignListItem from './CampaignListItem';
 import Modal from '../../Modal';
 import { useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext/context';
 import { SET_MODAL_VIEW } from '../../../utilities/hooks/ModalPaymentContext/constants';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   menuOpen: boolean;
@@ -15,6 +16,8 @@ interface Props {
 const ModalBox: any = Modal;
 
 const GiftAMealPage = (props: Props) => {
+  const { t } = useTranslation();
+
   const [activeCampaigns, setActiveCampaigns] = useState([]);
   const [pastCampaigns, setPastCampaigns] = useState([]);
 
@@ -36,21 +39,21 @@ const GiftAMealPage = (props: Props) => {
         />
         <div className={styles.header_text}>
           <div>
-            <h3 style={{ fontWeight: 'bolder' }}>Gift a Meal</h3>
-            <p>
-              Double the impact of your donation by gifting meals from our
-              merchants to local organizations that will distribute your gifted
-              meals to our community in need.
-            </p>
+            <h3 style={{ fontWeight: 'bolder' }}>{t('gamHome.header')}</h3>
+            <p>{t('gamHome.description')}</p>
           </div>
         </div>
         <CampaginInstructions isModal={false} />
       </div>
       <br />
-      <button className={styles.backButton}>Back to merchants</button>
+      <button className={styles.backButton}>
+        {t('gamHome.backButton')}
+      </button>
       {activeCampaigns.length ? (
         <>
-          <h5 className={styles.campaignHeader}>Active Gift-a-Meal</h5>
+          <h5 className={styles.campaignHeader}>
+            {t('gamHome.activeSection')}
+          </h5>
           {activeCampaigns.map((campaign: any) => (
             // TODO: pass campaign data to CampaignListItem
             <CampaignListItem campaign={''} />
@@ -59,21 +62,18 @@ const GiftAMealPage = (props: Props) => {
       ) : (
         <div className={styles.noCampaign}>
           <div className={styles.noCampaignText}>
-            <p>No active campaigns? You can still donate!</p>
-            <p>
-              Meal donations here will automatically be applied to our next
-              campaign.
-            </p>
+            <p>{t('gamHome.noCampaignsBox.CTA')}</p>
+            <p>{t('gamHome.noCampaignsBox.description')}</p>
           </div>
           <button
             className={classnames('button--filled', styles.giftButton)}
             onClick={showModal}
           >
-            Gift Meal
+            {t('gamHome.giftButton')}
           </button>
         </div>
       )}
-      <h5 className={styles.campaignHeader}>Past Gift-a-Meal</h5>
+      <h5 className={styles.campaignHeader}>{t('gamHome.pastSection')}</h5>
       {pastCampaigns.map((campaign: any) => (
         // TODO: pass campaign data to CampaignListItem
         <CampaignListItem campaign={''} />

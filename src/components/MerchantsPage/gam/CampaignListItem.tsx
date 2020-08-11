@@ -8,6 +8,7 @@ import {
 import campaignDefaultImage from '../images/campaign_default.png';
 import apexLogo from '../images/apex-logo.png';
 import melonpannaLogo from '../images/melonpanna-logo.png';
+import { useTranslation } from 'react-i18next';
 
 // In the final implementation, campaign will be object declared in types.ts
 
@@ -16,6 +17,8 @@ interface Props {
 }
 
 const CampaignListItem = (campaign: Props) => {
+  const { t } = useTranslation();
+
   return (
     <Container>
       <ColumnContainer>
@@ -43,8 +46,12 @@ const CampaignListItem = (campaign: Props) => {
           <img src={apexLogo} alt="merchant_logo" />
           <img src={melonpannaLogo} alt="distributor_logo" />
         </ImagesContainer>
-        <Button className="button--filled">Visit merchant</Button>
-        <Button className={'button--outlined'}>Gift a meal</Button>
+        <Button className="button--filled">
+          `${t('gamHome.listItem.viewButton')}`
+        </Button>
+        <Button className={'button--outlined'}>
+          `${t('gamHome.listItem.giftButton')}`
+        </Button>
       </ColumnContainer>
     </Container>
   );
