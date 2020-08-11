@@ -5,7 +5,6 @@ import {
   tabletScreens
 } from '../../../utilities/general/responsive';
 import campaignDefaultImage from '../images/campaign_default.png';
-import melonpannaLogo from '../images/melonpanna-logo.png';
 import { Campaign } from '../../../utilities/api/types';
 import { getDistributor, getSeller } from '../../../utilities';
 import { useEffect, useState } from 'react';
@@ -69,11 +68,13 @@ const CampaignListItem = (props: Props) => {
         <ImagesContainer>
           {distributor &&
             (<a href={distributor.website_url}>
-              <img src={distributor.image_url} alt="distributor_logo" />
+              <img src={distributor.image_url} style={{ margin: '0 15px' }} alt="distributor_logo" />
             </a>
             )
           }
-          <img src={melonpannaLogo} alt="merchant_logo" />
+          {merchant &&
+            (<img src={merchant.logo_image_url} alt="merchant_logo" />)
+          }
         </ImagesContainer>
         {merchant && (
           <Button className="button--filled" onClick={(e) => {
@@ -81,7 +82,9 @@ const CampaignListItem = (props: Props) => {
             window.location.href = '/' + merchant.seller_id;
           }}>Visit merchant</Button>
         )}
-        <Button className={'button--outlined'}>Gift a meal</Button>
+        {campaign.active && (
+          <Button className={'button--outlined'}>Gift a meal</Button>
+        )}
       </ColumnContainer>
     </Container >
   );
@@ -97,7 +100,7 @@ const Container = styled.div`
   justify-content: space-between;
 
   @media (${tabletScreens}) {
-    max-height: 575px;
+    max-height: 600px;
     flex-direction: column;
     margin: 0 17px;
     position: relative;
@@ -169,7 +172,7 @@ const Description = styled.div`
   line-height: 20px;
   letter-spacing: 0.02em;
   color: #1e1e1e;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 
   @media (${tabletScreens}) {
     font-size: 14px;
