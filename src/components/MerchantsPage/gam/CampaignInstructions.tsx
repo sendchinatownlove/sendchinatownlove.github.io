@@ -14,10 +14,10 @@ interface Props {
 const CampaignInstructions = (props: Props) => {
   const { t } = useTranslation();
   return (
-    <div className={props.isModal ? styles.modalSub : styles.sub}>
+    <div className={props.isModal ? styles.modalBackground : styles.background}>
       <div
         className={
-          props.isModal ? styles.modalInstructions : styles.instructions
+          props.isModal ? styles.modalInstructionsGrid : styles.instructionsGrid
         }
       >
         {[
@@ -53,7 +53,7 @@ export default CampaignInstructions;
 
 const generateStep = (step, text, icon, isModal, idx) => {
   return (
-    <div className={isModal ? styles.modalStep : styles.step} key={idx}>
+    <div className={isModal ? styles.modalStepGrid : styles.stepGrid} key={idx}>
       <img src={icon} alt="icon" />
       <div className={isModal ? styles.modalStepText : styles.stepText}>
         <p>{step}</p>

@@ -59,10 +59,7 @@ const CampaignListItem = (campaign: Props) => {
         <Button className="button--filled">
           {t('gamHome.listItem.viewButton')}
         </Button>
-        <Button 
-          className={'button--outlined'}
-          onClick={showModal}
-        >
+        <Button className={'button--outlined'} onClick={showModal}>
           {t('gamHome.listItem.giftButton')}
         </Button>
       </ColumnContainer>

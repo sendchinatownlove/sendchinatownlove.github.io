@@ -2,22 +2,20 @@ import React, { useState } from 'react';
 import styles from './styles.module.scss';
 import illustrated_flatlay_hero from '../images/illustrated_flatlay_hero.png';
 import CampaginInstructions from './CampaignInstructions';
-import NoActiveCampaignsBox from './NoCampignsBox'
+import NoActiveCampaignsBox from './NoCampignsBox';
 import CampaignListItem from './CampaignListItem';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 interface Props {
   menuOpen: boolean;
 }
 
-
-
 const GiftAMealPage = (props: Props) => {
   const { t } = useTranslation();
-  const history = useHistory()
+  const history = useHistory();
 
-  const [activeCampaigns, setActiveCampaigns] = useState([ ]);
+  const [activeCampaigns, setActiveCampaigns] = useState([]);
   const [pastCampaigns, setPastCampaigns] = useState([]);
 
   return (
@@ -40,10 +38,7 @@ const GiftAMealPage = (props: Props) => {
         <CampaginInstructions isModal={false} />
       </div>
       <br />
-      <button 
-        className={styles.backButton}
-        onClick={history.goBack}
-      >
+      <button className={styles.backButton} onClick={history.goBack}>
         {t('gamHome.backButton')}
       </button>
       {activeCampaigns.length ? (
@@ -56,7 +51,9 @@ const GiftAMealPage = (props: Props) => {
             <CampaignListItem campaign={'shunfa-bakery'} />
           ))}
         </>
-      ) : <NoActiveCampaignsBox />}
+      ) : (
+        <NoActiveCampaignsBox />
+      )}
       <h5 className={styles.campaignHeader}>{t('gamHome.pastSection')}</h5>
       {pastCampaigns.map((campaign: any) => (
         // TODO: pass campaign data to CampaignListItem
@@ -67,5 +64,3 @@ const GiftAMealPage = (props: Props) => {
 };
 
 export default GiftAMealPage;
-
-
