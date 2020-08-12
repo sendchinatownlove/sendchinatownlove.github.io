@@ -1,30 +1,24 @@
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
-import classnames from 'classnames';
 import illustrated_flatlay_hero from '../images/illustrated_flatlay_hero.png';
 import CampaginInstructions from './CampaignInstructions';
+import NoActiveCampaignsBox from './NoCampignsBox'
 import CampaignListItem from './CampaignListItem';
-import Modal from '../../Modal';
-import { useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../../utilities/hooks/ModalPaymentContext/constants';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from "react-router-dom";
 
 interface Props {
   menuOpen: boolean;
 }
 
-const ModalBox: any = Modal;
+
 
 const GiftAMealPage = (props: Props) => {
   const { t } = useTranslation();
+  const history = useHistory()
 
-  const [activeCampaigns, setActiveCampaigns] = useState([]);
+  const [activeCampaigns, setActiveCampaigns] = useState([ ]);
   const [pastCampaigns, setPastCampaigns] = useState([]);
-
-  const dispatch = useModalPaymentDispatch();
-  const showModal = (event: any) => {
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
-  };
 
   return (
     <div
@@ -46,7 +40,10 @@ const GiftAMealPage = (props: Props) => {
         <CampaginInstructions isModal={false} />
       </div>
       <br />
-      <button className={styles.backButton}>
+      <button 
+        className={styles.backButton}
+        onClick={history.goBack}
+      >
         {t('gamHome.backButton')}
       </button>
       {activeCampaigns.length ? (
@@ -56,38 +53,19 @@ const GiftAMealPage = (props: Props) => {
           </h5>
           {activeCampaigns.map((campaign: any) => (
             // TODO: pass campaign data to CampaignListItem
-            <CampaignListItem campaign={''} />
+            <CampaignListItem campaign={'shunfa-bakery'} />
           ))}
         </>
-      ) : (
-        <div className={styles.noCampaign}>
-          <div className={styles.noCampaignText}>
-            <p>{t('gamHome.noCampaignsBox.CTA')}</p>
-            <p>{t('gamHome.noCampaignsBox.description')}</p>
-          </div>
-          <button
-            className={classnames('button--filled', styles.giftButton)}
-            onClick={showModal}
-          >
-            {t('gamHome.giftButton')}
-          </button>
-        </div>
-      )}
+      ) : <NoActiveCampaignsBox />}
       <h5 className={styles.campaignHeader}>{t('gamHome.pastSection')}</h5>
       {pastCampaigns.map((campaign: any) => (
         // TODO: pass campaign data to CampaignListItem
         <CampaignListItem campaign={''} />
       ))}
-
-      <ModalBox
-        purchaseType={'buy_meal'}
-        sellerId={''}
-        sellerName={''}
-        costPerMeal={5}
-        nonProfitLocationId={''}
-      />
     </div>
   );
 };
 
 export default GiftAMealPage;
+
+

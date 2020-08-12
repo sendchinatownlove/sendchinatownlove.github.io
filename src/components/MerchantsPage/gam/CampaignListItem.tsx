@@ -9,6 +9,9 @@ import campaignDefaultImage from '../images/campaign_default.png';
 import apexLogo from '../images/apex-logo.png';
 import melonpannaLogo from '../images/melonpanna-logo.png';
 import { useTranslation } from 'react-i18next';
+import Modal from '../../Modal';
+import { useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext/context';
+import { SET_MODAL_VIEW } from '../../../utilities/hooks/ModalPaymentContext/constants';
 
 // In the final implementation, campaign will be object declared in types.ts
 
@@ -16,8 +19,15 @@ interface Props {
   campaign: String;
 }
 
+const ModalBox: any = Modal;
+
 const CampaignListItem = (campaign: Props) => {
   const { t } = useTranslation();
+
+  const dispatch = useModalPaymentDispatch();
+  const showModal = (event: any) => {
+    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+  };
 
   return (
     <Container>
@@ -47,12 +57,24 @@ const CampaignListItem = (campaign: Props) => {
           <img src={melonpannaLogo} alt="distributor_logo" />
         </ImagesContainer>
         <Button className="button--filled">
-          `${t('gamHome.listItem.viewButton')}`
+          {t('gamHome.listItem.viewButton')}
         </Button>
-        <Button className={'button--outlined'}>
-          `${t('gamHome.listItem.giftButton')}`
+        <Button 
+          className={'button--outlined'}
+          onClick={showModal}
+        >
+          {t('gamHome.listItem.giftButton')}
         </Button>
       </ColumnContainer>
+
+      {/* add appropriate references when merged */}
+      <ModalBox
+        purchaseType={'buy_meal'}
+        sellerId={'shunfa-bakery'}
+        sellerName={'Shunfa Bakery'}
+        costPerMeal={5}
+        nonProfitLocationId={''}
+      />
     </Container>
   );
 };
