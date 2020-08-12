@@ -207,7 +207,6 @@ const NavLinksContainer = styled.div`
 const HamburgerContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 125px;
   justify-content: space-between;
 `;
 
@@ -222,8 +221,8 @@ const NavLinkStyle = styled.a`
     width: 100%;
     margin: 16px auto;
     text-align: center;
-  `}
-  :link {
+t
+  `} :link {
     color: black;
   }
   :hover {
@@ -253,7 +252,10 @@ const LanguageContainer = styled.div`
   width: 78px;
   margin-left: 20px;
   margin-top: -4px;
-  ${(props: CompactProps) => props.compact === 'true' && 'margin-right: 20px;'}
+  ${(props: CompactProps) =>
+    props.compact === 'true' &&
+    `margin-right: 20px;
+  `}
 `;
 
 const LanguageButton = styled.div`
@@ -268,10 +270,12 @@ const LanguageButton = styled.div`
   }
   width: 35px;
 `;
+
 const LanguageSeparator = styled.div`
   margin-left: 6px;
   margin-right: 8px;
 `;
+
 const ReactNavLink = styled(Link)`
   text-decoration: none;
   color: black;
