@@ -9,7 +9,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import walletImage from './wallet.png';
 import cardImage from './card.png';
-import CampaignInstructions from '../MerchantsPage/gam/CampaignInstructions';
 import ReactPixel from 'react-facebook-pixel';
 
 export interface Props {
@@ -48,51 +47,26 @@ export const Modal = (props: Props) => {
   return (
     <form data-testid="ModalBuyMeal">
       <div>
-        {props.sellerId ? (
-          <h1>{t('buyMeal.header') + props.sellerName}</h1>
-        ) : (
-          <h1>Gift-a-Meal</h1>
-        )}
+        <h1>{t('buyMeal.header') + props.sellerName}</h1>
       </div>
-      <p>
-        {props.sellerId ? (
-          <>{t('buyMeal.subheader')}</>
-        ) : (
-          <>
-            We are partnering with APEX for Youth, 46 Mott, and Brooklyn
-            Chinese-American Association and restaurants who have been impacted
-            by COVID-19 to gift meals to communities in need.{' '}
-            <span style={{ fontWeight: 'bold' }}>All it takes is $5.</span>
-          </>
-        )}
-      </p>
+      <p>{t('buyMeal.subheader')}</p>
 
-      {props.sellerId ? (
-        <>
-          <div className={styles.illustrationsContainer}>
-            <img
-              src={walletImage}
-              alt={'How it works'}
-              className={styles.illustrationLeading}
-            />
-            <img
-              src={cardImage}
-              alt={'How it works'}
-              className={styles.illustrationTrailing}
-            />
-          </div>
-          <div className={styles.explantionContainer}>
-            <p className={styles.explanation}>
-              {t('buyMeal.explanationFirst')}
-            </p>
-            <p className={styles.explanation}>
-              {t('buyMeal.explanationSecond')}
-            </p>
-          </div>
-        </>
-      ) : (
-        <CampaignInstructions isModal={true} />
-      )}
+      <div className={styles.illustrationsContainer}>
+        <img
+          src={walletImage}
+          alt={'How it works'}
+          className={styles.illustrationLeading}
+        />
+        <img
+          src={cardImage}
+          alt={'How it works'}
+          className={styles.illustrationTrailing}
+        />
+      </div>
+      <div className={styles.explantionContainer}>
+        <p className={styles.explanation}>{t('buyMeal.explanationFirst')}</p>
+        <p className={styles.explanation}>{t('buyMeal.explanationSecond')}</p>
+      </div>
 
       <div className={styles.amountContainer}>
         <label htmlFor="select-amount">{t('buyMeal.prompt')}</label>

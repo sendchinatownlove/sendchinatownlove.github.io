@@ -1,6 +1,13 @@
 @import '../../../responsive';
 @import '../../../index.scss';
 
+.bold {
+  font-weight: 600;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
 .container {
   background-color: white;
   max-width: 1250px;
@@ -19,27 +26,22 @@
   grid-template-rows: 300px 215px;
 }
 
-.header_text {
+.headerText {
   grid-row: 1;
   grid-column: 1;
   display: flex;
-  align-items: center;
   z-index: 2;
-
-  & > div {
-    max-width: 385px;
-  }
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 385px;
 
   p {
     font-size: 18px;
   }
 
   @include for-phone-only {
-    align-items: flex-start;
-
-    & > div {
-      max-width: 264px;
-    }
+    max-width: 264px;
 
     h3 {
       font-size: 33px;
@@ -74,13 +76,12 @@
   @include base-button;
   font-weight: bold;
   font-size: 16px;
-  line-height: 22px;
-  display: flex;
-  align-items: center;
-  text-align: center;
+  display: grid;
+  place-items: center;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin-left: auto;
+  margin-bottom: 30px;
   cursor: pointer;
   border: none;
   background-color: transparent;
@@ -107,52 +108,6 @@
   }
 }
 
-.noCampaignText {
-  :first-child {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 33px;
-    letter-spacing: 0.02em;
-
-    @include for-phone-only {
-      font-size: 14px;
-      line-height: 19px;
-    }
-  }
-
-  :last-child {
-    font-size: 15px;
-
-    @include for-phone-only {
-      font-size: 12px;
-    }
-  }
-}
-
-.giftButton {
-  justify-self: flex-end;
-  text-align: center;
-  width: 240px;
-  letter-spacing: 0.15em;
-  cursor: pointer;
-  margin-bottom: 18px;
-  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.05em;
-  width: 100%;
-
-  @media (max-width: 550px) {
-    font-size: 14px;
-    width: 100%;
-  }
-}
-
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
-
 // CampaignInstructions styling when isModal=false
 .background {
   background-color: $standard-red;
@@ -164,6 +119,7 @@
   @media (max-width: 900px) {
     padding: 0 20px;
   }
+
 
   // to break out of the parent container
   position: relative;
@@ -221,15 +177,8 @@
       font-size: 11px;
     }
   }
-
-  :first-child {
-    text-transform: uppercase;
-  }
-
-  :last-child {
-    font-weight: 600;
-  }
 }
+
 
 // CampaignInstructions styling when isModal=true
 .modalBackground {
@@ -272,13 +221,5 @@
     color: white;
     margin: 0;
     font-size: 11px;
-  }
-
-  :first-child {
-    text-transform: uppercase;
-  }
-
-  :last-child {
-    font-weight: 600;
   }
 }

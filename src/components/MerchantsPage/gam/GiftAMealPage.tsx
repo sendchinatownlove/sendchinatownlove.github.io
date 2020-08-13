@@ -29,11 +29,9 @@ const GiftAMealPage = (props: Props) => {
           className={styles.hero}
           alt="meal overlay illustration"
         />
-        <div className={styles.header_text}>
-          <div>
-            <h3 style={{ fontWeight: 'bolder' }}>{t('gamHome.header')}</h3>
-            <p>{t('gamHome.description')}</p>
-          </div>
+        <div className={styles.headerText}>
+          <h3 style={{ fontWeight: 'bolder' }}>{t('gamHome.header')}</h3>
+          <p>{t('gamHome.description')}</p>
         </div>
         <CampaginInstructions isModal={false} />
       </div>

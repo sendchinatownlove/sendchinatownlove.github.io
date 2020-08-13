@@ -24,7 +24,7 @@ const ModalBox: any = Modal;
 const CampaignListItem = (campaign: Props) => {
   const { t } = useTranslation();
 
-  const dispatch = useModalPaymentDispatch();
+  const dispatch = useModalPaymentDispatch(); //provide null according to Bruce's new branch
   const showModal = (event: any) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
   };

@@ -56,8 +56,8 @@ const generateStep = (step, text, icon, isModal, idx) => {
     <div className={isModal ? styles.modalStepGrid : styles.stepGrid} key={idx}>
       <img src={icon} alt="icon" />
       <div className={isModal ? styles.modalStepText : styles.stepText}>
-        <p>{step}</p>
-        <p>{text}</p>
+        <p className={styles.uppercase}>{step}</p>
+        <p className={styles.bold}>{text}</p>
       </div>
     </div>
   );

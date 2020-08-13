@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './styles.module.scss';
-import { smallScreens } from '../../../utilities/general/responsive';
-import classnames from 'classnames';
+import {
+  smallScreens,
+  tabletScreens,
+} from '../../../utilities/general/responsive';
 import styled from 'styled-components';
 import Modal from '../../Modal';
 import { useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext/context';
@@ -13,18 +14,17 @@ const ModalBox: any = Modal;
 const NoActiveCampaignsBox = () => {
   const { t } = useTranslation();
 
-  const dispatch = useModalPaymentDispatch();
+  const dispatch = useModalPaymentDispatch(); //provide null according to Bruce's new branch
   const showModal = (event: any) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
   };
 
   return (
     <NoCampaignBox>
-      <div className={styles.noCampaignText}>
-        <p>{t('gamHome.noCampaignsBox.CTA')}</p>
-        <p>{t('gamHome.noCampaignsBox.description')}</p>
-        {/* add margin bottom to this paragrpah text */}
-      </div>
+      <TextContainer>
+        <Heading>{t('gamHome.noCampaignsBox.CTA')}</Heading>
+        <SubHeading>{t('gamHome.noCampaignsBox.description')}</SubHeading>
+      </TextContainer>
       <Button className="button--filled" onClick={showModal}>
         {t('gamHome.giftButton')}
       </Button>
@@ -42,16 +42,40 @@ const NoActiveCampaignsBox = () => {
 export default NoActiveCampaignsBox;
 
 const NoCampaignBox = styled.div`
-    align-items: center;
-    border: 1px solid #e5e5e5;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    padding: 30px;
+  align-items: center;
+  border: 1px solid #e5e5e5;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 30px;
 
-    @media (max-width: 900px) {
+  @media (${tabletScreens}) {
     grid-template-columns: 1fr;
     margin-bottom: 15px;
-    }
+  }
+`;
+
+const TextContainer = styled.div`
+  @media (${tabletScreens}) {
+    margin-bottom: 20px;
+  }
+`;
+
+const Heading = styled.p`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+
+  @media (${smallScreens}) {
+    font-size: 14px;
+  }
+`;
+
+const SubHeading = styled.p`
+  font-size: 15px;
+
+  @media (${smallScreens}) {
+    font-size: 12px;
+  }
 `;
 
 const Button = styled.button`

@@ -1,3 +1,4 @@
+@import '../../index.scss';
 @import '../../responsive';
 
 .amountContainer {
@@ -127,4 +128,15 @@
   .customAmt {
     width: 100%;
   }
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.link,
+.link:hover,
+.link:active {
+  color: $standard-red;
+  text-decoration: none;
 }

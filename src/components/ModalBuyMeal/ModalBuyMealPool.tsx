@@ -7,8 +7,7 @@ import {
   SET_AMOUNT,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useTranslation } from 'react-i18next';
-import walletImage from './wallet.png';
-import cardImage from './card.png';
+import CampaignInstructions from '../MerchantsPage/gam/CampaignInstructions';
 import ReactPixel from 'react-facebook-pixel';
 
 export interface Props {
@@ -47,26 +46,30 @@ export const Modal = (props: Props) => {
   return (
     <form data-testid="ModalBuyMeal">
       <div>
-        <h1>{t('buyMeal.header') + props.sellerName}</h1>
+          <h1>{t('buyMealPool.header')}</h1>
       </div>
-      <p>{t('buyMeal.subheader')}</p>
+      <p>
+          {t('buyMealPool.description.weAre')}
+          <a 
+            href="https://www.apexforyouth.org/" 
+            target="_blank" rel="noopener noreferrer"
+            className={styles.link}
+          > APEX for Youth</a>, 
+          <a 
+            href="http://www.lajornadany.org/" 
+            target="_blank" rel="noopener noreferrer"
+            className={styles.link}
+          > La Jornada Food Pantry</a>, 
+          <a 
+            href="https://www.cpc-nyc.org/" 
+            target="_blank" rel="noopener noreferrer"
+            className={styles.link}
+          > the Chinese-American Planning Council </a>
+          {t('buyMealPool.description.andRestaurants')} 
+          <span className={styles.bold}> {t('buyMealPool.description.allItTakes')}</span>
+      </p>
 
-      <div className={styles.illustrationsContainer}>
-        <img
-          src={walletImage}
-          alt={'How it works'}
-          className={styles.illustrationLeading}
-        />
-        <img
-          src={cardImage}
-          alt={'How it works'}
-          className={styles.illustrationTrailing}
-        />
-      </div>
-      <div className={styles.explantionContainer}>
-        <p className={styles.explanation}>{t('buyMeal.explanationFirst')}</p>
-        <p className={styles.explanation}>{t('buyMeal.explanationSecond')}</p>
-      </div>
+      <CampaignInstructions isModal={true} />
 
       <div className={styles.amountContainer}>
         <label htmlFor="select-amount">{t('buyMeal.prompt')}</label>
@@ -119,3 +122,4 @@ export const Modal = (props: Props) => {
 };
 
 export default Modal;
+
