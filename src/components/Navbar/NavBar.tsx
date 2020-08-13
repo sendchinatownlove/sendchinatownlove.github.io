@@ -174,7 +174,7 @@ const HeaderContainer = styled.header`
   align-items: center;
   font-size: 14px;
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
-  padding-right: 25px;
+  padding-right: 5px;
   ${(props: CompactProps) =>
     props.compact !== 'true' &&
     `
