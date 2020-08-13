@@ -221,7 +221,6 @@ const NavLinkStyle = styled.a`
     width: 100%;
     margin: 16px auto;
     text-align: center;
-t
   `} :link {
     color: black;
   }
