@@ -105,6 +105,26 @@
 
   @include for-phone-only {
     font-size: 16px;
+    padding-bottom: 30px;
+  }
+}
+
+.videoContainer {
+  text-align: center;
+  @include for-phone-only {
+    margin-top: 16px;
+  }
+}
+
+.videoDescription {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: 0.02em;
+
+  img {
+    width: 35px;
   }
 }
 
@@ -211,9 +231,6 @@
   grid-column-gap: 5px;
   width: 145px;
 
-  img {
-    width: 35px;
-  }
 }
 
 .modalStepText {
@@ -223,3 +240,4 @@
     font-size: 11px;
   }
 }
+

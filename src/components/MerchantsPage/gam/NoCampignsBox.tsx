@@ -47,6 +47,7 @@ const NoCampaignBox = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   padding: 30px;
+  margin-bottom: 25px;
 
   @media (${tabletScreens}) {
     grid-template-columns: 1fr;

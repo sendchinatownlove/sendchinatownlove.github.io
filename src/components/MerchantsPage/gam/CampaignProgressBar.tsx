@@ -69,25 +69,22 @@ const CampaignProgressBar = ({
           }}
         ></CurrentProgressBar>
       </TargetAmountBar>
-      <ContributionInfoContainer>
-        <div>
-          <ProgressTextContainer color={progressBarColor}>
-            {progressPercent}% {t('buyMeal.toTarget')}
-          </ProgressTextContainer>{' '}
+      <div>
+        <ProgressTextContainer color={progressBarColor}>
+          {progressPercent}% {t('buyMeal.toTarget')}
+        </ProgressTextContainer>{' '}
           ({numContributions} {t('buyMeal.outOf')} {targetAmount}{' '}
-          {t('buyMeal.meals')})
+        {t('buyMeal.meals')})
         </div>
-        {isActive && (
-          <div>
-            {t('buyMeal.endsIn')}{' '}
-            <ProgressTextContainer color={progressBarColor}>
-              {Math.ceil(daysUntilEnd)}
-            </ProgressTextContainer>{' '}
-            {t('buyMeal.days')}
-          </div>
-        )}
-        {!isActive && <div>{t('buyMeal.ended')}</div>}
-      </ContributionInfoContainer>
+      {isActive && (
+        <div>
+          {t('buyMeal.endsIn')}{' '}
+          <ProgressTextContainer color={progressBarColor}>
+            {Math.ceil(daysUntilEnd)}
+          </ProgressTextContainer>{' '}
+          {t('buyMeal.days')}
+        </div>
+      )}
     </ProgressBarContainer>
   );
 };
@@ -117,11 +114,6 @@ const TargetAmountBar = styled.div`
 const CurrentProgressBar = styled.div`
   background-color: #dd678a;
   height: 12px;
-`;
-
-const ContributionInfoContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
 `;
 
 const TimeStamp = styled.div`
