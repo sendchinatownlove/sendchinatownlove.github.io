@@ -27,7 +27,6 @@ const LogoImage = styled.img`
   @media (max-width: 599px) {
     width: 100px;
     height: 40px;
-    margin-left: -6px;
     margin-top: 10px;
   }
 `;

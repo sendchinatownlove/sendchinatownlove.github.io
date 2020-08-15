@@ -250,7 +250,6 @@ const LanguageContainer = styled.div`
   font-size: 13px;
   width: 78px;
   margin-left: 20px;
-  margin-top: -4px;
   ${(props: CompactProps) =>
     props.compact === 'true' &&
     `margin-right: 20px;
