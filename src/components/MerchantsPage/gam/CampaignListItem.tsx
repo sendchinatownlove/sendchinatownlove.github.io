@@ -2,7 +2,7 @@ import React from 'react';
 import CampaignProgressBar from './CampaignProgressBar';
 import styled from 'styled-components';
 import {
-  tabletScreens, desktopScreens
+  tabletScreens
 } from '../../../utilities/general/responsive';
 import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
@@ -215,14 +215,12 @@ const ImagesContainer = styled.span`
 `;
 
 const CampaignImage = styled.img`
+  height: 240px;
+  width: 240px;
+
   @media (${tabletScreens}) {
     max-height: 100px;
     width: 100%;
-  }
-
-  @media (${desktopScreens}) {
-    max-height: 240px;
-    max-width: 240px;
   }
 `;
 
