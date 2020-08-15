@@ -61,7 +61,7 @@ const NavBar = (props: Props) => {
           <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
             ENG
           </LanguageButton>
-          <span>|&nbsp;</span>
+          <LanguageSeparator>|</LanguageSeparator>
           <LanguageButton onClick={(e) => changeLanguage(e, 'cn')}>
             中文
           </LanguageButton>
@@ -70,7 +70,7 @@ const NavBar = (props: Props) => {
       </HamburgerContainer>
     ) : (
       <NavLinksContainer compact={hamburgerOpen.toString()}>
-        <HeaderContainer>
+        <HeaderContainer compact={hamburgerOpen.toString()}>
           <Logo />
           <Close onClick={(e) => props.setMenuOpen(false)} />
         </HeaderContainer>
@@ -109,7 +109,7 @@ const NavBar = (props: Props) => {
     );
   };
   return (
-    <HeaderContainer>
+    <HeaderContainer compact={hamburgerOpen.toString()}>
       <Logo />
       {hamburgerOpen ? (
         showCompactMenu()
@@ -150,7 +150,7 @@ const NavBar = (props: Props) => {
             <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
               ENG
             </LanguageButton>
-            <span>|&nbsp;</span>
+            <LanguageSeparator>|</LanguageSeparator>
             <LanguageButton onClick={(e) => changeLanguage(e, 'cn')}>
               中文
             </LanguageButton>
@@ -174,6 +174,12 @@ const HeaderContainer = styled.header`
   align-items: center;
   font-size: 14px;
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+  padding-right: 5px;
+  ${(props: CompactProps) =>
+    props.compact !== 'true' &&
+    `
+    margin-top: 40px;
+  `}
 `;
 
 const NavLinksContainer = styled.div`
@@ -201,7 +207,6 @@ const NavLinksContainer = styled.div`
 const HamburgerContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 125px;
   justify-content: space-between;
 `;
 
@@ -245,7 +250,11 @@ const LanguageContainer = styled.div`
   font-size: 13px;
   width: 78px;
   margin-left: 20px;
-  ${(props: CompactProps) => props.compact === 'true' && 'margin-right: 20px;'}
+  margin-top: -4px;
+  ${(props: CompactProps) =>
+    props.compact === 'true' &&
+    `margin-right: 20px;
+  `}
 `;
 
 const LanguageButton = styled.div`
@@ -259,6 +268,11 @@ const LanguageButton = styled.div`
     color: #a7182d;
   }
   width: 35px;
+`;
+
+const LanguageSeparator = styled.div`
+  margin-left: 6px;
+  margin-right: 8px;
 `;
 
 const ReactNavLink = styled(Link)`
