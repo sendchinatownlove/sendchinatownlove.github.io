@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import { Button, FinePrint } from './TrackScreen';
+import ScreenName from './ScreenName';
 
 // TODO: DELETE --> DUMMY IMAGE DATA
 import Image23 from './image-23.png';
@@ -103,7 +103,7 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
             {/* TODO: Update return screen with the Passport screen when built out  */}
             <Button 
               className='linkButton'
-              onClick={() => setCurrentScreenView(0)}
+              onClick={() => setCurrentScreenView(ScreenName.Track)}
             >
               RETURN TO PASSPORT
             </Button>

@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import CircleLogo from './CircleLogo.png';
 import CrawlMap from './CrawlMap.png';
-
 import TrackScreen from './TrackScreen';
 import RedemptionSelectScreen from './RedemptionSelectScreen';
+import ScreenName from "./ScreenName";
 
 interface Props {}
 
 const PassportRedemption = (props: Props) => {
-  const [currentScreenView, setCurrentScreenView] = useState(0);
+  const [currentScreenView, setCurrentScreenView] = useState(ScreenName.Track);
 
   const showCurrentScreen = (screen) => {
     // TODO: Update case #s when all screens are built out
     // NOTE: not sure if this is the right flow, 
     // but currently set up like this for now for ease of editing 
     switch(screen) {
-      case 1: 
+      case ScreenName.Redemption: 
         return <RedemptionSelectScreen setCurrentScreenView={setCurrentScreenView} />
-      default: 
+      case ScreenName.Track: 
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />
     }
   };
@@ -36,7 +35,7 @@ const PassportRedemption = (props: Props) => {
         <Logo
           src={CircleLogo}
           alt="scl-log"
-          className={currentScreenView === 0 ? 'passportTrackScreen' : ''}
+          className={currentScreenView === ScreenName.Track ? 'passportTrackScreen' : ''}
         />
 
         {
@@ -45,7 +44,7 @@ const PassportRedemption = (props: Props) => {
 
         <Row>
           <ExternalLinks>VIEW MAP</ExternalLinks>
-          <ExternalLinks href="mailto:sendchinatownlove@gmail.com.com">
+          <ExternalLinks href="mailto:sendchinatownlove@gmail.com">
             Contact Us
           </ExternalLinks>
         </Row>
