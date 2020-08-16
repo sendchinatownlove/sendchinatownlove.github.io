@@ -39,6 +39,7 @@ const MerchantVoucherDashboard = lazy(() =>
   import('../../pages/MerchantVoucherDashboard')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
+const RulesFaq = lazy(() => import('../../pages/PassportRulesFaq'));
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
@@ -94,6 +95,9 @@ const App = () => {
           </Route>
           <Route path="/passport">
             <PassportRedemption />
+          </Route>
+          <Route path="/rulesfaq">
+            <RulesFaq />
           </Route>
           <Route path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />

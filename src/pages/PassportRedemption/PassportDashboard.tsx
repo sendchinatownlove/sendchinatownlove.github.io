@@ -80,7 +80,7 @@ const PassportContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  background-color: red;
   max-width: 380px;
   margin: 0 auto;
   padding: 10px;
@@ -102,7 +102,7 @@ export const Row = styled.div`
   display: flex;
 `;
 
-const ExternalLinks = styled.a`
+ const ExternalLinks = styled.a`
   font-weight: bold;
   text-transform: uppercase;
   color: black;
