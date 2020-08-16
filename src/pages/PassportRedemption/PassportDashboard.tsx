@@ -6,6 +6,7 @@ import CrawlMap from './CrawlMap.png';
 
 import TrackScreen from './TrackScreen';
 import RedemptionSelectScreen from './RedemptionSelectScreen';
+import PassportScreen from './Passport';
 
 interface Props {}
 
@@ -19,8 +20,10 @@ const PassportRedemption = (props: Props) => {
     switch(screen) {
       case 1: 
         return <RedemptionSelectScreen setCurrentScreenView={setCurrentScreenView} />
-      default: 
+      case 2: 
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />
+      default: 
+        return <PassportScreen setCurrentScreenView={setCurrentScreenView} />
     }
   };
 
@@ -33,11 +36,11 @@ const PassportRedemption = (props: Props) => {
   return (
     <Container>
       <PassportContainer>
-        <Logo
+        {/* <Logo
           src={CircleLogo}
           alt="scl-log"
           className={currentScreenView === 0 ? 'passportTrackScreen' : ''}
-        />
+        /> */}
 
         {
           showCurrentScreen(currentScreenView)
