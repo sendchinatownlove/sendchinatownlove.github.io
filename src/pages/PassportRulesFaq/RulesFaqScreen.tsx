@@ -1,67 +1,89 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import CircleLogo from '../PassportRedemption/CircleLogo.png';
 import CrawlMap from '../PassportRedemption/CrawlMap.png';
 
-interface Props {}
-
 interface HeaderContainerProps {
-  fixed : boolean;
+  fixed : boolean
+  width: number
 }
 
-const RulesFaq = (props: Props) => {
+interface PlaceholderProps {
+  height : number
+}
 
-  const headerContainerRef = React.useRef<HTMLDivElement>(null)
+const RulesFaq = () => {
+
+  const headerContainerRef = useRef<HTMLDivElement>(null)
+  const headerWithRef = useRef<HTMLDivElement>(null)
   const [fixedPosition, setFixedPosition] = useState(false)
+  const [placeholderHeight, setPlaceholderHeight] = useState(0)
+  const [headerWidth, setHeaderWidth] = useState(0);
 
-  useEffect(() =>{
-      const rect = headerContainerRef.current?.getBoundingClientRect()
-      if (rect === undefined) {
-        return
-      }
-      const initialTop = rect.top
-      // console.log({initialTop})
-      const handleScroll = () =>{
-          // console.log(window.scrollY);
-          setFixedPosition(window.scrollY > initialTop)
-      }
-      window.addEventListener('scroll', handleScroll);
-      return () => {
-          window.removeEventListener("scroll", handleScroll);
-      }
-  }, [])
+  const updateHeaderWidth = () => {
+    if (headerWithRef.current !== null) {
+      setHeaderWidth(headerWithRef.current.offsetWidth)
+    }
+  }
 
+  useEffect(() => {
+    const rect = headerContainerRef.current?.getBoundingClientRect()
+    if (rect === undefined) {
+      return
+    }
+    
+    updateHeaderWidth()
+    window.addEventListener('resize', updateHeaderWidth)
 
-    return (
-        <Container> 
-            <PassportContainer>
-            
-        <Logo
-          src={CircleLogo}
-          alt="scl-log"/>
-        <OuterContainer className="trackScreen top">
-            <InnerContainer>
-      <HeaderContainer fixed={fixedPosition} ref={headerContainerRef}>
-        Header
-      </HeaderContainer>
-              <Content>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    const initialTop = window.scrollY + rect.top
+    const handleScroll = () =>{
+        const fixed = window.scrollY > initialTop
+        setFixedPosition(fixed)
+        setPlaceholderHeight(fixed ? rect.height : 0)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+        window.removeEventListener("scroll", handleScroll)
+    }
+  },[])
 
-Why do we use it?
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
-Why do we use it?
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
-Why do we use it?
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-              </Content>
+  return (
+    <Container> 
+        <PassportContainer>
+          <Logo
+            src={CircleLogo}
+            alt="scl-log" />
+          <OuterContainer className="trackScreen">
+          <InnerContainer className="rulesfaq">
+              <WidthDummy ref={headerWithRef} />
+              <HeaderParentContainer fixed={fixedPosition} width={headerWidth}>
+                  <HeaderContainer ref={headerContainerRef}>
+                      <Title>HOW TO WIN REWARDS</Title>
+                  </HeaderContainer>
+              </HeaderParentContainer>
+              <Placeholder height={placeholderHeight} />
+          <Content>
+            <RewardsLink href="https://www.google.com">VIEW ACTIVE REWARDS & GIVEAWAYS</RewardsLink>
+            <Question>
+            What is Lorem Ipsum?
+            </Question>
       
-</InnerContainer>
-</OuterContainer>
-
-            </PassportContainer>
-        </Container>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+     
+            <Question>
+            Where does it come from?
+            </Question>
+            
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+            
+            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+          </Content>
+        </InnerContainer>
+        </OuterContainer>
+      </PassportContainer>
+    </Container>
     )
 }
 
@@ -83,7 +105,6 @@ const PassportContainer = styled.div`
   background-color: red;
   max-width: 380px;
   margin: 0 auto;
-  color: red;
   padding: 10px;
   box-sizing: border-box;
 `;
@@ -103,8 +124,9 @@ const OuterContainer = styled.div`
   align-items: center;
   font-size: 12px;
   background-color: yellow;
+  color: black;
   &.trackScreen {
-    padding-top: 60px;
+    padding-top: 70px;
   }
 `;
 
@@ -115,30 +137,55 @@ padding: 25px 20px;
 box-sizing: border-box;
 overflow:hidden;
 border-radius: 20px;
-padding-top: 60px;
+&.rulesfaq {
+  padding-top: 5px;
+}
 `;
 
-const Header = styled.div`
-background-color: orange;
-color: blue;
-padding: 10px 15px;
-`;
+const WidthDummy = styled.div`
+height: 0;
+width: 100%;
+`
 
-const Content = styled.div`
-color: pink;
-padding: 16px
+const HeaderParentContainer = styled.div`
+${(props : HeaderContainerProps) => props.fixed ? `
+position: fixed;
+top: 0;
+` + " width: " + props.width + "px;" : `
+`}
 `;
-
 
 const HeaderContainer = styled.div`
 display: flex;
-flex-direction: row;
+justify-content: center;
+box-shadow: 0 10px 7px -7px #ccc;
+background-color: white;
+`;
 
-${(props : HeaderContainerProps) => props.fixed && `
-  position: fixed;
-  top: 0;
-`}
+const Title = styled.p`
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: .15em;
+`;
 
+const Content = styled.div`
+padding: 15px;
+`;
+
+const Placeholder = styled.div`
+${(props : PlaceholderProps) => "height: " + props.height + "px"}
+`
+
+const RewardsLink = styled.a`
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: black;
+  font-weight: bold;
+`;
+const Question = styled.p`
+  font-weight: bold;
+  margin-bottom: 1px;
 `;
 
 export default RulesFaq;
