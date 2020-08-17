@@ -50,10 +50,13 @@ const RulesFaq = () => {
   return (
     <Container> 
         <PassportContainer>
-          <Logo
-            src={CircleLogo}
-            alt="scl-log" />
-          <OuterContainer className="trackScreen">
+          <TopContainer>
+            <TopLink href="goggle.com">VIEW MAP</TopLink>
+            <Logo
+              src={CircleLogo}
+              alt="scl-log" />
+            <TopLink href="goggle.com">CONTACT US</TopLink>
+          </TopContainer>
           <InnerContainer className="rulesfaq">
               <HeaderParentContainer fixed={fixedPosition} width={headerWidth}>
                   <HeaderContainer ref={headerContainerRef}>
@@ -62,7 +65,7 @@ const RulesFaq = () => {
               </HeaderParentContainer>
               <Placeholder height={placeholderHeight} ref={headerWithRef} />
           <Content>
-            <RewardsLink href="https://www.google.com">VIEW ACTIVE REWARDS & GIVEAWAYS</RewardsLink>
+            <RewardsLink href="">VIEW ACTIVE REWARDS & GIVEAWAYS</RewardsLink>
             <Question>
             What is Lorem Ipsum?
             </Question>
@@ -76,7 +79,6 @@ const RulesFaq = () => {
             There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
           </Content>
         </InnerContainer>
-        </OuterContainer>
       </PassportContainer>
     </Container>
     )
@@ -97,44 +99,43 @@ const PassportContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: red;
   max-width: 380px;
   margin: 0 auto;
   padding: 10px;
   box-sizing: border-box;
+  font-size: 12px;
+
 `;
+
+const TopContainer = styled.div`
+  margin-top: 35px;
+  margin-bottom: 25px;
+`
+
+const TopLink = styled.a`
+  font-weight: bold;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: black;
+  letter-spacing: .15em;
+  @media (max-width: 370px) {
+    margin-left: 15px;
+    margin-right: 15px;
+`
 
 const Logo = styled.img`
   filter: drop-shadow(0 0mm 2px #cdcdcd);
-    position: relative;
-    top: 50px;
-    z-index: 5;
-    filter: drop-shadow(0 -0.1mm 0.1px #cdcdcd);
-  }
-`;
-
-const OuterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 12px;
-  background-color: yellow;
-  color: black;
-  &.trackScreen {
-    padding-top: 70px;
-  }
+  vertical-align:middle;
 `;
 
 const InnerContainer = styled.div`
 background-color: white;
 border: 1px solid #dedede;
-padding: 25px 20px;
+padding: 5px 20px 25px;
 box-sizing: border-box;
 overflow:hidden;
 border-radius: 20px;
-&.rulesfaq {
-  padding-top: 5px;
-}
+
 `;
 
 const HeaderParentContainer = styled.div`
@@ -169,10 +170,10 @@ width: 100%;
 `;
 
 const RewardsLink = styled.a`
-  letter-spacing: .15em;
   text-transform: uppercase;
   color: black;
-  font-weight: 500;
+  font-weight: bold;
+  letter-spacing: .15em;
 `;
 
 const Question = styled.p`
