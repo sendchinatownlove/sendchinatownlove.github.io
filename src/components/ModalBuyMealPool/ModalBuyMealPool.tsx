@@ -7,7 +7,7 @@ import {
   SET_AMOUNT,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { useTranslation } from 'react-i18next';
-import CampaignInstructions from '../MerchantsPage/gam/CampaignInstructions';
+import CampaignInstructions from './CamapignInstructions';
 import ReactPixel from 'react-facebook-pixel';
 
 export interface Props {
