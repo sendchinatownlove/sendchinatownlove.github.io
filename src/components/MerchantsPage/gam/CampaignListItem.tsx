@@ -51,7 +51,7 @@ const CampaignListItem = (props: Props) => {
     <Container>
       <ColumnContainer>
         {campaignImageUrls && campaignImageUrls.length && (
-          <img src={campaignImageUrls[0] ?? campaignDefaultImage} alt="campaign_image" />
+          <CampaignImage src={campaignImageUrls[0] ?? campaignDefaultImage} alt="campaign_image" />
         )}
       </ColumnContainer>
       <ColumnContainer>
@@ -81,12 +81,12 @@ const CampaignListItem = (props: Props) => {
         <ImagesContainer>
           {distributor &&
             (<a href={distributor.website_url}>
-              <img src={distributor.image_url} style={{ margin: '0 15px' }} alt="distributor_logo" />
+              <DistributorImage src={distributor.image_url} alt="distributor_logo" />
             </a>
             )
           }
           {merchant &&
-            (<img src={merchant.logo_image_url} alt="merchant_logo" />)
+            (<MerchantImage src={merchant.logo_image_url} alt="merchant_logo" />)
           }
         </ImagesContainer>
         {merchant && (
@@ -233,4 +233,27 @@ const ImagesContainer = styled.span`
       height: 25px;
     }
   }
+`;
+
+const CampaignImage = styled.img`
+  height: 240px;
+  width: 240px;
+
+  @media (${tabletScreens}) {
+    max-height: 100px;
+    width: 100%;
+  }
+`;
+
+const DistributorImage = styled.img`
+  max-height: 70px;
+  max-width: 120px;
+  margin-right: 15px;
+  vertical-align: middle;
+`;
+
+const MerchantImage = styled.img`
+  max-height: 70px;
+  max-width: 70px;
+  vertical-align: middle;
 `;

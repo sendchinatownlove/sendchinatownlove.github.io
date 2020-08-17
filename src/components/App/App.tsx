@@ -10,7 +10,7 @@ import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/
 import ReactPixel from 'react-facebook-pixel';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
 
-const trackingId = process.env.REACT_APP_API_ENDPOINT!;
+const trackingId = process.env.REACT_APP_GA_TRACKING_ID!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
 if (process.env.NODE_ENV === 'production') {
   ReactGA.initialize(trackingId);
@@ -73,7 +73,7 @@ const App = () => {
       <>
         <ModalPaymentProvider>
           <ScrollToTop />
-          <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+          <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} pageName={child} />
           {component}
           <Footer menuOpen={menuOpen} />
         </ModalPaymentProvider>
