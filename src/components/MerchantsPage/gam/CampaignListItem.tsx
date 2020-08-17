@@ -9,15 +9,15 @@ import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
 import { getDistributor, getSeller } from '../../../utilities';
 import { useEffect, useState } from 'react';
-import Modal from '../../Modal';
-import { useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../../utilities/hooks/ModalPaymentContext/constants';
+// import Modal from '../../Modal';
+// import { useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext/context';
+// import { SET_MODAL_VIEW } from '../../../utilities/hooks/ModalPaymentContext/constants';
 
 interface Props {
   campaign: Campaign;
 }
 
-const ModalBox: any = Modal;
+// const ModalBox: any = Modal;
 
 const CampaignListItem = (props: Props) => {
   const { t } = useTranslation();
@@ -42,10 +42,10 @@ const CampaignListItem = (props: Props) => {
   const targetMeals = Math.floor(campaign.target_amount / campaign.price_per_meal);
   const campaignImageUrls = campaign.gallery_image_urls;
 
-  const dispatch = useModalPaymentDispatch(); //provide null according to Bruce's new branch
-  const showModal = (event: any) => {
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
-  };
+  // const dispatch = useModalPaymentDispatch(); //provide null according to Bruce's new branch
+  // const showModal = (event: any) => {
+  //   dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+  // };
 
   return (
     <Container>
@@ -96,17 +96,20 @@ const CampaignListItem = (props: Props) => {
           }}>{t('gamHome.listItem.viewButton')}</Button>
         )}
         {campaign.active && (
-          <Button className={'button--outlined'} onClick={showModal}>{t('gamHome.listItem.giftButton')}</Button>
+          // <Button className={'button--outlined'} onClick={showModal}>{t('gamHome.listItem.giftButton')}</Button>
+          <Button className={'button--outlined'}>{t('gamHome.listItem.giftButton')}</Button>
         )}
       </ColumnContainer>
 
-      <ModalBox
-        purchaseType={'buy_meal'}
-        sellerId={'shunfa-bakery'}
-        sellerName={'Shunfa Bakery'}
-        costPerMeal={5}
-        nonProfitLocationId={''}
-      />
+      {/* {merchant && (
+        <ModalBox
+          purchaseType={'buy_meal'}
+          sellerId={merchant.seller_id}
+          sellerName={merchant.name}
+          costPerMeal={campaign.price_per_meal}
+          nonProfitLocationId={''}
+        />
+      )} */}
     </Container >
   );
 };

@@ -4,20 +4,20 @@ import {
   tabletScreens,
 } from '../../../utilities/general/responsive';
 import styled from 'styled-components';
-import Modal from '../../Modal';
-import { useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../../utilities/hooks/ModalPaymentContext/constants';
 import { useTranslation } from 'react-i18next';
+// import Modal from '../../Modal';
+// import { useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext/context';
+// import { SET_MODAL_VIEW } from '../../../utilities/hooks/ModalPaymentContext/constants';
 
-const ModalBox: any = Modal;
+// const ModalBox: any = Modal;
 
 const NoActiveCampaignsBox = () => {
   const { t } = useTranslation();
 
-  const dispatch = useModalPaymentDispatch(); //provide null according to Bruce's new branch
-  const showModal = (event: any) => {
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
-  };
+  // const dispatch = useModalPaymentDispatch(); //provide null according to Bruce's new branch
+  // const showModal = (event: any) => {
+  //   dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+  // };
 
   return (
     <NoCampaignBox>
@@ -25,16 +25,17 @@ const NoActiveCampaignsBox = () => {
         <Heading>{t('gamHome.noCampaignsBox.CTA')}</Heading>
         <SubHeading>{t('gamHome.noCampaignsBox.description')}</SubHeading>
       </TextContainer>
-      <Button className="button--filled" onClick={showModal}>
+      {/* <Button className="button--filled" onClick={showModal}> */}
+      <Button className="button--filled">
         {t('gamHome.giftButton')}
       </Button>
-      <ModalBox
+      {/* <ModalBox
         purchaseType={'buy_meal'}
         sellerId={''}
         sellerName={''}
         costPerMeal={5}
         nonProfitLocationId={''}
-      />
+      /> */}
     </NoCampaignBox>
   );
 };
