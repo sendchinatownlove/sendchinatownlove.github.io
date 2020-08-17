@@ -104,5 +104,45 @@
     "header": "Learn about Gift-a-Meal",
     "description": "Double the impact of your donation by gifting meals from our merchants to local organizations that will distribute your gifted meals to our community in need.",
     "button": "GIFT MEAL"
+  },
+  "gamHome": {
+    "header": "Gift-a-Meal",
+    "description": "Double the impact of your donation by gifting meals from our merchants to local organizations that will distribute your gifted meals to our community in need.",
+    "subheading": {
+      "step1": "Step 1: ",
+      "step1Text": "Donate to Gift-a-Meal",
+      "step2": "Step 2: ",
+      "step2Text": "100% of donations still go directly to our merchants",
+      "step3": "Step 3: ",
+      "step3Text": "Vouchers are donated to our community partners",
+      "step4": "Step 4: ",
+      "step4Text": "Partners distribute to individuals in need"
+    },
+    "backButton": "Back to Merchants",
+    "giftButton": "Gift Meal",
+    "activeSection": "Active Gift-a-Meal",
+    "pastSection": "Past Gift-a-Meal",
+    "noCampaignsBox": {
+      "CTA": "No active campaigns? You can still donate!",
+      "description": "Meal donations here will automatically be applied to our next campaign."
+    },
+    "videoBox": {
+      "caption": "Watch how we bring impact to our communities through Gift-a-Meal."
+    },
+    "listItem": {
+      "viewButton": "View Merchant",
+      "giftButton": "Gift Meal"
+    }
+  },
+  "buyMealPool": {
+    "header": "Gift-a-Meal",
+    "description": {
+      "weAre": "We are partnering with",
+      "andRestaurants": "and restaurants who have been impacted by COVID-19 to gift meals to communities in need.",
+      "allItTakes": "All it takes is $5."
+    },
+    "prompt": "Please enter how many meals to gift",
+    "totalLabel": "Total: ",
+    "next": "Next"
   }
 }

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {
   tabletScreens
 } from '../../../utilities/general/responsive';
+import { useTranslation } from 'react-i18next';
 import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
 import { getDistributor, getSeller } from '../../../utilities';
@@ -14,6 +15,8 @@ interface Props {
 }
 
 const CampaignListItem = (props: Props) => {
+  const { t } = useTranslation();
+
   const [distributor, setDistributor] = useState<any | null>();
   const [merchant, setMerchant] = useState<any | null>();
   const campaign = props.campaign;
@@ -80,10 +83,10 @@ const CampaignListItem = (props: Props) => {
           <Button className="button--filled" onClick={(e) => {
             e.preventDefault();
             window.location.href = '/' + merchant.seller_id;
-          }}>Visit merchant</Button>
+          }}>{t('gamHome.listItem.viewButton')}</Button>
         )}
         {campaign.active && (
-          <Button className={'button--outlined'}>Gift a meal</Button>
+          <Button className={'button--outlined'}>{t('gamHome.listItem.giftButton')}</Button>
         )}
       </ColumnContainer>
     </Container >

@@ -1,6 +1,13 @@
 @import '../../../responsive';
 @import '../../../index.scss';
 
+.bold {
+  font-weight: 600;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
 .container {
   background-color: white;
   max-width: 1250px;
@@ -19,27 +26,22 @@
   grid-template-rows: 300px 215px;
 }
 
-.main {
+.headerText {
   grid-row: 1;
   grid-column: 1;
   display: flex;
-  align-items: center;
   z-index: 2;
-
-  & > div {
-    max-width: 385px;
-  }
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 385px;
 
   p {
     font-size: 18px;
   }
 
   @include for-phone-only {
-    align-items: flex-start;
-
-    & > div {
-      max-width: 264px;
-    }
+    max-width: 264px;
 
     h3 {
       font-size: 33px;
@@ -70,7 +72,64 @@
   }
 }
 
-.sub {
+.backButton {
+  @include base-button;
+  font-weight: bold;
+  font-size: 16px;
+  display: grid;
+  place-items: center;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-left: auto;
+  margin-bottom: 30px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    color: $standard-red;
+  }
+
+  @include for-phone-only {
+    font-size: 14px;
+    padding-right: 0;
+  }
+}
+
+.campaignHeader {
+  font-weight: 600;
+  font-size: 18px;
+  width: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 50px;
+
+  @include for-phone-only {
+    font-size: 16px;
+    padding-bottom: 30px;
+  }
+}
+
+.videoContainer {
+  text-align: center;
+  @include for-phone-only {
+    margin-top: 16px;
+  }
+}
+
+.videoDescription {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: 0.02em;
+
+  img {
+    width: 35px;
+  }
+}
+
+// CampaignInstructions styling when isModal=false
+.background {
   background-color: $standard-red;
   display: flex;
   justify-content: center;
@@ -81,6 +140,7 @@
     padding: 0 20px;
   }
 
+
   // to break out of the parent container
   position: relative;
   width: 100vw;
@@ -90,20 +150,27 @@
   margin-right: -50vw;
 }
 
-.instructions {
+.instructionsGrid {
   max-width: 1250px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 
   @media (max-width: 1000px) {
-    grid-template-columns: repeat((2, 1fr));
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-row-gap: 15px;
     justify-items: center;
   }
+
+  @include for-phone-only {
+    grid-column-gap: 20px;
+  }
 }
 
-.step {
+.stepGrid {
   display: grid;
   grid-template-columns: min-content 1fr;
   grid-column-gap: 10px;
@@ -126,73 +193,51 @@
     margin: 0;
     font-size: 15px;
 
-    @media (max-width: 1000px) {
+    @include for-phone-only {
       font-size: 11px;
     }
   }
-
-  :first-child {
-    text-transform: uppercase;
-  }
-
-  :last-child {
-    font-weight: 600;
-  }
 }
 
-.backButton {
-  @include base-button;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 22px;
+
+// CampaignInstructions styling when isModal=true
+.modalBackground {
+  background-color: $standard-red;
   display: flex;
+  justify-content: center;
   align-items: center;
-  text-align: center;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-left: auto;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-
-  &:hover {
-    color: $standard-red;
-  }
-
-  @include for-phone-only {
-    font-size: 14px;
-    padding-right: 0;
-  }
+  padding: 20px 10px;
+  margin: 20px 0;
 }
 
-.campaignHeader {
-  font-weight: 600;
-  font-size: 18px;
+.modalInstructionsGrid {
   width: 100%;
-  border-bottom: 1px solid #e5e5e5;
-  padding-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 5px;
 
-  @include for-phone-only {
-    font-size: 16px;
-    padding-bottom: 30px;
+  @media (max-width: 900px) {
+    grid-auto-flow: column;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: 15px;
+    justify-items: center;
   }
 }
 
-.videoContainer {
-  text-align: center;
-  @include for-phone-only {
-    margin-top: 16px;
+.modalStepGrid {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-column-gap: 5px;
+  width: 145px;
+
+}
+
+.modalStepText {
+  p {
+    color: white;
+    margin: 0;
+    font-size: 11px;
   }
 }
 
-.videoDescription {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 25px;
-  letter-spacing: 0.02em;
-
-  @include for-phone-only {
-    font-size: 16px;
-  }
-}
