@@ -7,6 +7,9 @@ interface Props {
   setCurrentScreenView: Function;
 };
 
+type redeemRowProp = {
+  status?: string;
+};
 type stampProp = {
   sellerId: string;
 };
@@ -28,7 +31,7 @@ const Passport = ({ setCurrentScreenView }: Props) => {
     
 
     return (
-      <TableRow key={index}>
+      <TableRow key={index} status="active">
         <TableIndex> {index + 1} </TableIndex>
         <TableStamp> 
           <StampRow>
@@ -42,7 +45,7 @@ const Passport = ({ setCurrentScreenView }: Props) => {
               46 MOTT
             </Stamp>
           </StampRow>
-          <RedeemedRow>
+          <RedeemedRow status="active">
             2 MORE STAMPS UNTIL YOUR NEXT REWARD
           </RedeemedRow>
         </TableStamp>
@@ -88,6 +91,25 @@ const Table = styled.table`
 const TableRow = styled.tr`
   height: 90px;
   border: 2px solid #A5A5A5;
+  ${(props: redeemRowProp) => {
+    switch(props.status){ 
+      case "redeemed": 
+        return `
+          background: rgba(0, 0, 0, 0.05);
+          color: #A5A5A5;
+        `;
+      case "active":
+        return `
+          background: rgba(168, 25, 46, 0.05);
+          color: #A8192E;
+        `;
+      default: 
+        return `
+          background: rgba(0, 0, 0, 0);
+          color: black;
+        `;
+    }
+  }};
 `;
 const TableIndex = styled.td`
   display: flex;
@@ -98,6 +120,7 @@ const TableIndex = styled.td`
   justify-content: center;
   padding-top: 12px;
   border-right: 2px solid #A5A5A5;
+  font-weight: bold;
 `;
 const TableStamp = styled.td`
   width: 100%;
@@ -119,8 +142,12 @@ const RedeemedRow = styled.div`
   width: 100%;
   margin: 0 auto;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 10px;
-  height: 15px;
+  height: 20px;
+  ${(props: redeemRowProp) => props.status === "active" && "font-weight: 700;"};
 `
 const Stamp = styled.div`
   font-size: 10px;
