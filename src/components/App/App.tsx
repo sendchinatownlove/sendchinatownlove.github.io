@@ -38,6 +38,9 @@ const VoucherRedemptionPage = lazy(() =>
 const MerchantVoucherDashboard = lazy(() =>
   import('../../pages/MerchantVoucherDashboard')
 );
+const PassportVoucher = lazy(() =>
+import('../../pages/PassportRedemption/PassportVoucher')
+);
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
@@ -93,6 +96,9 @@ const App = () => {
           </Route>
           <Route path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
+          </Route>
+          <Route path="/print-passport-voucher/:id/tickets/:tickets_secret">
+            <PassportVoucher />
           </Route>
           <Route
             path="/gift-a-meal"
