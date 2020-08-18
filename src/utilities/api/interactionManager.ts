@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Buyer, PaymentParams, SquareLineItems } from './types';
-import { charges, sellers, vouchers, passportVouchers } from './endpoints';
 import { charges, sellers, vouchers, campaigns, distributors, passportVouchers } from './endpoints';
 
 // Fix return typing
