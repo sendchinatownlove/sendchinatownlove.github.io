@@ -62,22 +62,22 @@ const GiftAMealPage = (props: Props) => {
       </button>
       {activeCampaigns.length
         ? <>
-            <h5 className={styles.campaignHeader}>{t('gamHome.activeSection')}</h5>
-            {activeCampaigns.map((campaign: any) => (
-              <CampaignListItem campaign={campaign} />
-            ))}
-          </>
+          <h5 className={styles.campaignHeader}>{t('gamHome.activeSection')}</h5>
+          {activeCampaigns.map((campaign: any) => (
+            <CampaignListItem campaign={campaign} key={campaign.id} />
+          ))}
+        </>
         : <NoActiveCampaignsBox />
       }
 
       <div className={styles.videoContainer}>
-        <VideoComponent videoId="FYlUOhzYlRM"></VideoComponent>
+        <VideoComponent videoId="3zbqvouILto"></VideoComponent>
         <h5 className={styles.videoDescription}>{t('gamHome.videoBox.caption')}</h5>
       </div>
 
       <h5 className={styles.campaignHeader}>{t('gamHome.pastSection')}</h5>
       {pastCampaigns.map((campaign: any) => (
-        <CampaignListItem campaign={campaign} />
+        <CampaignListItem campaign={campaign} key={campaign.id} />
       ))}
     </div >
   );
