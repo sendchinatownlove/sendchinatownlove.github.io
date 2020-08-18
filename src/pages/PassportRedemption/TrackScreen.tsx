@@ -98,7 +98,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 12px;
-  background-color: yellow;
 `;
 
 export const InputContainer = styled.div`
@@ -107,7 +106,6 @@ export const InputContainer = styled.div`
   padding: 25px 20px;
   box-sizing: border-box;
   overflow:hidden;
-  background-color: green;
   &.trackScreen {
     padding-top: 60px;
   }
