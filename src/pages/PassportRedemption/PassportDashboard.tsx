@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import CircleLogo from './CircleLogo.png';
-import CrawlMap from './CrawlMap.png';
 import TrackScreen from './TrackScreen';
 import RedemptionSelectScreen from './RedemptionSelectScreen';
 import ScreenName from "./ScreenName";
+import { Container, PassportContainer, ExternalLink } from './style'
 
 interface Props {}
 
@@ -43,10 +43,10 @@ const PassportRedemption = (props: Props) => {
         }
 
         <Row>
-          <ExternalLinks>VIEW MAP</ExternalLinks>
-          <ExternalLinks href="mailto:sendchinatownlove@gmail.com">
+          <ExternalLink>VIEW MAP</ExternalLink>
+          <ExternalLink href="mailto:sendchinatownlove@gmail.com">
             Contact Us
-          </ExternalLinks>
+          </ExternalLink>
         </Row>
 
         <LinksContainer>
@@ -65,28 +65,6 @@ const PassportRedemption = (props: Props) => {
 
 export default PassportRedemption;
 
-const Container = styled.div`
-  background-color: #e5e5e5;
-  height: 100%;
-  min-height: 100vh;
-  background-image: url(${CrawlMap});
-
-  @media (max-width: 475px) {
-    background-size: 500px;
-  }
-`;
-
-const PassportContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  max-width: 380px;
-  margin: 0 auto;
-  padding: 10px;
-  box-sizing: border-box;
-`;
-
 const Logo = styled.img`
   filter: drop-shadow(0 0mm 2px #cdcdcd);
 
@@ -102,14 +80,6 @@ export const Row = styled.div`
   display: flex;
 `;
 
-const ExternalLinks = styled.a`
-  font-weight: bold;
-  text-transform: uppercase;
-  color: black;
-  font-size: 12px;
-  margin: 20px;
-`;
-
 const LinksContainer = styled.div`
   padding: 0;
   list-style: none;
@@ -123,4 +93,3 @@ const Icon = styled.a`
   padding: 0 15px;
   font-size: 22px;
 `;
-
