@@ -2,16 +2,16 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
 
-import gam_icon_step1 from '../images/gam_icon_step1.svg';
-import gam_icon_step2 from '../images/gam_icon_step2.svg';
-import gam_icon_step3 from '../images/gam_icon_step3.svg';
-import gam_icon_step4 from '../images/gam_icon_step4.svg';
+import gam_icon_step1 from '../MerchantsPage/images/gam_icon_step1.svg';
+import gam_icon_step2 from '../MerchantsPage/images/gam_icon_step2.svg';
+import gam_icon_step3 from '../MerchantsPage/images/gam_icon_step3.svg';
+import gam_icon_step4 from '../MerchantsPage/images/gam_icon_step4.svg';
 
 const CampaignInstructions = () => {
   const { t } = useTranslation();
   return (
-    <div className={styles.background}>
-      <div className={styles.instructionsGrid}>
+    <div className={styles.modalBackground}>
+      <div className={styles.modalInstructionsGrid}>
         {[
           [
             `${t('gamHome.subheading.step1')}`,
@@ -45,9 +45,9 @@ export default CampaignInstructions;
 
 const generateStep = (step, text, icon, idx) => {
   return (
-    <div className={styles.stepGrid} key={idx}>
+    <div className={styles.modalStepGrid} key={idx}>
       <img src={icon} alt="icon" />
-      <div className={styles.stepText}>
+      <div className={styles.modalStepText}>
         <p className={styles.uppercase}>{step}</p>
         <p className={styles.bold}>{text}</p>
       </div>

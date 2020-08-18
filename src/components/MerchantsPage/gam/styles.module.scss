@@ -136,115 +136,81 @@
   }
 }
 
-// CampaignInstructions styling when isModal=false
+.bold {
+  font-weight: 600;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+// CampaignInstructions styling
 .background {
-  background-color: $standard-red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 35px;
-
-  @media (max-width: 900px) {
-    padding: 0 20px;
-  }
-
-
-  // to break out of the parent container
-  position: relative;
-  width: 100vw;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-}
-
-.instructionsGrid {
-  max-width: 1250px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  @media (max-width: 1000px) {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-row-gap: 15px;
-    justify-items: center;
-  }
-
-  @include for-phone-only {
-    grid-column-gap: 20px;
-  }
-}
-
-.stepGrid {
-  display: grid;
-  grid-template-columns: min-content 1fr;
-  grid-column-gap: 10px;
-  max-width: 225px;
-
-  @include for-tablet-portrait-up {
-    min-width: 225px;
-  }
-
-  @media (max-width: 1000px) {
-    img {
-      width: 50px;
+    background-color: $standard-red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 35px;
+  
+    @media (max-width: 900px) {
+      padding: 0 20px;
     }
+  
+  
+    // to break out of the parent container
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
-}
-
-.stepText {
-  p {
-    color: white;
-    margin: 0;
-    font-size: 15px;
-
+  
+  .instructionsGrid {
+    max-width: 1250px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  
+    @media (max-width: 1000px) {
+      display: grid;
+      grid-auto-flow: column;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-row-gap: 15px;
+      justify-items: center;
+    }
+  
     @include for-phone-only {
-      font-size: 11px;
+      grid-column-gap: 20px;
     }
   }
-}
-
-
-// CampaignInstructions styling when isModal=true
-.modalBackground {
-  background-color: $standard-red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 10px;
-  margin: 20px 0;
-}
-
-.modalInstructionsGrid {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 5px;
-
-  @media (max-width: 900px) {
-    grid-auto-flow: column;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-row-gap: 15px;
-    justify-items: center;
+  
+  .stepGrid {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-column-gap: 10px;
+    max-width: 225px;
+  
+    @include for-tablet-portrait-up {
+      min-width: 225px;
+    }
+  
+    @media (max-width: 1000px) {
+      img {
+        width: 50px;
+      }
+    }
   }
-}
-
-.modalStepGrid {
-  display: grid;
-  grid-template-columns: min-content 1fr;
-  grid-column-gap: 5px;
-  width: 145px;
-
-}
-
-.modalStepText {
-  p {
-    color: white;
-    margin: 0;
-    font-size: 11px;
+  
+  .stepText {
+    p {
+      color: white;
+      margin: 0;
+      font-size: 15px;
+  
+      @include for-phone-only {
+        font-size: 11px;
+      }
+    }
   }
-}

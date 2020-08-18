@@ -15,7 +15,10 @@ const NoActiveCampaignsBox = () => {
         <Heading>{t('gamHome.noCampaignsBox.CTA')}</Heading>
         <SubHeading>{t('gamHome.noCampaignsBox.description')}</SubHeading>
       </TextContainer>
-      <Button className="button--filled">
+      <Button className="button--filled" onClick={(e) => {
+        e.preventDefault();
+        window.open('https://www.gofundme.com/f/gift-a-meal', '_blank')
+      }}>
         {t('gamHome.giftButton')}
       </Button>
     </NoCampaignBox>

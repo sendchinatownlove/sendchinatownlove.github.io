@@ -1,8 +1,7 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 import ModalAmount from '../ModalAmount';
-import ModalBuyMeal from '../ModalBuyMeal';
-import ModalBuyMealPool from '../ModalBuyMeal/ModalBuyMealPool';
+import ModalBuyMealNew from '../ModalBuyMealNew';
 import { SquareModal } from '../ModalPayment';
 import ModalConfirmation from '../ModalConfirmation';
 import {
@@ -53,11 +52,8 @@ export const Modal = (props: Props) => {
         {modalView === 0 && props.purchaseType !== 'buy_meal' && (
           <ModalAmount {...props} />
         )}
-        {modalView === 0 && props.purchaseType === 'buy_meal' && props.sellerId && (
-          <ModalBuyMeal {...props} />
-        )}
-        {modalView === 0 && props.purchaseType === 'buy_meal' && !props.sellerId && (
-          <ModalBuyMealPool {...props} />
+        {modalView === 0 && props.purchaseType === 'buy_meal' && (
+          <ModalBuyMealNew {...props} />
         )}
         {modalView === 1 && (
           <SquareModal {...props} idempotencyKey={idempotencyKey} />
