@@ -97,7 +97,6 @@ const CampaignListItem = (props: Props) => {
         )}
         {campaign.active && (
           <Button className={'button--outlined'} onClick={showModal}>{t('gamHome.listItem.giftButton')}</Button>
-          // <Button className={'button--outlined'}>{t('gamHome.listItem.giftButton')}</Button>
         )}
       </ColumnContainer>
 

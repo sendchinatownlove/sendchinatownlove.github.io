@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { getCampaigns } from '../../../utilities';
 import illustrated_flatlay_hero from '../images/illustrated_flatlay_hero.png';
-import CampaginInstructions from './CampaignInstructions';
-import NoActiveCampaignsBox from './NoCampignsBox';
+import CampaignInstructions from './CampaignInstructions';
+import NoActiveCampaignsBox from './NoCampaignsBox';
 import CampaignListItem from './CampaignListItem';
 import VideoComponent from './VideoComponent';
 import { useTranslation } from 'react-i18next';
@@ -48,7 +48,7 @@ const GiftAMealPage = (props: Props) => {
           <h3 style={{ fontWeight: 'bolder' }}>{t('gamHome.header')}</h3>
           <p>{t('gamHome.description')}</p>
         </div>
-        <CampaginInstructions isModal={false} />
+        <CampaignInstructions />
       </div>
       <br />
       <button

@@ -46,9 +46,14 @@ export const Modal = (props: Props) => {
   return (
     <form data-testid="ModalBuyMeal">
       <div>
-          <h1>{t('buyMealPool.header')}</h1>
+          <h1>
+            {props.sellerId
+              ? t('buyMeal.header') + props.sellerName
+              : t('buyMealPool.header')
+            }
+          </h1>
       </div>
-      <p>
+      <p className={styles.description}>
           {t('buyMealPool.description.weAre')}
           <a 
             href="https://www.apexforyouth.org/" 
@@ -69,7 +74,7 @@ export const Modal = (props: Props) => {
           <span className={styles.bold}> {t('buyMealPool.description.allItTakes')}</span>
       </p>
 
-      <CampaignInstructions isModal={true} />
+      <CampaignInstructions />
 
       <div className={styles.amountContainer}>
         <label htmlFor="select-amount">{t('buyMeal.prompt')}</label>
