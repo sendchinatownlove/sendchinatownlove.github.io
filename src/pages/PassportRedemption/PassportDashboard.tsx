@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import CircleLogo from './CircleLogo.png';
-import CrawlMap from './CrawlMap.png';
 import TrackScreen from './TrackScreen';
 import RedemptionSelectScreen from './RedemptionSelectScreen';
-import ScreenName from './ScreenName';
+import ScreenName from "./ScreenName";
+import { Container, PassportContainer, ExternalLink } from './style'
 
 interface Props {}
 
@@ -48,12 +48,15 @@ const PassportRedemption = (props: Props) => {
         {showCurrentScreen(currentScreenView)}
 
         <Row>
-          {/* WHERE IS THIS LINK SUPPOSED TO GO? */}
-          <ExternalLinks href="sendchinatownlove.com" target="_blank">
-            Learn More
-          </ExternalLinks>
-          <LinksContainer>
-            {socialMediaLinks.map((social) => (
+          <ExternalLink>VIEW MAP</ExternalLink>
+          <ExternalLink href="mailto:sendchinatownlove@gmail.com">
+            Contact Us
+          </ExternalLink>
+        </Row>
+
+        <LinksContainer>
+          {
+            socialMediaLinks.map((social) => (
               <Icon href={social.url}>
                 <span className={`fa fa-${social.platform}`} />
               </Icon>
@@ -66,28 +69,6 @@ const PassportRedemption = (props: Props) => {
 };
 
 export default PassportRedemption;
-
-const Container = styled.div`
-  background-color: #e5e5e5;
-  height: 100%;
-  min-height: 100vh;
-  background-image: url(${CrawlMap});
-
-  @media (max-width: 475px) {
-    background-size: 500px;
-  }
-`;
-
-const PassportContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  max-width: 380px;
-  margin: 0 auto;
-  padding: 10px;
-  box-sizing: border-box;
-`;
 
 const Logo = styled.img`
   filter: drop-shadow(0 0mm 2px #cdcdcd);
@@ -105,16 +86,6 @@ export const Row = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-`;
-
-export const ExternalLinks = styled.a`
-  font-weight: bold;
-  text-transform: uppercase;
-  color: black;
-  font-size: 12px;
-  margin: 20px;
-  cursor: pointer;
-  letter-spacing: 2px;
 `;
 
 const LinksContainer = styled.div`
