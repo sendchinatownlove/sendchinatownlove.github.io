@@ -8,7 +8,8 @@ import {
 } from '../../utilities/api/interactionManager';
 
 import { LoaderFillerContainer } from '../../components/Loader';
-import VoucherImage from './Voucher.png';
+import VoucherImage from './VoucherFront.png';
+import BackImage from './VoucherBack.png';
 
 const Voucher = () => {
   const { id, tickets_secret } = useParams();
@@ -19,6 +20,7 @@ const Voucher = () => {
   const getAllTickets = async () => {
     const { data: { name } } = await getParticipatingMerchant(id);
     const { data: allTickets } = await getParticipatingMerchantTickets(id, tickets_secret);
+
     if (allTickets && name) {
       setRestaurantName(name);
       setRestaurantTickets(allTickets);
@@ -29,22 +31,40 @@ const Voucher = () => {
     getAllTickets();
   });
 
+  const formatTicketCode = (code) => {
+    const formattedCode = code.split('');
+    formattedCode.splice(3, 0, '-');
+    return formattedCode.join('');
+  };
+
   return restaurantTickets ? (
-    <Bag>
-      {restaurantTickets.map((restaurant) => (
-        <Container>
-          <Image src={VoucherImage} />
-          <ContainerInfo>
-            <RestaurantName
-              className={restaurantName.length > 15 ? 'long' : ''}
-            >
-              {restaurantName}
-            </RestaurantName>
-            <TicketNumber>{restaurant.ticket_id}</TicketNumber>
-          </ContainerInfo>
-        </Container>
+    <Page>
+      {restaurantTickets.map((restaurant, idx) => (
+        <>
+          <Container>
+            <Image src={VoucherImage} />
+            <ContainerInfo>
+              <RestaurantName
+                className={restaurantName.length > 15 ? 'long' : ''}
+              >
+                {restaurantName}
+              </RestaurantName>
+              <TicketNumber>
+                {formatTicketCode(restaurant.ticket_id)}
+              </TicketNumber>
+            </ContainerInfo>
+          </Container>
+          {(idx + 1) % 4 === 0 && (
+            <>
+              <Image src={BackImage} />
+              <Image src={BackImage} />
+              <Image src={BackImage} />
+              <Image src={BackImage} />
+            </>
+          )}
+        </>
       ))}
-    </Bag>
+    </Page>
   ) : (
     <LoaderFillerContainer />
   );
@@ -52,20 +72,20 @@ const Voucher = () => {
 
 export default Voucher;
 
-const Bag = styled.div`
+const Page = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
 const Container = styled.div`
-  height: 600px;
+  height: 599px;
   width: 775px;
   display: grid;
   grid-template-rows: 1fr;
 `;
 
 const Image = styled.img`
-  height: 600px;
+  height: 599px;
   width: 775px;
   grid-row: 1;
   grid-column: 1;
@@ -74,7 +94,7 @@ const Image = styled.img`
 const ContainerInfo = styled.div`
   grid-row: 1;
   grid-column: 1;
-  height: 600px;
+  height: 599px;
   width: 775px;
   display: flex;
   z-index: 5;
@@ -90,7 +110,7 @@ const RestaurantName = styled.div`
   -moz-transform: rotate(15deg);
   -ms-transform: rotate(15deg);
   -o-transform: rotate(15deg);
-  
+
   margin-top: 317px;
   margin-left: 100px;
   display: flex;
@@ -114,5 +134,8 @@ const TicketNumber = styled.div`
   font-weight: bold;
   font-style: italic;
   font-size: 50px;
-  margin: 160px 0 0 255px;
+  margin: 160px 0 0 210px;
+
+  width: 285px;
+  text-align: center;
 `;
