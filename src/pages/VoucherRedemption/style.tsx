@@ -8,7 +8,7 @@ const ViewContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
 `;
 const SubViewContainer = styled.div`
   position: relative;
@@ -21,8 +21,6 @@ const MainView = styled(SubViewContainer)`
 `;
 const Footer = styled.div`
   width: 100%;
-  height: 100%;
-  // min-height: 175px;
   height: 100%;
   background: #f7f7f7;
   display: flex;

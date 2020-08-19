@@ -2,51 +2,94 @@ import React from 'react';
 import CampaignProgressBar from './CampaignProgressBar';
 import styled from 'styled-components';
 import {
-  smallScreens,
-  tabletScreens,
+  tabletScreens
 } from '../../../utilities/general/responsive';
+import { useTranslation } from 'react-i18next';
 import campaignDefaultImage from '../images/campaign_default.png';
-import apexLogo from '../images/apex-logo.png';
-import melonpannaLogo from '../images/melonpanna-logo.png';
-
-// In the final implementation, campaign will be object declared in types.ts
+import { Campaign } from '../../../utilities/api/types';
+import { getDistributor, getSeller } from '../../../utilities';
+import { useEffect, useState } from 'react';
 
 interface Props {
-  campaign: String;
+  campaign: Campaign;
 }
 
-const CampaignListItem = (campaign: Props) => {
+const CampaignListItem = (props: Props) => {
+  const { t } = useTranslation();
+
+  const [distributor, setDistributor] = useState<any | null>();
+  const [merchant, setMerchant] = useState<any | null>();
+  const campaign = props.campaign;
+
+  const fetchData = async () => {
+    const distributorData = await getDistributor(campaign.distributor_id);
+    const merchantData = await getSeller(campaign.seller_id);
+    setDistributor(distributorData.data);
+    setMerchant(merchantData.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line
+  }, []);
+
+  const mealsRaised = Math.floor(campaign.amount_raised / campaign.price_per_meal);
+  const targetMeals = Math.floor(campaign.target_amount / campaign.price_per_meal);
+  const campaignImageUrls = campaign.gallery_image_urls;
+
   return (
     <Container>
       <ColumnContainer>
-        <img src={campaignDefaultImage} alt="campaign_image" />
+        {campaignImageUrls && campaignImageUrls.length && (
+          <CampaignImage src={campaignImageUrls[0] ?? campaignDefaultImage} alt="campaign_image" />
+        )}
       </ColumnContainer>
       <ColumnContainer>
-        <Location>Sunset Park, Brooklyn</Location>
-        <Name>Melonpanna Tea & Shot x APEX for the Youth</Name>
+        {merchant && merchant.locations && merchant.locations.length && (
+          <Location>{merchant.locations[0].city}</Location>
+        )}
+        {distributor && merchant && (
+          <Name>{merchant.name} x {distributor.name}</Name>
+        )}
         <Description>
-          Partnering with APEX for the Youth, we hope to raise 200 meals for
-          underserved Asian and immigrant youth from low-income families.
+          {campaign.description}
+          <br></br>
+          {distributor &&
+            (<a href={distributor.website_url}>{distributor.name}</a>)
+          }
         </Description>
-        {/* Testing values */}
         <CampaignProgressBar
-          isActive={true}
-          numContributions={73}
-          targetAmount={100}
+          isActive={campaign.active}
+          numContributions={mealsRaised}
+          targetAmount={targetMeals}
           progressBarColor={'#CF6E8A'}
-          lastContributionTime={new Date('07/21/2020 20:05:00')}
-          endDate={new Date('07/23/2020')}
+          lastContributionTime={new Date(campaign.last_contribution)}
+          endDate={new Date(campaign.end_date)}
         />
       </ColumnContainer>
       <ColumnContainer>
         <ImagesContainer>
-          <img src={apexLogo} alt="merchant_logo" />
-          <img src={melonpannaLogo} alt="distributor_logo" />
+          {distributor &&
+            (<a href={distributor.website_url}>
+              <DistributorImage src={distributor.image_url} alt="distributor_logo" />
+            </a>
+            )
+          }
+          {merchant &&
+            (<MerchantImage src={merchant.logo_image_url} alt="merchant_logo" />)
+          }
         </ImagesContainer>
-        <Button className="button--filled">Visit merchant</Button>
-        <Button className={'button--outlined'}>Gift a meal</Button>
+        {merchant && (
+          <Button className="button--filled" onClick={(e) => {
+            e.preventDefault();
+            window.location.href = '/' + merchant.seller_id;
+          }}>{t('gamHome.listItem.viewButton')}</Button>
+        )}
+        {campaign.active && (
+          <Button className={'button--outlined'}>{t('gamHome.listItem.giftButton')}</Button>
+        )}
       </ColumnContainer>
-    </Container>
+    </Container >
   );
 };
 
@@ -60,7 +103,7 @@ const Container = styled.div`
   justify-content: space-between;
 
   @media (${tabletScreens}) {
-    max-height: 575px;
+    max-height: 600px;
     flex-direction: column;
     margin: 0 17px;
     position: relative;
@@ -104,6 +147,7 @@ const Location = styled.div`
 
   @media (${tabletScreens}) {
     font-size: 14px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -118,6 +162,7 @@ const Name = styled.div`
   margin-bottom: 18px;
 
   @media (${tabletScreens}) {
+    margin-bottom: 10px;
     width: 70%;
   }
 `;
@@ -130,22 +175,12 @@ const Description = styled.div`
   line-height: 20px;
   letter-spacing: 0.02em;
   color: #1e1e1e;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 
   @media (${tabletScreens}) {
     font-size: 14px;
-    margin-bottom: 34px;
+    margin-bottom: 10px;
   }
-`;
-
-const TimeStamp = styled.div`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
-  letter-spacing: 0.02em;
-  color: #9e9e9e;
 `;
 
 const Button = styled.div`
@@ -162,6 +197,7 @@ const Button = styled.div`
   @media (max-width: 550px) {
     font-size: 14px;
     width: 100%;
+    margin-bottom: 10px;
   }
 `;
 
@@ -173,9 +209,33 @@ const ImagesContainer = styled.span`
   @media (${tabletScreens}) {
     position: absolute;
     top: 132px;
+    margin-bottom: 30px;
 
     img {
       height: 25px;
     }
   }
+`;
+
+const CampaignImage = styled.img`
+  height: 240px;
+  width: 240px;
+
+  @media (${tabletScreens}) {
+    max-height: 100px;
+    width: 100%;
+  }
+`;
+
+const DistributorImage = styled.img`
+  max-height: 70px;
+  max-width: 120px;
+  margin-right: 15px;
+  vertical-align: middle;
+`;
+
+const MerchantImage = styled.img`
+  max-height: 70px;
+  max-width: 70px;
+  vertical-align: middle;
 `;

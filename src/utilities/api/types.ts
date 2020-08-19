@@ -95,3 +95,21 @@ export type BrowsePageSeller = {
   non_profit_location_id: string;
   logo_image_url: string;
 };
+
+export type Campaign = {
+  id: number;
+  active: boolean;
+  valid: boolean;
+  description: string;
+  seller_id: string;
+  distributor_id: string;
+  location_id: string;
+  end_date: string;
+  created_at: string;
+  updated_at: string;
+  gallery_image_urls: string[];
+  target_amount: number;
+  price_per_meal: number;
+  amount_raised: number;
+  last_contribution: string;
+};
