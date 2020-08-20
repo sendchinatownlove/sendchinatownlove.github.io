@@ -5,6 +5,7 @@ import TrackScreen from './TrackScreen';
 import RedemptionSelectScreen from './RedemptionSelectScreen';
 import ScreenName from "./ScreenName";
 import { Container, PassportContainer, ExternalLink } from './style'
+import PassportScreen from './Passport';
 
 interface Props {}
 
@@ -13,15 +14,15 @@ const PassportRedemption = (props: Props) => {
 
   const showCurrentScreen = (screen) => {
     // TODO: Update case #s when all screens are built out
-    // NOTE: not sure if this is the right flow,
-    // but currently set up like this for now for ease of editing
-    switch (screen) {
-      case ScreenName.Redemption:
-        return (
-          <RedemptionSelectScreen setCurrentScreenView={setCurrentScreenView} />
-        );
+    // NOTE: not sure if this is the right flow, 
+    // but currently set up like this for now for ease of editing 
+    switch(screen) {
+      case ScreenName.Redemption: 
+        return <RedemptionSelectScreen setCurrentScreenView={setCurrentScreenView} />
       case ScreenName.Track:
-        return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
+        return <TrackScreen setCurrentScreenView={setCurrentScreenView} />
+      default: 
+        return <PassportScreen setCurrentScreenView={setCurrentScreenView} />
     }
   };
 
@@ -37,7 +38,7 @@ const PassportRedemption = (props: Props) => {
   return (
     <Container>
       <PassportContainer>
-        <Logo
+        {/* <Logo
           src={CircleLogo}
           alt="scl-log"
           className={
