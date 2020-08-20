@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 
-import { PassportContainer, Title, SubTitle, Button, Container } from "./style";
+import { PassportContainer, Title, SubTitle, Button } from "./style";
 import ScreenName from "./ScreenName";
+import FAQ from "./Faq"
 
 interface Props {
   setCurrentScreenView: Function;
@@ -18,6 +19,7 @@ type stampProp = {
 const initStamps = [1,2,3,4,5,6,7,9];
 const Passport = ({ setCurrentScreenView }: Props) => {
   const [stamps, setStamps] = useState(initStamps);
+  const [showFaq, setShowFaq] = useState(true);
 
   const createRow = (info,index) => {
     const dummyInfo = {
@@ -28,9 +30,7 @@ const Passport = ({ setCurrentScreenView }: Props) => {
       sponsor_seller_id: "WOK WOK",
       redeemed_at: "9/1/20",
       expiration: "9/20/20"
-    }
-    
-
+    }    
     return (
       <TableRow key={index} status="active">
         <TableIndex> {index + 1} </TableIndex>
@@ -53,25 +53,32 @@ const Passport = ({ setCurrentScreenView }: Props) => {
       </TableRow>
     ) 
   }
+
   return (
-    <PassportContainer>
-      <TitleRow>
-        <Title>PASSPORT TO CHINATOWN</Title>
-        <SubTitle>9/1/20202 - 9/30/20</SubTitle>
-      </TitleRow>
-      
-      <Table>
-        {stamps.length && stamps.map((stamp, index) => createRow(stamp,index))}
-      </Table>
-        
-      <AddNewTicket
-        value="track-screen-button"
-        className="button--filled"
-        onClick={() => setCurrentScreenView(ScreenName.Dashboard)}
+    <>
+      <FAQ showFaq={showFaq} toggleView={() => setShowFaq(true)}/>
+      <PassportContainer 
+        mainView={!showFaq} 
+        onClick={() => setShowFaq(false)}
       >
-        Add New Ticket
-      </AddNewTicket>
-    </PassportContainer>
+        <TitleRow>
+          <Title>PASSPORT TO CHINATOWN</Title>
+          <SubTitle>9/1/20202 - 9/30/20</SubTitle>
+        </TitleRow>
+          
+        <Table>
+          {stamps.length && stamps.map((stamp, index) => createRow(stamp,index))}
+        </Table>
+          
+        <AddNewTicket
+          value="track-screen-button"
+          className="button--filled"
+          onClick={() => setCurrentScreenView(ScreenName.Dashboard)}
+        >
+          Add New Ticket
+        </AddNewTicket>
+      </PassportContainer>
+    </>
   );
 };
 

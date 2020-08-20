@@ -8,13 +8,21 @@ type Props = {
   size?: string;
 };
 
+type PassportProps = {
+  mainView?: boolean;
+};
+
 const Container = styled.div`
+  position: relative;
   background-color: #e5e5e5;
   height: 100%;
   min-height: 100vh;
   background-image: url(${CrawlMap});
+  width: 100%;
   margin: 0 auto;
-
+  display: flex;
+  // flex-direction: column;
+  justify-content: center;
   @media (max-width: 475px) {
       background-size: 500px;
   }
@@ -24,18 +32,19 @@ const PassportContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 367px;
+  width: 367px;
+  // max-width: 367px;
   margin: 0 auto;
+  background: #FFFFFF;
 
   border: 1px solid #dedede;
   border-radius: 20px;
   box-sizing: border-box;
   overflow: hidden;
 
-  &.faq {
-      font-size: 12px;
-      max-height: 100vh;
-  }
+  position: absolute;
+  z-index: ${(props: PassportProps) => props.mainView ? "10" : "0"};
+  top: ${(props: PassportProps) => props.mainView ? "40px" : "0"};
 `;
 
 const ExternalLink = styled.a`
