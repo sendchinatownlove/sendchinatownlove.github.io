@@ -16,9 +16,15 @@ const Track = ({ setCurrentScreenView }: Props) => {
   const [ticketCode, setTicketCode] = useState('');
   // TODO(Athena): Check error code validity --> send to BE first then process?
   // Follow up to see how this part works
-  const [isTicketValid, setIsTicketValid] = useState(true);
+  // const [isTicketValid, setIsTicketValid] = useState(true);
   const [instagramHandle, setinstagramHandle] = useState('');
 
+  const formatTicketCode = (code) => {
+    if(code.length === 3) {
+      setTicketCode(code + '-')
+    } 
+  };
+  
   return (
     <Container>
       <InputContainer className="trackScreen top">
@@ -48,16 +54,22 @@ const Track = ({ setCurrentScreenView }: Props) => {
             name="ticket-code"
             type="text"
             onChange={(e) => setTicketCode(e.target.value)}
+            onKeyUp={(e) => {
+              if(e.key !== 'Backspace') {
+                formatTicketCode(e.target['value'])
+              }
+            }}
             value={ticketCode}
+            maxLength={6}
           />
 
           {/* TODO: need to sync up to something to check error code validity */}
-          {!isTicketValid && (
+          {/* {!isTicketValid && ( */}
             <ErrorMessage>
               This is not a valid Ticket Code. Please check your ticket again
               and make sure you haven’t added this ticket before.
             </ErrorMessage>
-          )}
+          {/* )} */}
         </Column>
       </InputContainer>
       
@@ -70,7 +82,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
           <img src={CrawlInsta} alt="social-media-logo" width="40px"></img>
         </Row>
 
-        <Label htmlFor="instagram-handle">Instagram Handle (Optional)</Label>
+        <Label htmlFor="instagram-handle">Instagram Handle (for Digital Giveaway)</Label>
         <InputField
           name="instagram-handle"
           type="text"
