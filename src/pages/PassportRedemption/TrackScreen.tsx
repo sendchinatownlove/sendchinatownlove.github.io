@@ -79,11 +79,11 @@ const Track = ({ setCurrentScreenView }: Props) => {
   return (
     <Container>
       <InputContainer className="trackScreen top">
-        <Title>PASSPORT TO CHINATOWN</Title>
-        <FinePrint className="center">
+        <Title color="#a8192e">PASSPORT TO CHINATOWN</Title>
+        <SubTitle>
           Enter your ticket code to start accumulating rewards you can use in
           Chinatown
-        </FinePrint>
+        </SubTitle>
 
         <Column>
           <Label htmlFor="email-input">Email Address</Label>
@@ -224,22 +224,6 @@ export const InputContainer = styled.div`
     border-radius: 0px 0px 20px 20px;
     border-top: 1px dashed #dedede;
     text-align: center;
-  }
-`;
-
-export const FinePrint = styled.p`
-  &.center {
-    text-align: center;
-    padding: 0 20px;
-  }
-
-  &.bold {
-    font-weight: bold;
-    width: 250px;
-  }
-
-  &.smallText {
-    font-size: 10px;
   }
 `;
 
