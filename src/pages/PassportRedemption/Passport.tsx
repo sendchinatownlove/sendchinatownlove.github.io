@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { PassportContainer, Title, SubTitle, Button } from "./style";
 import ScreenName from "./ScreenName";
 import FAQ from "./Faq"
+import PassportIconImg from "./passportIcon.png"
 
 interface Props {
   setCurrentScreenView: Function;
@@ -17,9 +18,15 @@ type stampProp = {
 };
 
 const initStamps = [1,2,3,4,5,6,7,9];
+
 const Passport = ({ setCurrentScreenView }: Props) => {
   const [stamps, setStamps] = useState(initStamps);
-  const [showFaq, setShowFaq] = useState(true);
+  const [showFaq, setShowFaq] = useState(false);
+  const [showEmailSent, setShowEmailSent] = useState(false);
+
+  const sendEmail = () => {
+    setShowEmailSent(true);
+  }
 
   const createRow = (info,index) => {
     const dummyInfo = {
@@ -31,11 +38,21 @@ const Passport = ({ setCurrentScreenView }: Props) => {
       redeemed_at: "9/1/20",
       expiration: "9/20/20"
     }    
+
     return (
       <TableRow key={index} status="active">
         <TableIndex> {index + 1} </TableIndex>
         <TableStamp> 
           <StampRow>
+            {/* { status === "active" && ( */}
+                <SendEmailButton
+                  className="button--red-filled"
+                  onClick={sendEmail}
+                > 
+                  Send to Email
+                </SendEmailButton>
+              {/* )
+            } */}
             <Stamp sellerId={dummyInfo.participating_seller_id}>
               {dummyInfo.participating_seller_id}
             </Stamp>
@@ -66,6 +83,22 @@ const Passport = ({ setCurrentScreenView }: Props) => {
           <SubTitle>9/1/20202 - 9/30/20</SubTitle>
         </TitleRow>
           
+        { showEmailSent && (
+            <SendEmailContainer>
+              <PassportIcon src={PassportIconImg}/>
+              <TitleRow>
+                <Title>REWARD EMAIL SENT</Title>
+                <SubTitle bold="700">Check your inbox shortly for a link to access your available rewards!</SubTitle>                
+              </TitleRow>
+              <SendEmailButtonClose 
+                className="button--red-filled"
+                onClick={e => setShowEmailSent(false)}
+              > 
+                CLOSE 
+              </SendEmailButtonClose>
+            </SendEmailContainer>
+          ) 
+        }
         <Table>
           {stamps.length && stamps.map((stamp, index) => createRow(stamp,index))}
         </Table>
@@ -136,8 +169,10 @@ const TableStamp = styled.td`
 const AddNewTicket = styled(Button)`
   position: fixed;
   bottom: 10px;
+  width: 300px;
 `
 const StampRow = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -176,3 +211,43 @@ const Stamp = styled.div`
   border: 2px solid #A8192E;
   color: #A8192E;
 `;
+const SendEmailButton = styled(Button)`
+  height: 30px;
+  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  text-transform: uppercase;
+`;
+const SendEmailContainer = styled.div`
+  position: fixed;
+  width: 340px;
+  margin: 0 auto;
+  height: 260px;
+  z-index: 20;  
+  top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;;
+  align-items: center;
+
+  background: #F2EAE8;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+`;
+const PassportIcon = styled.img`
+  width: 59px;
+  height: 76px;
+`;
+const SendEmailButtonClose = styled(Button)`
+  height: 32px;
+  width: 115px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+`
+  
