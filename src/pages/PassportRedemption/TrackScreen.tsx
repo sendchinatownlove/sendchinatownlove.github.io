@@ -137,6 +137,10 @@ export const FinePrint = styled.p`
   &.smallText {
     font-size: 10px;
   }
+
+  &.red {
+    color: #A8192E;
+  }
 `;
 
 const Label = styled.label`

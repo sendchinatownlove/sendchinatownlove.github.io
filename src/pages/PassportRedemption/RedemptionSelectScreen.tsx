@@ -83,7 +83,7 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
       {
         !!selectedReward.name ? (
           <React.Fragment>
-            <FinePrint className='center bold'>When redeemed, you have 5 minutes to use your reward.</FinePrint>
+            <FinePrint className='center bold red'>When redeemed, you have 5 minutes to use your reward.</FinePrint>
 
             <Button
               value="redemption-selected-button"

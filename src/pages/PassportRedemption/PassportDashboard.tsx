@@ -6,6 +6,7 @@ import CrawlMap from './CrawlMap.png';
 
 import TrackScreen from './TrackScreen';
 import RedemptionSelectScreen from './RedemptionSelectScreen';
+import RedemptionClaimScreen from './RedemptionClaimScreen';
 
 interface Props {}
 
@@ -19,6 +20,8 @@ const PassportRedemption = (props: Props) => {
     switch(screen) {
       case 1: 
         return <RedemptionSelectScreen setCurrentScreenView={setCurrentScreenView} />
+      case 2:
+        return <RedemptionClaimScreen setCurrentScreenView={setCurrentScreenView} />
       default: 
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />
     }
