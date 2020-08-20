@@ -273,6 +273,10 @@ export const InputContainer = styled.div`
     border-top: 1px dashed #dedede;
     text-align: center;
   }
+
+  &.red {
+    color: #A8192E;
+  }
 `;
 
 const Label = styled.label`

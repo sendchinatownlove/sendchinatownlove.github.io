@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import TrackScreen from './TrackScreen';
 import RedemptionSelectScreen from './RedemptionSelectScreen';
+import RedemptionClaimScreen from './RedemptionClaimScreen';
+
 import ScreenName from "./ScreenName";
 import PassportScreen from './Passport';
 import CrawlMap from './CrawlMap.png';
@@ -33,6 +35,8 @@ const PassportRedemption = (props: Props) => {
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />
       case ScreenName.Dashboard: 
         return <PassportScreen setCurrentScreenView={setCurrentScreenView}/>
+      case ScreenName.Claim:
+        return <RedemptionClaimScreen setCurrentScreenView={setCurrentScreenView} />
       default: 
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />
     }
