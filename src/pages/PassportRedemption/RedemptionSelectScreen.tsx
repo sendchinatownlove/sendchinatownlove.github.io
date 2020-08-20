@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Button, FinePrint } from './TrackScreen';
+import { SubTitle, Button } from "./style";
 import ScreenName from './ScreenName';
 
 // TODO: DELETE --> DUMMY IMAGE DATA
@@ -101,37 +101,36 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
         })}
       </RewardsContainer>
 
-      {!!selectedReward.name ? (
-        <React.Fragment>
-          <FinePrint className="center bold">
-            When redeemed, you have 5 minutes to use your reward.
-          </FinePrint>
+      {
+        !!selectedReward.name ? (
+          <React.Fragment>
+            <SubTitle bold="700">When redeemed, you have 5 minutes to use your reward.</SubTitle>
 
-          <Button
-            value="redemption-selected-button"
-            className="button--red-filled"
-            disabled={!selectedReward}
-            onClick={() => setCurrentScreenView(2)}
-          >
-            REEDEM NOW
-          </Button>
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <FinePrint className="center bold">
-            Select an offer and be ready to show this screen when you’re
-            ordering.
-          </FinePrint>
+            <Button
+              value="redemption-selected-button"
+              className="button--red-filled"
+              disabled={!selectedReward}
+              onClick={() => setCurrentScreenView(2)}
+            >
+              REEDEM NOW
+            </Button>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <SubTitle bold="700">
+              Select an offer and be ready to show this screen when you’re ordering.
+            </SubTitle>
 
-          {/* TODO: Update return screen with the Passport screen when built out  */}
-          <Button
-            className="linkButton"
-            onClick={() => setCurrentScreenView(ScreenName.Track)}
-          >
-            RETURN TO PASSPORT
-          </Button>
-        </React.Fragment>
-      )}
+            {/* TODO: Update return screen with the Passport screen when built out  */}
+            <Button 
+              className='linkButton'
+              onClick={() => setCurrentScreenView(ScreenName.Track)}
+            >
+              RETURN TO PASSPORT
+            </Button>
+          </React.Fragment>
+        )
+      }
     </Container>
   );
 };

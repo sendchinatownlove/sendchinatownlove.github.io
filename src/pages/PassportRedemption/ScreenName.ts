@@ -1,6 +1,7 @@
 enum ScreenName {
-  Track,
-  Redemption,
+    Track,
+    Redemption,
+    Dashboard
 }
 
 export default ScreenName;
