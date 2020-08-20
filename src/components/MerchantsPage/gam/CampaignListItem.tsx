@@ -105,7 +105,7 @@ const CampaignListItem = (props: Props) => {
           purchaseType={'buy_meal'}
           sellerId={merchant.seller_id}
           sellerName={merchant.name}
-          costPerMeal={campaign.price_per_meal}
+          costPerMeal={campaign.price_per_meal / 100}
           nonProfitLocationId={merchant.non_profit_location_id}
         />
       )}
