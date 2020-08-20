@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 
-import { PassportContainer, Title, SubTitle, Button, ErrorMessage } from "./style";
+import { PassportContainer, Title, SubTitle, Button, Container } from "./style";
+import ScreenName from "./ScreenName";
 
 interface Props {
   setCurrentScreenView: Function;
@@ -66,7 +67,7 @@ const Passport = ({ setCurrentScreenView }: Props) => {
       <AddNewTicket
         value="track-screen-button"
         className="button--filled"
-        onClick={() => setCurrentScreenView(1)}
+        onClick={() => setCurrentScreenView(ScreenName.Dashboard)}
       >
         Add New Ticket
       </AddNewTicket>

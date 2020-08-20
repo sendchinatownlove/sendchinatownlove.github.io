@@ -10,7 +10,7 @@ import PassportScreen from './Passport';
 interface Props {}
 
 const PassportRedemption = (props: Props) => {
-  const [currentScreenView, setCurrentScreenView] = useState(ScreenName.Track);
+  const [currentScreenView, setCurrentScreenView] = useState(ScreenName.Dashboard);
 
   const showCurrentScreen = (screen) => {
     // TODO: Update case #s when all screens are built out
@@ -21,6 +21,8 @@ const PassportRedemption = (props: Props) => {
         return <RedemptionSelectScreen setCurrentScreenView={setCurrentScreenView} />
       case ScreenName.Track:
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />
+      case ScreenName.Dashboard: 
+        return <PassportScreen setCurrentScreenView={setCurrentScreenView} />
       default: 
         return <PassportScreen setCurrentScreenView={setCurrentScreenView} />
     }
@@ -34,24 +36,22 @@ const PassportRedemption = (props: Props) => {
 
   return (
     <Container>
-      <PassportContainer>
-        {/* <Logo
-          src={CircleLogo}
-          alt="scl-log"
-          className={currentScreenView === ScreenName.Track ? 'passportTrackScreen' : ''}
-        />
+      {/* <Logo
+        src={CircleLogo}
+        alt="scl-log"
+        className={currentScreenView === ScreenName.Track ? 'passportTrackScreen' : ''}
+      />
+      */}
 
-        {
-          showCurrentScreen(currentScreenView)
-        }
+      {
+        showCurrentScreen(currentScreenView)
+      }
 
-        <Row>
-          <ExternalLink>VIEW MAP</ExternalLink>
-          <ExternalLink href="mailto:sendchinatownlove@gmail.com">
-            Contact Us
-          </ExternalLink>
-        </Row>
-
+      <Row>
+        <ExternalLink>VIEW MAP</ExternalLink>
+        <ExternalLink href="mailto:sendchinatownlove@gmail.com">
+          Contact Us
+        </ExternalLink>
         <LinksContainer>
           {
             socialMediaLinks.map((social) => (
@@ -61,7 +61,7 @@ const PassportRedemption = (props: Props) => {
             ))
           }
         </LinksContainer>
-      </PassportContainer>
+      </Row>
     </Container>
   );
 };
@@ -81,6 +81,10 @@ const Logo = styled.img`
 
 export const Row = styled.div`
   display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: center;
 `;
 
 const LinksContainer = styled.div`

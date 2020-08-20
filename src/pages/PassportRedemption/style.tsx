@@ -5,6 +5,7 @@ type Props = {
   color?: string;
   bold?: string;
   align?: string;
+  size?: string;
 };
 
 const Container = styled.div`
@@ -12,6 +13,7 @@ const Container = styled.div`
   height: 100%;
   min-height: 100vh;
   background-image: url(${CrawlMap});
+  margin: 0 auto;
 
   @media (max-width: 475px) {
       background-size: 500px;
@@ -22,6 +24,8 @@ const PassportContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 367px;
+  margin: 0 auto;
 
   border: 1px solid #dedede;
   border-radius: 20px;
@@ -55,11 +59,12 @@ const Title = styled.span`
   font-weight: bold;
   text-align: center;
   letter-spacing: .15em;
+  margin: 5px auto;
 `;
 
 const SubTitle = styled.span`
   color: ${(props: Props) => props.color ? props.color : "black"};
-  font-size: 12px;
+  font-size: ${(props: Props) => props.size ? props.size : "12px"};
   font-weight: ${(props: Props) => props.bold ? props.bold : "400"};
   text-align: ${(props: Props) => props.align ? props.align : "center"};
   letter-spacing: .15em;

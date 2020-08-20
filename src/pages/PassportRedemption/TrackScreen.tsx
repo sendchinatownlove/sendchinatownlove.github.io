@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Row } from './PassportDashboard';
+import { PassportContainer, Title, SubTitle, Button, ErrorMessage } from "./style";
 
 import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 import CrawlInsta from './CrawlInsta.png';
+import ScreenName from "./ScreenName";
 
 interface Props {
   setCurrentScreenView: Function;
@@ -22,11 +24,11 @@ const Track = ({ setCurrentScreenView }: Props) => {
   return (
     <Container>
       <InputContainer className="trackScreen top">
-        <Title>PASSPORT TO CHINATOWN</Title>
-        <FinePrint className="center">
+        <Title color="#a8192e">PASSPORT TO CHINATOWN</Title>
+        <SubTitle>
           Enter your ticket code to start accumulating rewards you can use in
           Chinatown
-        </FinePrint>
+        </SubTitle>
 
         <Column>
           <Label htmlFor="email-input">Email Address</Label>
@@ -63,10 +65,10 @@ const Track = ({ setCurrentScreenView }: Props) => {
       
       <InputContainer className="bottom">
         <Row>
-          <FinePrint className="smallText">
+          <SubTitle size="10px">
             To be entered into our weekly giveaway, share your food crawl
             pictures on Instagram and tag @sendchinatownlove{' '}
-          </FinePrint>
+          </SubTitle>
           <img src={CrawlInsta} alt="social-media-logo" width="40px"></img>
         </Row>
 
@@ -83,7 +85,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
         value="track-screen-button"
         className="button--red-filled"
         disabled={!email || !ticketCode}
-        onClick={() => setCurrentScreenView(1)}
+        onClick={() => setCurrentScreenView(ScreenName.Dashboard)}
       >
         Add Ticket
       </Button>
@@ -100,7 +102,7 @@ const Container = styled.div`
   font-size: 12px;
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled(PassportContainer)`
   background-color: white;
   border: 1px solid #dedede;
   padding: 25px 20px;
@@ -123,49 +125,13 @@ export const InputContainer = styled.div`
   }
 `;
 
-export const FinePrint = styled.p`
-  &.center {
-    text-align: center;
-    padding: 0 20px;
-  }
-
-  &.bold {
-    font-weight: bold;
-    width: 250px;
-  }
-
-  &.smallText {
-    font-size: 10px;
-  }
-`;
-
 const Label = styled.label`
   font-size: 13px;
 `;
 
 const Column = styled.div`
   margin: 25px 0;
-`;
-
-const Title = styled.p`
-  color: #a8192e;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  letter-spacing: .15em;
-`;
-
-export const Button = styled.button`
-  margin: 20px 0 10px;
-
-  &.linkButton {
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid black;
-    line-spacing: .1em;
-    font-weight: bold;
-  }
-`;
+`; 
 
 const InputField = styled.input`
   width: 100%;
@@ -178,9 +144,4 @@ const InputField = styled.input`
   :invalid {
     border: 1px solid red;
   }
-`;
-
-const ErrorMessage = styled.div`
-  color: red;
-  padding-top: 5px;
 `;

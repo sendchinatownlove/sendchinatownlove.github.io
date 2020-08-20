@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Button, FinePrint } from './TrackScreen';
+import { SubTitle, Button } from "./style";
 import ScreenName from './ScreenName';
 
 // TODO: DELETE --> DUMMY IMAGE DATA
@@ -83,7 +83,7 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
       {
         !!selectedReward.name ? (
           <React.Fragment>
-            <FinePrint className='center bold'>When redeemed, you have 5 minutes to use your reward.</FinePrint>
+            <SubTitle bold="700">When redeemed, you have 5 minutes to use your reward.</SubTitle>
 
             <Button
               value="redemption-selected-button"
@@ -96,9 +96,9 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <FinePrint className='center bold'>
+            <SubTitle bold="700">
               Select an offer and be ready to show this screen when you’re ordering.
-            </FinePrint>
+            </SubTitle>
 
             {/* TODO: Update return screen with the Passport screen when built out  */}
             <Button 
