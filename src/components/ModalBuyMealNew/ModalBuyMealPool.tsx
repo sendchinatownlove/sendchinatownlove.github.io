@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
@@ -43,6 +43,11 @@ export const Modal = (props: Props) => {
   const totalAmount = { value: totalMealPrice, text: '$' + totalMealPrice };
   const COST_LIMIT = 10000;
 
+  useEffect(() => {
+    dispatch({ type: SET_AMOUNT, payload: String(totalMealPrice) });
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <form data-testid="ModalBuyMeal">
       <div>
@@ -55,23 +60,23 @@ export const Modal = (props: Props) => {
       </div>
       <p className={styles.description}>
           {t('buyMealPool.description.weAre')}
-          <a 
-            href="https://www.apexforyouth.org/" 
+          <a
+            href="https://www.apexforyouth.org/"
             target="_blank" rel="noopener noreferrer"
             className={styles.link}
-          > APEX for Youth</a>, 
-          <a 
-            href="http://www.lajornadany.org/" 
+          > APEX for Youth</a>,
+          <a
+            href="http://www.lajornadany.org/"
             target="_blank" rel="noopener noreferrer"
             className={styles.link}
-          > La Jornada Food Pantry</a>, 
-          <a 
-            href="https://www.cpc-nyc.org/" 
+          > La Jornada Food Pantry</a>,
+          <a
+            href="https://www.cpc-nyc.org/"
             target="_blank" rel="noopener noreferrer"
             className={styles.link}
           > the Chinese-American Planning Council </a>
-          {t('buyMealPool.description.andRestaurants')} 
-          <span className={styles.bold}> {t('buyMealPool.description.allItTakes')}</span>
+          {t('buyMealPool.description.andRestaurants')}
+          <span className={styles.bold}> {t('buyMealPool.description.allItTakes')} ${props.costPerMeal}</span>
       </p>
 
       <CampaignInstructions />
@@ -127,4 +132,3 @@ export const Modal = (props: Props) => {
 };
 
 export default Modal;
-
