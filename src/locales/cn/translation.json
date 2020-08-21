@@ -139,7 +139,7 @@
     "description": {
       "weAre": "我们与",
       "andRestaurants": "以及受到 COVID-19 疫情影响的餐厅合作，捐爱心餐给需要的团体。",
-      "allItTakes": "五美金就能响应。"
+      "allItTakes": ""
     },
     "prompt": "Please enter how many meals to gift",
     "totalLabel": "Total: ",

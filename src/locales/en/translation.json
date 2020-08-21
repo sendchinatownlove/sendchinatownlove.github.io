@@ -139,7 +139,7 @@
     "description": {
       "weAre": "We are partnering with",
       "andRestaurants": "and restaurants who have been impacted by COVID-19 to gift meals to communities in need.",
-      "allItTakes": "All it takes is $5."
+      "allItTakes": "All it takes is"
     },
     "prompt": "Please enter how many meals to gift",
     "totalLabel": "Total: ",
