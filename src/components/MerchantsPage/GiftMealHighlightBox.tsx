@@ -14,7 +14,7 @@ const GiftMealHighlightBox = () => {
 
   const onButtonClick = (e: any) => {
     ReactPixel.trackCustom('GiftMealBoxButtonClick', {});
-    // TODO: Add router to open GAM page
+    window.location.href = '/gift-a-meal-home';
   };
 
   return (
