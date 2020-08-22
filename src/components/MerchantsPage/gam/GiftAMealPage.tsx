@@ -12,7 +12,6 @@ interface Props {
 }
 
 const GiftAMealPage = (props: Props) => {
-
   return (
     <div
       className={styles.container}

@@ -9,7 +9,7 @@ import CrawlInsta from './CrawlInsta.png';
 
 interface Props {
   setCurrentScreenView: Function;
-};
+}
 
 const Track = ({ setCurrentScreenView }: Props) => {
   const [email, setEmail] = useState('');
@@ -60,7 +60,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
           )}
         </Column>
       </InputContainer>
-      
+
       <InputContainer className="bottom">
         <Row>
           <FinePrint className="smallText">
@@ -105,7 +105,7 @@ export const InputContainer = styled.div`
   border: 1px solid #dedede;
   padding: 25px 20px;
   box-sizing: border-box;
-  overflow:hidden;
+  overflow: hidden;
 
   &.trackScreen {
     padding-top: 60px;
@@ -139,7 +139,7 @@ export const FinePrint = styled.p`
   }
 
   &.red {
-    color: #A8192E;
+    color: #a8192e;
   }
 `;
 
@@ -156,7 +156,7 @@ const Title = styled.p`
   font-size: 14px;
   font-weight: bold;
   text-align: center;
-  letter-spacing: .15em;
+  letter-spacing: 0.15em;
 `;
 
 export const Button = styled.button`
@@ -166,7 +166,7 @@ export const Button = styled.button`
     background-color: transparent;
     border: none;
     border-bottom: 1px solid black;
-    line-spacing: .1em;
+    line-spacing: 0.1em;
     font-weight: bold;
   }
 `;
