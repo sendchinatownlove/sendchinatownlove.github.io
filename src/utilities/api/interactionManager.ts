@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Buyer, PaymentParams, SquareLineItems } from './types';
-import { charges, sellers, vouchers, campaigns, distributors } from './endpoints';
+import { charges, sellers, vouchers, campaigns, distributors, passportVouchers } from './endpoints';
 
 // Fix return typing
 export const getSellers = async (lang?: string): Promise<any> => {
@@ -140,3 +140,19 @@ export const getDistributor = async (id: string): Promise<any> => {
     .then((res) => res)
     .catch((err) => err);
 }
+
+// for passport crawl voucher print outs
+export const getParticipatingMerchant = async (id: string) =>
+  axios
+    .get(passportVouchers + id)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getParticipatingMerchantTickets = async (
+  id: string,
+  tickets_secret: string
+) =>
+  axios
+    .get(passportVouchers + id + '/tickets/' + tickets_secret)
+    .then((res) => res)
+    .catch((err) => err);
