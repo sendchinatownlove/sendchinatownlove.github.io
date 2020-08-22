@@ -22,6 +22,7 @@ export interface Props {
   sellerName: string;
   costPerMeal: number;
   nonProfitLocationId?: string;
+  campaignId?: string;
 }
 
 export interface ModalProps {
