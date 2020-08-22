@@ -17,6 +17,7 @@ const GiftAMealPage = (props: Props) => {
 
   const [activeCampaigns, setActiveCampaigns] = useState([]);
   const [pastCampaigns, setPastCampaigns] = useState([]);
+  const [selectedCampaign, setSelectedCampaign] = useState(null)
 
   const fetchData = async () => {
     const campaignData = await getCampaigns();
@@ -64,7 +65,12 @@ const GiftAMealPage = (props: Props) => {
         ? <>
           <h5 className={styles.campaignHeader}>{t('gamHome.activeSection')}</h5>
           {activeCampaigns.map((campaign: any) => (
-            <CampaignListItem campaign={campaign} key={campaign.id} />
+            <CampaignListItem
+              campaign={campaign}
+              key={campaign.id}
+              selectedCampaign={selectedCampaign}
+              setSelectedCampaign={setSelectedCampaign}
+            />
           ))}
         </>
         : <NoActiveCampaignsBox />
@@ -77,7 +83,12 @@ const GiftAMealPage = (props: Props) => {
 
       <h5 className={styles.campaignHeader}>{t('gamHome.pastSection')}</h5>
       {pastCampaigns.map((campaign: any) => (
-        <CampaignListItem campaign={campaign} key={campaign.id} />
+        <CampaignListItem
+          campaign={campaign}
+          key={campaign.id}
+          selectedCampaign={selectedCampaign}
+          setSelectedCampaign={setSelectedCampaign}
+        />
       ))}
     </div >
   );
