@@ -110,6 +110,7 @@ const CampaignListItem = (props: Props) => {
           sellerName={merchant.name}
           costPerMeal={campaign.price_per_meal / 100}
           nonProfitLocationId={merchant.non_profit_location_id}
+          campaignId={campaign.id}
         />
       )}
     </Container >
