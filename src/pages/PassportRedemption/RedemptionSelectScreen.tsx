@@ -19,27 +19,11 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
     name: '',
     rewardType: '',
     address: '',
-    logo_url: '',
+    logo: '',
   });
 
-  // let rewardsToSelect2 = [];
-
-  // const getInfo = async () => {
-  //   const { data: sponsors } = await getSponsorRewards()
-  //   // sponsors.map(async reward => {
-  //   //   const { data: location } = await getSponsorLocation(reward.location_id)
-  //   // })
-  //   rewardsToSelect2 = sponsors;
-
-  //   console.log(rewardsToSelect2)
-  // }
-
-  // useEffect(() => {
-  //   getInfo()
-  // })
-
   // TODO(Athena): UPDATE THIS WITH THE ACTUAL STHUFF; dummy data for now
-  const rewardsToSelect = [
+  const rewards = [
     {
       name: 'nom wah tea parlor',
       rewardType: '20% off meal',
@@ -64,6 +48,30 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
       address: 'chinatown',
       logo_url: "Image23",
     },
+    {
+      name: 'Fetty Wah',
+      rewardType: 'free sample',
+      address: 'chinatown',
+      logo: Image23,
+    },
+    {
+      name: 'Taylwah Swift',
+      rewardType: 'free album',
+      address: 'chinatown',
+      logo: Image23,
+    },
+    {
+      name: 'A$AP Wah',
+      rewardType: 'free bike',
+      address: 'chinatown',
+      logo: Image23,
+    },
+    {
+      name: 'wahzaaap',
+      rewardType: 'free taffy',
+      address: 'chinatown',
+      logo: Image23,
+    },
   ];
 
   return (
@@ -73,15 +81,18 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
       {/* TODO: fix rewards to reflect whatever date should be */}
       <Heading>Rewards available until 9/15/2020</Heading>
 
-      <RewardsContainer>
-        {rewardsToSelect.map((reward) => {
-          const { name, logo_url, rewardType, address } = reward;
+      <RewardsContainer
+        numRewards={rewards.length}
+        selected={selectedReward.name ? true : false}
+      >
+        {rewards.map((reward) => {
+          const { name, logo, rewardType, address } = reward;
 
           return (
             <SingleRewardContainer
               className={selectedReward.name === name ? 'selected' : ''}
               onClick={() =>
-                setSelectedReward({ name, logo_url, rewardType, address })
+                setSelectedReward({ name, logo, rewardType, address })
               }
             >
               <input
@@ -92,7 +103,7 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 
               <SingleRewardInfo>
                 <Text className="header">{rewardType}</Text>
-                <img src={logo_url} alt="reward-logo_url" width="130px"></img>
+                <img src={logo} alt="reward-logo" width="130px"></img>
                 <Text>{name}</Text>
                 <Text className="finePrint">{address}</Text>
               </SingleRewardInfo>
@@ -101,36 +112,39 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
         })}
       </RewardsContainer>
 
-      {
-        !!selectedReward.name ? (
-          <React.Fragment>
-            <SubTitle bold="700">When redeemed, you have 5 minutes to use your reward.</SubTitle>
+      {!!selectedReward.name ? (
+        <Footer>
+          <SubTitle bold="700">
+            When redeemed, you have 5 minutes to use your reward.
+          </SubTitle>
 
+          <Button
+            value="redemption-selected-button"
+            className="button--red-filled"
+            disabled={!selectedReward}
+            onClick={() => setCurrentScreenView(2)}
+          >
+            REEDEM NOW
+          </Button>
+        </Footer>
+      ) : (
+        <Footer>
+          <SubTitle className="center bold">
+            Select an offer and be ready to show this screen when you’re
+            ordering.
+          </SubTitle>
+
+          {rewards.length <= 4 && (
             <Button
-              value="redemption-selected-button"
-              className="button--red-filled"
-              disabled={!selectedReward}
-              onClick={() => setCurrentScreenView(2)}
-            >
-              REEDEM NOW
-            </Button>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <SubTitle bold="700">
-              Select an offer and be ready to show this screen when you’re ordering.
-            </SubTitle>
-
-            {/* TODO: Update return screen with the Passport screen when built out  */}
-            <Button 
-              className='linkButton'
-              onClick={() => setCurrentScreenView(ScreenName.Track)}
+              // {/* TODO: Update return screen with the Passport screen when built out  */}
+              className="linkButton"
+              onClick={() => setCurrentScreenView(0)}
             >
               RETURN TO PASSPORT
             </Button>
-          </React.Fragment>
-        )
-      }
+          )}
+        </Footer>
+      )}
     </Container>
   );
 };
@@ -142,12 +156,14 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 12px;
+  }
 `;
 
 const Heading = styled.span`
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin-top: 10px;
+  z-index: 2;
 
   &.bold {
     font-weight: bold;
@@ -155,10 +171,55 @@ const Heading = styled.span`
   }
 `;
 
-const RewardsContainer = styled.div`
+const RewardsContainer = styled.div<{
+  numRewards: number;
+  selected: boolean;
+}>`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  max-height: ${(props) =>
+    props.numRewards <= 4 || props.selected ? '500px' : '575px'};
+  overflow-y: scroll;
+  padding-top: 20px;
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  &::before {
+    content: '';
+    display: ${(props) => (props.numRewards > 4 ? 'block' : 'none')};
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 25px 27px 22px white;
+    width: 100%;
+    height: 150px;
+  }
+
+  &::after {
+    content: '';
+    display: ${(props) => (props.numRewards > 4 ? 'block' : 'none')};
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px -25px 27px 22px white;
+    width: 100%;
+    height: ${(props) => (props.selected ? '200px' : '125px')};
+  }
+`;
+
+const Footer = styled.div`
+  z-index: 2;
+  display: grid;
+  justify-items: center;
 `;
 
 const SingleRewardContainer = styled.button`

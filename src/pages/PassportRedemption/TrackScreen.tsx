@@ -275,7 +275,7 @@ export const InputContainer = styled.div`
   }
 
   &.red {
-    color: #A8192E;
+    color: #a8192e;
   }
 `;
 
