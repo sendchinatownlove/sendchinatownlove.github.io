@@ -87,6 +87,7 @@
   "ownerPanel": {
     "donation": "Donation",
     "voucher": "Voucher",
+    "giftmeal": "Gift a meal",
     "extraInfo": {
       "Type": "Type",
       "Employees": "Employees",
