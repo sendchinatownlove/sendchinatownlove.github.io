@@ -123,7 +123,7 @@ const OwnerPanel = ({ seller }: Props) => {
             )}
             onClick={giftMealClickHandler}
           >
-            Gift a meal
+            {t('ownerPanel.giftmeal')}
           </button>
         )}
       </div>
