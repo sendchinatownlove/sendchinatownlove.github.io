@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-// import { Button } from "./style";
+import { Button } from "./style";
 
 interface Props {
   stamps: participatingSellerProps[];
   index: number;
+  sendEmail: () => void;
 };
 
 type participatingSellerProps = {
@@ -16,35 +17,58 @@ type participatingSellerProps = {
   updated_at: string,
 };
 type redeemRowProp = {
-  status?: string;
+  status?: RowStatuses;
 };
 
-const TicketRow = (props: Props) => (
-  <TableRow key={props.index} status="active">
-    <TableIndex> {props.index + 1} </TableIndex>
-    <TableStamp> 
-      <StampRow>
-        {
-          props.stamps.map((ticketInfo) => (
-              // { 
-              //   status === "active" && (
-              //   <SendEmailButton
-              //     className="button--red-filled"
-              //     onClick={sendEmail}
-              //   > 
-              //     Send to Email
-              //   </SendEmailButton>)
-              // }
-              <Stamp src={ticketInfo.stamp_url}/>
-          ))
-        }
-      </StampRow>
-      <RedeemedRow status="active">
-        { props.stamps.length < 3 ? `${3 - props.stamps.length} MORE STAMPS UNTIL YOUR NEXT REWARD` : "READY TO REDEEM"}
-      </RedeemedRow>
-    </TableStamp>
-  </TableRow>
-)
+enum RowStatuses {
+  Inactive,
+  Active,
+  Redeemed
+}
+
+const TicketRow = (props: Props) => {
+  const [status, setStatus] = useState<RowStatuses>(RowStatuses.Inactive);
+
+  useEffect(() => {
+    if(props.stamps.some(stamp => stamp.hasOwnProperty("redeemedAt"))){
+      setStatus(RowStatuses.Redeemed);
+    } else if (props.stamps.length === 3){
+      setStatus(RowStatuses.Active);
+    } else {
+      setStatus(RowStatuses.Inactive);
+    }
+  }, [props.stamps])
+
+  return (
+    <TableRow key={props.index} status={status}>
+      <TableIndex> {props.index + 1} </TableIndex>
+      <TableStamp> 
+        <StampRow>
+          {
+            props.stamps.map((ticketInfo) => (
+              <>
+                { 
+                  status === RowStatuses.Active && (
+                  <SendEmailButton
+                    className="button--red-filled"
+                    onClick={props.sendEmail}
+                  > 
+                    Send to Email
+                  </SendEmailButton>
+                  )
+                }
+                <Stamp src={ticketInfo.stamp_url}/>
+              </>
+            ))
+          }
+        </StampRow>
+        <RedeemedRow status={status}>
+          { props.stamps.length < 3 ? `${3 - props.stamps.length} MORE STAMPS UNTIL YOUR NEXT REWARD` : "READY TO REDEEM"}
+        </RedeemedRow>
+      </TableStamp>
+    </TableRow>
+  )
+}
 
 export default TicketRow;
 
@@ -53,12 +77,12 @@ const TableRow = styled.tr`
   border: 2px solid #A5A5A5;
   ${(props: redeemRowProp) => {
     switch(props.status){ 
-      case "redeemed": 
+      case RowStatuses.Redeemed:
         return `
           background: rgba(0, 0, 0, 0.05);
           color: #A5A5A5;
         `;
-      case "active":
+      case RowStatuses.Active:
         return `
           background: rgba(168, 25, 46, 0.05);
           color: #A8192E;
@@ -104,20 +128,20 @@ const RedeemedRow = styled.div`
   justify-content: center;
   font-size: 10px;
   height: 20px;
-  ${(props: redeemRowProp) => props.status === "active" && "font-weight: 700;"};
+  ${(props: redeemRowProp) => props.status === RowStatuses.Active && "font-weight: 700;"};
 `
 const Stamp = styled.img`
   height: 35px;
   width: 60px;
   max-width: 75px;
 `;
-// const SendEmailButton = styled(Button)`
-//   height: 30px;
-//   width: 300px;
-//   margin: 0 auto;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   position: absolute;
-//   text-transform: uppercase;
-// `;
+const SendEmailButton = styled(Button)`
+  height: 30px;
+  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  text-transform: uppercase;
+`;
