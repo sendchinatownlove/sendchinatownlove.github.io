@@ -37,7 +37,6 @@ const Passport = (props: Props) => {
       .then((passportTickets) => {
         const tempTickets = passportTickets.map(ticket => ticket.data);
         if (tempTickets.length > 0) {
-          console.log("tempTickets"+ tempTickets)
           setTickets(tempTickets);
         }
       })
@@ -61,11 +60,19 @@ const Passport = (props: Props) => {
     return rows;
   }
 
-  const createRows = (stamps) => {    
+  const sendEmail = () => {
+    setShowEmailSent(true);
+  }
+
+  const createRows = (stamps) => {
     const rows = createTicketRows(stamps);
     return (
       <Table> 
-        {rows.map((row, index) => <TicketRow stamps={row} index={index} key={index}/>)} 
+        {
+          rows.map((row, index) => (
+            <TicketRow stamps={row} index={index} key={index} sendEmail={sendEmail}/>
+          ))
+        } 
       </Table>
     )
   }
