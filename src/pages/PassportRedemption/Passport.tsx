@@ -8,11 +8,12 @@ import {
 } from '../../utilities/api/interactionManager';
 import { PassportContainer, Title, SubTitle, Button } from "./style";
 
-import TicketRow from "./TicketRow"
+import TicketRow from "./TicketRow";
 import ScreenName from "./ScreenName";
-import FAQ from "./Faq"
-import PassportIconImg from "./passportIcon.png"
+import FAQ from "./Faq";
 
+import PassportIconImg from "./passportIcon.png";
+import CircleLogo from './CircleLogo.png';
 
 interface Props {
   setCurrentScreenView: Function;
@@ -70,47 +71,90 @@ const Passport = (props: Props) => {
   }
 
   return (
-    <>
-      <FAQ showFaq={showFaq} toggleView={() => setShowFaq(true)}/>
-      <PassportContainer 
-        mainView={!showFaq} 
-        onClick={() => setShowFaq(false)}
-      >
-        <TitleRow>
-          <Title>PASSPORT TO CHINATOWN</Title>
-          <SubTitle>9/1/20202 - 9/30/20</SubTitle>
-        </TitleRow>
-          
-        { showEmailSent && (
-            <SendEmailContainer>
-              <PassportIcon src={PassportIconImg}/>
-              <TitleRow>
-                <Title>REWARD EMAIL SENT</Title>
-                <SubTitle bold="700">Check your inbox shortly for a link to access your available rewards!</SubTitle>                
-              </TitleRow>
-              <SendEmailButtonClose 
-                className="button--red-filled"
-                onClick={e => setShowEmailSent(false)}
-              > 
-                CLOSE 
-              </SendEmailButtonClose>
-            </SendEmailContainer>
-          ) 
-        }
-          {tickets.length > 0 && createRows(tickets)}
-        <AddNewTicket
-          value="track-screen-button"
-          className="button--filled"
-          onClick={() => props.setCurrentScreenView(ScreenName.Dashboard)}
+    <Container>
+      <HeaderContainer>
+        <RedirectionLinks href="#">Learn More</RedirectionLinks>
+        <Logo src={CircleLogo} alt="scl-log" />
+        <RedirectionLinks href="#">contact us</RedirectionLinks>
+      </HeaderContainer>
+      <BodyContainer>
+        <FAQ showFaq={showFaq} toggleView={() => setShowFaq(true)}/>
+        <PassportContainer 
+          mainView={!showFaq} 
+          onClick={() => setShowFaq(false)}
         >
-          Add New Ticket
-        </AddNewTicket>
-      </PassportContainer>
-    </>
+          <TitleRow>
+            <Title>PASSPORT TO CHINATOWN</Title>
+            <SubTitle>9/1/20202 - 9/30/20</SubTitle>
+          </TitleRow>
+            
+          { showEmailSent && (
+              <SendEmailContainer>
+                <PassportIcon src={PassportIconImg}/>
+                <TitleRow>
+                  <Title>REWARD EMAIL SENT</Title>
+                  <SubTitle bold="700">Check your inbox shortly for a link to access your available rewards!</SubTitle>                
+                </TitleRow>
+                <SendEmailButtonClose 
+                  className="button--red-filled"
+                  onClick={e => setShowEmailSent(false)}
+                > 
+                  CLOSE 
+                </SendEmailButtonClose>
+              </SendEmailContainer>
+            ) 
+          }
+            {tickets.length > 0 && createRows(tickets)}
+          <AddNewTicket
+            value="track-screen-button"
+            className="button--filled"
+            onClick={() => props.setCurrentScreenView(ScreenName.Dashboard)}
+          >
+            Add New Ticket
+          </AddNewTicket>
+        </PassportContainer>
+      </BodyContainer>      
+    </Container>
   );
 };
 
 export default Passport;
+
+const Container = styled.div`
+  height: 100vh;
+  width: 375px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;  
+`;
+
+const HeaderContainer = styled.div`
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 12px auto;
+`
+const RedirectionLinks = styled.a`
+  text-transform: uppercase;
+  color: black;
+  font-weight: bold;
+  letter-spacing: .15em;
+  font-size: 12px;
+`;
+
+const Logo = styled.img`
+  width: 100px;
+  height: 100px;
+  filter: drop-shadow(0 0mm 2px #cdcdcd);
+`;
+
+const BodyContainer = styled.div`
+  width: 375px;
+  height: auto;
+  position: relative;
+`
 
 const TitleRow = styled.div`
   text-align: center;

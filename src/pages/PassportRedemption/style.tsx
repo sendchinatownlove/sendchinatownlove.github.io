@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import CrawlMap from './CrawlMap.png';
 
 type Props = {
   color?: string;
@@ -12,21 +11,6 @@ type PassportProps = {
   mainView?: boolean;
 };
 
-const Container = styled.div`
-  position: relative;
-  background-color: #e5e5e5;
-  height: 100%;
-  min-height: 100vh;
-  background-image: url(${CrawlMap});
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  // flex-direction: column;
-  justify-content: center;
-  @media (max-width: 475px) {
-      background-size: 500px;
-  }
-`;
 
 const PassportContainer = styled.div`
   display: flex;
@@ -80,7 +64,7 @@ const SubTitle = styled.span`
 `;
 
 const Button = styled.button`
-  margin: 20px 0 10px;
+  margin: 20px auto 10px auto;
 
   &.linkButton {
     background-color: transparent;
@@ -97,4 +81,4 @@ const ErrorMessage = styled.div`
 `;
 
 
-export { PassportContainer, Title, SubTitle, Button, ErrorMessage, Container, ExternalLink  };
+export { PassportContainer, Title, SubTitle, Button, ErrorMessage, ExternalLink  };
