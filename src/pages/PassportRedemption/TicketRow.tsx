@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import { Button } from "./style";
+import {dateFormatter} from "../../utilities/general/textFormatter"
 
 interface Props {
   stamps: participatingSellerProps[];
@@ -15,6 +16,7 @@ type participatingSellerProps = {
   seller_id: number,
   stamp_url: string,
   updated_at: string,
+  redeemedAt: string,
 };
 type redeemRowProp = {
   status?: RowStatuses;
@@ -28,9 +30,12 @@ enum RowStatuses {
 
 const TicketRow = (props: Props) => {
   const [status, setStatus] = useState<RowStatuses>(RowStatuses.Inactive);
+  const [redeemedOn, setRedeemedOn] = useState("");
 
   useEffect(() => {
     if(props.stamps.some(stamp => stamp.hasOwnProperty("redeemedAt"))){
+      const date = props.stamps.find(stamp => stamp.hasOwnProperty("redeemedAt"));
+      if (!!date) setRedeemedOn(date.redeemedAt);
       setStatus(RowStatuses.Redeemed);
     } else if (props.stamps.length === 3){
       setStatus(RowStatuses.Active);
@@ -39,31 +44,36 @@ const TicketRow = (props: Props) => {
     }
   }, [props.stamps])
 
+  const showRedeemRow = (status) => {
+    switch(status){ 
+      case RowStatuses.Redeemed:
+        return `PRIZE REDEEMED ${dateFormatter(redeemedOn)}`;
+      case RowStatuses.Active:
+        return `READY TO REDEEM`;
+      default: 
+        return `${3 - props.stamps.length} MORE STAMPS UNTIL YOUR NEXT REWARD`;
+    }
+  }
+
   return (
     <TableRow key={props.index} status={status}>
       <TableIndex> {props.index + 1} </TableIndex>
       <TableStamp> 
         <StampRow>
-          {
-            props.stamps.map((ticketInfo) => (
-              <>
-                { 
-                  status === RowStatuses.Active && (
-                  <SendEmailButton
-                    className="button--red-filled"
-                    onClick={props.sendEmail}
-                  > 
-                    Send to Email
-                  </SendEmailButton>
-                  )
-                }
-                <Stamp src={ticketInfo.stamp_url}/>
-              </>
-            ))
+          { 
+            status === RowStatuses.Active && (
+              <SendEmailButton
+                className="button--red-filled"
+                onClick={props.sendEmail}
+              >
+                Send to Email
+              </SendEmailButton>
+            )
           }
+          { props.stamps.map((ticketInfo) => (<Stamp key={ticketInfo.id} src={ticketInfo.stamp_url}/>)) }
         </StampRow>
         <RedeemedRow status={status}>
-          { props.stamps.length < 3 ? `${3 - props.stamps.length} MORE STAMPS UNTIL YOUR NEXT REWARD` : "READY TO REDEEM"}
+          {showRedeemRow(status)}
         </RedeemedRow>
       </TableStamp>
     </TableRow>
