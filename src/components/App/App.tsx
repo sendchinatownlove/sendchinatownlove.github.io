@@ -92,7 +92,7 @@ const App = () => {
               <VoucherRedemptionPage />
             </VoucherProvider>
           </Route>
-          <Route path="/passport">
+          <Route path="/passport/:id">
             <PassportRedemption />
           </Route>
           <Route path="/:seller_id/dashboard/:secret_id">

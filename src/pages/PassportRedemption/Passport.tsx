@@ -1,74 +1,72 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import {useParams} from "react-router-dom"
 
+import {
+  getPassportTickets,
+  getParticipatingSeller
+} from '../../utilities/api/interactionManager';
 import { PassportContainer, Title, SubTitle, Button } from "./style";
+
+import TicketRow from "./TicketRow"
 import ScreenName from "./ScreenName";
 import FAQ from "./Faq"
 import PassportIconImg from "./passportIcon.png"
+
 
 interface Props {
   setCurrentScreenView: Function;
 };
 
-type redeemRowProp = {
-  status?: string;
-};
-type stampProp = {
-  sellerId: string;
-};
-
-const initStamps = [1,2,3,4,5,6,7,9];
-
-const Passport = ({ setCurrentScreenView }: Props) => {
-  const [stamps, setStamps] = useState(initStamps);
+const Passport = (props: Props) => {
+  const { id } = useParams();
   const [showFaq, setShowFaq] = useState(false);
   const [showEmailSent, setShowEmailSent] = useState(false);
+  const [tickets, setTickets] = useState<any[]>([]);
 
-  const sendEmail = () => {
-    setShowEmailSent(true);
+  useEffect(() => {    
+    getPassportTickets(id)
+      .then((ticketIds) => {
+        let promises: any[] = [];
+        ticketIds.data.forEach(ticket => {
+          promises.push(getParticipatingSeller(ticket.participating_seller_id));
+        });    
+        return Promise.all(promises);
+      })
+      .then((passportTickets) => {
+        const tempTickets = passportTickets.map(ticket => ticket.data);
+        if (tempTickets.length > 0) {
+          console.log("tempTickets"+ tempTickets)
+          setTickets(tempTickets);
+        }
+      })
+      .catch((err) => {
+        console.log("passport error: "+err);
+      })
+  }, [id])
+
+  const createTicketRows = (tickets) => {
+    const tempTickets = [...tickets];
+    const sortedTickets = tempTickets.sort((a,b) => {
+      const dateA = new Date(a.updated_at);
+      const dateB = new Date(b.updated_at);
+      return (dateA.getTime() - dateB.getTime());
+    })
+    let rows: any[] = [];
+    
+    while (sortedTickets.length) {
+      rows.push(sortedTickets.splice(0, 3));
+    }
+    return rows;
   }
 
-  const createRow = (info,index) => {
-    const dummyInfo = {
-      id: 1,
-      contact_id: 12,
-      ticket_id: 123,
-      participating_seller_id: "WOK WOK",
-      sponsor_seller_id: "WOK WOK",
-      redeemed_at: "9/1/20",
-      expiration: "9/20/20"
-    }    
-
+  const createRows = (stamps) => {    
+    const rows = createTicketRows(stamps);
     return (
-      <TableRow key={index} status="active">
-        <TableIndex> {index + 1} </TableIndex>
-        <TableStamp> 
-          <StampRow>
-            {/* { status === "active" && ( */}
-                <SendEmailButton
-                  className="button--red-filled"
-                  onClick={sendEmail}
-                > 
-                  Send to Email
-                </SendEmailButton>
-              {/* )
-            } */}
-            <Stamp sellerId={dummyInfo.participating_seller_id}>
-              {dummyInfo.participating_seller_id}
-            </Stamp>
-            <Stamp sellerId="CONGEE VILLAGE">
-              CONGEE VILLAGE
-            </Stamp>
-            <Stamp sellerId="46 MOTT">
-              46 MOTT
-            </Stamp>
-          </StampRow>
-          <RedeemedRow status="active">
-            2 MORE STAMPS UNTIL YOUR NEXT REWARD
-          </RedeemedRow>
-        </TableStamp>
-      </TableRow>
-    ) 
+      <Table> 
+        {rows.map((row, index) => <TicketRow stamps={row} index={index} key={index}/>)} 
+      </Table>
+    )
   }
 
   return (
@@ -99,14 +97,11 @@ const Passport = ({ setCurrentScreenView }: Props) => {
             </SendEmailContainer>
           ) 
         }
-        <Table>
-          {stamps.length && stamps.map((stamp, index) => createRow(stamp,index))}
-        </Table>
-          
+          {tickets.length > 0 && createRows(tickets)}
         <AddNewTicket
           value="track-screen-button"
           className="button--filled"
-          onClick={() => setCurrentScreenView(ScreenName.Dashboard)}
+          onClick={() => props.setCurrentScreenView(ScreenName.Dashboard)}
         >
           Add New Ticket
         </AddNewTicket>
@@ -129,98 +124,11 @@ const Table = styled.table`
   border-spacing: 0;
   font-size: 12px;
 `;
-const TableRow = styled.tr`
-  height: 90px;
-  border: 2px solid #A5A5A5;
-  ${(props: redeemRowProp) => {
-    switch(props.status){ 
-      case "redeemed": 
-        return `
-          background: rgba(0, 0, 0, 0.05);
-          color: #A5A5A5;
-        `;
-      case "active":
-        return `
-          background: rgba(168, 25, 46, 0.05);
-          color: #A8192E;
-        `;
-      default: 
-        return `
-          background: rgba(0, 0, 0, 0);
-          color: black;
-        `;
-    }
-  }};
-`;
-const TableIndex = styled.td`
-  display: flex;
-  width: 40px;
-  height: 90px;
-  text-align: center;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 12px;
-  border-right: 2px solid #A5A5A5;
-  font-weight: bold;
-`;
-const TableStamp = styled.td`
-  width: 100%;
-`;
 const AddNewTicket = styled(Button)`
   position: fixed;
   bottom: 10px;
   width: 300px;
 `
-const StampRow = styled.div`
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  height: 70px;
-`
-const RedeemedRow = styled.div`
-  border-top: 1px dotted #A5A5A5;
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  height: 20px;
-  ${(props: redeemRowProp) => props.status === "active" && "font-weight: 700;"};
-`
-const Stamp = styled.div`
-  font-size: 10px;
-  height: 35px;
-  width: 60px;
-  padding: 5px;
-  ${(props: stampProp) => props.sellerId.length < 12 && `
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;    
-  `}
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 75px;
-  text-align: center;
-  border: 2px solid #A8192E;
-  color: #A8192E;
-`;
-const SendEmailButton = styled(Button)`
-  height: 30px;
-  width: 300px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  text-transform: uppercase;
-`;
 const SendEmailContainer = styled.div`
   position: fixed;
   width: 340px;
