@@ -4,7 +4,8 @@ import {useParams} from "react-router-dom"
 
 import {
   getPassportTickets,
-  getParticipatingSeller
+  getParticipatingSeller,
+  sendRedeemTicketsEmail
 } from '../../utilities/api/interactionManager';
 import { PassportContainer, Title, SubTitle, Button } from "./style";
 
@@ -57,11 +58,17 @@ const Passport = (props: Props) => {
     while (sortedTickets.length) {
       rows.push(sortedTickets.splice(0, 3));
     }
+      while (rows.length < 6 ){
+        rows.push(new Array());
+      }
     return rows;
   }
 
   const sendEmail = () => {
-    setShowEmailSent(true);
+    sendRedeemTicketsEmail(id)
+      .then((res) => {
+        setShowEmailSent(true);
+      })
   }
 
   const createRows = (stamps) => {
