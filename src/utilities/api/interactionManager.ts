@@ -9,7 +9,8 @@ import {
   distributors,
   passportVouchers,
   contacts,
-  tickets, 
+  tickets,
+  participatingSellers
 } from './endpoints';
 
 // Fix return typing
@@ -207,5 +208,17 @@ export const checkForValidTicket = async (ticket_id: string) =>
 export const updateTicketContactId = async (ticket_id: string, contact_id: string) =>
   axios
     .put(tickets + ticket_id, { contact_id })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getPassportTickets = async (passportId: string) =>
+  axios
+    .get(contacts + passportId + "/tickets")
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getParticipatingSeller = async (sellerId: string) =>
+  axios
+    .get(participatingSellers + sellerId)
     .then((res) => res)
     .catch((err) => err);

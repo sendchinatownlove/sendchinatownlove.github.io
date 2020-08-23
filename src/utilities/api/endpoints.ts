@@ -8,3 +8,4 @@ export const distributors = baseUrl + 'distributors/';
 export const passportVouchers = baseUrl + 'participating_sellers/';
 export const contacts = baseUrl + 'contacts/';
 export const tickets = baseUrl + 'tickets/';
+export const participatingSellers = baseUrl + 'participating_sellers/';
