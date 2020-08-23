@@ -10,7 +10,7 @@ interface Props {
 }
 
 const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
-  const [timeLeft, setTimeLeft] = useState(300000);
+  const [timeLeft, setTimeLeft] = useState(60 * 5);
 
   // TODO(Olivia): remove later & reference real state
   const selected = {
@@ -22,20 +22,18 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setTimeLeft(timeLeft - 1000);
+      setTimeLeft(timeLeft - 1);
     }, 1000);
     if (!timeLeft) markAsUsed();
     return () => clearTimeout(timer);
   }, [timeLeft]);
 
   const formatTime = (time) => {
-    const ms = time % 1000;
-    time = (time - ms) / 1000;
     const sec = time % 60;
     time = (time - sec) / 60;
     const min = time % 60;
 
-    const pad = (val) => `00${val}`.slice(-2);
+    const pad = (val) => val.toString().padStart(2, '0');
     return `${pad(min)}:${pad(sec)}`;
   };
 
