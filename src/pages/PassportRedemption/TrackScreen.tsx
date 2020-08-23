@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+<<<<<<< HEAD
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, Theme } from '@material-ui/core/styles';
 
+=======
+
+import { PassportContainer, Title, SubTitle, Button, ErrorMessage, ExternalLink} from "./style";
+>>>>>>> fix wiring between each component/ move footer/header into their own styles for each container
 import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
 import {
   getPassportEmailId,
@@ -16,6 +21,12 @@ import CrawlInfoIcon from './CrawlInfoIcon.png';
 interface Props {
   setCurrentScreenView: Function;
 }
+
+const socialMediaLinks = [
+  {platform: 'facebook', url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891'},
+  {platform: 'instagram', url: 'https://instagram.com/sendchinatownlove'},
+  {platform: 'envelope', url: 'mailto:hello@sendchinatownlove.com'},
+];
 
 const Track = ({ setCurrentScreenView }: Props) => {
   const [email, setEmail] = useState('');
@@ -131,7 +142,10 @@ const Track = ({ setCurrentScreenView }: Props) => {
             </ErrorMessage>
           )}
         </Column>
+<<<<<<< HEAD
 
+=======
+>>>>>>> fix wiring between each component/ move footer/header into their own styles for each container
         <Row>
           <Label htmlFor="instagram-handle">
             Instagram Handle (for Digital Giveaway)
@@ -167,7 +181,19 @@ const Track = ({ setCurrentScreenView }: Props) => {
           placeholder="@"
         />
       </InputContainer>
+      
+      <InputContainer className="bottom">
+        <Button
+          value="track-screen-button"
+          className="button--red-filled"
+          disabled={!email || !ticketCode}
+          onClick={() => setCurrentScreenView(ScreenName.Dashboard)}
+        >
+          Add Ticket
+        </Button>        
+      </InputContainer>
 
+<<<<<<< HEAD
       <InputContainer className="bottom">
         <Button
           value="track-screen-button"
@@ -190,6 +216,23 @@ const Track = ({ setCurrentScreenView }: Props) => {
           View my tickets
         </Button>
       </InputContainer>
+=======
+      {/* <Row>
+        <ExternalLink>VIEW MAP</ExternalLink>
+        <ExternalLink href="mailto:sendchinatownlove@gmail.com">
+          Contact Us
+        </ExternalLink>
+        <LinksContainer>
+          {
+            socialMediaLinks.map((social) => (
+              <Icon href={social.url} key={social.url}>
+                <span className={`fa fa-${social.platform}`} />
+              </Icon>
+            ))
+          }
+        </LinksContainer>
+      </Row> */}
+>>>>>>> fix wiring between each component/ move footer/header into their own styles for each container
     </Container>
   );
 };
@@ -201,14 +244,27 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 12px;
+  width: 367px;
+  margin: 0 auto;
 `;
 
 export const InputContainer = styled.div`
+<<<<<<< HEAD
+=======
+  display: flex;
+  flex-direction: column;
+>>>>>>> fix wiring between each component/ move footer/header into their own styles for each container
   background-color: white;
   border: 1px solid #dedede;
   padding: 25px 20px;
   box-sizing: border-box;
+<<<<<<< HEAD
   overflow: hidden;
+=======
+  overflow:hidden;
+  width:100%;
+  margin: 0 auto;
+>>>>>>> fix wiring between each component/ move footer/header into their own styles for each container
 
   &.trackScreen {
     padding-top: 60px;
@@ -277,6 +333,7 @@ const InputField = styled.input`
   }
 `;
 
+<<<<<<< HEAD
 const ErrorMessage = styled.div`
   color: red;
   padding-top: 5px;
@@ -285,3 +342,27 @@ const ErrorMessage = styled.div`
 const ToolTipTable = styled.table`
   width: 100%;
 `;
+=======
+// FOOTER
+export const Row = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: center;
+`;
+
+const LinksContainer = styled.div`
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+`;
+
+const Icon = styled.a`
+  text-decoration: none;
+  color: #a8192e;
+  padding: 0 15px;
+  font-size: 22px;
+`;
+>>>>>>> fix wiring between each component/ move footer/header into their own styles for each container

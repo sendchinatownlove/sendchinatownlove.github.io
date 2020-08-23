@@ -9,6 +9,7 @@ import ScrollToTop from '../ScrollToTop';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import ReactPixel from 'react-facebook-pixel';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
+import ScreenName from '../../pages/PassportRedemption/ScreenName';
 
 const trackingId = process.env.REACT_APP_GA_TRACKING_ID!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
@@ -95,8 +96,11 @@ const App = () => {
               <VoucherRedemptionPage />
             </VoucherProvider>
           </Route>
-          <Route path="/passport/:id">
-            <PassportRedemption />
+          <Route exact path="/passport">
+            <PassportRedemption screen={ScreenName.Track}/>
+          </Route>
+          <Route exact path="/passport/:id">
+            <PassportRedemption screen={ScreenName.Dashboard}/>
           </Route>
           <Route path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
