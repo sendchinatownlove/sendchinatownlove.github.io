@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from "./style";
+// import { Button } from "./style";
 
 interface Props {
   stamps: participatingSellerProps[];
