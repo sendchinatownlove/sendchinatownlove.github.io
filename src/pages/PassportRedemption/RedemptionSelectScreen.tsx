@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { SubTitle, Button } from "./style";
 import ScreenName from './ScreenName';
 
 // TODO: DELETE --> DUMMY IMAGE DATA
-import Image23 from './image-23.png';
+// import Image23 from './image-23.png';
 
-import { getSponsorRewards, getSponsorLocation } from '../../utilities/api/interactionManager';
+// import { getSponsorRewards, getSponsorLocation } from '../../utilities/api/interactionManager';
 
 interface Props {
   setCurrentScreenView: Function;
@@ -22,21 +22,21 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
     logo_url: '',
   });
 
-  let rewardsToSelect2 = [];
+  // let rewardsToSelect2 = [];
 
-  const getInfo = async () => {
-    const { data: sponsors } = await getSponsorRewards()
-    // sponsors.map(async reward => {
-    //   const { data: location } = await getSponsorLocation(reward.location_id)
-    // })
-    rewardsToSelect2 = sponsors;
+  // const getInfo = async () => {
+  //   const { data: sponsors } = await getSponsorRewards()
+  //   // sponsors.map(async reward => {
+  //   //   const { data: location } = await getSponsorLocation(reward.location_id)
+  //   // })
+  //   rewardsToSelect2 = sponsors;
 
-    console.log(rewardsToSelect2)
-  }
+  //   console.log(rewardsToSelect2)
+  // }
 
-  useEffect(() => {
-    getInfo()
-  })
+  // useEffect(() => {
+  //   getInfo()
+  // })
 
   // TODO(Athena): UPDATE THIS WITH THE ACTUAL STHUFF; dummy data for now
   const rewardsToSelect = [
@@ -44,25 +44,25 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
       name: 'nom wah tea parlor',
       rewardType: '20% off meal',
       address: '13 Doyers St, New York, NY',
-      logo_url: Image23,
+      logo_url: "Image23",
     },
     {
       name: 'Hello Wah',
       rewardType: '20% off',
       address: 'chinatown',
-      logo_url: Image23,
+      logo_url: "Image23",
     },
     {
       name: 'World Wah',
       rewardType: '20% off',
       address: 'chinatown',
-      logo_url: Image23,
+      logo_url: "Image23",
     },
     {
       name: 'Bye Wah',
       rewardType: '20% off',
       address: 'chinatown',
-      logo_url: Image23,
+      logo_url: "Image23",
     },
   ];
 

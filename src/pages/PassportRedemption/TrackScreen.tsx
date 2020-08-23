@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-<<<<<<< HEAD
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, Theme } from '@material-ui/core/styles';
 
-=======
-
-import { PassportContainer, Title, SubTitle, Button, ErrorMessage, ExternalLink} from "./style";
->>>>>>> fix wiring between each component/ move footer/header into their own styles for each container
+import { Title, SubTitle, Button, ErrorMessage } from "./style";
 import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
 import {
   getPassportEmailId,
@@ -17,16 +13,11 @@ import {
 } from '../../utilities/api/interactionManager';
 
 import CrawlInfoIcon from './CrawlInfoIcon.png';
+import CircleLogo from './CircleLogo.png';
 
 interface Props {
   setCurrentScreenView: Function;
 }
-
-const socialMediaLinks = [
-  {platform: 'facebook', url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891'},
-  {platform: 'instagram', url: 'https://instagram.com/sendchinatownlove'},
-  {platform: 'envelope', url: 'mailto:hello@sendchinatownlove.com'},
-];
 
 const Track = ({ setCurrentScreenView }: Props) => {
   const [email, setEmail] = useState('');
@@ -87,153 +78,146 @@ const Track = ({ setCurrentScreenView }: Props) => {
     },
   }))(Tooltip);
 
+  const socialMediaLinks = [
+    {
+      platform: 'facebook',
+      url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891',
+    },
+    { platform: 'instagram', url: 'https://instagram.com/sendchinatownlove' },
+    { platform: 'envelope', url: 'mailto:hello@sendchinatownlove.com' },
+  ];
+
   return (
     <Container>
-      <InputContainer className="trackScreen top">
-        <Title color="#a8192e">PASSPORT TO CHINATOWN</Title>
-        <SubTitle>
-          Enter your ticket code to start accumulating rewards you can use in
-          Chinatown
-        </SubTitle>
+      <PassportCard>      
+        <Logo src={CircleLogo} alt="scl-log" />
+        <InputContainer className="trackScreen top">
+          <Title color="#a8192e">PASSPORT TO CHINATOWN</Title>
+          <SubTitle>
+            Enter your ticket code to start accumulating rewards you can use in
+            Chinatown
+          </SubTitle>
 
-        <Column>
-          <Label htmlFor="email-input">Email Address</Label>
-          <InputField
-            name="email-input"
-            type="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-              setIsEmailValid(true);
-            }}
-            value={email}
-            pattern={EMAIL_REGEX.source}
-          />
-          {!!email && !EMAIL_REGEX.test(email) && (
-            <ErrorMessage>Please enter a valid email address.</ErrorMessage>
-          )}
-          {!isEmailValid && (
-            <ErrorMessage>
-              Sorry, there are no saved tickets tied to this email.
-            </ErrorMessage>
-          )}
-        </Column>
+          <Column>
+            <Label htmlFor="email-input">Email Address</Label>
+            <InputField
+              name="email-input"
+              type="email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setIsEmailValid(true);
+              }}
+              value={email}
+              pattern={EMAIL_REGEX.source}
+            />
+            {!!email && !EMAIL_REGEX.test(email) && (
+              <ErrorMessage>Please enter a valid email address.</ErrorMessage>
+            )}
+            {!isEmailValid && (
+              <ErrorMessage>
+                Sorry, there are no saved tickets tied to this email.
+              </ErrorMessage>
+            )}
+          </Column>
 
-        <Column>
-          <Label htmlFor="ticket-code">Ticket Code</Label>
-          <InputField
-            name="ticket-code"
-            type="text"
-            onChange={(e) => {
-              setTicketCode(e.target.value);
-              setIsTicketValid(true);
-            }}
-            onKeyUp={(e) => {
-              if (e.key !== 'Backspace') {
-                formatTicketCode(e.target['value']);
+          <Column>
+            <Label htmlFor="ticket-code">Ticket Code</Label>
+            <InputField
+              name="ticket-code"
+              type="text"
+              onChange={(e) => {
+                setTicketCode(e.target.value);
+                setIsTicketValid(true);
+              }}
+              onKeyUp={(e) => {
+                if (e.key !== 'Backspace') {
+                  formatTicketCode(e.target['value']);
+                }
+              }}
+              value={ticketCode}
+              maxLength={6}
+            />
+            {!isTicketValid && (
+              <ErrorMessage>
+                This is not a valid Ticket Code. Please check your ticket again
+                and make sure you haven’t added this ticket before.
+              </ErrorMessage>
+            )}
+          </Column>
+
+          <Row>
+            <Label htmlFor="instagram-handle">
+              Instagram Handle (for Digital Giveaway)
+            </Label>
+            <SupporterTooltip
+              title={
+                <React.Fragment>
+                  <ToolTipTable>
+                    <tbody>
+                      <tr>
+                        To be entered into our weekly Digital Giveaways, visit 3
+                        merchants and post and tag <b>@sendchinatownlove</b> with
+                        your food crawl pictures on Instagram. Enter your
+                        Instagram handle so we can track your entries.
+                      </tr>
+                    </tbody>
+                  </ToolTipTable>
+                </React.Fragment>
               }
-            }}
-            value={ticketCode}
-            maxLength={6}
+              enterTouchDelay={10}
+              placement="left"
+            >
+              <div>
+                <img src={CrawlInfoIcon} alt="instagram-crawl-info"/>
+              </div>
+            </SupporterTooltip>
+          </Row>
+          <InputField
+            name="instagram-handle"
+            type="text"
+            onChange={(e) => setinstagramHandle(e.target.value)}
+            value={instagramHandle}
+            placeholder="@"
           />
-          {!isTicketValid && (
-            <ErrorMessage>
-              This is not a valid Ticket Code. Please check your ticket again
-              and make sure you haven’t added this ticket before.
-            </ErrorMessage>
-          )}
-        </Column>
-<<<<<<< HEAD
-
-=======
->>>>>>> fix wiring between each component/ move footer/header into their own styles for each container
-        <Row>
-          <Label htmlFor="instagram-handle">
-            Instagram Handle (for Digital Giveaway)
-          </Label>
-          <SupporterTooltip
-            title={
-              <React.Fragment>
-                <ToolTipTable>
-                  <tbody>
-                    <tr>
-                      To be entered into our weekly Digital Giveaways, visit 3
-                      merchants and post and tag <b>@sendchinatownlove</b> with
-                      your food crawl pictures on Instagram. Enter your
-                      Instagram handle so we can track your entries.
-                    </tr>
-                  </tbody>
-                </ToolTipTable>
-              </React.Fragment>
-            }
-            enterTouchDelay={10}
-            placement="left"
+        </InputContainer>
+        
+        <InputContainer className="bottom">
+          <Button
+            value="track-screen-button"
+            className="button--red-filled"
+            disabled={!email || !ticketCode || !isTicketValid}
+            onClick={() => {
+              findOrCreateUser(email, false)
+              findTicketCode(ticketCode);
+            }}
           >
-            <div>
-              <img src={CrawlInfoIcon} alt="instagram-crawl-info"/>
-            </div>
-          </SupporterTooltip>
-        </Row>
-        <InputField
-          name="instagram-handle"
-          type="text"
-          onChange={(e) => setinstagramHandle(e.target.value)}
-          value={instagramHandle}
-          placeholder="@"
-        />
-      </InputContainer>
-      
-      <InputContainer className="bottom">
-        <Button
-          value="track-screen-button"
-          className="button--red-filled"
-          disabled={!email || !ticketCode}
-          onClick={() => setCurrentScreenView(ScreenName.Dashboard)}
-        >
-          Add Ticket
-        </Button>        
-      </InputContainer>
-
-<<<<<<< HEAD
-      <InputContainer className="bottom">
-        <Button
-          value="track-screen-button"
-          className="button--red-filled"
-          disabled={!email || !ticketCode || !isTicketValid}
-          onClick={() => {
-            findOrCreateUser(email, false)
-            findTicketCode(ticketCode);
-          }}
-        >
-          Add Ticket
-        </Button>
-        <Button
-          className="linkButton"
-          disabled={!email}
-          onClick={() => {
-            findOrCreateUser(email, true);
-          }}
-        >
-          View my tickets
-        </Button>
-      </InputContainer>
-=======
-      {/* <Row>
-        <ExternalLink>VIEW MAP</ExternalLink>
-        <ExternalLink href="mailto:sendchinatownlove@gmail.com">
-          Contact Us
-        </ExternalLink>
+            Add Ticket
+          </Button>
+          <Button
+            className="linkButton"
+            disabled={!email}
+            onClick={() => {
+              findOrCreateUser(email, true);
+            }}
+          >
+            View my tickets
+          </Button>
+        </InputContainer>
+      </PassportCard>
+      <Row>
+        {/* WHERE IS THIS LINK SUPPOSED TO GO? */}
+        <ExternalLinks href="sendchinatownlove.com" target="_blank">
+          Learn More
+        </ExternalLinks>
         <LinksContainer>
-          {
-            socialMediaLinks.map((social) => (
-              <Icon href={social.url} key={social.url}>
-                <span className={`fa fa-${social.platform}`} />
-              </Icon>
-            ))
-          }
+          {socialMediaLinks.map((social) => (
+            <Icon href={social.url}>
+              <span className={`fa fa-${social.platform}`} />
+            </Icon>
+          ))}
         </LinksContainer>
-      </Row> */}
->>>>>>> fix wiring between each component/ move footer/header into their own styles for each container
-    </Container>
+    </Row>
+  </Container>
   );
 };
 
@@ -242,29 +226,37 @@ export default Track;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  font-size: 12px;
   width: 367px;
   margin: 0 auto;
 `;
-
-export const InputContainer = styled.div`
-<<<<<<< HEAD
-=======
+const PassportCard = styled.div`
   display: flex;
   flex-direction: column;
->>>>>>> fix wiring between each component/ move footer/header into their own styles for each container
+  align-items: center;
+  font-size: 12px;
+  width: 367px;
+  margin: 50px auto;
+  z-index: 0;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+`;
+
+const Logo = styled.img`
+  z-index: 10;
+  width: 100px;
+  height: 100px;
   background-color: white;
-  border: 1px solid #dedede;
+  border-radius: 50%;
+  margin-bottom: -50px;
+`;
+
+export const InputContainer = styled.div`
+  background-color: white;
   padding: 25px 20px;
   box-sizing: border-box;
-<<<<<<< HEAD
   overflow: hidden;
-=======
-  overflow:hidden;
-  width:100%;
-  margin: 0 auto;
->>>>>>> fix wiring between each component/ move footer/header into their own styles for each container
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 
   &.trackScreen {
     padding-top: 60px;
@@ -291,34 +283,21 @@ const Column = styled.div`
   margin: 25px 0;
 `;
 
-const Row = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+// export const Button = styled.button`
+//   margin: 10px 0;
+//   outline: none;
+//   cursor: pointer;
 
-const Title = styled.p`
-  color: #a8192e;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  letter-spacing: 0.15em;
-`;
-
-export const Button = styled.button`
-  margin: 10px 0;
-  outline: none;
-  cursor: pointer;
-
-  &.linkButton {
-    background-color: transparent;
-    border: none;
-    line-spacing: 0.1em;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    underline: none;
-  }
-`;
+//   &.linkButton {
+//     background-color: transparent;
+//     border: none;
+//     line-spacing: 0.1em;
+//     font-weight: bold;
+//     text-transform: uppercase;
+//     letter-spacing: 2px;
+//     underline: none;
+//   }
+// `;
 
 const InputField = styled.input`
   width: 100%;
@@ -332,26 +311,27 @@ const InputField = styled.input`
     border: 1px solid red;
   }
 `;
-
-<<<<<<< HEAD
-const ErrorMessage = styled.div`
-  color: red;
-  padding-top: 5px;
-`;
-
 const ToolTipTable = styled.table`
   width: 100%;
 `;
-=======
 // FOOTER
 export const Row = styled.div`
   display: flex;
   align-items: center;
   margin: 0 auto;
   width: 100%;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
+export const ExternalLinks = styled.a`
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+  font-size: 12px;
+  margin: 20px;
+  cursor: pointer;
+  letter-spacing: 2px;
+`;
 const LinksContainer = styled.div`
   padding: 0;
   list-style: none;
@@ -365,4 +345,3 @@ const Icon = styled.a`
   padding: 0 15px;
   font-size: 22px;
 `;
->>>>>>> fix wiring between each component/ move footer/header into their own styles for each container
