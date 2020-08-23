@@ -4,7 +4,7 @@ import CircleLogo from './CircleLogo.png';
 import CrawlMap from './CrawlMap.png';
 import TrackScreen from './TrackScreen';
 import RedemptionSelectScreen from './RedemptionSelectScreen';
-import ScreenName from "./ScreenName";
+import ScreenName from './ScreenName';
 
 interface Props {}
 
@@ -13,20 +13,25 @@ const PassportRedemption = (props: Props) => {
 
   const showCurrentScreen = (screen) => {
     // TODO: Update case #s when all screens are built out
-    // NOTE: not sure if this is the right flow, 
-    // but currently set up like this for now for ease of editing 
-    switch(screen) {
-      case ScreenName.Redemption: 
-        return <RedemptionSelectScreen setCurrentScreenView={setCurrentScreenView} />
-      case ScreenName.Track: 
-        return <TrackScreen setCurrentScreenView={setCurrentScreenView} />
+    // NOTE: not sure if this is the right flow,
+    // but currently set up like this for now for ease of editing
+    switch (screen) {
+      case ScreenName.Redemption:
+        return (
+          <RedemptionSelectScreen setCurrentScreenView={setCurrentScreenView} />
+        );
+      case ScreenName.Track:
+        return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
     }
   };
 
   const socialMediaLinks = [
-    {platform: 'facebook', url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891'},
-    {platform: 'instagram', url: 'https://instagram.com/sendchinatownlove'},
-    {platform: 'envelope', url: 'mailto:hello@sendchinatownlove.com'},
+    {
+      platform: 'facebook',
+      url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891',
+    },
+    { platform: 'instagram', url: 'https://instagram.com/sendchinatownlove' },
+    { platform: 'envelope', url: 'mailto:hello@sendchinatownlove.com' },
   ];
 
   return (
@@ -35,29 +40,26 @@ const PassportRedemption = (props: Props) => {
         <Logo
           src={CircleLogo}
           alt="scl-log"
-          className={currentScreenView === ScreenName.Track ? 'passportTrackScreen' : ''}
+          className={
+            currentScreenView === ScreenName.Track ? 'passportTrackScreen' : ''
+          }
         />
 
-        {
-          showCurrentScreen(currentScreenView)
-        }
+        {showCurrentScreen(currentScreenView)}
 
         <Row>
-          <ExternalLinks>VIEW MAP</ExternalLinks>
-          <ExternalLinks href="mailto:sendchinatownlove@gmail.com">
-            Contact Us
+          {/* WHERE IS THIS LINK SUPPOSED TO GO? */}
+          <ExternalLinks href="sendchinatownlove.com" target="_blank">
+            Learn More
           </ExternalLinks>
-        </Row>
-
-        <LinksContainer>
-          {
-            socialMediaLinks.map((social) => (
+          <LinksContainer>
+            {socialMediaLinks.map((social) => (
               <Icon href={social.url}>
                 <span className={`fa fa-${social.platform}`} />
               </Icon>
-            ))
-          }
-        </LinksContainer>
+            ))}
+          </LinksContainer>
+        </Row>
       </PassportContainer>
     </Container>
   );
@@ -100,14 +102,19 @@ const Logo = styled.img`
 
 export const Row = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 `;
 
-const ExternalLinks = styled.a`
+export const ExternalLinks = styled.a`
   font-weight: bold;
   text-transform: uppercase;
   color: black;
   font-size: 12px;
   margin: 20px;
+  cursor: pointer;
+  letter-spacing: 2px;
 `;
 
 const LinksContainer = styled.div`
@@ -123,4 +130,3 @@ const Icon = styled.a`
   padding: 0 15px;
   font-size: 22px;
 `;
-

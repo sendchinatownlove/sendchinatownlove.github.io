@@ -1,30 +1,81 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
-import { Row } from './PassportDashboard';
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles, Theme } from '@material-ui/core/styles';
 
 import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
+import {
+  getPassportEmailId,
+  createPassportEmailId,
+  checkForValidTicket,
+  updateTicketContactId
+} from '../../utilities/api/interactionManager';
 
-import CrawlInsta from './CrawlInsta.png';
+import CrawlInfoIcon from './CrawlInfoIcon.png';
 
 interface Props {
   setCurrentScreenView: Function;
-};
+}
 
 const Track = ({ setCurrentScreenView }: Props) => {
   const [email, setEmail] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(true);
+
   const [ticketCode, setTicketCode] = useState('');
-  // TODO(Athena): Check error code validity --> send to BE first then process?
-  // Follow up to see how this part works
-  // const [isTicketValid, setIsTicketValid] = useState(true);
+  const [isTicketValid, setIsTicketValid] = useState(true);
+
   const [instagramHandle, setinstagramHandle] = useState('');
 
-  const formatTicketCode = (code) => {
-    if(code.length === 3) {
-      setTicketCode(code + '-')
-    } 
+  const [contactId, setContactId] = useState('');
+
+  const findOrCreateUser = async (email, viewTickets) => {
+    const { data } = await getPassportEmailId(email);
+
+    // sets error message for non-existent users (to view tickets)
+    if(viewTickets && !data) {
+      setIsEmailValid(false);
+      setEmail('');
+      return;
+    }
+    
+    // searches for existing user or creates new user (to add tickets)
+    if(data) {
+      setContactId(data.id)
+    } else {
+      const { data: id } = await createPassportEmailId(email, instagramHandle);
+      setContactId(id);
+    }
   };
-  
+
+  const findTicketCode = async (code) => {
+    const formattedCode = code.split('-').join('');
+
+    const { data } = await checkForValidTicket(formattedCode);
+    if (data && !data.contact_id) {
+      const { data: newContactId } = await updateTicketContactId(formattedCode, contactId);
+      newContactId && setCurrentScreenView(1);
+    } else {
+      setIsTicketValid(false);
+      setTicketCode('');
+    }
+  };
+
+  const formatTicketCode = (code) => {
+    if (code.length === 3) {
+      setTicketCode(code + '-');
+    }
+  };
+
+  const SupporterTooltip = withStyles((theme: Theme) => ({
+    tooltip: {
+      backgroundColor: '#ffffff',
+      color: 'rgba(0, 0, 0, 0.87)',
+      width: '100%',
+      fontSize: theme.typography.pxToRem(14),
+      border: '1px solid #dadde9',
+    },
+  }))(Tooltip);
+
   return (
     <Container>
       <InputContainer className="trackScreen top">
@@ -39,12 +90,20 @@ const Track = ({ setCurrentScreenView }: Props) => {
           <InputField
             name="email-input"
             type="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setIsEmailValid(true);
+            }}
             value={email}
             pattern={EMAIL_REGEX.source}
           />
           {!!email && !EMAIL_REGEX.test(email) && (
             <ErrorMessage>Please enter a valid email address.</ErrorMessage>
+          )}
+          {!isEmailValid && (
+            <ErrorMessage>
+              Sorry, there are no saved tickets tied to this email.
+            </ErrorMessage>
           )}
         </Column>
 
@@ -53,52 +112,84 @@ const Track = ({ setCurrentScreenView }: Props) => {
           <InputField
             name="ticket-code"
             type="text"
-            onChange={(e) => setTicketCode(e.target.value)}
+            onChange={(e) => {
+              setTicketCode(e.target.value);
+              setIsTicketValid(true);
+            }}
             onKeyUp={(e) => {
-              if(e.key !== 'Backspace') {
-                formatTicketCode(e.target['value'])
+              if (e.key !== 'Backspace') {
+                formatTicketCode(e.target['value']);
               }
             }}
             value={ticketCode}
             maxLength={6}
           />
-
-          {/* TODO: need to sync up to something to check error code validity */}
-          {/* {!isTicketValid && ( */}
+          {!isTicketValid && (
             <ErrorMessage>
               This is not a valid Ticket Code. Please check your ticket again
               and make sure you haven’t added this ticket before.
             </ErrorMessage>
-          {/* )} */}
+          )}
         </Column>
-      </InputContainer>
-      
-      <InputContainer className="bottom">
-        <Row>
-          <FinePrint className="smallText">
-            To be entered into our weekly giveaway, share your food crawl
-            pictures on Instagram and tag @sendchinatownlove{' '}
-          </FinePrint>
-          <img src={CrawlInsta} alt="social-media-logo" width="40px"></img>
-        </Row>
 
-        <Label htmlFor="instagram-handle">Instagram Handle (for Digital Giveaway)</Label>
+        <Row>
+          <Label htmlFor="instagram-handle">
+            Instagram Handle (for Digital Giveaway)
+          </Label>
+          <SupporterTooltip
+            title={
+              <React.Fragment>
+                <ToolTipTable>
+                  <tbody>
+                    <tr>
+                      To be entered into our weekly Digital Giveaways, visit 3
+                      merchants and post and tag <b>@sendchinatownlove</b> with
+                      your food crawl pictures on Instagram. Enter your
+                      Instagram handle so we can track your entries.
+                    </tr>
+                  </tbody>
+                </ToolTipTable>
+              </React.Fragment>
+            }
+            enterTouchDelay={10}
+            placement="left"
+          >
+            <div>
+              <img src={CrawlInfoIcon} alt="instagram-crawl-info"/>
+            </div>
+          </SupporterTooltip>
+        </Row>
         <InputField
           name="instagram-handle"
           type="text"
           onChange={(e) => setinstagramHandle(e.target.value)}
           value={instagramHandle}
+          placeholder="@"
         />
       </InputContainer>
 
-      <Button
-        value="track-screen-button"
-        className="button--red-filled"
-        disabled={!email || !ticketCode}
-        onClick={() => setCurrentScreenView(1)}
-      >
-        Add Ticket
-      </Button>
+      <InputContainer className="bottom">
+        <Button
+          value="track-screen-button"
+          className="button--red-filled"
+          disabled={!email || !ticketCode || !isTicketValid}
+          onClick={() => {
+            findOrCreateUser(email, false)
+            findTicketCode(ticketCode);
+          }}
+        >
+          Add Ticket
+        </Button>
+        <Button
+          className="linkButton"
+          disabled={!email}
+          onClick={() => {
+            findOrCreateUser(email, true);
+          }}
+        >
+          View my tickets
+        </Button>
+      </InputContainer>
     </Container>
   );
 };
@@ -117,7 +208,7 @@ export const InputContainer = styled.div`
   border: 1px solid #dedede;
   padding: 25px 20px;
   box-sizing: border-box;
-  overflow:hidden;
+  overflow: hidden;
 
   &.trackScreen {
     padding-top: 60px;
@@ -132,6 +223,7 @@ export const InputContainer = styled.div`
     padding-top: 25px;
     border-radius: 0px 0px 20px 20px;
     border-top: 1px dashed #dedede;
+    text-align: center;
   }
 `;
 
@@ -159,23 +251,32 @@ const Column = styled.div`
   margin: 25px 0;
 `;
 
+const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Title = styled.p`
   color: #a8192e;
   font-size: 14px;
   font-weight: bold;
   text-align: center;
-  letter-spacing: .15em;
+  letter-spacing: 0.15em;
 `;
 
 export const Button = styled.button`
-  margin: 20px 0 10px;
+  margin: 10px 0;
+  outline: none;
+  cursor: pointer;
 
   &.linkButton {
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid black;
-    line-spacing: .1em;
+    line-spacing: 0.1em;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    underline: none;
   }
 `;
 
@@ -195,4 +296,8 @@ const InputField = styled.input`
 const ErrorMessage = styled.div`
   color: red;
   padding-top: 5px;
+`;
+
+const ToolTipTable = styled.table`
+  width: 100%;
 `;
