@@ -1,7 +1,16 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Buyer, PaymentParams, SquareLineItems } from './types';
-import { charges, sellers, vouchers, campaigns, distributors, passportVouchers } from './endpoints';
+import { 
+  charges, 
+  sellers, 
+  vouchers, 
+  campaigns, 
+  distributors,
+  passportVouchers,
+  contacts,
+  tickets, 
+} from './endpoints';
 
 // Fix return typing
 export const getSellers = async (lang?: string): Promise<any> => {
@@ -164,5 +173,39 @@ export const getParticipatingMerchantTickets = async (
 ) =>
   axios
     .get(passportVouchers + id + '/tickets/' + tickets_secret)
+    .then((res) => res)
+    .catch((err) => err);
+
+  
+// validate passport email
+export const getPassportEmailId = async (email: string) =>
+  axios
+    .get(contacts, {
+      params: { email },
+    })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const createPassportEmailId = async (email: string, instagram: string) => {
+  let params = {}
+  
+  if(instagram) params = { email, instagram }
+  else params = { email }
+
+  return axios
+          .post(contacts, params)
+          .then((res) => res)
+          .catch((err) => err);
+};
+
+export const checkForValidTicket = async (ticket_id: string) =>
+  axios
+    .get(tickets + ticket_id)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const updateTicketContactId = async (ticket_id: string, contact_id: string) =>
+  axios
+    .put(tickets + ticket_id, { contact_id })
     .then((res) => res)
     .catch((err) => err);

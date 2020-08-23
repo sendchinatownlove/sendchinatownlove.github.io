@@ -6,3 +6,5 @@ export const vouchers = baseUrl + 'gift_cards/';
 export const campaigns = baseUrl + 'campaigns/';
 export const distributors = baseUrl + 'distributors/';
 export const passportVouchers = baseUrl + 'participating_sellers/';
+export const contacts = baseUrl + 'contacts/';
+export const tickets = baseUrl + 'tickets/';
