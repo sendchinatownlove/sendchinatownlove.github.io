@@ -222,3 +222,10 @@ export const getParticipatingSeller = async (sellerId: string) =>
     .get(participatingSellers + sellerId)
     .then((res) => res)
     .catch((err) => err);
+
+export const sendRedeemTicketsEmail = async (passportId: string) =>
+  axios
+    .post(contacts + passportId + "/rewards")
+    .then((res) => res)
+    .catch((err) => err);
+
