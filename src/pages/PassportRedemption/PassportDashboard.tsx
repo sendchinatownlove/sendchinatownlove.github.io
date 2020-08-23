@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import CircleLogo from './CircleLogo.png';
+
+// import CircleLogo from './CircleLogo.png';
 import TrackScreen from './TrackScreen';
 import RedemptionSelectScreen from './RedemptionSelectScreen';
 import ScreenName from "./ScreenName";
-import { Container, PassportContainer, ExternalLink } from './style'
+import { Container, ExternalLink } from './style'
 import PassportScreen from './Passport';
 
-interface Props {}
+interface Props {
+  screen?: string
+}
+
+type participatingSellerProps = {
+  created_at: string,
+  id: number,
+  name: string,
+  seller_id: number,
+  stamp_url: string,
+  updated_at: string,
+};
 
 const PassportRedemption = (props: Props) => {
-  const [currentScreenView, setCurrentScreenView] = useState(ScreenName.Dashboard);
+  const [currentScreenView, setCurrentScreenView] = useState(props.screen);  
 
   const showCurrentScreen = (screen) => {
     // TODO: Update case #s when all screens are built out
@@ -21,10 +33,10 @@ const PassportRedemption = (props: Props) => {
         return <RedemptionSelectScreen setCurrentScreenView={setCurrentScreenView} />
       case ScreenName.Track:
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />
-      case ScreenName.Dashboard: 
-        return <PassportScreen setCurrentScreenView={setCurrentScreenView} />
+      // case ScreenName.Dashboard: 
+      //   return <PassportScreen setCurrentScreenView={setCurrentScreenView}/>
       default: 
-        return <PassportScreen setCurrentScreenView={setCurrentScreenView} />
+        return <PassportScreen setCurrentScreenView={setCurrentScreenView}/>
     }
   };
 
@@ -55,7 +67,7 @@ const PassportRedemption = (props: Props) => {
         <LinksContainer>
           {
             socialMediaLinks.map((social) => (
-              <Icon href={social.url}>
+              <Icon href={social.url} key={social.url}>
                 <span className={`fa fa-${social.platform}`} />
               </Icon>
             ))

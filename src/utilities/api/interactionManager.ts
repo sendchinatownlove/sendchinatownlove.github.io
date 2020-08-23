@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Buyer, PaymentParams, SquareLineItems } from './types';
-import { charges, sellers, vouchers } from './endpoints';
+import { charges, sellers, vouchers, passport, participatingSellers } from './endpoints';
 
 // Fix return typing
 export const getSellers = async (lang?: string): Promise<any> => {
@@ -130,3 +130,15 @@ function localeFromLanguage(language?: string) {
       return 'en';
   }
 }
+
+export const getPassportTickets = async (passportId: string) =>
+  axios
+    .get(passport + passportId + "/tickets")
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getParticipatingSeller = async (sellerId: string) =>
+  axios
+    .get(participatingSellers + sellerId)
+    .then((res) => res)
+    .catch((err) => err);
