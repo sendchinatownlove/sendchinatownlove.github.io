@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Row } from './PassportDashboard';
-import { PassportContainer, Title, SubTitle, Button, ErrorMessage } from "./style";
-
+import { PassportContainer, Title, SubTitle, Button, ErrorMessage, ExternalLink} from "./style";
 import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 import CrawlInsta from './CrawlInsta.png';
@@ -12,6 +10,12 @@ import ScreenName from "./ScreenName";
 interface Props {
   setCurrentScreenView: Function;
 };
+
+const socialMediaLinks = [
+  {platform: 'facebook', url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891'},
+  {platform: 'instagram', url: 'https://instagram.com/sendchinatownlove'},
+  {platform: 'envelope', url: 'mailto:hello@sendchinatownlove.com'},
+];
 
 const Track = ({ setCurrentScreenView }: Props) => {
   const [email, setEmail] = useState('');
@@ -61,9 +65,6 @@ const Track = ({ setCurrentScreenView }: Props) => {
             </ErrorMessage>
           )}
         </Column>
-      </InputContainer>
-      
-      <InputContainer className="bottom">
         <Row>
           <SubTitle size="10px">
             To be entered into our weekly giveaway, share your food crawl
@@ -80,15 +81,33 @@ const Track = ({ setCurrentScreenView }: Props) => {
           value={instagramHandle}
         />
       </InputContainer>
+      
+      <InputContainer className="bottom">
+        <Button
+          value="track-screen-button"
+          className="button--red-filled"
+          disabled={!email || !ticketCode}
+          onClick={() => setCurrentScreenView(ScreenName.Dashboard)}
+        >
+          Add Ticket
+        </Button>        
+      </InputContainer>
 
-      <Button
-        value="track-screen-button"
-        className="button--red-filled"
-        disabled={!email || !ticketCode}
-        onClick={() => setCurrentScreenView(ScreenName.Dashboard)}
-      >
-        Add Ticket
-      </Button>
+      {/* <Row>
+        <ExternalLink>VIEW MAP</ExternalLink>
+        <ExternalLink href="mailto:sendchinatownlove@gmail.com">
+          Contact Us
+        </ExternalLink>
+        <LinksContainer>
+          {
+            socialMediaLinks.map((social) => (
+              <Icon href={social.url} key={social.url}>
+                <span className={`fa fa-${social.platform}`} />
+              </Icon>
+            ))
+          }
+        </LinksContainer>
+      </Row> */}
     </Container>
   );
 };
@@ -100,14 +119,20 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   font-size: 12px;
+  width: 367px;
+  margin: 0 auto;
 `;
 
-export const InputContainer = styled(PassportContainer)`
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border: 1px solid #dedede;
   padding: 25px 20px;
   box-sizing: border-box;
   overflow:hidden;
+  width:100%;
+  margin: 0 auto;
 
   &.trackScreen {
     padding-top: 60px;
@@ -144,4 +169,27 @@ const InputField = styled.input`
   :invalid {
     border: 1px solid red;
   }
+`;
+
+// FOOTER
+export const Row = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  justify-content: center;
+`;
+
+const LinksContainer = styled.div`
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+`;
+
+const Icon = styled.a`
+  text-decoration: none;
+  color: #a8192e;
+  padding: 0 15px;
+  font-size: 22px;
 `;
