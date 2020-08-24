@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {useParams} from "react-router-dom"
+import {useParams, useHistory} from "react-router-dom"
 
 import {
   getPassportTickets,
@@ -10,7 +10,6 @@ import {
 import { PassportContainer, Title, SubTitle, Button } from "./style";
 
 import TicketRow from "./TicketRow";
-import ScreenName from "./ScreenName";
 import FAQ from "./Faq";
 
 import PassportIconImg from "./passportIcon.png";
@@ -22,28 +21,38 @@ interface Props {
 
 const Passport = (props: Props) => {
   const { id } = useParams();
+  const { push, location } = useHistory();
   const [showFaq, setShowFaq] = useState(false);
   const [showEmailSent, setShowEmailSent] = useState(false);
   const [tickets, setTickets] = useState<any[]>([]);
 
   useEffect(() => {    
-    getPassportTickets(id)
-      .then((ticketIds) => {
-        let promises: any[] = [];
-        ticketIds.data.forEach(ticket => {
-          promises.push(getParticipatingSeller(ticket.participating_seller_id));
-        });    
-        return Promise.all(promises);
-      })
-      .then((passportTickets) => {
-        const tempTickets = passportTickets.map(ticket => ticket.data);
-        if (tempTickets.length > 0) {
-          setTickets(tempTickets);
-        }
-      })
-      .catch((err) => {
-        console.log("passport error: "+err);
-      })
+    if (location.hash === "#faq") {
+      setShowFaq(true);
+    }
+  }, [location.hash])
+
+  useEffect(() => {    
+    if (id) {
+      getPassportTickets(id)
+        .then((ticketIds) => {
+          let promises: any[] = [];
+          ticketIds.data.forEach(ticket => {
+            promises.push(getParticipatingSeller(ticket.participating_seller_id));
+          });
+          
+          return Promise.all(promises);
+        })
+        .then((passportTickets) => {
+          const tempTickets = passportTickets.map(ticket => ticket.data);
+          if (tempTickets.length > 0) {
+            setTickets(tempTickets);
+          }
+        })
+        .catch((err) => {
+          console.log("passport error: "+err);
+        })
+    }
   }, [id])
 
   const createTicketRows = (tickets) => {
@@ -59,7 +68,7 @@ const Passport = (props: Props) => {
       rows.push(sortedTickets.splice(0, 3));
     }
       while (rows.length < 6 ){
-        rows.push(new Array());
+        rows.push([]);
       }
     return rows;
   }
@@ -84,6 +93,11 @@ const Passport = (props: Props) => {
         </tbody>        
       </Table>
     )
+  }
+
+  const addTicket = (e) => {
+    e.preventDefault();
+    push("/passport");
   }
 
   return (
@@ -124,7 +138,7 @@ const Passport = (props: Props) => {
           <AddNewTicket
             value="track-screen-button"
             className="button--filled"
-            onClick={() => props.setCurrentScreenView(ScreenName.Dashboard)}
+            onClick={addTicket}
           >
             Add New Ticket
           </AddNewTicket>
