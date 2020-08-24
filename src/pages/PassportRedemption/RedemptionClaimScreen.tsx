@@ -1,30 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+
 import { InputContainer, Button, FinePrint } from './TrackScreen';
 
-// TODO: DELETE --> DUMMY IMAGE DATA
-import Image23 from './image-23.png';
+import {
+  getOneSponsor,
+  getLocationById,
+} from '../../utilities/api/interactionManager';
+
+// delete before push or change into proper imports
+enum ScreenName {
+  Track,
+  Redemption,
+  Dashboard,
+  Passport,
+  Claim,
+}
 
 interface Props {
   setCurrentScreenView: Function;
 }
 
 const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
-  const [timeLeft, setTimeLeft] = useState(60 * 5);
+  const { sponsor_seller_id } = useParams();
+  const [selectedReward, setSelectedReward] = useState({
+    id: '',
+    name: '',
+    location: {
+      address1: '',
+      address2: '',
+      borough: '',
+      state: '',
+      zip_code: '',
+    },
+    logo_url: '',
+    reward: '',
+  });
 
-  // TODO(Olivia): remove later & reference real state
-  const selected = {
-    name: 'nom wah tea parlor',
-    rewardType: '20% off meal',
-    address: '13 Doyers St, New York, NY',
-    logo: Image23,
+  const fetchData = async () => {
+    try {
+      const sponsorResponse = await getOneSponsor(sponsor_seller_id);
+      const locationResponse = await getLocationById(sponsorResponse.data.id);
+      setSelectedReward({
+        ...sponsorResponse.data,
+        location: locationResponse.data,
+      });
+    } catch (error) {
+      console.error('passport error: ' + error);
+    }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const [timeLeft, setTimeLeft] = useState(60 * 5);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setTimeLeft(timeLeft - 1);
     }, 1000);
-    if (!timeLeft) markAsUsed();
+    if (!timeLeft) setCurrentScreenView(ScreenName.Redemption);
     return () => clearTimeout(timer);
   }, [timeLeft]);
 
@@ -37,25 +74,29 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
     return `${pad(min)}:${pad(sec)}`;
   };
 
-  // TODO(Olivia): rly marked as used when claimed; this will just redirect
-  const markAsUsed = () => setCurrentScreenView(1);
-
   return (
     <Container>
       <Shadow>
         <InputContainer className="top shadow">
           <Content>
-            <Text className="header">{selected.rewardType}</Text>
-            <img src={Image23} alt="reward-logo" width="260px" />
+            <Text className="header">{selectedReward.reward}</Text>
+            <img src={'logo_url'} alt="reward-logo" width="260px" />
             <br />
             <div>
-              <Text className="">{selected.name}</Text>
-              <Text className="finePrint">
-                {selected.address.slice(0, selected.address.indexOf(','))}
-              </Text>
-              <Text className="finePrint">
-                {selected.address.slice(selected.address.indexOf(',') + 2)}
-              </Text>
+              <Text className="">{selectedReward.name}</Text>
+              {selectedReward && selectedReward.location && (
+                <>
+                  <Text className="finePrint">
+                    {selectedReward.location.address1},{' '}
+                    {selectedReward.location.address2}
+                  </Text>
+                  <Text className="finePrint">
+                    {selectedReward.location.borough},{' '}
+                    {selectedReward.location.state}{' '}
+                    {selectedReward.location.zip_code}
+                  </Text>
+                </>
+              )}
             </div>
           </Content>
         </InputContainer>
@@ -76,7 +117,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         <Button
           value="redemption-selected-button"
           className="button--red-filled"
-          onClick={() => setCurrentScreenView(1)}
+          onClick={() => setCurrentScreenView(ScreenName.Redemption)}
         >
           MARK AS USED
         </Button>

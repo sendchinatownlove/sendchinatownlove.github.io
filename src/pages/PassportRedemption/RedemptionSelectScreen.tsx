@@ -1,128 +1,142 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { SubTitle, Button } from "./style";
 import ScreenName from './ScreenName';
 
-// TODO: DELETE --> DUMMY IMAGE DATA
-// import Image23 from './image-23.png';
+import { useParams } from 'react-router-dom';
 
-// import { getSponsorRewards, getSponsorLocation } from '../../utilities/api/interactionManager';
+import {
+  getAllSponsors,
+  getLocationById,
+  getPassportTickets,
+  redeemReward,
+} from '../../utilities/api/interactionManager';
+
 
 interface Props {
   setCurrentScreenView: Function;
 }
 
 // TODO: Ask design --> do we want user to be able to unselect a reward?
-
 const PassportSelected = ({ setCurrentScreenView }: Props) => {
-  const [selectedReward, setSelectedReward] = useState({
-    name: '',
-    rewardType: '',
-    address: '',
-    logo: '',
+  const { id, access_token } = useParams();
+
+  const [error, setError] = useState('')
+  const [tickets, setTickets] = useState<any[]>([]);
+  const numRewards = Math.floor(tickets.length / 3)
+  const [allSponsors, setAllSponsors] = useState<any[]>([]);
+  const [selectedSponsor, setSelectedSponsor] = useState({
+    id: null,
+    reward_cost: null,
   });
 
-  // TODO(Athena): UPDATE THIS WITH THE ACTUAL STHUFF; dummy data for now
-  const rewards = [
-    {
-      name: 'nom wah tea parlor',
-      rewardType: '20% off meal',
-      address: '13 Doyers St, New York, NY',
-      logo_url: "Image23",
-    },
-    {
-      name: 'Hello Wah',
-      rewardType: '20% off',
-      address: 'chinatown',
-      logo_url: "Image23",
-    },
-    {
-      name: 'World Wah',
-      rewardType: '20% off',
-      address: 'chinatown',
-      logo_url: "Image23",
-    },
-    {
-      name: 'Bye Wah',
-      rewardType: '20% off',
-      address: 'chinatown',
-      logo_url: "Image23",
-    },
-    {
-      name: 'Fetty Wah',
-      rewardType: 'free sample',
-      address: 'chinatown',
-      logo: Image23,
-    },
-    {
-      name: 'Taylwah Swift',
-      rewardType: 'free album',
-      address: 'chinatown',
-      logo: Image23,
-    },
-    {
-      name: 'A$AP Wah',
-      rewardType: 'free bike',
-      address: 'chinatown',
-      logo: Image23,
-    },
-    {
-      name: 'wahzaaap',
-      rewardType: 'free taffy',
-      address: 'chinatown',
-      logo: Image23,
-    },
-  ];
+
+  const fetchData = async () => {
+    try {
+      const ticketsResponse = await getPassportTickets(id);
+      const availableTickets = ticketsResponse.data.filter(
+        (ticket) => ticket.sponsor_seller_id === null
+      );
+      setTickets(availableTickets);
+      const allSponsorsResponse = await getAllSponsors();
+      const allSponsorsWithLocations = await Promise.all(
+        allSponsorsResponse.data.map(async (sponsor) => {
+          const locationResponse = await getLocationById(sponsor.location_id);
+          return { ...sponsor, location: locationResponse.data };
+        })
+      );
+      setAllSponsors(allSponsorsWithLocations);
+    } catch (err) {
+      console.error('passport error: ' + err);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleRedemption = async () => {
+    try {
+      const ticketsToRedeem = tickets.slice(0, 3).map((ticket) => {
+        return { id: ticket.id, sponsor_seller_id: selectedSponsor.id };
+      });
+      const redemptionResponse = await redeemReward(
+        id,
+        access_token,
+        ticketsToRedeem
+      );
+      // TODO OS: so this isn't very secure, right? instead of route, should I just change view to RedemptionClaimScreen?
+      if (redemptionResponse.status === 200) {
+        window.location.href = `/passport/${id}/redeem/${access_token}/sponsor/${selectedSponsor.id}`;
+      } else setError('Something went wrong! Please try again.');
+    } catch (err) {
+      console.error('passport error: ' + err);
+    }
+  };
 
   return (
     <Container>
-      {/* TODO: replace with X number of rewards */}
-      <Heading className="bold">1 REWARD AVAILABLE</Heading>
-      {/* TODO: fix rewards to reflect whatever date should be */}
-      <Heading>Rewards available until 9/15/2020</Heading>
+      <Heading className="bold">
+        {numRewards} REWARD{numRewards === 0 || numRewards > 1 ? 'S' : ''} AVAILABLE
+      </Heading>
+      <Heading>Rewards available until 9/30/2020</Heading>
 
       <RewardsContainer
-        numRewards={rewards.length}
-        selected={selectedReward.name ? true : false}
+        numRewards={allSponsors.length}
+        selected={selectedSponsor.id ? true : false}
       >
-        {rewards.map((reward) => {
-          const { name, logo, rewardType, address } = reward;
+        {allSponsors.length > 0 &&
+          allSponsors.map((sponsor: any) => {
+            return (
+              <SingleRewardContainer
+                className={selectedSponsor.id === id ? 'selected' : ''}
+                onClick={() => {
+                  if (numRewards > 0) setSelectedSponsor({
+                    id: sponsor.id,
+                    reward_cost: sponsor.reward_cost,
+                  })}
+                }
+              >
+                <input
+                  type="radio"
+                  checked={selectedSponsor.id === sponsor.id}
+                  id={sponsor.reward}
+                />
 
-          return (
-            <SingleRewardContainer
-              className={selectedReward.name === name ? 'selected' : ''}
-              onClick={() =>
-                setSelectedReward({ name, logo, rewardType, address })
-              }
-            >
-              <input
-                type="radio"
-                checked={selectedReward.name === name}
-                id={rewardType}
-              />
-
-              <SingleRewardInfo>
-                <Text className="header">{rewardType}</Text>
-                <img src={logo} alt="reward-logo" width="130px"></img>
-                <Text>{name}</Text>
-                <Text className="finePrint">{address}</Text>
-              </SingleRewardInfo>
-            </SingleRewardContainer>
-          );
-        })}
+                <SingleRewardInfo>
+                  <Text className="header">{sponsor.reward}</Text>
+                  <img
+                    src={sponsor.logo_url}
+                    alt="reward-logo"
+                    width="130px"
+                  ></img>
+                  <Text>{sponsor.name}</Text>
+                  {sponsor && sponsor.location && (
+                    <Text className="finePrint">
+                      {sponsor.location.address1}
+                    </Text>
+                  )}
+                </SingleRewardInfo>
+              </SingleRewardContainer>
+            );
+          })}
       </RewardsContainer>
 
-      {!!selectedReward.name ? (
+      {!!selectedSponsor.id ? (
         <Footer>
           <SubTitle bold="700">
-            When redeemed, you have 5 minutes to use your reward.
+            {
+              error
+                ? error
+                : 'When redeemed, you have 5 minutes to use your reward.'
+            }
           </SubTitle>
 
           <Button
             value="redemption-selected-button"
             className="button--red-filled"
-            disabled={!selectedReward}
-            onClick={() => setCurrentScreenView(2)}
+            disabled={!selectedSponsor}
+            onClick={() => handleRedemption()}
           >
             REEDEM NOW
           </Button>
@@ -134,11 +148,13 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
             ordering.
           </SubTitle>
 
-          {rewards.length <= 4 && (
+          {allSponsors.length <= 4 && (
             <Button
-              // {/* TODO: Update return screen with the Passport screen when built out  */}
               className="linkButton"
-              onClick={() => setCurrentScreenView(0)}
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = `/passport/${id}`;
+              }}
             >
               RETURN TO PASSPORT
             </Button>
@@ -252,7 +268,7 @@ export const Text = styled.p`
   letter-spacing: 0.1em;
   font-weight: bold;
   font-size: 10px;
-  line-height: 50%;
+  line-height: 100%;
 
   &.header {
     font-size: 14px;

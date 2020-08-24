@@ -7,7 +7,9 @@ import {
   vouchers,
   contacts,
   tickets,
-  participatingSellers
+  participatingSellers,
+  sponsorSellers,
+  locations
 } from './endpoints';
 
 // Fix return typing
@@ -189,3 +191,30 @@ export const sendRedeemTicketsEmail = async (passportId: string) =>
     .then((res) => res)
     .catch((err) => err);
 
+export const getLocationById = async (locationId: number) =>
+  axios
+    .get(locations + locationId)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getAllSponsors = async () =>
+  axios
+    .get(sponsorSellers)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getOneSponsor = async (rewardId: number) =>
+  axios
+    .get(sponsorSellers + rewardId)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const redeemReward = async (
+  contact_id: number,
+  auth_token: string,
+  tickets: Array<any>
+) =>
+  axios
+    .put(contacts + contact_id + '/tickets/' + auth_token, { tickets })
+    .then((res) => res)
+    .catch((err) => err);

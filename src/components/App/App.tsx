@@ -11,6 +11,13 @@ import ReactPixel from 'react-facebook-pixel';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
 import ScreenName from '../../pages/PassportRedemption/ScreenName';
 
+enum ScreenName {
+  Track,
+  Redemption,
+  Dashboard,
+  Claim,
+}
+
 const trackingId = process.env.REACT_APP_API_ENDPOINT!;
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
 if (process.env.NODE_ENV === 'production') {
@@ -98,6 +105,15 @@ const App = () => {
           </Route>
           <Route exact path="/passport/:id/tickets">
             <PassportRedemption screen={ScreenName.Dashboard}/>
+          </Route>
+          <Route exact path="/passport/:id/redeem/:access_token">
+            <PassportRedemption screen={ScreenName.Redemption} />
+          </Route>
+          <Route
+            exact
+            path="/passport/:id/redeem/:access_token/sponsor/:sponsor_seller_id"
+          >
+            <PassportRedemption screen={ScreenName.Claim} />
           </Route>
           <Route path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
