@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
-import { Button, FinePrint } from './TrackScreen';
+import { NoRewardsFooter, RedeemRewardsFooter, DefaultFooter } from './RedemptionFooters'
 
 import {
   getAllSponsors,
@@ -81,6 +81,12 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
     }
   };
 
+  const handleFooter = () => {
+    if (numRewards === 0) return <NoRewardsFooter setCurrentScreenView={setCurrentScreenView} />
+    else if (!!selectedSponsor.id) return <RedeemRewardsFooter error={error} selectedSponsor={selectedSponsor} handleRedemption={handleRedemption} />
+    else return <DefaultFooter allSponsors={allSponsors} id={id} />
+  }
+
   return (
     <Container>
       <Heading className="bold">
@@ -129,45 +135,8 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
           })}
       </RewardsContainer>
 
-      {!!selectedSponsor.id ? (
-        <Footer>
-          <FinePrint className="center bold red">
-            {
-              error
-                ? error
-                : 'When redeemed, you have 5 minutes to use your reward.'
-            }
-          </FinePrint>
-
-          <Button
-            value="redemption-selected-button"
-            className="button--red-filled"
-            disabled={!selectedSponsor}
-            onClick={() => handleRedemption()}
-          >
-            REEDEM NOW
-          </Button>
-        </Footer>
-      ) : (
-        <Footer>
-          <FinePrint className="center bold">
-            Select an offer and be ready to show this screen when you’re
-            ordering.
-          </FinePrint>
-
-          {allSponsors.length <= 4 && (
-            <Button
-              className="linkButton"
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.href = `/passport/${id}`;
-              }}
-            >
-              RETURN TO PASSPORT
-            </Button>
-          )}
-        </Footer>
-      )}
+      {handleFooter()}
+          
     </Container>
   );
 };
@@ -237,12 +206,6 @@ const RewardsContainer = styled.div<{
     width: 100%;
     height: ${(props) => (props.selected ? '200px' : '125px')};
   }
-`;
-
-const Footer = styled.div`
-  z-index: 2;
-  display: grid;
-  justify-items: center;
 `;
 
 const SingleRewardContainer = styled.button`
