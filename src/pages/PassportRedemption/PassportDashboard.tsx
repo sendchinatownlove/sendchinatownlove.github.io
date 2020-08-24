@@ -42,16 +42,13 @@ const PassportRedemption = (props: Props) => {
 export default PassportRedemption;
 
 const Container = styled.div`
-  // position: relative;
   background-color: #e5e5e5;
-  height: 100%;
   min-height: 100vh;
   background-image: url(${CrawlMap});
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   @media (max-width: 475px) {
     background-size: 500px;
   }
