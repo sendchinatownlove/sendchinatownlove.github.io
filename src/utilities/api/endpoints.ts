@@ -6,6 +6,3 @@ export const vouchers = baseUrl + 'gift_cards/';
 export const locations = baseUrl + 'locations/';
 export const contacts = baseUrl + 'contacts/';
 export const sponsorSellers = baseUrl + 'sponsor_sellers/';
-
-// remove later
-export const passport = baseUrl + 'contacts/';

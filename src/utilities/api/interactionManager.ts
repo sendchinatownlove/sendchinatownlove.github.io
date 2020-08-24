@@ -8,7 +8,6 @@ import {
   locations,
   sponsorSellers,
   contacts,
-  passport,
 } from './endpoints'; //clean this up
 
 // Fix return typing
@@ -164,12 +163,5 @@ export const redeemReward = async (
 ) =>
   axios
     .put(contacts + contact_id + '/tickets/' + auth_token, { tickets })
-    .then((res) => res)
-    .catch((err) => err);
-
-// remove later
-export const getPassportTickets = async (passportId: string) =>
-  axios
-    .get(passport + passportId + '/tickets')
     .then((res) => res)
     .catch((err) => err);
