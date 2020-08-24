@@ -6,7 +6,7 @@ import ScreenName from './ScreenName';
 
 
 interface NoRewardsProps {
-    setCurrentScreenView: Function
+  setCurrentScreenView: Function;
 }
 
 export const NoRewardsFooter = (props: NoRewardsProps) => {
@@ -16,21 +16,21 @@ export const NoRewardsFooter = (props: NoRewardsProps) => {
             Have more tickets to add?
           </SubTitle>
 
-          <Button
-            value="redemption-selected-button"
-            className="button--red-filled"
-            onClick={() => props.setCurrentScreenView(ScreenName.Track)}
-          >
-            ADD NEW TICKETS
-          </Button>
-        </Footer>
-    )
-}
+      <Button
+        value="redemption-selected-button"
+        className="button--red-filled"
+        onClick={() => props.setCurrentScreenView(ScreenName.Track)}
+      >
+        ADD NEW TICKETS
+      </Button>
+    </Footer>
+  );
+};
 
 interface RedeemRewardsProps {
-    error: string;
-    selectedSponsor: null | any;
-    handleRedemption: Function
+  error: string;
+  selectedSponsor: null | any;
+  handleRedemption: Function;
 }
 
 export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
@@ -44,21 +44,21 @@ export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
             }
           </SubTitle>
 
-          <Button
-            value="redemption-selected-button"
-            className="button--red-filled"
-            disabled={!props.selectedSponsor}
-            onClick={() => props.handleRedemption()}
-          >
-            REEDEM NOW
-          </Button>
-        </Footer>
-    )
-}
+      <Button
+        value="redemption-selected-button"
+        className="button--red-filled"
+        disabled={!props.selectedSponsor}
+        onClick={() => props.handleRedemption()}
+      >
+        REEDEM NOW
+      </Button>
+    </Footer>
+  );
+};
 
 interface defaultProps {
-    allSponsors: any[],
-    id: number
+  allSponsors: any[];
+  id: number;
 }
 
 export const DefaultFooter = (props: defaultProps) => {
@@ -69,20 +69,20 @@ export const DefaultFooter = (props: defaultProps) => {
             ordering.
           </SubTitle>
 
-          {props.allSponsors.length <= 4 && (
-            <Button
-              className="linkButton"
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.href = `/passport/${props.id}`;
-              }}
-            >
-              RETURN TO PASSPORT
-            </Button>
-          )}
-        </Footer>
-    )
-}
+      {props.allSponsors.length <= 4 && (
+        <Button
+          className="linkButton"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = `/passport/${props.id}`;
+          }}
+        >
+          RETURN TO PASSPORT
+        </Button>
+      )}
+    </Footer>
+  );
+};
 
 const Footer = styled.div`
   z-index: 2;

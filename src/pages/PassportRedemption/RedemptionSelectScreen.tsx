@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useParams } from 'react-router-dom';
-import { NoRewardsFooter, RedeemRewardsFooter, DefaultFooter } from './RedemptionFooters'
+import {
+  NoRewardsFooter,
+  RedeemRewardsFooter,
+  DefaultFooter,
+} from './RedemptionFooters';
 
 import {
+  getPassportTickets,
   getAllSponsors,
   getLocationById,
-  getPassportTickets,
   redeemReward,
 } from '../../utilities/api/interactionManager';
 
@@ -20,15 +24,14 @@ interface Props {
 const PassportSelected = ({ setCurrentScreenView }: Props) => {
   const { id, access_token } = useParams();
 
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
   const [tickets, setTickets] = useState<any[]>([]);
-  const numRewards = Math.floor(tickets.length / 3)
+  const numRewards = Math.floor(tickets.length / 3);
   const [allSponsors, setAllSponsors] = useState<any[]>([]);
   const [selectedSponsor, setSelectedSponsor] = useState({
     id: null,
     reward_cost: null,
   });
-
 
   const fetchData = async () => {
     try {
@@ -74,15 +77,24 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
   };
 
   const handleFooter = () => {
-    if (numRewards === 0) return <NoRewardsFooter setCurrentScreenView={setCurrentScreenView} />
-    else if (!!selectedSponsor.id) return <RedeemRewardsFooter error={error} selectedSponsor={selectedSponsor} handleRedemption={handleRedemption} />
-    else return <DefaultFooter allSponsors={allSponsors} id={id} />
-  }
+    if (numRewards === 0)
+      return <NoRewardsFooter setCurrentScreenView={setCurrentScreenView} />;
+    else if (!!selectedSponsor.id)
+      return (
+        <RedeemRewardsFooter
+          error={error}
+          selectedSponsor={selectedSponsor}
+          handleRedemption={handleRedemption}
+        />
+      );
+    else return <DefaultFooter allSponsors={allSponsors} id={id} />;
+  };
 
   return (
     <Container>
       <Heading className="bold">
-        {numRewards} REWARD{numRewards === 0 || numRewards > 1 ? 'S' : ''} AVAILABLE
+        {numRewards} REWARD{numRewards === 0 || numRewards > 1 ? 'S' : ''}{' '}
+        AVAILABLE
       </Heading>
       <Heading>Rewards available until 9/30/2020</Heading>
 
@@ -96,11 +108,12 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
               <SingleRewardContainer
                 className={selectedSponsor.id === id ? 'selected' : ''}
                 onClick={() => {
-                  if (numRewards > 0) setSelectedSponsor({
-                    id: sponsor.id,
-                    reward_cost: sponsor.reward_cost,
-                  })}
-                }
+                  if (numRewards > 0)
+                    setSelectedSponsor({
+                      id: sponsor.id,
+                      reward_cost: sponsor.reward_cost,
+                    });
+                }}
               >
                 <input
                   type="radio"
@@ -128,7 +141,6 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
       </RewardsContainer>
 
       {handleFooter()}
-          
     </Container>
   );
 };
