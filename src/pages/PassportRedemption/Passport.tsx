@@ -75,11 +75,13 @@ const Passport = (props: Props) => {
     const rows = createTicketRows(stamps);
     return (
       <Table> 
-        {
-          rows.map((row, index) => (
-            <TicketRow stamps={row} index={index} key={index} sendEmail={sendEmail}/>
-          ))
-        } 
+        <tbody>
+          {
+            rows.map((row, index) => (
+              <TicketRow stamps={row} index={index} key={index} sendEmail={sendEmail}/>
+            ))
+          } 
+        </tbody>        
       </Table>
     )
   }
@@ -135,11 +137,12 @@ const Passport = (props: Props) => {
 export default Passport;
 
 const Container = styled.div`
-  height: 100vh;
+  position: relative;
   width: 375px;
+  hidden: 100vh;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
 `;
 
 const HeaderContainer = styled.div`
@@ -166,8 +169,9 @@ const Logo = styled.img`
 
 const BodyContainer = styled.div`
   width: 375px;
-  height: auto;
   position: relative;
+  display: flex;
+  justify-content: center;
 `
 
 const TitleRow = styled.div`
@@ -184,7 +188,9 @@ const Table = styled.table`
 `;
 const AddNewTicket = styled(Button)`
   position: fixed;
+  margin-left: -150px;
   bottom: 10px;
+  left: 50%;
   width: 300px;
 `
 const SendEmailContainer = styled.div`
