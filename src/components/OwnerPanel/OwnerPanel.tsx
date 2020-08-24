@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { BrowsePageSeller } from '../../utilities/api/types';
+import { getCampaignsForMerchant } from '../../utilities';
 import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
@@ -27,6 +28,23 @@ const OwnerPanel = ({ seller }: Props) => {
 
   const dispatch = useModalPaymentDispatch();
   const [purchaseType, setPurchaseType] = useState('');
+  const [activeCampaign, setActiveCampaign] = useState<any | null>();
+
+  const fetchData = async () => {
+    const campaigns = await getCampaignsForMerchant(seller.seller_id);
+    if (campaigns.data) {
+      const active = campaigns.data.find(
+        (campaign: any) => campaign.active
+      );
+      // product does not support >1 active campaign per merchant
+      setActiveCampaign(active);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line
+  }, []);
 
   const showModal = (event: any) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
@@ -59,8 +77,6 @@ const OwnerPanel = ({ seller }: Props) => {
   const validExtraInfo = Object.keys(extraInfo).filter((current) => {
     return extraInfo[current] != null;
   });
-
-  const costPerMealDollars = seller.cost_per_meal / 100;
 
   return (
     <Container>
@@ -113,7 +129,7 @@ const OwnerPanel = ({ seller }: Props) => {
             {t('ownerPanel.voucher')}
           </button>
         )}
-        {seller.cost_per_meal !== null && (
+        {activeCampaign && (
           <button
             value="buy_meal"
             className={classnames(
@@ -164,13 +180,16 @@ const OwnerPanel = ({ seller }: Props) => {
         ''
       )}
 
-      <ModalBox
-        purchaseType={purchaseType}
-        sellerId={seller.seller_id}
-        sellerName={seller.name}
-        costPerMeal={costPerMealDollars}
-        nonProfitLocationId={seller.non_profit_location_id}
-      />
+      {activeCampaign && (
+        <ModalBox
+          purchaseType={purchaseType}
+          sellerId={seller.seller_id}
+          sellerName={seller.name}
+          costPerMeal={activeCampaign.price_per_meal / 100}
+          nonProfitLocationId={seller.non_profit_location_id}
+          campaignId={activeCampaign.id}
+        />
+      )}
 
       <div className={styles.mapsContainer}>
         {/* need to put in google API */}

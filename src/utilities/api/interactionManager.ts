@@ -134,8 +134,16 @@ function localeFromLanguage(language?: string) {
 }
 
 export const getCampaigns = async (): Promise<any> => {
-  return await axios.get(campaigns);
+  return await axios.get(campaigns)
+    .then((res) => res)
+    .catch((err) => err);
 };
+
+export const getCampaignsForMerchant = async (seller_id: string): Promise<any> => {
+  return await axios.get(sellers + seller_id + '/campaigns')
+    .then((res) => res)
+    .catch((err) => err);
+}
 
 export const getDistributor = async (id: string): Promise<any> => {
   return await axios.get(distributors + id)
