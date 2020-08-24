@@ -96,7 +96,7 @@ const App = () => {
           <Route exact path="/passport">
             <PassportRedemption screen={ScreenName.Track}/>
           </Route>
-          <Route exact path="/passport/:id">
+          <Route exact path="/passport/:id/tickets">
             <PassportRedemption screen={ScreenName.Dashboard}/>
           </Route>
           <Route path="/:seller_id/dashboard/:secret_id">

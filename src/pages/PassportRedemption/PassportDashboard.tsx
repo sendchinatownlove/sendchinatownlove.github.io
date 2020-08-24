@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import TrackScreen from './TrackScreen';
@@ -6,13 +6,21 @@ import RedemptionSelectScreen from './RedemptionSelectScreen';
 import ScreenName from "./ScreenName";
 import PassportScreen from './Passport';
 import CrawlMap from './CrawlMap.png';
+import {useHistory} from "react-router-dom"
 
 interface Props {
   screen: ScreenName
 }
 
 const PassportRedemption = (props: Props) => {
+  const {location} = useHistory();
   const [currentScreenView, setCurrentScreenView] = useState<ScreenName>(props.screen);
+
+  useEffect(() => {
+    if (location.pathname === "/passport") {
+      setCurrentScreenView(ScreenName.Track);
+    }
+  }, [location])
 
   const showCurrentScreen = (screen) => {
     // TODO: Update case #s when all screens are built out
