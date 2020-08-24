@@ -9,15 +9,6 @@ import {
   getLocationById,
 } from '../../utilities/api/interactionManager';
 
-// delete before push or change into proper imports
-enum ScreenName {
-  Track,
-  Redemption,
-  Dashboard,
-  Passport,
-  Claim,
-}
-
 interface Props {
   setCurrentScreenView: Function;
 }
