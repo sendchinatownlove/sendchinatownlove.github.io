@@ -8,24 +8,37 @@ import TrackScreen from './TrackScreen';
 import RedemptionSelectScreen from './RedemptionSelectScreen';
 import RedemptionClaimScreen from './RedemptionClaimScreen';
 
-interface Props {}
+enum ScreenName {
+  Track,
+  Redemption,
+  Dashboard,
+  Claim,
+}
+
+interface Props {
+  screen: ScreenName;
+}
 
 const PassportRedemption = (props: Props) => {
-  const [currentScreenView, setCurrentScreenView] = useState(0);
+  const [currentScreenView, setCurrentScreenView] = useState<ScreenName>(
+    props.screen
+  );
 
   const showCurrentScreen = (screen) => {
     // TODO: Update case #s when all screens are built out
     // NOTE: not sure if this is the right flow,
     // but currently set up like this for now for ease of editing
     switch (screen) {
-      case 1:
+      case ScreenName.Redemption:
         return (
           <RedemptionSelectScreen setCurrentScreenView={setCurrentScreenView} />
         );
-      case 2:
+      case ScreenName.Claim:
         return (
           <RedemptionClaimScreen setCurrentScreenView={setCurrentScreenView} />
         );
+      case ScreenName.Track:
+        return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
       default:
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
     }

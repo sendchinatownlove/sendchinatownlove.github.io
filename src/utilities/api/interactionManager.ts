@@ -1,7 +1,15 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Buyer, PaymentParams, SquareLineItems } from './types';
-import { charges, sellers, vouchers } from './endpoints';
+import {
+  charges,
+  sellers,
+  vouchers,
+  locations,
+  sponsorSellers,
+  contacts,
+  passport,
+} from './endpoints'; //clean this up
 
 // Fix return typing
 export const getSellers = async (lang?: string): Promise<any> => {
@@ -130,3 +138,38 @@ function localeFromLanguage(language?: string) {
       return 'en';
   }
 }
+
+export const getLocationById = async (locationId: number) =>
+  axios
+    .get(locations + locationId)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getAllSponsors = async () =>
+  axios
+    .get(sponsorSellers)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getOneSponsor = async (rewardId: number) =>
+  axios
+    .get(sponsorSellers + rewardId)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const redeemReward = async (
+  contact_id: number,
+  auth_token: string,
+  tickets: Array<any>
+) =>
+  axios
+    .put(contacts + contact_id + '/tickets/' + auth_token, { tickets })
+    .then((res) => res)
+    .catch((err) => err);
+
+// remove later
+export const getPassportTickets = async (passportId: string) =>
+  axios
+    .get(passport + passportId + '/tickets')
+    .then((res) => res)
+    .catch((err) => err);
