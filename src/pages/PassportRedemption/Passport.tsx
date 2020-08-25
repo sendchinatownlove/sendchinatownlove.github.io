@@ -38,15 +38,20 @@ const Passport = (props: Props) => {
         .then((ticketIds) => {
           let promises: any[] = [];
           ticketIds.data.forEach(ticket => {
-            promises.push(getParticipatingSeller(ticket.participating_seller_id));
+            promises.push(
+              getParticipatingSeller(ticket.participating_seller_id)
+                .then((seller) => ({
+                    stamp_url: seller.data.stamp_url,
+                    ...ticket
+                  })
+                ));
           });
           
           return Promise.all(promises);
         })
         .then((passportTickets) => {
-          const tempTickets = passportTickets.map(ticket => ticket.data);
-          if (tempTickets.length > 0) {
-            setTickets(tempTickets);
+          if (passportTickets.length > 0) {
+            setTickets(passportTickets);
           }
         })
         .catch((err) => {
@@ -56,20 +61,49 @@ const Passport = (props: Props) => {
   }, [id])
 
   const createTicketRows = (tickets) => {
+    function groupBy(array, key) {
+      return array.reduce((rv, x) => {
+        (rv[x[key]] = rv[x[key]] || []).push(x);
+        return rv;
+      }, {});
+    };
+    
     const tempTickets = [...tickets];
-    const sortedTickets = tempTickets.sort((a,b) => {
-      const dateA = new Date(a.updated_at);
-      const dateB = new Date(b.updated_at);
-      return (dateA.getTime() - dateB.getTime());
-    })
+    const sortedTickets = tempTickets
+      .sort((a,b) => {
+        return (b.sponsor_seller_id - a.sponsor_seller_id );
+      })
+      .sort((a,b) => {
+        const dateA = a.redeemed_at ? Date.parse(a.redeemed_at) : 0;
+        const dateB = b.redeemed_at ? Date.parse(b.redeemed_at) : 0;
+        return (dateB - dateA);
+      })
     let rows: any[] = [];
     
-    while (sortedTickets.length) {
-      rows.push(sortedTickets.splice(0, 3));
-    }
-      while (rows.length < 6 ){
-        rows.push([]);
+    const groupedTickets = groupBy(sortedTickets, "sponsor_seller_id");
+    const newEntries = Object.keys(groupedTickets);
+    // console.log(newEntries)
+
+    sortedTickets.push({
+      contact_id: 11,
+      created_at: "2020-08-25T01:01:50.857Z",
+      expiration: null,
+      id: 1,
+      participating_seller_id: 1,
+      redeemed_at: "2020-08-24",
+      sponsor_seller_id: 1,
+      stamp_url: "http://example.com/placeholder.jpg",
+      ticket_id: "7MRJV",
+      updated_at: "2020-08-25T01:23:06.038Z"}
+      )
+    for(const entry of newEntries){
+      const arrays = entry === "null" ? sortedTickets.filter((ticket) => !ticket.sponsor_seller_id)
+                   : sortedTickets.filter((ticket) => ticket.sponsor_seller_id === parseInt(entry));      
+      while (arrays.length) {
+        rows.push(arrays.splice(0, 3));
       }
+    }
+    
     return rows;
   }
 
