@@ -16,7 +16,7 @@ type participatingSellerProps = {
   seller_id: number,
   stamp_url: string,
   updated_at: string,
-  redeemedAt: string,
+  redeemed_at: string,
 };
 type redeemRowProp = {
   status?: RowStatuses;
@@ -33,9 +33,9 @@ const TicketRow = (props: Props) => {
   const [redeemedOn, setRedeemedOn] = useState("");
 
   useEffect(() => {
-    if(props.stamps.some(stamp => stamp.hasOwnProperty("redeemedAt"))){
-      const date = props.stamps.find(stamp => stamp.hasOwnProperty("redeemedAt"));
-      if (!!date) setRedeemedOn(date.redeemedAt);
+    if(props.stamps.some(stamp => stamp.redeemed_at)){
+      const date = props.stamps.find(stamp => stamp.redeemed_at);
+      if (!!date) setRedeemedOn(date.redeemed_at);
       setStatus(RowStatuses.Redeemed);
     } else if (props.stamps.length === 3){
       setStatus(RowStatuses.Active);
