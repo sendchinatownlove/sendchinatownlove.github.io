@@ -30,8 +30,8 @@ const OwnerPanel = ({ seller }: Props) => {
   const [purchaseType, setPurchaseType] = useState('');
   const [activeCampaign, setActiveCampaign] = useState<any | null>();
 
-  const fetchData = async () => {
-    const campaigns = await getCampaignsForMerchant(seller.seller_id);
+  const fetchData = async (seller_id: string) => {
+    const campaigns = await getCampaignsForMerchant(seller_id);
     if (campaigns.data) {
       const active = campaigns.data.find(
         (campaign: any) => campaign.active
@@ -42,7 +42,9 @@ const OwnerPanel = ({ seller }: Props) => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (seller.seller_id) {
+      fetchData(seller.seller_id);
+    }
     // eslint-disable-next-line
   }, []);
 
