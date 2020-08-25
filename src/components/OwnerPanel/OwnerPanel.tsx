@@ -29,6 +29,8 @@ const OwnerPanel = ({ seller }: Props) => {
   const dispatch = useModalPaymentDispatch();
   const [purchaseType, setPurchaseType] = useState('');
   const [activeCampaign, setActiveCampaign] = useState<any | null>();
+  const [pricePerMeal, setPricePerMeal] = useState(0);
+  const [campaignId, setCampaignId] = useState('');
 
   const fetchData = async (seller_id: string) => {
     const campaigns = await getCampaignsForMerchant(seller_id);
@@ -37,7 +39,11 @@ const OwnerPanel = ({ seller }: Props) => {
         (campaign: any) => campaign.active
       );
       // product does not support >1 active campaign per merchant
-      setActiveCampaign(active);
+      if (active) {
+        setActiveCampaign(active);
+        setPricePerMeal(active.price_per_meal);
+        setCampaignId(active.campaign_id);
+      }
     }
   };
 
@@ -182,16 +188,14 @@ const OwnerPanel = ({ seller }: Props) => {
         ''
       )}
 
-      {activeCampaign && (
-        <ModalBox
-          purchaseType={purchaseType}
-          sellerId={seller.seller_id}
-          sellerName={seller.name}
-          costPerMeal={activeCampaign.price_per_meal / 100}
-          nonProfitLocationId={seller.non_profit_location_id}
-          campaignId={activeCampaign.id}
-        />
-      )}
+      <ModalBox
+        purchaseType={purchaseType}
+        sellerId={seller.seller_id}
+        sellerName={seller.name}
+        costPerMeal={pricePerMeal / 100}
+        nonProfitLocationId={seller.non_profit_location_id}
+        campaignId={campaignId}
+      />
 
       <div className={styles.mapsContainer}>
         {/* need to put in google API */}
