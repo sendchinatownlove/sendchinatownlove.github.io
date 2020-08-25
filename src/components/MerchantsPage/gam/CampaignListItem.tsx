@@ -66,7 +66,7 @@ const CampaignListItem = (props: Props) => {
         )}
         <Description>
           {campaign.description}
-          <br></br>
+          {' '}
           {distributor &&
             (<a href={distributor.website_url}>{distributor.name}</a>)
           }
