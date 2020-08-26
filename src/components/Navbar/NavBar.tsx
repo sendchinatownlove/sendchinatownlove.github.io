@@ -89,6 +89,12 @@ const NavBar = (props: Props) => {
         </ReactNavLink>
         <NavLink
           compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/food-crawl.html"
+          i18nText="SCL FOOD CRAWL"
+          altText="SCL FOOD CRAWL"
+        />
+        <NavLink
+          compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/about.html"
           i18nText="OUR STORY"
           altText="OUR STORY"
@@ -128,6 +134,12 @@ const NavBar = (props: Props) => {
           >
             {t('navBar.header.merchants')}
           </ReactNavLink>
+          <NavLink
+            compact={hamburgerOpen.toString()}
+            href="https://www.sendchinatownlove.com/food-crawl.html"
+            i18nText="SCL FOOD CRAWL"
+            altText="SCL FOOD CRAWL"
+          />
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/about.html"
@@ -199,7 +211,7 @@ const NavLinksContainer = styled.div`
     z-index: 10;
   `
       : `
-    max-width: 620px;
+    max-width: 760px;
     justify-content: flex-end;
   `}
 `;
