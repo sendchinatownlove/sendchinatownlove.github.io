@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
-import { InputContainer, Button, FinePrint } from './TrackScreen';
+import { InputContainer } from './TrackScreen';
+import { Button, SubTitle } from './style';
+import CircleLogo from './CircleLogo.png';
+
+import ScreenName from './ScreenName';
 
 import {
   getOneSponsor,
@@ -67,6 +71,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
 
   return (
     <Container>
+      <Logo src={CircleLogo} alt="scl-log" />
       <Shadow>
         <InputContainer className="top shadow">
           <Content>
@@ -101,10 +106,10 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         </InputContainer>
       </Shadow>
 
-      <Margin>
-        <FinePrint className="center bold red">
+      <Footer>
+        <SubTitle bold="700">
           Please show this screen to the host when you are placing your order.
-        </FinePrint>
+        </SubTitle>
         <Button
           value="redemption-selected-button"
           className="button--red-filled"
@@ -112,7 +117,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         >
           MARK AS USED
         </Button>
-      </Margin>
+      </Footer>
     </Container>
   );
 };
@@ -120,11 +125,25 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
 export default PassportRedemptionClaim;
 
 const Container = styled.div`
+  position: relative;
+  width: 375px;
+  hidden: 100vh;
+  margin: 0 auto;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 12px;
-  margin-top: 30px;
+`;
+
+const Logo = styled.img`
+  z-index: 10;
+  width: 100px;
+  height: 100px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  border-radius: 50%;
+  margin-bottom: 25px;
 `;
 
 const Content = styled.div`
@@ -166,6 +185,9 @@ const Shadow = styled.div`
   border-radius: 20px;
 `;
 
-const Margin = styled.div`
+const Footer = styled.div`
   margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

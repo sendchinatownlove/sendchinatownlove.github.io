@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
 import { useParams } from 'react-router-dom';
+
 import {
   NoRewardsFooter,
   RedeemRewardsFooter,
   DefaultFooter,
 } from './RedemptionFooters';
+import CircleLogo from './CircleLogo.png';
+
 
 import {
   getPassportTickets,
@@ -92,6 +94,7 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 
   return (
     <Container>
+      <Logo src={CircleLogo} alt="scl-log" />
       <Heading className="bold">
         {numRewards} REWARD{numRewards === 0 || numRewards > 1 ? 'S' : ''}{' '}
         AVAILABLE
@@ -148,11 +151,25 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 export default PassportSelected;
 
 const Container = styled.div`
+  width: 375px;
+  height: 100vh;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 12px;
   }
+`;
+
+const Logo = styled.img`
+  z-index: 10;
+  width: 70px;
+  height: 70px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const Heading = styled.span`
@@ -176,7 +193,7 @@ const RewardsContainer = styled.div<{
   justify-content: center;
 
   max-height: ${(props) =>
-    props.numRewards <= 4 || props.selected ? '500px' : '575px'};
+    (props.numRewards > 0 && props.numRewards <= 4) || props.selected ? '525px' : '575px'};
   overflow-y: scroll;
   padding-top: 20px;
 
@@ -195,7 +212,7 @@ const RewardsContainer = styled.div<{
     background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0px 25px 27px 22px white;
     width: 100%;
-    height: 150px;
+    height: 110px;
   }
 
   &::after {
@@ -208,7 +225,7 @@ const RewardsContainer = styled.div<{
     background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0px -25px 27px 22px white;
     width: 100%;
-    height: ${(props) => (props.selected ? '200px' : '125px')};
+    height: ${(props) => (props.selected ? '150px' : '100px')};
   }
 `;
 

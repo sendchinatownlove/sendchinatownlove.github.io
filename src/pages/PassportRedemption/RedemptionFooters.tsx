@@ -88,4 +88,6 @@ const Footer = styled.div`
   z-index: 2;
   display: grid;
   justify-items: center;
+  width: 300px;
+  margin: 20px 0;
 `;
