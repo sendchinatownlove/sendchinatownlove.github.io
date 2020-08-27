@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PassportContainer, Title } from './style';
+import { useParams, useHistory } from 'react-router-dom';
+
+import { PassportContainer, TitleRow, Title } from './style';
 
 type Props = {
   showFaq: boolean;
@@ -8,9 +10,19 @@ type Props = {
 };
 
 const Faq = ({ showFaq, toggleView }: Props) => {
+  const history = useHistory();
+  const { id } = useParams();
+
+  const goToPassPort = (e) => {
+    console.log("clicked");
+    history.push(`/passport/${id}/tickets`);
+  }
+  
   return (
     <PassportContainer mainView={showFaq} onClick={toggleView}>
-      <Title>HOW TO WIN REWARDS</Title>
+      <TitleRow>
+        <Title>HOW TO WIN REWARDS</Title>
+      </TitleRow>
       {!showFaq && (
         <>
           <br />
@@ -142,19 +154,17 @@ const Faq = ({ showFaq, toggleView }: Props) => {
 };
 
 const Content = styled.div`
-  padding: 30px 15px 15px;
-  // overflow: auto;
-
-  /* height is done in a hacky way, 197px the logo/links height, 47 is header, 25 is padding*/
-  // height: calc(100vh - 197px - 47px + 25px);
-  // ::-webkit-scrollbar {display:none;}
+  padding: 10px 15px 15px;
 `;
 
-const RewardsLink = styled.a`
+const RewardsLink = styled.span`
   text-transform: uppercase;
   color: black;
-  font-weight: bold;
+  font-weight: 700;
   letter-spacing: 0.15em;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 const Question = styled.p`
