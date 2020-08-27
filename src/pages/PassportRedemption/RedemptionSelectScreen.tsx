@@ -25,7 +25,7 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 
   const [tickets, setTickets] = useState<any[]>([]);
   const numRewards = Math.floor(tickets.length / 3);
-  
+
   const [allSponsors, setAllSponsors] = useState<any[]>([]);
   const [selectedSponsor, setSelectedSponsor] = useState({
     id: null,
@@ -68,9 +68,9 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 
   const handleFooter = () => {
     if (numRewards === 0)
-      return <NoRewardsFooter setCurrentScreenView={setCurrentScreenView} />;
+      return <NoRewardsFooter  />;
     else if (!!selectedSponsor.id)
-      return <RedeemRewardsFooter selectedSponsor={selectedSponsor} />;
+      return <RedeemRewardsFooter id={id} access_token={access_token} selectedSponsor={selectedSponsor} />;
     else return <DefaultFooter allSponsors={allSponsors} id={id} />;
   };
 

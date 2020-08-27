@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { InputContainer } from './TrackScreen';
 import { Button, SubTitle } from './style';
@@ -20,6 +20,7 @@ interface Props {
 }
 
 const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
+  const { push } = useHistory();
   const { id, access_token, sponsor_seller_id } = useParams();
 
   const [selectedReward, setSelectedReward] = useState({
@@ -64,6 +65,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         ticketsToRedeem
       );
       // add some kind of error handling to redirect user here
+      if (status !== 200) push(`/passport/${id}/tickets`)
     } catch (err) {
       console.error('passport error: ' + err);
     }
@@ -139,7 +141,10 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         <Button
           value="redemption-selected-button"
           className="button--red-filled"
-          onClick={() => setCurrentScreenView(ScreenName.Redemption)}
+          onClick={(e) => {
+            e.preventDefault()
+            window.location.href = `/passport/${id}/redeem/${access_token}`
+          }}
         >
           MARK AS USED
         </Button>
