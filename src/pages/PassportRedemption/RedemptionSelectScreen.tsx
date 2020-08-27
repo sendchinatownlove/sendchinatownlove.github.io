@@ -13,7 +13,6 @@ import {
   getPassportTickets,
   getAllSponsors,
   getLocationById,
-  redeemReward,
 } from '../../utilities/api/interactionManager';
 
 interface Props {
@@ -24,9 +23,9 @@ interface Props {
 const PassportSelected = ({ setCurrentScreenView }: Props) => {
   const { id, access_token } = useParams();
 
-  const [error, setError] = useState('');
   const [tickets, setTickets] = useState<any[]>([]);
   const numRewards = Math.floor(tickets.length / 3);
+  
   const [allSponsors, setAllSponsors] = useState<any[]>([]);
   const [selectedSponsor, setSelectedSponsor] = useState({
     id: null,
@@ -67,36 +66,11 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleRedemption = async () => {
-    try {
-      const ticketsToRedeem = tickets.slice(0, 3).map((ticket) => {
-        return { id: ticket.id, sponsor_seller_id: selectedSponsor.id };
-      });
-      const redemptionResponse = await redeemReward(
-        id,
-        access_token,
-        ticketsToRedeem
-      );
-      // TODO OS: so this isn't very secure, right? instead of route, should I just change view to RedemptionClaimScreen?
-      if (redemptionResponse.status === 200) {
-        window.location.href = `/passport/${id}/redeem/${access_token}/sponsor/${selectedSponsor.id}`;
-      } else setError('Something went wrong! Please try again.');
-    } catch (err) {
-      console.error('passport error: ' + err);
-    }
-  };
-
   const handleFooter = () => {
     if (numRewards === 0)
       return <NoRewardsFooter setCurrentScreenView={setCurrentScreenView} />;
     else if (!!selectedSponsor.id)
-      return (
-        <RedeemRewardsFooter
-          error={error}
-          selectedSponsor={selectedSponsor}
-          handleRedemption={handleRedemption}
-        />
-      );
+      return <RedeemRewardsFooter selectedSponsor={selectedSponsor} />;
     else return <DefaultFooter allSponsors={allSponsors} id={id} />;
   };
 

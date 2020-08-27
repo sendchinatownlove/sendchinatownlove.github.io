@@ -25,25 +25,21 @@ export const NoRewardsFooter = (props: NoRewardsProps) => {
 };
 
 interface RedeemRewardsProps {
-  error: string;
   selectedSponsor: null | any;
-  handleRedemption: Function;
 }
 
 export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
   return (
     <Footer>
       <SubTitle bold="700">
-        {props.error
-          ? props.error
-          : 'When redeemed, you have 5 minutes to use your reward.'}
+          When redeemed, you have 5 minutes to use your reward.
       </SubTitle>
 
       <Button
         value="redemption-selected-button"
         className="button--red-filled"
         disabled={!props.selectedSponsor}
-        onClick={() => props.handleRedemption()}
+        onClick={() => {}}
       >
         REEDEM NOW
       </Button>

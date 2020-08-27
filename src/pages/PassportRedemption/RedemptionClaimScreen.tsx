@@ -9,8 +9,10 @@ import CircleLogo from './CircleLogo.png';
 import ScreenName from './ScreenName';
 
 import {
+  getPassportTickets,
   getOneSponsor,
   getLocationById,
+  redeemReward
 } from '../../utilities/api/interactionManager';
 
 interface Props {
@@ -18,7 +20,8 @@ interface Props {
 }
 
 const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
-  const { sponsor_seller_id } = useParams();
+  const { id, access_token, sponsor_seller_id } = useParams();
+
   const [selectedReward, setSelectedReward] = useState({
     id: '',
     name: '',
@@ -36,18 +39,39 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
   const fetchSponsor = async () => {
     try {
       const { data: sponsor } = await getOneSponsor(sponsor_seller_id);
-      const { data: location } = await getLocationById(sponsor.data.id);
+      const { data: location } = await getLocationById(sponsor_seller_id);
       setSelectedReward({
         ...sponsor,
         location: location,
       });
-    } catch (error) {
-      console.error('passport error: ' + error);
+    } catch (err) {
+      console.error('passport error: ' + err);
     }
   };
 
+  const handleRedemption = async () => {
+    try {
+      const { data: allTickets } = await getPassportTickets(id);
+      const ticketsToRedeem = allTickets
+        .filter((ticket) => ticket.sponsor_seller_id === null)
+        .slice(0, 3)
+        .map((ticket) => {
+          return { id: ticket.id, sponsor_seller_id }
+        })
+      const { status } = await redeemReward(
+        id,
+        access_token,
+        ticketsToRedeem
+      );
+      // add some kind of error handling to redirect user here
+    } catch (err) {
+      console.error('passport error: ' + err);
+    }
+  }
+
   useEffect(() => {
     fetchSponsor();
+    handleRedemption();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
