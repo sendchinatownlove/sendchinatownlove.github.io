@@ -111,13 +111,8 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
               {selectedReward && selectedReward.location && (
                 <>
                   <Text className="finePrint">
-                    {selectedReward.location.address1},{' '}
-                    {selectedReward.location.address2}
-                  </Text>
-                  <Text className="finePrint">
-                    {selectedReward.location.city},{' '}
-                    {selectedReward.location.state}{' '}
-                    {selectedReward.location.zip_code}
+                    {selectedReward.location.address1}{selectedReward.location.address2 && ', '}
+                    {selectedReward.location.address2 && selectedReward.location.address2}
                   </Text>
                 </>
               )}
@@ -190,7 +185,7 @@ const Text = styled.p`
   letter-spacing: 0.1em;
   font-weight: bold;
   font-size: 15px;
-  line-height: 75%;
+  line-height: 100%;
   text-align: center;
 
   &.header {
