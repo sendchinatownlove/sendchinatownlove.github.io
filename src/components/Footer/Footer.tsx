@@ -14,7 +14,7 @@ const FooterComponent = (props: Props) => {
   const { theme = 'none' } = props;
 
   return (
-    <Container menuOpen={props.menuOpen} theme={theme}>
+    <Container theme={theme}>
       <a href="https://sendchinatownlove.com/">
         <Logo theme={theme} />
       </a>

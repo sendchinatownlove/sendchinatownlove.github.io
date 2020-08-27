@@ -134,9 +134,69 @@
   font-weight: 600;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 .link,
 .link:hover,
 .link:active {
   color: $standard-red;
   text-decoration: none;
+}
+
+.description {
+  line-height: normal;
+  width: 80%;
+
+  @include for-phone-only {
+    width: 100%;
+  }
+}
+
+// CampaignInstructions styling
+.modalBackground {
+  background-color: $standard-red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 10px;
+  margin: 20px 0;
+}
+
+.modalInstructionsGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 5px;
+
+  @media (max-width: 900px) {
+    grid-auto-flow: column;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: 15px;
+    justify-items: center;
+  }
+}
+
+.modalStepGrid {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-column-gap: 5px;
+  width: 145px;
+
+  @media (max-width: 1000px) {
+    img {
+      width: 50px;
+    }
+  }
+}
+
+.modalStepText {
+  p {
+    color: white;
+    margin: 0;
+    font-size: 11px;
+    line-height: normal;
+  }
 }

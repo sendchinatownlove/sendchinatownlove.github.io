@@ -55,7 +55,7 @@ const Amount = (props: Props) => {
   return (
     <Container>
       <StoreBanner />
-      <MainView>
+      <AmountContainer>
         <BackButton onClick={backToLanding}>CANCEL</BackButton>
         <StoreFrontImage
           src={
@@ -94,7 +94,7 @@ const Amount = (props: Props) => {
             </RemainingMessage>
           </MessagesContainer>
         </InputContainer>
-      </MainView>
+      </AmountContainer>
       <Footer>
         <FooterLabel>{voucher.seller_gift_card_id}</FooterLabel>
         <SubmitButton
@@ -113,6 +113,9 @@ export default Amount;
 // CONTAINERS
 const Container = styled(ViewContainer)`
   border-top: 3px solid #f7f7f7;
+`;
+const AmountContainer = styled(MainView)`
+  min-height: 480px;
 `;
 const BalanceContainer = styled(SubViewContainer)`
   width: 160px;

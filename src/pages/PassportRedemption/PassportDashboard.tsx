@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import CircleLogo from './CircleLogo.png';
-import CrawlMap from './CrawlMap.png';
+
 import TrackScreen from './TrackScreen';
 import RedemptionSelectScreen from './RedemptionSelectScreen';
-import ScreenName from './ScreenName';
+import RedemptionClaimScreen from './RedemptionClaimScreen';
 
-interface Props {}
+import ScreenName from './ScreenName';
+import PassportScreen from './Passport';
+import CrawlMap from './CrawlMap.png';
+import { useHistory } from 'react-router-dom';
+
+interface Props {
+  screen: ScreenName;
+}
 
 const PassportRedemption = (props: Props) => {
-  const [currentScreenView, setCurrentScreenView] = useState(ScreenName.Track);
+  const { location } = useHistory();
+  const [currentScreenView, setCurrentScreenView] = useState<ScreenName>(
+    props.screen
+  );
+
+  useEffect(() => {
+    if (location.pathname === '/passport') {
+      setCurrentScreenView(ScreenName.Track);
+    } else if (location.pathname.includes('/tickets')) {
+      setCurrentScreenView(ScreenName.Dashboard);
+    }
+  }, [location.pathname]);
 
   const showCurrentScreen = (screen) => {
     // TODO: Update case #s when all screens are built out
@@ -22,111 +39,31 @@ const PassportRedemption = (props: Props) => {
         );
       case ScreenName.Track:
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
+      case ScreenName.Dashboard:
+        return <PassportScreen setCurrentScreenView={setCurrentScreenView} />;
+      case ScreenName.Claim:
+        return (
+          <RedemptionClaimScreen setCurrentScreenView={setCurrentScreenView} />
+        );
+      default:
+        return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
     }
   };
 
-  const socialMediaLinks = [
-    {
-      platform: 'facebook',
-      url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891',
-    },
-    { platform: 'instagram', url: 'https://instagram.com/sendchinatownlove' },
-    { platform: 'envelope', url: 'mailto:hello@sendchinatownlove.com' },
-  ];
-
-  return (
-    <Container>
-      <PassportContainer>
-        <Logo
-          src={CircleLogo}
-          alt="scl-log"
-          className={
-            currentScreenView === ScreenName.Track ? 'passportTrackScreen' : ''
-          }
-        />
-
-        {showCurrentScreen(currentScreenView)}
-
-        <Row>
-          {/* WHERE IS THIS LINK SUPPOSED TO GO? */}
-          <ExternalLinks href="sendchinatownlove.com" target="_blank">
-            Learn More
-          </ExternalLinks>
-          <LinksContainer>
-            {socialMediaLinks.map((social) => (
-              <Icon href={social.url}>
-                <span className={`fa fa-${social.platform}`} />
-              </Icon>
-            ))}
-          </LinksContainer>
-        </Row>
-      </PassportContainer>
-    </Container>
-  );
+  return <Container>{showCurrentScreen(currentScreenView)}</Container>;
 };
 
 export default PassportRedemption;
 
 const Container = styled.div`
   background-color: #e5e5e5;
-  height: 100%;
   min-height: 100vh;
   background-image: url(${CrawlMap});
-
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   @media (max-width: 475px) {
     background-size: 500px;
   }
-`;
-
-const PassportContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  max-width: 380px;
-  margin: 0 auto;
-  padding: 10px;
-  box-sizing: border-box;
-`;
-
-const Logo = styled.img`
-  filter: drop-shadow(0 0mm 2px #cdcdcd);
-
-  &.passportTrackScreen {
-    position: relative;
-    top: 50px;
-    z-index: 5;
-    filter: drop-shadow(0 -0.1mm 0.1px #cdcdcd);
-  }
-`;
-
-export const Row = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-`;
-
-export const ExternalLinks = styled.a`
-  font-weight: bold;
-  text-transform: uppercase;
-  color: black;
-  font-size: 12px;
-  margin: 20px;
-  cursor: pointer;
-  letter-spacing: 2px;
-`;
-
-const LinksContainer = styled.div`
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-`;
-
-const Icon = styled.a`
-  text-decoration: none;
-  color: #a8192e;
-  padding: 0 15px;
-  font-size: 22px;
 `;

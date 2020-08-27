@@ -1,137 +1,157 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Button, FinePrint } from './TrackScreen';
-import ScreenName from './ScreenName';
+import { useParams } from 'react-router-dom';
 
-// TODO: DELETE --> DUMMY IMAGE DATA
-import Image23 from './image-23.png';
+import {
+  NoRewardsFooter,
+  RedeemRewardsFooter,
+  DefaultFooter,
+} from './RedemptionFooters';
+import CircleLogo from './CircleLogo.png';
 
-import { getSponsorRewards, getSponsorLocation } from '../../utilities/api/interactionManager';
+import {
+  getPassportTickets,
+  getAllSponsors,
+  getLocationById,
+  redeemReward,
+} from '../../utilities/api/interactionManager';
 
 interface Props {
   setCurrentScreenView: Function;
 }
 
 // TODO: Ask design --> do we want user to be able to unselect a reward?
-
 const PassportSelected = ({ setCurrentScreenView }: Props) => {
-  const [selectedReward, setSelectedReward] = useState({
-    name: '',
-    rewardType: '',
-    address: '',
-    logo_url: '',
+  const { id, access_token } = useParams();
+
+  const [error, setError] = useState('');
+  const [tickets, setTickets] = useState<any[]>([]);
+  const numRewards = Math.floor(tickets.length / 3);
+  const [allSponsors, setAllSponsors] = useState<any[]>([]);
+  const [selectedSponsor, setSelectedSponsor] = useState({
+    id: null,
+    reward_cost: null,
   });
 
-  let rewardsToSelect2 = [];
-
-  const getInfo = async () => {
-    const { data: sponsors } = await getSponsorRewards()
-    // sponsors.map(async reward => {
-    //   const { data: location } = await getSponsorLocation(reward.location_id)
-    // })
-    rewardsToSelect2 = sponsors;
-
-    console.log(rewardsToSelect2)
-  }
+  const fetchData = async () => {
+    try {
+      const ticketsResponse = await getPassportTickets(id);
+      const availableTickets = ticketsResponse.data.filter(
+        (ticket) => ticket.sponsor_seller_id === null
+      );
+      setTickets(availableTickets);
+      const allSponsorsResponse = await getAllSponsors();
+      const allSponsorsWithLocations = await Promise.all(
+        allSponsorsResponse.data.map(async (sponsor) => {
+          const locationResponse = await getLocationById(sponsor.location_id);
+          return { ...sponsor, location: locationResponse.data };
+        })
+      );
+      setAllSponsors(allSponsorsWithLocations);
+    } catch (err) {
+      console.error('passport error: ' + err);
+    }
+  };
 
   useEffect(() => {
-    getInfo()
-  })
+    fetchData();
 
-  // TODO(Athena): UPDATE THIS WITH THE ACTUAL STHUFF; dummy data for now
-  const rewardsToSelect = [
-    {
-      name: 'nom wah tea parlor',
-      rewardType: '20% off meal',
-      address: '13 Doyers St, New York, NY',
-      logo_url: Image23,
-    },
-    {
-      name: 'Hello Wah',
-      rewardType: '20% off',
-      address: 'chinatown',
-      logo_url: Image23,
-    },
-    {
-      name: 'World Wah',
-      rewardType: '20% off',
-      address: 'chinatown',
-      logo_url: Image23,
-    },
-    {
-      name: 'Bye Wah',
-      rewardType: '20% off',
-      address: 'chinatown',
-      logo_url: Image23,
-    },
-  ];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleRedemption = async () => {
+    try {
+      const ticketsToRedeem = tickets.slice(0, 3).map((ticket) => {
+        return { id: ticket.id, sponsor_seller_id: selectedSponsor.id };
+      });
+      const redemptionResponse = await redeemReward(
+        id,
+        access_token,
+        ticketsToRedeem
+      );
+      // TODO OS: so this isn't very secure, right? instead of route, should I just change view to RedemptionClaimScreen?
+      if (redemptionResponse.status === 200) {
+        window.location.href = `/passport/${id}/redeem/${access_token}/sponsor/${selectedSponsor.id}`;
+      } else setError('Something went wrong! Please try again.');
+    } catch (err) {
+      console.error('passport error: ' + err);
+    }
+  };
+
+  const handleFooter = () => {
+    if (numRewards === 0)
+      return <NoRewardsFooter setCurrentScreenView={setCurrentScreenView} />;
+    else if (!!selectedSponsor.id)
+      return (
+        <RedeemRewardsFooter
+          error={error}
+          selectedSponsor={selectedSponsor}
+          handleRedemption={handleRedemption}
+        />
+      );
+    else return <DefaultFooter allSponsors={allSponsors} id={id} />;
+  };
 
   return (
     <Container>
-      {/* TODO: replace with X number of rewards */}
-      <Heading className="bold">1 REWARD AVAILABLE</Heading>
-      {/* TODO: fix rewards to reflect whatever date should be */}
-      <Heading>Rewards available until 9/15/2020</Heading>
+      <Logo src={CircleLogo} alt="scl-log" />
+      <Heading className="bold">
+        {numRewards} REWARD{numRewards === 0 || numRewards > 1 ? 'S' : ''}{' '}
+        AVAILABLE
+      </Heading>
+      <Heading>Rewards available until 9/30/2020</Heading>
 
-      <RewardsContainer>
-        {rewardsToSelect.map((reward) => {
-          const { name, logo_url, rewardType, address } = reward;
+      <RewardsContainer
+        numRewards={allSponsors.length}
+        selected={selectedSponsor.id ? true : false}
+      >
+        {allSponsors.length > 0 &&
+          allSponsors.map((sponsor: any) => {
+            console.log(sponsor.logo_url);
+            return (
+              <SingleRewardContainer
+                className={selectedSponsor.id === id ? 'selected' : ''}
+                onClick={() => {
+                  if (numRewards > 0)
+                    setSelectedSponsor({
+                      id: sponsor.id,
+                      reward_cost: sponsor.reward_cost,
+                    });
+                }}
+              >
+                <input
+                  type="radio"
+                  checked={selectedSponsor.id === sponsor.id}
+                  id={sponsor.reward}
+                />
 
-          return (
-            <SingleRewardContainer
-              className={selectedReward.name === name ? 'selected' : ''}
-              onClick={() =>
-                setSelectedReward({ name, logo_url, rewardType, address })
-              }
-            >
-              <input
-                type="radio"
-                checked={selectedReward.name === name}
-                id={rewardType}
-              />
-
-              <SingleRewardInfo>
-                <Text className="header">{rewardType}</Text>
-                <img src={logo_url} alt="reward-logo_url" width="130px"></img>
-                <Text>{name}</Text>
-                <Text className="finePrint">{address}</Text>
-              </SingleRewardInfo>
-            </SingleRewardContainer>
-          );
-        })}
+                <SingleRewardInfo>
+                  <Text
+                    className="header"
+                    style={{
+                      fontSize: sponsor.reward.length > 20 ? '10px' : '12px',
+                    }}
+                  >
+                    {sponsor.reward}
+                  </Text>
+                  <img
+                    src={sponsor.logo_url}
+                    alt="reward-logo"
+                    width="130px"
+                  ></img>
+                  <Text>{sponsor.name}</Text>
+                  {sponsor && sponsor.location && (
+                    <Text className="finePrint">
+                      {sponsor.location.address1}
+                    </Text>
+                  )}
+                </SingleRewardInfo>
+              </SingleRewardContainer>
+            );
+          })}
       </RewardsContainer>
 
-      {!!selectedReward.name ? (
-        <React.Fragment>
-          <FinePrint className="center bold">
-            When redeemed, you have 5 minutes to use your reward.
-          </FinePrint>
-
-          <Button
-            value="redemption-selected-button"
-            className="button--red-filled"
-            disabled={!selectedReward}
-            onClick={() => setCurrentScreenView(2)}
-          >
-            REEDEM NOW
-          </Button>
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <FinePrint className="center bold">
-            Select an offer and be ready to show this screen when you’re
-            ordering.
-          </FinePrint>
-
-          {/* TODO: Update return screen with the Passport screen when built out  */}
-          <Button
-            className="linkButton"
-            onClick={() => setCurrentScreenView(ScreenName.Track)}
-          >
-            RETURN TO PASSPORT
-          </Button>
-        </React.Fragment>
-      )}
+      {handleFooter()}
     </Container>
   );
 };
@@ -139,16 +159,32 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 export default PassportSelected;
 
 const Container = styled.div`
+  width: 375px;
+  height: 100vh;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 12px;
+  }
+`;
+
+const Logo = styled.img`
+  z-index: 10;
+  width: 70px;
+  height: 70px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const Heading = styled.span`
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin-top: 10px;
+  z-index: 2;
 
   &.bold {
     font-weight: bold;
@@ -156,10 +192,51 @@ const Heading = styled.span`
   }
 `;
 
-const RewardsContainer = styled.div`
+const RewardsContainer = styled.div<{
+  numRewards: number;
+  selected: boolean;
+}>`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  max-height: ${(props) =>
+    (props.numRewards > 0 && props.numRewards <= 4) || props.selected
+      ? '525px'
+      : '575px'};
+  overflow-y: scroll;
+  padding-top: 20px;
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  &::before {
+    content: '';
+    display: ${(props) => (props.numRewards > 4 ? 'block' : 'none')};
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 25px 27px 22px white;
+    width: 100%;
+    height: 110px;
+  }
+
+  &::after {
+    content: '';
+    display: ${(props) => (props.numRewards > 4 ? 'block' : 'none')};
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px -25px 27px 22px white;
+    width: 100%;
+    height: ${(props) => (props.selected ? '150px' : '100px')};
+  }
 `;
 
 const SingleRewardContainer = styled.button`
@@ -192,7 +269,7 @@ export const Text = styled.p`
   letter-spacing: 0.1em;
   font-weight: bold;
   font-size: 10px;
-  line-height: 50%;
+  line-height: 100%;
 
   &.header {
     font-size: 14px;

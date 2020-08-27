@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, Theme } from '@material-ui/core/styles';
-
 import styled from 'styled-components';
 
 interface Props {
@@ -42,55 +41,55 @@ const ProgressBar = ({
 
   return (
     <ProgressBarContainer>
-      <TargetAmountBar className="progress-bar">
-        <CurrentProgressBar
-          style={{
-            width: `${progressWidth(amountRaised, targetAmount)}%`,
-            backgroundColor: progressBarColor,
-            //defaults to default color if no color is passed in
-          }}
-        >
-          {' '}
-        </CurrentProgressBar>
-      </TargetAmountBar>
+      <SupporterTooltip
+        title={
+          <React.Fragment>
+            <ToolTipTable>
+              <tbody>
+                <tr>
+                  <td>
+                    <b>{numGiftCards}</b> vouchers
+                  </td>
+                  <td>
+                    <b>${Math.floor(giftCardAmount / 100).toLocaleString()}</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>{numDonations}</b> donations
+                  </td>
+                  <td>
+                    <b>${Math.floor(donationAmount / 100).toLocaleString()}</b>
+                  </td>
+                </tr>
+              </tbody>
+            </ToolTipTable>
+          </React.Fragment>
+        }
+        enterTouchDelay={50}
+        placement="top"
+      >
+        <TargetAmountBar className="progress-bar">
+          <CurrentProgressBar
+            style={{
+              width: `${progressWidth(amountRaised, targetAmount)}%`,
+              backgroundColor: progressBarColor,
+              //defaults to default color if no color is passed in
+            }}
+          >
+            {' '}
+          </CurrentProgressBar>
+        </TargetAmountBar>
+      </SupporterTooltip>
       <ContributionInfoContainer>
         <div>
           ${Math.floor(amountRaised / 100).toLocaleString()} of $
           {Math.floor(targetAmount / 100).toLocaleString()}
         </div>
         <div>
-          <SupporterTooltip
-            title={
-              <React.Fragment>
-                <ToolTipTable>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <b>{numGiftCards}</b> vouchers
-                      </td>
-                      <td>
-                        <b>${Math.floor(giftCardAmount) / 100}</b>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <b>{numDonations}</b> donations
-                      </td>
-                      <td>
-                        <b>${Math.floor(donationAmount) / 100}</b>
-                      </td>
-                    </tr>
-                  </tbody>
-                </ToolTipTable>
-              </React.Fragment>
-            }
-            enterTouchDelay={50}
-            placement="top"
-          >
-            <div>
-              <b>{numContributions}</b> supporters
-            </div>
-          </SupporterTooltip>
+          <div>
+            <b>{numContributions}</b> supporters
+          </div>
         </div>
       </ContributionInfoContainer>
     </ProgressBarContainer>

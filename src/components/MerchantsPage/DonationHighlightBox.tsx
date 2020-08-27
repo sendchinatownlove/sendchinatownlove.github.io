@@ -7,6 +7,7 @@ import { getWebsiteImages } from '../../utilities/general/StoreImages';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
+import { useWindowSize } from '../../utilities/hooks/helpers';
 
 const DonationHighlightBox = () => {
   const websiteImages = getWebsiteImages();
@@ -19,8 +20,11 @@ const DonationHighlightBox = () => {
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
   };
 
+  const containerClickHandler =
+    useWindowSize().width < 600 ? openModal : () => {};
+
   return (
-    <Container>
+    <Container onClick={containerClickHandler}>
       <Image src={websiteImages.donationPoolHero} alt="banner" />
 
       <ColumnContainer>
