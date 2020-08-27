@@ -33,28 +33,36 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
     reward_cost: null,
   });
 
-  const fetchData = async () => {
+  const fetchTickets = async () => {
     try {
-      const ticketsResponse = await getPassportTickets(id);
-      const availableTickets = ticketsResponse.data.filter(
+      const { data: allTickets } = await getPassportTickets(id);
+      const availableTickets = allTickets.filter(
         (ticket) => ticket.sponsor_seller_id === null
       );
       setTickets(availableTickets);
-      const allSponsorsResponse = await getAllSponsors();
+    } catch (err) {
+      console.error('passport error: ' + err);
+    }
+  };
+
+  const fetchSponsors = async () => {
+    try {
+      const { data: allSponsors } = await getAllSponsors();
       const allSponsorsWithLocations = await Promise.all(
-        allSponsorsResponse.data.map(async (sponsor) => {
-          const locationResponse = await getLocationById(sponsor.location_id);
-          return { ...sponsor, location: locationResponse.data };
+        allSponsors.map(async (sponsor) => {
+          const { data: location } = await getLocationById(sponsor.location_id);
+          return { ...sponsor, location: location };
         })
       );
       setAllSponsors(allSponsorsWithLocations);
     } catch (err) {
       console.error('passport error: ' + err);
     }
-  };
+  }
 
   useEffect(() => {
-    fetchData();
+    fetchTickets();
+    fetchSponsors();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

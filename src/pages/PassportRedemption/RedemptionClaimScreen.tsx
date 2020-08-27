@@ -25,7 +25,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
     location: {
       address1: '',
       address2: '',
-      borough: '',
+      city: '',
       state: '',
       zip_code: '',
     },
@@ -33,13 +33,13 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
     reward: '',
   });
 
-  const fetchData = async () => {
+  const fetchSponsor = async () => {
     try {
-      const sponsorResponse = await getOneSponsor(sponsor_seller_id);
-      const locationResponse = await getLocationById(sponsorResponse.data.id);
+      const { data: sponsor } = await getOneSponsor(sponsor_seller_id);
+      const { data: location } = await getLocationById(sponsor.data.id);
       setSelectedReward({
-        ...sponsorResponse.data,
-        location: locationResponse.data,
+        ...sponsor,
+        location: location,
       });
     } catch (error) {
       console.error('passport error: ' + error);
@@ -47,7 +47,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchSponsor();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -89,7 +89,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
                     {selectedReward.location.address2}
                   </Text>
                   <Text className="finePrint">
-                    {selectedReward.location.borough},{' '}
+                    {selectedReward.location.city},{' '}
                     {selectedReward.location.state}{' '}
                     {selectedReward.location.zip_code}
                   </Text>
