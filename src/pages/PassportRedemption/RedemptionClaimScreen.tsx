@@ -48,6 +48,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [timeLeft, setTimeLeft] = useState(60 * 5);
@@ -58,6 +59,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
     }, 1000);
     if (!timeLeft) setCurrentScreenView(ScreenName.Redemption);
     return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft]);
 
   const formatTime = (time) => {
