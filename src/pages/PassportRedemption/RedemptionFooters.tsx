@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { SubTitle, Button } from './style';
 
 export const NoRewardsFooter = () => {
-
   return (
     <Footer>
       <SubTitle bold="700">Have more tickets to add?</SubTitle>
@@ -13,8 +12,8 @@ export const NoRewardsFooter = () => {
         value="redemption-selected-button"
         className="button--red-filled"
         onClick={(e) => {
-          e.preventDefault()
-          window.location.href = '/passport'
+          e.preventDefault();
+          window.location.href = '/passport';
         }}
       >
         ADD NEW TICKETS
@@ -24,17 +23,16 @@ export const NoRewardsFooter = () => {
 };
 
 interface RedeemRewardsProps {
-  id: number,
-  access_token: string,
+  id: number;
+  access_token: string;
   selectedSponsor: null | any;
 }
 
 export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
-
   return (
     <Footer>
       <SubTitle bold="700">
-          When redeemed, you have 5 minutes to use your reward.
+        When redeemed, you have 5 minutes to use your reward.
       </SubTitle>
 
       <Button
@@ -42,8 +40,8 @@ export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
         className="button--red-filled"
         disabled={!props.selectedSponsor}
         onClick={(e) => {
-          e.preventDefault()
-          window.location.href = `/passport/${props.id}/redeem/${props.access_token}/sponsor/${props.selectedSponsor.id}`
+          e.preventDefault();
+          window.location.href = `/passport/${props.id}/redeem/${props.access_token}/sponsor/${props.selectedSponsor.id}`;
         }}
       >
         REEDEM NOW
@@ -58,7 +56,6 @@ interface defaultProps {
 }
 
 export const DefaultFooter = (props: defaultProps) => {
-
   return (
     <Footer>
       <SubTitle bold="700">

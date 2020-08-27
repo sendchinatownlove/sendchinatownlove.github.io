@@ -57,20 +57,25 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
     } catch (err) {
       console.error('passport error: ' + err);
     }
-  }
+  };
 
   useEffect(() => {
     fetchTickets();
     fetchSponsors();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleFooter = () => {
-    if (numRewards === 0)
-      return <NoRewardsFooter  />;
+    if (numRewards === 0) return <NoRewardsFooter />;
     else if (!!selectedSponsor.id)
-      return <RedeemRewardsFooter id={id} access_token={access_token} selectedSponsor={selectedSponsor} />;
+      return (
+        <RedeemRewardsFooter
+          id={id}
+          access_token={access_token}
+          selectedSponsor={selectedSponsor}
+        />
+      );
     else return <DefaultFooter allSponsors={allSponsors} id={id} />;
   };
 

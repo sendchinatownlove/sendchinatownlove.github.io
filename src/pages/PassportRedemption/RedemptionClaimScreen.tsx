@@ -12,7 +12,7 @@ import {
   getPassportTickets,
   getOneSponsor,
   getLocationById,
-  redeemReward
+  redeemReward,
 } from '../../utilities/api/interactionManager';
 
 interface Props {
@@ -35,7 +35,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
     },
     logo_url: '',
     reward: '',
-    reward_detail: ''
+    reward_detail: '',
   });
 
   const fetchSponsor = async () => {
@@ -58,19 +58,15 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         .filter((ticket) => ticket.sponsor_seller_id === null)
         .slice(0, 3)
         .map((ticket) => {
-          return { id: ticket.id, sponsor_seller_id }
-        })
-      const { status } = await redeemReward(
-        id,
-        access_token,
-        ticketsToRedeem
-      );
+          return { id: ticket.id, sponsor_seller_id };
+        });
+      const { status } = await redeemReward(id, access_token, ticketsToRedeem);
       // add some kind of error handling to redirect user here
-      if (status !== 200) push(`/passport/${id}/tickets`)
+      if (status !== 200) push(`/passport/${id}/tickets`);
     } catch (err) {
       console.error('passport error: ' + err);
     }
-  }
+  };
 
   useEffect(() => {
     fetchSponsor();
@@ -113,8 +109,10 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
               {selectedReward && selectedReward.location && (
                 <>
                   <Text className="finePrint">
-                    {selectedReward.location.address1}{selectedReward.location.address2 && ', '}
-                    {selectedReward.location.address2 && selectedReward.location.address2}
+                    {selectedReward.location.address1}
+                    {selectedReward.location.address2 && ', '}
+                    {selectedReward.location.address2 &&
+                      selectedReward.location.address2}
                   </Text>
                 </>
               )}
@@ -139,8 +137,8 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
           value="redemption-selected-button"
           className="button--red-filled"
           onClick={(e) => {
-            e.preventDefault()
-            window.location.href = `/passport/${id}/redeem/${access_token}`
+            e.preventDefault();
+            window.location.href = `/passport/${id}/redeem/${access_token}`;
           }}
         >
           MARK AS USED
@@ -194,7 +192,7 @@ const Text = styled.p`
     font-size: 14px;
     margin-bottom: 5px;
   }
-  
+
   &.subheader {
     font-size: 10px;
     margin-bottom: 15px;
