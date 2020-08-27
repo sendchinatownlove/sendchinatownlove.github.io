@@ -208,6 +208,16 @@ export const createPassportEmailId = async (
     .catch((err) => err);
 };
 
+export const updatePassportInstagram = async (
+  id: string,
+  instagram: string
+) => {
+  return axios
+    .put(contacts + id, { instagram })
+    .then((res) => res)
+    .catch((err) => err);
+};
+
 export const checkForValidTicket = async (ticket_id: string) =>
   axios
     .get(tickets + ticket_id)

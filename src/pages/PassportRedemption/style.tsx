@@ -59,7 +59,7 @@ const SubTitle = styled.span`
   font-size: ${(props: Props) => (props.size ? props.size : '12px')};
   font-weight: ${(props: Props) => (props.bold ? props.bold : '400')};
   text-align: ${(props: Props) => (props.align ? props.align : 'center')};
-  letter-spacing: 0.15em;
+  letter-spacing: 0.11em;
 `;
 
 const Button = styled.button`

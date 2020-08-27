@@ -9,8 +9,10 @@ import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants
 import {
   getPassportEmailId,
   createPassportEmailId,
+  updatePassportInstagram,
   checkForValidTicket,
   updateTicketContactId,
+  getPassportTickets,
 } from '../../utilities/api/interactionManager';
 
 import CrawlInfoIcon from './CrawlInfoIcon.png';
@@ -34,20 +36,26 @@ const Track = ({ setCurrentScreenView }: Props) => {
   const findOrCreateUser = async (email, viewTickets) => {
     const { data } = await getPassportEmailId(email);
 
-    // sets error message for non-existent users (to view tickets)
+    // (to view tickets): sets error message for non-existent users and users with no tickets
     if (viewTickets && !data) {
       setIsEmailValid(false);
       setEmail('');
       return;
     } else if (viewTickets && data) {
-      push(`/passport/${data.id}/tickets`);
+      const { data: hasTickets } = await getPassportTickets(data.id);
+      if (hasTickets.length) push(`/passport/${data.id}/tickets`);
+      else setIsEmailValid(false);
       return;
     }
 
-    // searches for existing user or creates new user (to add tickets)
+    // (to add tickets): searches for existing user or creates new user
     let contactId = '';
     if (data) {
       contactId = data.id;
+      // updates instagram handle for existing users
+      if (instagramHandle) {
+        await updatePassportInstagram(contactId, instagramHandle);
+      }
     } else {
       const {
         data: { id },
@@ -95,7 +103,11 @@ const Track = ({ setCurrentScreenView }: Props) => {
       url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891',
     },
     { platform: 'instagram', url: 'https://instagram.com/sendchinatownlove' },
-    { platform: 'envelope', url: 'mailto:hello@sendchinatownlove.com' },
+    {
+      platform: 'wechat',
+      url:
+        'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png',
+    },
   ];
 
   return (
@@ -156,40 +168,42 @@ const Track = ({ setCurrentScreenView }: Props) => {
             )}
           </Column>
 
-          <Row>
-            <Label htmlFor="instagram-handle">
-              Instagram Handle (for Digital Giveaway)
-            </Label>
-            <SupporterTooltip
-              title={
-                <React.Fragment>
-                  <ToolTipTable>
-                    <tbody>
-                      <tr>
-                        To be entered into our weekly Digital Giveaways, visit 3
-                        merchants and post and tag <b>@sendchinatownlove</b>{' '}
-                        with your food crawl pictures on Instagram. Enter your
-                        Instagram handle so we can track your entries.
-                      </tr>
-                    </tbody>
-                  </ToolTipTable>
-                </React.Fragment>
-              }
-              enterTouchDelay={10}
-              placement="left"
-            >
-              <div>
-                <img src={CrawlInfoIcon} alt="instagram-crawl-info" />
-              </div>
-            </SupporterTooltip>
-          </Row>
-          <InputField
-            name="instagram-handle"
-            type="text"
-            onChange={(e) => setinstagramHandle(e.target.value)}
-            value={instagramHandle}
-            placeholder="@"
-          />
+          <Column>
+            <Row className="row-no-margin">
+              <Label htmlFor="instagram-handle">
+                Instagram Handle (for Digital Giveaway)
+              </Label>
+              <SupporterTooltip
+                title={
+                  <React.Fragment>
+                    <ToolTipTable>
+                      <tbody>
+                        <tr>
+                          To be entered into our weekly Digital Giveaways, visit 3
+                          merchants and post and tag <b>@sendchinatownlove</b>
+                          &nbsp;with your food crawl pictures on Instagram. Enter your
+                          Instagram handle so we can track your entries.
+                        </tr>
+                      </tbody>
+                    </ToolTipTable>
+                  </React.Fragment>
+                }
+                enterTouchDelay={10}
+                placement="left"
+              >
+                <div>
+                  <img src={CrawlInfoIcon} alt="instagram-crawl-info" />
+                </div>
+              </SupporterTooltip>
+            </Row>
+            <InputField
+              name="instagram-handle"
+              type="text"
+              onChange={(e) => setinstagramHandle(e.target.value)}
+              value={instagramHandle}
+              placeholder="@"
+            />
+          </Column>
         </InputContainer>
 
         <InputContainer className="bottom">
@@ -214,14 +228,17 @@ const Track = ({ setCurrentScreenView }: Props) => {
           </Button>
         </InputContainer>
       </PassportCard>
+
       <Row>
-        {/* WHERE IS THIS LINK SUPPOSED TO GO? */}
-        <ExternalLinks href="sendchinatownlove.com" target="_blank">
+        <ExternalLinks
+          href="https://www.sendchinatownlove.com/food-crawl.html"
+          target="_blank"
+        >
           Learn More
         </ExternalLinks>
         <LinksContainer>
           {socialMediaLinks.map((social) => (
-            <Icon href={social.url}>
+            <Icon href={social.url} target="_blank">
               <span className={`fa fa-${social.platform}`} />
             </Icon>
           ))}
@@ -245,7 +262,7 @@ const PassportCard = styled.div`
   align-items: center;
   font-size: 12px;
   width: 367px;
-  margin: 50px auto;
+  margin: 50px 0px 0px;
   z-index: 0;
   filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
 `;
@@ -294,24 +311,8 @@ const Label = styled.label`
 `;
 
 const Column = styled.div`
-  margin: 25px 0;
+  margin: 15px 0;
 `;
-
-// export const Button = styled.button`
-//   margin: 10px 0;
-//   outline: none;
-//   cursor: pointer;
-
-//   &.linkButton {
-//     background-color: transparent;
-//     border: none;
-//     line-spacing: 0.1em;
-//     font-weight: bold;
-//     text-transform: uppercase;
-//     letter-spacing: 2px;
-//     underline: none;
-//   }
-// `;
 
 const InputField = styled.input`
   width: 100%;
@@ -325,16 +326,22 @@ const InputField = styled.input`
     border: 1px solid red;
   }
 `;
+
 const ToolTipTable = styled.table`
   width: 100%;
 `;
+
 // FOOTER
 export const Row = styled.div`
   display: flex;
   align-items: center;
-  margin: 0 auto;
+  margin: 15px 0 25px;
   width: 100%;
   justify-content: space-between;
+
+  &.row-no-margin {
+    margin: 0 auto;
+  }
 `;
 
 export const ExternalLinks = styled.a`
@@ -346,6 +353,7 @@ export const ExternalLinks = styled.a`
   cursor: pointer;
   letter-spacing: 2px;
 `;
+
 const LinksContainer = styled.div`
   padding: 0;
   list-style: none;
