@@ -45,6 +45,13 @@ const ExternalLink = styled.a`
   }
 `;
 
+const TitleRow = styled.div`
+  text-align: center;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+`;
+
 const Title = styled.span`
   color: ${(props) => (props.color ? props.color : 'black')};
   font-size: 14px;
@@ -81,6 +88,7 @@ const ErrorMessage = styled.div`
 
 export {
   PassportContainer,
+  TitleRow,
   Title,
   SubTitle,
   Button,

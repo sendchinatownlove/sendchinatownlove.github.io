@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PassportContainer, Title } from './style';
+import { useParams, useHistory } from 'react-router-dom';
+
+import { PassportContainer, TitleRow, Title } from './style';
 
 type Props = {
   showFaq: boolean;
@@ -8,9 +10,19 @@ type Props = {
 };
 
 const Faq = ({ showFaq, toggleView }: Props) => {
+  const history = useHistory();
+  const { id } = useParams();
+
+  const goToPassPort = (e) => {
+    console.log("clicked");
+    history.push(`/passport/${id}/tickets`);
+  }
+  
   return (
     <PassportContainer mainView={showFaq} onClick={toggleView}>
-      <Title>HOW TO WIN REWARDS</Title>
+      <TitleRow>
+        <Title>HOW TO WIN REWARDS</Title>
+      </TitleRow>
       {!showFaq && (
         <>
           <br />
@@ -18,72 +30,32 @@ const Faq = ({ showFaq, toggleView }: Props) => {
         </>
       )}
       <Content hidden={!showFaq}>
-        <RewardsLink href="">VIEW ACTIVE REWARDS & GIVEAWAYS</RewardsLink>
-        <Question>What is Lorem Ipsum?</Question>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
-        <Question>Where does it come from?</Question>
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It
-        has roots in a piece of classical Latin literature from 45 BC, making it
-        over 2000 years old. Richard McClintock, a Latin professor at
-        Hampden-Sydney College in Virginia, looked up one of the more obscure
-        Latin words, consectetur, from a Lorem Ipsum passage, and going through
-        the cites of the word in classical literature, discovered the
-        undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33
-        of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by
-        Cicero, written in 45 BC. This book is a treatise on the theory of
-        ethics, very popular during the Renaissance. The first line of Lorem
-        Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section
-        1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is
-        reproduced below for those interested. Sections 1.10.32 and 1.10.33 from
-        "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their
-        exact original form, accompanied by English versions from the 1914
-        translation by H. Rackham. It is a long established fact that a reader
-        will be distracted by the readable content of a page when looking at its
-        layout. The point of using Lorem Ipsum is that it has a more-or-less
-        normal distribution of letters, as opposed to using 'Content here,
-        content here', making it look like readable English. Many desktop
-        publishing packages and web page editors now use Lorem Ipsum as their
-        default model text, and a search for 'lorem ipsum' will uncover many web
-        sites still in their infancy. Various versions have evolved over the
-        years, sometimes by accident, sometimes on purpose (injected humour and
-        the like). There are many variations of passages of Lorem Ipsum
-        available, but the majority have suffered alteration in some form, by
-        injected humour, or randomised words which don't look even slightly
-        believable. If you are going to use a passage of Lorem Ipsum, you need
-        to be sure there isn't anything embarrassing hidden in the middle of
-        text. All the Lorem Ipsum generators on the Internet tend to repeat
-        predefined chunks as necessary, making this the first true generator on
-        the Internet. It uses a dictionary of over 200 Latin words, combined
-        with a handful of model sentence structures, to generate Lorem Ipsum
-        which looks reasonable. The generated Lorem Ipsum is therefore always
-        free from repetition, injected humour, or non-characteristic words etc.
+        <RewardsLink onClick={goToPassPort}>VIEW ACTIVE REWARDS & GIVEAWAYS</RewardsLink>              
+        <Question>What is the Send Chinatown Love Food Crawl?</Question>
+          For the month of September, Send Chinatown Love is hosting a food crawl in Manhattan’s Chinatown, highlighting 13 incredible restaurants, bakeries, cafes and more throughout the neighborhood. Come with your friends and family to explore locally and savor all the incredible things Chinatown has to offer and earn rewards for shopping with our merchants! 
+        <Question>What is the purpose of the Send Chinatown Love Food Crawl?</Question>
+        Chinatown was disproportionately impacted by the lack of tourism and foot traffic resulting from COVID-19. To sustain long-term growth for the businesses in Chinatown, we have planned a food crawl for the entire month of September to bring foot traffic back to the neighborhood. Unlike a traditional food crawl, we encourage you to participate at your own pace and on your own schedule throughout the month to better ensure everyone’s health and safety. Collect tickets as you visit our 13 vendors around Chinatown and record them in your Passport to Chinatown. Your tickets will unlock rewards at local businesses in the neighborhood! Visit all 13 vendors for a chance to win a grand prize! 
+        <Question>What is the Passport to Chinatown? </Question>
+        The Passport to Chinatown is a mobile site that will be your ultimate guide to the Send Chinatown Love Food Crawl. It will track which vendors you’ve visited and provide a full list of local rewards you can redeem once you’ve submitted your unique ticket codes.
+        <Question>How can I access my Passport to Chinatown?</Question>
+        Scan the QR code on your ticket to access your Passport to Chinatown. You will be prompted to submit your email address and your ticket code. You can then view all of your collected tickets by entering your email address in your Passport, then clicking “View My Tickets.” 
       </Content>
     </PassportContainer>
   );
 };
 
 const Content = styled.div`
-  padding: 30px 15px 15px;
-  // overflow: auto;
-
-  /* height is done in a hacky way, 197px the logo/links height, 47 is header, 25 is padding*/
-  // height: calc(100vh - 197px - 47px + 25px);
-  // ::-webkit-scrollbar {display:none;}
+  padding: 10px 15px 15px;
 `;
 
-const RewardsLink = styled.a`
+const RewardsLink = styled.span`
   text-transform: uppercase;
   color: black;
-  font-weight: bold;
+  font-weight: 700;
   letter-spacing: 0.15em;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 const Question = styled.p`
