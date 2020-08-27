@@ -21,7 +21,7 @@ interface Props {
 }
 
 const Track = ({ setCurrentScreenView }: Props) => {
-  const {push, location} = useHistory();
+  const {push} = useHistory();
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
 
@@ -29,8 +29,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
   const [isTicketValid, setIsTicketValid] = useState(true);
 
   const [instagramHandle, setinstagramHandle] = useState('');
-
-  const [contactId, setContactId] = useState('');
+  // const [contactId, setContactId] = useState('');
 
   const findOrCreateUser = async (email, viewTickets) => {
     const { data } = await getPassportEmailId(email);
@@ -40,25 +39,29 @@ const Track = ({ setCurrentScreenView }: Props) => {
       setIsEmailValid(false);
       setEmail('');
       return;
+    } else if (viewTickets && data) {
+      push(`/passport/${data.id}/tickets`)
+      return;
     }
     
     // searches for existing user or creates new user (to add tickets)
+    let contactId = '';
     if(data) {
-      setContactId(data.id);
+      contactId = data.id;
     } else {
-      const { data: id } = await createPassportEmailId(email, instagramHandle);
-      setContactId(id);
+      const { data: { id } } = await createPassportEmailId(email, instagramHandle);
+      contactId = id;
     }
+    await findTicketCode(ticketCode, contactId)
   };
 
-  const findTicketCode = async (code) => {
+  const findTicketCode = async (code, contactId) => {
     const formattedCode = code.split('-').join('');
-    console.log("code: "+code);
 
     const { data } = await checkForValidTicket(formattedCode);
     if (data && !data.contact_id) {
       const { data: newContactId } = await updateTicketContactId(formattedCode, contactId);
-      newContactId && push(`${location.pathname}/${newContactId.contact_id}/tickets`);
+      newContactId && push(`/passport/${newContactId.contact_id}/tickets`);
     } else {
       setIsTicketValid(false);
       setTicketCode('');
@@ -190,8 +193,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
             className="button--red-filled"
             disabled={!email || !ticketCode || !isTicketValid}
             onClick={() => {
-              findOrCreateUser(email, false)
-              findTicketCode(ticketCode);
+              findOrCreateUser(email, false);
             }}
           >
             Add Ticket
