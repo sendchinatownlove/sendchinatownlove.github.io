@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, Theme } from '@material-ui/core/styles';
+import {useHistory} from "react-router-dom"
 
 import { Title, SubTitle, Button, ErrorMessage } from "./style";
 import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
@@ -20,6 +21,7 @@ interface Props {
 }
 
 const Track = ({ setCurrentScreenView }: Props) => {
+  const {push, location} = useHistory();
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
 
@@ -42,7 +44,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
     
     // searches for existing user or creates new user (to add tickets)
     if(data) {
-      setContactId(data.id)
+      setContactId(data.id);
     } else {
       const { data: id } = await createPassportEmailId(email, instagramHandle);
       setContactId(id);
@@ -51,11 +53,12 @@ const Track = ({ setCurrentScreenView }: Props) => {
 
   const findTicketCode = async (code) => {
     const formattedCode = code.split('-').join('');
+    console.log("code: "+code);
 
     const { data } = await checkForValidTicket(formattedCode);
     if (data && !data.contact_id) {
       const { data: newContactId } = await updateTicketContactId(formattedCode, contactId);
-      newContactId && setCurrentScreenView(1);
+      newContactId && push(`${location.pathname}/${newContactId.contact_id}/tickets`);
     } else {
       setIsTicketValid(false);
       setTicketCode('');

@@ -21,8 +21,11 @@ const PassportRedemption = (props: Props) => {
   useEffect(() => {
     if (location.pathname === "/passport") {
       setCurrentScreenView(ScreenName.Track);
+    } else if (location.pathname.includes("/tickets")){
+      setCurrentScreenView(ScreenName.Dashboard);
     }
-  }, [location])
+  }, [location.pathname])
+  
 
   const showCurrentScreen = (screen) => {
     // TODO: Update case #s when all screens are built out

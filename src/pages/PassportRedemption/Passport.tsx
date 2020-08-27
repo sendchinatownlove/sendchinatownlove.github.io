@@ -19,6 +19,21 @@ interface Props {
   setCurrentScreenView: Function;
 };
 
+/**
+ * groups an array of objects according to a specific key
+ *  
+ * @param {object[]} array - the array we are iterating over
+ * @param {key} children - the key we are grouping by
+ * @return {object} an object whose keys will be the different groups
+ *
+ */
+function groupBy(array, key) {
+  return array.reduce((rv, x) => {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
+};
+
 const Passport = (props: Props) => {
   const { id } = useParams();
   const { push, location } = useHistory();
@@ -29,9 +44,11 @@ const Passport = (props: Props) => {
   useEffect(() => {    
     if (location.hash === "#faq") {
       setShowFaq(true);
+    } else {
+      setShowFaq(false);
     }
-  }, [location.hash])
-
+  }, [location])
+  
   useEffect(() => {    
     if (id) {
       getPassportTickets(id)
@@ -61,13 +78,7 @@ const Passport = (props: Props) => {
   }, [id])
 
   const createTicketRows = (tickets) => {
-    function groupBy(array, key) {
-      return array.reduce((rv, x) => {
-        (rv[x[key]] = rv[x[key]] || []).push(x);
-        return rv;
-      }, {});
-    };
-    
+    // make a temp ticket that sorts the tickets by sponsor seller, then redemption date
     const tempTickets = [...tickets];
     const sortedTickets = tempTickets
       .sort((a,b) => {
@@ -80,28 +91,27 @@ const Passport = (props: Props) => {
       })
     let rows: any[] = [];
     
+    // group the entries by sponsor_seller_id, 
     const groupedTickets = groupBy(sortedTickets, "sponsor_seller_id");
     const newEntries = Object.keys(groupedTickets);
-    // console.log(newEntries)
-
-    sortedTickets.push({
-      contact_id: 11,
-      created_at: "2020-08-25T01:01:50.857Z",
-      expiration: null,
-      id: 1,
-      participating_seller_id: 1,
-      redeemed_at: "2020-08-24",
-      sponsor_seller_id: 1,
-      stamp_url: "http://example.com/placeholder.jpg",
-      ticket_id: "7MRJV",
-      updated_at: "2020-08-25T01:23:06.038Z"}
-      )
+    
+    // for each key in newEntries (different sponsor sellers + non redeemed tickets which are labeled as key null) 
+    // push the stamps to rows of 3, if there arent 3, then push the left over amount
     for(const entry of newEntries){
       const arrays = entry === "null" ? sortedTickets.filter((ticket) => !ticket.sponsor_seller_id)
                    : sortedTickets.filter((ticket) => ticket.sponsor_seller_id === parseInt(entry));      
       while (arrays.length) {
         rows.push(arrays.splice(0, 3));
       }
+    }
+
+    // if there are less than 6 rows, make 6 rows, other wise make one extra row 
+    if (rows.length < 6) {
+      while(rows.length < 6) {
+        rows.push([]);
+      }
+    } else {
+      rows.push([]);
     }
     
     return rows;
@@ -142,11 +152,8 @@ const Passport = (props: Props) => {
         <RedirectionLinks href="#">contact us</RedirectionLinks>
       </HeaderContainer>
       <BodyContainer>
-        <FAQ showFaq={showFaq} toggleView={() => setShowFaq(true)}/>
-        <PassportContainer 
-          mainView={!showFaq} 
-          onClick={() => setShowFaq(false)}
-        >
+        <FAQ showFaq={showFaq} toggleView={() => push(location.pathname + "#faq")}/>
+        <PassportContainer mainView={!showFaq} onClick={() => push(location.pathname)}>
           <TitleRow>
             <Title>PASSPORT TO CHINATOWN</Title>
             <SubTitle>9/1/20202 - 9/30/20</SubTitle>
@@ -228,12 +235,14 @@ const TitleRow = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
   font-size: 12px;
 `;
+
 const AddNewTicket = styled(Button)`
   position: fixed;
   margin-left: -150px;
@@ -241,6 +250,7 @@ const AddNewTicket = styled(Button)`
   left: 50%;
   width: 300px;
 `
+
 const SendEmailContainer = styled.div`
   position: fixed;
   width: 340px;
@@ -257,10 +267,12 @@ const SendEmailContainer = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(4px);
 `;
+
 const PassportIcon = styled.img`
   width: 59px;
   height: 76px;
 `;
+
 const SendEmailButtonClose = styled(Button)`
   height: 32px;
   width: 115px;
