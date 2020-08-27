@@ -4,7 +4,7 @@ import { getWebsiteImages } from '../../utilities/general/StoreImages';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
-import { useWindowSize } from '../../utilities/hooks/helpers'
+import { useWindowSize } from '../../utilities/hooks/helpers';
 
 const GiftMealHighlightBox = () => {
   const websiteImages = getWebsiteImages();
@@ -15,9 +15,8 @@ const GiftMealHighlightBox = () => {
     window.location.href = '/gift-a-meal-home';
   };
 
-  const containerClickHandler = useWindowSize().width < 600
-    ? onButtonClick
-    : () => {};
+  const containerClickHandler =
+    useWindowSize().width < 600 ? onButtonClick : () => {};
 
   return (
     <Container onClick={containerClickHandler}>

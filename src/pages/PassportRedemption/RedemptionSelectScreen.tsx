@@ -9,14 +9,12 @@ import {
 } from './RedemptionFooters';
 import CircleLogo from './CircleLogo.png';
 
-
 import {
   getPassportTickets,
   getAllSponsors,
   getLocationById,
   redeemReward,
 } from '../../utilities/api/interactionManager';
-
 
 interface Props {
   setCurrentScreenView: Function;
@@ -193,7 +191,9 @@ const RewardsContainer = styled.div<{
   justify-content: center;
 
   max-height: ${(props) =>
-    (props.numRewards > 0 && props.numRewards <= 4) || props.selected ? '525px' : '575px'};
+    (props.numRewards > 0 && props.numRewards <= 4) || props.selected
+      ? '525px'
+      : '575px'};
   overflow-y: scroll;
   padding-top: 20px;
 

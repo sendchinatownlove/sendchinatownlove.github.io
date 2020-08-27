@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, Theme } from '@material-ui/core/styles';
-import {useHistory} from "react-router-dom"
+import { useHistory } from 'react-router-dom';
 
-import { Title, SubTitle, Button, ErrorMessage } from "./style";
+import { Title, SubTitle, Button, ErrorMessage } from './style';
 import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
 import {
   getPassportEmailId,
   createPassportEmailId,
   checkForValidTicket,
-  updateTicketContactId
+  updateTicketContactId,
 } from '../../utilities/api/interactionManager';
 
 import CrawlInfoIcon from './CrawlInfoIcon.png';
@@ -21,7 +21,7 @@ interface Props {
 }
 
 const Track = ({ setCurrentScreenView }: Props) => {
-  const {push} = useHistory();
+  const { push } = useHistory();
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
 
@@ -35,24 +35,26 @@ const Track = ({ setCurrentScreenView }: Props) => {
     const { data } = await getPassportEmailId(email);
 
     // sets error message for non-existent users (to view tickets)
-    if(viewTickets && !data) {
+    if (viewTickets && !data) {
       setIsEmailValid(false);
       setEmail('');
       return;
     } else if (viewTickets && data) {
-      push(`/passport/${data.id}/tickets`)
+      push(`/passport/${data.id}/tickets`);
       return;
     }
-    
+
     // searches for existing user or creates new user (to add tickets)
     let contactId = '';
-    if(data) {
+    if (data) {
       contactId = data.id;
     } else {
-      const { data: { id } } = await createPassportEmailId(email, instagramHandle);
+      const {
+        data: { id },
+      } = await createPassportEmailId(email, instagramHandle);
       contactId = id;
     }
-    await findTicketCode(ticketCode, contactId)
+    await findTicketCode(ticketCode, contactId);
   };
 
   const findTicketCode = async (code, contactId) => {
@@ -60,7 +62,10 @@ const Track = ({ setCurrentScreenView }: Props) => {
 
     const { data } = await checkForValidTicket(formattedCode);
     if (data && !data.contact_id) {
-      const { data: newContactId } = await updateTicketContactId(formattedCode, contactId);
+      const { data: newContactId } = await updateTicketContactId(
+        formattedCode,
+        contactId
+      );
       newContactId && push(`/passport/${newContactId.contact_id}/tickets`);
     } else {
       setIsTicketValid(false);
@@ -95,7 +100,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
 
   return (
     <Container>
-      <PassportCard>      
+      <PassportCard>
         <Logo src={CircleLogo} alt="scl-log" />
         <InputContainer className="trackScreen top">
           <Title color="#a8192e">PASSPORT TO CHINATOWN</Title>
@@ -162,8 +167,8 @@ const Track = ({ setCurrentScreenView }: Props) => {
                     <tbody>
                       <tr>
                         To be entered into our weekly Digital Giveaways, visit 3
-                        merchants and post and tag <b>@sendchinatownlove</b> with
-                        your food crawl pictures on Instagram. Enter your
+                        merchants and post and tag <b>@sendchinatownlove</b>{' '}
+                        with your food crawl pictures on Instagram. Enter your
                         Instagram handle so we can track your entries.
                       </tr>
                     </tbody>
@@ -174,7 +179,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
               placement="left"
             >
               <div>
-                <img src={CrawlInfoIcon} alt="instagram-crawl-info"/>
+                <img src={CrawlInfoIcon} alt="instagram-crawl-info" />
               </div>
             </SupporterTooltip>
           </Row>
@@ -186,7 +191,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
             placeholder="@"
           />
         </InputContainer>
-        
+
         <InputContainer className="bottom">
           <Button
             value="track-screen-button"
@@ -221,8 +226,8 @@ const Track = ({ setCurrentScreenView }: Props) => {
             </Icon>
           ))}
         </LinksContainer>
-    </Row>
-  </Container>
+      </Row>
+    </Container>
   );
 };
 

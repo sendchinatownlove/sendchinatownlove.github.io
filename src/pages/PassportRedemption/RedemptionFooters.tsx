@@ -1,20 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { SubTitle, Button } from "./style";
+import { SubTitle, Button } from './style';
 import ScreenName from './ScreenName';
-
 
 interface NoRewardsProps {
   setCurrentScreenView: Function;
 }
 
 export const NoRewardsFooter = (props: NoRewardsProps) => {
-    return (
-        <Footer>
-          <SubTitle bold="700">
-            Have more tickets to add?
-          </SubTitle>
+  return (
+    <Footer>
+      <SubTitle bold="700">Have more tickets to add?</SubTitle>
 
       <Button
         value="redemption-selected-button"
@@ -34,15 +31,13 @@ interface RedeemRewardsProps {
 }
 
 export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
-    return (
-        <Footer>
-          <SubTitle bold="700">
-            {
-              props.error
-                ? props.error
-                : 'When redeemed, you have 5 minutes to use your reward.'
-            }
-          </SubTitle>
+  return (
+    <Footer>
+      <SubTitle bold="700">
+        {props.error
+          ? props.error
+          : 'When redeemed, you have 5 minutes to use your reward.'}
+      </SubTitle>
 
       <Button
         value="redemption-selected-button"
@@ -62,12 +57,11 @@ interface defaultProps {
 }
 
 export const DefaultFooter = (props: defaultProps) => {
-    return (
-        <Footer>
-          <SubTitle bold="700">
-            Select an offer and be ready to show this screen when you’re
-            ordering.
-          </SubTitle>
+  return (
+    <Footer>
+      <SubTitle bold="700">
+        Select an offer and be ready to show this screen when you’re ordering.
+      </SubTitle>
 
       {props.allSponsors.length <= 4 && (
         <Button

@@ -17,7 +17,7 @@ const GiftAMealPage = (props: Props) => {
 
   const [activeCampaigns, setActiveCampaigns] = useState([]);
   const [pastCampaigns, setPastCampaigns] = useState([]);
-  const [selectedCampaign, setSelectedCampaign] = useState(null)
+  const [selectedCampaign, setSelectedCampaign] = useState(null);
 
   const fetchData = async () => {
     const campaignData = await getCampaigns();
@@ -61,9 +61,11 @@ const GiftAMealPage = (props: Props) => {
       >
         {t('gamHome.backButton')}
       </button>
-      {activeCampaigns.length
-        ? <>
-          <h5 className={styles.campaignHeader}>{t('gamHome.activeSection')}</h5>
+      {activeCampaigns.length ? (
+        <>
+          <h5 className={styles.campaignHeader}>
+            {t('gamHome.activeSection')}
+          </h5>
           {activeCampaigns.map((campaign: any) => (
             <CampaignListItem
               campaign={campaign}
@@ -73,12 +75,15 @@ const GiftAMealPage = (props: Props) => {
             />
           ))}
         </>
-        : <NoActiveCampaignsBox />
-      }
+      ) : (
+        <NoActiveCampaignsBox />
+      )}
 
       <div className={styles.videoContainer}>
         <VideoComponent videoId="3zbqvouILto"></VideoComponent>
-        <h5 className={styles.videoDescription}>{t('gamHome.videoBox.caption')}</h5>
+        <h5 className={styles.videoDescription}>
+          {t('gamHome.videoBox.caption')}
+        </h5>
       </div>
 
       <h5 className={styles.campaignHeader}>{t('gamHome.pastSection')}</h5>
@@ -90,7 +95,7 @@ const GiftAMealPage = (props: Props) => {
           setSelectedCampaign={setSelectedCampaign}
         />
       ))}
-    </div >
+    </div>
   );
 };
 

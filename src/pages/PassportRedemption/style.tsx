@@ -11,7 +11,6 @@ type PassportProps = {
   mainView?: boolean;
 };
 
-
 const PassportContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,7 +18,7 @@ const PassportContainer = styled.div`
   width: 367px;
   // max-width: 367px;
   margin: 0 auto;
-  background: #FFFFFF;
+  background: #ffffff;
 
   border: 1px solid #dedede;
   border-radius: 20px;
@@ -27,8 +26,8 @@ const PassportContainer = styled.div`
   overflow: hidden;
 
   position: absolute;
-  z-index: ${(props: PassportProps) => props.mainView ? "10" : "0"};
-  top: ${(props: PassportProps) => props.mainView ? "40px" : "0"};
+  z-index: ${(props: PassportProps) => (props.mainView ? '10' : '0')};
+  top: ${(props: PassportProps) => (props.mainView ? '40px' : '0')};
 `;
 
 const ExternalLink = styled.a`
@@ -47,20 +46,20 @@ const ExternalLink = styled.a`
 `;
 
 const Title = styled.span`
-  color: ${props => props.color ? props.color : "black"};
+  color: ${(props) => (props.color ? props.color : 'black')};
   font-size: 14px;
   font-weight: bold;
   text-align: center;
-  letter-spacing: .15em;
+  letter-spacing: 0.15em;
   margin: 5px auto;
 `;
 
 const SubTitle = styled.span`
-  color: ${(props: Props) => props.color ? props.color : "black"};
-  font-size: ${(props: Props) => props.size ? props.size : "12px"};
-  font-weight: ${(props: Props) => props.bold ? props.bold : "400"};
-  text-align: ${(props: Props) => props.align ? props.align : "center"};
-  letter-spacing: .15em;
+  color: ${(props: Props) => (props.color ? props.color : 'black')};
+  font-size: ${(props: Props) => (props.size ? props.size : '12px')};
+  font-weight: ${(props: Props) => (props.bold ? props.bold : '400')};
+  text-align: ${(props: Props) => (props.align ? props.align : 'center')};
+  letter-spacing: 0.15em;
 `;
 
 const Button = styled.button`
@@ -70,7 +69,7 @@ const Button = styled.button`
     background-color: transparent;
     border: none;
     border-bottom: 1px solid black;
-    line-spacing: .1em;
+    line-spacing: 0.1em;
     font-weight: bold;
   }
 `;
@@ -80,5 +79,11 @@ const ErrorMessage = styled.div`
   padding-top: 5px;
 `;
 
-
-export { PassportContainer, Title, SubTitle, Button, ErrorMessage, ExternalLink  };
+export {
+  PassportContainer,
+  Title,
+  SubTitle,
+  Button,
+  ErrorMessage,
+  ExternalLink,
+};

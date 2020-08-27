@@ -1,9 +1,7 @@
 import React from 'react';
 import CampaignProgressBar from './CampaignProgressBar';
 import styled from 'styled-components';
-import {
-  tabletScreens
-} from '../../../utilities/general/responsive';
+import { tabletScreens } from '../../../utilities/general/responsive';
 import { useTranslation } from 'react-i18next';
 import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
@@ -15,8 +13,8 @@ import { SET_MODAL_VIEW } from '../../../utilities/hooks/ModalPaymentContext/con
 
 interface Props {
   campaign: Campaign;
-  selectedCampaign: null | number,
-  setSelectedCampaign: Function
+  selectedCampaign: null | number;
+  setSelectedCampaign: Function;
 }
 
 const ModalBox: any = Modal;
@@ -40,13 +38,17 @@ const CampaignListItem = (props: Props) => {
     // eslint-disable-next-line
   }, []);
 
-  const mealsRaised = Math.floor(campaign.amount_raised / campaign.price_per_meal);
-  const targetMeals = Math.floor(campaign.target_amount / campaign.price_per_meal);
+  const mealsRaised = Math.floor(
+    campaign.amount_raised / campaign.price_per_meal
+  );
+  const targetMeals = Math.floor(
+    campaign.target_amount / campaign.price_per_meal
+  );
   const campaignImageUrls = campaign.gallery_image_urls;
 
   const dispatch = useModalPaymentDispatch(); //provide null according to Bruce's new branch
   const showModal = (event: any) => {
-    props.setSelectedCampaign(campaign.id)
+    props.setSelectedCampaign(campaign.id);
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
   };
 
@@ -54,7 +56,10 @@ const CampaignListItem = (props: Props) => {
     <Container>
       <ColumnContainer>
         {campaignImageUrls && campaignImageUrls.length && (
-          <CampaignImage src={campaignImageUrls[0] ?? campaignDefaultImage} alt="campaign_image" />
+          <CampaignImage
+            src={campaignImageUrls[0] ?? campaignDefaultImage}
+            alt="campaign_image"
+          />
         )}
       </ColumnContainer>
       <ColumnContainer>
@@ -62,14 +67,15 @@ const CampaignListItem = (props: Props) => {
           <Location>{merchant.locations[0].city}</Location>
         )}
         {distributor && merchant && (
-          <Name>{merchant.name} x {distributor.name}</Name>
+          <Name>
+            {merchant.name} x {distributor.name}
+          </Name>
         )}
         <Description>
-          {campaign.description}
-          {' '}
-          {distributor &&
-            (<a href={distributor.website_url}>{distributor.name}</a>)
-          }
+          {campaign.description}{' '}
+          {distributor && (
+            <a href={distributor.website_url}>{distributor.name}</a>
+          )}
         </Description>
         <CampaignProgressBar
           isActive={campaign.active}
@@ -82,24 +88,33 @@ const CampaignListItem = (props: Props) => {
       </ColumnContainer>
       <ColumnContainer>
         <ImagesContainer>
-          {distributor &&
-            (<a href={distributor.website_url}>
-              <DistributorImage src={distributor.image_url} alt="distributor_logo" />
+          {distributor && (
+            <a href={distributor.website_url}>
+              <DistributorImage
+                src={distributor.image_url}
+                alt="distributor_logo"
+              />
             </a>
-            )
-          }
-          {merchant &&
-            (<MerchantImage src={merchant.logo_image_url} alt="merchant_logo" />)
-          }
+          )}
+          {merchant && (
+            <MerchantImage src={merchant.logo_image_url} alt="merchant_logo" />
+          )}
         </ImagesContainer>
         {merchant && (
-          <Button className="button--filled" onClick={(e) => {
-            e.preventDefault();
-            window.location.href = '/' + merchant.seller_id;
-          }}>{t('gamHome.listItem.viewButton')}</Button>
+          <Button
+            className="button--filled"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = '/' + merchant.seller_id;
+            }}
+          >
+            {t('gamHome.listItem.viewButton')}
+          </Button>
         )}
         {campaign.active && (
-          <Button className={'button--outlined'} onClick={showModal}>{t('gamHome.listItem.giftButton')}</Button>
+          <Button className={'button--outlined'} onClick={showModal}>
+            {t('gamHome.listItem.giftButton')}
+          </Button>
         )}
       </ColumnContainer>
 
@@ -113,7 +128,7 @@ const CampaignListItem = (props: Props) => {
           campaignId={campaign.id}
         />
       )}
-    </Container >
+    </Container>
   );
 };
 

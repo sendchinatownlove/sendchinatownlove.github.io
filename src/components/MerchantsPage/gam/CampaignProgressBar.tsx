@@ -73,9 +73,9 @@ const CampaignProgressBar = ({
         <ProgressTextContainer color={progressBarColor}>
           {progressPercent}% {t('buyMeal.toTarget')}
         </ProgressTextContainer>{' '}
-          ({numContributions} {t('buyMeal.outOf')} {targetAmount}{' '}
+        ({numContributions} {t('buyMeal.outOf')} {targetAmount}{' '}
         {t('buyMeal.meals')})
-        </div>
+      </div>
       {isActive && (
         <div>
           {t('buyMeal.endsIn')}{' '}

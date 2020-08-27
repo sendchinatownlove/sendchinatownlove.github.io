@@ -101,7 +101,14 @@ const SquareModal = ({
     };
 
     setCanSubmit(false);
-    return makeSquarePayment(nonce, sellerId, payment, buyer, is_distribution, campaignId)
+    return makeSquarePayment(
+      nonce,
+      sellerId,
+      payment,
+      buyer,
+      is_distribution,
+      campaignId
+    )
       .then((res) => {
         if (res.status === 200) {
           dispatch({ type: SET_MODAL_VIEW, payload: 2 });

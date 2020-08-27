@@ -35,9 +35,7 @@ const OwnerPanel = ({ seller }: Props) => {
   const fetchData = async (seller_id: string) => {
     const campaigns = await getCampaignsForMerchant(seller_id);
     if (campaigns.data) {
-      const active = campaigns.data.find(
-        (campaign: any) => campaign.active
-      );
+      const active = campaigns.data.find((campaign: any) => campaign.active);
       // product does not support >1 active campaign per merchant
       if (active) {
         setActiveCampaign(active);

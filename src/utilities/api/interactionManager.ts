@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Buyer, PaymentParams, SquareLineItems } from './types';
-import { 
-  charges, 
-  sellers, 
-  vouchers, 
-  campaigns, 
+import {
+  charges,
+  sellers,
+  vouchers,
+  campaigns,
   distributors,
   passportVouchers,
   contacts,
   tickets,
   participatingSellers,
   sponsorSellers,
-  locations
+  locations,
 } from './endpoints';
 
 // Fix return typing
@@ -108,7 +108,7 @@ export const makeSquarePayment = async (
         idempotency_key: idempotencyKey,
         is_subscribed: isSubscribed,
         is_distribution: isDistribution, // TODO: deprecate this in favor of campaignId
-        campaign_id: campaignId
+        campaign_id: campaignId,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
@@ -146,22 +146,27 @@ function localeFromLanguage(language?: string) {
 }
 
 export const getCampaigns = async (): Promise<any> => {
-  return await axios.get(campaigns)
+  return await axios
+    .get(campaigns)
     .then((res) => res)
     .catch((err) => err);
 };
 
-export const getCampaignsForMerchant = async (seller_id: string): Promise<any> => {
-  return await axios.get(sellers + seller_id + '/campaigns')
+export const getCampaignsForMerchant = async (
+  seller_id: string
+): Promise<any> => {
+  return await axios
+    .get(sellers + seller_id + '/campaigns')
     .then((res) => res)
     .catch((err) => err);
-}
+};
 
 export const getDistributor = async (id: string): Promise<any> => {
-  return await axios.get(distributors + id)
+  return await axios
+    .get(distributors + id)
     .then((res) => res)
     .catch((err) => err);
-}
+};
 
 // for passport crawl voucher print outs
 export const getParticipatingMerchant = async (id: string) =>
@@ -179,7 +184,6 @@ export const getParticipatingMerchantTickets = async (
     .then((res) => res)
     .catch((err) => err);
 
-  
 // validate passport email
 export const getPassportEmailId = async (email: string) =>
   axios
@@ -189,16 +193,19 @@ export const getPassportEmailId = async (email: string) =>
     .then((res) => res)
     .catch((err) => err);
 
-export const createPassportEmailId = async (email: string, instagram: string) => {
-  let params = {}
-  
-  if(instagram) params = { email, instagram }
-  else params = { email }
+export const createPassportEmailId = async (
+  email: string,
+  instagram: string
+) => {
+  let params = {};
+
+  if (instagram) params = { email, instagram };
+  else params = { email };
 
   return axios
-          .post(contacts, params)
-          .then((res) => res)
-          .catch((err) => err);
+    .post(contacts, params)
+    .then((res) => res)
+    .catch((err) => err);
 };
 
 export const checkForValidTicket = async (ticket_id: string) =>
@@ -207,7 +214,10 @@ export const checkForValidTicket = async (ticket_id: string) =>
     .then((res) => res)
     .catch((err) => err);
 
-export const updateTicketContactId = async (ticket_id: string, contact_id: string) =>
+export const updateTicketContactId = async (
+  ticket_id: string,
+  contact_id: string
+) =>
   axios
     .put(tickets + ticket_id, { contact_id })
     .then((res) => res)
@@ -215,7 +225,7 @@ export const updateTicketContactId = async (ticket_id: string, contact_id: strin
 
 export const getPassportTickets = async (passportId: string) =>
   axios
-    .get(contacts + passportId + "/tickets")
+    .get(contacts + passportId + '/tickets')
     .then((res) => res)
     .catch((err) => err);
 
@@ -227,7 +237,7 @@ export const getParticipatingSeller = async (sellerId: string) =>
 
 export const sendRedeemTicketsEmail = async (passportId: string) =>
   axios
-    .post(contacts + passportId + "/rewards")
+    .post(contacts + passportId + '/rewards')
     .then((res) => res)
     .catch((err) => err);
 

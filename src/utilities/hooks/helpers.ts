@@ -23,8 +23,8 @@ export const getLocationInfo = (merchantData): LocationInfo => {
   return locationInfo;
 };
 
- // https://usehooks.com/useWindowSize/
- export const useWindowSize = () => {
+// https://usehooks.com/useWindowSize/
+export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
     width: 0,
     height: 0,

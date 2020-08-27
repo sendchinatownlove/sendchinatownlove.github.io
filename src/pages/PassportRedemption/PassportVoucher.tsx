@@ -18,8 +18,13 @@ const Voucher = () => {
   const [restaurantTickets, setRestaurantTickets] = useState<any | null>();
 
   const getAllTickets = async () => {
-    const { data: { name } } = await getParticipatingMerchant(id);
-    const { data: allTickets } = await getParticipatingMerchantTickets(id, tickets_secret);
+    const {
+      data: { name },
+    } = await getParticipatingMerchant(id);
+    const { data: allTickets } = await getParticipatingMerchantTickets(
+      id,
+      tickets_secret
+    );
 
     if (allTickets && name) {
       setRestaurantName(name);

@@ -41,7 +41,7 @@ const MerchantVoucherDashboard = lazy(() =>
   import('../../pages/MerchantVoucherDashboard')
 );
 const PassportVoucher = lazy(() =>
-import('../../pages/PassportRedemption/PassportVoucher')
+  import('../../pages/PassportRedemption/PassportVoucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
 
@@ -79,7 +79,11 @@ const App = () => {
       <>
         <ModalPaymentProvider>
           <ScrollToTop />
-          <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} pageName={child} />
+          <Header
+            menuOpen={menuOpen}
+            setMenuOpen={setMenuOpen}
+            pageName={child}
+          />
           {component}
           <Footer menuOpen={menuOpen} />
         </ModalPaymentProvider>
@@ -98,10 +102,10 @@ const App = () => {
             </VoucherProvider>
           </Route>
           <Route exact path="/passport">
-            <PassportRedemption screen={ScreenName.Track}/>
+            <PassportRedemption screen={ScreenName.Track} />
           </Route>
           <Route exact path="/passport/:id/tickets">
-            <PassportRedemption screen={ScreenName.Dashboard}/>
+            <PassportRedemption screen={ScreenName.Dashboard} />
           </Route>
           <Route exact path="/passport/:id/redeem/:access_token">
             <PassportRedemption screen={ScreenName.Redemption} />
