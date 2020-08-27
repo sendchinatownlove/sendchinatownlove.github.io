@@ -1,7 +1,19 @@
 import axios from 'axios';
 import { CardElement } from '@stripe/react-stripe-js';
 import { Buyer, PaymentParams, SquareLineItems } from './types';
-import { charges, sellers, vouchers, campaigns, distributors, passportVouchers } from './endpoints';
+import {
+  charges,
+  sellers,
+  vouchers,
+  campaigns,
+  distributors,
+  passportVouchers,
+  contacts,
+  tickets,
+  participatingSellers,
+  sponsorSellers,
+  locations,
+} from './endpoints';
 
 // Fix return typing
 export const getSellers = async (lang?: string): Promise<any> => {
@@ -96,7 +108,7 @@ export const makeSquarePayment = async (
         idempotency_key: idempotencyKey,
         is_subscribed: isSubscribed,
         is_distribution: isDistribution, // TODO: deprecate this in favor of campaignId
-        campaign_id: campaignId
+        campaign_id: campaignId,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
@@ -134,22 +146,27 @@ function localeFromLanguage(language?: string) {
 }
 
 export const getCampaigns = async (): Promise<any> => {
-  return await axios.get(campaigns)
+  return await axios
+    .get(campaigns)
     .then((res) => res)
     .catch((err) => err);
 };
 
-export const getCampaignsForMerchant = async (seller_id: string): Promise<any> => {
-  return await axios.get(sellers + seller_id + '/campaigns')
+export const getCampaignsForMerchant = async (
+  seller_id: string
+): Promise<any> => {
+  return await axios
+    .get(sellers + seller_id + '/campaigns')
     .then((res) => res)
     .catch((err) => err);
-}
+};
 
 export const getDistributor = async (id: string): Promise<any> => {
-  return await axios.get(distributors + id)
+  return await axios
+    .get(distributors + id)
     .then((res) => res)
     .catch((err) => err);
-}
+};
 
 // for passport crawl voucher print outs
 export const getParticipatingMerchant = async (id: string) =>
@@ -164,5 +181,90 @@ export const getParticipatingMerchantTickets = async (
 ) =>
   axios
     .get(passportVouchers + id + '/tickets/' + tickets_secret)
+    .then((res) => res)
+    .catch((err) => err);
+
+// validate passport email
+export const getPassportEmailId = async (email: string) =>
+  axios
+    .get(contacts, {
+      params: { email },
+    })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const createPassportEmailId = async (
+  email: string,
+  instagram: string
+) => {
+  let params = {};
+
+  if (instagram) params = { email, instagram };
+  else params = { email };
+
+  return axios
+    .post(contacts, params)
+    .then((res) => res)
+    .catch((err) => err);
+};
+
+export const checkForValidTicket = async (ticket_id: string) =>
+  axios
+    .get(tickets + ticket_id)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const updateTicketContactId = async (
+  ticket_id: string,
+  contact_id: string
+) =>
+  axios
+    .put(tickets + ticket_id, { contact_id })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getPassportTickets = async (passportId: string) =>
+  axios
+    .get(contacts + passportId + '/tickets')
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getParticipatingSeller = async (sellerId: string) =>
+  axios
+    .get(participatingSellers + sellerId)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const sendRedeemTicketsEmail = async (passportId: string) =>
+  axios
+    .post(contacts + passportId + '/rewards')
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getLocationById = async (locationId: number) =>
+  axios
+    .get(locations + locationId)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getAllSponsors = async () =>
+  axios
+    .get(sponsorSellers)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getOneSponsor = async (rewardId: number) =>
+  axios
+    .get(sponsorSellers + rewardId)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const redeemReward = async (
+  contact_id: number,
+  auth_token: string,
+  tickets: Array<any>
+) =>
+  axios
+    .put(contacts + contact_id + '/tickets/' + auth_token, { tickets })
     .then((res) => res)
     .catch((err) => err);

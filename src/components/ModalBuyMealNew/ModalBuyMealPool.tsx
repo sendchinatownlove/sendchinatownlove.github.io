@@ -51,32 +51,48 @@ export const Modal = (props: Props) => {
   return (
     <form data-testid="ModalBuyMeal">
       <div>
-          <h1>
-            {props.sellerId
-              ? t('buyMeal.header') + props.sellerName
-              : t('buyMealPool.header')
-            }
-          </h1>
+        <h1>
+          {props.sellerId
+            ? t('buyMeal.header') + props.sellerName
+            : t('buyMealPool.header')}
+        </h1>
       </div>
       <p className={styles.description}>
-          {t('buyMealPool.description.weAre')}
-          <a
-            href="https://www.apexforyouth.org/"
-            target="_blank" rel="noopener noreferrer"
-            className={styles.link}
-          > APEX for Youth</a>,
-          <a
-            href="http://www.lajornadany.org/"
-            target="_blank" rel="noopener noreferrer"
-            className={styles.link}
-          > La Jornada Food Pantry</a>,
-          <a
-            href="https://www.cpc-nyc.org/"
-            target="_blank" rel="noopener noreferrer"
-            className={styles.link}
-          > the Chinese-American Planning Council </a>
-          {t('buyMealPool.description.andRestaurants')}
-          <span className={styles.bold}> {t('buyMealPool.description.allItTakes')} ${props.costPerMeal}</span>
+        {t('buyMealPool.description.weAre')}
+        <a
+          href="https://www.apexforyouth.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
+          {' '}
+          APEX for Youth
+        </a>
+        ,
+        <a
+          href="http://www.lajornadany.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
+          {' '}
+          La Jornada Food Pantry
+        </a>
+        ,
+        <a
+          href="https://www.cpc-nyc.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
+          {' '}
+          the Chinese-American Planning Council{' '}
+        </a>
+        {t('buyMealPool.description.andRestaurants')}
+        <span className={styles.bold}>
+          {' '}
+          {t('buyMealPool.description.allItTakes')} ${props.costPerMeal}
+        </span>
       </p>
 
       <CampaignInstructions />

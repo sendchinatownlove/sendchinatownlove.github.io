@@ -33,9 +33,7 @@ const CampaignInstructions = () => {
             `${t('gamHome.subheading.step4Text')}`,
             gam_icon_step4,
           ],
-        ].map(([step, text, icon], idx) =>
-          generateStep(step, text, icon, idx)
-        )}
+        ].map(([step, text, icon], idx) => generateStep(step, text, icon, idx))}
       </div>
     </div>
   );

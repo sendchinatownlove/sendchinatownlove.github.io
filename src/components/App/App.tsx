@@ -9,8 +9,10 @@ import ScrollToTop from '../ScrollToTop';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
 import ReactPixel from 'react-facebook-pixel';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
+import ScreenName from '../../pages/PassportRedemption/ScreenName';
 
 const trackingId = process.env.REACT_APP_GA_TRACKING_ID!;
+
 // For Testing purposes: https://github.com/react-ga/react-ga/issues/322
 if (process.env.NODE_ENV === 'production') {
   ReactGA.initialize(trackingId);
@@ -39,8 +41,9 @@ const MerchantVoucherDashboard = lazy(() =>
   import('../../pages/MerchantVoucherDashboard')
 );
 const PassportVoucher = lazy(() =>
-import('../../pages/PassportRedemption/PassportVoucher')
+  import('../../pages/PassportRedemption/PassportVoucher')
 );
+const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
@@ -76,7 +79,11 @@ const App = () => {
       <>
         <ModalPaymentProvider>
           <ScrollToTop />
-          <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} pageName={child} />
+          <Header
+            menuOpen={menuOpen}
+            setMenuOpen={setMenuOpen}
+            pageName={child}
+          />
           {component}
           <Footer menuOpen={menuOpen} />
         </ModalPaymentProvider>
@@ -93,6 +100,21 @@ const App = () => {
             <VoucherProvider>
               <VoucherRedemptionPage />
             </VoucherProvider>
+          </Route>
+          <Route exact path="/passport">
+            <PassportRedemption screen={ScreenName.Track} />
+          </Route>
+          <Route exact path="/passport/:id/tickets">
+            <PassportRedemption screen={ScreenName.Dashboard} />
+          </Route>
+          <Route exact path="/passport/:id/redeem/:access_token">
+            <PassportRedemption screen={ScreenName.Redemption} />
+          </Route>
+          <Route
+            exact
+            path="/passport/:id/redeem/:access_token/sponsor/:sponsor_seller_id"
+          >
+            <PassportRedemption screen={ScreenName.Claim} />
           </Route>
           <Route path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
