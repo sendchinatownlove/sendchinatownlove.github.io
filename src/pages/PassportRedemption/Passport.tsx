@@ -89,7 +89,7 @@ const Passport = (props: Props) => {
         .sort((a, b) => {
           const dateA = a.redeemed_at ? Date.parse(a.redeemed_at) : 0;
           const dateB = b.redeemed_at ? Date.parse(b.redeemed_at) : 0;
-          if (dateA != dateB) {
+          if (dateA !== dateB) {
             return dateB - dateA;
           }
           return b.sponsor_seller_id - a.sponsor_seller_id;
