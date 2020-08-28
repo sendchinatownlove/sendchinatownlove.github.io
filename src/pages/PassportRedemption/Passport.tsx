@@ -87,13 +87,13 @@ const Passport = (props: Props) => {
       let tempTickets = [...tickets]; 
       const sortedTickets = tempTickets
         .sort((a, b) => {
-          return b.sponsor_seller_id - a.sponsor_seller_id;
-        })
-        .sort((a, b) => {
           const dateA = a.redeemed_at ? Date.parse(a.redeemed_at) : 0;
           const dateB = b.redeemed_at ? Date.parse(b.redeemed_at) : 0;
-          return dateB - dateA;
-        });
+          if (dateA !== dateB) {
+            return dateB - dateA;
+          }
+          return b.sponsor_seller_id - a.sponsor_seller_id;
+      })
       
         // group the entries by sponsor_seller_id,
       const groupedTickets = groupBy(sortedTickets, 'sponsor_seller_id');
@@ -173,7 +173,7 @@ const Passport = (props: Props) => {
         >
           <TitleRow>
             <Title>PASSPORT TO CHINATOWN</Title>
-            <SubTitle>9/1/20202 - 9/30/20</SubTitle>
+            <SubTitle>9/1/2020 - 9/30/2020</SubTitle>
           </TitleRow>
 
           {showEmailSent && (
