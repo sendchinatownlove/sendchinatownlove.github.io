@@ -93,7 +93,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
       width: '100%',
       fontSize: theme.typography.pxToRem(14),
       border: '1px solid #dadde9',
-      leaveTouchDelay: '30000'
+      leaveTouchDelay: '60000'
     },
   }))(Tooltip);
 
@@ -149,13 +149,14 @@ const Track = ({ setCurrentScreenView }: Props) => {
             <Label htmlFor="ticket-code">Ticket Code</Label>
             <InputField
               name="ticket-code"
-              type="text"
+              // type="text"
+              type="tel"
               onChange={(e) => {
                 setTicketCode(e.target.value);
                 setIsTicketValid(true);
               }}
               onKeyUp={(e) => {
-                if (e.keyCode !== 8) {
+                if (e.key !== 'Backspace' || e.keyCode !== 8) {
                   formatTicketCode(e.target['value']);
                 }
               }}
