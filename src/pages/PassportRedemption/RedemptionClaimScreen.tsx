@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { InputContainer } from './TrackScreen';
 import { Button, SubTitle } from './style';
@@ -9,8 +9,10 @@ import CircleLogo from './CircleLogo.png';
 import ScreenName from './ScreenName';
 
 import {
+  getPassportTickets,
   getOneSponsor,
   getLocationById,
+  redeemReward,
 } from '../../utilities/api/interactionManager';
 
 interface Props {
@@ -18,36 +20,57 @@ interface Props {
 }
 
 const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
-  const { sponsor_seller_id } = useParams();
+  const { push } = useHistory();
+  const { id, access_token, sponsor_seller_id } = useParams();
+
   const [selectedReward, setSelectedReward] = useState({
     id: '',
     name: '',
     location: {
       address1: '',
       address2: '',
-      borough: '',
+      city: '',
       state: '',
       zip_code: '',
     },
     logo_url: '',
     reward: '',
+    reward_detail: '',
   });
 
-  const fetchData = async () => {
+  const fetchSponsor = async () => {
     try {
-      const sponsorResponse = await getOneSponsor(sponsor_seller_id);
-      const locationResponse = await getLocationById(sponsorResponse.data.id);
+      const { data: sponsor } = await getOneSponsor(sponsor_seller_id);
+      const { data: location } = await getLocationById(sponsor_seller_id);
       setSelectedReward({
-        ...sponsorResponse.data,
-        location: locationResponse.data,
+        ...sponsor,
+        location: location,
       });
-    } catch (error) {
-      console.error('passport error: ' + error);
+    } catch (err) {
+      console.error('passport error: ' + err);
+    }
+  };
+
+  const handleRedemption = async () => {
+    try {
+      const { data: allTickets } = await getPassportTickets(id);
+      const ticketsToRedeem = allTickets
+        .filter((ticket) => ticket.sponsor_seller_id === null)
+        .slice(0, 3)
+        .map((ticket) => {
+          return { id: ticket.id, sponsor_seller_id };
+        });
+      const { status } = await redeemReward(id, access_token, ticketsToRedeem);
+      // add some kind of error handling to redirect user here
+      if (status !== 200) push(`/passport/${id}/tickets`);
+    } catch (err) {
+      console.error('passport error: ' + err);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    fetchSponsor();
+    handleRedemption();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -78,6 +101,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         <InputContainer className="top shadow">
           <Content>
             <Text className="header">{selectedReward.reward}</Text>
+            <Text className="subheader">{selectedReward.reward_detail}</Text>
             <img src={'logo_url'} alt="reward-logo" width="260px" />
             <br />
             <div>
@@ -85,13 +109,10 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
               {selectedReward && selectedReward.location && (
                 <>
                   <Text className="finePrint">
-                    {selectedReward.location.address1},{' '}
-                    {selectedReward.location.address2}
-                  </Text>
-                  <Text className="finePrint">
-                    {selectedReward.location.borough},{' '}
-                    {selectedReward.location.state}{' '}
-                    {selectedReward.location.zip_code}
+                    {selectedReward.location.address1}
+                    {selectedReward.location.address2 && ', '}
+                    {selectedReward.location.address2 &&
+                      selectedReward.location.address2}
                   </Text>
                 </>
               )}
@@ -115,7 +136,10 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         <Button
           value="redemption-selected-button"
           className="button--red-filled"
-          onClick={() => setCurrentScreenView(ScreenName.Redemption)}
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = `/passport/${id}/redeem/${access_token}`;
+          }}
         >
           MARK AS USED
         </Button>
@@ -161,11 +185,17 @@ const Text = styled.p`
   letter-spacing: 0.1em;
   font-weight: bold;
   font-size: 15px;
-  line-height: 75%;
+  line-height: 100%;
   text-align: center;
 
   &.header {
-    font-size: 30px;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  &.subheader {
+    font-size: 10px;
+    margin-bottom: 15px;
   }
 
   &.finePrint {

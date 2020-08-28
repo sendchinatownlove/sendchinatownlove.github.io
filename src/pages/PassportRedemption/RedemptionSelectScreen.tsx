@@ -13,7 +13,6 @@ import {
   getPassportTickets,
   getAllSponsors,
   getLocationById,
-  redeemReward,
 } from '../../utilities/api/interactionManager';
 
 interface Props {
@@ -24,27 +23,34 @@ interface Props {
 const PassportSelected = ({ setCurrentScreenView }: Props) => {
   const { id, access_token } = useParams();
 
-  const [error, setError] = useState('');
   const [tickets, setTickets] = useState<any[]>([]);
   const numRewards = Math.floor(tickets.length / 3);
+
   const [allSponsors, setAllSponsors] = useState<any[]>([]);
   const [selectedSponsor, setSelectedSponsor] = useState({
     id: null,
     reward_cost: null,
   });
 
-  const fetchData = async () => {
+  const fetchTickets = async () => {
     try {
-      const ticketsResponse = await getPassportTickets(id);
-      const availableTickets = ticketsResponse.data.filter(
+      const { data: allTickets } = await getPassportTickets(id);
+      const availableTickets = allTickets.filter(
         (ticket) => ticket.sponsor_seller_id === null
       );
       setTickets(availableTickets);
-      const allSponsorsResponse = await getAllSponsors();
+    } catch (err) {
+      console.error('passport error: ' + err);
+    }
+  };
+
+  const fetchSponsors = async () => {
+    try {
+      const { data: allSponsors } = await getAllSponsors();
       const allSponsorsWithLocations = await Promise.all(
-        allSponsorsResponse.data.map(async (sponsor) => {
-          const locationResponse = await getLocationById(sponsor.location_id);
-          return { ...sponsor, location: locationResponse.data };
+        allSponsors.map(async (sponsor) => {
+          const { data: location } = await getLocationById(sponsor.location_id);
+          return { ...sponsor, location: location };
         })
       );
       setAllSponsors(allSponsorsWithLocations);
@@ -54,39 +60,20 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchTickets();
+    fetchSponsors();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleRedemption = async () => {
-    try {
-      const ticketsToRedeem = tickets.slice(0, 3).map((ticket) => {
-        return { id: ticket.id, sponsor_seller_id: selectedSponsor.id };
-      });
-      const redemptionResponse = await redeemReward(
-        id,
-        access_token,
-        ticketsToRedeem
-      );
-      // TODO OS: so this isn't very secure, right? instead of route, should I just change view to RedemptionClaimScreen?
-      if (redemptionResponse.status === 200) {
-        window.location.href = `/passport/${id}/redeem/${access_token}/sponsor/${selectedSponsor.id}`;
-      } else setError('Something went wrong! Please try again.');
-    } catch (err) {
-      console.error('passport error: ' + err);
-    }
-  };
-
   const handleFooter = () => {
-    if (numRewards === 0)
-      return <NoRewardsFooter setCurrentScreenView={setCurrentScreenView} />;
+    if (numRewards === 0) return <NoRewardsFooter />;
     else if (!!selectedSponsor.id)
       return (
         <RedeemRewardsFooter
-          error={error}
+          id={id}
+          access_token={access_token}
           selectedSponsor={selectedSponsor}
-          handleRedemption={handleRedemption}
         />
       );
     else return <DefaultFooter allSponsors={allSponsors} id={id} />;
