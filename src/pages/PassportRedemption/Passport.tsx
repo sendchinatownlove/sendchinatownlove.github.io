@@ -172,6 +172,16 @@ const Passport = (props: Props) => {
               )
             }            
           </TitleRow>
+          {
+            !showFaq && (
+              <AddNewTicket
+                className="button--filled"
+                onClick={addTicket}
+              >
+                Add New Ticket
+              </AddNewTicket>
+            )
+          }
 
           {showEmailSent && (
             <SendEmailContainer>
