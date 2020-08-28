@@ -140,9 +140,7 @@ const RedeemedRow = styled.div`
     props.status === RowStatuses.Active && 'font-weight: 700;'};
 `;
 const Stamp = styled.img`
-  height: 35px;
-  width: 60px;
-  max-width: 75px;
+  width: 50px;
 `;
 const SendEmailButton = styled(Button)`
   height: 30px;

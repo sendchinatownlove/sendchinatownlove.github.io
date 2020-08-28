@@ -7,7 +7,7 @@ import {
   getParticipatingSeller,
   sendRedeemTicketsEmail,
 } from '../../utilities/api/interactionManager';
-import { PassportContainer, Title, SubTitle, Button } from './style';
+import { PassportContainer, TitleRow, Title, SubTitle, Button } from './style';
 
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
@@ -79,36 +79,40 @@ const Passport = (props: Props) => {
   }, [id]);
 
   const createTicketRows = (tickets) => {
-    // make a temp ticket that sorts the tickets by sponsor seller, then redemption date
-    const tempTickets = [...tickets];
-    const sortedTickets = tempTickets
-      .sort((a, b) => {
-        return b.sponsor_seller_id - a.sponsor_seller_id;
-      })
-      .sort((a, b) => {
-        const dateA = a.redeemed_at ? Date.parse(a.redeemed_at) : 0;
-        const dateB = b.redeemed_at ? Date.parse(b.redeemed_at) : 0;
-        return dateB - dateA;
-      });
+    
     let rows: any[] = [];
 
-    // group the entries by sponsor_seller_id,
-    const groupedTickets = groupBy(sortedTickets, 'sponsor_seller_id');
-    const newEntries = Object.keys(groupedTickets);
+    if (tickets.length > 0) {
+      // make a temp ticket that sorts the tickets by sponsor seller, then redemption date
+      let tempTickets = [...tickets]; 
+      const sortedTickets = tempTickets
+        .sort((a, b) => {
+          return b.sponsor_seller_id - a.sponsor_seller_id;
+        })
+        .sort((a, b) => {
+          const dateA = a.redeemed_at ? Date.parse(a.redeemed_at) : 0;
+          const dateB = b.redeemed_at ? Date.parse(b.redeemed_at) : 0;
+          return dateB - dateA;
+        });
+      
+        // group the entries by sponsor_seller_id,
+      const groupedTickets = groupBy(sortedTickets, 'sponsor_seller_id');
+      const newEntries = Object.keys(groupedTickets);
 
-    // for each key in newEntries (different sponsor sellers + non redeemed tickets which are labeled as key null)
-    // push the stamps to rows of 3, if there arent 3, then push the left over amount
-    for (const entry of newEntries) {
-      const arrays =
-        entry === 'null'
-          ? sortedTickets.filter((ticket) => !ticket.sponsor_seller_id)
-          : sortedTickets.filter(
-              (ticket) => ticket.sponsor_seller_id === parseInt(entry)
-            );
-      while (arrays.length) {
-        rows.push(arrays.splice(0, 3));
-      }
-    }
+      // for each key in newEntries (different sponsor sellers + non redeemed tickets which are labeled as key null)
+      // push the stamps to rows of 3, if there arent 3, then push the left over amount
+      for (const entry of newEntries) {
+        const arrays =
+          entry === 'null'
+            ? sortedTickets.filter((ticket) => !ticket.sponsor_seller_id)
+            : sortedTickets.filter(
+                (ticket) => ticket.sponsor_seller_id === parseInt(entry)
+              );
+        while (arrays.length) {
+          rows.push(arrays.splice(0, 3));
+        }
+      }        
+    }    
 
     // if there are less than 6 rows, make 6 rows, other wise make one extra row
     if (rows.length < 6) {
@@ -154,9 +158,9 @@ const Passport = (props: Props) => {
   return (
     <Container>
       <HeaderContainer>
-        <RedirectionLinks href="#">Learn More</RedirectionLinks>
+        <RedirectionLinks href="https://www.sendchinatownlove.com/food-crawl.html">Learn More</RedirectionLinks>
         <Logo src={CircleLogo} alt="scl-log" />
-        <RedirectionLinks href="#">contact us</RedirectionLinks>
+        <RedirectionLinks href="mailto:hello@sendchinatownlove.com">contact us</RedirectionLinks>
       </HeaderContainer>
       <BodyContainer>
         <FAQ
@@ -190,16 +194,20 @@ const Passport = (props: Props) => {
               </SendEmailButtonClose>
             </SendEmailContainer>
           )}
-          {tickets.length > 0 && createRows(tickets)}
+          {createRows(tickets)}
+        </PassportContainer>
+      </BodyContainer>
+
+      {
+        !showFaq && (
           <AddNewTicket
-            value="track-screen-button"
             className="button--filled"
             onClick={addTicket}
           >
             Add New Ticket
           </AddNewTicket>
-        </PassportContainer>
-      </BodyContainer>
+        )
+      }
     </Container>
   );
 };
@@ -244,13 +252,6 @@ const BodyContainer = styled.div`
   justify-content: center;
 `;
 
-const TitleRow = styled.div`
-  text-align: center;
-  padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
-`;
-
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -264,6 +265,7 @@ const AddNewTicket = styled(Button)`
   bottom: 10px;
   left: 50%;
   width: 300px;
+  z-index: 100;
 `;
 
 const SendEmailContainer = styled.div`
