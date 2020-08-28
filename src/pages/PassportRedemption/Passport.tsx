@@ -8,6 +8,7 @@ import {
   sendRedeemTicketsEmail,
 } from '../../utilities/api/interactionManager';
 import { PassportContainer, TitleRow, Title, SubTitle, Button } from './style';
+import ScreenName from './ScreenName';
 
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
@@ -158,9 +159,9 @@ const Passport = (props: Props) => {
   return (
     <Container>
       <HeaderContainer>
-        <RedirectionLinks href="#">Learn More</RedirectionLinks>
+        <RedirectionLinks href="https://www.sendchinatownlove.com/food-crawl.html">Learn More</RedirectionLinks>
         <Logo src={CircleLogo} alt="scl-log" />
-        <RedirectionLinks href="#">contact us</RedirectionLinks>
+        <RedirectionLinks href="mailto:hello@sendchinatownlove.com">contact us</RedirectionLinks>
       </HeaderContainer>
       <BodyContainer>
         <FAQ
@@ -195,15 +196,19 @@ const Passport = (props: Props) => {
             </SendEmailContainer>
           )}
           {createRows(tickets)}
+        </PassportContainer>
+      </BodyContainer>
+
+      {
+        !showFaq && (
           <AddNewTicket
-            value="track-screen-button"
             className="button--filled"
             onClick={addTicket}
           >
             Add New Ticket
           </AddNewTicket>
-        </PassportContainer>
-      </BodyContainer>
+        )
+      }
     </Container>
   );
 };
@@ -261,6 +266,7 @@ const AddNewTicket = styled(Button)`
   bottom: 10px;
   left: 50%;
   width: 300px;
+  z-index: 100;
 `;
 
 const SendEmailContainer = styled.div`
