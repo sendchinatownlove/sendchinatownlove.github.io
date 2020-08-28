@@ -44,7 +44,7 @@ export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
           window.location.href = `/passport/${props.id}/redeem/${props.access_token}/sponsor/${props.selectedSponsor.id}`;
         }}
       >
-        REEDEM NOW
+        REDEEM NOW
       </Button>
     </Footer>
   );
