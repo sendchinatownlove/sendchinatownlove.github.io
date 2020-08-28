@@ -10,12 +10,12 @@ type Props = {
 };
 
 const Faq = ({ showFaq, toggleView }: Props) => {
-  const history = useHistory();
+  const { push } = useHistory();
   const { id } = useParams();
 
   const goToPassPort = (e) => {
-    console.log("clicked");
-    history.push(`/passport/${id}/tickets`);
+    e.preventDefault();
+    push(`/passport/${id}/tickets`);
   }
   
   return (
