@@ -16,7 +16,6 @@ const PassportContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 367px;
-  // max-width: 367px;
   margin: 0 auto;
   background: #ffffff;
 
@@ -59,18 +58,20 @@ const SubTitle = styled.span`
   font-size: ${(props: Props) => (props.size ? props.size : '12px')};
   font-weight: ${(props: Props) => (props.bold ? props.bold : '400')};
   text-align: ${(props: Props) => (props.align ? props.align : 'center')};
-  letter-spacing: 0.11em;
+  letter-spacing: 0.1em;
 `;
 
 const Button = styled.button`
-  margin: 20px auto 10px auto;
+  margin: 10px auto;
+  outline: none;
+  cursor: pointer;
 
   &.linkButton {
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid black;
-    line-spacing: 0.1em;
+    letter-spacing: 0.1em;
     font-weight: bold;
+    text-transform: uppercase;
   }
 `;
 

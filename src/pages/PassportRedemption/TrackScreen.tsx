@@ -31,7 +31,6 @@ const Track = ({ setCurrentScreenView }: Props) => {
   const [isTicketValid, setIsTicketValid] = useState(true);
 
   const [instagramHandle, setinstagramHandle] = useState('');
-  // const [contactId, setContactId] = useState('');
 
   const findOrCreateUser = async (email, viewTickets) => {
     const { data } = await getPassportEmailId(email);
@@ -68,7 +67,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
   const findTicketCode = async (code, contactId) => {
     const formattedCode = code.split('-').join('');
 
-    const { data } = await checkForValidTicket(formattedCode);
+    const { data } = await checkForValidTicket(formattedCode.toUpperCase());
     if (data && !data.contact_id) {
       const { data: newContactId } = await updateTicketContactId(
         formattedCode,
@@ -94,6 +93,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
       width: '100%',
       fontSize: theme.typography.pxToRem(14),
       border: '1px solid #dadde9',
+      leaveTouchDelay: '30000'
     },
   }))(Tooltip);
 
@@ -120,6 +120,8 @@ const Track = ({ setCurrentScreenView }: Props) => {
             Enter your ticket code to start accumulating rewards you can use in
             Chinatown
           </SubTitle>
+
+          <Column />
 
           <Column>
             <Label htmlFor="email-input">Email Address</Label>
@@ -153,7 +155,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
                 setIsTicketValid(true);
               }}
               onKeyUp={(e) => {
-                if (e.key !== 'Backspace') {
+                if (e.keyCode !== 8) {
                   formatTicketCode(e.target['value']);
                 }
               }}
@@ -171,7 +173,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
           <Column>
             <Row className="row-no-margin">
               <Label htmlFor="instagram-handle">
-                Instagram Handle (for Digital Giveaway)
+                Instagram Handle <strong>(for Digital Giveaway)</strong>
               </Label>
               <SupporterTooltip
                 title={
@@ -180,7 +182,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
                       <tbody>
                         <tr>
                           To be entered into our weekly Digital Giveaways, visit 3
-                          merchants and post and tag <b>@sendchinatownlove</b>
+                          merchants and post and tag <strong>@sendchinatownlove</strong>
                           &nbsp;with your food crawl pictures on Instagram. Enter your
                           Instagram handle so we can track your entries.
                         </tr>
@@ -203,6 +205,9 @@ const Track = ({ setCurrentScreenView }: Props) => {
               value={instagramHandle}
               placeholder="@"
             />
+            <SubTitle color="grey" size="11px" align="left">
+              Optional
+            </SubTitle>
           </Column>
         </InputContainer>
 
@@ -217,15 +222,19 @@ const Track = ({ setCurrentScreenView }: Props) => {
           >
             Add Ticket
           </Button>
-          <Button
-            className="linkButton"
-            disabled={!email}
-            onClick={() => {
-              findOrCreateUser(email, true);
-            }}
-          >
-            View my tickets
-          </Button>
+          {
+            !!email && EMAIL_REGEX.test(email) && (
+              <Button
+              className="linkButton"
+              disabled={!email}
+              onClick={() => {
+                findOrCreateUser(email, true);
+              }}
+              >
+                View my tickets
+              </Button>
+            )
+          }
         </InputContainer>
       </PassportCard>
 
@@ -256,6 +265,7 @@ const Container = styled.div`
   width: 367px;
   margin: 0 auto;
 `;
+
 const PassportCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -321,6 +331,8 @@ const InputField = styled.input`
   margin-top: 8px;
   padding-left: 1em;
   border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
 
   :invalid {
     border: 1px solid red;
