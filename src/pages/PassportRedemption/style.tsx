@@ -28,7 +28,7 @@ const PassportContainer = styled.div`
 
   position: absolute;
   z-index: ${(props: PassportProps) => (props.mainView ? '10' : '0')};
-  top: ${(props: PassportProps) => (props.mainView ? '40px' : '0')};
+  top: ${(props: PassportProps) => (props.mainView ? '50px' : '0')};
 `;
 
 const ExternalLink = styled.a`

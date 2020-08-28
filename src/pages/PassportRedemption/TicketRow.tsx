@@ -51,7 +51,7 @@ const TicketRow = (props: Props) => {
       case RowStatuses.Active:
         return `READY TO REDEEM`;
       default:
-        return `${3 - props.stamps.length} MORE STAMPS UNTIL YOUR NEXT REWARD`;
+        return `${3 - props.stamps.length} MORE ${3 - props.stamps.length > 1 ? 'STAMPS' : 'STAMP'}  UNTIL YOUR NEXT REWARD`;
     }
   };
 
@@ -143,12 +143,18 @@ const Stamp = styled.img`
   width: 50px;
 `;
 const SendEmailButton = styled(Button)`
-  height: 30px;
+  height: 35px;
   width: 300px;
   margin: 0 auto;
   display: flex;
-  align-items: center;
   justify-content: center;
   position: absolute;
+
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 15px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 `;
