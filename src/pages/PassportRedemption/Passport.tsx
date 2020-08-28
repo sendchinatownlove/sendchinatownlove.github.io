@@ -8,7 +8,6 @@ import {
   sendRedeemTicketsEmail,
 } from '../../utilities/api/interactionManager';
 import { PassportContainer, TitleRow, Title, SubTitle, Button } from './style';
-import ScreenName from './ScreenName';
 
 import TicketRow from './TicketRow';
 import FAQ from './Faq';

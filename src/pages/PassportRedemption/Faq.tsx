@@ -10,12 +10,11 @@ type Props = {
 };
 
 const Faq = ({ showFaq, toggleView }: Props) => {
-  const { push } = useHistory();
+  const history = useHistory();
   const { id } = useParams();
 
   const goToPassPort = (e) => {
-    e.preventDefault();
-    push(`/passport/${id}/tickets`);
+    history.push(`/passport/${id}/tickets`);
   }
   
   return (
@@ -30,7 +29,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
         </>
       )}
       <Content hidden={!showFaq}>
-        <RewardsLink href="">VIEW ACTIVE REWARDS & GIVEAWAYS</RewardsLink>
+        <RewardsLink onClick={goToPassPort}>VIEW ACTIVE REWARDS & GIVEAWAYS</RewardsLink>
         <Question>1. What is the Send Chinatown Love Food Crawl?</Question>
         For the <strong><u>month of September</u></strong>, Send Chinatown Love is hosting a food crawl in Manhattan’s Chinatown, highlighting 13 incredible restaurants, bakeries, cafes and more throughout the neighborhood. Come with your friends and family to explore locally and savor all the incredible things Chinatown has to offer and earn rewards for shopping with our merchants!
  
