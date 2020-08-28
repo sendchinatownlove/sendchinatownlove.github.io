@@ -102,7 +102,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
           <Content>
             <Text className="header">{selectedReward.reward}</Text>
             <Text className="subheader">{selectedReward.reward_detail}</Text>
-            <img src={'logo_url'} alt="reward-logo" width="260px" />
+            <img src={selectedReward.logo_url} alt="reward-logo" width="260px" />
             <br />
             <div>
               <Text className="">{selectedReward.name}</Text>
