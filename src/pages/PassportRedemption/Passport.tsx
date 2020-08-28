@@ -6,12 +6,22 @@ import {
   getPassportTickets,
   getParticipatingSeller,
   sendRedeemTicketsEmail,
+  getContactInfo,
 } from '../../utilities/api/interactionManager';
-import { PassportContainer, TitleRow, MainTitle, Title, SubTitle, Button } from './style';
+import {
+  CardContainer,
+  TitleRow,
+  Title,
+  SubTitle,
+  Button,
+  InstagramDisabled,
+  InstagramEnabled,
+} from './style';
 
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
 
+import PassportDashboardBackground from './PassportDashboardBackground.png';
 import PassportIconImg from './passportIcon.png';
 import CircleLogo from './CircleLogo.png';
 
@@ -19,25 +29,11 @@ interface Props {
   setCurrentScreenView: Function;
 }
 
-/**
- * groups an array of objects according to a specific key
- *
- * @param {object[]} array - the array we are iterating over
- * @param {key} children - the key we are grouping by
- * @return {object} an object whose keys will be the different groups
- *
- */
-function groupBy(array, key) {
-  return array.reduce((rv, x) => {
-    (rv[x[key]] = rv[x[key]] || []).push(x);
-    return rv;
-  }, {});
-}
-
 const Passport = (props: Props) => {
   const { id } = useParams();
   const { push, location } = useHistory();
   const [showFaq, setShowFaq] = useState(false);
+  const [showInstagram, setShowInstagram] = useState(false);
   const [showEmailSent, setShowEmailSent] = useState(false);
   const [tickets, setTickets] = useState<any[]>([]);
 
@@ -51,7 +47,11 @@ const Passport = (props: Props) => {
 
   useEffect(() => {
     if (id) {
-      getPassportTickets(id)
+      getContactInfo(id)
+        .then((contactInfo) => {
+          setShowInstagram(contactInfo.data.instagram);
+          return getPassportTickets(id);
+        })
         .then((ticketIds) => {
           let promises: any[] = [];
           ticketIds.data.forEach((ticket) => {
@@ -69,7 +69,14 @@ const Passport = (props: Props) => {
         })
         .then((passportTickets) => {
           if (passportTickets.length > 0) {
-            setTickets(passportTickets);
+            const sortedTickets = passportTickets.sort((a, b) => {
+              const dateA = new Date(a.associated_with_contact_at);
+              const dateB = new Date(b.associated_with_contact_at);
+
+              return dateB.getTime() - dateA.getTime();
+            });
+
+            setTickets(sortedTickets.reverse());
           }
         })
         .catch((err) => {
@@ -79,38 +86,15 @@ const Passport = (props: Props) => {
   }, [id]);
 
   const createTicketRows = (tickets) => {
-
     let rows: any[] = [];
 
     if (tickets.length > 0) {
       // make a temp ticket that sorts the tickets by sponsor seller, then redemption date
       let tempTickets = [...tickets];
-      const sortedTickets = tempTickets
-        .sort((a, b) => {
-          const dateA = a.redeemed_at ? Date.parse(a.redeemed_at) : 0;
-          const dateB = b.redeemed_at ? Date.parse(b.redeemed_at) : 0;
-          if (dateA !== dateB) {
-            return dateB - dateA;
-          }
-          return b.sponsor_seller_id - a.sponsor_seller_id;
-        })
 
-      // group the entries by sponsor_seller_id,
-      const groupedTickets = groupBy(sortedTickets, 'sponsor_seller_id');
-      const newEntries = Object.keys(groupedTickets);
-
-      // for each key in newEntries (different sponsor sellers + non redeemed tickets which are labeled as key null)
       // push the stamps to rows of 3, if there arent 3, then push the left over amount
-      for (const entry of newEntries) {
-        const arrays =
-          entry === 'null'
-            ? sortedTickets.filter((ticket) => !ticket.sponsor_seller_id)
-            : sortedTickets.filter(
-              (ticket) => ticket.sponsor_seller_id === parseInt(entry)
-            );
-        while (arrays.length) {
-          rows.push(arrays.splice(0, 3));
-        }
+      while (tempTickets.length) {
+        rows.push(tempTickets.splice(0, 3));
       }
     }
 
@@ -136,18 +120,18 @@ const Passport = (props: Props) => {
     const rows = createTicketRows(stamps);
     return (
       <TableContainer>
-      <Table>
-        <tbody>
-          {rows.map((row, index) => (
-            <TicketRow
-              stamps={row}
-              index={index}
-              key={index}
-              sendEmail={sendEmail}
-            />
-          ))}
-        </tbody>
-      </Table>
+        <Table>
+          <tbody>
+            {rows.map((row, index) => (
+              <TicketRow
+                stamps={row}
+                index={index}
+                key={index}
+                sendEmail={sendEmail}
+              />
+            ))}
+          </tbody>
+        </Table>
       </TableContainer>
     );
   };
@@ -160,9 +144,13 @@ const Passport = (props: Props) => {
   return (
     <Container>
       <HeaderContainer>
-        <RedirectionLinks href="https://www.sendchinatownlove.com/food-crawl.html">Learn More</RedirectionLinks>
+        <RedirectionLinks href="https://www.sendchinatownlove.com/food-crawl.html">
+          Learn More
+        </RedirectionLinks>
         <Logo src={CircleLogo} alt="scl-log" />
-        <RedirectionLinks href="mailto:hello@sendchinatownlove.com">contact us</RedirectionLinks>
+        <RedirectionLinks href="mailto:hello@sendchinatownlove.com">
+          contact us
+        </RedirectionLinks>
       </HeaderContainer>
       <BodyContainer>
         <FAQ
@@ -174,8 +162,29 @@ const Passport = (props: Props) => {
           onClick={() => push(location.pathname)}
         >
           <TitleRow>
-            <MainTitle isMainTitle={!showFaq}>PASSPORT TO CHINATOWN</MainTitle>
-            <SubTitle>9/1/2020 - 9/30/2020</SubTitle>
+            <Title color={showFaq ? 'grey' : 'black'}>PASSPORT TO CHINATOWN</Title>
+            {showFaq ? (
+              <>
+                <br />
+                <br />
+                <br />
+              </>
+            ) : (
+              <>
+                <SubHeader color={showFaq ? 'transparent' : 'black'}>
+                  {showInstagram
+                    ? 'INSTAGRAM FOR GIVEAWAY ADDED'
+                    : '9/1/2020 - 9/30/2020'}
+                </SubHeader>
+                <Icon>
+                  {showInstagram ? (
+                    <InstagramEnabled />
+                  ) : (
+                    <InstagramDisabled />
+                  )}
+                </Icon>
+              </>
+            )}
           </TitleRow>
 
           {showEmailSent && (
@@ -186,6 +195,9 @@ const Passport = (props: Props) => {
                 <SubTitle bold="700">
                   Check your inbox shortly for a link to access your available
                   rewards!
+                  <br />
+                  <br />
+                  This link will expire in 30 minutes.
                 </SubTitle>
               </TitleRow>
               <SendEmailButtonClose
@@ -199,17 +211,11 @@ const Passport = (props: Props) => {
           {!showFaq && createRows(tickets)}
         </PassportContainer>
       </BodyContainer>
-
-      {
-        !showFaq && (
-          <AddNewTicket
-            className="button--filled"
-            onClick={addTicket}
-          >
-            Add New Ticket
-          </AddNewTicket>
-        )
-      }
+      {!showFaq && (
+        <AddNewTicket className="button--filled" onClick={addTicket}>
+          Add New Ticket
+        </AddNewTicket>
+      )}
     </Container>
   );
 };
@@ -223,6 +229,16 @@ const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+`;
+
+const PassportContainer = styled(CardContainer)`
+  background-size: 400px;
+  background-image: url(${PassportDashboardBackground});
+  max-height: 650px;
+`;
+
+const SubHeader = styled(SubTitle)`
+  font-style: italic;
 `;
 
 const HeaderContainer = styled.div`
@@ -270,19 +286,20 @@ const Table = styled.table`
 const AddNewTicket = styled(Button)`
   position: fixed;
   margin-left: -150px;
-  bottom: 10px;
+  bottom: 0;
   left: 50%;
   width: 300px;
   z-index: 100;
+  font-weight: bold;
 `;
 
 const SendEmailContainer = styled.div`
-  position: fixed;
+  position: absolute;
   width: 340px;
   margin: 0 auto;
   height: 260px;
   z-index: 20;
-  top: 50px;
+  top: 70px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -306,4 +323,13 @@ const SendEmailButtonClose = styled(Button)`
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
+`;
+
+const Icon = styled.div`
+  position: absolute;
+  right: 10px;
+  text-decoration: none;
+  color: black;
+  padding: 10px 15px;
+  font-size: 22px;
 `;

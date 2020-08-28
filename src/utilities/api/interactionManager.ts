@@ -193,6 +193,12 @@ export const getPassportEmailId = async (email: string) =>
     .then((res) => res)
     .catch((err) => err);
 
+export const getContactInfo = async (passportId: string) =>
+  axios
+    .get(contacts + passportId)
+    .then((res) => res)
+    .catch((err) => err);
+
 export const createPassportEmailId = async (
   email: string,
   instagram: string
