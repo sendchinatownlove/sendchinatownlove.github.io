@@ -54,7 +54,16 @@ const Passport = (props: Props) => {
         })
         .then((passportTickets) => {
           if (passportTickets.length > 0) {
-            setTickets(passportTickets);
+            console.log("passportTickets: "+JSON.stringify(passportTickets));
+            const sortedTickets = passportTickets
+              .sort((a, b) => {
+                const dateA = new Date(a.associated_with_contact_at);
+                const dateB = new Date(b.associated_with_contact_at);
+      
+                return dateB.getTime() - dateA.getTime();
+              });
+
+            setTickets(sortedTickets.reverse());
           }
         })
         .catch((err) => {
@@ -70,18 +79,10 @@ const Passport = (props: Props) => {
     if (tickets.length > 0) {
       // make a temp ticket that sorts the tickets by sponsor seller, then redemption date
       let tempTickets = [...tickets]; 
-      const sortedTickets = tempTickets
-        .sort((a, b) => {
-          const dateA = new Date(a.associated_with_contact_at);
-          const dateB = new Date(b.associated_with_contact_at);
 
-          return dateB.getTime() + dateA.getTime();
-        });
-
-        
       // push the stamps to rows of 3, if there arent 3, then push the left over amount
-      while (sortedTickets.length) {
-        rows.push(sortedTickets.splice(0, 3));
+      while (tempTickets.length) {
+        rows.push(tempTickets.splice(0, 3));
       }
     }
 
