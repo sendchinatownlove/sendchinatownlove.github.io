@@ -27,8 +27,11 @@ const PassportContainer = styled.div`
   overflow: hidden;
 
   position: absolute;
+  opacity: ${(props: PassportProps) => (props.mainView ? '1' : '0.5')};
   z-index: ${(props: PassportProps) => (props.mainView ? '10' : '0')};
   top: ${(props: PassportProps) => (props.mainView ? '50px' : '0')};
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 `;
 
 const ExternalLink = styled.a`
