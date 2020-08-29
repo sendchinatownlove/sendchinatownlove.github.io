@@ -34,7 +34,7 @@ const TicketRow = (props: Props) => {
 
   useEffect(() => {
     if (props.stamps.some((stamp) => stamp.redeemed_at)) {
-      const date = props.stamps.find((stamp) => stamp.redeemed_at);
+      const date = props.stamps.find((stamp) => !!stamp.redeemed_at);
       if (!!date) setRedeemedOn(date.redeemed_at);
       setStatus(RowStatuses.Redeemed);
     } else if (props.stamps.length === 3) {
@@ -55,11 +55,23 @@ const TicketRow = (props: Props) => {
     }
   };
 
+  const createStamps = (stamps) => {
+    const filledStamps = stamps.map((ticketInfo) => (
+      <Stamp key={ticketInfo.id} src={ticketInfo.stamp_url} />
+    ));
+
+    while(filledStamps.length < 3) {
+      filledStamps.push(<EmptyStamp />);
+    }
+
+    return filledStamps
+  }
+
   return (
     <TableRow key={props.index} status={status}>
       <TableIndex> {props.index + 1} </TableIndex>
       <TableStamp>
-        <StampRow>
+        <StampColumn>
           {status === RowStatuses.Active && (
             <SendEmailButton
               className="button--red-filled"
@@ -68,10 +80,10 @@ const TicketRow = (props: Props) => {
               Send to Email
             </SendEmailButton>
           )}
-          {props.stamps.map((ticketInfo) => (
-            <Stamp key={ticketInfo.id} src={ticketInfo.stamp_url} />
-          ))}
-        </StampRow>
+          <StampRow>
+            {!!props.stamps && createStamps(props.stamps)}
+          </StampRow>
+        </StampColumn>
         <RedeemedRow status={status}>{showRedeemRow(status)}</RedeemedRow>
       </TableStamp>
     </TableRow>
@@ -116,15 +128,25 @@ const TableIndex = styled.td`
 `;
 const TableStamp = styled.td`
   width: 100%;
+  position: relative;
+`;
+const StampColumn = styled.div`
+  position: relative;
+  width: 100%;  
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const StampRow = styled.div`
-  position: relative;
-  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  height: 70px;
+  margin: 0 auto;
+  width: 80%;
+  height: 100%;
 `;
 const RedeemedRow = styled.div`
   border-top: 1px dotted #a5a5a5;
@@ -140,6 +162,9 @@ const RedeemedRow = styled.div`
     props.status === RowStatuses.Active && 'font-weight: 700;'};
 `;
 const Stamp = styled.img`
+  width: 55px;
+`;
+const EmptyStamp = styled.div`
   width: 55px;
 `;
 const SendEmailButton = styled(Button)`
