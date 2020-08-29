@@ -88,7 +88,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
             We have partnered with other local businesses to offer rewards to food crawl participants who have successfully collected three (3) tickets. These rewards range from discounts to complimentary items with a purchase.
           </BulletPoint>
           <BulletPoint>
-            See the full list of our reward partners and their offerings on our site, <a href="www.sendchinatownlove.com/food-crawl" target="_blank">www.sendchinatownlove.com/food-crawl </a>
+            See the full list of our reward partners and their offerings on our site, <a href="https://www.sendchinatownlove.com/food-crawl.html" target="_blank" rel="noopener noreferrer">www.sendchinatownlove.com/food-crawl </a>
           </BulletPoint>
 
         <Question>10. How do I redeem my reward?</Question>
@@ -96,7 +96,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
             Scan the QR code on the back side of your ticket to access your <em>Passport to Chinatown</em>. You will be able to keep track of the vendors you have   visited and redeem your rewards there.
           </BulletPoint>
           <BulletPoint>
-            Once you have submitted three (3) tickets (one (1) ticket each from three (3) different vendors) to your <em>Passport</em>, you will be able to redeem a reward from one of our reward partners listed at <a href="www.sendchinatownlove.com/food-crawl" target="_blank">www.sendchinatownlove.com/food-crawl</a>.
+            Once you have submitted three (3) tickets (one (1) ticket each from three (3) different vendors) to your <em>Passport</em>, you will be able to redeem a reward from one of our reward partners listed at <a href="https://www.sendchinatownlove.com/food-crawl.html" target="_blank" rel="noopener noreferrer">www.sendchinatownlove.com/food-crawl</a>.
           </BulletPoint>
           <BulletPoint>
             Visit one of our reward partners to redeem your reward!
@@ -107,7 +107,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
             The rewards are redeemable from our local reward partners’ stores for the entire duration of the food crawl (September 1 - 30, 2020). Once you redeem a reward, your <em>Passport to Chinatown</em> will mark that reward as used.
           </BulletPoint>
           <BulletPoint>
-            Please note that some of our reward partners are only open certain days of the week. Check our website <a href="www.sendchinatownlove.com/food-crawl" target="_blank">www.sendchinatownlove.com/food-crawl</a> for the latest updates.
+            Please note that some of our reward partners are only open certain days of the week. Check our website <a href="https://www.sendchinatownlove.com/food-crawl.html" target="_blank" rel="noopener noreferrer">www.sendchinatownlove.com/food-crawl</a> for the latest updates.
           </BulletPoint>
 
         <Question>12. What are the weekly digital giveaways?</Question>
