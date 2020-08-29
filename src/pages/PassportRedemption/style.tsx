@@ -87,6 +87,19 @@ const ErrorMessage = styled.div`
   padding-top: 5px;
 `;
 
+interface CardTextProps {
+  bold?: string;
+  size?: string;
+}
+
+const CardText = styled.p`
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+  font-weight: ${(props: CardTextProps) => (props.bold ? props.bold : '400')};
+  font-size: ${(props: CardTextProps) => (props.size ? props.size : '12px')};
+`;
+
 export {
   PassportContainer,
   TitleRow,
@@ -95,4 +108,5 @@ export {
   Button,
   ErrorMessage,
   ExternalLink,
+  CardText
 };

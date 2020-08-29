@@ -56,12 +56,13 @@ interface defaultProps {
 }
 
 export const DefaultFooter = (props: defaultProps) => {
+  
   return (
     <Footer>
       <SubTitle bold="700">
         Select an offer and be ready to show this screen when you’re ordering.
       </SubTitle>
-
+      
       {props.allSponsors.length <= 4 && (
         <Button
           className="linkButton"
