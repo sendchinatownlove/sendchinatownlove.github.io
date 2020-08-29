@@ -35,7 +35,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
     },
     logo_url: '',
     reward: '',
-    reward_detail: ''
+    reward_detail: '',
   });
 
   const fetchSponsor = async () => {
@@ -102,7 +102,11 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
           <Content>
             <Text className="header">{selectedReward.reward}</Text>
             <Text className="subheader">{selectedReward.reward_detail}</Text>
-            <img src={selectedReward.logo_url} alt="reward-logo" width="260px" />
+            <img
+              src={selectedReward.logo_url}
+              alt="reward-logo"
+              width="260px"
+            />
             <br />
             <div>
               <Text className="">{selectedReward.name}</Text>
@@ -193,9 +197,9 @@ const Text = styled.p`
     margin-bottom: 5px;
   }
 
-  &.subheader {	
-    font-size: 10px;	
-    margin-bottom: 15px;	
+  &.subheader {
+    font-size: 10px;
+    margin-bottom: 15px;
   }
 
   &.finePrint {

@@ -108,5 +108,5 @@ export {
   Button,
   ErrorMessage,
   ExternalLink,
-  CardText
+  CardText,
 };

@@ -7,7 +7,7 @@ import {
   RedeemRewardsFooter,
   DefaultFooter,
 } from './RedemptionFooters';
-import { CardText } from './style'
+import { CardText } from './style';
 import CircleLogo from './CircleLogo.png';
 
 import {
@@ -111,44 +111,38 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
                   }
                 }}
               >
-                {numRewards !== 0 &&
+                {numRewards !== 0 && (
                   <input
                     type="radio"
                     checked={selectedSponsor.id === sponsor.id}
                     id={sponsor.reward}
                   />
-                }
+                )}
 
                 <SingleRewardInfo>
                   <div>
-                    <CardText bold='700' size='14px'>
+                    <CardText bold="700" size="14px">
                       {sponsor.reward}
                     </CardText>
-                    <CardText bold='700' size='10px'>
+                    <CardText bold="700" size="10px">
                       {sponsor.reward_detail}
                     </CardText>
                   </div>
-                  <LogoImage
-                    src={sponsor.logo_url}
-                    alt="reward-logo"
-                  />
-                  <CardText bold='700' size='10px'>{sponsor.name}</CardText>
+                  <LogoImage src={sponsor.logo_url} alt="reward-logo" />
+                  <CardText bold="700" size="10px">
+                    {sponsor.name}
+                  </CardText>
                   {sponsor && sponsor.location && (
-                    <CardText size='10px'>
-                      {sponsor.location.address1}
-                    </CardText>
+                    <CardText size="10px">{sponsor.location.address1}</CardText>
                   )}
                 </SingleRewardInfo>
-                
               </SingleRewardContainer>
             );
           })}
+        {allSponsors.length > 4 && <Buffer />}
       </RewardsContainer>
 
-    <Footer numSponsors={allSponsors.length}>
-      {handleFooter()}
-    </Footer>
-
+      <Footer numSponsors={allSponsors.length}>{handleFooter()}</Footer>
     </Container>
   );
 };
@@ -174,8 +168,9 @@ const Header = styled.div<{
   width: 100vw;
   position: relative;
 
-  ${(props) => props.numSponsors > 4
-    ? `    
+  ${(props) =>
+    props.numSponsors > 4
+      ? `    
       &::after {
         content: '';
         position: absolute;
@@ -186,10 +181,10 @@ const Header = styled.div<{
         background-color: white;
         box-shadow: 0px 25px 27px 22px white;
       }
-    ` : ''
-  }
-`
-  
+    `
+      : ''}
+`;
+
 const Logo = styled.img`
   z-index: 10;
   width: 70px;
@@ -208,7 +203,7 @@ const Heading = styled.span`
   z-index: 2;
   font-weight: bold;
   font-size: 13px;
-`
+`;
 
 const SubHeading = styled.span`
   letter-spacing: 0.15em;
@@ -230,14 +225,16 @@ const Footer = styled.div<{
     padding: 10px;
   }
 
-  ${(props) => props.numSponsors > 4
-    ? `  
+  ${(props) =>
+    props.numSponsors > 4
+      ? `  
       height: calc(min-content - 20px);
       postion: relative;
       background-color: white;
       box-shadow: 0px -10px 27px 20px white;
       z-index: 1;
-    ` : '' }
+    `
+      : ''}
 `;
 
 const RewardsContainer = styled.div`
@@ -258,15 +255,17 @@ const SingleRewardContainer = styled.button<{
 }>`
   width: 160px;
   height: 220px;
-  border: ${(props) => props.selected ? '1px solid black' : '1px solid #e5e5e5'};
-  box-shadow: ${(props) => props.numRewards > 0 ? '0px 0px 10px rgba(0, 0, 0, 0.25)' : 'none'};
+  border: ${(props) =>
+    props.selected ? '1px solid black' : '1px solid #e5e5e5'};
+  box-shadow: ${(props) =>
+    props.numRewards > 0 ? '0px 0px 10px rgba(0, 0, 0, 0.25)' : 'none'};
   background-color: white;
   padding: 5px 5px;
   box-sizing: border-box;
   margin: 8px;
   outline: none;
   border-radius: 5px;
-  cursor: ${(props) => props.numRewards > 0 ? 'pointer' : 'auto'};
+  cursor: ${(props) => (props.numRewards > 0 ? 'pointer' : 'auto')};
 
   display: flex;
   flex-direction: column;
@@ -284,4 +283,9 @@ const SingleRewardInfo = styled.div`
 const LogoImage = styled.img`
   width: 130px;
   border-radius: 20px;
-`
+`;
+
+const Buffer = styled.div`
+  height: 50px;
+  grid-column: 1 / span 2;
+`;
