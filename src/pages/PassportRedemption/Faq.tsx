@@ -31,7 +31,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
       <Content hidden={!showFaq}>
         <RewardsLink onClick={goToPassPort}>VIEW ACTIVE REWARDS & GIVEAWAYS</RewardsLink>
         <Question>1. What is the Send Chinatown Love Food Crawl?</Question>
-        For the <strong><u>month of September</u></strong>, Send Chinatown Love is hosting a food crawl in Manhattan’s Chinatown, highlighting 13 incredible restaurants, bakeries, cafes and more throughout the neighborhood. Come with your friends and family to explore locally and savor all the incredible things Chinatown has to offer and earn rewards for shopping with our merchants!
+        For the <strong>month of September</strong>, Send Chinatown Love is hosting a food crawl in Manhattan’s Chinatown, highlighting 13 incredible restaurants, bakeries, cafes and more throughout the neighborhood. Come with your friends and family to explore locally and savor all the incredible things Chinatown has to offer and earn rewards for shopping with our merchants!
  
         <Question>2. What is the purpose of the Send Chinatown Love Food Crawl?</Question>
           <BulletPoint>
@@ -75,11 +75,9 @@ const Faq = ({ showFaq, toggleView }: Props) => {
           </BulletPoint>
           <BulletPoint>
             Every three (3) tickets qualifies you for one (1) local reward. You can get as many tickets as you want, as long as your three (3) tickets are from different vendors. 
-            <ul>
-              <BulletPoint>
-                For example, if you collect a second ticket from a Food Crawl vendor you’ve already visited, you can use this ticket in combination with two other different vendors to redeem another reward.
-              </BulletPoint>
-            </ul>
+          </BulletPoint>
+          <BulletPoint>
+            For example, if you collect a second ticket from a Food Crawl vendor you’ve already visited, you can use this ticket in combination with two other different vendors to redeem another reward.
           </BulletPoint>
           <BulletPoint>
             You can only redeem your reward once you have <strong>entered your unique ticket code</strong> into your <em>Passport to Chinatown</em>.
@@ -116,12 +114,12 @@ const Faq = ({ showFaq, toggleView }: Props) => {
         As an added bonus, once you have collected your three (3) tickets, you will be entered into a digital raffle to win our item of the week! These raffle items will be announced every Sunday.
 
         <Question>13. How do I enter the weekly digital giveaways?</Question>
+        <BulletPoint>
         Once you’ve collected three (3) tickets and logged them into the <em>Passport to Chinatown</em>, you will also be entered into the digital giveaway with just one more step: 
-          <ul>
-            <BulletPoint>
-              Post about the Food Crawl and tag us on Instagram (@sendchinatownlove). This can be an in-feed post or a story. You must include your Instagram username when submitting at least one of your tickets to your Passport to Chinatown.
-            </BulletPoint>
-          </ul>
+        </BulletPoint>
+        <BulletPoint>
+          Post about the Food Crawl and tag us on Instagram (@sendchinatownlove). This can be an in-feed post or a story. You must include your Instagram username when submitting at least one of your tickets to your Passport to Chinatown.
+        </BulletPoint>
 
         <Question>14. How many times can I enter the digital giveaway? Can I have multiple entries?</Question>
         Every three (3) tickets qualifies you for one (1) entry into our digital giveaway for the month. We’ll select winners four (4) times throughout the month.
