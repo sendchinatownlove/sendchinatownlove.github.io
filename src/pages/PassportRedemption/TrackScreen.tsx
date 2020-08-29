@@ -80,11 +80,11 @@ const Track = ({ setCurrentScreenView }: Props) => {
     }
   };
 
-  const formatTicketCode = (code) => {
-    if (code.length === 3) {
-      setTicketCode(code + '-');
-    }
-  };
+  // const formatTicketCode = (code) => {
+  //   if (code.length === 3) {
+  //     setTicketCode(code + '-');
+  //   }
+  // };
 
   const SupporterTooltip = withStyles((theme: Theme) => ({
     tooltip: {
@@ -149,17 +149,16 @@ const Track = ({ setCurrentScreenView }: Props) => {
             <Label htmlFor="ticket-code">Ticket Code</Label>
             <InputField
               name="ticket-code"
-              // type="text"
-              type="tel"
+              type="text"
               onChange={(e) => {
                 setTicketCode(e.target.value);
                 setIsTicketValid(true);
               }}
-              onKeyUp={(e) => {
-                if (e.key !== 'Backspace' || e.keyCode !== 8) {
-                  formatTicketCode(e.target['value']);
-                }
-              }}
+              // onKeyUp={(e) => {
+              //   if (e.key !== 'Backspace' || e.keyCode !== 8) {
+              //     formatTicketCode(e.target['value']);
+              //   }
+              // }}
               value={ticketCode}
               maxLength={6}
             />
