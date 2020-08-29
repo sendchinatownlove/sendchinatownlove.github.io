@@ -106,11 +106,13 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
                     });
                 }}
               >
-                <input
-                  type="radio"
-                  checked={selectedSponsor.id === sponsor.id}
-                  id={sponsor.reward}
-                />
+                {numRewards !== 0 &&
+                  <input
+                    type="radio"
+                    checked={selectedSponsor.id === sponsor.id}
+                    id={sponsor.reward}
+                  />
+                }
 
                 <SingleRewardInfo>
                   <Text className="header">{sponsor.reward}</Text>
