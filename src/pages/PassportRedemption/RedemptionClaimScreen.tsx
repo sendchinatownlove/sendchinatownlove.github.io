@@ -35,7 +35,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
     },
     logo_url: '',
     reward: '',
-    reward_detail: '',
+    reward_detail: ''
   });
 
   const fetchSponsor = async () => {
@@ -61,7 +61,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
           return { id: ticket.id, sponsor_seller_id };
         });
       const { status } = await redeemReward(id, access_token, ticketsToRedeem);
-      // add some kind of error handling to redirect user here
+      // figure out how to handle invalid redemption with this page
       if (status !== 200) push(`/passport/${id}/tickets`);
     } catch (err) {
       console.error('passport error: ' + err);
@@ -102,7 +102,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
           <Content>
             <Text className="header">{selectedReward.reward}</Text>
             <Text className="subheader">{selectedReward.reward_detail}</Text>
-            <img src={'logo_url'} alt="reward-logo" width="260px" />
+            <img src={selectedReward.logo_url} alt="reward-logo" width="260px" />
             <br />
             <div>
               <Text className="">{selectedReward.name}</Text>
@@ -193,9 +193,9 @@ const Text = styled.p`
     margin-bottom: 5px;
   }
 
-  &.subheader {
-    font-size: 10px;
-    margin-bottom: 15px;
+  &.subheader {	
+    font-size: 10px;	
+    margin-bottom: 15px;	
   }
 
   &.finePrint {
