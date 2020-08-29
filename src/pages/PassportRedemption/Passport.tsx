@@ -175,18 +175,8 @@ const Passport = (props: Props) => {
         >
           <TitleRow>
             <Title>PASSPORT TO CHINATOWN</Title>
-            <SubTitle color={ showFaq ? 'transparent' : 'black'}>9/1/20202 - 9/30/20</SubTitle>
+            <SubTitle color={ showFaq ? 'transparent' : 'black'}>9/1/20 - 9/30/20</SubTitle>
           </TitleRow>
-          {
-            !showFaq && (
-              <AddNewTicket
-                className="button--filled"
-                onClick={addTicket}
-              >
-                Add New Ticket
-              </AddNewTicket>
-            )
-          }
 
           {showEmailSent && (
             <SendEmailContainer>
@@ -209,6 +199,16 @@ const Passport = (props: Props) => {
           {!showFaq && createRows(tickets)}
         </PassportContainer>
       </BodyContainer>
+      {
+        !showFaq && (
+          <AddNewTicket
+            className="button--filled"
+            onClick={addTicket}
+          >
+            Add New Ticket
+          </AddNewTicket>
+        )
+      }
     </Container>
   );
 };
