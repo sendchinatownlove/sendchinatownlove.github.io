@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 
-import { PassportContainer, TitleRow, Title } from './style';
+import { PassportContainer, TitleRow, MainTitle } from './style';
 
 type Props = {
   showFaq: boolean;
@@ -20,7 +20,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
   return (
     <PassportContainer mainView={showFaq} onClick={toggleView}>
       <TitleRow>
-        <Title>HOW TO WIN REWARDS</Title>
+        <MainTitle isMainTitle={showFaq}>HOW TO WIN REWARDS</MainTitle>
       </TitleRow>
       {!showFaq && (
         <>
@@ -154,6 +154,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
 
 const Content = styled.div`
   padding: 10px 15px 15px;
+  font-size: 14px;
 `;
 
 const RewardsLink = styled.span`

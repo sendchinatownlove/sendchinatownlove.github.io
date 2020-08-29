@@ -7,7 +7,7 @@ import {
   getParticipatingSeller,
   sendRedeemTicketsEmail,
 } from '../../utilities/api/interactionManager';
-import { PassportContainer, TitleRow, Title, SubTitle, Button } from './style';
+import { PassportContainer, TitleRow, MainTitle, Title, SubTitle, Button } from './style';
 
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
@@ -172,7 +172,7 @@ const Passport = (props: Props) => {
           onClick={() => push(location.pathname)}
         >
           <TitleRow>
-            <Title>PASSPORT TO CHINATOWN</Title>
+            <MainTitle isMainTitle={!showFaq}>PASSPORT TO CHINATOWN</MainTitle>
             <SubTitle>9/1/2020 - 9/30/2020</SubTitle>
           </TitleRow>
 
@@ -194,7 +194,7 @@ const Passport = (props: Props) => {
               </SendEmailButtonClose>
             </SendEmailContainer>
           )}
-          {createRows(tickets)}
+          {!showFaq && createRows(tickets)}
         </PassportContainer>
       </BodyContainer>
 
