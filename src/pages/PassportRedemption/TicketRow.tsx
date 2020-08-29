@@ -169,12 +169,8 @@ const EmptyStamp = styled.div`
   width: 55px;
 `;
 const SendEmailButton = styled(Button)`
-<<<<<<< HEAD
   padding: 0;
   height: 25px;
-=======
-  height: 35px;
->>>>>>> fixes:
   width: 300px;
   margin: 0 auto;
   display: flex;
