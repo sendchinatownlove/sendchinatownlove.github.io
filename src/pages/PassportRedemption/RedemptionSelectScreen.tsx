@@ -7,7 +7,7 @@ import {
   RedeemRewardsFooter,
   DefaultFooter,
 } from './RedemptionFooters';
-import { Title, CardText } from './style'
+import { CardText } from './style'
 import CircleLogo from './CircleLogo.png';
 
 import {
@@ -81,17 +81,16 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 
   return (
     <Container>
-      <Logo src={CircleLogo} alt="scl-log" />
-      <Heading>
-        {numRewards} REWARD{numRewards === 0 || numRewards > 1 ? 'S' : ''}{' '}
-        AVAILABLE
-      </Heading>
-      <SubHeading>Rewards available until 9/30/2020</SubHeading>
+      <Header numSponsors={allSponsors.length}>
+        <Logo src={CircleLogo} alt="scl-log" />
+        <Heading>
+          {numRewards} REWARD{numRewards === 0 || numRewards > 1 ? 'S' : ''}{' '}
+          AVAILABLE
+        </Heading>
+        <SubHeading>Rewards available until 9/30/2020</SubHeading>
+      </Header>
 
-      <RewardsContainer
-        numSponsors={allSponsors.length}
-        selected={selectedSponsor.id ? true : false}
-      >
+      <RewardsContainer>
         {allSponsors.length > 0 &&
           allSponsors.map((sponsor: any) => {
             return (
@@ -140,12 +139,16 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
                     </CardText>
                   )}
                 </SingleRewardInfo>
+                
               </SingleRewardContainer>
             );
           })}
       </RewardsContainer>
 
+    <Footer numSponsors={allSponsors.length}>
       {handleFooter()}
+    </Footer>
+
     </Container>
   );
 };
@@ -160,8 +163,32 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
 `;
+
+const Header = styled.div<{
+  numSponsors: number;
+}>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  position: relative;
+
+  ${(props) => props.numSponsors > 4
+    ? `    
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 90%;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0px 25px 27px 22px white;
+      }
+    ` : ''
+  }
+`
   
 const Logo = styled.img`
   z-index: 10;
@@ -190,10 +217,30 @@ const SubHeading = styled.span`
   z-index: 2;
 `;
 
-const RewardsContainer = styled.div<{
+const Footer = styled.div<{
   numSponsors: number;
-  selected: boolean;
 }>`
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  padding: 20px;
+
+  & > * {
+    z-index: 2;
+    padding: 10px;
+  }
+
+  ${(props) => props.numSponsors > 4
+    ? `  
+      height: calc(min-content - 20px);
+      postion: relative;
+      background-color: white;
+      box-shadow: 0px -10px 27px 20px white;
+      z-index: 1;
+    ` : '' }
+`;
+
+const RewardsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   overflow-y: scroll;
