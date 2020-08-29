@@ -61,7 +61,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
           return { id: ticket.id, sponsor_seller_id };
         });
       const { status } = await redeemReward(id, access_token, ticketsToRedeem);
-      // add some kind of error handling to redirect user here
+      // figure out how to handle invalid redemption with this page
       if (status !== 200) push(`/passport/${id}/tickets`);
     } catch (err) {
       console.error('passport error: ' + err);

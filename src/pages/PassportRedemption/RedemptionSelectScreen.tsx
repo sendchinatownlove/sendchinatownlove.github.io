@@ -53,7 +53,6 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
         })
       );
       setAllSponsors(allSponsorsWithLocations);
-      console.log(allSponsorsWithLocations)
     } catch (err) {
       console.error('passport error: ' + err);
     }
