@@ -20,6 +20,7 @@ const PassportContainer = styled.div`
   margin: 0 auto;
   background: #ffffff;
   
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
   border: 1px solid #dedede;
   border-radius: 20px;
   box-sizing: border-box;
