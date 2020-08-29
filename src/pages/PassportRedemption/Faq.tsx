@@ -154,6 +154,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
 
 const Content = styled.div`
   padding: 10px 15px 15px;
+  font-size: 14px;
 `;
 
 const RewardsLink = styled.span`
