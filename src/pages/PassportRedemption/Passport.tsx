@@ -19,21 +19,6 @@ interface Props {
   setCurrentScreenView: Function;
 }
 
-/**
- * groups an array of objects according to a specific key
- *
- * @param {object[]} array - the array we are iterating over
- * @param {key} children - the key we are grouping by
- * @return {object} an object whose keys will be the different groups
- *
- */
-function groupBy(array, key) {
-  return array.reduce((rv, x) => {
-    (rv[x[key]] = rv[x[key]] || []).push(x);
-    return rv;
-  }, {});
-}
-
 const Passport = (props: Props) => {
   const { id } = useParams();
   const { push, location } = useHistory();
@@ -87,30 +72,16 @@ const Passport = (props: Props) => {
       let tempTickets = [...tickets];
       const sortedTickets = tempTickets
         .sort((a, b) => {
-          const dateA = a.redeemed_at ? Date.parse(a.redeemed_at) : 0;
-          const dateB = b.redeemed_at ? Date.parse(b.redeemed_at) : 0;
-          if (dateA !== dateB) {
-            return dateB - dateA;
-          }
-          return b.sponsor_seller_id - a.sponsor_seller_id;
-        })
+          const dateA = new Date(a.associated_with_contact_at);
+          const dateB = new Date(b.associated_with_contact_at);
 
-      // group the entries by sponsor_seller_id,
-      const groupedTickets = groupBy(sortedTickets, 'sponsor_seller_id');
-      const newEntries = Object.keys(groupedTickets);
+          return dateB.getTime() + dateA.getTime();
+        });
 
-      // for each key in newEntries (different sponsor sellers + non redeemed tickets which are labeled as key null)
+        
       // push the stamps to rows of 3, if there arent 3, then push the left over amount
-      for (const entry of newEntries) {
-        const arrays =
-          entry === 'null'
-            ? sortedTickets.filter((ticket) => !ticket.sponsor_seller_id)
-            : sortedTickets.filter(
-              (ticket) => ticket.sponsor_seller_id === parseInt(entry)
-            );
-        while (arrays.length) {
-          rows.push(arrays.splice(0, 3));
-        }
+      while (sortedTickets.length) {
+        rows.push(sortedTickets.splice(0, 3));
       }
     }
 
