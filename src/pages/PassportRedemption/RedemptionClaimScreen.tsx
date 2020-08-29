@@ -35,7 +35,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
     },
     logo_url: '',
     reward: '',
-    reward_detail: '',
+    reward_detail: ''
   });
 
   const fetchSponsor = async () => {
@@ -193,9 +193,9 @@ const Text = styled.p`
     margin-bottom: 5px;
   }
 
-  &.subheader {
-    font-size: 10px;
-    margin-bottom: 15px;
+  &.subheader {	
+    font-size: 10px;	
+    margin-bottom: 15px;	
   }
 
   &.finePrint {

@@ -54,6 +54,7 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
         })
       );
       setAllSponsors(allSponsorsWithLocations);
+      console.log(allSponsorsWithLocations)
     } catch (err) {
       console.error('passport error: ' + err);
     }
@@ -113,6 +114,7 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 
                 <SingleRewardInfo>
                   <Text className="header">{sponsor.reward}</Text>
+                  <Text className="header">{sponsor.reward_detail}</Text>
                   <img
                     src={sponsor.logo_url}
                     alt="reward-logo"
