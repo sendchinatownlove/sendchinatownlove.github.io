@@ -19,7 +19,6 @@ interface Props {
   setCurrentScreenView: Function;
 }
 
-// TODO: Ask design --> do we want user to be able to unselect a reward?
 const PassportSelected = ({ setCurrentScreenView }: Props) => {
   const { id, access_token } = useParams();
 
@@ -99,11 +98,17 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
               <SingleRewardContainer
                 className={selectedSponsor.id === id ? 'selected' : ''}
                 onClick={() => {
-                  if (numRewards > 0)
+                  if (selectedSponsor.id !== sponsor.id) {
                     setSelectedSponsor({
                       id: sponsor.id,
                       reward_cost: sponsor.reward_cost,
                     });
+                  } else {
+                    setSelectedSponsor({
+                      id: null,
+                      reward_cost: null,
+                    });
+                  }
                 }}
               >
                 {numRewards !== 0 &&
