@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 
-import { PassportContainer, TitleRow, Title } from './style';
+import { PassportContainer, TitleRow, MainTitle } from './style';
 
 type Props = {
   showFaq: boolean;
@@ -20,7 +20,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
   return (
     <PassportContainer mainView={showFaq} onClick={toggleView}>
       <TitleRow>
-        <Title>HOW TO WIN REWARDS</Title>
+        <MainTitle isMainTitle={showFaq}>HOW TO WIN REWARDS</MainTitle>
       </TitleRow>
       {!showFaq && (
         <>

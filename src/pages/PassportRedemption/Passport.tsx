@@ -7,7 +7,7 @@ import {
   getParticipatingSeller,
   sendRedeemTicketsEmail,
 } from '../../utilities/api/interactionManager';
-import { PassportContainer, TitleRow, Title, SubTitle, Button } from './style';
+import { PassportContainer, TitleRow, MainTitle, Title, SubTitle, Button } from './style';
 
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
@@ -79,12 +79,12 @@ const Passport = (props: Props) => {
   }, [id]);
 
   const createTicketRows = (tickets) => {
-    
+
     let rows: any[] = [];
 
     if (tickets.length > 0) {
       // make a temp ticket that sorts the tickets by sponsor seller, then redemption date
-      let tempTickets = [...tickets]; 
+      let tempTickets = [...tickets];
       const sortedTickets = tempTickets
         .sort((a, b) => {
           const dateA = a.redeemed_at ? Date.parse(a.redeemed_at) : 0;
@@ -93,9 +93,9 @@ const Passport = (props: Props) => {
             return dateB - dateA;
           }
           return b.sponsor_seller_id - a.sponsor_seller_id;
-      })
-      
-        // group the entries by sponsor_seller_id,
+        })
+
+      // group the entries by sponsor_seller_id,
       const groupedTickets = groupBy(sortedTickets, 'sponsor_seller_id');
       const newEntries = Object.keys(groupedTickets);
 
@@ -106,13 +106,13 @@ const Passport = (props: Props) => {
           entry === 'null'
             ? sortedTickets.filter((ticket) => !ticket.sponsor_seller_id)
             : sortedTickets.filter(
-                (ticket) => ticket.sponsor_seller_id === parseInt(entry)
-              );
+              (ticket) => ticket.sponsor_seller_id === parseInt(entry)
+            );
         while (arrays.length) {
           rows.push(arrays.splice(0, 3));
         }
-      }        
-    }    
+      }
+    }
 
     // if there are less than 6 rows, make 6 rows, other wise make one extra row
     if (rows.length < 6) {
@@ -172,7 +172,7 @@ const Passport = (props: Props) => {
           onClick={() => push(location.pathname)}
         >
           <TitleRow>
-            <Title>PASSPORT TO CHINATOWN</Title>
+            <MainTitle isMainTitle={!showFaq}>PASSPORT TO CHINATOWN</MainTitle>
             <SubTitle>9/1/2020 - 9/30/2020</SubTitle>
           </TitleRow>
 
@@ -194,7 +194,7 @@ const Passport = (props: Props) => {
               </SendEmailButtonClose>
             </SendEmailContainer>
           )}
-          {createRows(tickets)}
+          {!showFaq && createRows(tickets)}
         </PassportContainer>
       </BodyContainer>
 
@@ -250,6 +250,7 @@ const BodyContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+  margin-bottom: 750px;
 `;
 
 const Table = styled.table`
