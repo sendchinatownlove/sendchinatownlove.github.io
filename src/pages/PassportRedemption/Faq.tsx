@@ -28,7 +28,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
           <br />
         </>
       )}
-      <Content hidden={!showFaq}>
+      <FaqContent hidden={!showFaq}>
         <RewardsLink onClick={goToPassPort}>VIEW ACTIVE REWARDS & GIVEAWAYS</RewardsLink>
         <Question>1. What is the Send Chinatown Love Food Crawl?</Question>
         For the <strong>month of September</strong>, Send Chinatown Love is hosting a food crawl in Manhattan’s Chinatown, highlighting 13 incredible restaurants, bakeries, cafes and more throughout the neighborhood. Come with your friends and family to explore locally and savor all the incredible things Chinatown has to offer and earn rewards for shopping with our merchants!
@@ -145,13 +145,14 @@ const Faq = ({ showFaq, toggleView }: Props) => {
         <BulletPoint>
           <strong>Friends and family.</strong> Food is always more enjoyable when shared with your loved ones!
         </BulletPoint>
-      </Content>
+      </FaqContent>
     </PassportContainer>
   );
 };
 
-const Content = styled.div`
-  padding: 10px 15px 15px;
+const FaqContent = styled.div`
+  padding: 10px 30px 15px;
+  font-size: 12px;
 `;
 
 const RewardsLink = styled.span`
@@ -162,6 +163,7 @@ const RewardsLink = styled.span`
   font-size: 14px;
   text-decoration: underline;
   cursor: pointer;
+  font-size: 12px;
 `;
 
 const Question = styled.p`
