@@ -6,8 +6,9 @@ import {
   getPassportTickets,
   getParticipatingSeller,
   sendRedeemTicketsEmail,
+  getContactInfo,
 } from '../../utilities/api/interactionManager';
-import { PassportContainer, TitleRow, MainTitle, Title, SubTitle, Button } from './style';
+import { PassportContainer, TitleRow, Title, SubTitle, Button, InstagramDisabled, InstagramEnabled } from './style';
 
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
@@ -23,6 +24,7 @@ const Passport = (props: Props) => {
   const { id } = useParams();
   const { push, location } = useHistory();
   const [showFaq, setShowFaq] = useState(false);
+  const [showInstagram, setShowInstagram] = useState(false);
   const [showEmailSent, setShowEmailSent] = useState(false);
   const [tickets, setTickets] = useState<any[]>([]);
 
@@ -36,7 +38,11 @@ const Passport = (props: Props) => {
 
   useEffect(() => {
     if (id) {
-      getPassportTickets(id)
+      getContactInfo(id)
+        .then((contactInfo) => {
+          setShowInstagram(contactInfo.data.instagram);
+          return getPassportTickets(id);
+        })
         .then((ticketIds) => {
           let promises: any[] = [];
           ticketIds.data.forEach((ticket) => {
@@ -153,7 +159,10 @@ const Passport = (props: Props) => {
         >
           <TitleRow>
             <Title>PASSPORT TO CHINATOWN</Title>
-            <SubTitle color={ showFaq ? 'transparent' : 'black'}>9/1/20 - 9/30/20</SubTitle>
+            <SubTitle color={ showFaq ? 'transparent' : 'black'}>9/1/2020 - 9/30/2020</SubTitle>
+            <Icon>
+              { !showInstagram ? <InstagramEnabled/> : <InstagramDisabled /> }
+            </Icon>
           </TitleRow>
 
           {showEmailSent && (
@@ -287,4 +296,13 @@ const SendEmailButtonClose = styled(Button)`
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
+`;
+
+const Icon = styled.div`
+  position: absolute;
+  right: 10px;
+  text-decoration: none;
+  color: black;
+  padding: 10px 15px;
+  font-size: 22px;
 `;
