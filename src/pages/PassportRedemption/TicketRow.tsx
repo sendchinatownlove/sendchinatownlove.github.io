@@ -51,6 +51,7 @@ const TicketRow = (props: Props) => {
       case RowStatuses.Active:
         return `READY TO REDEEM`;
       default:
+        if (props.stamps.length === 0) return;
         return `${3 - props.stamps.length} MORE ${3 - props.stamps.length > 1 ? 'STAMPS' : 'STAMP'}  UNTIL YOUR NEXT REWARD`;
     }
   };
@@ -99,8 +100,8 @@ const TableRow = styled.tr`
     switch (props.status) {
       case RowStatuses.Redeemed:
         return `
+          opacity: 0.75;
           background: rgba(0, 0, 0, 0.05);
-          color: #A5A5A5;
         `;
       case RowStatuses.Active:
         return `
