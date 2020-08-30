@@ -7,6 +7,7 @@ import {
   RedeemRewardsFooter,
   DefaultFooter,
 } from './RedemptionFooters';
+import { CardText } from './style';
 import CircleLogo from './CircleLogo.png';
 
 import {
@@ -80,22 +81,22 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 
   return (
     <Container>
-      <Logo src={CircleLogo} alt="scl-log" />
-      <Heading className="bold">
-        {numRewards} REWARD{numRewards === 0 || numRewards > 1 ? 'S' : ''}{' '}
-        AVAILABLE
-      </Heading>
-      <Heading>Rewards available until 9/30/2020</Heading>
+      <Header numSponsors={allSponsors.length}>
+        <Logo src={CircleLogo} alt="scl-log" />
+        <Heading>
+          {numRewards} REWARD{numRewards === 0 || numRewards > 1 ? 'S' : ''}{' '}
+          AVAILABLE
+        </Heading>
+        <SubHeading>Rewards available until 9/30/2020</SubHeading>
+      </Header>
 
-      <RewardsContainer
-        numRewards={allSponsors.length}
-        selected={selectedSponsor.id ? true : false}
-      >
+      <RewardsContainer>
         {allSponsors.length > 0 &&
           allSponsors.map((sponsor: any) => {
             return (
               <SingleRewardContainer
-                className={selectedSponsor.id === id ? 'selected' : ''}
+                selected={selectedSponsor.id === sponsor.id}
+                numRewards={numRewards}
                 onClick={() => {
                   if (numRewards === 0) {
                     return;
@@ -113,35 +114,38 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
                   }
                 }}
               >
-                {numRewards !== 0 &&
+                {numRewards !== 0 && (
                   <input
                     type="radio"
                     checked={selectedSponsor.id === sponsor.id}
                     id={sponsor.reward}
                   />
-                }
+                )}
 
                 <SingleRewardInfo>
-                  <Text className="header">{sponsor.reward}</Text>
-                  <Text className="header">{sponsor.reward_detail}</Text>
-                  <img
-                    src={sponsor.logo_url}
-                    alt="reward-logo"
-                    width="130px"
-                  ></img>
-                  <Text>{sponsor.name}</Text>
+                  <div>
+                    <CardText bold="700" size="14px">
+                      {sponsor.reward}
+                    </CardText>
+                    <CardText bold="700" size="10px">
+                      {sponsor.reward_detail}
+                    </CardText>
+                  </div>
+                  <LogoImage src={sponsor.logo_url} alt="reward-logo" />
+                  <CardText bold="700" size="10px">
+                    {sponsor.name}
+                  </CardText>
                   {sponsor && sponsor.location && (
-                    <Text className="finePrint">
-                      {sponsor.location.address1}
-                    </Text>
+                    <CardText size="10px">{sponsor.location.address1}</CardText>
                   )}
                 </SingleRewardInfo>
               </SingleRewardContainer>
             );
           })}
+        {allSponsors.length > 4 && <Buffer />}
       </RewardsContainer>
 
-      {handleFooter()}
+      <Footer numSponsors={allSponsors.length}>{handleFooter()}</Footer>
     </Container>
   );
 };
@@ -152,11 +156,36 @@ const Container = styled.div`
   width: 375px;
   height: 100vh;
   margin: 0 auto;
+  font-size: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 12px;
-  }
+`;
+
+const Header = styled.div<{
+  numSponsors: number;
+}>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  position: relative;
+
+  ${(props) =>
+    props.numSponsors > 4
+      ? `    
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 90%;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0px 25px 27px 22px white;
+      }
+    `
+      : ''}
 `;
 
 const Logo = styled.img`
@@ -175,25 +204,45 @@ const Heading = styled.span`
   text-transform: uppercase;
   margin-top: 10px;
   z-index: 2;
-
-  &.bold {
-    font-weight: bold;
-    font-size: 13px;
-  }
+  font-weight: bold;
+  font-size: 13px;
 `;
 
-const RewardsContainer = styled.div<{
-  numRewards: number;
-  selected: boolean;
+const SubHeading = styled.span`
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 10px;
+  z-index: 2;
+`;
+
+const Footer = styled.div<{
+  numSponsors: number;
 }>`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  padding: 20px;
 
-  max-height: ${(props) =>
-    (props.numRewards > 0 && props.numRewards <= 4) || props.selected
-      ? '525px'
-      : '575px'};
+  & > * {
+    z-index: 2;
+    padding: 10px;
+  }
+
+  ${(props) =>
+    props.numSponsors > 4
+      ? `  
+      height: calc(min-content - 20px);
+      postion: relative;
+      background-color: white;
+      box-shadow: 0px -10px 27px 20px white;
+      z-index: 1;
+    `
+      : ''}
+`;
+
+const RewardsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   overflow-y: scroll;
   padding-top: 20px;
   padding-bottom: 30px;
@@ -202,72 +251,45 @@ const RewardsContainer = styled.div<{
     width: 0px;
     background: transparent;
   }
-
-  &::before {
-    content: '';
-    display: ${(props) => (props.numRewards > 4 ? 'block' : 'none')};
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0px 25px 27px 22px white;
-    width: 100%;
-    height: 110px;
-  }
-
-  &::after {
-    content: '';
-    display: ${(props) => (props.numRewards > 4 ? 'block' : 'none')};
-    z-index: 1;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0px -25px 27px 22px white;
-    width: 100%;
-    height: ${(props) => (props.selected ? '150px' : '100px')};
-  }
 `;
 
-const SingleRewardContainer = styled.button`
+const SingleRewardContainer = styled.button<{
+  selected: boolean;
+  numRewards: number;
+}>`
   width: 160px;
-  height: 250px;
-  border: 1px solid #e5e5e5;
+  height: 220px;
+  border: ${(props) =>
+    props.selected ? '1px solid black' : '1px solid #e5e5e5'};
+  box-shadow: ${(props) =>
+    props.numRewards > 0 ? '0px 0px 10px rgba(0, 0, 0, 0.25)' : 'none'};
   background-color: white;
   padding: 5px 5px;
   box-sizing: border-box;
   margin: 8px;
   outline: none;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: ${(props) => (props.numRewards > 0 ? 'pointer' : 'auto')};
 
   display: flex;
   flex-direction: column;
-
-  &.selected {
-    border: 1px solid black;
-  }
 `;
 
 const SingleRewardInfo = styled.div`
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
 `;
 
-export const Text = styled.p`
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: bold;
-  font-size: 10px;
-  line-height: 100%;
+const LogoImage = styled.img`
+  width: 130px;
+  border-radius: 20px;
+`;
 
-  &.header {
-    font-size: 14px;
-  }
-
-  &.finePrint {
-    font-weight: normal;
-    line-height: 110%;
-  }
+const Buffer = styled.div`
+  height: 50px;
+  grid-column: 1 / span 2;
 `;

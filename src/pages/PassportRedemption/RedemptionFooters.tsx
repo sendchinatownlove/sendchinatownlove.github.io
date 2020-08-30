@@ -1,11 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { SubTitle, Button } from './style';
 
 export const NoRewardsFooter = () => {
   return (
-    <Footer>
+    <>
       <SubTitle bold="700">Have more tickets to add?</SubTitle>
 
       <Button
@@ -18,7 +17,7 @@ export const NoRewardsFooter = () => {
       >
         ADD NEW TICKETS
       </Button>
-    </Footer>
+    </>
   );
 };
 
@@ -30,7 +29,7 @@ interface RedeemRewardsProps {
 
 export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
   return (
-    <Footer>
+    <>
       <SubTitle bold="700">
         When redeemed, you have 5 minutes to use your reward.
       </SubTitle>
@@ -46,7 +45,7 @@ export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
       >
         REDEEM NOW
       </Button>
-    </Footer>
+    </>
   );
 };
 
@@ -57,7 +56,7 @@ interface defaultProps {
 
 export const DefaultFooter = (props: defaultProps) => {
   return (
-    <Footer>
+    <>
       <SubTitle bold="700">
         Select an offer and be ready to show this screen when you’re ordering.
       </SubTitle>
@@ -73,14 +72,6 @@ export const DefaultFooter = (props: defaultProps) => {
           RETURN TO PASSPORT
         </Button>
       )}
-    </Footer>
+    </>
   );
 };
-
-const Footer = styled.div`
-  z-index: 2;
-  display: grid;
-  justify-items: center;
-  width: 300px;
-  margin: 20px 0;
-`;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 
 import { InputContainer } from './TrackScreen';
-import { Button, SubTitle } from './style';
+import { CardText, Button, SubTitle } from './style';
 import CircleLogo from './CircleLogo.png';
 
 import ScreenName from './ScreenName';
@@ -35,7 +35,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
     },
     logo_url: '',
     reward: '',
-    reward_detail: ''
+    reward_detail: '',
   });
 
   const fetchSponsor = async () => {
@@ -99,33 +99,42 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
       <Logo src={CircleLogo} alt="scl-log" />
       <Shadow>
         <InputContainer className="top shadow">
-          <Content>
-            <Text className="header">{selectedReward.reward}</Text>
-            <Text className="subheader">{selectedReward.reward_detail}</Text>
-            <img src={selectedReward.logo_url} alt="reward-logo" width="260px" />
+          <ContentContainer>
+            <CardText bold="700" size="30px" letterSpacing="0.15em;">{selectedReward.reward}</CardText>
+            <CardText bold="700" size="25px">{selectedReward.reward_detail}</CardText>
+            <br />
+            <LogoImage
+              src={selectedReward.logo_url}
+              alt="reward-logo"
+            />
             <br />
             <div>
-              <Text className="">{selectedReward.name}</Text>
+              <CardText bold="700" size="15px">{selectedReward.name}</CardText>
               {selectedReward && selectedReward.location && (
                 <>
-                  <Text className="finePrint">
+                  <CardText size="15px">
                     {selectedReward.location.address1}
                     {selectedReward.location.address2 && ', '}
                     {selectedReward.location.address2 &&
                       selectedReward.location.address2}
-                  </Text>
+                  </CardText>
+                  <CardText size="15px">
+                    {selectedReward.location.city},{' '}
+                    {selectedReward.location.state}{' '}
+                    {selectedReward.location.zip_code}
+                  </CardText>
                 </>
               )}
             </div>
-          </Content>
+          </ContentContainer>
         </InputContainer>
         <InputContainer className="bottom shadow">
-          <Content>
-            <Text className="finePrint red">
+          <ContentContainer>
+            <CardText size="15px" color="#a8192e">
               Offer must be used in:
-              <span className="bold"> {formatTime(timeLeft)}</span>
-            </Text>
-          </Content>
+              <span style={{fontWeight:'bold'}}> {formatTime(timeLeft)}</span>
+            </CardText>
+          </ContentContainer>
         </InputContainer>
       </Shadow>
 
@@ -155,7 +164,7 @@ const Container = styled.div`
   width: 375px;
   hidden: 100vh;
   margin: 0 auto;
-  margin-top: 30px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -172,48 +181,21 @@ const Logo = styled.img`
   margin-bottom: 25px;
 `;
 
-const Content = styled.div`
-  min-width: 300px;
+const ContentContainer = styled.div`
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 `;
 
-const Text = styled.p`
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: bold;
-  font-size: 15px;
-  line-height: 100%;
-  text-align: center;
-
-  &.header {
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-
-  &.subheader {	
-    font-size: 10px;	
-    margin-bottom: 15px;	
-  }
-
-  &.finePrint {
-    font-weight: normal;
-    line-height: 25%;
-  }
-
-  &.red {
-    color: #a8192e;
-  }
-
-  .bold {
-    font-weight: bold;
-  }
-`;
-
 const Shadow = styled.div`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+`;
+
+const LogoImage = styled.img`
+  width: 260px;
   border-radius: 20px;
 `;
 
@@ -222,4 +204,8 @@ const Footer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  & > * {
+    padding: 10px;
+  }
 `;
