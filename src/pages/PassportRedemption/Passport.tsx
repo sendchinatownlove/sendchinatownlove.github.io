@@ -135,6 +135,7 @@ const Passport = (props: Props) => {
   const createRows = (stamps) => {
     const rows = createTicketRows(stamps);
     return (
+      <TableContainer>
       <Table>
         <tbody>
           {rows.map((row, index) => (
@@ -147,6 +148,7 @@ const Passport = (props: Props) => {
           ))}
         </tbody>
       </Table>
+      </TableContainer>
     );
   };
 
@@ -250,7 +252,12 @@ const BodyContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  margin-bottom: 750px;
+`;
+
+const TableContainer = styled.div`
+  width: 100%;
+  overflow: auto;
+  height: calc(100vh - 300px);
 `;
 
 const Table = styled.table`
