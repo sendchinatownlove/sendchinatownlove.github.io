@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 
-import { PassportContainer, TitleRow, Title } from './style';
+import { CardContainer, TitleRow, Title } from './style';
 
 type Props = {
   showFaq: boolean;
@@ -18,7 +18,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
   }
   
   return (
-    <PassportContainer mainView={showFaq} onClick={toggleView}>
+    <CardContainer mainView={showFaq} onClick={toggleView}>
       <TitleRow>
         <Title>HOW TO WIN REWARDS</Title>
       </TitleRow>
@@ -148,7 +148,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
           <strong>Friends and family.</strong> Food is always more enjoyable when shared with your loved ones!
         </BulletPoint>
       </Content>
-    </PassportContainer>
+    </CardContainer>
   );
 };
 

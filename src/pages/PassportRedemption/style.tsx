@@ -12,7 +12,7 @@ type PassportProps = {
   mainView?: boolean;
 };
 
-const PassportContainer = styled.div`
+const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,7 +114,7 @@ const InstagramEnabled = () => (
 )
 
 export {
-  PassportContainer,
+  CardContainer,
   TitleRow,
   Title,
   SubTitle,
