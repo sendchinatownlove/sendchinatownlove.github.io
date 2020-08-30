@@ -54,7 +54,6 @@ const Passport = (props: Props) => {
         })
         .then((passportTickets) => {
           if (passportTickets.length > 0) {
-            console.log("passportTickets: "+JSON.stringify(passportTickets));
             const sortedTickets = passportTickets
               .sort((a, b) => {
                 const dateA = new Date(a.associated_with_contact_at);
@@ -163,6 +162,9 @@ const Passport = (props: Props) => {
                 <SubTitle bold="700">
                   Check your inbox shortly for a link to access your available
                   rewards!
+                  <br/>
+                  <br/>
+                  This link will expire in 30 minutes.
                 </SubTitle>
               </TitleRow>
               <SendEmailButtonClose
