@@ -52,7 +52,9 @@ const TicketRow = (props: Props) => {
         return `READY TO REDEEM`;
       default:
         if (props.stamps.length === 0) return;
-        return `${3 - props.stamps.length} MORE ${3 - props.stamps.length > 1 ? 'STAMPS' : 'STAMP'}  UNTIL YOUR NEXT REWARD`;
+        return `${3 - props.stamps.length} MORE ${
+          3 - props.stamps.length > 1 ? 'STAMPS' : 'STAMP'
+        }  UNTIL YOUR NEXT REWARD`;
     }
   };
 
@@ -61,12 +63,12 @@ const TicketRow = (props: Props) => {
       <Stamp key={ticketInfo.id} src={ticketInfo.stamp_url} />
     ));
 
-    while(filledStamps.length < 3) {
+    while (filledStamps.length < 3) {
       filledStamps.push(<EmptyStamp />);
     }
 
-    return filledStamps
-  }
+    return filledStamps;
+  };
 
   return (
     <TableRow key={props.index} status={status}>
@@ -81,9 +83,7 @@ const TicketRow = (props: Props) => {
               Send to Email
             </SendEmailButton>
           )}
-          <StampRow>
-            {!!props.stamps && createStamps(props.stamps)}
-          </StampRow>
+          <StampRow>{!!props.stamps && createStamps(props.stamps)}</StampRow>
         </StampColumn>
         <RedeemedRow status={status}>{showRedeemRow(status)}</RedeemedRow>
       </TableStamp>
@@ -133,7 +133,7 @@ const TableStamp = styled.td`
 `;
 const StampColumn = styled.div`
   position: relative;
-  width: 100%;  
+  width: 100%;
   height: 70px;
 
   display: flex;

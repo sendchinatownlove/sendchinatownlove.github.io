@@ -8,7 +8,15 @@ import {
   sendRedeemTicketsEmail,
   getContactInfo,
 } from '../../utilities/api/interactionManager';
-import { CardContainer, TitleRow, Title, SubTitle, Button, InstagramDisabled, InstagramEnabled } from './style';
+import {
+  CardContainer,
+  TitleRow,
+  Title,
+  SubTitle,
+  Button,
+  InstagramDisabled,
+  InstagramEnabled,
+} from './style';
 
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
@@ -61,13 +69,12 @@ const Passport = (props: Props) => {
         })
         .then((passportTickets) => {
           if (passportTickets.length > 0) {
-            const sortedTickets = passportTickets
-              .sort((a, b) => {
-                const dateA = new Date(a.associated_with_contact_at);
-                const dateB = new Date(b.associated_with_contact_at);
-      
-                return dateB.getTime() - dateA.getTime();
-              });
+            const sortedTickets = passportTickets.sort((a, b) => {
+              const dateA = new Date(a.associated_with_contact_at);
+              const dateB = new Date(b.associated_with_contact_at);
+
+              return dateB.getTime() - dateA.getTime();
+            });
 
             setTickets(sortedTickets.reverse());
           }
@@ -79,7 +86,6 @@ const Passport = (props: Props) => {
   }, [id]);
 
   const createTicketRows = (tickets) => {
-
     let rows: any[] = [];
 
     if (tickets.length > 0) {
@@ -138,9 +144,13 @@ const Passport = (props: Props) => {
   return (
     <Container>
       <HeaderContainer>
-        <RedirectionLinks href="https://www.sendchinatownlove.com/food-crawl.html">Learn More</RedirectionLinks>
+        <RedirectionLinks href="https://www.sendchinatownlove.com/food-crawl.html">
+          Learn More
+        </RedirectionLinks>
         <Logo src={CircleLogo} alt="scl-log" />
-        <RedirectionLinks href="mailto:hello@sendchinatownlove.com">contact us</RedirectionLinks>
+        <RedirectionLinks href="mailto:hello@sendchinatownlove.com">
+          contact us
+        </RedirectionLinks>
       </HeaderContainer>
       <BodyContainer>
         <FAQ
@@ -153,24 +163,28 @@ const Passport = (props: Props) => {
         >
           <TitleRow>
             <Title>PASSPORT TO CHINATOWN</Title>
-            {
-              showFaq ? (
-                <>
-                  <br/>
-                  <br/>
-                  <br/>
-                </>
-              ) : (
-                <>
-                  <SubHeader color={ showFaq ? 'transparent' : 'black'}>
-                    { !showInstagram ? "INSTAGRAM FOR GIVEAWAY ADDED" : "9/1/2020 - 9/30/2020"}
-                  </SubHeader>
-                  <Icon>
-                    { !showInstagram ? <InstagramEnabled/> : <InstagramDisabled /> }
-                  </Icon>
-                </>
-              )
-            }            
+            {showFaq ? (
+              <>
+                <br />
+                <br />
+                <br />
+              </>
+            ) : (
+              <>
+                <SubHeader color={showFaq ? 'transparent' : 'black'}>
+                  {!showInstagram
+                    ? 'INSTAGRAM FOR GIVEAWAY ADDED'
+                    : '9/1/2020 - 9/30/2020'}
+                </SubHeader>
+                <Icon>
+                  {!showInstagram ? (
+                    <InstagramEnabled />
+                  ) : (
+                    <InstagramDisabled />
+                  )}
+                </Icon>
+              </>
+            )}
           </TitleRow>
 
           {showEmailSent && (
@@ -181,8 +195,8 @@ const Passport = (props: Props) => {
                 <SubTitle bold="700">
                   Check your inbox shortly for a link to access your available
                   rewards!
-                  <br/>
-                  <br/>
+                  <br />
+                  <br />
                   This link will expire in 30 minutes.
                 </SubTitle>
               </TitleRow>
@@ -197,16 +211,11 @@ const Passport = (props: Props) => {
           {!showFaq && createRows(tickets)}
         </PassportContainer>
       </BodyContainer>
-      {
-        !showFaq && (
-          <AddNewTicket
-            className="button--filled"
-            onClick={addTicket}
-          >
-            Add New Ticket
-          </AddNewTicket>
-        )
-      }
+      {!showFaq && (
+        <AddNewTicket className="button--filled" onClick={addTicket}>
+          Add New Ticket
+        </AddNewTicket>
+      )}
     </Container>
   );
 };
@@ -225,11 +234,11 @@ const Container = styled.div`
 const PassportContainer = styled(CardContainer)`
   background-size: 400px;
   background-image: url(${PassportDashboardBackground});
-`
+`;
 
-const SubHeader = styled(SubTitle)`  
+const SubHeader = styled(SubTitle)`
   font-style: italic;
-`
+`;
 
 const HeaderContainer = styled.div`
   width: 100%;

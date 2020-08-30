@@ -9,6 +9,7 @@ type Props = {
 };
 
 const Faq = ({ showFaq, toggleView }: Props) => {
+  
   const goToFoodCrawlInfo = (e) => {
     window.open('https://www.sendchinatownlove.com/food-crawl.html', '_blank');
   }
@@ -16,7 +17,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
   return (
     <CardContainer mainView={showFaq} onClick={toggleView}>
       <TitleRow>
-        <Title color={showFaq ? "black" : "grey"}>HOW TO WIN REWARDS</Title>
+        <Title color={showFaq ? 'black' : 'grey'}>HOW TO WIN REWARDS</Title>
       </TitleRow>
       {!showFaq && (
         <>
@@ -52,8 +53,9 @@ const Faq = ({ showFaq, toggleView }: Props) => {
           </BulletPoint>
 
         <Question>5. How do I get a ticket?</Question>
-        Spend at least $5 at any one of our 13 participating vendors and you will be issued a ticket. Each ticket has a unique ticket code that cannot be replaced — don’t lose this!
-
+        Spend at least $5 at any one of our 13 participating vendors and you
+        will be issued a ticket. Each ticket has a unique ticket code that
+        cannot be replaced — don’t lose this!
         <Question>6. How many tickets do I get per purchase?</Question>
         <BulletPoint>
           You get one (1) ticket per purchase over $5. You must spend a minimum of $5 to get one (1) ticket, and are limited to one (1) ticket per transaction.
@@ -63,8 +65,10 @@ const Faq = ({ showFaq, toggleView }: Props) => {
           </BulletPoint>
 
         <Question>7. What are the tickets for?</Question>
-        The tickets are used to track the vendors you’ve visited. Be sure to submit your unique ticket code to your Passport to Chinatown. Once submitted, every three (3) tickets will unlock rewards from a list of our local rewards partners.
-
+        The tickets are used to track the vendors you’ve visited. Be sure to
+        submit your unique ticket code to your Passport to Chinatown. Once
+        submitted, every three (3) tickets will unlock rewards from a list of
+        our local rewards partners.
         <Question>8. How many tickets do I need to win a reward?</Question>
         <BulletPoint>
           You must submit a <strong>total of three (3) tickets</strong> to redeem your reward at one of our local reward partners. Each of your three (3) tickets must be obtained from three <strong>(3) different</strong> vendors. You will <strong><em>not</em></strong> be eligible if you submit multiple tickets from the same vendor.
@@ -107,14 +111,18 @@ const Faq = ({ showFaq, toggleView }: Props) => {
           </BulletPoint>
 
         <Question>12. What are the weekly digital giveaways?</Question>
-        As an added bonus, once you have collected your three (3) tickets, you will be entered into a digital raffle to win our item of the week! These raffle items will be announced every Sunday.
-
+        As an added bonus, once you have collected your three (3) tickets, you
+        will be entered into a digital raffle to win our item of the week! These
+        raffle items will be announced every Sunday.
         <Question>13. How do I enter the weekly digital giveaways?</Question>
         <BulletPoint>
           Once you’ve collected three (3) tickets and logged them into the <em>Passport to Chinatown</em>, you will also be entered into the digital giveaway with just one more step:
         </BulletPoint>
         <BulletPoint>
-          Post about the Food Crawl and tag us on Instagram (@sendchinatownlove). This can be an in-feed post or a story. You must include your Instagram username when submitting at least one of your tickets to your Passport to Chinatown.
+          Post about the Food Crawl and tag us on Instagram
+          (@sendchinatownlove). This can be an in-feed post or a story. You must
+          include your Instagram username when submitting at least one of your
+          tickets to your Passport to Chinatown.
         </BulletPoint>
 
         <Question>14. How many times can I enter the digital giveaway? Can I have multiple entries?</Question>
@@ -133,13 +141,20 @@ const Faq = ({ showFaq, toggleView }: Props) => {
 
         <Question>17. What should I bring? </Question>
         <BulletPoint>
-          <strong>PPE.</strong> Please bring and wear your mask at all times when you’re not eating or drinking. We want to encourage more foot traffic in the area, but not at the expense of others’ safety. Your own personal hand sanitizer is recommended, but not required, as many businesses will already have hand sanitizer available for you.
+          <strong>PPE.</strong> Please bring and wear your mask at all times
+          when you’re not eating or drinking. We want to encourage more foot
+          traffic in the area, but not at the expense of others’ safety. Your
+          own personal hand sanitizer is recommended, but not required, as many
+          businesses will already have hand sanitizer available for you.
         </BulletPoint>
         <BulletPoint>
-          <strong>Cash.</strong> Remember to bring cash, since many businesses are cash only. If you forget, refer to our Food Crawl map for ATMs in the Chinatown area.
+          <strong>Cash.</strong> Remember to bring cash, since many businesses
+          are cash only. If you forget, refer to our Food Crawl map for ATMs in
+          the Chinatown area.
         </BulletPoint>
         <BulletPoint>
-          <strong>Friends and family.</strong> Food is always more enjoyable when shared with your loved ones!
+          <strong>Friends and family.</strong> Food is always more enjoyable
+          when shared with your loved ones!
         </BulletPoint>
       </FaqContent>
     </CardContainer>
