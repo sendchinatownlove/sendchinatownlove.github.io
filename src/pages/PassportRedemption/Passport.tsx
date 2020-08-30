@@ -13,7 +13,7 @@ import { CardContainer, TitleRow, Title, SubTitle, Button, InstagramDisabled, In
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
 
-// import PassportDashboardBackground from './PassportDashboardBackground.png';
+import PassportDashboardBackground from './PassportDashboardBackground.png';
 import PassportIconImg from './passportIcon.png';
 import CircleLogo from './CircleLogo.png';
 
@@ -216,7 +216,8 @@ const Container = styled.div`
 `;
 
 const PassportContainer = styled(CardContainer)`
-  // background-image: url(${PassportDashboardBackground});
+  background-size: 400px;
+  background-image: url(${PassportDashboardBackground});
 `
 
 const SubHeader = styled(SubTitle)`  
