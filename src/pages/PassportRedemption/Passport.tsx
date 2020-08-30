@@ -85,13 +85,6 @@ const Passport = (props: Props) => {
     if (tickets.length > 0) {
       // make a temp ticket that sorts the tickets by sponsor seller, then redemption date
       let tempTickets = [...tickets];
-      const sortedTickets = tempTickets
-        .sort((a, b) => {
-          const dateA = new Date(a.associated_with_contact_at);
-          const dateB = new Date(b.associated_with_contact_at);
-
-          return dateB.getTime() + dateA.getTime();
-        });
 
       // push the stamps to rows of 3, if there arent 3, then push the left over amount
       while (tempTickets.length) {
@@ -158,12 +151,24 @@ const Passport = (props: Props) => {
         >
           <TitleRow>
             <Title>PASSPORT TO CHINATOWN</Title>
-            <SubHeader color={ showFaq ? 'transparent' : 'black'}>
-            { !showInstagram ? "INSTAGRAM FOR GIVEAWAY ADDED" : "9/1/2020 - 9/30/2020"}
-            </SubHeader>
-            <Icon>
-              { !showInstagram ? <InstagramEnabled/> : <InstagramDisabled /> }
-            </Icon>
+            {
+              showFaq ? (
+                <>
+                  <br/>
+                  <br/>
+                  <br/>
+                </>
+              ) : (
+                <>
+                  <SubHeader color={ showFaq ? 'transparent' : 'black'}>
+                    { !showInstagram ? "INSTAGRAM FOR GIVEAWAY ADDED" : "9/1/2020 - 9/30/2020"}
+                  </SubHeader>
+                  <Icon>
+                    { !showInstagram ? <InstagramEnabled/> : <InstagramDisabled /> }
+                  </Icon>
+                </>
+              )
+            }            
           </TitleRow>
 
           {showEmailSent && (
