@@ -98,7 +98,10 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
                 selected={selectedSponsor.id === sponsor.id}
                 numRewards={numRewards}
                 onClick={() => {
-                  if (numRewards && selectedSponsor.id !== sponsor.id) {
+                  if (numRewards === 0) {
+                    return;
+                  }
+                  if (selectedSponsor.id !== sponsor.id) {
                     setSelectedSponsor({
                       id: sponsor.id,
                       reward_cost: sponsor.reward_cost,
@@ -241,7 +244,8 @@ const RewardsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   overflow-y: scroll;
-  padding: 20px 0;
+  padding-top: 20px;
+  padding-bottom: 30px;
 
   ::-webkit-scrollbar {
     width: 0px;

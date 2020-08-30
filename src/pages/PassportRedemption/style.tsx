@@ -5,6 +5,7 @@ type Props = {
   bold?: string;
   align?: string;
   size?: string;
+  isMainTitle?: boolean;
 };
 
 type PassportProps = {
@@ -18,7 +19,8 @@ const PassportContainer = styled.div`
   width: 367px;
   margin: 0 auto;
   background: #ffffff;
-
+  
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
   border: 1px solid #dedede;
   border-radius: 20px;
   box-sizing: border-box;
@@ -58,6 +60,11 @@ const Title = styled.span`
   text-align: center;
   letter-spacing: 0.15em;
   margin: 5px auto;
+`;
+
+const MainTitle = styled(Title)`
+  color: ${(props: Props) =>
+    (props.isMainTitle ? 'black': 'grey')};
 `;
 
 const SubTitle = styled.span`
@@ -109,6 +116,7 @@ export {
   PassportContainer,
   TitleRow,
   Title,
+  MainTitle,
   SubTitle,
   Button,
   ErrorMessage,

@@ -93,7 +93,6 @@ const Track = ({ setCurrentScreenView }: Props) => {
       width: '100%',
       fontSize: theme.typography.pxToRem(14),
       border: '1px solid #dadde9',
-      leaveTouchDelay: '60000'
     },
   }))(Tooltip);
 
@@ -191,6 +190,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
                   </React.Fragment>
                 }
                 enterTouchDelay={10}
+                leaveTouchDelay={6000}
                 placement="left"
               >
                 <div>
@@ -225,11 +225,11 @@ const Track = ({ setCurrentScreenView }: Props) => {
           {
             !!email && EMAIL_REGEX.test(email) && (
               <Button
-              className="linkButton"
-              disabled={!email}
-              onClick={() => {
-                findOrCreateUser(email, true);
-              }}
+                className="linkButton"
+                disabled={!email}
+                onClick={() => {
+                  findOrCreateUser(email, true);
+                }}
               >
                 View my tickets
               </Button>
