@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { PassportContainer, TitleRow, MainTitle } from './style';
+import { CardContainer, TitleRow, Title } from './style';
 
 type Props = {
   showFaq: boolean;
@@ -14,9 +14,9 @@ const Faq = ({ showFaq, toggleView }: Props) => {
   }
 
   return (
-    <PassportContainer mainView={showFaq} onClick={toggleView}>
+    <CardContainer mainView={showFaq} onClick={toggleView}>
       <TitleRow>
-        <MainTitle isMainTitle={showFaq}>HOW TO WIN REWARDS</MainTitle>
+        <Title color={showFaq ? "black" : "grey"}>HOW TO WIN REWARDS</Title>
       </TitleRow>
       {!showFaq && (
         <>
@@ -142,7 +142,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
           <strong>Friends and family.</strong> Food is always more enjoyable when shared with your loved ones!
         </BulletPoint>
       </FaqContent>
-    </PassportContainer>
+    </CardContainer>
   );
 };
 

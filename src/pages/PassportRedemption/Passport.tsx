@@ -8,11 +8,12 @@ import {
   sendRedeemTicketsEmail,
   getContactInfo,
 } from '../../utilities/api/interactionManager';
-import { PassportContainer, TitleRow, Title, SubTitle, Button, InstagramDisabled, InstagramEnabled } from './style';
+import { CardContainer, TitleRow, Title, SubTitle, Button, InstagramDisabled, InstagramEnabled } from './style';
 
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
 
+// import PassportDashboardBackground from './PassportDashboardBackground.png';
 import PassportIconImg from './passportIcon.png';
 import CircleLogo from './CircleLogo.png';
 
@@ -159,7 +160,9 @@ const Passport = (props: Props) => {
         >
           <TitleRow>
             <Title>PASSPORT TO CHINATOWN</Title>
-            <SubTitle color={ showFaq ? 'transparent' : 'black'}>9/1/2020 - 9/30/2020</SubTitle>
+            <SubHeader color={ showFaq ? 'transparent' : 'black'}>
+            { !showInstagram ? "INSTAGRAM FOR GIVEAWAY ADDED" : "9/1/2020 - 9/30/2020"}
+            </SubHeader>
             <Icon>
               { !showInstagram ? <InstagramEnabled/> : <InstagramDisabled /> }
             </Icon>
@@ -213,6 +216,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const PassportContainer = styled(CardContainer)`
+  // background-image: url(${PassportDashboardBackground});
+`
+
+const SubHeader = styled(SubTitle)`  
+  font-style: italic;
+`
 
 const HeaderContainer = styled.div`
   width: 100%;

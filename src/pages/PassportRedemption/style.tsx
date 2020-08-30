@@ -13,7 +13,7 @@ type PassportProps = {
   mainView?: boolean;
 };
 
-const PassportContainer = styled.div`
+const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,7 +140,7 @@ const CardText = styled.p`
 `;
 
 export {
-  PassportContainer,
+  CardContainer,
   TitleRow,
   Title,
   MainTitle,
