@@ -90,14 +90,19 @@ const ErrorMessage = styled.div`
 interface CardTextProps {
   bold?: string;
   size?: string;
+  color?: string;
+  letterSpacing?: string;
 }
 
 const CardText = styled.p`
   text-transform: uppercase;
+  text-align: center;
   letter-spacing: 0.1em;
   margin: 0;
   font-weight: ${(props: CardTextProps) => (props.bold ? props.bold : '400')};
   font-size: ${(props: CardTextProps) => (props.size ? props.size : '12px')};
+  color: ${(props: CardTextProps) => (props.color ? props.color : '12px')};
+  letter-spacing; ${(props: CardTextProps) => (props.letterSpacing ? props.letterSpacing : '')};
 `;
 
 export {
