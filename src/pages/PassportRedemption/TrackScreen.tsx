@@ -65,9 +65,10 @@ const Track = ({ setCurrentScreenView }: Props) => {
   };
 
   const findTicketCode = async (code, contactId) => {
-    const formattedCode = code.split('-').join('');
+    let formattedCode = code.split('-').join('');
+    formattedCode = formattedCode.toUpperCase();
 
-    const { data } = await checkForValidTicket(formattedCode.toUpperCase());
+    const { data } = await checkForValidTicket(formattedCode);
     if (data && !data.contact_id) {
       const { data: newContactId } = await updateTicketContactId(
         formattedCode,
