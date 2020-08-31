@@ -286,7 +286,7 @@ const Table = styled.table`
 const AddNewTicket = styled(Button)`
   position: fixed;
   margin-left: -150px;
-  bottom: 10px;
+  bottom: 0;
   left: 50%;
   width: 300px;
   z-index: 100;
