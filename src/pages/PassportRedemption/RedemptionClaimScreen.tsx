@@ -62,7 +62,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         });
       const { status } = await redeemReward(id, access_token, ticketsToRedeem);
       // figure out how to handle invalid redemption with this page
-      if (status !== 200) push(`/passport/${id}/tickets`);
+      // if (status !== 200) push(`/passport/${id}/tickets`);
     } catch (err) {
       console.error('passport error: ' + err);
     }
