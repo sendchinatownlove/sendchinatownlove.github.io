@@ -120,18 +120,18 @@ const Passport = (props: Props) => {
     const rows = createTicketRows(stamps);
     return (
       <TableContainer>
-      <Table>
-        <tbody>
-          {rows.map((row, index) => (
-            <TicketRow
-              stamps={row}
-              index={index}
-              key={index}
-              sendEmail={sendEmail}
-            />
-          ))}
-        </tbody>
-      </Table>
+        <Table>
+          <tbody>
+            {rows.map((row, index) => (
+              <TicketRow
+                stamps={row}
+                index={index}
+                key={index}
+                sendEmail={sendEmail}
+              />
+            ))}
+          </tbody>
+        </Table>
       </TableContainer>
     );
   };
@@ -234,6 +234,7 @@ const Container = styled.div`
 const PassportContainer = styled(CardContainer)`
   background-size: 400px;
   background-image: url(${PassportDashboardBackground});
+  max-height: 650px;
 `;
 
 const SubHeader = styled(SubTitle)`

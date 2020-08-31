@@ -31,7 +31,6 @@ const CardContainer = styled.div`
   opacity: ${(props: PassportProps) => (props.mainView ? '1' : '0.5')};
   z-index: ${(props: PassportProps) => (props.mainView ? '10' : '0')};
   top: ${(props: PassportProps) => (props.mainView ? '50px' : '0')};
-
 `;
 
 const ExternalLink = styled.a`
