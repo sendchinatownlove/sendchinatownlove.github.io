@@ -79,8 +79,11 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
     else return <DefaultFooter allSponsors={allSponsors} id={id} />;
   };
 
+  const vh = window.innerHeight * 0.01;
+  console.log(vh)
+
   return (
-    <Container>
+    <Container vh={vh}>
       <Header numSponsors={allSponsors.length}>
         <Logo src={CircleLogo} alt="scl-log" />
         <Heading>
@@ -152,9 +155,11 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 
 export default PassportSelected;
 
-const Container = styled.div`
+const Container = styled.div<{
+  vh: number;
+}>`
   width: 375px;
-  height: 100vh;
+  height: ${(props) => 100 * props.vh}px;
   margin: 0 auto;
   font-size: 12px;
   display: flex;
