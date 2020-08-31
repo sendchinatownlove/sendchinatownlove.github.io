@@ -41,7 +41,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
   const fetchSponsor = async () => {
     try {
       const { data: sponsor } = await getOneSponsor(sponsor_seller_id);
-      const { data: location } = await getLocationById(sponsor_seller_id);
+      const { data: location } = await getLocationById(sponsor.location_id);
       setSelectedReward({
         ...sponsor,
         location: location,
