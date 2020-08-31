@@ -13,9 +13,7 @@ import {
   TitleRow,
   Title,
   SubTitle,
-  Button,
-  InstagramDisabled,
-  InstagramEnabled,
+  Button
 } from './style';
 
 import TicketRow from './TicketRow';
@@ -24,6 +22,9 @@ import FAQ from './Faq';
 import PassportDashboardBackground from './PassportDashboardBackground.png';
 import PassportIconImg from './passportIcon.png';
 import CircleLogo from './CircleLogo.png';
+import InstagramDisabled from './InstagramDisabled';
+import InstagramEnabled from './InstagramEnabled';
+
 
 interface Props {
   setCurrentScreenView: Function;
