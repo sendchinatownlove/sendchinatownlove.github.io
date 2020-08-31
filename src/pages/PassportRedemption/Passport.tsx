@@ -162,7 +162,7 @@ const Passport = (props: Props) => {
           onClick={() => push(location.pathname)}
         >
           <TitleRow>
-            <Title>PASSPORT TO CHINATOWN</Title>
+            <Title color={showFaq ? 'grey' : 'black'}>PASSPORT TO CHINATOWN</Title>
             {showFaq ? (
               <>
                 <br />
@@ -172,12 +172,12 @@ const Passport = (props: Props) => {
             ) : (
               <>
                 <SubHeader color={showFaq ? 'transparent' : 'black'}>
-                  {!showInstagram
+                  {showInstagram
                     ? 'INSTAGRAM FOR GIVEAWAY ADDED'
                     : '9/1/2020 - 9/30/2020'}
                 </SubHeader>
                 <Icon>
-                  {!showInstagram ? (
+                  {showInstagram ? (
                     <InstagramEnabled />
                   ) : (
                     <InstagramDisabled />

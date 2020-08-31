@@ -28,7 +28,7 @@ const CardContainer = styled.div`
   overflow: hidden;
 
   position: absolute;
-  opacity: ${(props: PassportProps) => (props.mainView ? '1' : '0.5')};
+  // opacity: ${(props: PassportProps) => (props.mainView ? '1' : '0.85')};
   z-index: ${(props: PassportProps) => (props.mainView ? '10' : '0')};
   top: ${(props: PassportProps) => (props.mainView ? '50px' : '0')};
 `;
