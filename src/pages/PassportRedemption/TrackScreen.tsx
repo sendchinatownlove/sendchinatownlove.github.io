@@ -180,10 +180,12 @@ const Track = ({ setCurrentScreenView }: Props) => {
                     <ToolTipTable>
                       <tbody>
                         <tr>
-                          To be entered into our weekly Digital Giveaways, visit 3
-                          merchants and post and tag <strong>@sendchinatownlove</strong>
-                          &nbsp;with your food crawl pictures on Instagram. Enter your
-                          Instagram handle so we can track your entries.
+                          To be entered into our weekly Digital Giveaways, visit
+                          3 merchants and post and tag{' '}
+                          <strong>@sendchinatownlove</strong>
+                          &nbsp;with your food crawl pictures on Instagram.
+                          Enter your Instagram handle so we can track your
+                          entries.
                         </tr>
                       </tbody>
                     </ToolTipTable>
@@ -222,19 +224,17 @@ const Track = ({ setCurrentScreenView }: Props) => {
           >
             Add Ticket
           </Button>
-          {
-            !!email && EMAIL_REGEX.test(email) && (
-              <Button
-                className="linkButton"
-                disabled={!email}
-                onClick={() => {
-                  findOrCreateUser(email, true);
-                }}
-              >
-                View my tickets
-              </Button>
-            )
-          }
+          {!!email && EMAIL_REGEX.test(email) && (
+            <Button
+              className="linkButton"
+              disabled={!email}
+              onClick={() => {
+                findOrCreateUser(email, true);
+              }}
+            >
+              View my tickets
+            </Button>
+          )}
         </InputContainer>
       </PassportCard>
 

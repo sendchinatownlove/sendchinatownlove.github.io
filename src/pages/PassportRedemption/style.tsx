@@ -12,23 +12,24 @@ type PassportProps = {
   mainView?: boolean;
 };
 
-const PassportContainer = styled.div`
+const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 367px;
   margin: 0 auto;
   background: #ffffff;
-  
-  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   border: 1px solid #dedede;
   border-radius: 20px;
   box-sizing: border-box;
   overflow: hidden;
 
   position: absolute;
+  // opacity: ${(props: PassportProps) => (props.mainView ? '1' : '0.85')};
   z-index: ${(props: PassportProps) => (props.mainView ? '10' : '0')};
-  top: ${(props: PassportProps) => (props.mainView ? '40px' : '0')};
+  top: ${(props: PassportProps) => (props.mainView ? '50px' : '0')};
 `;
 
 const ExternalLink = styled.a`
@@ -63,8 +64,7 @@ const Title = styled.span`
 `;
 
 const MainTitle = styled(Title)`
-  color: ${(props: Props) =>
-    (props.isMainTitle ? 'black': 'grey')};
+  color: ${(props: Props) => (props.isMainTitle ? 'black' : 'grey')};
 `;
 
 const SubTitle = styled.span`
@@ -109,11 +109,12 @@ const CardText = styled.p`
   font-weight: ${(props: CardTextProps) => (props.bold ? props.bold : '400')};
   font-size: ${(props: CardTextProps) => (props.size ? props.size : '12px')};
   color: ${(props: CardTextProps) => (props.color ? props.color : '12px')};
-  letter-spacing; ${(props: CardTextProps) => (props.letterSpacing ? props.letterSpacing : '')};
+  letter-spacing; ${(props: CardTextProps) =>
+    props.letterSpacing ? props.letterSpacing : ''};
 `;
 
 export {
-  PassportContainer,
+  CardContainer,
   TitleRow,
   Title,
   MainTitle,

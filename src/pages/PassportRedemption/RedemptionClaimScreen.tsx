@@ -100,16 +100,19 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
       <Shadow>
         <InputContainer className="top shadow">
           <ContentContainer>
-            <CardText bold="700" size="30px" letterSpacing="0.15em;">{selectedReward.reward}</CardText>
-            <CardText bold="700" size="25px">{selectedReward.reward_detail}</CardText>
+            <CardText bold="700" size="30px" letterSpacing="0.15em;">
+              {selectedReward.reward}
+            </CardText>
+            <CardText bold="700" size="25px">
+              {selectedReward.reward_detail}
+            </CardText>
             <br />
-            <LogoImage
-              src={selectedReward.logo_url}
-              alt="reward-logo"
-            />
+            <LogoImage src={selectedReward.logo_url} alt="reward-logo" />
             <br />
             <div>
-              <CardText bold="700" size="15px">{selectedReward.name}</CardText>
+              <CardText bold="700" size="15px">
+                {selectedReward.name}
+              </CardText>
               {selectedReward && selectedReward.location && (
                 <>
                   <CardText size="15px">
@@ -132,7 +135,10 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
           <ContentContainer>
             <CardText size="15px" color="#a8192e">
               Offer must be used in:
-              <span style={{fontWeight:'bold'}}> {formatTime(timeLeft)}</span>
+              <span style={{ fontWeight: 'bold' }}>
+                {' '}
+                {formatTime(timeLeft)}
+              </span>
             </CardText>
           </ContentContainer>
         </InputContainer>
