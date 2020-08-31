@@ -79,7 +79,14 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
     else return <DefaultFooter allSponsors={allSponsors} id={id} />;
   };
 
-  const vh = window.innerHeight * 0.01;
+  const [vh, setVh] = useState(window.innerHeight * 0.01);
+
+  useEffect(() => {
+    function handleResize() {
+      setVh(window.innerHeight * 0.01)
+    }
+    window.addEventListener('resize', handleResize)
+  });
 
   return (
     <Container vh={vh}>
