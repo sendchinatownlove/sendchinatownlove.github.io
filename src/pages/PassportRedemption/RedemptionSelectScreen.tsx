@@ -79,8 +79,10 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
     else return <DefaultFooter allSponsors={allSponsors} id={id} />;
   };
 
+  const vh = window.innerHeight * 0.01;
+
   return (
-    <Container>
+    <Container vh={vh}>
       <Header numSponsors={allSponsors.length}>
         <Logo src={CircleLogo} alt="scl-log" />
         <Heading>
@@ -152,14 +154,15 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 
 export default PassportSelected;
 
-const Container = styled.div`
+const Container = styled.div<{
+  vh: number;
+}>`
   width: 375px;
-  height: 100vh;
+  height: ${(props) => 100 * props.vh}px;
   margin: 0 auto;
   font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
 `;
 
 const Header = styled.div<{
@@ -168,7 +171,7 @@ const Header = styled.div<{
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   position: relative;
 
   ${(props) =>
@@ -220,7 +223,7 @@ const Footer = styled.div<{
 }>`
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   padding: 20px;
 
   & > * {
@@ -243,6 +246,7 @@ const Footer = styled.div<{
 const RewardsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  place-items: center;
   overflow-y: scroll;
   padding-top: 20px;
   padding-bottom: 30px;
@@ -264,13 +268,12 @@ const SingleRewardContainer = styled.button<{
   box-shadow: ${(props) =>
     props.numRewards > 0 ? '0px 0px 10px rgba(0, 0, 0, 0.25)' : 'none'};
   background-color: white;
-  padding: 5px 5px;
   box-sizing: border-box;
   margin: 8px;
   outline: none;
   border-radius: 5px;
   cursor: ${(props) => (props.numRewards > 0 ? 'pointer' : 'auto')};
-
+  
   display: flex;
   flex-direction: column;
 `;
