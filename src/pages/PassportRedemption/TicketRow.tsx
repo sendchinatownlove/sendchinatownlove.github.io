@@ -130,6 +130,7 @@ const TableIndex = styled.td`
 const TableStamp = styled.td`
   width: 100%;
   position: relative;
+  padding: 0;
 `;
 const StampColumn = styled.div`
   position: relative;

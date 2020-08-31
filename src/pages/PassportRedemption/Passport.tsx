@@ -145,7 +145,7 @@ const Passport = (props: Props) => {
   return (
     <Container>
       <HeaderContainer>
-        <RedirectionLinks href="https://www.sendchinatownlove.com/food-crawl.html">
+        <RedirectionLinks href="https://www.sendchinatownlove.com/food-crawl.html" target="_blank">
           Learn More
         </RedirectionLinks>
         <Logo src={CircleLogo} alt="scl-log" />
