@@ -251,6 +251,7 @@ const Footer = styled.div<{
 `;
 
 const RewardsContainer = styled.div`
+  margin: 0 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   overflow-y: scroll;
