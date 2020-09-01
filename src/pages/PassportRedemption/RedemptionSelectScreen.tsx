@@ -276,7 +276,7 @@ const SingleRewardContainer = styled.button<{
   background-color: white;
   box-sizing: border-box;
   margin: 8px;
-  padding: 10px 5px;
+  padding: 5px;
   outline: none;
   border-radius: 5px;
   cursor: ${(props) => (props.numRewards > 0 ? 'pointer' : 'auto')};
@@ -288,16 +288,17 @@ const SingleRewardContainer = styled.button<{
 
 const SingleRewardInfo = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(220px - 5px - 15px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;
 
 const LogoImage = styled.img`
   width: 130px;
   border-radius: 20px;
+  border: 1px solid #EAEAEA;
 `;
 
 const Buffer = styled.div`
