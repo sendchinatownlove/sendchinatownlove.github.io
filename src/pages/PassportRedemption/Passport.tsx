@@ -295,6 +295,7 @@ const AddNewTicket = styled(Button)`
 `;
 
 const SendEmailContainer = styled.div`
+  padding: 10px;
   position: absolute;
   width: 340px;
   margin: 0 auto;
@@ -317,6 +318,8 @@ const PassportIcon = styled.img`
 `;
 
 const SendEmailButtonClose = styled(Button)`
+  padding: 0;
+  text-align: center;
   height: 32px;
   width: 115px;
   margin: 0 auto;
