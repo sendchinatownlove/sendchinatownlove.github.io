@@ -253,7 +253,6 @@ const Footer = styled.div<{
 const RewardsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  place-items: center;
   overflow-y: scroll;
   padding-top: 20px;
   padding-bottom: 50px;
@@ -284,6 +283,7 @@ const SingleRewardContainer = styled.button<{
   
   display: flex;
   flex-direction: column;
+  place-self: center;
 `;
 
 const SingleRewardInfo = styled.div`
