@@ -70,14 +70,7 @@ const Passport = (props: Props) => {
         })
         .then((passportTickets) => {
           if (passportTickets.length > 0) {
-            const sortedTickets = passportTickets.sort((a, b) => {
-              const dateA = new Date(a.associated_with_contact_at);
-              const dateB = new Date(b.associated_with_contact_at);
-
-              return dateB.getTime() - dateA.getTime();
-            });
-
-            setTickets(sortedTickets.reverse());
+            setTickets(passportTickets);
           }
         })
         .catch((err) => {
@@ -295,6 +288,7 @@ const AddNewTicket = styled(Button)`
 `;
 
 const SendEmailContainer = styled.div`
+  padding: 10px;
   position: absolute;
   width: 340px;
   margin: 0 auto;
@@ -317,6 +311,8 @@ const PassportIcon = styled.img`
 `;
 
 const SendEmailButtonClose = styled(Button)`
+  padding: 0;
+  text-align: center;
   height: 32px;
   width: 115px;
   margin: 0 auto;
