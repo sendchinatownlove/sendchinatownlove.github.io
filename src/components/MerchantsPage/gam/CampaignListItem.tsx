@@ -142,7 +142,7 @@ const Container = styled.div`
   justify-content: space-between;
 
   @media (${tabletScreens}) {
-    max-height: 600px;
+    max-height: 1000px;
     flex-direction: column;
     margin: 0 17px;
     position: relative;
