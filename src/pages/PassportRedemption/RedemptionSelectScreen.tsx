@@ -256,7 +256,7 @@ const RewardsContainer = styled.div`
   place-items: center;
   overflow-y: scroll;
   padding-top: 20px;
-  padding-bottom: 30px;
+  padding-bottom: 50px;
 
   ::-webkit-scrollbar {
     width: 0px;
@@ -277,7 +277,7 @@ const SingleRewardContainer = styled.button<{
   background-color: white;
   box-sizing: border-box;
   margin: 8px;
-  padding: 10px;
+  padding: 10px 5px;
   outline: none;
   border-radius: 5px;
   cursor: ${(props) => (props.numRewards > 0 ? 'pointer' : 'auto')};
