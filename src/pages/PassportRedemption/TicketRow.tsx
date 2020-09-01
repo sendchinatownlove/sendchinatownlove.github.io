@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Button } from './style';
-import { dateFormatter } from '../../utilities/general/textFormatter';
+import { dateFormatter, makePlural } from '../../utilities/general/textFormatter';
 
 interface Props {
   stamps: participatingSellerProps[];
@@ -17,6 +17,7 @@ type participatingSellerProps = {
   stamp_url: string;
   updated_at: string;
   redeemed_at: string;
+  sponsor_seller_id: string;
 };
 type redeemRowProp = {
   status?: RowStatuses;
@@ -33,12 +34,14 @@ const TicketRow = (props: Props) => {
   const [redeemedOn, setRedeemedOn] = useState('');
 
   useEffect(() => {
-    if (props.stamps.some((stamp) => stamp.redeemed_at)) {
-      const date = props.stamps.find((stamp) => !!stamp.redeemed_at);
-      if (!!date) setRedeemedOn(date.redeemed_at);
-      setStatus(RowStatuses.Redeemed);
-    } else if (props.stamps.length === 3) {
-      setStatus(RowStatuses.Active);
+    if (props.stamps.length === 3) {
+      if (props.stamps.every((stamp) => stamp.redeemed_at && stamp.sponsor_seller_id) ) {
+        const date = props.stamps[0].redeemed_at;
+        setRedeemedOn(date);
+        setStatus(RowStatuses.Redeemed);
+      } else {
+        setStatus(RowStatuses.Active);
+      }
     } else {
       setStatus(RowStatuses.Inactive);
     }
@@ -52,9 +55,7 @@ const TicketRow = (props: Props) => {
         return `READY TO REDEEM`;
       default:
         if (props.stamps.length === 0) return;
-        return `${3 - props.stamps.length} MORE ${
-          3 - props.stamps.length > 1 ? 'STAMPS' : 'STAMP'
-        }  UNTIL YOUR NEXT REWARD`;
+        return `${3 - props.stamps.length} MORE ${makePlural(3 - props.stamps.length, "stamp", 's')} UNTIL YOUR NEXT REWARD`;
     }
   };
 
@@ -160,6 +161,7 @@ const RedeemedRow = styled.div`
   justify-content: center;
   font-size: 10px;
   height: 20px;
+  text-transform: uppercase;
   ${(props: redeemRowProp) =>
     props.status === RowStatuses.Active && 'font-weight: 700;'};
 `;
