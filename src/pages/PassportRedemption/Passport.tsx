@@ -70,14 +70,7 @@ const Passport = (props: Props) => {
         })
         .then((passportTickets) => {
           if (passportTickets.length > 0) {
-            const sortedTickets = passportTickets.sort((a, b) => {
-              const dateA = new Date(a.associated_with_contact_at);
-              const dateB = new Date(b.associated_with_contact_at);
-
-              return dateB.getTime() - dateA.getTime();
-            });
-
-            setTickets(sortedTickets.reverse());
+            setTickets(passportTickets);
           }
         })
         .catch((err) => {
