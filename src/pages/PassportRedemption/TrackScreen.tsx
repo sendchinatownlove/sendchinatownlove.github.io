@@ -334,6 +334,8 @@ const InputField = styled.input`
   border-radius: 5px;
   outline: none;
   -webkit-appearance: none;
+  font-size: 16px;
+  color: grey;
 
   :invalid {
     border: 1px solid red;
