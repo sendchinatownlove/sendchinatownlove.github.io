@@ -49,7 +49,7 @@
     }
   },
   "merchantsPage": {
-    "platformInfoHeader": "我们的中国城",
+    "platformInfoHeader": "我们的华埠",
     "platformInfoDescription": "我们会提供网上平台去帮助一些受到疫情影响的传统的，不会使用科技的，只收现金的亚洲华人商家。",
     "platformInfoAction": "我们将会通过募集接受捐款或礼品券去帮助他们",
     "flyerAsk": "Know of any business owners that fit our target merchant?",
@@ -65,7 +65,7 @@
     "header": "如果你不太确定捐款给哪个商家？",
     "description1": "我们会把你的捐款平均分配给商家",
     "description2": "",
-    "button": "请支持中国城!"
+    "button": "请支持华埠!"
   },
   "contributionBar": {
     "header": "筹款总额",
@@ -79,7 +79,7 @@
     "bullet2": "英语上不流畅，以现金收入为主，或者不太懂网上新科技的商人",
     "bullet3": "现在财务受困，影响到付房租，付水电费，及发工资给员工的能力",
     "bullet4": "沒有网址，网上外卖，或接受礼品券的服务",
-    "bullet5": "在纽约中国城，法拉盛，及八大道等"
+    "bullet5": "在纽约华埠，法拉盛，及八大道等"
   },
   "storeDetails": {
     "storyHeader": "背景简介"
