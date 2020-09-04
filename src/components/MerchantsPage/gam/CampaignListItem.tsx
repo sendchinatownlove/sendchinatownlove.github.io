@@ -137,7 +137,7 @@ export default CampaignListItem;
 const Container = styled.div`
   border-bottom: 1px solid #e5e5e5;
   display: flex;
-  max-height: 350px;
+  max-height: 800px;
   margin: 35px 0 55px;
   justify-content: space-between;
 
