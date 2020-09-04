@@ -32,11 +32,11 @@ const DonationHighlightBox = () => {
           <Header>{t('donationBox.header')}</Header>
           <Description>{t('donationBox.description')}</Description>
         </ColumnContainer>
-
-        <Button className={'button--outlined'} onClick={openModal}>
-          {t('donationBox.button')}
-        </Button>
       </div>
+
+      <Button className={'button--outlined'} onClick={openModal}>
+        {t('donationBox.button')}
+      </Button>
 
       <Modal
         purchaseType={'donation'}
