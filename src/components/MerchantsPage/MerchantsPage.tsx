@@ -7,7 +7,8 @@ import DescriptionBox from './DescriptionBox';
 import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import { LoaderFillerContainer } from '../Loader';
-import DonationPoolBox from './DonationPool';
+import DonationHighlightBox from './DonationHighlightBox';
+import GiftMealHighlightBox from './GiftMealHighlightBox';
 import { getWebsiteImages } from '../../utilities/general/StoreImages';
 import { useTranslation } from 'react-i18next';
 import ReactPixel from 'react-facebook-pixel';
@@ -109,7 +110,10 @@ const MerchantsPage = (props: Props) => {
           </div>
 
           <div className={styles.merchantInfoContainer}>
-            <DonationPoolBox />
+            <div className={styles.highlightsContainer}>
+              <DonationHighlightBox />
+              <GiftMealHighlightBox />
+            </div>
 
             <div className={styles.storeInfoContainer}>
               <NavBar filterStoreType={filterStoreType} />
@@ -134,8 +138,8 @@ const MerchantsPage = (props: Props) => {
           </div>
         </>
       ) : (
-        <LoaderFillerContainer />
-      )}
+          <LoaderFillerContainer />
+        )}
     </div>
   );
 };
