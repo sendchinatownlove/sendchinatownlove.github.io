@@ -21,20 +21,22 @@ const DonationHighlightBox = () => {
   };
 
   const containerClickHandler =
-    useWindowSize().width < 600 ? openModal : () => {};
+    useWindowSize().width < 600 ? openModal : () => { };
 
   return (
-    <Container onClick={containerClickHandler}>
-      <Image src={websiteImages.donationPoolHero} alt="banner" />
+    <Container>
+      <div onClick={containerClickHandler}>
+        <Image src={websiteImages.donationPoolHero} alt="banner" />
 
-      <ColumnContainer>
-        <Header>{t('donationBox.header')}</Header>
-        <Description>{t('donationBox.description')}</Description>
-      </ColumnContainer>
+        <ColumnContainer>
+          <Header>{t('donationBox.header')}</Header>
+          <Description>{t('donationBox.description')}</Description>
+        </ColumnContainer>
 
-      <Button className={'button--outlined'} onClick={openModal}>
-        {t('donationBox.button')}
-      </Button>
+        <Button className={'button--outlined'} onClick={openModal}>
+          {t('donationBox.button')}
+        </Button>
+      </div>
 
       <Modal
         purchaseType={'donation'}

@@ -2,8 +2,10 @@
 @import '../../responsive';
 
 
-h1 {
-  line-height: 40px;
+.header {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
 }
 
 .amountContainer {

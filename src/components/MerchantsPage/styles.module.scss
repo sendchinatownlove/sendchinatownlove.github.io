@@ -138,9 +138,23 @@
   flex-direction: column;
   max-width: 1300px;
   margin: 0 auto;
+}
+
+.highlightsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 550px);
+  grid-gap: 2.5rem 6rem;
+  padding-top: 40px;
+  padding-bottom: 60px;
+
+  @media (max-width: 1350px) {
+    grid-gap: 2.5rem 5%;
+  }
 
   @include for-phone-only {
-    flex-direction: column-reverse;
+    grid-template-columns: repeat(auto-fill, 170px);
+    justify-content: center;
+    grid-gap: 10px;
   }
 }
 

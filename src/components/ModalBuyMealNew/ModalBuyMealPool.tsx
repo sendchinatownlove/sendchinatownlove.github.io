@@ -51,11 +51,11 @@ export const Modal = (props: Props) => {
   return (
     <form data-testid="ModalBuyMeal">
       <div>
-        <h1>
+        <div className={styles.header}>
           {props.sellerId
             ? t('buyMeal.header') + props.sellerName
             : t('buyMealPool.header')}
-        </h1>
+        </div>
       </div>
       <p className={styles.description}>
         {t('buyMealPool.description.weAre')}
