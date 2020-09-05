@@ -56,10 +56,12 @@ const CampaignListItem = (props: Props) => {
     <Container>
       <ColumnContainer>
         {campaignImageUrls && campaignImageUrls.length && (
-          <CampaignImage
-            src={campaignImageUrls[0] ?? campaignDefaultImage}
-            alt="campaign_image"
-          />
+          <CampaignImageContainer>
+            <CampaignImage
+              src={campaignImageUrls[0] ?? campaignDefaultImage}
+              alt="campaign_image"
+            />
+          </CampaignImageContainer>
         )}
       </ColumnContainer>
       <ColumnContainer>
@@ -96,13 +98,10 @@ const CampaignListItem = (props: Props) => {
               />
             </a>
           )}
-          {merchant && (
-            <MerchantImage src={merchant.logo_image_url} alt="merchant_logo" />
-          )}
         </ImagesContainer>
         {merchant && (
           <Button
-            className="button--filled"
+            className="button--outlined"
             onClick={(e) => {
               e.preventDefault();
               window.location.href = '/' + merchant.seller_id;
@@ -112,7 +111,7 @@ const CampaignListItem = (props: Props) => {
           </Button>
         )}
         {campaign.active && (
-          <Button className={'button--outlined'} onClick={showModal}>
+          <Button className={'button--filled'} onClick={showModal}>
             {t('gamHome.listItem.giftButton')}
           </Button>
         )}
@@ -242,7 +241,7 @@ const Button = styled.div`
 
 const ImagesContainer = styled.span`
   align-self: right;
-  margin-bottom: 60px;
+  margin-bottom: 140px;
   align-self: flex-end;
 
   @media (${tabletScreens}) {
@@ -256,25 +255,26 @@ const ImagesContainer = styled.span`
   }
 `;
 
-const CampaignImage = styled.img`
+const CampaignImageContainer = styled.div`
   height: 240px;
   width: 240px;
 
   @media (${tabletScreens}) {
-    max-height: 100px;
+    height: 100px;
     width: 100%;
   }
+`;
+
+const CampaignImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 `;
 
 const DistributorImage = styled.img`
   max-height: 70px;
   max-width: 120px;
   margin-right: 15px;
-  vertical-align: middle;
-`;
-
-const MerchantImage = styled.img`
-  max-height: 70px;
-  max-width: 70px;
   vertical-align: middle;
 `;
