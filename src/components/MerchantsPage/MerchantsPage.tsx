@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { getSellers } from '../../utilities';
 import NavBar from './MerchantNavBar';
 import MerchantCard from './MerchantCard';
-import DescriptionBox from './DescriptionBox';
+import MerchantDescriptionBanner from './MerchantDescriptionBanner';
 import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import { LoaderFillerContainer } from '../Loader';
@@ -103,9 +103,6 @@ const MerchantsPage = (props: Props) => {
                   totalGiftCards={totalGiftCards}
                 />
               </div>
-              <div className={styles.ownerPanel}>
-                <DescriptionBox />
-              </div>
             </div>
           </div>
 
@@ -127,6 +124,8 @@ const MerchantsPage = (props: Props) => {
               </div>
             </div>
           </div>
+
+          <MerchantDescriptionBanner></MerchantDescriptionBanner>
 
           <div className={styles.flyerContainer}>
             <p>
