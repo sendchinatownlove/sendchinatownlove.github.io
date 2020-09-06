@@ -1,13 +1,13 @@
 {
   "paymentProcessing": {
     "amount": {
-      "header": "Please select an amount or enter a custom amount",
-      "label1": "Select an amount",
-      "label2": "Or enter any amount",
-      "minimum": "Minimum",
-      "maximum": "Maximum",
-      "amount": "amount",
-      "submit": "Next"
+      "header": "请选择或输入金额",
+      "label1": "选择金额",
+      "label2": "或输入金额",
+      "minimum": "最低",
+      "maximum": "最高",
+      "amount": "金额",
+      "submit": "下一步"
     }
   },
   "navBar": {
@@ -17,7 +17,7 @@
     },
     "languages": {
       "english": "ENG",
-      "chinese": "中文"
+      "chinese": "简体中文"
     }
   },
   "buyMeal": {
@@ -37,8 +37,8 @@
     "meals": "meals"
   },
   "purchase": {
-    "donation": "Donation for ",
-    "voucher": "Voucher for "
+    "donation": "捐款给 ",
+    "voucher": "购买礼品券 - "
   },
   "errorPage": {
     "body": {
@@ -50,65 +50,65 @@
   },
   "merchantsPage": {
     "platformInfoHeader": "我们的华埠",
-    "platformInfoDescription": "我们会提供网上平台去帮助一些受到疫情影响的传统的，不会使用科技的，只收现金的亚洲华人商家。",
-    "platformInfoAction": "我们将会通过募集接受捐款或礼品券去帮助他们",
-    "flyerAsk": "Know of any business owners that fit our target merchant?",
-    "flyerDownload": "Download our flyer to share with them."
+    "platformInfoDescription": "我们提供線上平台來帮助受到疫情影响，不会使用科技，只收现金的亚裔传统商家",
+    "platformInfoAction": "我们透过募款以及贩售礼品券来帮助这些商家。",
+    "flyerAsk": "认识需要协助的小型商家业者？",
+    "flyerDownload": "下载传单分享给他们。"
   },
   "merchantNavBar": {
-    "all": "所有的店铺",
-    "brooklyn": "布鲁克林区",
+    "all": "所有的商家",
+    "brooklyn": "布鲁克林",
     "manhattan": "曼哈顿",
     "queens": "皇后区"
   },
   "donationPool": {
     "header": "如果你不太确定捐款给哪个商家？",
-    "description1": "我们会把你的捐款平均分配给商家",
+    "description1": "捐献到爱心池来支持我们的每间商家！我们会把你的捐款平均分配给各商家。。",
     "description2": "",
     "button": "请支持华埠!"
   },
   "contributionBar": {
     "header": "筹款总额",
-    "vouchers": "代金券",
+    "vouchers": "礼品券",
     "donations": "捐款",
-    "footer": "所有的收益将会到所需的商家手里，免信用卡手续费"
+    "footer": "所有的收益将会到所需的商家手里，免信用卡手续费。"
   },
   "descriptionBox": {
-    "header": "我们目标商人有",
-    "bullet1": "亚洲移民创办的小生意",
-    "bullet2": "英语上不流畅，以现金收入为主，或者不太懂网上新科技的商人",
+    "header": "我们在找的小型商家业者",
+    "bullet1": "亚裔移民经营的小型商家",
+    "bullet2": "英语上不流畅，以现金收入为主，或者不太懂网上新科技",
     "bullet3": "现在财务受困，影响到付房租，付水电费，及发工资给员工的能力",
-    "bullet4": "沒有网址，网上外卖，或接受礼品券的服务",
-    "bullet5": "在纽约华埠，法拉盛，及八大道等"
+    "bullet4": "沒有网站，网上外卖，或接受礼品券的服务",
+    "bullet5": "在纽约曼哈顿，法拉盛，或宾臣墟"
   },
   "storeDetails": {
     "storyHeader": "背景简介"
   },
   "ownerPanel": {
-    "donation": "捐赠",
-    "voucher": "购买礼品卡",
+    "donation": "捐款",
+    "voucher": "购买礼品券",
     "giftmeal": "捐爱心餐",
     "extraInfo": {
-      "Type": "商业类型",
+      "Type": "企业类型",
       "Employees": "员工人数",
-      "Founded": "创办于",
-      "Website": "Website",
-      "Menu": "Menu"
+      "Founded": "創立于",
+      "Website": "网站",
+      "Menu": "菜单"
     }
   },
   "donationBox": {
-    "header": "Not sure who to donate to?",
-    "description": "To support every merchant on this page, contribute to our donation pool. We distribute funds evenly across all businesses.",
-    "button": "DONATE"
+    "header": "如果你不太确定捐款给哪个商家？",
+    "description": "捐献到爱心池来支持我们的每间商家！我们会把你的捐款平均分配给各商家。",
+    "button": "捐款"
   },
   "gamBox": {
-    "header": "Learn about Gift-a-Meal",
-    "description": "Double the impact of your donation by gifting meals from our merchants to local organizations that will distribute your gifted meals to our community in need.",
-    "button": "GIFT MEAL"
+    "header": "了解关于爱心餐",
+    "description": "让你的爱心有更大的影响力，捐献给我们的商家以提供爱心餐给社区公益团体，发送给需要的人。",
+    "button": "捐爱心餐"
   },
   "gamHome": {
     "header": "爱心餐",
-    "description": "让你的爱心有更大的影响力，捐献给我们的商家以提供爱心餐给社区公益团体，发送给有需要的人。",
+    "description": "让你的爱心有更大的影响力，捐献给我们的商家以提供爱心餐给社区公益团体，发送给需要的人。",
     "subheading": {
       "step1": "第一步：",
       "step1Text": "捐款给爱心餐活动",
@@ -117,7 +117,7 @@
       "step3": "第三步：",
       "step3Text": "我们将餐券捐给社区公益团体",
       "step4": "第四步：",
-      "step4Text": "社区公益团体发送餐点给有需要的人"
+      "step4Text": "社区公益团体发送餐点给需要的人"
     },
     "backButton": "回到商家页面",
     "giftButton": "捐爱心餐",
@@ -138,9 +138,9 @@
   "buyMealPool": {
     "header": "爱心餐",
     "description": {
-      "weAre": "我们与",
-      "andRestaurants": "以及受到 COVID-19 疫情影响的餐厅合作，捐爱心餐给需要的团体。",
-      "allItTakes": ""
+      "weAre": "我们与 ",
+      "andRestaurants": " 以及受到 COVID-19 疫情影响的餐厅合作，捐爱心餐给需要的团体。",
+      "allItTakes": "仅需"
     },
     "prompt": "Please enter how many meals to gift",
     "totalLabel": "Total: ",
