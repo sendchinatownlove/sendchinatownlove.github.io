@@ -177,10 +177,16 @@ export const getParticipatingMerchant = async (id: string) =>
 
 export const getParticipatingMerchantTickets = async (
   id: string,
-  tickets_secret: string
-) =>
-  axios
-    .get(passportVouchers + id + '/tickets/' + tickets_secret)
+  tickets_secret: string,
+  page: number | null,
+  items: number | null,
+  printed: boolean | null,
+  associated: boolean | null
+
+) => axios
+    .get(passportVouchers + id + '/tickets/' + tickets_secret, {
+      params: { page, items, printed, associated },
+    })
     .then((res) => res)
     .catch((err) => err);
 
