@@ -36,9 +36,9 @@ const FooterComponent = (props: Props) => {
 
   return (
     <Container theme={theme}>
-      <a href="https://sendchinatownlove.com/">
+      <LogoLink href="https://sendchinatownlove.com/">
         <Logo theme={theme} />
-      </a>
+      </LogoLink>
       <LinksContainer>
         {socialMediaLinks.map((social) => (
           <LinkItem>
@@ -81,6 +81,7 @@ const Container = styled.footer`
 `;
 
 const LinksContainer = styled.div`
+  z-index: 5;
   padding: 0;
   list-style: none;
   display: flex;
@@ -92,6 +93,11 @@ const LinksContainer = styled.div`
     flex-direction: row;
   }
 `;
+
+const LogoLink = styled.a`
+  z-index: 5;
+`;
+
 const LinkItem = styled.div`
   padding: 0;
   display: flex;
