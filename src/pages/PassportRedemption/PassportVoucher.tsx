@@ -6,13 +6,31 @@ import {
   getParticipatingMerchant,
   getParticipatingMerchantTickets,
 } from '../../utilities/api/interactionManager';
-
+import { useLocation } from 'react-router-dom';
 import { LoaderFillerContainer } from '../../components/Loader';
 import VoucherImage from './VoucherFront.png';
 import BackImage from './VoucherBack.png';
 
 const Voucher = () => {
   const { id, tickets_secret } = useParams();
+  let params = new URLSearchParams(useLocation().search);
+
+  const convertToInt = (input: string | null) => {
+    if (input === null) { return null };
+    const num = parseInt(input, 10);
+    return num;
+  };
+
+  const convertToBool = (input: string | null) => {
+    if (input === 'true') { return true };
+    if (input === 'false') { return false };
+    return null;
+  };
+
+  const page = convertToInt(params.get('page'));
+  const items = convertToInt(params.get('items'));
+  const printed = convertToBool(params.get('printed'));
+  const associated = convertToBool(params.get('associated'));
 
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantTickets, setRestaurantTickets] = useState<any | null>();
@@ -23,7 +41,11 @@ const Voucher = () => {
     } = await getParticipatingMerchant(id);
     const { data: allTickets } = await getParticipatingMerchantTickets(
       id,
-      tickets_secret
+      tickets_secret,
+      page,
+      items,
+      printed,
+      associated
     );
 
     if (allTickets && name) {
