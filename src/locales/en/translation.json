@@ -1,9 +1,9 @@
 {
   "paymentProcessing": {
     "amount": {
-      "header": "Please select an amount or enter a custom amount",
-      "label1": "Select an amount",
-      "label2": "Or enter any amount",
+      "header": "100% of your support will go to the merchant toward their operating costs. Your transaction is secure, encrypted and directly goes to the owner for sustaining their business.",
+      "label1": "Select amount",
+      "label2": "Other:",
       "minimum": "Minimum",
       "maximum": "Maximum",
       "amount": "amount",
