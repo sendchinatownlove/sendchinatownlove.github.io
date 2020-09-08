@@ -1,9 +1,9 @@
 {
   "paymentProcessing": {
     "amount": {
-      "header": "请选择或输入金额",
+      "header": "您的爱心将会全数送到商家手里，帮助他们负担营运支出。您的网上交易资料将会做加密处理，款项会直接交给商家以支持他们。",
       "label1": "选择金额",
-      "label2": "或输入金额",
+      "label2": "其他金额",
       "minimum": "最低",
       "maximum": "最高",
       "amount": "金额",
@@ -37,7 +37,7 @@
     "meals": "meals"
   },
   "purchase": {
-    "donation": "捐款给 ",
+    "donation": "捐款 - ",
     "voucher": "购买礼品券 - "
   },
   "errorPage": {
@@ -50,7 +50,7 @@
   },
   "merchantsPage": {
     "platformInfoHeader": "我们的华埠",
-    "platformInfoDescription": "我们提供線上平台來帮助受到疫情影响，不会使用科技，只收现金的亚裔传统商家",
+    "platformInfoDescription": "我们提供線上平台來帮助受到疫情影响，不会使用科技，只收现金的亚裔传统商家。",
     "platformInfoAction": "我们透过募款以及贩售礼品券来帮助这些商家。",
     "flyerAsk": "认识需要协助的小型商家业者？",
     "flyerDownload": "下载传单分享给他们。"
@@ -62,7 +62,7 @@
     "queens": "皇后区"
   },
   "donationPool": {
-    "header": "如果你不太确定捐款给哪个商家？",
+    "header": "不太确定捐款给哪个商家？",
     "description1": "捐献到爱心池来支持我们的每间商家！我们会把你的捐款平均分配给各商家。。",
     "description2": "",
     "button": "请支持华埠!"
@@ -71,7 +71,7 @@
     "header": "筹款总额",
     "vouchers": "礼品券",
     "donations": "捐款",
-    "footer": "所有的收益将会到所需的商家手里，免信用卡手续费。"
+    "footer": "所有的收益将会全数送到所需的商家手里，免信用卡手续费。"
   },
   "descriptionBox": {
     "header": "我们在找的小型商家业者",
@@ -97,7 +97,7 @@
     }
   },
   "donationBox": {
-    "header": "如果你不太确定捐款给哪个商家？",
+    "header": "不太确定捐款给哪个商家？",
     "description": "捐献到爱心池来支持我们的每间商家！我们会把你的捐款平均分配给各商家。",
     "button": "捐款"
   },
