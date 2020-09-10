@@ -1,13 +1,26 @@
 {
   "paymentProcessing": {
     "amount": {
-      "header": "100% of your support will go to the merchant toward their operating costs. Your transaction is secure, encrypted and directly goes to the owner for sustaining their business.",
+      "donation": {
+        "header": "Donation for",
+        "body": "Your donation is secure, encrypted, and directly goes to the restaurant owner for sustaining their business."
+      },
+      "voucher": {
+        "header": "Voucher for",
+        "body": "Your payment is secure, encrypted, and directly goes to the restaurant owner for sustaining their business."
+      },
+      "cover": {
+        "body1": "When you donate via credit card, there are usually payment processing fees of 2-3% on the transaction. If you make a $100 donation, the merchant only gets $97 of it.",
+        "body2": "In order to help our small businesses get your full donation, please consider covering the processing fees.",
+        "action": "I'll cover processing fees."
+      },
       "label1": "Select amount",
       "label2": "Other:",
       "minimum": "Minimum",
       "maximum": "Maximum",
       "amount": "amount",
-      "submit": "Next"
+      "submit": "Next",
+      "total": "Total amount"
     }
   },
   "navBar": {
@@ -35,10 +48,6 @@
     "toTarget": "to target",
     "outOf": "out of",
     "meals": "meals"
-  },
-  "purchase": {
-    "donation": "Donation for ",
-    "voucher": "Voucher for "
   },
   "errorPage": {
     "body": {

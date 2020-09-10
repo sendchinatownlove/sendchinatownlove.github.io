@@ -13,6 +13,9 @@ const SET_SELLER_DATA = 'SET_SELLER_DATA';
 const UPDATE_SELLER_DATA = 'UPDATE_SELLER_DATA';
 
 const EMAIL_REGEX = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+const TRANSACTION_FEE_PERCENT = 0.03;
+
 export {
   SET_MODAL_VIEW,
   SET_AMOUNT,
@@ -21,4 +24,5 @@ export {
   EMAIL_REGEX,
   SET_SELLER_DATA,
   UPDATE_SELLER_DATA,
+  TRANSACTION_FEE_PERCENT
 };

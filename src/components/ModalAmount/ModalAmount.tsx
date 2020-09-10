@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import {
-  useModalPaymentState,
-  useModalPaymentDispatch,
-} from '../../utilities/hooks/ModalPaymentContext/context';
+import { useModalPaymentState, useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
+  TRANSACTION_FEE_PERCENT
 } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { Checkbox } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
@@ -19,13 +18,18 @@ export interface Props {
 
 export const Modal = (props: Props) => {
   const { t } = useTranslation();
-
   const { amount } = useModalPaymentState();
-  const [isCustomAmount, setIsCustomAmount] = useState(true);
   const [selected, setSelected] = useState('');
+  const [isCustomAmount, setIsCustomAmount] = useState(true);
+  const [customAmount, setCustomAmount] = useState('0.00'); // TODO
+  const [isFeeCovered, setIsFeeCovered] = useState(false);
   const dispatch = useModalPaymentDispatch();
   const minAmount = 5;
   const maxAmount = 10000;
+
+  const changeAmount = (value: string) => {
+    dispatch({ type: SET_AMOUNT, payload: value });
+  };
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
     setSelected(text);
@@ -33,10 +37,39 @@ export const Modal = (props: Props) => {
     dispatch({ type: SET_AMOUNT, payload: value });
   };
 
+  const handleClickSelectAmount = (value: string, text: string) => {
+    setSelected(text);
+    setIsCustomAmount(false);
+    changeAmount(value);
+  };
+
+  const handleClickSelectOther = (value: string) => {
+    setSelected('');
+    setIsCustomAmount(true);
+    changeAmount(value);
+  };
+
+  const handleClickCoverFee = () => {
+    setIsFeeCovered(!isFeeCovered);
+
+    if (isFeeCovered) {
+      const covered = transactionFee(amount);
+      dispatch({ type: SET_AMOUNT, payload: (amount + covered) });
+    }
+  };
+
   const openModal = (e: any) => {
     ReactPixel.trackCustom('PaymentNextButtonClick', { amount: amount });
     e.preventDefault();
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
+  };
+
+  const transactionFee = (value: string) => {
+    return (Number(value) * TRANSACTION_FEE_PERCENT).toFixed(2);
+  };
+
+  const formatMoney = (value: string) => {
+    return `$${ Number(value).toFixed(2) }`;
   };
 
   const validAmount = (value: string) => {
@@ -48,100 +81,133 @@ export const Modal = (props: Props) => {
     { value: '10', text: '$10' },
     { value: '25', text: '$25' },
     { value: '50', text: '$50' },
-    { value: '100', text: '$100' },
+    { value: '100', text: '$100' }
   ];
 
   const headerText =
     props.purchaseType === 'donation'
-      ? t('purchase.donation')
-      : t('purchase.voucher');
+      ? `${ t('paymentProcessing.amount.donation.header') } ${ props.sellerName }`
+      : `${ t('paymentProcessing.amount.voucher.header') } ${ props.sellerName }`;
+
+  const bodyText =
+    props.purchaseType === 'donation'
+      ? t('paymentProcessing.amount.donation.body')
+      : t('paymentProcessing.amount.voucher.body');
 
   return (
     <ContentContainer id="donation-form" data-testid="Modal Amount">
       <Header>
-        {headerText} {props.sellerName}
+        { headerText }
       </Header>
-
-      {props.sellerId === 'send-chinatown-love' && (
-        <p>{t('donationPool.description2')}</p>
-      )}
-      <p>{t('paymentProcessing.amount.header')}</p>
+      {
+        props.sellerId === 'send-chinatown-love' &&
+        <p>{ t('donationPool.description2') }</p>
+      }
+      <p>{ bodyText }</p>
 
       <AmountContainer>
         <label htmlFor="select-amount">
-          {t('paymentProcessing.amount.label1')}
+          { t('paymentProcessing.amount.label1') }
         </label>
         <br />
         <SelectAmtContainer>
-          {buttonAmounts.map((amount) => (
-            <button
-              key={amount.text}
-              type="button"
-              className={
-                selected === amount.text
-                  ? 'modalButton--selected'
-                  : 'modalButton--outlined'
-              }
-              onClick={(e) => {
-                handleAmount(amount.value, false, amount.text);
-              }}
-            >
-              {amount.text}
-            </button>
-          ))}
+          {
+            buttonAmounts.map((amount) => (
+              <button
+                key={ amount.text }
+                type="button"
+                className={
+                  selected === amount.text
+                    ? 'modalButton--selected'
+                    : 'modalButton--outlined'
+                }
+                onClick={ (e) => {
+                  handleAmount(amount.value, false, amount.text);
+                } }
+              >
+                { amount.text }
+              </button>
+            ))
+          }
         </SelectAmtContainer>
         <label htmlFor="custom-amount">
-          {t('paymentProcessing.amount.label2')}
+          { t('paymentProcessing.amount.label2') }
         </label>
         <br />
         <CustomAmountContainer>
           <CustomAmountInput
             name="custom-amount"
             type="number"
-            onFocus={(e) => handleAmount('', true, '')}
-            className={'modalInput--input'}
-            onChange={(e) => {
+            onFocus={ (e) => handleAmount('', true, '') }
+            className={ 'modalInput--input' }
+            onChange={ (e) => {
               handleAmount(e.target.value, true, '');
-            }}
-            onKeyDown={(evt) =>
+            } }
+            onKeyDown={ (evt) =>
               (evt.key === 'e' ||
                 evt.key === '+' ||
                 evt.key === '-' ||
                 evt.key === '.') &&
               evt.preventDefault()
             }
-            value={isCustomAmount ? amount : ''}
+            value={ isCustomAmount ? amount : '' }
             min="5"
             max="10000"
           />
+          {
+            Number(amount) < minAmount && isCustomAmount && (
+              <ErrorMessage>
+                { t('paymentProcessing.amount.minimum') }{ ' ' }
+                { props.purchaseType === 'gift_card' ? 'voucher' : 'donation' }{ ' ' }
+                { t('paymentProcessing.amount.amount') }: $5
+              </ErrorMessage>
+            )
+          }
+          {
+            Number(amount) > maxAmount && isCustomAmount && (
+              <ErrorMessage>
+                { t('paymentProcessing.amount.maximum') }{ ' ' }
+                { props.purchaseType === 'gift_card' ? 'voucher' : 'donation' }{ ' ' }
+                { t('paymentProcessing.amount.amount') }: $10000
+              </ErrorMessage>
+            )
+          }
         </CustomAmountContainer>
-        {Number(amount) < minAmount && isCustomAmount && (
-          <ErrorMessage>
-            {t('paymentProcessing.amount.minimum')}{' '}
-            {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
-            {t('paymentProcessing.amount.amount')}: $5
-          </ErrorMessage>
-        )}
-        {Number(amount) > maxAmount && isCustomAmount && (
-          <ErrorMessage>
-            {t('paymentProcessing.amount.maximum')}{' '}
-            {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
-            {t('paymentProcessing.amount.amount')}: $10000
-          </ErrorMessage>
-        )}
       </AmountContainer>
+
+      <DisclaimerText>{ t('paymentProcessing.amount.cover.body1') }</DisclaimerText>
+      <DisclaimerText>{ t('paymentProcessing.amount.cover.body2') }</DisclaimerText>
+
+      <hr />
+      <CoverFeeContainer>
+        <CheckboxContainer>
+          <Checkbox
+            value="isFeeCovered"
+            inputProps={ { 'aria-label': 'Checkbox A' } }
+            onClick={ handleClickCoverFee }
+            checked={ isFeeCovered }
+          />
+          <b>{ t('paymentProcessing.amount.cover.action') }</b>
+        </CheckboxContainer>
+        <b>{ formatMoney(transactionFee(amount)) }</b>
+      </CoverFeeContainer>
+      <hr />
+
+      <TotalContainer>
+        <b>{ t('paymentProcessing.amount.total') }: <span>{ formatMoney(amount) }</span></b>
+      </TotalContainer>
 
       <NextButton
         type="button"
-        className={'modalButton--filled'}
-        onClick={openModal}
+        className={ 'modalButton--filled' }
+        onClick={ openModal }
         disabled={
           Number(amount) < minAmount ||
           Number(amount) > maxAmount ||
           !validAmount(amount)
         }
       >
-        {t('paymentProcessing.amount.submit')}
+        { t('paymentProcessing.amount.submit') }
       </NextButton>
     </ContentContainer>
   );
@@ -156,7 +222,7 @@ const ContentContainer = styled.form`
 const AmountContainer = styled.div`
   background-color: #f7f7f7;
   padding: 25px 35px;
-  margin-top: 30px;
+  margin: 30px 0;
 `;
 
 const SelectAmtContainer = styled.div`
@@ -192,6 +258,31 @@ const CustomAmountInput = styled.input`
 
   @media (max-width: 450px) {
     width: 100%;
+  }
+`;
+
+const DisclaimerText = styled.p`
+  font-size: 14px;
+  line-height: 22px;
+`;
+
+const CoverFeeContainer = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const CheckboxContainer = styled.label`
+  display: flex;
+  align-items: center;
+`;
+
+const TotalContainer = styled.label`
+  display: flex;
+  justify-content: flex-end;
+
+  span {
+    color: #DD678A;
   }
 `;
 
