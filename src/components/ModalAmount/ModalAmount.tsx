@@ -5,7 +5,8 @@ import {
   SET_AMOUNT,
   SET_CUSTOM_INPUT,
   SET_COVERED_BY_CUSTOMER,
-  TRANSACTION_FEE_PERCENT
+  TRANSACTION_FEE_RATE,
+  TRANSACTION_FEE_FLAT
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { Checkbox } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
@@ -27,14 +28,17 @@ export const Modal = (props: Props) => {
   const dispatch = useModalPaymentDispatch();
   const { amount, customInput, coveredByCustomer } = useModalPaymentState();
   const [selectedAmount, setSelectedAmount] = useState(DEFAULT_AMOUNT);
-  const [coveredAmount, setCoveredAmount] = useState((Number(DEFAULT_AMOUNT) * TRANSACTION_FEE_PERCENT).toFixed(2));
+  const [coveredAmount, setCoveredAmount] = useState(
+    ((Number(DEFAULT_AMOUNT) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT).toFixed(2)
+  );
 
   useEffect(() => {
+    const setAmount = (value: string) => dispatch({ type: SET_AMOUNT, payload: value });
     const newAmount = coveredByCustomer ? (Number(selectedAmount) + Number(coveredAmount)).toFixed(2) : selectedAmount;
+
     setAmount(newAmount);
   }, [selectedAmount, coveredAmount, coveredByCustomer]);
 
-  const setAmount = (value: string) => dispatch({ type: SET_AMOUNT, payload: value });
   const setCustomInput = (value: boolean) => dispatch({ type: SET_CUSTOM_INPUT, payload: value });
   const setCoveredByCustomer = (value: boolean) => dispatch({ type: SET_COVERED_BY_CUSTOMER, payload: value });
 
@@ -61,7 +65,8 @@ export const Modal = (props: Props) => {
   };
 
   const transactionFee = (value: string) => {
-    return (Number(value) * TRANSACTION_FEE_PERCENT).toFixed(2);
+    // TODO: Maybe revert to flat 3% since this looks ugly.
+    return ((Number(value) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT).toFixed(2);
   };
 
   const formatCurrency = (value: string) => {
