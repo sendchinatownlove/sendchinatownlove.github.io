@@ -21,10 +21,6 @@ ReactPixel.trackCustom('MerchantsPageView', {});
 const MerchantsPage = (props: Props) => {
   const websiteImages = getWebsiteImages();
   const { t, i18n } = useTranslation();
-
-  const flyerZip: string =
-    process.env.PUBLIC_URL + './assets/send-chinatown-love-flyers.zip';
-
   const [sellers, setSellers] = useState<any | null>();
   const [filter, setFilter] = useState<any | null>();
   const [totalDonations, setDonations] = useState(0);
@@ -125,12 +121,12 @@ const MerchantsPage = (props: Props) => {
             </div>
           </div>
 
-          <MerchantDescriptionBanner></MerchantDescriptionBanner>
+          <MerchantDescriptionBanner />
 
           <div className={styles.flyerContainer}>
             <p>
               {t('merchantsPage.flyerAsk') + ' '}
-              <a className={styles.redLink} download href={flyerZip}>
+              <a className={styles.redLink} href="https://www.sendchinatownlove.com/merchant-flyers.html">
                 {t('merchantsPage.flyerDownload')}
               </a>
             </p>
