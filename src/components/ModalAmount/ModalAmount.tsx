@@ -127,16 +127,10 @@ export const Modal = (props: Props) => {
           <CustomAmountInput
             name="custom-amount"
             type="number"
-            onFocus={ (e) => handleSelectOther('') }
+            onFocus={ (e) => handleSelectOther(selectedAmount) }
             className={ 'modalInput--input' }
             onChange={ (e) => handleSelectOther(e.target.value) }
-            onKeyDown={ (evt) =>
-              (evt.key === 'e' ||
-                evt.key === '+' ||
-                evt.key === '-' ||
-                evt.key === '.') &&
-              evt.preventDefault()
-            }
+            onKeyDown={ (e) => ['e', '+', '-', '.'].includes(e.key) && e.preventDefault() }
             value={ selectedAmount }
             min={ CUSTOM_AMOUNT_MIN }
             max={ CUSTOM_AMOUNT_MAX }
