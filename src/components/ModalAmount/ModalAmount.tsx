@@ -20,7 +20,13 @@ export interface Props {
 }
 
 export const Modal = (props: Props) => {
-  const DEFAULT_AMOUNT = '25';
+  const transactionFee = (amount: string) => {
+    const raw = (Number(amount) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT
+    const roundedUp = Math.ceil(raw * 100) / 100
+    return roundedUp.toFixed(2);
+  };
+
+  const DEFAULT_AMOUNT = '5';
   const CUSTOM_AMOUNT_MIN = 5;
   const CUSTOM_AMOUNT_MAX = 10000;
 
@@ -28,9 +34,7 @@ export const Modal = (props: Props) => {
   const dispatch = useModalPaymentDispatch();
   const { amount, customInput, coveredByCustomer } = useModalPaymentState();
   const [selectedAmount, setSelectedAmount] = useState(DEFAULT_AMOUNT);
-  const [coveredAmount, setCoveredAmount] = useState(
-    ((Number(DEFAULT_AMOUNT) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT).toFixed(2)
-  );
+  const [coveredAmount, setCoveredAmount] = useState(transactionFee(DEFAULT_AMOUNT));
 
   useEffect(() => {
     const setAmount = (value: string) => dispatch({ type: SET_AMOUNT, payload: value });
@@ -62,11 +66,6 @@ export const Modal = (props: Props) => {
     ReactPixel.trackCustom('PaymentNextButtonClick', { amount: amount });
     e.preventDefault();
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
-  };
-
-  const transactionFee = (value: string) => {
-    // TODO: Maybe revert to flat 3% since this looks ugly.
-    return ((Number(value) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT).toFixed(2);
   };
 
   const formatCurrency = (value: string) => {
