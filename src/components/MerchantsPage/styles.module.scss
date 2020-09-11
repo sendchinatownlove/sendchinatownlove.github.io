@@ -152,6 +152,39 @@
   }
 }
 
+.bannerContentContainer {
+  // grid relative to parent container
+  grid-row: 1;
+  grid-column: 1;
+  z-index: 1;
+
+  // creating grid container for its own children components
+  display: grid;
+  grid-gap: 0 10%;
+  padding: 50px 0 0;
+  background-color: transparent;
+  height: 0px;
+  width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: 1350px) {
+    padding: 50px 35px 0;
+  }
+
+  @include for-tablet-landscape-up {
+    grid-template-columns: 2fr;
+    grid-template-rows: 2fr minmax(0, 250px);
+  }
+
+  @include for-phone-only {
+    height: 480px;
+    padding-top: 20px;
+    justify-items: center;
+    padding-bottom: 0;
+    grid-template-columns: minmax(0, 100%);
+  }
+}
+
 .bannerBackground {
   grid-row: 1;
   grid-column: 1;
