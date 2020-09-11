@@ -4,6 +4,7 @@
  * @typedef {Object} DefaultModalPaymentState
  * @property {number} amount - amount (in cents)
  * @property {boolean} customInput - if a user used the custom input
+ * @property {boolean} coveredByCustomer - if a user is covering transaction fees
  * @property {boolean} close - modal for closing the payment modal
  * @property {number} modalView - expiration year
  *
@@ -14,13 +15,15 @@ import { BrowsePageSeller } from '../../api/types';
 export type ModalPaymentState = {
   amount: string;
   customInput: boolean;
+  coveredByCustomer: boolean;
   modalView: number;
   sellerData: BrowsePageSeller;
 };
 
 export const defaultState: ModalPaymentState = {
-  amount: '5',
+  amount: '25',
   customInput: false,
+  coveredByCustomer: false,
   modalView: -1,
   sellerData: {
     id: 0,
