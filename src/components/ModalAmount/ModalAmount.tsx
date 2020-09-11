@@ -3,7 +3,9 @@ import { useModalPaymentState, useModalPaymentDispatch } from '../../utilities/h
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
-  TRANSACTION_FEE_PERCENT
+  TRANSACTION_FEE_PERCENT,
+  SET_CUSTOM_INPUT,
+  SET_COVERED_BY_CUSTOMER
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { Checkbox } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
@@ -17,36 +19,33 @@ export interface Props {
 }
 
 export const Modal = (props: Props) => {
-  const { t } = useTranslation();
-  const { amount } = useModalPaymentState();
-  const dispatch = useModalPaymentDispatch();
-
   const DEFAULT_AMOUNT = '25';
   const CUSTOM_AMOUNT_MIN = 5;
   const CUSTOM_AMOUNT_MAX = 10000;
 
+  const { t } = useTranslation();
+  const dispatch = useModalPaymentDispatch();
+  const { amount, customInput, coveredByCustomer } = useModalPaymentState();
   const [selectedAmount, setSelectedAmount] = useState(DEFAULT_AMOUNT);
   const [coveredAmount, setCoveredAmount] = useState((Number(DEFAULT_AMOUNT) * TRANSACTION_FEE_PERCENT).toFixed(2));
-  const [isCustomAmount, setIsCustomAmount] = useState(false); // TODO: move into reducer
-  const [coveredByCustomer, setCoveredByCustomer] = useState(false); // TODO: move into reducer
 
   useEffect(() => {
     const newAmount = coveredByCustomer ? (Number(selectedAmount) + Number(coveredAmount)).toFixed(2) : selectedAmount;
-    changeAmount(newAmount);
+    setAmount(newAmount);
   }, [selectedAmount, coveredAmount, coveredByCustomer]);
 
-  const changeAmount = (value: string) => {
-    dispatch({ type: SET_AMOUNT, payload: value });
-  };
+  const setAmount = (value: string) => dispatch({ type: SET_AMOUNT, payload: value });;
+  const setCustomInput = (value: boolean) => dispatch({ type: SET_CUSTOM_INPUT, payload: value });
+  const setCoveredByCustomer = (value: boolean) => dispatch({ type: SET_COVERED_BY_CUSTOMER, payload: value });
 
   const handleSelectAmount = (value: string) => {
-    setIsCustomAmount(false);
+    setCustomInput(false);
     setSelectedAmount(value);
     setCoveredAmount(transactionFee(value));
   };
 
   const handleSelectOther = (value: string) => {
-    setIsCustomAmount(true);
+    setCustomInput(true);
     setSelectedAmount(value);
     setCoveredAmount(transactionFee(value));
   };
@@ -143,7 +142,7 @@ export const Modal = (props: Props) => {
             max={ CUSTOM_AMOUNT_MAX }
           />
           {
-            isCustomAmount &&
+            customInput &&
             Number(amount) < CUSTOM_AMOUNT_MIN &&
             <ErrorMessage>
               {
@@ -154,7 +153,7 @@ export const Modal = (props: Props) => {
             </ErrorMessage>
           }
           {
-            isCustomAmount &&
+            customInput &&
             Number(amount) > CUSTOM_AMOUNT_MAX &&
             <ErrorMessage>
               {
