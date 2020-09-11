@@ -10,7 +10,7 @@ const MerchantDescriptionBanner = () => {
   return (
     <div className={styles.bannerContainer}>
       <div className={styles.bannerBackground}></div>
-      <div className={styles.contentContainer}>
+      <div className={styles.bannerContentContainer}>
         <div className={styles.bannerText}>
           <h3 className={styles.bannerHeaderText}>
             {t('descriptionBox.header')}
