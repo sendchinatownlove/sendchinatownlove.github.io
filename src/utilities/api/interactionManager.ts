@@ -55,7 +55,7 @@ export const makePayment = async (
       else {
         const cardElement = elements!.getElement(CardElement);
         const result = await stripe!.confirmCardPayment(
-          `${res.data.client_secret}`,
+          `${ res.data.client_secret }`,
           {
             payment_method: {
               card: cardElement!,
@@ -91,9 +91,13 @@ export const makeSquarePayment = async (
   isDistribution: boolean,
   campaignId?: string
 ) => {
-  const { email, name } = buyer;
-  const idempotencyKey = buyer.idempotency_key;
-  const isSubscribed = buyer.is_subscribed;
+  const {
+    email,
+    name,
+    idempotency_key,
+    is_subscribed,
+    covered_by_customer,
+  } = buyer;
 
   return await axios
     .post(
@@ -105,9 +109,10 @@ export const makeSquarePayment = async (
         email,
         name,
         seller_id: sellerId,
-        idempotency_key: idempotencyKey,
-        is_subscribed: isSubscribed,
+        idempotency_key,
+        is_subscribed,
         is_distribution: isDistribution, // TODO: deprecate this in favor of campaignId
+        covered_by_customer,
         campaign_id: campaignId,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
@@ -184,11 +189,11 @@ export const getParticipatingMerchantTickets = async (
   associated: boolean | null
 
 ) => axios
-    .get(passportVouchers + id + '/tickets/' + tickets_secret, {
-      params: { page, items, printed, associated },
-    })
-    .then((res) => res)
-    .catch((err) => err);
+  .get(passportVouchers + id + '/tickets/' + tickets_secret, {
+    params: { page, items, printed, associated },
+  })
+  .then((res) => res)
+  .catch((err) => err);
 
 // validate passport email
 export const getPassportEmailId = async (email: string) =>

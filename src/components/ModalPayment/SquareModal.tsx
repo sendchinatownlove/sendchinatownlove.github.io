@@ -43,7 +43,7 @@ const SquareModal = ({
   campaignId,
 }: Props) => {
   const { t } = useTranslation();
-  const { amount } = useModalPaymentState();
+  const { amount, coveredByCustomer } = useModalPaymentState();
   const dispatch = useModalPaymentDispatch();
 
   const [isTermsChecked, setTermsChecked] = useState(false);
@@ -98,6 +98,7 @@ const SquareModal = ({
       nonce,
       idempotency_key: idempotencyKey,
       is_subscribed: isSubscriptionChecked,
+      covered_by_customer: coveredByCustomer
     };
 
     setCanSubmit(false);
