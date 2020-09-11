@@ -34,7 +34,7 @@ export const Modal = (props: Props) => {
     setAmount(newAmount);
   }, [selectedAmount, coveredAmount, coveredByCustomer]);
 
-  const setAmount = (value: string) => dispatch({ type: SET_AMOUNT, payload: value });;
+  const setAmount = (value: string) => dispatch({ type: SET_AMOUNT, payload: value });
   const setCustomInput = (value: boolean) => dispatch({ type: SET_CUSTOM_INPUT, payload: value });
   const setCoveredByCustomer = (value: boolean) => dispatch({ type: SET_COVERED_BY_CUSTOMER, payload: value });
 
