@@ -3,9 +3,9 @@ import { useModalPaymentState, useModalPaymentDispatch } from '../../utilities/h
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
-  TRANSACTION_FEE_PERCENT,
   SET_CUSTOM_INPUT,
-  SET_COVERED_BY_CUSTOMER
+  SET_COVERED_BY_CUSTOMER,
+  TRANSACTION_FEE_PERCENT
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { Checkbox } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
