@@ -21,8 +21,8 @@ export interface Props {
 
 export const Modal = (props: Props) => {
   const transactionFee = (amount: string) => {
-    const raw = (Number(amount) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT
-    const roundedUp = Math.ceil(raw * 100) / 100
+    const raw = (Number(amount) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT;
+    const roundedUp = Math.ceil(raw * 100) / 100;
     return roundedUp.toFixed(2);
   };
 
@@ -41,6 +41,7 @@ export const Modal = (props: Props) => {
     const newAmount = coveredByCustomer ? (Number(selectedAmount) + Number(coveredAmount)).toFixed(2) : selectedAmount;
 
     setAmount(newAmount);
+    // eslint-disable-next-line
   }, [selectedAmount, coveredAmount, coveredByCustomer]);
 
   const setCustomInput = (value: boolean) => dispatch({ type: SET_CUSTOM_INPUT, payload: value });
