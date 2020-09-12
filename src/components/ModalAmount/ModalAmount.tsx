@@ -19,13 +19,22 @@ export interface Props {
   sellerName: string;
 }
 
-export const Modal = (props: Props) => {
-  const transactionFee = (amount: string) => {
-    const raw = (Number(amount) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT;
-    const roundedUp = Math.ceil(raw * 100) / 100;
-    return roundedUp.toFixed(2);
-  };
+const transactionFee = (amount: string) => {
+  const raw = (Number(amount) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT;
+  const roundedUp = Math.ceil(raw * 100) / 100;
+  return roundedUp.toFixed(2);
+};
 
+const formatCurrency = (value: string) => {
+  return `$${ Number(value).toFixed(2) }`;
+};
+
+const validAmount = (value: string) => {
+  const r = /^[0-9.]+$/;
+  return r.test(value);
+};
+
+export const Modal = (props: Props) => {
   const DEFAULT_AMOUNT = '5';
   const CUSTOM_AMOUNT_MIN = 5;
   const CUSTOM_AMOUNT_MAX = 10000;
@@ -37,12 +46,11 @@ export const Modal = (props: Props) => {
   const [coveredAmount, setCoveredAmount] = useState(transactionFee(DEFAULT_AMOUNT));
 
   useEffect(() => {
-    const setAmount = (value: string) => dispatch({ type: SET_AMOUNT, payload: value });
     const newAmount = coveredByCustomer ? (Number(selectedAmount) + Number(coveredAmount)).toFixed(2) : selectedAmount;
+    const setAmount = (value: string) => dispatch({ type: SET_AMOUNT, payload: value });
 
     setAmount(newAmount);
-    // eslint-disable-next-line
-  }, [selectedAmount, coveredAmount, coveredByCustomer]);
+  }, [selectedAmount, coveredAmount, coveredByCustomer, dispatch]);
 
   const setCustomInput = (value: boolean) => dispatch({ type: SET_CUSTOM_INPUT, payload: value });
   const setCoveredByCustomer = (value: boolean) => dispatch({ type: SET_COVERED_BY_CUSTOMER, payload: value });
@@ -67,15 +75,6 @@ export const Modal = (props: Props) => {
     ReactPixel.trackCustom('PaymentNextButtonClick', { amount: amount });
     e.preventDefault();
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
-  };
-
-  const formatCurrency = (value: string) => {
-    return `$${ Number(value).toFixed(2) }`;
-  };
-
-  const validAmount = (value: string) => {
-    const r = /^[0-9.]+$/;
-    return r.test(value);
   };
 
   const buttonAmounts = ['10', '25', '50', '100'];
