@@ -144,7 +144,7 @@ const MerchantVoucherDashboard = () => {
                 Active Vouchers{' '}
                 <span className={styles.noBreak}>可使用的礼品券数量</span>
               </h1>
-              <h2>{giftCards && giftCards.length}</h2>
+              <h2>{giftCards && giftCards.filter(card => card.latest_value > 0).length}</h2>
             </div>
             <div className={styles.metadataBlock}>
               <h1>
