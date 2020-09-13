@@ -26,10 +26,17 @@ const MerchantVoucherDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const giftCardData = (
+      let giftCardData = (
         await getMerchantGiftCards(metadata.sellerId, metadata.secretId)
       ).data;
       const sellerData = (await getSeller(metadata.sellerId)).data;
+
+      giftCardData = giftCardData.map(card => {
+        if (card.updated_at === card.created_at) {
+          card.updated_at = null;
+        }
+        return card;
+      });
 
       setGiftCards(giftCardData);
       setSeller(sellerData);
@@ -54,6 +61,9 @@ const MerchantVoucherDashboard = () => {
   };
 
   const renderDate = (props: FTRenderProps) => {
+    if (!props.value) {
+      return "N/A";
+    }
     return new Date(props.value).toISOString().substring(0, 10);
   };
 
@@ -71,7 +81,7 @@ const MerchantVoucherDashboard = () => {
       sortable: true,
     },
     {
-      name: 'value',
+      name: 'original_value',
       displayName: 'Original Amount \n 购买金额',
       inputFilterable: true,
       sortable: true,
@@ -83,6 +93,20 @@ const MerchantVoucherDashboard = () => {
       inputFilterable: true,
       sortable: true,
       render: renderDate,
+    },
+    {
+      name: 'updated_at',
+      displayName: 'Date Last Used \n 上次使用日期',
+      inputFilterable: true,
+      sortable: true,
+      render: renderDate,
+    },
+    {
+      name: 'latest_value',
+      displayName: 'Ending Balance  \n 结余',
+      inputFilterable: true,
+      sortable: true,
+      render: renderAmount,
     },
     /* {
       name: 'expiration',
@@ -128,7 +152,7 @@ const MerchantVoucherDashboard = () => {
               </h1>
               <h2>
                 {renderAmount({
-                  value: giftCards.reduce((acc, cur) => acc + cur.value, 0),
+                  value: giftCards.reduce((acc, cur) => acc + cur.latest_value, 0),
                 })}
               </h2>
             </div>
