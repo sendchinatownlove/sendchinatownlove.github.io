@@ -88,7 +88,7 @@ export const MerchantCard = styled.div`
         &.descriptionBox {
             width: 85vw;
             height: auto;
-    }
+    } 
 `;
 
 const StoreName = styled.h3`
