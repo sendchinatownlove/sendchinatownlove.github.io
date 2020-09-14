@@ -7,6 +7,7 @@ import {
 import Loader from '../../components/Loader/Loader';
 import styles from './styles.module.scss';
 import ErrorPage from '../../components/404Page';
+import { Checkbox } from '@material-ui/core';
 const FilterableTable = require('react-filterable-table');
 
 const MerchantVoucherDashboard = () => {
@@ -14,6 +15,8 @@ const MerchantVoucherDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [giftCards, setGiftCards] = useState<any | null>();
   const [seller, setSeller] = useState<any | null>();
+  const [shouldFilterGAM, setFilterGAM] = useState(false);
+  const checkFilterGAM = () => setFilterGAM(!shouldFilterGAM);
 
   const params = useHistory();
   const urlParams = (params.location.pathname.match(
@@ -27,7 +30,7 @@ const MerchantVoucherDashboard = () => {
   const fetchData = async () => {
     try {
       let giftCardData = (
-        await getMerchantGiftCards(metadata.sellerId, metadata.secretId)
+        await getMerchantGiftCards(metadata.sellerId, metadata.secretId, shouldFilterGAM)
       ).data;
       const sellerData = (await getSeller(metadata.sellerId)).data;
 
@@ -50,7 +53,7 @@ const MerchantVoucherDashboard = () => {
     fetchData();
 
     // eslint-disable-next-line
-  }, []);
+  }, [shouldFilterGAM]);
 
   const renderAmount = (props: FTRenderProps) => {
     return Intl.NumberFormat('en-US', {
@@ -159,6 +162,15 @@ const MerchantVoucherDashboard = () => {
               </h2>
             </div>
           </div>
+          <div className={styles.gamToggle}>
+            <Checkbox
+                  value="shouldFilterGAM"
+                  inputProps={{ 'aria-label': 'FilterGAM Checkbox' }}
+                  onClick={checkFilterGAM}
+                  checked={shouldFilterGAM}
+                />
+              <span>hide gift-a-meal vouchers 隐藏爱心餐餐券</span>
+          </div>
           <FilterableTable
             namespace="Vouchers"
             initialSort="seller_gift_card_id"
@@ -169,8 +181,8 @@ const MerchantVoucherDashboard = () => {
             topPagerVisible={false}
             pageSize={20}
             pageSizes={null} // don't show the page size chooser
-            recordCountName="Voucher"
-            recordCountNamePlural="Vouchers"
+            recordCountName="Voucher Found"
+            recordCountNamePlural="Vouchers Found"
           />
         </>
       )}
