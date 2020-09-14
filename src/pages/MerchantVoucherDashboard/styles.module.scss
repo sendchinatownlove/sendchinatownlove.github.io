@@ -4,7 +4,7 @@
 
 .header {
   width: 100%;
-  height: 20vh;
+  height: 13vh;
   min-height: 70px;
   background: $standard-red;
 
@@ -44,6 +44,7 @@
 
 .metadataHeader {
   width: 100%;
+  min-height: 70px;
   background: $light-red;
 
   @media only screen and (min-width: 750px) {

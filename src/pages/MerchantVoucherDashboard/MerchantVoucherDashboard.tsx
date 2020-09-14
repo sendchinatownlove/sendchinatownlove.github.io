@@ -79,6 +79,8 @@ const MerchantVoucherDashboard = () => {
       displayName: 'Email \n 电子邮件',
       inputFilterable: true,
       sortable: true,
+      thClassName: 'table-email-header',
+      tdClassName: 'table-email-container'
     },
     {
       name: 'original_value',

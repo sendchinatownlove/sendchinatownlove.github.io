@@ -245,6 +245,7 @@ h3 {
   }
 }
 
+// voucher-dashboard styles
 .filterable-table-container {
   font-family: 'Open Sans';
   display: flex;
@@ -280,6 +281,12 @@ h3 {
     }
   }
 
+  .table {
+    table-layout: fixed;
+    max-width: 1200px;
+    margin: auto;
+  }
+
   thead {
     background: $very-light-grey;
     white-space: pre-line;
@@ -288,6 +295,14 @@ h3 {
   .fa {
     // filter arrows
     margin-left: 1vw;
+  }
+
+  .table-email-header {
+    width: 35%;
+  }
+
+  .table-email-container {
+    word-break: break-all;
   }
 
   nav {
