@@ -24,6 +24,8 @@ export interface Props {
 }
 
 const transactionFee = (amount: string) => {
+  if (!validAmount(amount)) throw new Error('amount cannot contain invalid characters');
+
   const base = (Number(amount) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT;
   const roundedUp = Math.ceil(base * 100) / 100;
   return roundedUp.toFixed(2);
@@ -172,7 +174,7 @@ export const Modal = (props: Props) => {
         <CheckboxContainer>
           <Checkbox
             value="coveredByCustomer"
-            inputProps={ { 'aria-label': 'Checkbox A' } }
+            inputProps={ { 'aria-label': 'Checkbox to cover transaction fees' } }
             onClick={ handleToggleCoverFee }
             checked={ coveredByCustomer }
           />
