@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useModalPaymentState, useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
+import {
+  useModalPaymentState,
+  useModalPaymentDispatch
+} from '../../utilities/hooks/ModalPaymentContext/context';
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
@@ -8,6 +11,7 @@ import {
   TRANSACTION_FEE_RATE,
   TRANSACTION_FEE_FLAT
 } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { currencyFormatter } from '../../utilities/general/textFormatter';
 import { Checkbox } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -20,13 +24,9 @@ export interface Props {
 }
 
 const transactionFee = (amount: string) => {
-  const raw = (Number(amount) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT;
-  const roundedUp = Math.ceil(raw * 100) / 100;
+  const base = (Number(amount) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT;
+  const roundedUp = Math.ceil(base * 100) / 100;
   return roundedUp.toFixed(2);
-};
-
-const formatCurrency = (value: string) => {
-  return `$${ Number(value).toFixed(2) }`;
 };
 
 const validAmount = (value: string) => {
@@ -47,9 +47,9 @@ export const Modal = (props: Props) => {
 
   useEffect(() => {
     const newAmount = coveredByCustomer ? (Number(selectedAmount) + Number(coveredAmount)).toFixed(2) : selectedAmount;
-    const setAmount = (value: string) => dispatch({ type: SET_AMOUNT, payload: value });
 
-    setAmount(newAmount);
+    dispatch({ type: SET_AMOUNT, payload: newAmount });
+
   }, [selectedAmount, coveredAmount, coveredByCustomer, dispatch]);
 
   const setCustomInput = (value: boolean) => dispatch({ type: SET_CUSTOM_INPUT, payload: value });
@@ -61,7 +61,7 @@ export const Modal = (props: Props) => {
     setCoveredAmount(transactionFee(value));
   };
 
-  const handleSelectOther = (value: string) => {
+  const handleSelectCustom = (value: string) => {
     setCustomInput(true);
     setSelectedAmount(value);
     setCoveredAmount(transactionFee(value));
@@ -72,8 +72,8 @@ export const Modal = (props: Props) => {
   };
 
   const openModal = (e: any) => {
-    ReactPixel.trackCustom('PaymentNextButtonClick', { amount: amount });
     e.preventDefault();
+    ReactPixel.trackCustom('PaymentNextButtonClick', { amount: amount });
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
   };
 
@@ -131,9 +131,9 @@ export const Modal = (props: Props) => {
           <CustomAmountInput
             name="custom-amount"
             type="number"
-            onFocus={ (e) => handleSelectOther(selectedAmount) }
+            onFocus={ (e) => setCustomInput(true) }
             className={ 'modalInput--input' }
-            onChange={ (e) => handleSelectOther(e.target.value) }
+            onChange={ (e) => handleSelectCustom(e.target.value) }
             onKeyDown={ (e) => ['e', '+', '-', '.'].includes(e.key) && e.preventDefault() }
             value={ selectedAmount }
             min={ CUSTOM_AMOUNT_MIN }
@@ -178,12 +178,12 @@ export const Modal = (props: Props) => {
           />
           <b>{ t('paymentProcessing.amount.cover.action') }</b>
         </CheckboxContainer>
-        <b>{ formatCurrency(coveredAmount) }</b>
+        <b>{ currencyFormatter(Number(coveredAmount) * 100) }</b>
       </CoverFeeContainer>
       <hr />
 
       <TotalContainer>
-        <b>{ t('paymentProcessing.amount.total') }: <span>{ formatCurrency(amount) }</span></b>
+        <b>{ t('paymentProcessing.amount.total') }: <span>{ currencyFormatter(Number(amount) * 100) }</span></b>
       </TotalContainer>
 
       <NextButton
