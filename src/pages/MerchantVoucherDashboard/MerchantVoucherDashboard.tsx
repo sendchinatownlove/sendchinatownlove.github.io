@@ -4,6 +4,7 @@ import {
   getMerchantGiftCards,
   getSeller,
 } from '../../utilities/api/interactionManager';
+import { currencyFormatter } from '../../utilities/general/textFormatter'
 import Loader from '../../components/Loader/Loader';
 import styles from './styles.module.scss';
 import ErrorPage from '../../components/404Page';
@@ -46,11 +47,7 @@ const MerchantVoucherDashboard = () => {
   }, []);
 
   const renderAmount = (props: FTRenderProps) => {
-    return Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumSignificantDigits: 4,
-    }).format(props.value / 100);
+    return currencyFormatter(Number(props.value), 0)
   };
 
   const renderDate = (props: FTRenderProps) => {
