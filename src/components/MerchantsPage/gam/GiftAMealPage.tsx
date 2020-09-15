@@ -89,14 +89,16 @@ const GiftAMealPage = (props: Props) => {
 
       <div className={styles.videoContainer}>
         <VideoComponent videoId="FYlUOhzYlRM"></VideoComponent>
-        <h5 className={styles.videoDescription}>Watch how we bring impact to our communties through Gift-a-Meal.</h5>
+        <h5 className={styles.videoDescription}>
+          Watch how we bring impact to our communties through Gift-a-Meal.
+        </h5>
       </div>
 
       <h5 className={styles.campaignHeader}>Past Gift-a-Meal</h5>
       {pastCampaigns.map((campaign: any) => (
         <CampaignListItem campaign={campaign} />
       ))}
-    </div >
+    </div>
   );
 };
 

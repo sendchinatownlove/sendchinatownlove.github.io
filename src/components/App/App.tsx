@@ -73,7 +73,11 @@ const App = () => {
       <>
         <ModalPaymentProvider>
           <ScrollToTop />
-          <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} pageName={child} />
+          <Header
+            menuOpen={menuOpen}
+            setMenuOpen={setMenuOpen}
+            pageName={child}
+          />
           {component}
           <Footer menuOpen={menuOpen} />
         </ModalPaymentProvider>

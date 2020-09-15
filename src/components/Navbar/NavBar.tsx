@@ -23,7 +23,7 @@ interface CompactProps {
 const NavBar = (props: Props) => {
   const { t, i18n } = useTranslation();
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
-  const [DropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const changeLanguage = (e: MouseEvent, language: string) => {
     e.preventDefault();
@@ -40,8 +40,8 @@ const NavBar = (props: Props) => {
   };
 
   const handleDropdownOpen = () => {
-    setDropdownOpen(!DropdownOpen)
-  }
+    setDropdownOpen(!dropdownOpen);
+  };
 
   const isMerchantsPathActive = props.pageName === 'all';
 
@@ -74,11 +74,70 @@ const NavBar = (props: Props) => {
         <MenuIcon onClick={(e) => props.setMenuOpen(true)} />
       </HamburgerContainer>
     ) : (
+      <NavLinksContainer compact={hamburgerOpen.toString()}>
+        <HeaderContainer compact={hamburgerOpen.toString()}>
+          <Logo />
+          <Close onClick={(e) => props.setMenuOpen(false)} />
+        </HeaderContainer>
+        <NavLink
+          compact={hamburgerOpen.toString()}
+          href="https://sendchinatownlove.com/"
+          i18nText="navBar.header.home"
+          altText="HOME"
+        />
+        <DropdownButtonContainer>
+          <ReactNavLink
+            href="https://www.sendchinatownlove.com/ways-to-donate.html"
+            compact={hamburgerOpen.toString()}
+          >
+            <p>{t('navBar.header.merchants')}</p>
+          </ReactNavLink>
+          <DropdownButton onClick={handleDropdownOpen}>›</DropdownButton>
+        </DropdownButtonContainer>
+        {dropdownOpen && (
+          <DropdownMobile>
+            <MobileItemLink to="/merchants">
+              {t('navBar.header.waystodonate.donate')}
+            </MobileItemLink>
+            <MobileItem href="https://merchant.sendchinatownlove.com/gift-a-meal-home">
+              {t('navBar.header.waystodonate.gift-a-meal')}
+            </MobileItem>
+            <MobileItem href="https://stickylocals.com/scl">
+              {t('navBar.header.waystodonate.sticky-locals-x-scl')}
+            </MobileItem>
+            <MobileItem href="https://www.friendofafriend.studio/shop">
+              {t('navBar.header.waystodonate.friendofafriend-studioxscl')}
+            </MobileItem>
+          </DropdownMobile>
+        )}
+        <NavLink
+          compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/about.html"
+          i18nText="OUR STORY"
+          altText="OUR STORY"
+        />
+        <NavLink
+          compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/resource-center.html"
+          i18nText="RESOURCES"
+          altText="RESOURCES"
+        />
+        <NavLink
+          compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/press"
+          i18nText="PRESS"
+          altText="PRESS"
+        />
+      </NavLinksContainer>
+    );
+  };
+  return (
+    <HeaderContainer compact={hamburgerOpen.toString()}>
+      <Logo />
+      {hamburgerOpen ? (
+        showCompactMenu()
+      ) : (
         <NavLinksContainer compact={hamburgerOpen.toString()}>
-          <HeaderContainer compact={hamburgerOpen.toString()}>
-            <Logo />
-            <Close onClick={(e) => props.setMenuOpen(false)} />
-          </HeaderContainer>
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://sendchinatownlove.com/"
@@ -86,19 +145,29 @@ const NavBar = (props: Props) => {
             altText="HOME"
           />
           <ReactNavLink
-            to="#"
+            href="https://www.sendchinatownlove.com/ways-to-donate.html"
+            onMouseEnter={() => setDropdownOpen(true)}
             compact={hamburgerOpen.toString()}
-            // onClick={(e) => props.setMenuOpen(false)}
-            onClick={handleDropdownOpen}
+            active={isMerchantsPathActive.toString()}
           >
             {t('navBar.header.merchants')}
           </ReactNavLink>
-          {DropdownOpen && <DropdownMobile >
-            <MobileItem href='https://merchant.sendchinatownlove.com/all'>{t('navBar.header.waystodonate.donate')}</MobileItem>
-            <MobileItem href='https://merchant.sendchinatownlove.com/gift-a-meal-home'>{t('navBar.header.waystodonate.gift-a-meal')}</MobileItem>
-            <MobileItem href='https://stickylocals.com/scl'>{t('navBar.header.waystodonate.sticky-locals-x-scl')}</MobileItem>
-            <MobileItem href='https://www.friendofafriend.studio/shop'>{t('navBar.header.waystodonate.friendofafriend-studioxscl')}</MobileItem>
-          </DropdownMobile>}
+          {dropdownOpen && (
+            <Dropdown onMouseLeave={() => setDropdownOpen(false)}>
+              <DropdownItemLink to="/merchants">
+                {t('navBar.header.waystodonate.donate')}
+              </DropdownItemLink>
+              <DropdownItem href="https://merchant.sendchinatownlove.com/gift-a-meal-home">
+                {t('navBar.header.waystodonate.gift-a-meal')}
+              </DropdownItem>
+              <DropdownItem href="https://stickylocals.com/scl">
+                {t('navBar.header.waystodonate.sticky-locals-x-scl')}
+              </DropdownItem>
+              <DropdownItem href="https://www.friendofafriend.studio/shop">
+                {t('navBar.header.waystodonate.friendofafriend-studioxscl')}
+              </DropdownItem>
+            </Dropdown>
+          )}
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/about.html"
@@ -117,65 +186,17 @@ const NavBar = (props: Props) => {
             i18nText="PRESS"
             altText="PRESS"
           />
+          <LanguageContainer compact={hamburgerOpen.toString()}>
+            <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
+              ENG
+            </LanguageButton>
+            <LanguageSeparator>|</LanguageSeparator>
+            <LanguageButton onClick={(e) => changeLanguage(e, 'cn')}>
+              中文
+            </LanguageButton>
+          </LanguageContainer>
         </NavLinksContainer>
-      );
-  };
-  return (
-    <HeaderContainer compact={hamburgerOpen.toString()}>
-      <Logo />
-      {hamburgerOpen ? (
-        showCompactMenu()
-      ) : (
-          <NavLinksContainer compact={hamburgerOpen.toString()}>
-            <NavLink
-              compact={hamburgerOpen.toString()}
-              href="https://sendchinatownlove.com/"
-              i18nText="navBar.header.home"
-              altText="HOME"
-            />
-            <ReactNavLink
-              to="#"
-              onClick={handleDropdownOpen}
-              compact={hamburgerOpen.toString()}
-              active={isMerchantsPathActive.toString()}
-            >
-              {t('navBar.header.merchants')}
-            </ReactNavLink>
-            {DropdownOpen && <Dropdown >
-              <DropdownItem href='https://merchant.sendchinatownlove.com/all'>{t('navBar.header.waystodonate.donate')}</DropdownItem>
-              <DropdownItem href='https://merchant.sendchinatownlove.com/gift-a-meal-home'>{t('navBar.header.waystodonate.gift-a-meal')}</DropdownItem>
-              <DropdownItem href='https://stickylocals.com/scl'>{t('navBar.header.waystodonate.sticky-locals-x-scl')}</DropdownItem>
-              <DropdownItem href='https://www.friendofafriend.studio/shop'>{t('navBar.header.waystodonate.friendofafriend-studioxscl')}</DropdownItem>
-            </Dropdown >}
-            <NavLink
-              compact={hamburgerOpen.toString()}
-              href="https://www.sendchinatownlove.com/about.html"
-              i18nText="OUR STORY"
-              altText="OUR STORY"
-            />
-            <NavLink
-              compact={hamburgerOpen.toString()}
-              href="https://www.sendchinatownlove.com/resource-center.html"
-              i18nText="RESOURCES"
-              altText="RESOURCES"
-            />
-            <NavLink
-              compact={hamburgerOpen.toString()}
-              href="https://www.sendchinatownlove.com/press"
-              i18nText="PRESS"
-              altText="PRESS"
-            />
-            <LanguageContainer compact={hamburgerOpen.toString()}>
-              <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
-                ENG
-            </LanguageButton>
-              <LanguageSeparator>|</LanguageSeparator>
-              <LanguageButton onClick={(e) => changeLanguage(e, 'cn')}>
-                中文
-            </LanguageButton>
-            </LanguageContainer>
-          </NavLinksContainer>
-        )}
+      )}
     </HeaderContainer>
   );
 };
@@ -206,7 +227,7 @@ const NavLinksContainer = styled.div`
   flex-direction: ${(props: CompactProps) =>
     props.compact === 'true' ? `column` : 'row'};
   width: 100%;
-  position:relative;
+  position: relative;
   ${(props: CompactProps) =>
     props.compact === 'true'
       ? `
@@ -248,7 +269,6 @@ const NavLinkStyle = styled.a`
   :hover {
     color: #9e9e9e;
   }
-  
 `;
 
 const NavLink = (props: CompactProps) => {
@@ -297,7 +317,7 @@ const LanguageSeparator = styled.div`
   margin-right: 8px;
 `;
 
-const ReactNavLink = styled(Link)`
+const ReactNavLink = styled.a`
   text-decoration: none;
   color: black;
   transition: 0.1s;
@@ -306,8 +326,7 @@ const ReactNavLink = styled(Link)`
     props.compact === 'true' &&
     `
     width: 100%;
-    margin: 16px auto;
-    text-align: center;
+    text-align:center;
   `}
   ${(props: CompactProps) =>
     props.active === 'true' &&
@@ -318,65 +337,68 @@ const ReactNavLink = styled(Link)`
     color: black;
   }
   :hover {
-    color: #9e9e9e;}
-  position:relative;
+    color: #9e9e9e;
+  }
+  position: relative;
 `;
-
 
 const Close = styled(CloseIcon)`
   cursor: pointer;
 `;
 
-
 const Dropdown = styled.div`
-  display:flex;
   z-index: 11;
-  display: block;
-  position: absolute;
-  left: 145px;
+  left: 141px;
   top: 19px;
   width: 213px;
-  height: 183px;  
-  margin:0px;
-  color:black;
+  height: 183px;
   a:hover {
     color: #9e9e9e;
   }
-  background-color:#FFFFFF;
+  background-color: #ffffff;
+  position: absolute;
 `;
 
 const DropdownMobile = styled.div`
-  width:375px;
-  height: 163px;  
-  position:relative;
-  top: -8px;
-  display:flex;
+  width: 375px;
+  height: 163px;
+  position: relative;
+  bottom: 8px;
+  display: flex;
   flex-direction: column;
-  justify-content:space-around;
-  align-items:center;
-  a:hover {
-    color: #9e9e9e;
-  }
-`
-const DropdownItem = styled.a`
-  margin-top:18px;
-  margin-left:25px;
+  justify-content: space-around;
+  align-items: center;
+`;
+const DropItem = styled.div`
+  margin-top: 18px;
+  margin-left: 28px;
   font-size: 13px;
   display: flex;
   align-items: center;
   letter-spacing: 0.05em;
-  text-decoration:none;
-  color:black;  
-  :link {
-    color: black;
-  }
-  :hover {
-    color: #a7182d;
-}
+  text-decoration: none;
+  color: black;
 `;
-
+const DropdownItem = DropItem.withComponent('a');
+const DropdownItemLink = DropItem.withComponent(Link);
 const MobileItem = styled(DropdownItem)`
-   margin-left:0px;
-   margin-top:0px;
-   color:#949494;
+  margin: 0px;
+  color: #949494;
+`;
+const MobileItemLink = styled(DropdownItemLink)`
+  margin: 0px;
+  color: #949494;
+`;
+const DropdownButtonContainer = styled.div`
+  display:flex;
+  position:relative
+  justify-content:center
+`;
+const DropdownButton = styled.h1`
+  font-size: 45px;
+  font-family: system-ui, serif;
+  transform: rotate(90deg);
+  position: absolute;
+  left: 280px;
+  top: 122px;
 `;

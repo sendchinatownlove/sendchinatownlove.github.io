@@ -1,9 +1,7 @@
 import React from 'react';
 import CampaignProgressBar from './CampaignProgressBar';
 import styled from 'styled-components';
-import {
-  tabletScreens
-} from '../../../utilities/general/responsive';
+import { tabletScreens } from '../../../utilities/general/responsive';
 import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
 import { getDistributor, getSeller } from '../../../utilities';
@@ -30,15 +28,22 @@ const CampaignListItem = (props: Props) => {
     // eslint-disable-next-line
   }, []);
 
-  const mealsRaised = Math.floor(campaign.amount_raised / campaign.price_per_meal);
-  const targetMeals = Math.floor(campaign.target_amount / campaign.price_per_meal);
+  const mealsRaised = Math.floor(
+    campaign.amount_raised / campaign.price_per_meal
+  );
+  const targetMeals = Math.floor(
+    campaign.target_amount / campaign.price_per_meal
+  );
   const campaignImageUrls = campaign.gallery_image_urls;
 
   return (
     <Container>
       <ColumnContainer>
         {campaignImageUrls && campaignImageUrls.length && (
-          <CampaignImage src={campaignImageUrls[0] ?? campaignDefaultImage} alt="campaign_image" />
+          <CampaignImage
+            src={campaignImageUrls[0] ?? campaignDefaultImage}
+            alt="campaign_image"
+          />
         )}
       </ColumnContainer>
       <ColumnContainer>
@@ -46,14 +51,16 @@ const CampaignListItem = (props: Props) => {
           <Location>{merchant.locations[0].city}</Location>
         )}
         {distributor && merchant && (
-          <Name>{merchant.name} x {distributor.name}</Name>
+          <Name>
+            {merchant.name} x {distributor.name}
+          </Name>
         )}
         <Description>
           {campaign.description}
           <br></br>
-          {distributor &&
-            (<a href={distributor.website_url}>{distributor.name}</a>)
-          }
+          {distributor && (
+            <a href={distributor.website_url}>{distributor.name}</a>
+          )}
         </Description>
         <CampaignProgressBar
           isActive={campaign.active}
@@ -66,27 +73,34 @@ const CampaignListItem = (props: Props) => {
       </ColumnContainer>
       <ColumnContainer>
         <ImagesContainer>
-          {distributor &&
-            (<a href={distributor.website_url}>
-              <DistributorImage src={distributor.image_url} alt="distributor_logo" />
+          {distributor && (
+            <a href={distributor.website_url}>
+              <DistributorImage
+                src={distributor.image_url}
+                alt="distributor_logo"
+              />
             </a>
-            )
-          }
-          {merchant &&
-            (<MerchantImage src={merchant.logo_image_url} alt="merchant_logo" />)
-          }
+          )}
+          {merchant && (
+            <MerchantImage src={merchant.logo_image_url} alt="merchant_logo" />
+          )}
         </ImagesContainer>
         {merchant && (
-          <Button className="button--filled" onClick={(e) => {
-            e.preventDefault();
-            window.location.href = '/' + merchant.seller_id;
-          }}>Visit merchant</Button>
+          <Button
+            className="button--filled"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = '/' + merchant.seller_id;
+            }}
+          >
+            Visit merchant
+          </Button>
         )}
         {campaign.active && (
           <Button className={'button--outlined'}>Gift a meal</Button>
         )}
       </ColumnContainer>
-    </Container >
+    </Container>
   );
 };
 

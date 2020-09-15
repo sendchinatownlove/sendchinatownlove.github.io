@@ -42,44 +42,44 @@ const ProgressBar = ({
   return (
     <ProgressBarContainer>
       <SupporterTooltip
-            title={
-              <React.Fragment>
-                <ToolTipTable>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <b>{numGiftCards}</b> vouchers
-                      </td>
-                      <td>
-                        <b>${Math.floor(giftCardAmount / 100).toLocaleString()}</b>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <b>{numDonations}</b> donations
-                      </td>
-                      <td>
-                        <b>${Math.floor(donationAmount / 100).toLocaleString()}</b>
-                      </td>
-                    </tr>
-                  </tbody>
-                </ToolTipTable>
-              </React.Fragment>
-            }
-            enterTouchDelay={50}
-            placement="top"
+        title={
+          <React.Fragment>
+            <ToolTipTable>
+              <tbody>
+                <tr>
+                  <td>
+                    <b>{numGiftCards}</b> vouchers
+                  </td>
+                  <td>
+                    <b>${Math.floor(giftCardAmount / 100).toLocaleString()}</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>{numDonations}</b> donations
+                  </td>
+                  <td>
+                    <b>${Math.floor(donationAmount / 100).toLocaleString()}</b>
+                  </td>
+                </tr>
+              </tbody>
+            </ToolTipTable>
+          </React.Fragment>
+        }
+        enterTouchDelay={50}
+        placement="top"
+      >
+        <TargetAmountBar className="progress-bar">
+          <CurrentProgressBar
+            style={{
+              width: `${progressWidth(amountRaised, targetAmount)}%`,
+              backgroundColor: progressBarColor,
+              //defaults to default color if no color is passed in
+            }}
           >
-      <TargetAmountBar className="progress-bar">
-        <CurrentProgressBar
-          style={{
-            width: `${progressWidth(amountRaised, targetAmount)}%`,
-            backgroundColor: progressBarColor,
-            //defaults to default color if no color is passed in
-          }}
-        >
-          {' '}
-        </CurrentProgressBar>
-      </TargetAmountBar>
+            {' '}
+          </CurrentProgressBar>
+        </TargetAmountBar>
       </SupporterTooltip>
       <ContributionInfoContainer>
         <div>
@@ -87,9 +87,9 @@ const ProgressBar = ({
           {Math.floor(targetAmount / 100).toLocaleString()}
         </div>
         <div>
-            <div>
-              <b>{numContributions}</b> supporters
-            </div>
+          <div>
+            <b>{numContributions}</b> supporters
+          </div>
         </div>
       </ContributionInfoContainer>
     </ProgressBarContainer>
