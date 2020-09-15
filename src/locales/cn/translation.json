@@ -145,5 +145,17 @@
     "prompt": "Please enter how many meals to gift",
     "totalLabel": "Total: ",
     "next": "Next"
+  },
+  "lyftReward": {
+    "mainBody1": "Thanks for participating in the Send Chinatown Love Food Crawl!",
+    "mainBody2": "In partnership with Lyft, we are giving away free Citi Bike Day Passes to help you get around Chinatown.",
+    "mainBody3": "Would you like a free Citi Bike Day Pass?",
+    "successBody1": "DAY PASS EMAIL SENT",
+    "successBody2": "Please check your email for your Citi Bike Day Pass code!",
+    "failureBody1": "OOPS!",
+    "failureBody2": "It looks like we ran out of the Citi Bike Day Pass codes. Stay tuned for more giveaways in the future!",
+    "yesButton": "YES",
+    "noButton": "NO",
+    "closeButton": "CLOSE"
   }
 }
