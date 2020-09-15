@@ -23,30 +23,31 @@ export interface Props {
   sellerName: string;
 }
 
-const transactionFee = (amount: string) => {
+const transactionFee = (amount: number) => {
   const base = (Number(amount) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT;
-  const roundedUp = Math.ceil(base * 100) / 100;
-  return roundedUp.toFixed(2);
+  const roundedUp = Math.ceil(base);
+  return roundedUp;
 };
 
-const validAmount = (value: string) => {
-  const r = /^[0-9.]+$/;
-  return r.test(value);
-};
+// const validAmount = (value: string) => {
+//   const r = /^[0-9.]+$/;
+//   return r.test(value);
+// };
 
 export const Modal = (props: Props) => {
-  const DEFAULT_AMOUNT = '5';
-  const CUSTOM_AMOUNT_MIN = 5;
-  const CUSTOM_AMOUNT_MAX = 10000;
+  const DEFAULT_AMOUNT = 5_00;
+  const CUSTOM_AMOUNT_MIN = 5_00;
+  const CUSTOM_AMOUNT_MAX = 10_000_00;
 
   const { t } = useTranslation();
   const dispatch = useModalPaymentDispatch();
   const { amount, customInput, coveredByCustomer } = useModalPaymentState();
   const [selectedAmount, setSelectedAmount] = useState(DEFAULT_AMOUNT);
   const [coveredAmount, setCoveredAmount] = useState(transactionFee(DEFAULT_AMOUNT));
+  const [customDisplayAmount, setCustomDisplayAmount] = useState(DEFAULT_AMOUNT / 100);
 
   useEffect(() => {
-    const newAmount = coveredByCustomer ? (Number(selectedAmount) + Number(coveredAmount)).toFixed(2) : selectedAmount;
+    const newAmount = coveredByCustomer ? (selectedAmount + coveredAmount) : selectedAmount;
 
     dispatch({ type: SET_AMOUNT, payload: newAmount });
 
@@ -55,16 +56,19 @@ export const Modal = (props: Props) => {
   const setCustomInput = (value: boolean) => dispatch({ type: SET_CUSTOM_INPUT, payload: value });
   const setCoveredByCustomer = (value: boolean) => dispatch({ type: SET_COVERED_BY_CUSTOMER, payload: value });
 
-  const handleSelectAmount = (value: string) => {
+  const handleSelectAmount = (amount: number) => {
     setCustomInput(false);
-    setSelectedAmount(value);
-    setCoveredAmount(transactionFee(value));
+    setCustomDisplayAmount(0);
+    setSelectedAmount(amount);
+    setCoveredAmount(transactionFee(amount));
   };
 
-  const handleSelectCustom = (value: string) => {
+  const handleSelectCustom = (amount: number) => {
+    const cents = amount * 100;
     setCustomInput(true);
-    setSelectedAmount(value);
-    setCoveredAmount(transactionFee(value));
+    setCustomDisplayAmount(amount);
+    setSelectedAmount(cents);
+    setCoveredAmount(transactionFee(cents));
   };
 
   const handleToggleCoverFee = () => {
@@ -77,7 +81,7 @@ export const Modal = (props: Props) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
   };
 
-  const buttonAmounts = ['10', '25', '50', '100'];
+  const buttonAmounts = [10_00, 25_00, 50_00, 100_00];
 
   const headerText =
     props.purchaseType === 'donation'
@@ -118,7 +122,7 @@ export const Modal = (props: Props) => {
                 }
                 onClick={ (e) => handleSelectAmount(buttonAmount) }
               >
-                { `$${ buttonAmount }` }
+                { currencyFormatter(buttonAmount, 0) }
               </button>
             ))
           }
@@ -131,13 +135,14 @@ export const Modal = (props: Props) => {
           <CustomAmountInput
             name="custom-amount"
             type="number"
+            // onFocus={ (e) => handleSelectCustom(selectedAmount) }
             onFocus={ (e) => setCustomInput(true) }
             className={ 'modalInput--input' }
-            onChange={ (e) => handleSelectCustom(e.target.value) }
+            onChange={ (e) => handleSelectCustom(Number(e.target.value)) }
             onKeyDown={ (e) => ['e', '+', '-', '.'].includes(e.key) && e.preventDefault() }
-            value={ selectedAmount }
-            min={ CUSTOM_AMOUNT_MIN }
-            max={ CUSTOM_AMOUNT_MAX }
+            value={ customDisplayAmount }
+            min={ CUSTOM_AMOUNT_MIN / 100 }
+            max={ CUSTOM_AMOUNT_MAX / 100 }
           />
           {
             customInput &&
@@ -146,7 +151,7 @@ export const Modal = (props: Props) => {
               {
                 `${ t('paymentProcessing.amount.minimum') }
                 ${ props.purchaseType === 'gift_card' ? 'voucher' : 'donation' }
-                ${ t('paymentProcessing.amount.amount') }: $${ CUSTOM_AMOUNT_MIN }`
+                ${ t('paymentProcessing.amount.amount') }: ${ currencyFormatter(CUSTOM_AMOUNT_MIN, 0) }`
               }
             </ErrorMessage>
           }
@@ -157,7 +162,7 @@ export const Modal = (props: Props) => {
               {
                 `${ t('paymentProcessing.amount.maximum') }
                 ${ props.purchaseType === 'gift_card' ? 'voucher' : 'donation' }
-                ${ t('paymentProcessing.amount.amount') }: $${ CUSTOM_AMOUNT_MAX }`
+                ${ t('paymentProcessing.amount.amount') }: ${ currencyFormatter(CUSTOM_AMOUNT_MAX, 0) }`
               }
             </ErrorMessage>
           }
@@ -178,12 +183,12 @@ export const Modal = (props: Props) => {
           />
           <b>{ t('paymentProcessing.amount.cover.action') }</b>
         </CheckboxContainer>
-        <b>{ currencyFormatter(Number(coveredAmount) * 100) }</b>
+        <b>{ currencyFormatter(coveredAmount) }</b>
       </CoverFeeContainer>
       <hr />
 
       <TotalContainer>
-        <b>{ t('paymentProcessing.amount.total') }: <span>{ currencyFormatter(Number(amount) * 100) }</span></b>
+        <b>{ t('paymentProcessing.amount.total') }: <span>{ currencyFormatter(amount) }</span></b>
       </TotalContainer>
 
       <NextButton
@@ -192,8 +197,7 @@ export const Modal = (props: Props) => {
         onClick={ openModal }
         disabled={
           Number(amount) < CUSTOM_AMOUNT_MIN ||
-          Number(amount) > CUSTOM_AMOUNT_MAX ||
-          !validAmount(amount)
+          Number(amount) > CUSTOM_AMOUNT_MAX
         }
       >
         { t('paymentProcessing.amount.submit') }

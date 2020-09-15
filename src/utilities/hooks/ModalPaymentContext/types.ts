@@ -13,7 +13,7 @@
 import { BrowsePageSeller } from '../../api/types';
 
 export type ModalPaymentState = {
-  amount: string;
+  amount: number;
   customInput: boolean;
   coveredByCustomer: boolean;
   modalView: number;
@@ -21,7 +21,7 @@ export type ModalPaymentState = {
 };
 
 export const defaultState: ModalPaymentState = {
-  amount: '5',
+  amount: 5_00,
   customInput: false,
   coveredByCustomer: false,
   modalView: -1,
