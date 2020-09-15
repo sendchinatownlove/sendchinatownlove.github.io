@@ -99,9 +99,9 @@ const NavBar = (props: Props) => {
             <MobileItemLink to="/merchants">
               {t('navBar.header.waystodonate.donate')}
             </MobileItemLink>
-            <MobileItem href="https://merchant.sendchinatownlove.com/gift-a-meal-home">
+            <MobileItemLink to="/gift-a-meal-home">
               {t('navBar.header.waystodonate.gift-a-meal')}
-            </MobileItem>
+            </MobileItemLink>
             <MobileItem href="https://stickylocals.com/scl">
               {t('navBar.header.waystodonate.sticky-locals-x-scl')}
             </MobileItem>
@@ -157,9 +157,9 @@ const NavBar = (props: Props) => {
               <DropdownItemLink to="/merchants">
                 {t('navBar.header.waystodonate.donate')}
               </DropdownItemLink>
-              <DropdownItem href="https://merchant.sendchinatownlove.com/gift-a-meal-home">
+              <DropdownItemLink to="/gift-a-meal-home">
                 {t('navBar.header.waystodonate.gift-a-meal')}
-              </DropdownItem>
+              </DropdownItemLink>
               <DropdownItem href="https://stickylocals.com/scl">
                 {t('navBar.header.waystodonate.sticky-locals-x-scl')}
               </DropdownItem>
@@ -202,6 +202,11 @@ const NavBar = (props: Props) => {
 };
 
 export default NavBar;
+
+const theme = {
+  maxzIndex: '9999 !important',
+  navHoverColor: '#9e9e9e',
+};
 
 const HeaderContainer = styled.header`
   background-color: transparent;
@@ -267,7 +272,7 @@ const NavLinkStyle = styled.a`
     color: black;
   }
   :hover {
-    color: #9e9e9e;
+    color: ${theme.navHoverColor};
   }
 `;
 
@@ -302,14 +307,14 @@ const LanguageContainer = styled.div`
 const LanguageButton = styled.div`
   margin: 0;
   transition: 0.1s;
-  color: #9e9e9e;
+  color: ${theme.navHoverColor};
   font-size: 14px;
   cursor: pointer;
   font-weight: 200;
   :hover {
     color: #a7182d;
   }
-  width: 35px;
+  width: 36px;
 `;
 
 const LanguageSeparator = styled.div`
@@ -326,18 +331,18 @@ const ReactNavLink = styled.a`
     props.compact === 'true' &&
     `
     width: 100%;
-    text-align:center;
+    text-align: center;
   `}
   ${(props: CompactProps) =>
     props.active === 'true' &&
     `
-    border-bottom: 1px #9e9e9e solid;
+    border-bottom: 1px ${theme.navHoverColor}; solid;
     padding: 0 5px 3px;
   `} :link {
     color: black;
   }
   :hover {
-    color: #9e9e9e;
+    color: ${theme.navHoverColor};
   }
   position: relative;
 `;
@@ -347,21 +352,21 @@ const Close = styled(CloseIcon)`
 `;
 
 const Dropdown = styled.div`
-  z-index: 11;
-  left: 141px;
-  top: 19px;
-  width: 213px;
-  height: 183px;
+  z-index: ${theme.maxzIndex};
+  left: 138px;
+  top: 20px;
+  width: 212px;
+  height: 184px;
   a:hover {
-    color: #9e9e9e;
+    color: ${theme.navHoverColor};
   }
   background-color: #ffffff;
   position: absolute;
 `;
 
 const DropdownMobile = styled.div`
-  width: 375px;
-  height: 163px;
+  width: 376px;
+  height: 164px;
   position: relative;
   bottom: 8px;
   display: flex;
@@ -383,16 +388,16 @@ const DropdownItem = DropItem.withComponent('a');
 const DropdownItemLink = DropItem.withComponent(Link);
 const MobileItem = styled(DropdownItem)`
   margin: 0px;
-  color: #949494;
+  color: ${theme.navHoverColor};
 `;
 const MobileItemLink = styled(DropdownItemLink)`
   margin: 0px;
-  color: #949494;
+  color: ${theme.navHoverColor};
 `;
 const DropdownButtonContainer = styled.div`
-  display:flex;
-  position:relative
-  justify-content:center
+  display: flex;
+  position: relative;
+  justify-content: center;
 `;
 const DropdownButton = styled.h1`
   font-size: 45px;
