@@ -24,7 +24,7 @@ export interface Props {
 }
 
 const transactionFee = (amount: string) => {
-  if (!validAmount(amount)) throw new Error('amount cannot contain invalid characters');
+  if (!validAmount(amount)) return '';
 
   const base = (Number(amount) * TRANSACTION_FEE_RATE) + TRANSACTION_FEE_FLAT;
   const roundedUp = Math.ceil(base * 100) / 100;
