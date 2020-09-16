@@ -106,6 +106,10 @@ const Passport = (props: Props) => {
   };
 
   const sendEmail = () => {
+    // Disable the email modal if the Lyft reward modal is showing
+    if (showLyftRewardPromo || lyftRewardConfirmation.showConfirmation) {
+      return;
+    }
     sendRedeemTicketsEmail(id).then((res) => {
       setShowEmailSent(true);
     });
