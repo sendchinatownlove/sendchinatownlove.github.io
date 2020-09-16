@@ -7,24 +7,18 @@ import {
   getParticipatingSeller,
   sendRedeemTicketsEmail,
   getContactInfo,
+  createLyftReward,
 } from '../../utilities/api/interactionManager';
-import {
-  CardContainer,
-  TitleRow,
-  Title,
-  SubTitle,
-  Button
-} from './style';
+import { CardContainer, TitleRow, Title, SubTitle, Button } from './style';
 
+import GiveawayPopover from './GiveawayPopover';
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
 
 import PassportDashboardBackground from './PassportDashboardBackground.png';
 import PassportIconImg from './passportIcon.png';
 import CircleLogo from './CircleLogo.png';
-import InstagramDisabled from './InstagramDisabled';
-import InstagramEnabled from './InstagramEnabled';
-
+import { LyftRewardPromo, LyftConfirmationPromo } from './LyftPromo';
 
 interface Props {
   setCurrentScreenView: Function;
@@ -36,6 +30,11 @@ const Passport = (props: Props) => {
   const [showFaq, setShowFaq] = useState(false);
   const [showInstagram, setShowInstagram] = useState(false);
   const [showEmailSent, setShowEmailSent] = useState(false);
+  const [showLyftRewardPromo, setShowLyftRewardPromo] = useState(false);
+  const [lyftRewardConfirmation, setLyftRewardConfirmation] = useState({
+    showConfirmation: false,
+    isSuccess: false,
+  });
   const [tickets, setTickets] = useState<any[]>([]);
 
   useEffect(() => {
@@ -51,6 +50,7 @@ const Passport = (props: Props) => {
       getContactInfo(id)
         .then((contactInfo) => {
           setShowInstagram(contactInfo.data.instagram);
+          setShowLyftRewardPromo(contactInfo.data.is_eligible_for_lyft_reward);
           return getPassportTickets(id);
         })
         .then((ticketIds) => {
@@ -105,9 +105,32 @@ const Passport = (props: Props) => {
   };
 
   const sendEmail = () => {
+    // Disable the email modal if the Lyft reward modal is showing
+    if (showLyftRewardPromo || lyftRewardConfirmation.showConfirmation) {
+      return;
+    }
     sendRedeemTicketsEmail(id).then((res) => {
       setShowEmailSent(true);
     });
+  };
+
+  const lyftRewardYesClickHandler = () => {
+    setShowLyftRewardPromo(false);
+    createLyftReward(id).then((res) => {
+      const isSuccess = res.status === 200;
+      setLyftRewardConfirmation({
+        showConfirmation: true,
+        isSuccess: isSuccess,
+      });
+    });
+  };
+
+  const lyftRewardNoClickHandler = () => {
+    setShowLyftRewardPromo(false);
+  };
+
+  const lyftConfirmationCloseClickHandler = () => {
+    setLyftRewardConfirmation({ showConfirmation: false, isSuccess: false });
   };
 
   const createRows = (stamps) => {
@@ -138,7 +161,10 @@ const Passport = (props: Props) => {
   return (
     <Container>
       <HeaderContainer>
-        <RedirectionLinks href="https://www.sendchinatownlove.com/food-crawl.html" target="_blank">
+        <RedirectionLinks
+          href="https://www.sendchinatownlove.com/food-crawl.html"
+          target="_blank"
+        >
           Learn More
         </RedirectionLinks>
         <Logo src={CircleLogo} alt="scl-log" />
@@ -156,7 +182,9 @@ const Passport = (props: Props) => {
           onClick={() => push(location.pathname)}
         >
           <TitleRow>
-            <Title color={showFaq ? 'grey' : 'black'}>PASSPORT TO CHINATOWN</Title>
+            <Title color={showFaq ? 'grey' : 'black'}>
+              PASSPORT TO CHINATOWN
+            </Title>
             {showFaq ? (
               <>
                 <br />
@@ -170,16 +198,23 @@ const Passport = (props: Props) => {
                     ? 'INSTAGRAM FOR GIVEAWAY ADDED'
                     : '9/1/2020 - 9/30/2020'}
                 </SubHeader>
-                <Icon>
-                  {showInstagram ? (
-                    <InstagramEnabled />
-                  ) : (
-                    <InstagramDisabled />
-                  )}
-                </Icon>
+                <GiveawayPopover showInstagram={showInstagram} contactId={id}/>
               </>
             )}
           </TitleRow>
+
+          {showLyftRewardPromo && (
+            <LyftRewardPromo
+              yesClickHander={lyftRewardYesClickHandler}
+              noClickHander={lyftRewardNoClickHandler}
+            ></LyftRewardPromo>
+          )}
+          {lyftRewardConfirmation.showConfirmation && (
+            <LyftConfirmationPromo
+              isSuccess={lyftRewardConfirmation.isSuccess}
+              closeClickHander={lyftConfirmationCloseClickHandler}
+            ></LyftConfirmationPromo>
+          )}
 
           {showEmailSent && (
             <SendEmailContainer>
@@ -320,13 +355,4 @@ const SendEmailButtonClose = styled(Button)`
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-`;
-
-const Icon = styled.div`
-  position: absolute;
-  right: 10px;
-  text-decoration: none;
-  color: black;
-  padding: 10px 15px;
-  font-size: 22px;
 `;

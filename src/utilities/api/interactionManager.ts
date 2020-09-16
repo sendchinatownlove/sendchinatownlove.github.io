@@ -132,8 +132,16 @@ export const updateVoucher = async (id: string, amount: number) =>
     .then((res) => res)
     .catch((err) => err);
 
-export const getMerchantGiftCards = async (seller_id: string, secret: string) =>
-  axios.get(sellers + seller_id + '/gift_cards/' + secret).then((res) => res); // don't catch error, throw it up the stack
+export const getMerchantGiftCards = async (
+  seller_id: string,
+  secret: string,
+  filterGAM: boolean = false
+) => {
+  const filterGAMString = filterGAM ? '?filterGAM=true' : ''; // if the key is present at all, filtering will happen
+  return axios
+    .get(sellers + seller_id + '/gift_cards/' + secret + filterGAMString)
+    .then((res) => res); // don't catch error, throw it up the stack
+};
 
 function localeFromLanguage(language?: string) {
   switch (language) {
@@ -168,6 +176,12 @@ export const getDistributor = async (id: string): Promise<any> => {
     .catch((err) => err);
 };
 
+export const getAllParticipatingSellers = async (): Promise<any> =>
+  axios
+    .get(passportVouchers)
+    .then((res) => res)
+    .catch((err) => err);
+
 // for passport crawl voucher print outs
 export const getParticipatingMerchant = async (id: string) =>
   axios
@@ -182,8 +196,8 @@ export const getParticipatingMerchantTickets = async (
   items: number | null,
   printed: boolean | null,
   associated: boolean | null
-
-) => axios
+) =>
+  axios
     .get(passportVouchers + id + '/tickets/' + tickets_secret, {
       params: { page, items, printed, associated },
     })
@@ -257,6 +271,12 @@ export const getParticipatingSeller = async (sellerId: string) =>
     .then((res) => res)
     .catch((err) => err);
 
+export const getGiveawayTicketsForContact = async (contactId: string) =>
+  axios
+    .get(contacts + contactId)
+    .then((res) => res)
+    .catch((err) => err);
+
 export const sendRedeemTicketsEmail = async (passportId: string) =>
   axios
     .post(contacts + passportId + '/rewards')
@@ -288,5 +308,11 @@ export const redeemReward = async (
 ) =>
   axios
     .put(contacts + contact_id + '/tickets/' + auth_token, { tickets })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const createLyftReward = async (contact_id: number) =>
+  axios
+    .post(contacts + contact_id + '/lyft_rewards/')
     .then((res) => res)
     .catch((err) => err);

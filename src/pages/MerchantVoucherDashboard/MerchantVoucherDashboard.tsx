@@ -7,6 +7,7 @@ import {
 import Loader from '../../components/Loader/Loader';
 import styles from './styles.module.scss';
 import ErrorPage from '../../components/404Page';
+import { Checkbox } from '@material-ui/core';
 const FilterableTable = require('react-filterable-table');
 
 const MerchantVoucherDashboard = () => {
@@ -14,6 +15,8 @@ const MerchantVoucherDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [giftCards, setGiftCards] = useState<any | null>();
   const [seller, setSeller] = useState<any | null>();
+  const [shouldFilterGAM, setFilterGAM] = useState(false);
+  const checkFilterGAM = () => setFilterGAM(!shouldFilterGAM);
 
   const params = useHistory();
   const urlParams = (params.location.pathname.match(
@@ -26,10 +29,21 @@ const MerchantVoucherDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const giftCardData = (
-        await getMerchantGiftCards(metadata.sellerId, metadata.secretId)
+      let giftCardData = (
+        await getMerchantGiftCards(
+          metadata.sellerId,
+          metadata.secretId,
+          shouldFilterGAM
+        )
       ).data;
       const sellerData = (await getSeller(metadata.sellerId)).data;
+
+      giftCardData = giftCardData.map((card) => {
+        if (card.updated_at === card.created_at) {
+          card.updated_at = null;
+        }
+        return card;
+      });
 
       setGiftCards(giftCardData);
       setSeller(sellerData);
@@ -43,7 +57,7 @@ const MerchantVoucherDashboard = () => {
     fetchData();
 
     // eslint-disable-next-line
-  }, []);
+  }, [shouldFilterGAM]);
 
   const renderAmount = (props: FTRenderProps) => {
     return Intl.NumberFormat('en-US', {
@@ -54,6 +68,9 @@ const MerchantVoucherDashboard = () => {
   };
 
   const renderDate = (props: FTRenderProps) => {
+    if (!props.value) {
+      return 'N/A';
+    }
     return new Date(props.value).toISOString().substring(0, 10);
   };
 
@@ -69,9 +86,11 @@ const MerchantVoucherDashboard = () => {
       displayName: 'Email \n 电子邮件',
       inputFilterable: true,
       sortable: true,
+      thClassName: 'table-email-header',
+      tdClassName: 'table-email-container',
     },
     {
-      name: 'value',
+      name: 'original_value',
       displayName: 'Original Amount \n 购买金额',
       inputFilterable: true,
       sortable: true,
@@ -83,6 +102,20 @@ const MerchantVoucherDashboard = () => {
       inputFilterable: true,
       sortable: true,
       render: renderDate,
+    },
+    {
+      name: 'updated_at',
+      displayName: 'Date Last Used \n 上次使用日期',
+      inputFilterable: true,
+      sortable: true,
+      render: renderDate,
+    },
+    {
+      name: 'latest_value',
+      displayName: 'Ending Balance  \n 结余',
+      inputFilterable: true,
+      sortable: true,
+      render: renderAmount,
     },
     /* {
       name: 'expiration',
@@ -120,7 +153,10 @@ const MerchantVoucherDashboard = () => {
                 Active Vouchers{' '}
                 <span className={styles.noBreak}>可使用的礼品券数量</span>
               </h1>
-              <h2>{giftCards && giftCards.length}</h2>
+              <h2>
+                {giftCards &&
+                  giftCards.filter((card) => card.latest_value > 0).length}
+              </h2>
             </div>
             <div className={styles.metadataBlock}>
               <h1>
@@ -128,24 +164,38 @@ const MerchantVoucherDashboard = () => {
               </h1>
               <h2>
                 {renderAmount({
-                  value: giftCards.reduce((acc, cur) => acc + cur.value, 0),
+                  value: giftCards.reduce(
+                    (acc, cur) => acc + cur.latest_value,
+                    0
+                  ),
                 })}
               </h2>
             </div>
           </div>
-          <FilterableTable
-            namespace="Vouchers"
-            initialSort="seller_gift_card_id"
-            data={giftCards}
-            fields={fields}
-            noRecordsMessage="No vouchers in our system yet!"
-            noFilteredRecordsMessage="No vouchers found for filter"
-            topPagerVisible={false}
-            pageSize={20}
-            pageSizes={null} // don't show the page size chooser
-            recordCountName="Voucher"
-            recordCountNamePlural="Vouchers"
-          />
+          <div>
+            <div className={styles.gamToggle}>
+              <Checkbox
+                value="shouldFilterGAM"
+                inputProps={{ 'aria-label': 'FilterGAM Checkbox' }}
+                onClick={checkFilterGAM}
+                checked={shouldFilterGAM}
+              />
+              <span>hide gift-a-meal vouchers 隐藏爱心餐餐券</span>
+            </div>
+            <FilterableTable
+              namespace="Vouchers"
+              initialSort="seller_gift_card_id"
+              data={giftCards}
+              fields={fields}
+              noRecordsMessage="No vouchers in our system yet!"
+              noFilteredRecordsMessage="No vouchers found for filter"
+              topPagerVisible={false}
+              pageSize={20}
+              pageSizes={null} // don't show the page size chooser
+              recordCountName="Voucher Found"
+              recordCountNamePlural="Vouchers Found"
+            />
+          </div>
         </>
       )}
     </>
