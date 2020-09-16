@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TitleRow, Title, SubTitle, Button } from './style';
+import { TitleRow, SubTitle, Button } from './style';
 import BikeImg from './Citibike_Lyft.png';
 import { useTranslation } from 'react-i18next';
 
@@ -96,30 +96,14 @@ const LyftYesButton = styled(Button)`
   width: 115px;
   margin-right: 8px;
   display: inline-block;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
+  min-width: 0;
 `;
 
-const LyftNoButton = styled(Button)`
-  padding: 0;
-  text-align: center;
-  height: 33px;
-  width: 115px;
+const LyftNoButton = styled(LyftYesButton)`
   margin-left: 8px;
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
+  margin-right: 0;
 `;
 
-const LyftCloseButton = styled(Button)`
-  padding: 0;
-  text-align: center;
-  height: 33px;
-  width: 115px;
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
+const LyftCloseButton = styled(LyftYesButton)`
+  margin: 0;
 `;
