@@ -30,11 +30,15 @@ const MerchantVoucherDashboard = () => {
   const fetchData = async () => {
     try {
       let giftCardData = (
-        await getMerchantGiftCards(metadata.sellerId, metadata.secretId, shouldFilterGAM)
+        await getMerchantGiftCards(
+          metadata.sellerId,
+          metadata.secretId,
+          shouldFilterGAM
+        )
       ).data;
       const sellerData = (await getSeller(metadata.sellerId)).data;
 
-      giftCardData = giftCardData.map(card => {
+      giftCardData = giftCardData.map((card) => {
         if (card.updated_at === card.created_at) {
           card.updated_at = null;
         }
@@ -65,7 +69,7 @@ const MerchantVoucherDashboard = () => {
 
   const renderDate = (props: FTRenderProps) => {
     if (!props.value) {
-      return "N/A";
+      return 'N/A';
     }
     return new Date(props.value).toISOString().substring(0, 10);
   };
@@ -83,7 +87,7 @@ const MerchantVoucherDashboard = () => {
       inputFilterable: true,
       sortable: true,
       thClassName: 'table-email-header',
-      tdClassName: 'table-email-container'
+      tdClassName: 'table-email-container',
     },
     {
       name: 'original_value',
@@ -149,7 +153,10 @@ const MerchantVoucherDashboard = () => {
                 Active Vouchers{' '}
                 <span className={styles.noBreak}>可使用的礼品券数量</span>
               </h1>
-              <h2>{giftCards && giftCards.filter(card => card.latest_value > 0).length}</h2>
+              <h2>
+                {giftCards &&
+                  giftCards.filter((card) => card.latest_value > 0).length}
+              </h2>
             </div>
             <div className={styles.metadataBlock}>
               <h1>
@@ -157,33 +164,38 @@ const MerchantVoucherDashboard = () => {
               </h1>
               <h2>
                 {renderAmount({
-                  value: giftCards.reduce((acc, cur) => acc + cur.latest_value, 0),
+                  value: giftCards.reduce(
+                    (acc, cur) => acc + cur.latest_value,
+                    0
+                  ),
                 })}
               </h2>
             </div>
           </div>
-          <div className={styles.gamToggle}>
-            <Checkbox
-                  value="shouldFilterGAM"
-                  inputProps={{ 'aria-label': 'FilterGAM Checkbox' }}
-                  onClick={checkFilterGAM}
-                  checked={shouldFilterGAM}
-                />
+          <div>
+            <div className={styles.gamToggle}>
+              <Checkbox
+                value="shouldFilterGAM"
+                inputProps={{ 'aria-label': 'FilterGAM Checkbox' }}
+                onClick={checkFilterGAM}
+                checked={shouldFilterGAM}
+              />
               <span>hide gift-a-meal vouchers 隐藏爱心餐餐券</span>
+            </div>
+            <FilterableTable
+              namespace="Vouchers"
+              initialSort="seller_gift_card_id"
+              data={giftCards}
+              fields={fields}
+              noRecordsMessage="No vouchers in our system yet!"
+              noFilteredRecordsMessage="No vouchers found for filter"
+              topPagerVisible={false}
+              pageSize={20}
+              pageSizes={null} // don't show the page size chooser
+              recordCountName="Voucher Found"
+              recordCountNamePlural="Vouchers Found"
+            />
           </div>
-          <FilterableTable
-            namespace="Vouchers"
-            initialSort="seller_gift_card_id"
-            data={giftCards}
-            fields={fields}
-            noRecordsMessage="No vouchers in our system yet!"
-            noFilteredRecordsMessage="No vouchers found for filter"
-            topPagerVisible={false}
-            pageSize={20}
-            pageSizes={null} // don't show the page size chooser
-            recordCountName="Voucher Found"
-            recordCountNamePlural="Vouchers Found"
-          />
         </>
       )}
     </>
