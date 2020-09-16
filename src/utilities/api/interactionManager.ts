@@ -132,11 +132,16 @@ export const updateVoucher = async (id: string, amount: number) =>
     .then((res) => res)
     .catch((err) => err);
 
-export const getMerchantGiftCards = async (seller_id: string, secret: string, filterGAM: boolean = false) => {
+export const getMerchantGiftCards = async (
+  seller_id: string,
+  secret: string,
+  filterGAM: boolean = false
+) => {
   const filterGAMString = filterGAM ? '?filterGAM=true' : ''; // if the key is present at all, filtering will happen
-  return axios.get(sellers + seller_id + '/gift_cards/' + secret + filterGAMString)
-              .then((res) => res); // don't catch error, throw it up the stack
-}
+  return axios
+    .get(sellers + seller_id + '/gift_cards/' + secret + filterGAMString)
+    .then((res) => res); // don't catch error, throw it up the stack
+};
 
 function localeFromLanguage(language?: string) {
   switch (language) {
@@ -185,8 +190,8 @@ export const getParticipatingMerchantTickets = async (
   items: number | null,
   printed: boolean | null,
   associated: boolean | null
-
-) => axios
+) =>
+  axios
     .get(passportVouchers + id + '/tickets/' + tickets_secret, {
       params: { page, items, printed, associated },
     })
@@ -291,5 +296,11 @@ export const redeemReward = async (
 ) =>
   axios
     .put(contacts + contact_id + '/tickets/' + auth_token, { tickets })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const createLyftReward = async (contact_id: number) =>
+  axios
+    .post(contacts + contact_id + '/lyft_rewards/')
     .then((res) => res)
     .catch((err) => err);
