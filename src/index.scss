@@ -257,19 +257,22 @@ h3 {
   }
 }
 
+// voucher-dashboard styles
 .filterable-table-container {
   font-family: 'Open Sans';
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 1200px;
+  margin: auto;
 
   .header-row {
     display: grid;
     grid-template-columns: 4fr 0px 1fr;
     align-items: center;
-    justify-content: center;
+    justify-content: stretch;
     padding: 10px 0px;
-    max-width: 1200px;
+    width: 100%;
 
     .filter-container {
       display: flex;
@@ -286,10 +289,23 @@ h3 {
       }
     }
 
-    .record-count > span {
-      min-width: 100px;
-      display: flex;
+    .record-count {
+      justify-self: end;
+      min-width: 150px;
+
+      span {
+        min-width: 150px;
+        display: flex;
+      }
     }
+  }
+
+  div {
+    width: 100%;
+  }
+
+  .table {
+    table-layout: fixed;
   }
 
   thead {
@@ -300,6 +316,14 @@ h3 {
   .fa {
     // filter arrows
     margin-left: 1vw;
+  }
+
+  .table-email-header {
+    width: 35%;
+  }
+
+  .table-email-container {
+    word-break: break-all;
   }
 
   nav {
