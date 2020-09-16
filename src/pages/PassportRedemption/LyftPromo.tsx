@@ -1,64 +1,79 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TitleRow, Title, SubTitle, Button } from './style';
+import { TitleRow, SubTitle, Button } from './style';
 import BikeImg from './Citibike_Lyft.png';
 import { useTranslation } from 'react-i18next';
 
-interface Props {
-    isSuccess: boolean;
+interface PromoProps {
+  yesClickHander: () => void;
+  noClickHander: () => void;
 }
 
-export const LyftRewardPromo = () => {
-    const { t } = useTranslation();
-    return (
-        <LyftPromptContainer height={340}>
-            <LyftIcon src={BikeImg} />
-            <TitleRow>
-                <LyftSubTitle>
-                    {t('lyftReward.mainBody1')}
-                    <br />
-                    <br />
-                    {t('lyftReward.mainBody2')}
-                    <br />
-                    <br />
-                    {t('lyftReward.mainBody3')}
-                </LyftSubTitle>
-            </TitleRow>
-            <span>
-                <LyftYesButton className="button--red-filled" onClick={(e) => { }}>
-                    {t('lyftReward.yesButton')}
-                </LyftYesButton>
-                <LyftNoButton className="button--red-outlined" onClick={(e) => { }}>
-                    {t('lyftReward.noButton')}
-                </LyftNoButton>
-            </span>
-        </LyftPromptContainer>
-    );
+export const LyftRewardPromo = (props: PromoProps) => {
+  const { t } = useTranslation();
+  return (
+    <LyftPromptContainer height={340}>
+      <LyftIcon src={BikeImg} />
+      <TitleRow>
+        <LyftSubTitle>
+          {t('lyftReward.mainBody1')}
+          <br />
+          <br />
+          {t('lyftReward.mainBody2')}
+          <br />
+          <br />
+          {t('lyftReward.mainBody3')}
+        </LyftSubTitle>
+      </TitleRow>
+      <span>
+        <LyftYesButton
+          className="button--red-filled"
+          onClick={props.yesClickHander}
+        >
+          {t('lyftReward.yesButton')}
+        </LyftYesButton>
+        <LyftNoButton
+          className="button--red-outlined"
+          onClick={props.noClickHander}
+        >
+          {t('lyftReward.noButton')}
+        </LyftNoButton>
+      </span>
+    </LyftPromptContainer>
+  );
 };
 
-export const LyftConfirmationPromo = (props: Props) => {
-    const { t } = useTranslation();
-    return (
-        <LyftPromptContainer height={285}>
-            <LyftIcon src={BikeImg} />
-            <TitleRow>
-                <SubTitle bold="700">
-                    <br />
-                    {props.isSuccess
-                        ? t('lyftReward.successBody1')
-                        : t('lyftReward.failureBody1')}
-                    <br />
-                    <br />
-                    {props.isSuccess
-                        ? t('lyftReward.successBody2')
-                        : t('lyftReward.failureBody2')}
-                </SubTitle>
-            </TitleRow>
-            <LyftCloseButton className="button--red-filled" onClick={(e) => { }}>
-                {t('lyftReward.closeButton')}
-            </LyftCloseButton>
-        </LyftPromptContainer>
-    );
+interface ConfirmationProps {
+  isSuccess: boolean;
+  closeClickHander: () => void;
+}
+
+export const LyftConfirmationPromo = (props: ConfirmationProps) => {
+  const { t } = useTranslation();
+  return (
+    <LyftPromptContainer height={285}>
+      <LyftIcon src={BikeImg} />
+      <TitleRow>
+        <LyftSubTitle>
+          <br />
+          {props.isSuccess
+            ? t('lyftReward.successBody1')
+            : t('lyftReward.failureBody1')}
+          <br />
+          <br />
+          {props.isSuccess
+            ? t('lyftReward.successBody2')
+            : t('lyftReward.failureBody2')}
+        </LyftSubTitle>
+      </TitleRow>
+      <LyftCloseButton
+        className="button--red-filled"
+        onClick={props.closeClickHander}
+      >
+        {t('lyftReward.closeButton')}
+      </LyftCloseButton>
+    </LyftPromptContainer>
+  );
 };
 
 const LyftPromptContainer = styled.div<{ height: number }>`
@@ -86,7 +101,7 @@ const LyftIcon = styled.img`
 `;
 
 const LyftSubTitle = styled(SubTitle)`
-  bold: 700;
+  font-weight: 700;
 `;
 
 const LyftYesButton = styled(Button)`
