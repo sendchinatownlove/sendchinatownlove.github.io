@@ -3,6 +3,7 @@ enum ScreenName {
   Redemption,
   Dashboard,
   Claim,
+  LyftCode,
 }
 
 export default ScreenName;

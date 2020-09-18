@@ -7,6 +7,7 @@ import RedemptionClaimScreen from './RedemptionClaimScreen';
 
 import ScreenName from './ScreenName';
 import PassportScreen from './Passport';
+import LyftCodeScreen from './LyftCodeScreen';
 import CrawlMap from './CrawlMap.png';
 import { useHistory } from 'react-router-dom';
 
@@ -45,6 +46,8 @@ const PassportRedemption = (props: Props) => {
         return (
           <RedemptionClaimScreen setCurrentScreenView={setCurrentScreenView} />
         );
+      case ScreenName.LyftCode:
+        return <LyftCodeScreen setCurrentScreenView={setCurrentScreenView} />;
       default:
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
     }
