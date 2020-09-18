@@ -114,10 +114,19 @@ export const LyftCode = (props: CodeProps) => {
             style={{
               backgroundColor: '#a9182e',
               color: 'white',
-              padding: '20px 68px 20px 68px',
+              padding: '21px 78px 21px 78px',
               borderRadius: 3,
               zIndex: 10,
-              opacity: 0.7,
+              opacity: 0.8,
+              fontFamily: 'Open Sans',
+              fontWeight: 'bold',
+              fontSize: '15px',
+              lineHeight: '20px',
+              display: 'flex',
+              alignItems: 'center',
+              textAlign: 'center',
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
               ...props.style,
             }}
           >
