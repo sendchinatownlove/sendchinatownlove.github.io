@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TitleRow, SubTitle, Button } from './style';
-import BikeImg from './Citibike_Lyft.png';
+import { TitleRow, SubTitle, Button, CardContainer } from './style';
+import BikeImg from './Lyft_Bike.png';
 import { useTranslation } from 'react-i18next';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import Tooltip from 'react-bootstrap/Tooltip';
+import Overlay from 'react-bootstrap/Overlay';
+import { useState, useRef } from 'react';
 
 interface PromoProps {
   yesClickHander: () => void;
@@ -76,13 +80,64 @@ export const LyftConfirmationPromo = (props: ConfirmationProps) => {
   );
 };
 
+interface CodeProps {
+  code: string;
+}
+
+export const LyftCode = (props: CodeProps) => {
+  const { t } = useTranslation();
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+
+  return (
+    <CardContainer mainView={true}>
+      <br />
+      <br />
+      <LyftIcon src={BikeImg} />
+      <LyftCodeTitle>{t('lyftReward.codeTitle')}</LyftCodeTitle>
+      <LyftCodeSubtitle>{t('lyftReward.codeSubtitle')}</LyftCodeSubtitle>
+      <CopyToClipboard
+        text={props.code}
+        onCopy={(e: any) => {
+          setShow(!show);
+        }}
+      >
+        <LyftCodeDisplay>{props.code}</LyftCodeDisplay>
+      </CopyToClipboard>
+      <div ref={target}></div>
+      <Overlay target={target.current} show={show} placement="top">
+        {(props) => (
+          <Tooltip
+            id="copied-tooltip"
+            onClick={() => setShow(!show)}
+            {...props}
+            style={{
+              backgroundColor: '#a9182e',
+              color: 'white',
+              padding: '20px 68px 20px 68px',
+              borderRadius: 3,
+              zIndex: 10,
+              opacity: 0.7,
+              ...props.style,
+            }}
+          >
+            {t('lyftReward.codeCopied')}
+          </Tooltip>
+        )}
+      </Overlay>
+      <br />
+      <br />
+    </CardContainer>
+  );
+};
+
 const LyftPromptContainer = styled.div<{ height: number }>`
   padding: 10px;
   position: absolute;
   width: 340px;
   margin: 0 auto;
   height: ${(props) => props.height}px;
-  z-index: 20;
+  z-index: 1;
   top: 70px;
   display: flex;
   flex-direction: column;
@@ -96,8 +151,8 @@ const LyftPromptContainer = styled.div<{ height: number }>`
 
 const LyftIcon = styled.img`
   margin-top: 10px;
-  width: 160px;
-  height: 80px;
+  width: 216px;
+  height: 85px;
 `;
 
 const LyftSubTitle = styled(SubTitle)`
@@ -121,4 +176,52 @@ const LyftNoButton = styled(LyftYesButton)`
 
 const LyftCloseButton = styled(LyftYesButton)`
   margin: 0;
+`;
+
+const LyftCodeTitle = styled.div`
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0px 30px 0px 30px;
+  margin-top: 30px;
+`;
+
+const LyftCodeSubtitle = styled.div`
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0px 30px 0px 30px;
+  margin-top: 30px;
+`;
+
+const LyftCodeDisplay = styled.div`
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 41px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #a8192e;
+  border: 1px dashed #000000;
+  box-sizing: border-box;
+  padding: 10px 20px 10px 20px;
+  margin-top: 20px;
 `;

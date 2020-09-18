@@ -122,6 +122,9 @@ const App = () => {
           <Route path="/print-passport-voucher/:id/tickets/:tickets_secret">
             <PassportVoucher />
           </Route>
+          <Route exact path="/passport/lyft_rewards/:contact_id/redeem/:token">
+            <PassportRedemption screen={ScreenName.LyftCode} />
+          </Route>
           <Route
             path="/gift-a-meal"
             component={() => {
