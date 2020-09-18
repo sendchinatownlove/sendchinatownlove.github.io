@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TitleRow, SubTitle, Button, CardContainer } from './style';
-import BikeImg from './Lyft_Bike.png';
+import CitiBikeImg from './citi_bike.png';
 import { useTranslation } from 'react-i18next';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -17,7 +17,7 @@ export const LyftRewardPromo = (props: PromoProps) => {
   const { t } = useTranslation();
   return (
     <LyftPromptContainer height={340}>
-      <LyftIcon src={BikeImg} />
+      <LyftIcon src={CitiBikeImg} />
       <TitleRow>
         <LyftSubTitle>
           {t('lyftReward.mainBody1')}
@@ -56,7 +56,7 @@ export const LyftConfirmationPromo = (props: ConfirmationProps) => {
   const { t } = useTranslation();
   return (
     <LyftPromptContainer height={285}>
-      <LyftIcon src={BikeImg} />
+      <LyftIcon src={CitiBikeImg} />
       <TitleRow>
         <LyftSubTitle>
           <br />
@@ -93,7 +93,7 @@ export const LyftCode = (props: CodeProps) => {
     <CardContainer mainView={true}>
       <br />
       <br />
-      <LyftIcon src={BikeImg} />
+      <LyftIcon src={CitiBikeImg} />
       <LyftCodeTitle>{t('lyftReward.codeTitle')}</LyftCodeTitle>
       <LyftCodeSubtitle>{t('lyftReward.codeSubtitle')}</LyftCodeSubtitle>
       <CopyToClipboard
@@ -160,8 +160,8 @@ const LyftPromptContainer = styled.div<{ height: number }>`
 
 const LyftIcon = styled.img`
   margin-top: 10px;
-  width: 216px;
-  height: 85px;
+  width: 200px;
+  height: 94px;
 `;
 
 const LyftSubTitle = styled(SubTitle)`
