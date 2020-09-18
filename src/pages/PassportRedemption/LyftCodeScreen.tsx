@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import CircleLogo from './CircleLogo.png';
 import { LyftCode } from './LyftPromo';
+import { useParams } from 'react-router-dom';
+import {
+  getLyftReward,
+  redeemToken,
+} from '../../utilities/api/interactionManager';
 
-interface Props {
-  setCurrentScreenView: Function;
-}
+const LyftCodeScreen = () => {
+  const { contact_id, token } = useParams();
+  const [code, setCode] = useState('');
 
-const LyftCodeScreen = (props: Props) => {
+  useEffect(() => {
+    getLyftReward(contact_id).then((res) => {
+      if (res.status === 200 && res.data) {
+        setCode(res.data.code);
+      } else {
+        redeemToken(contact_id, token).then((res) => {
+          if (res.status === 200 && res.data) {
+            setCode(res.data.code);
+          }
+        })
+      }
+    });
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <Container>
       <HeaderContainer>
@@ -23,7 +42,9 @@ const LyftCodeScreen = (props: Props) => {
         </RedirectionLinks>
       </HeaderContainer>
       <BodyContainer>
-        <LyftCode code={'1234xyz'}></LyftCode>
+        {code &&
+          <LyftCode code={code}></LyftCode>
+        }
       </BodyContainer>
     </Container>
   );

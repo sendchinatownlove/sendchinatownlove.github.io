@@ -47,7 +47,7 @@ const PassportRedemption = (props: Props) => {
           <RedemptionClaimScreen setCurrentScreenView={setCurrentScreenView} />
         );
       case ScreenName.LyftCode:
-        return <LyftCodeScreen setCurrentScreenView={setCurrentScreenView} />;
+        return <LyftCodeScreen/>;
       default:
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
     }

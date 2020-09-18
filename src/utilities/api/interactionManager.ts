@@ -13,6 +13,7 @@ import {
   participatingSellers,
   sponsorSellers,
   locations,
+  lyftRewards,
 } from './endpoints';
 
 // Fix return typing
@@ -301,6 +302,18 @@ export const redeemReward = async (
 
 export const createLyftReward = async (contact_id: number) =>
   axios
-    .post(contacts + contact_id + '/lyft_rewards/')
+    .post(contacts + contact_id + '/' + lyftRewards)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getLyftReward = async (contact_id: number) =>
+  axios
+    .get(contacts + contact_id + '/' + lyftRewards)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const redeemToken = async (contact_id: number, token: string) =>
+  axios
+    .post(contacts + contact_id + '/' + lyftRewards + token + '/redeem/')
     .then((res) => res)
     .catch((err) => err);
