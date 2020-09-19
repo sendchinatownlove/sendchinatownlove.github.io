@@ -156,6 +156,9 @@
     "failureBody2": "It looks like we ran out of the Citi Bike Day Pass codes. Stay tuned for more giveaways in the future!",
     "yesButton": "YES",
     "noButton": "NO",
-    "closeButton": "CLOSE"
+    "closeButton": "CLOSE",
+    "codeTitle": "Here is your Free Lyft Citi Bike Day Pass code",
+    "codeSubtitle": "TAP TO COPY",
+    "codeCopied": "COPIED"
   }
 }
