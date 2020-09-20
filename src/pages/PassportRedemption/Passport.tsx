@@ -11,14 +11,13 @@ import {
 } from '../../utilities/api/interactionManager';
 import { CardContainer, TitleRow, Title, SubTitle, Button } from './style';
 
+import GiveawayPopover from './GiveawayPopover';
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
 
 import PassportDashboardBackground from './PassportDashboardBackground.png';
 import PassportIconImg from './passportIcon.png';
 import CircleLogo from './CircleLogo.png';
-import InstagramDisabled from './InstagramDisabled';
-import InstagramEnabled from './InstagramEnabled';
 import { LyftRewardPromo, LyftConfirmationPromo } from './LyftPromo';
 
 interface Props {
@@ -193,17 +192,15 @@ const Passport = (props: Props) => {
                 <br />
               </>
             ) : (
-                <>
-                  <SubHeader color={showFaq ? 'transparent' : 'black'}>
-                    {showInstagram
-                      ? 'INSTAGRAM FOR GIVEAWAY ADDED'
-                      : '9/1/2020 - 9/30/2020'}
-                  </SubHeader>
-                  <Icon>
-                    {showInstagram ? <InstagramEnabled /> : <InstagramDisabled />}
-                  </Icon>
-                </>
-              )}
+              <>
+                <SubHeader color={showFaq ? 'transparent' : 'black'}>
+                  {showInstagram
+                    ? 'INSTAGRAM FOR GIVEAWAY ADDED'
+                    : '9/1/2020 - 9/30/2020'}
+                </SubHeader>
+                <GiveawayPopover showInstagram={showInstagram} contactId={id}/>
+              </>
+            )}
           </TitleRow>
 
           {showLyftRewardPromo && (
@@ -358,13 +355,4 @@ const SendEmailButtonClose = styled(Button)`
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-`;
-
-const Icon = styled.div`
-  position: absolute;
-  right: 10px;
-  text-decoration: none;
-  color: black;
-  padding: 10px 15px;
-  font-size: 22px;
 `;

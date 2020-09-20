@@ -177,6 +177,12 @@ export const getDistributor = async (id: string): Promise<any> => {
     .catch((err) => err);
 };
 
+export const getAllParticipatingSellers = async (): Promise<any> =>
+  axios
+    .get(passportVouchers)
+    .then((res) => res)
+    .catch((err) => err);
+
 // for passport crawl voucher print outs
 export const getParticipatingMerchant = async (id: string) =>
   axios
@@ -263,6 +269,12 @@ export const getPassportTickets = async (passportId: string) =>
 export const getParticipatingSeller = async (sellerId: string) =>
   axios
     .get(participatingSellers + sellerId)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getGiveawayTicketsForContact = async (contactId: string) =>
+  axios
+    .get(contacts + contactId)
     .then((res) => res)
     .catch((err) => err);
 
