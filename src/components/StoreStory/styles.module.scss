@@ -1,5 +1,17 @@
+@import '../../index.scss';
+
 .container {
   white-space: pre-wrap;
   line-height: 1.75em;
   letter-spacing: 0.015em;
+
+  a {
+    color: $standard-red;
+    text-decoration: none;
+  
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
 }
