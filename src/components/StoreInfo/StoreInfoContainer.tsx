@@ -10,6 +10,7 @@ import StoreGallery from './StoreGalleryTab';
 import StoreMerch from './StoreMerchTab';
 import StoreSocial from './StoreSocialTab';
 import styles from './styles.module.scss';
+import defaultStoreFront from './misc-store.png';
 import StoryStyles from '../StoreStory/styles.module.scss';
 
 type Props = {
