@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import classnames from 'classnames';
+import ReactMarkdown from "react-markdown";
 import styled from 'styled-components';
 import { Location, BrowsePageSeller } from '../../utilities';
 import StoreStory from '../StoreStory';
@@ -9,7 +10,7 @@ import StoreGallery from './StoreGalleryTab';
 import StoreMerch from './StoreMerchTab';
 import StoreSocial from './StoreSocialTab';
 import styles from './styles.module.scss';
-import defaultStoreFront from './misc-store.png';
+import StoryStyles from '../StoreStory/styles.module.scss';
 
 type Props = {
   seller: BrowsePageSeller;
@@ -78,7 +79,7 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
             </React.Fragment>
           ))}
       </div>
-      <p>{summary}</p>
+      <ReactMarkdown className={StoryStyles.container} source={summary}></ReactMarkdown>
       <StoreNavContainer>
         {storeNavItems.map(
           (value) =>

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styles from './styles.module.scss';
 import ReactMarkdown from "react-markdown";
+import styles from './styles.module.scss';
 
 type Props = {
   story: string;
