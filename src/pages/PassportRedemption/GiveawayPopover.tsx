@@ -138,15 +138,12 @@ const Title = styled.h1`
   position: absolute;
   height: 14px;
   top: 26px;
-  font-family: Open Sans;
   font-style: italic;
-  font-weight: normal;
   font-size: 10px;
   line-height: 14px;
   display: flex;
   align-items: center;
   letter-spacing: 0.15em;
-  color: #000000;
 `
 const Divider = styled.div`
   position: absolute;
@@ -166,7 +163,6 @@ const GiveawayTextContainer = styled.div`
 const IconWrap = styled.span`
   margin-right: 9px;
   height: 38px;
-  padding-left: 3px;
 `
 
 const TextBold = styled.span`
@@ -201,12 +197,9 @@ const InfoText = styled.p`
 
 const SubText = styled.div`
   position: absolute;
-  width: 285px;
-  height: 23px;
+  width: 284px;
+  height: 24px;
   top: 204px;
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
   font-size: 10px;
   line-height: 14px;
   text-align: center;
@@ -216,8 +209,8 @@ const SubText = styled.div`
 
 const ToggleClosedButton = styled.div`
   position: absolute;
-  right: 6.5px;
-  top: 11.5px;
+  right: 6px;
+  top: 12px;
 `
 
 const CloseButton = styled.button`
