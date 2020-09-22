@@ -71,7 +71,9 @@ const NavBar = (props: Props) => {
     ) : (
       <NavLinksContainer compact={hamburgerOpen.toString()}>
         <HeaderContainer compact={hamburgerOpen.toString()}>
-          <Logo />
+          <a href="https://sendchinatownlove.com/">
+            <Logo />
+          </a>
           <Close onClick={(e) => props.setMenuOpen(false)} />
         </HeaderContainer>
         <NavLink
@@ -116,7 +118,9 @@ const NavBar = (props: Props) => {
   };
   return (
     <HeaderContainer compact={hamburgerOpen.toString()}>
-      <Logo />
+      <a href="https://sendchinatownlove.com/">
+        <Logo />
+      </a>
       {hamburgerOpen ? (
         showCompactMenu()
       ) : (
