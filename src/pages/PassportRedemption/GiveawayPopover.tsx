@@ -58,26 +58,26 @@ const GiveawayPopover = (props: Props) => {
         </Title>
         <Divider/>
         <GiveawayTextContainer>
-          <InfoText>
-            <TextBold>{giveawayData.weekly_giveaway_entries}</TextBold>
+          <InfoSentence>
+            <DynamicBoldText>{giveawayData.weekly_giveaway_entries}</DynamicBoldText>
             <GeneralText>
               Weekly Giveaway Entries
             </GeneralText>
-          </InfoText>
+          </InfoSentence>
 
           {giveawayData.number_of_visits_left !== 0 ?
-          <InfoText>
-            <TextBold>{giveawayData.number_of_visits_left}</TextBold>
+          <InfoSentence>
+            <DynamicBoldText>{giveawayData.number_of_visits_left}</DynamicBoldText>
             <GeneralText>
               Vendor Tickets away from a Grand Prize Giveaway Entry
             </GeneralText>
-          </InfoText> :
-          <InfoText icon={true}>
+          </InfoSentence> :
+          <InfoSentence icon={true}>
             <IconWrap>
               <GreenCheck/>
             </IconWrap>
             <GeneralText>Grand Prize Giveaway Entered</GeneralText>
-          </InfoText>
+          </InfoSentence>
           }
         </GiveawayTextContainer>
         <SubText>
@@ -161,19 +161,19 @@ const GiveawayTextContainer = styled.div`
   font-style: normal;
 `
 const IconWrap = styled.span`
-  margin-right: 9px;
+  margin-right: 6px;
   height: 38px;
 `
 
-const TextBold = styled.span`
+const DynamicBoldText = styled.span`
   font-size: 24px;
   font-weight: bold;
   font-style: normal;
   font-family: Open Sans;
   text-align: left;
-  line-height: 33px;
+  line-height: 34px;
   color: black;
-  width: 27px;
+  margin-right: 6px;
   height: 38px;
   display: inline-block;
 `
@@ -182,7 +182,7 @@ const GeneralText = styled.span`
   width: 230px;
 `
 
-const InfoText = styled.p`
+const InfoSentence = styled.p`
   display: flex;
   flex-wrap: nowrap;
   align-items: baseline;
