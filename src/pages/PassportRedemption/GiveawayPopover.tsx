@@ -157,8 +157,6 @@ const GiveawayTextContainer = styled.div`
   width: 258px;
   position: absolute;
   top: 56px;
-  font-family: Open Sans;
-  font-style: normal;
 `
 const IconWrap = styled.span`
   margin-right: 6px;
@@ -168,11 +166,8 @@ const IconWrap = styled.span`
 const DynamicBoldText = styled.span`
   font-size: 24px;
   font-weight: bold;
-  font-style: normal;
-  font-family: Open Sans;
   text-align: left;
   line-height: 34px;
-  color: black;
   margin-right: 6px;
   height: 38px;
   display: inline-block;
