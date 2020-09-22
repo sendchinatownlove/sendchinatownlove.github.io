@@ -76,7 +76,7 @@ const CampaignListItem = (props: Props) => {
         <Description>
           {campaign.description}{' '}
           {distributor && (
-            <a href={distributor.website_url}>{distributor.name}</a>
+            <a href={distributor.website_url} target="_blank" rel="noopener noreferrer">Learn more about {distributor.name}.</a>
           )}
         </Description>
         <CampaignProgressBar
