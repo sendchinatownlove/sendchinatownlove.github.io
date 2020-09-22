@@ -17,9 +17,6 @@ interface TextProps {
   icon ?: boolean
 }
 
-interface IgButtonProps {
-  disabled ?: boolean
-}
 interface GiveawayData {
   weekly_giveaway_entries: String
   number_of_visits_left : undefined | number
@@ -89,12 +86,12 @@ const GiveawayPopover = (props: Props) => {
       </PopoverContent>}
       {
         props.showInstagram ?
-        <InstagramButton onClick={() => setShowInfo(!showInfo)}>
+        <InstagramButtonEnabled onClick={() => setShowInfo(!showInfo)}>
           <InstagramEnabled/>
-        </InstagramButton> :
-        <InstagramButton disabled={true}>
+        </InstagramButtonEnabled> :
+        <InstagramButtonDisabled>
           <InstagramDisabled/>
-        </InstagramButton>
+        </InstagramButtonDisabled>
       }
     </PopoverContainer>
   )
@@ -107,14 +104,21 @@ const PopoverContainer = styled.div`
   right: 0;
 `;
 
-const InstagramButton = styled.div`
-  position: absolute;
-  right: ${(props:IgButtonProps) => props.disabled ? '8.5px' : '4px'};
-  top: ${(props:IgButtonProps) => props.disabled ? '-3px': '1px'};
-  text-decoration: none;
-  color: black;
-  padding: 10px 15px;
-  font-size: 22px;
+const InstagramButtonBase = styled.div`
+position: absolute;
+text-decoration: none;
+color: black;
+padding: 10px 15px;
+font-size: 22px;
+`
+
+const InstagramButtonDisabled = styled(InstagramButtonBase)`
+  right: 8px;
+  top: -2px;
+`
+const InstagramButtonEnabled = styled(InstagramButtonBase)`
+  right: 4px;
+  top: 1px;
 `
 
 const PopoverContent = styled.div`
