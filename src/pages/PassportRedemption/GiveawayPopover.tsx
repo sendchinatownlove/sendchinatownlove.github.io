@@ -13,9 +13,6 @@ interface Props {
   contactId: string
 }
 
-interface TextProps {
-  icon ?: boolean
-}
 
 interface GiveawayData {
   weekly_giveaway_entries: String
@@ -23,23 +20,18 @@ interface GiveawayData {
 }
 
 const GiveawayPopover = (props: Props) => {
-  const [showInfo, setShowInfo] = useState(false);
+  const [showInfo, setShowInfo] = useState(true);
   const [giveawayData, setData] = useState<GiveawayData>({
     weekly_giveaway_entries: '',
     number_of_visits_left: undefined
   })
+
+  async function setGiveawayCount(contactId: string) {
+      const { data: allSellers } = await getAllParticipatingSellers();
+      const { data: { weekly_giveaway_entries, unique_seller_tickets } } = await getGiveawayTicketsForContact(contactId)
+      setData({weekly_giveaway_entries, number_of_visits_left: allSellers.length - unique_seller_tickets})
+  }
   useEffect(() => {
-    async function setGiveawayCount(contactId: string) {
-      try {
-        const qtySellers = await getAllParticipatingSellers()
-          .then((res) => res.data.length);
-        const { weekly_giveaway_entries, unique_seller_tickets } = await getGiveawayTicketsForContact(contactId)
-          .then((res) => res.data);
-        setData({weekly_giveaway_entries, number_of_visits_left: qtySellers - unique_seller_tickets})
-      } catch (err) {
-        console.error(err);
-      }
-    }
     if (props.showInstagram && showInfo) {
       setGiveawayCount(props.contactId)
     }
@@ -69,7 +61,7 @@ const GiveawayPopover = (props: Props) => {
               Vendor Tickets away from a Grand Prize Giveaway Entry
             </GeneralText>
           </InfoSentence> :
-          <InfoSentence icon={true}>
+          <InfoSentence>
             <IconWrap>
               <GreenCheck/>
             </IconWrap>
@@ -188,10 +180,7 @@ const InfoSentence = styled.p`
   font-size: 16px;
   text-align: left;
   line-height: 22px;
-
-  & + & {
-    margin-top: ${(props: TextProps) =>  props.icon ? '22px' : '17px'};
-  }
+  margin-bottom: 22px;
 `
 
 const SubText = styled.div`
@@ -203,7 +192,6 @@ const SubText = styled.div`
   line-height: 14px;
   text-align: center;
   letter-spacing: 0.05em;
-  color: #000000;
 `
 
 const ToggleClosedButton = styled.div`
