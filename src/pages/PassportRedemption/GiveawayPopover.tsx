@@ -37,6 +37,16 @@ const GiveawayPopover = (props: Props) => {
     }
   }, [props.showInstagram, showInfo, props.contactId])
   return (
+    <>
+      {
+        props.showInstagram ?
+        <InstagramButtonEnabled onClick={() => setShowInfo(!showInfo)}>
+          <InstagramEnabled/>
+        </InstagramButtonEnabled> :
+        <InstagramButtonDisabled>
+          <InstagramDisabled/>
+        </InstagramButtonDisabled>
+      }
     <PopoverContainer>
       {props.showInstagram && showInfo && <PopoverContent>
         <ToggleClosedButton onClick={() => setShowInfo(false)}>
@@ -76,16 +86,8 @@ const GiveawayPopover = (props: Props) => {
           CLOSE
         </CloseButton>
       </PopoverContent>}
-      {
-        props.showInstagram ?
-        <InstagramButtonEnabled onClick={() => setShowInfo(!showInfo)}>
-          <InstagramEnabled/>
-        </InstagramButtonEnabled> :
-        <InstagramButtonDisabled>
-          <InstagramDisabled/>
-        </InstagramButtonDisabled>
-      }
     </PopoverContainer>
+    </>
   )
 }
 
@@ -94,6 +96,7 @@ export default GiveawayPopover
 const PopoverContainer = styled.div`
   position: absolute;
   right: 0;
+  top: 10px;
 `;
 
 const InstagramButtonBase = styled.div`
@@ -105,12 +108,12 @@ font-size: 22px;
 `
 
 const InstagramButtonDisabled = styled(InstagramButtonBase)`
-  right: 8px;
-  top: -2px;
+  right: 9px;
+  top: 7px;
 `
 const InstagramButtonEnabled = styled(InstagramButtonBase)`
   right: 4px;
-  top: 1px;
+  top: 11px;
 `
 
 const PopoverContent = styled.div`
