@@ -81,7 +81,7 @@ const TicketRow = (props: Props) => {
               className="button--red-filled"
               onClick={props.sendEmail}
             >
-              Send to Email
+              Redeem
             </SendEmailButton>
           )}
           <StampRow>{!!props.stamps && createStamps(props.stamps)}</StampRow>
@@ -175,6 +175,7 @@ const SendEmailButton = styled(Button)`
   padding: 0;
   height: 25px;
   width: 300px;
+  top: 65px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
