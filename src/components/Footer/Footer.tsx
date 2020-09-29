@@ -13,27 +13,40 @@ interface Props {
 const FooterComponent = (props: Props) => {
   const { theme = 'none' } = props;
 
+  const socialMediaLinks = [
+    {
+      platform: 'facebook',
+      url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891'
+    },
+    { 
+      platform: 'instagram',
+      url: 'https://instagram.com/sendchinatownlove' 
+    },
+    {
+      platform: 'wechat',
+      url:
+        'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png'
+    },
+    {
+      platform: 'envelope',
+      url:
+        'mailto:hello@sendchinatownlove.com'
+    },
+  ];
+
   return (
     <Container theme={theme}>
       <a href="https://sendchinatownlove.com/">
         <Logo theme={theme} />
       </a>
       <LinksContainer>
-        <LinkItem>
-          <Icon href="https://www.facebook.com/Send-Chinatown-Love-100872288240891/">
-            <span className="fa fa-facebook" />
-          </Icon>
-        </LinkItem>
-        <LinkItem>
-          <Icon href="https://instagram.com/sendchinatownlove">
-            <span className="fa fa-instagram" />
-          </Icon>
-        </LinkItem>
-        <LinkItem>
-          <Icon href="mailto:hello@sendchinatownlove.com">
-            <span className="fa fa-envelope" />
-          </Icon>
-        </LinkItem>
+        {socialMediaLinks.map((social) => (
+          <LinkItem>
+            <Icon href={social.url} target="_blank">
+              <span className={`fa fa-${social.platform}`} />
+            </Icon>
+          </LinkItem>
+        ))}
       </LinksContainer>
     </Container>
   );
@@ -68,6 +81,7 @@ const Container = styled.footer`
 `;
 
 const LinksContainer = styled.div`
+  z-index: 5;
   padding: 0;
   list-style: none;
   display: flex;
@@ -79,6 +93,7 @@ const LinksContainer = styled.div`
     flex-direction: row;
   }
 `;
+
 const LinkItem = styled.div`
   padding: 0;
   display: flex;

@@ -1,9 +1,9 @@
 {
   "paymentProcessing": {
     "amount": {
-      "header": "Please select an amount or enter a custom amount",
-      "label1": "Select an amount",
-      "label2": "Or enter any amount",
+      "header": "100% of your support will go to the merchant toward their operating costs. Your transaction is secure, encrypted and directly goes to the owner for sustaining their business.",
+      "label1": "Select amount",
+      "label2": "Other:",
       "minimum": "Minimum",
       "maximum": "Maximum",
       "amount": "amount",
@@ -23,7 +23,7 @@
     },
     "languages": {
       "english": "ENG",
-      "chinese": "中文"
+      "chinese": "简体中文"
     }
   },
   "buyMeal": {
@@ -77,10 +77,10 @@
     "header": "Total Raised",
     "vouchers": "VOUCHERS",
     "donations": "DONATIONS",
-    "footer": "100% of all proceeds go to the businesses, and we cover the credit card processing fees."
+    "footer": "100% of all proceeds go to the businesses."
   },
   "descriptionBox": {
-    "header": "Meet our Target Merchant",
+    "header": "Our Target Merchant",
     "bullet1": "Asian immigrant-owned small businesses",
     "bullet2": "Not fluent in English, run cash-only establishments, and not tech-savvy",
     "bullet3": "Currently struggling to pay rent, utility bills and employee wages",
@@ -93,6 +93,7 @@
   "ownerPanel": {
     "donation": "Donation",
     "voucher": "Voucher",
+    "giftmeal": "Gift a meal",
     "extraInfo": {
       "Type": "Type",
       "Employees": "Employees",
@@ -110,5 +111,60 @@
     "header": "Learn about Gift-a-Meal",
     "description": "Double the impact of your donation by gifting meals from our merchants to local organizations that will distribute your gifted meals to our community in need.",
     "button": "GIFT MEAL"
+  },
+  "gamHome": {
+    "header": "Gift-a-Meal",
+    "description": "Double the impact of your donation by gifting meals from our merchants to local organizations that will distribute your gifted meals to our community in need.",
+    "subheading": {
+      "step1": "Step 1: ",
+      "step1Text": "Donate to Gift-a-Meal",
+      "step2": "Step 2: ",
+      "step2Text": "100% of donations still go directly to our merchants",
+      "step3": "Step 3: ",
+      "step3Text": "Vouchers are donated to our community partners",
+      "step4": "Step 4: ",
+      "step4Text": "Partners distribute to individuals in need"
+    },
+    "backButton": "Back to Merchants",
+    "giftButton": "Gift Meal",
+    "activeSection": "Active Gift-a-Meal",
+    "pastSection": "Past Gift-a-Meal",
+    "noCampaignsBox": {
+      "CTA": "No active campaigns? You can still donate!",
+      "description": "Meal donations here will automatically be applied to our next campaign."
+    },
+    "videoBox": {
+      "caption": "Watch how we bring impact to our communities through Gift-a-Meal."
+    },
+    "listItem": {
+      "viewButton": "Visit Merchant",
+      "giftButton": "Gift Meal"
+    }
+  },
+  "buyMealPool": {
+    "header": "Gift-a-Meal",
+    "description": {
+      "weAre": "We are partnering with",
+      "andRestaurants": "and restaurants who have been impacted by COVID-19 to gift meals to communities in need.",
+      "allItTakes": "All it takes is"
+    },
+    "prompt": "Please enter how many meals to gift",
+    "totalLabel": "Total: ",
+    "next": "Next"
+  },
+  "lyftReward": {
+    "mainBody1": "Thanks for participating in the Send Chinatown Love Food Crawl!",
+    "mainBody2": "In partnership with Lyft, we are giving away free Citi Bike Day Passes to help you get around Chinatown.",
+    "mainBody3": "Would you like a free Citi Bike Day Pass?",
+    "successBody1": "DAY PASS EMAIL SENT",
+    "successBody2": "Please check your email for your Citi Bike Day Pass code!",
+    "failureBody1": "OOPS!",
+    "failureBody2": "It looks like we ran out of the Citi Bike Day Pass codes. Stay tuned for more giveaways in the future!",
+    "yesButton": "YES",
+    "noButton": "NO",
+    "closeButton": "CLOSE",
+    "codeTitle": "Here is your Free Lyft Citi Bike Day Pass code",
+    "codeSubtitle": "TAP TO COPY",
+    "codeCopied": "COPIED"
   }
 }

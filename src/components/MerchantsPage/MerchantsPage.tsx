@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import { getSellers } from '../../utilities';
 import NavBar from './MerchantNavBar';
 import MerchantCard from './MerchantCard';
-import DescriptionBox from './DescriptionBox';
+import MerchantDescriptionBanner from './MerchantDescriptionBanner';
 import ContributionBar from './ContributionBar';
 import styles from './styles.module.scss';
 import { LoaderFillerContainer } from '../Loader';
-import DonationPoolBox from './DonationPool';
+import DonationHighlightBox from './DonationHighlightBox';
+import GiftMealHighlightBox from './GiftMealHighlightBox';
 import { getWebsiteImages } from '../../utilities/general/StoreImages';
 import { useTranslation } from 'react-i18next';
 import ReactPixel from 'react-facebook-pixel';
@@ -20,10 +21,6 @@ ReactPixel.trackCustom('MerchantsPageView', {});
 const MerchantsPage = (props: Props) => {
   const websiteImages = getWebsiteImages();
   const { t, i18n } = useTranslation();
-
-  const flyerZip: string =
-    process.env.PUBLIC_URL + './assets/send-chinatown-love-flyers.zip';
-
   const [sellers, setSellers] = useState<any | null>();
   const [filter, setFilter] = useState<any | null>();
   const [totalDonations, setDonations] = useState(0);
@@ -102,14 +99,14 @@ const MerchantsPage = (props: Props) => {
                   totalGiftCards={totalGiftCards}
                 />
               </div>
-              <div className={styles.ownerPanel}>
-                <DescriptionBox />
-              </div>
             </div>
           </div>
 
           <div className={styles.merchantInfoContainer}>
-            <DonationPoolBox />
+            <div className={styles.highlightsContainer}>
+              <DonationHighlightBox />
+              <GiftMealHighlightBox />
+            </div>
 
             <div className={styles.storeInfoContainer}>
               <NavBar filterStoreType={filterStoreType} />
@@ -124,18 +121,20 @@ const MerchantsPage = (props: Props) => {
             </div>
           </div>
 
+          <MerchantDescriptionBanner />
+
           <div className={styles.flyerContainer}>
             <p>
               {t('merchantsPage.flyerAsk') + ' '}
-              <a className={styles.redLink} download href={flyerZip}>
+              <a className={styles.redLink} href="https://www.sendchinatownlove.com/merchant-flyers.html">
                 {t('merchantsPage.flyerDownload')}
               </a>
             </p>
           </div>
         </>
       ) : (
-        <LoaderFillerContainer />
-      )}
+          <LoaderFillerContainer />
+        )}
     </div>
   );
 };

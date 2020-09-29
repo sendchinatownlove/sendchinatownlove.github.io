@@ -37,6 +37,7 @@
     "react-filterable-table": "^0.3.434",
     "react-ga": "^2.7.0",
     "react-i18next": "^11.7.0",
+    "react-markdown": "^4.3.1",
     "react-number-format": "^4.4.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",

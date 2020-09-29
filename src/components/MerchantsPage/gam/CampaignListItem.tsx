@@ -2,16 +2,26 @@ import React from 'react';
 import CampaignProgressBar from './CampaignProgressBar';
 import styled from 'styled-components';
 import { tabletScreens } from '../../../utilities/general/responsive';
+import { useTranslation } from 'react-i18next';
 import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
 import { getDistributor, getSeller } from '../../../utilities';
 import { useEffect, useState } from 'react';
+import Modal from '../../Modal';
+import { useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext/context';
+import { SET_MODAL_VIEW } from '../../../utilities/hooks/ModalPaymentContext/constants';
 
 interface Props {
   campaign: Campaign;
+  selectedCampaign: null | number;
+  setSelectedCampaign: Function;
 }
 
+const ModalBox: any = Modal;
+
 const CampaignListItem = (props: Props) => {
+  const { t } = useTranslation();
+
   const [distributor, setDistributor] = useState<any | null>();
   const [merchant, setMerchant] = useState<any | null>();
   const campaign = props.campaign;
@@ -36,6 +46,12 @@ const CampaignListItem = (props: Props) => {
   );
   const campaignImageUrls = campaign.gallery_image_urls;
 
+  const dispatch = useModalPaymentDispatch(); //provide null according to Bruce's new branch
+  const showModal = (event: any) => {
+    props.setSelectedCampaign(campaign.id);
+    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+  };
+
   return (
     <Container>
       <ColumnContainer>
@@ -44,6 +60,12 @@ const CampaignListItem = (props: Props) => {
             src={campaignImageUrls[0] ?? campaignDefaultImage}
             alt="campaign_image"
           />
+          <CampaignImageContainer>
+            <CampaignImage
+              src={campaignImageUrls[0] ?? campaignDefaultImage}
+              alt="campaign_image"
+            />
+          </CampaignImageContainer>
         )}
       </ColumnContainer>
       <ColumnContainer>
@@ -60,6 +82,9 @@ const CampaignListItem = (props: Props) => {
           <br></br>
           {distributor && (
             <a href={distributor.website_url}>{distributor.name}</a>
+          {campaign.description}{' '}
+          {distributor && (
+            <a href={distributor.website_url} target="_blank" rel="noopener noreferrer">Learn more about {distributor.name}.</a>
           )}
         </Description>
         <CampaignProgressBar
@@ -88,18 +113,36 @@ const CampaignListItem = (props: Props) => {
         {merchant && (
           <Button
             className="button--filled"
+        </ImagesContainer>
+        {merchant && (
+          <Button
+            className="button--outlined"
             onClick={(e) => {
               e.preventDefault();
               window.location.href = '/' + merchant.seller_id;
             }}
           >
             Visit merchant
+            {t('gamHome.listItem.viewButton')}
           </Button>
         )}
         {campaign.active && (
-          <Button className={'button--outlined'}>Gift a meal</Button>
+          <Button className={'button--filled'} onClick={showModal}>
+            {t('gamHome.listItem.giftButton')}
+          </Button>
         )}
       </ColumnContainer>
+
+      {campaign.active && props.selectedCampaign === campaign.id && (
+        <ModalBox
+          purchaseType={'buy_meal'}
+          sellerId={merchant.seller_id}
+          sellerName={merchant.name}
+          costPerMeal={campaign.price_per_meal / 100}
+          nonProfitLocationId={merchant.non_profit_location_id}
+          campaignId={campaign.id}
+        />
+      )}
     </Container>
   );
 };
@@ -109,12 +152,12 @@ export default CampaignListItem;
 const Container = styled.div`
   border-bottom: 1px solid #e5e5e5;
   display: flex;
-  max-height: 350px;
+  max-height: 800px;
   margin: 35px 0 55px;
   justify-content: space-between;
 
   @media (${tabletScreens}) {
-    max-height: 600px;
+    max-height: 1000px;
     flex-direction: column;
     margin: 0 17px;
     position: relative;
@@ -214,7 +257,7 @@ const Button = styled.div`
 
 const ImagesContainer = styled.span`
   align-self: right;
-  margin-bottom: 60px;
+  margin-bottom: 140px;
   align-self: flex-end;
 
   @media (${tabletScreens}) {
@@ -228,25 +271,26 @@ const ImagesContainer = styled.span`
   }
 `;
 
-const CampaignImage = styled.img`
+const CampaignImageContainer = styled.div`
   height: 240px;
   width: 240px;
 
   @media (${tabletScreens}) {
-    max-height: 100px;
+    height: 100px;
     width: 100%;
   }
+`;
+
+const CampaignImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 `;
 
 const DistributorImage = styled.img`
   max-height: 70px;
   max-width: 120px;
   margin-right: 15px;
-  vertical-align: middle;
-`;
-
-const MerchantImage = styled.img`
-  max-height: 70px;
-  max-width: 70px;
   vertical-align: middle;
 `;

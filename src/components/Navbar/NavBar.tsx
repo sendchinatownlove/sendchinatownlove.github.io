@@ -100,7 +100,9 @@ const NavBar = (props: Props) => {
     ) : (
       <NavLinksContainer compact={hamburgerOpen.toString()}>
         <HeaderContainer compact={hamburgerOpen.toString()}>
-          <Logo />
+          <a href="https://sendchinatownlove.com/">
+            <Logo />
+          </a>
           <Close onClick={(e) => props.setMenuOpen(false)} />
         </HeaderContainer>
         <NavLink
@@ -125,6 +127,12 @@ const NavBar = (props: Props) => {
         )}
         <NavLink
           compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/food-crawl.html"
+          i18nText="SCL FOOD CRAWL"
+          altText="SCL FOOD CRAWL"
+        />
+        <NavLink
+          compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/about.html"
           i18nText="OUR STORY"
           altText="OUR STORY"
@@ -146,7 +154,9 @@ const NavBar = (props: Props) => {
   };
   return (
     <HeaderContainer compact={hamburgerOpen.toString()}>
-      <Logo />
+      <a href="https://sendchinatownlove.com/">
+        <Logo />
+      </a>
       {hamburgerOpen ? (
         showCompactMenu()
       ) : (
@@ -170,6 +180,12 @@ const NavBar = (props: Props) => {
                {Drop()}
             </Dropdown>
           )}
+          <NavLink
+            compact={hamburgerOpen.toString()}
+            href="https://www.sendchinatownlove.com/food-crawl.html"
+            i18nText="SCL FOOD CRAWL"
+            altText="SCL FOOD CRAWL"
+          />
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/about.html"
@@ -407,3 +423,4 @@ const DropdownButton = styled.h1`
   position: absolute;
   left: 280px;
 `;
+

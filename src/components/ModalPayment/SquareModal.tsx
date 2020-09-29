@@ -25,6 +25,7 @@ type Props = {
   idempotencyKey: string;
   costPerMeal: number;
   nonProfitLocationId?: string;
+  campaignId?: string;
 };
 
 type ErrorMessage = {
@@ -39,6 +40,7 @@ const SquareModal = ({
   idempotencyKey,
   costPerMeal,
   nonProfitLocationId,
+  campaignId,
 }: Props) => {
   const { t } = useTranslation();
   const { amount } = useModalPaymentState();
@@ -99,7 +101,14 @@ const SquareModal = ({
     };
 
     setCanSubmit(false);
-    return makeSquarePayment(nonce, sellerId, payment, buyer, is_distribution)
+    return makeSquarePayment(
+      nonce,
+      sellerId,
+      payment,
+      buyer,
+      is_distribution,
+      campaignId
+    )
       .then((res) => {
         if (res.status === 200) {
           dispatch({ type: SET_MODAL_VIEW, payload: 2 });

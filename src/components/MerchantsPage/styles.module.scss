@@ -87,6 +87,7 @@
   }
 
   @include for-phone-only {
+    padding-top: 20px;
     justify-items: center;
     padding-bottom: 0;
     grid-template-columns: minmax(0, 100%);
@@ -138,9 +139,120 @@
   flex-direction: column;
   max-width: 1300px;
   margin: 0 auto;
+}
+
+.bannerContainer {
+  display: grid;
+  grid-template-rows: 1fr;
+  margin-bottom: 150px;
+  max-height: 240px;
 
   @include for-phone-only {
-    flex-direction: column-reverse;
+    max-height: 400px;
+  }
+}
+
+.bannerContentContainer {
+  // grid relative to parent container
+  grid-row: 1;
+  grid-column: 1;
+  z-index: 1;
+
+  // creating grid container for its own children components
+  display: grid;
+  grid-gap: 0 10%;
+  padding: 50px 0 0;
+  background-color: transparent;
+  height: 0px;
+  width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: 1350px) {
+    padding: 50px 35px 0;
+  }
+
+  @include for-tablet-landscape-up {
+    grid-template-columns: 2fr;
+    grid-template-rows: 2fr minmax(0, 250px);
+  }
+
+  @include for-phone-only {
+    height: 480px;
+    padding-top: 20px;
+    justify-items: center;
+    padding-bottom: 0;
+    grid-template-columns: minmax(0, 100%);
+  }
+}
+
+.bannerBackground {
+  grid-row: 1;
+  grid-column: 1;
+  background-color: #a8192e;
+  height: 240px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-top: 100px;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  @include for-phone-only {
+    margin-top: 20px;
+    height: 100%;
+  }
+}
+
+.bannerText {
+  grid-row: 1;
+  margin-top: 60px;
+  text-align: justify;
+
+  @include for-phone-only {
+    grid-row: 1;
+    grid-column: 1;
+    text-align: left;
+    margin-top: 0px;
+  }
+}
+
+.bannerHeaderText {
+  font-family: 'Open Sans', 'sans-serif';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 160%;
+  color: #ffffff;
+}
+
+.highlightsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 550px);
+  grid-gap: 2.5rem 6rem;
+  padding-top: 40px;
+  padding-bottom: 60px;
+
+  @media (max-width: 1350px) {
+    grid-gap: 2.5rem 5%;
+  }
+
+  @include for-phone-only {
+    grid-template-columns: repeat(auto-fill, 170px);
+    justify-content: center;
+    grid-gap: 10px;
+  }
+}
+
+.merchantIconImage {
+  grid-row: 1;
+  grid-column: 2;
+  margin-top: 100px;
+
+  @include for-phone-only {
+    grid-row: 2;
+    grid-column: 1;
+    margin-top: 0px;
   }
 }
 
