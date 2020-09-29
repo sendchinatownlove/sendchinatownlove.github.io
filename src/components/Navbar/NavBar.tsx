@@ -5,6 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import { Logo } from '../Logos';
 import { useTranslation } from 'react-i18next';
+import { AnyAaaaRecord } from 'dns';
 
 interface Props {
   menuOpen: boolean;
@@ -42,6 +43,29 @@ const NavBar = (props: Props) => {
   const handleDropdownOpen = () => {
     setDropdownOpen(!dropdownOpen);
   };
+
+  const dropdownOptions = [
+    { url: "/merchants", translation: "donate", external: false },
+    { url: "/gift-a-meal-home", translation: "gift-a-meal", external: false },
+    { url: "https://stickylocals.com/scl", translation: "sticky-locals-x-scl", external: true  },
+    { url: "https://www.friendofafriend.studio/shop", translation: "friendofafriend-studioxscl", external: true }
+  ]
+ 
+  const Drop = () => {
+    return (
+    dropdownOptions.map(option => {
+    const { url, translation, external } = option; 
+      return external ? (
+         <DropdownItem href={url}>
+           { t(`navBar.header.waystodonate.${translation}`) }
+         </DropdownItem>
+         ) : (
+         <DropdownItemLink to={url}>
+           { t(`navBar.header.waystodonate.${translation}`) }
+         </DropdownItemLink>
+          )
+    }))
+  }
 
   const isMerchantsPathActive = props.pageName === 'all';
 
@@ -93,21 +117,10 @@ const NavBar = (props: Props) => {
             <p>{t('navBar.header.merchants')}</p>
           </ReactNavLink>
           <DropdownButton onClick={handleDropdownOpen}>›</DropdownButton>
-        </DropdownButtonContainer>
+        </DropdownButtonContainer >
         {dropdownOpen && (
           <DropdownMobile>
-            <MobileItemLink to="/merchants">
-              {t('navBar.header.waystodonate.donate')}
-            </MobileItemLink>
-            <MobileItemLink to="/gift-a-meal-home">
-              {t('navBar.header.waystodonate.gift-a-meal')}
-            </MobileItemLink>
-            <MobileItem href="https://stickylocals.com/scl">
-              {t('navBar.header.waystodonate.sticky-locals-x-scl')}
-            </MobileItem>
-            <MobileItem href="https://www.friendofafriend.studio/shop">
-              {t('navBar.header.waystodonate.friendofafriend-studioxscl')}
-            </MobileItem>
+            {Drop()}
           </DropdownMobile>
         )}
         <NavLink
@@ -154,18 +167,7 @@ const NavBar = (props: Props) => {
           </ReactNavLink>
           {dropdownOpen && (
             <Dropdown onMouseLeave={() => setDropdownOpen(false)}>
-              <DropdownItemLink to="/merchants">
-                {t('navBar.header.waystodonate.donate')}
-              </DropdownItemLink>
-              <DropdownItemLink to="/gift-a-meal-home">
-                {t('navBar.header.waystodonate.gift-a-meal')}
-              </DropdownItemLink>
-              <DropdownItem href="https://stickylocals.com/scl">
-                {t('navBar.header.waystodonate.sticky-locals-x-scl')}
-              </DropdownItem>
-              <DropdownItem href="https://www.friendofafriend.studio/shop">
-                {t('navBar.header.waystodonate.friendofafriend-studioxscl')}
-              </DropdownItem>
+               {Drop()}
             </Dropdown>
           )}
           <NavLink
@@ -370,10 +372,11 @@ const DropdownMobile = styled.div`
   position: relative;
   bottom: 8px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   justify-content: space-around;
   align-items: center;
 `;
+
 const DropItem = styled.div`
   margin-top: 18px;
   margin-left: 28px;
@@ -383,21 +386,19 @@ const DropItem = styled.div`
   letter-spacing: 0.05em;
   text-decoration: none;
   color: black;
+  @media (max-width: 375px) {
+    color:grey;
+    margin: 0px;
+  }
 `;
+
 const DropdownItem = DropItem.withComponent('a');
 const DropdownItemLink = DropItem.withComponent(Link);
-const MobileItem = styled(DropdownItem)`
-  margin: 0px;
-  color: ${theme.navHoverColor};
-`;
-const MobileItemLink = styled(DropdownItemLink)`
-  margin: 0px;
-  color: ${theme.navHoverColor};
-`;
 const DropdownButtonContainer = styled.div`
   display: flex;
   position: relative;
   justify-content: center;
+  align-items:center;
 `;
 const DropdownButton = styled.h1`
   font-size: 45px;
@@ -405,5 +406,4 @@ const DropdownButton = styled.h1`
   transform: rotate(90deg);
   position: absolute;
   left: 280px;
-  top: 122px;
 `;
