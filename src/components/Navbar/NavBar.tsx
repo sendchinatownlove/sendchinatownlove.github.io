@@ -367,7 +367,7 @@ const Dropdown = styled.div`
 `;
 
 const DropdownMobile = styled.div`
-  width: 376px;
+  width: 100%;
   height: 164px;
   position: relative;
   bottom: 8px;
@@ -386,7 +386,7 @@ const DropItem = styled.div`
   letter-spacing: 0.05em;
   text-decoration: none;
   color: black;
-  @media (max-width: 375px) {
+  @media (max-width: 920px) {
     color:grey;
     margin: 0px;
   }
@@ -395,8 +395,8 @@ const DropItem = styled.div`
 const DropdownItem = DropItem.withComponent('a');
 const DropdownItemLink = DropItem.withComponent(Link);
 const DropdownButtonContainer = styled.div`
+  width;100%;  
   display: flex;
-  position: relative;
   justify-content: center;
   align-items:center;
 `;
