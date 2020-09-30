@@ -56,10 +56,6 @@ const CampaignListItem = (props: Props) => {
     <Container>
       <ColumnContainer>
         {campaignImageUrls && campaignImageUrls.length && (
-          <CampaignImage
-            src={campaignImageUrls[0] ?? campaignDefaultImage}
-            alt="campaign_image"
-          />
           <CampaignImageContainer>
             <CampaignImage
               src={campaignImageUrls[0] ?? campaignDefaultImage}
@@ -78,10 +74,6 @@ const CampaignListItem = (props: Props) => {
           </Name>
         )}
         <Description>
-          {campaign.description}
-          <br></br>
-          {distributor && (
-            <a href={distributor.website_url}>{distributor.name}</a>
           {campaign.description}{' '}
           {distributor && (
             <a href={distributor.website_url} target="_blank" rel="noopener noreferrer">Learn more about {distributor.name}.</a>
@@ -106,9 +98,6 @@ const CampaignListItem = (props: Props) => {
               />
             </a>
           )}
-           {merchant && (
-            <MerchantImage src={merchant.logo_image_url} alt="merchant_logo" />
-          )}
         </ImagesContainer>
         {merchant && (
           <Button
@@ -118,7 +107,6 @@ const CampaignListItem = (props: Props) => {
               window.location.href = '/' + merchant.seller_id;
             }}
           >
-            Visit merchant
             {t('gamHome.listItem.viewButton')}
           </Button>
         )}
