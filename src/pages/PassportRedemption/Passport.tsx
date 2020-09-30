@@ -198,11 +198,10 @@ const Passport = (props: Props) => {
                     ? 'INSTAGRAM FOR GIVEAWAY ADDED'
                     : '9/1/2020 - 9/30/2020'}
                 </SubHeader>
-                <GiveawayPopover showInstagram={showInstagram} contactId={id}/>
               </>
             )}
           </TitleRow>
-
+          <GiveawayPopover showInstagram={showInstagram} contactId={id}/>
           {showLyftRewardPromo && (
             <LyftRewardPromo
               yesClickHander={lyftRewardYesClickHandler}
