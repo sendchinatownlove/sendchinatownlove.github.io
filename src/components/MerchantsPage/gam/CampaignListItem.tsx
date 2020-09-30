@@ -106,9 +106,9 @@ const CampaignListItem = (props: Props) => {
               />
             </a>
           )}
-        {merchant && (
-          <Button
-            className="button--filled"
+           {merchant && (
+            <MerchantImage src={merchant.logo_image_url} alt="merchant_logo" />
+          )}
         </ImagesContainer>
         {merchant && (
           <Button
