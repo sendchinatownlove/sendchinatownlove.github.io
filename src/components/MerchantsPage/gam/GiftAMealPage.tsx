@@ -83,6 +83,7 @@ const GiftAMealPage = (props: Props) => {
         <VideoComponent videoId="FYlUOhzYlRM"></VideoComponent>
         <h5 className={styles.videoDescription}>
           Watch how we bring impact to our communties through Gift-a-Meal.
+        </h5>
         <VideoComponent videoId="3zbqvouILto"></VideoComponent>
         <h5 className={styles.videoDescription}>
           {t('gamHome.videoBox.caption')}
