@@ -5,7 +5,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import { Logo } from '../Logos';
 import { useTranslation } from 'react-i18next';
-import { AnyAaaaRecord } from 'dns';
 
 interface Props {
   menuOpen: boolean;
