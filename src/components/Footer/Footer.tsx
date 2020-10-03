@@ -41,7 +41,7 @@ const FooterComponent = (props: Props) => {
       </a>
       <LinksContainer>
         {socialMediaLinks.map((social) => (
-          <LinkItem>
+          <LinkItem key={social.platform}>
             <Icon href={social.url} target="_blank">
               <span className={`fa fa-${social.platform}`} />
             </Icon>
