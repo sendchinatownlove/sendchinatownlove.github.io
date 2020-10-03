@@ -52,27 +52,35 @@ const options = {
 const pixelId = process.env.REACT_APP_FB_PIXEL_ID!;
 ReactPixel.init(pixelId, undefined, options);
 
+enum Pages {
+  ALL = 'ALL',
+  ERROR = 'ERROR',
+  GIFTAMEAL = 'GIFTAMEAL',
+  MERCHANTS = 'MERCHANTS',
+  SELLER = 'SELLER',
+};
+
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const returnComponent = (child) => {
+  const returnComponent = (child: Pages) => {
     let component;
     switch (child) {
-      case 'all':
+      case Pages.ALL:
         component = <MerchantsPage menuOpen={menuOpen} />;
         break;
-      case 'merchants':
+      case Pages.MERCHANTS:
         component = <Redirect to="/all" />;
         break;
-      case 'seller':
+      case Pages.SELLER:
         component = <SellerPage menuOpen={menuOpen} />;
         break;
-      case 'giftameal':
+      case Pages.GIFTAMEAL:
         component = <GiftAMealPage menuOpen={menuOpen} />;
         break;
+      case Pages.ERROR:
       default:
         component = <ErrorPage menuOpen={menuOpen} />;
-        break;
     }
 
     return (
@@ -95,7 +103,7 @@ const App = () => {
     <Router history={history}>
       <Suspense fallback={<Loader isPage={true} />}>
         <Switch>
-          <Route path="/all">{returnComponent('all')}</Route>
+          <Route path="/all">{returnComponent(Pages.ALL)}</Route>
           <Route path="/voucher/:id">
             <VoucherProvider>
               <VoucherRedemptionPage />
@@ -132,11 +140,11 @@ const App = () => {
               return null;
             }}
           />
-          <Route path="/gift-a-meal-home">{returnComponent('giftameal')}</Route>
-          <Route path="/merchants">{returnComponent('merchants')}</Route>
-          <Route path="/:id">{returnComponent('seller')}</Route>
-          <Route path="/:id#story">{returnComponent('seller')}</Route>
-          <Route>{returnComponent('error')}</Route>
+          <Route path="/gift-a-meal-home">{returnComponent(Pages.GIFTAMEAL)}</Route>
+          <Route path="/merchants">{returnComponent(Pages.MERCHANTS)}</Route>
+          <Route path="/:id">{returnComponent(Pages.SELLER)}</Route>
+          <Route path="/:id#story">{returnComponent(Pages.SELLER)}</Route>
+          <Route>{returnComponent(Pages.ERROR)}</Route>
         </Switch>
       </Suspense>
     </Router>
