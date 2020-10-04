@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { Logo } from '../Logos';
+import { MAILTO_URL } from '../../consts';
 import '../../responsive.scss';
 
 export type Theme = 'dark' | 'none';
@@ -29,8 +31,7 @@ const FooterComponent = (props: Props) => {
     },
     {
       platform: 'envelope',
-      url:
-        'mailto:hello@sendchinatownlove.com'
+      url: MAILTO_URL
     },
   ];
 

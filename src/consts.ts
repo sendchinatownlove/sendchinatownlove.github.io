@@ -1,3 +1,5 @@
+const MAILTO_URL = 'mailto:hello@sendchinatownlove.com';
+
 const SquareErrors = {
   ADDRESS_VERIFICATION_FAILURE:
     'The card issuer declined the request because the postal code is invalid.',
@@ -56,4 +58,4 @@ const SquareErrors = {
 function hasKey<O>(obj: O, key: keyof any): key is keyof O {
   return key in obj;
 }
-export { SquareErrors, hasKey };
+export { MAILTO_URL, SquareErrors, hasKey };
