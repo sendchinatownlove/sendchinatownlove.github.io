@@ -1,5 +1,13 @@
 const MAILTO_URL = 'mailto:hello@sendchinatownlove.com';
 
+enum Page {
+  All,
+  Error,
+  GiftAMeal,
+  Merchants,
+  Seller,
+};
+
 const SquareErrors = {
   ADDRESS_VERIFICATION_FAILURE:
     'The card issuer declined the request because the postal code is invalid.',
@@ -55,7 +63,28 @@ const SquareErrors = {
     'This payment requires verification. For more information, see SCA Overview.',
 };
 
+interface SocialMediaLink {
+  platform: 'facebook' | 'instagram' | 'wechat',
+  url: string,
+};
+
+const socialMediaLinks: SocialMediaLink[] = [
+  {
+    platform: 'facebook',
+    url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891',
+  },
+  {
+    platform: 'instagram',
+    url: 'https://instagram.com/sendchinatownlove',
+  },
+  {
+    platform: 'wechat',
+    url: 'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png',
+  },
+];
+
 function hasKey<O>(obj: O, key: keyof any): key is keyof O {
   return key in obj;
 }
-export { MAILTO_URL, SquareErrors, hasKey };
+
+export { MAILTO_URL, Page, SquareErrors, hasKey, socialMediaLinks };
