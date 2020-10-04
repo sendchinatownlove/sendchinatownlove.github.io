@@ -1,15 +1,17 @@
 import { createBrowserHistory } from 'history';
-import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import React, { lazy, Suspense, useState } from 'react';
+import ReactPixel from 'react-facebook-pixel';
 import ReactGA from 'react-ga';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
+
+import Footer from '../Footer';
 import Loader from '../Loader';
 import Header from '../Navbar';
-import Footer from '../Footer';
 import ScrollToTop from '../ScrollToTop';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
-import ReactPixel from 'react-facebook-pixel';
-import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
+import { Page } from '../../consts';
 import ScreenName from '../../pages/PassportRedemption/ScreenName';
+import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
 
 const trackingId = process.env.REACT_APP_GA_TRACKING_ID!;
 
@@ -55,24 +57,24 @@ ReactPixel.init(pixelId, undefined, options);
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const returnComponent = (child) => {
+  const returnComponent = (child: Page) => {
     let component;
     switch (child) {
-      case 'all':
+      case Page.All:
         component = <MerchantsPage menuOpen={menuOpen} />;
         break;
-      case 'merchants':
+      case Page.Merchants:
         component = <Redirect to="/all" />;
         break;
-      case 'seller':
+      case Page.Seller:
         component = <SellerPage menuOpen={menuOpen} />;
         break;
-      case 'giftameal':
+      case Page.GiftAMeal:
         component = <GiftAMealPage menuOpen={menuOpen} />;
         break;
+      case Page.Error:
       default:
         component = <ErrorPage menuOpen={menuOpen} />;
-        break;
     }
 
     return (
@@ -81,8 +83,8 @@ const App = () => {
           <ScrollToTop />
           <Header
             menuOpen={menuOpen}
-            setMenuOpen={setMenuOpen}
             pageName={child}
+            setMenuOpen={setMenuOpen}
           />
           {component}
           <Footer menuOpen={menuOpen} />
@@ -95,7 +97,7 @@ const App = () => {
     <Router history={history}>
       <Suspense fallback={<Loader isPage={true} />}>
         <Switch>
-          <Route path="/all">{returnComponent('all')}</Route>
+          <Route path="/all">{returnComponent(Page.All)}</Route>
           <Route path="/voucher/:id">
             <VoucherProvider>
               <VoucherRedemptionPage />
@@ -132,11 +134,11 @@ const App = () => {
               return null;
             }}
           />
-          <Route path="/gift-a-meal-home">{returnComponent('giftameal')}</Route>
-          <Route path="/merchants">{returnComponent('merchants')}</Route>
-          <Route path="/:id">{returnComponent('seller')}</Route>
-          <Route path="/:id#story">{returnComponent('seller')}</Route>
-          <Route>{returnComponent('error')}</Route>
+          <Route path="/gift-a-meal-home">{returnComponent(Page.GiftAMeal)}</Route>
+          <Route path="/merchants">{returnComponent(Page.Merchants)}</Route>
+          <Route path="/:id">{returnComponent(Page.Seller)}</Route>
+          <Route path="/:id#story">{returnComponent(Page.Seller)}</Route>
+          <Route>{returnComponent(Page.Error)}</Route>
         </Switch>
       </Suspense>
     </Router>
