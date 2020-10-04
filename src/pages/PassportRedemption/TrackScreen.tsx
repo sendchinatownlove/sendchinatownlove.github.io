@@ -248,7 +248,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
         </ExternalLinks>
         <LinksContainer>
           {socialMediaLinks.map((social) => (
-            <Icon href={social.url} target="_blank">
+            <Icon href={social.url} key={social.platform} target="_blank">
               <span className={`fa fa-${social.platform}`} />
             </Icon>
           ))}
