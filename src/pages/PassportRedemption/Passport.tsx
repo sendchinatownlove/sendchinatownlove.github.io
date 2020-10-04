@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 
+import { CardContainer, TitleRow, Title, SubTitle, Button } from './style';
+import { MAILTO_URL } from '../../consts';
 import {
   getPassportTickets,
   getParticipatingSeller,
@@ -9,7 +11,6 @@ import {
   getContactInfo,
   createLyftReward,
 } from '../../utilities/api/interactionManager';
-import { CardContainer, TitleRow, Title, SubTitle, Button } from './style';
 
 import GiveawayPopover from './GiveawayPopover';
 import TicketRow from './TicketRow';
@@ -168,7 +169,7 @@ const Passport = (props: Props) => {
           Learn More
         </RedirectionLinks>
         <Logo src={CircleLogo} alt="scl-log" />
-        <RedirectionLinks href="mailto:hello@sendchinatownlove.com">
+        <RedirectionLinks href={MAILTO_URL}>
           contact us
         </RedirectionLinks>
       </HeaderContainer>

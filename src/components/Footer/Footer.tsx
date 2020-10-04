@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Logo } from '../Logos';
-import { socialMediaLinks } from '../../consts';
+import { MAILTO_URL, socialMediaLinks } from '../../consts';
 import '../../responsive.scss';
 
 export type Theme = 'dark' | 'none';
@@ -19,7 +19,7 @@ const FooterComponent = (props: Props) => {
     ...socialMediaLinks,
     {
       platform: 'envelope',
-      url: 'mailto:hello@sendchinatownlove.com',
+      url: MAILTO_URL,
     },
   ];
 

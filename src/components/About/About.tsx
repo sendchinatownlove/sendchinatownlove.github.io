@@ -1,6 +1,8 @@
 import * as React from 'react';
+
 import styles from './styles.module.scss';
 import Footer from '../Footer';
+import { MAILTO_URL } from '../../consts';
 
 const About: React.SFC = () => {
   return (
@@ -28,7 +30,7 @@ const About: React.SFC = () => {
               Chinatown. The time to help is now.
             </p>
           </div>
-          <a href="mailto:hello@sendchinatownlove.com">
+          <a href={MAILTO_URL}>
             <button className={styles.ctaButton}>Work with us</button>
           </a>
         </div>

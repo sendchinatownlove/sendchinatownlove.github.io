@@ -1,3 +1,5 @@
+const MAILTO_URL = 'mailto:hello@sendchinatownlove.com';
+
 enum Page {
   All,
   Error,
@@ -85,4 +87,4 @@ function hasKey<O>(obj: O, key: keyof any): key is keyof O {
   return key in obj;
 }
 
-export { Page, SquareErrors, hasKey, socialMediaLinks };
+export { MAILTO_URL, Page, SquareErrors, hasKey, socialMediaLinks };
