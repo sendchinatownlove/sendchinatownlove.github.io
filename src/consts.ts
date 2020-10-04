@@ -1,3 +1,11 @@
+enum Page {
+  All,
+  Error,
+  GiftAMeal,
+  Merchants,
+  Seller,
+};
+
 const SquareErrors = {
   ADDRESS_VERIFICATION_FAILURE:
     'The card issuer declined the request because the postal code is invalid.',
@@ -56,4 +64,5 @@ const SquareErrors = {
 function hasKey<O>(obj: O, key: keyof any): key is keyof O {
   return key in obj;
 }
-export { SquareErrors, hasKey };
+
+export { Page, SquareErrors, hasKey };
