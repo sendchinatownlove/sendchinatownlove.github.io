@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, Theme } from '@material-ui/core/styles';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { Title, SubTitle, Button, ErrorMessage } from './style';
-import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { socialMediaLinks } from '../../consts';
 import {
   getPassportEmailId,
   createPassportEmailId,
@@ -14,6 +14,7 @@ import {
   updateTicketContactId,
   getPassportTickets,
 } from '../../utilities/api/interactionManager';
+import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 import CrawlInfoIcon from './CrawlInfoIcon.png';
 import CircleLogo from './CircleLogo.png';
@@ -96,19 +97,6 @@ const Track = ({ setCurrentScreenView }: Props) => {
       border: '1px solid #dadde9',
     },
   }))(Tooltip);
-
-  const socialMediaLinks = [
-    {
-      platform: 'facebook',
-      url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891',
-    },
-    { platform: 'instagram', url: 'https://instagram.com/sendchinatownlove' },
-    {
-      platform: 'wechat',
-      url:
-        'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png',
-    },
-  ];
 
   return (
     <Container>

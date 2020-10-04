@@ -53,7 +53,28 @@ const SquareErrors = {
     'This payment requires verification. For more information, see SCA Overview.',
 };
 
+interface SocialMediaLink {
+  platform: 'facebook' | 'instagram' | 'wechat',
+  url: string,
+};
+
+const socialMediaLinks: SocialMediaLink[] = [
+  {
+    platform: 'facebook',
+    url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891',
+  },
+  {
+    platform: 'instagram',
+    url: 'https://instagram.com/sendchinatownlove',
+  },
+  {
+    platform: 'wechat',
+    url: 'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png',
+  },
+];
+
 function hasKey<O>(obj: O, key: keyof any): key is keyof O {
   return key in obj;
 }
-export { SquareErrors, hasKey };
+
+export { SquareErrors, hasKey, socialMediaLinks };
