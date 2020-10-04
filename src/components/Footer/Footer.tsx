@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { Logo } from '../Logos';
+import { socialMediaLinks } from '../../consts';
 import '../../responsive.scss';
 
 export type Theme = 'dark' | 'none';
@@ -13,24 +15,11 @@ interface Props {
 const FooterComponent = (props: Props) => {
   const { theme = 'none' } = props;
 
-  const socialMediaLinks = [
-    {
-      platform: 'facebook',
-      url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891'
-    },
-    { 
-      platform: 'instagram',
-      url: 'https://instagram.com/sendchinatownlove' 
-    },
-    {
-      platform: 'wechat',
-      url:
-        'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png'
-    },
+  const links = [
+    ...socialMediaLinks,
     {
       platform: 'envelope',
-      url:
-        'mailto:hello@sendchinatownlove.com'
+      url: 'mailto:hello@sendchinatownlove.com',
     },
   ];
 
@@ -40,7 +29,7 @@ const FooterComponent = (props: Props) => {
         <Logo theme={theme} />
       </a>
       <LinksContainer>
-        {socialMediaLinks.map((social) => (
+        {links.map((social) => (
           <LinkItem key={social.platform}>
             <Icon href={social.url} target="_blank">
               <span className={`fa fa-${social.platform}`} />
