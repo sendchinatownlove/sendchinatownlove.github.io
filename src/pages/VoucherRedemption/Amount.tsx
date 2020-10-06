@@ -58,11 +58,7 @@ const Amount = (props: Props) => {
       <AmountContainer>
         <BackButton onClick={backToLanding}>CANCEL</BackButton>
         <StoreFrontImage
-          src={
-            voucher.storeImage
-              ? process.env.REACT_APP_BASE_URL + voucher.storeImage
-              : defaultStoreFront
-          }
+          src={voucher.storeImage || defaultStoreFront}
           alt={`${voucher.storeName} Illustration`}
         />
         <BalanceContainer>
