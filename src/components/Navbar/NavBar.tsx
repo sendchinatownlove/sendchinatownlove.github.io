@@ -266,7 +266,7 @@ const NavLinksContainer = styled.div`
   
   `
       : `
-    max-width: 722px;
+    max-width: 876px;
     justify-content: flex-end;
   `}
 `;
