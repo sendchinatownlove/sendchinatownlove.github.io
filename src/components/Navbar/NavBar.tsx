@@ -25,6 +25,7 @@ interface CompactProps {
 const NavBar = (props: Props) => {
   const { t, i18n } = useTranslation();
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const changeLanguage = (e: MouseEvent, language: string) => {
     e.preventDefault();
@@ -40,6 +41,34 @@ const NavBar = (props: Props) => {
     }
   };
 
+  const handleDropdownOpen = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const dropdownOptions = [
+    { url: "/merchants", translation: "donate", external: false },
+    { url: "/gift-a-meal-home", translation: "gift-a-meal", external: false },
+    { url: "https://stickylocals.com/scl", translation: "sticky-locals-x-scl", external: true  },
+    { url: "https://www.friendofafriend.studio/shop", translation: "friendofafriend-studioxscl", external: true }
+  ]
+ 
+  const Drop = () => {
+    return (
+    dropdownOptions.map(option => {
+    const { url, translation, external } = option; 
+      return external ? (
+         <DropdownItem href={url}>
+           { t(`navBar.header.waystodonate.${translation}`) }
+         </DropdownItem>
+         ) : (
+         <DropdownItemLink to={url}>
+           { t(`navBar.header.waystodonate.${translation}`) }
+         </DropdownItemLink>
+          )
+    }))
+  }
+
+  
   const isMerchantsPathActive = props.pageName === Page.All;
 
   useEffect(() => {
@@ -84,13 +113,20 @@ const NavBar = (props: Props) => {
           i18nText="navBar.header.home"
           altText="HOME"
         />
-        <ReactNavLink
-          to="/merchants"
-          compact={hamburgerOpen.toString()}
-          onClick={(e) => props.setMenuOpen(false)}
-        >
-          {t('navBar.header.merchants')}
-        </ReactNavLink>
+        <DropdownButtonContainer>
+          <ReactNavLink
+            href="https://www.sendchinatownlove.com/ways-to-donate.html"
+            compact={hamburgerOpen.toString()}
+          >
+            <p>{t('navBar.header.merchants')}</p>
+          </ReactNavLink>
+          <DropdownButton onClick={handleDropdownOpen}>›</DropdownButton>
+        </DropdownButtonContainer >
+        {dropdownOpen && (
+          <DropdownMobile>
+            {Drop()}
+          </DropdownMobile>
+        )}
         <NavLink
           compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/food-crawl.html"
@@ -134,12 +170,18 @@ const NavBar = (props: Props) => {
             altText="HOME"
           />
           <ReactNavLink
-            to="/merchants"
+            href="https://www.sendchinatownlove.com/ways-to-donate.html"
+            onMouseEnter={() => setDropdownOpen(true)}
             compact={hamburgerOpen.toString()}
             active={isMerchantsPathActive.toString()}
           >
             {t('navBar.header.merchants')}
           </ReactNavLink>
+          {dropdownOpen && (
+            <Dropdown onMouseLeave={() => setDropdownOpen(false)}>
+               {Drop()}
+            </Dropdown>
+          )}
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/food-crawl.html"
@@ -181,6 +223,11 @@ const NavBar = (props: Props) => {
 
 export default NavBar;
 
+const theme = {
+  maxzIndex: '9999 !important',
+  navHoverColor: '#9e9e9e',
+};
+
 const HeaderContainer = styled.header`
   background-color: transparent;
   display: flex;
@@ -205,6 +252,7 @@ const NavLinksContainer = styled.div`
   flex-direction: ${(props: CompactProps) =>
     props.compact === 'true' ? `column` : 'row'};
   width: 100%;
+  position: relative;
   ${(props: CompactProps) =>
     props.compact === 'true'
       ? `
@@ -215,9 +263,10 @@ const NavLinksContainer = styled.div`
     right:0;
     background-color: white;
     z-index: 10;
+  
   `
       : `
-    max-width: 760px;
+    max-width: 722px;
     justify-content: flex-end;
   `}
 `;
@@ -243,7 +292,7 @@ const NavLinkStyle = styled.a`
     color: black;
   }
   :hover {
-    color: #9e9e9e;
+    color: ${theme.navHoverColor};
   }
 `;
 
@@ -278,14 +327,14 @@ const LanguageContainer = styled.div`
 const LanguageButton = styled.div`
   margin: 0;
   transition: 0.1s;
-  color: #9e9e9e;
+  color: ${theme.navHoverColor};
   font-size: 14px;
   cursor: pointer;
   font-weight: 200;
   :hover {
     color: #a7182d;
   }
-  width: 35px;
+  width: 36px;
 `;
 
 const LanguageSeparator = styled.div`
@@ -293,7 +342,7 @@ const LanguageSeparator = styled.div`
   margin-right: 8px;
 `;
 
-const ReactNavLink = styled(Link)`
+const ReactNavLink = styled.a`
   text-decoration: none;
   color: black;
   transition: 0.1s;
@@ -302,22 +351,78 @@ const ReactNavLink = styled(Link)`
     props.compact === 'true' &&
     `
     width: 100%;
-    margin: 16px auto;
     text-align: center;
   `}
   ${(props: CompactProps) =>
     props.active === 'true' &&
     `
-    border-bottom: 1px #9e9e9e solid;
+    border-bottom: 1px ${theme.navHoverColor}; solid;
     padding: 0 5px 3px;
   `} :link {
     color: black;
   }
   :hover {
-    color: #9e9e9e;
+    color: ${theme.navHoverColor};
   }
+  position: relative;
 `;
 
 const Close = styled(CloseIcon)`
   cursor: pointer;
 `;
+
+const Dropdown = styled.div`
+  z-index: ${theme.maxzIndex};
+  left: 138px;
+  top: 20px;
+  width: 212px;
+  height: 184px;
+  a:hover {
+    color: ${theme.navHoverColor};
+  }
+  background-color: #ffffff;
+  position: absolute;
+`;
+
+const DropdownMobile = styled.div`
+  width: 100%;
+  height: 164px;
+  position: relative;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const DropItem = styled.div`
+  margin-top: 18px;
+  margin-left: 28px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: black;
+  @media (max-width: 920px) {
+    color:grey;
+    margin: 0px;
+  }
+`;
+
+const DropdownItem = DropItem.withComponent('a');
+const DropdownItemLink = DropItem.withComponent(Link);
+const DropdownButtonContainer = styled.div`
+  width;100%;  
+  display: flex;
+  justify-content: center;
+  align-items:center;
+`;
+const DropdownButton = styled.h1`
+  font-size: 45px;
+  font-family: system-ui, serif;
+  transform: rotate(90deg);
+  position: absolute;
+  left: 280px;
+`;
+
