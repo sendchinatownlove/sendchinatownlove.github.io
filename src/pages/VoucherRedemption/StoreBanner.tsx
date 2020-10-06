@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { useVoucherState } from '../../utilities/hooks/VoucherContext';
+
 import Logo from '../../components/Logos/image/PureLogo.png';
+import LogoNoBorder from '../../components/Logos/image/PureLogoNoBorder.png';
 
 interface Props {}
 interface ContainerProps {
@@ -17,7 +20,7 @@ const StoreBanner = (props: Props) => {
     <Container isOnLandingPage={isOnLandingPage}>
       <OwnerImage
         isOnLandingPage={isOnLandingPage}
-        src={isOnLandingPage && voucher?.storeImage ? voucher.storeImage : Logo}
+        src={isOnLandingPage ? LogoNoBorder : Logo}
       />
       <Header isOnLandingPage={isOnLandingPage}>
         {isOnLandingPage && 'Welcome to '}
