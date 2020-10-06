@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import CircleLogo from './CircleLogo.png';
-import { LyftCode } from './LyftPromo';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
+
+import { LyftCode } from './LyftPromo';
+import { MAILTO_URL } from '../../consts';
 import {
   getLyftReward,
   redeemToken,
 } from '../../utilities/api/interactionManager';
+
+import CircleLogo from './CircleLogo.png';
 
 const LyftCodeScreen = () => {
   const { contact_id, token } = useParams();
@@ -37,7 +40,7 @@ const LyftCodeScreen = () => {
           Learn More
         </RedirectionLinks>
         <Logo src={CircleLogo} alt="scl-log" />
-        <RedirectionLinks href="mailto:hello@sendchinatownlove.com">
+        <RedirectionLinks href={MAILTO_URL}>
           contact us
         </RedirectionLinks>
       </HeaderContainer>

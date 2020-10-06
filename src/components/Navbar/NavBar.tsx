@@ -1,15 +1,17 @@
-import React, { useState, useEffect, MouseEvent } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import { Logo } from '../Logos';
+import React, { useState, useEffect, MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+import { Logo } from '../Logos';
+import { Page } from '../../consts'
 
 interface Props {
   menuOpen: boolean;
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  pageName: string;
+  pageName: Page;
 }
 
 interface CompactProps {
@@ -66,7 +68,8 @@ const NavBar = (props: Props) => {
     }))
   }
 
-  const isMerchantsPathActive = props.pageName === 'all';
+  
+  const isMerchantsPathActive = props.pageName === Page.All;
 
   useEffect(() => {
     if (window.innerWidth < 1025) {
