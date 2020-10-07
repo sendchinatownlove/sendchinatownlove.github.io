@@ -103,6 +103,7 @@ export type Campaign = {
   description: string;
   seller_id: string;
   distributor_id: string;
+  nonprofit_id: string;
   location_id: string;
   end_date: string;
   created_at: string;
