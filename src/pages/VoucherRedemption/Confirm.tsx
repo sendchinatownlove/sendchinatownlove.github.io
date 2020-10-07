@@ -77,10 +77,10 @@ const Amount = (props: Props) => {
   let moreInfoMarginLeft: string;
   if (voucher.single_use) {
     headerText = 'Are you ready to redeem your voucher?';
-    moreInfoMarginLeft = '200px';
+    moreInfoMarginLeft = '212px';
   } else {
     headerText = 'Complete Your Purchase';
-    moreInfoMarginLeft = '45px';
+    moreInfoMarginLeft = '57px';
   }
 
   return (
