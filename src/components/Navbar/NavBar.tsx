@@ -52,22 +52,19 @@ const NavBar = (props: Props) => {
     { url: "https://www.friendofafriend.studio/shop", translation: "friendofafriend-studioxscl", external: true }
   ]
  
-  const Drop = () => {
-    return (
+  const drop = 
     dropdownOptions.map(option => {
-    const { url, translation, external } = option; 
-      return external ? (
-         <DropdownItem href={url}>
-           { t(`navBar.header.waystodonate.${translation}`) }
-         </DropdownItem>
-         ) : (
-         <DropdownItemLink to={url}>
-           { t(`navBar.header.waystodonate.${translation}`) }
-         </DropdownItemLink>
-          )
-    }))
-  }
-
+      const { url, translation, external } = option; 
+        return external ? (
+            <DropdownItem href={url}>
+              { t(`navBar.header.waystodonate.${translation}`) }
+            </DropdownItem>
+            ) : (
+            <DropdownItemLink to={url} onClick={(e) => props.setMenuOpen(false)}>
+              { t(`navBar.header.waystodonate.${translation}`) }
+            </DropdownItemLink>
+            )
+    })
   
   const isMerchantsPathActive = props.pageName === Page.All;
 
@@ -124,7 +121,7 @@ const NavBar = (props: Props) => {
         </DropdownButtonContainer >
         {dropdownOpen && (
           <DropdownMobile>
-            {Drop()}
+            {drop}
           </DropdownMobile>
         )}
         <NavLink
@@ -179,7 +176,7 @@ const NavBar = (props: Props) => {
           </ReactNavLink>
           {dropdownOpen && (
             <Dropdown onMouseLeave={() => setDropdownOpen(false)}>
-               {Drop()}
+               {drop}
             </Dropdown>
           )}
           <NavLink
