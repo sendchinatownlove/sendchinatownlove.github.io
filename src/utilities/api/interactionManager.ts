@@ -14,6 +14,7 @@ import {
   sponsorSellers,
   locations,
   lyftRewards,
+  nonprofits,
 } from './endpoints';
 
 // Fix return typing
@@ -173,6 +174,13 @@ export const getCampaignsForMerchant = async (
 export const getDistributor = async (id: string): Promise<any> => {
   return await axios
     .get(distributors + id)
+    .then((res) => res)
+    .catch((err) => err);
+};
+
+export const getFiscalSponsor = async (id: string): Promise<any> => {
+  return await axios
+    .get(nonprofits + id)
     .then((res) => res)
     .catch((err) => err);
 };

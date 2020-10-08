@@ -138,7 +138,8 @@
     },
     "listItem": {
       "viewButton": "查看商家",
-      "giftButton": "捐爱心餐"
+      "giftButton": "捐爱心餐",
+      "fiscalSponsor": "Donations for this campaign are in partnership with {{sponsorName}}, a non-profit organization under IRS code 501(c)(3). Your donation will be tax deductible to the extent allowable by law."
     }
   },
   "buyMealPool": {
