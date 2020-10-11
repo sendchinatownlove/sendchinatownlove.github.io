@@ -1,21 +1,36 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { getSellers } from '../../utilities';
-import NavBar from './MerchantNavBar';
-import MerchantCard from './MerchantCard';
-import MerchantDescriptionBanner from './MerchantDescriptionBanner';
+import ReactPixel from 'react-facebook-pixel';
+import { useTranslation } from 'react-i18next';
+
 import ContributionBar from './ContributionBar';
-import styles from './styles.module.scss';
-import { LoaderFillerContainer } from '../Loader';
 import DonationHighlightBox from './DonationHighlightBox';
 import GiftMealHighlightBox from './GiftMealHighlightBox';
+import MerchantCard from './MerchantCard';
+import MerchantDescriptionBanner from './MerchantDescriptionBanner';
+import NavBar from './MerchantNavBar';
+import { LoaderFillerContainer } from '../Loader';
+import { getSellers } from '../../utilities';
+import type { BrowsePageSeller } from '../../utilities/api/types';
 import { getWebsiteImages } from '../../utilities/general/StoreImages';
-import { useTranslation } from 'react-i18next';
-import ReactPixel from 'react-facebook-pixel';
+
+import styles from './styles.module.scss';
 
 interface Props {
   menuOpen: boolean;
 }
+
+type ContributionsType = {
+  donationAmount: number,
+  giftCardAmount: number,
+  giftAMealAmount: number,
+}
+
+const INITIAL_CONTRIBUTIONS: ContributionsType = {
+  donationAmount: 0,
+  giftCardAmount: 0,
+  giftAMealAmount: 0,
+};
 
 ReactPixel.trackCustom('MerchantsPageView', {});
 const MerchantsPage = (props: Props) => {
@@ -23,26 +38,23 @@ const MerchantsPage = (props: Props) => {
   const { t, i18n } = useTranslation();
   const [sellers, setSellers] = useState<any | null>();
   const [filter, setFilter] = useState<any | null>();
-  const [totalDonations, setDonations] = useState(0);
-  const [totalGiftCards, setGiftCards] = useState(0);
+  const [contributions, setContributions] = useState<ContributionsType>(INITIAL_CONTRIBUTIONS);
 
-  const fetchData = async (lang?) => {
+  const fetchData = async (lang?: string) => {
     const { data } = await getSellers(lang);
 
-    const contributions = data.reduce(
-      (total: any, store: any) => {
-        return [
-          total[0] + store.donation_amount,
-          total[1] + store.gift_card_amount,
-        ];
-      },
-      [0, 0]
+    const tempContributions = data.reduce(
+      (totalContributions: ContributionsType, store: BrowsePageSeller) => ({
+        donationAmount: totalContributions.donationAmount + store.donation_amount,
+        giftCardAmount: totalContributions.giftCardAmount + store.gift_card_amount,
+        giftAMealAmount: totalContributions.giftAMealAmount + store.gift_a_meal_amount,
+      }),
+      INITIAL_CONTRIBUTIONS,
     );
 
     setSellers(data);
     setFilter(data);
-    setDonations(contributions[0]);
-    setGiftCards(contributions[1]);
+    setContributions(tempContributions);
   };
 
   useEffect(() => {
@@ -95,8 +107,11 @@ const MerchantsPage = (props: Props) => {
               {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
               <div className={styles.storeInfo}>
                 <ContributionBar
-                  totalDonations={totalDonations}
-                  totalGiftCards={totalGiftCards}
+                  donationsRaised={contributions.donationAmount}
+                  giftAMealAmountRaised={contributions.giftAMealAmount}
+                  // giftCardAmountRaised includes the amount from the gift-a-meal program.
+                  // Subtract out contributions.giftAMealAmount so we don't overcount.
+                  giftCardAmountRaised={contributions.giftCardAmount - contributions.giftAMealAmount}
                 />
               </div>
             </div>

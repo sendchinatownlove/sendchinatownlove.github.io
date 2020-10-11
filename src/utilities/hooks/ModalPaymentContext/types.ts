@@ -33,6 +33,7 @@ export const defaultState: ModalPaymentState = {
     num_donations: 0,
     num_gift_cards: 0,
     donation_amount: 0,
+    gift_a_meal_amount: 0,
     gift_card_amount: 0,
     progress_bar_color: '',
     summary: '',
