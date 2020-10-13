@@ -3,10 +3,7 @@ import axios from 'axios';
 import { renderIntegration } from '../utilities/testing/render';
 import VoucherPage from '../pages/VoucherRedemption';
 import { cleanup, fireEvent } from '@testing-library/react';
-import {
-  VoucherProvider,
-  VoucherTypes,
-} from '../utilities/hooks/VoucherContext';
+import { VoucherProvider } from '../utilities/hooks/VoucherContext';
 
 jest.mock('../utilities/api/interactionManager', () => {
   const shunfaBakeryResponse: any = {
@@ -126,17 +123,6 @@ const renderVoucher = () => (
 );
 
 describe('Voucher Page', () => {
-  let providerValues = {};
-  let VoucherProps = {};
-  let VoucherDispatcher = jest.fn();
-  beforeEach(() => {
-    VoucherProps = VoucherTypes.defaultState;
-    providerValues = {
-      VoucherProps,
-      VoucherDispatcher,
-    };
-  });
-
   test('should display VoucherPage with succesful GET /voucher request', async () => {
     const { findByText } = renderIntegration(
       '/voucher/123asdf',
@@ -165,7 +151,7 @@ describe('Voucher Page', () => {
   test('should display VoucherPage Amount prompt when clicking "Click to being to being reddeming your voucher"', async () => {
     const { findByText, findAllByText } = renderIntegration(
       '/voucher/123asdf',
-      renderVoucher(providerValues)
+      renderVoucher()
     );
 
     const NextButton = await findByText(
@@ -194,7 +180,7 @@ describe('Voucher Page', () => {
   test('should display VoucherPage Confirm prompt when clicking "Next"', async () => {
     const { findByText, findByPlaceholderText } = renderIntegration(
       '/voucher/123asdf',
-      renderVoucher(providerValues)
+      renderVoucher()
     );
 
     const NextButton = await findByText(
@@ -234,7 +220,7 @@ describe('Voucher Page', () => {
   test('should display VoucherPage Completed prompt', async () => {
     const { findByText, findByPlaceholderText } = renderIntegration(
       '/voucher/123asdf',
-      renderVoucher(providerValues)
+      renderVoucher()
     );
 
     const NextButton = await findByText(
