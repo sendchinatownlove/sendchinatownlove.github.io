@@ -73,18 +73,24 @@ const Amount = (props: Props) => {
 
   const backToAmount = (e) => setView(voucher.single_use ? 0 : 1);
 
+  let headerText: string;
+  let moreInfoMarginLeft: string;
+  if (voucher.single_use) {
+    headerText = 'Are you ready to redeem your voucher?';
+    moreInfoMarginLeft = '212px';
+  } else {
+    headerText = 'Complete Your Purchase';
+    moreInfoMarginLeft = '57px';
+  }
+
   return (
     <Container>
       <MainView>
         <StoreBanner />
         <BackButton onClick={backToAmount}>BACK</BackButton>
         <Header>
-          <HeaderText>
-            {voucher.single_use
-              ? 'Are you ready to redeem your voucher?'
-              : 'Complete Your Purchase'}
-          </HeaderText>
-          <MoreInfo showShadow={true} inverted={true} marginLeft="45px" />
+          <HeaderText>{headerText}</HeaderText>
+          <MoreInfo showShadow={true} inverted={true} marginLeft={moreInfoMarginLeft} />
         </Header>
         <BalanceContainer>
           {!voucher.single_use ? (
