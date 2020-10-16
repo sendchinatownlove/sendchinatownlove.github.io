@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import classnames from 'classnames';
 import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { BrowsePageSeller } from '../../utilities/api/types';
@@ -9,28 +8,33 @@ import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
-import { useTranslation } from 'react-i18next';
-import ReactPixel from 'react-facebook-pixel';
+import classnames from 'classnames';
+import chevron from './assets/chevron.svg';
+import DonationButtons from '../DonationButtons/DonationButtons';
+import OrderNow from './OrderNow';
+import { useMedia } from 'use-media';
+
 
 interface Props {
   seller: BrowsePageSeller;
+  sellerHours: any[]
+  isMerchantOpen: boolean
+  deliveryService: any[]
 }
 
-interface State {
-  show: boolean;
-  purchaseType: string;
-}
 
 const ModalBox: any = Modal;
 
-const OwnerPanel = ({ seller }: Props) => {
-  const { t } = useTranslation();
+const OwnerPanel = ({ seller, sellerHours, isMerchantOpen, deliveryService }: Props) => {
+  const showAltLayout = useMedia({minWidth: 900})
 
   const dispatch = useModalPaymentDispatch();
   const [purchaseType, setPurchaseType] = useState('');
   const [activeCampaign, setActiveCampaign] = useState<any | null>();
   const [pricePerMeal, setPricePerMeal] = useState(0);
   const [campaignId, setCampaignId] = useState('');
+  const [showOrderNow, toggleOrderNow] = useState(true);
+  const [showDonationsFooter, toggleDonationsFooter] = useState(false)
 
   const fetchData = async (seller_id: string) => {
     const campaigns = await getCampaignsForMerchant(seller_id);
@@ -49,142 +53,93 @@ const OwnerPanel = ({ seller }: Props) => {
     if (seller.seller_id) {
       fetchData(seller.seller_id);
     }
-    // eslint-disable-next-line
-  }, []);
+  }, [seller.seller_id]);
 
   const showModal = (event: any) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 0 });
     setPurchaseType(event.target.value);
   };
 
-  const donationClickHandler = (event: any) => {
-    ReactPixel.trackCustom('DonationButtonClick', {});
-    showModal(event);
-  };
-
-  const voucherClickHandler = (event: any) => {
-    ReactPixel.trackCustom('VoucherButtonClick', {});
-    showModal(event);
-  };
-
-  const giftMealClickHandler = (event: any) => {
-    ReactPixel.trackCustom('GiftMealButtonClick', {});
-    showModal(event);
-  };
-
-  const extraInfo = {
-    Type: seller.business_type,
-    Employees: seller.num_employees,
-    Founded: seller.founded_year,
-    Website: seller.website_url,
-    Menu: seller.menu_url,
-  };
-
-  const validExtraInfo = Object.keys(extraInfo).filter((current) => {
-    return extraInfo[current] != null;
-  });
-
   return (
-    <Container>
-      <figure className={styles.ownerContainer}>
-        <img
-          className={styles.ownerImage}
-          src={
-            seller?.owner_image_url ??
-            seller?.logo_image_url ??
-            defaultOwnerImage
-          }
-          alt={seller.owner_name}
-        />
-      </figure>
+    <>
+      {
+        showAltLayout
+          ? <Panel>
+              <div className={styles.subsection}>
+                <figure className={styles.ownerContainer}>
+                  <img
+                    className={styles.ownerImage}
+                    src={
+                      seller?.owner_image_url
+                        ? seller?.owner_image_url
+                        : defaultOwnerImage
+                    }
+                    alt={seller.owner_name}
+                  />
+                </figure>
 
-      <h2 className={styles.ownerName}>{seller.owner_name}</h2>
-      {seller.target_amount && (
-        <ProgressBar
-          amountRaised={seller.amount_raised}
-          targetAmount={seller.target_amount}
-          progressBarColor={seller.progress_bar_color}
-          numContributions={seller.num_contributions}
-          numDonations={seller.num_donations}
-          numGiftCards={seller.num_gift_cards}
-          donationAmount={seller.donation_amount}
-          giftCardAmount={seller.gift_card_amount}
-        />
-      )}
+                <h2 className={styles.ownerName}>{seller.owner_name}</h2>
+                {seller.target_amount && (
+                  <ProgressBar
+                    amountRaised={seller.amount_raised}
+                    targetAmount={seller.target_amount}
+                    progressBarColor={seller.progress_bar_color}
+                    numContributions={seller.num_contributions}
+                    numDonations={seller.num_donations}
+                    numGiftCards={seller.num_gift_cards}
+                    donationAmount={seller.donation_amount}
+                    giftCardAmount={seller.gift_card_amount}
+                  />
+                )}
+                <DonationButtons seller={seller} showModal={showModal} active={activeCampaign} />
+              </div>
 
-      <div className={styles.buttonContainer}>
-        {seller.accept_donations && (
-          <button
-            value="donation"
-            className={classnames(
-              styles.button,
-              seller.cost_per_meal && styles.moreThanTwoButtons,
-              'button--filled'
-            )}
-            onClick={donationClickHandler}
-          >
-            {t('ownerPanel.donation')}
-          </button>
-        )}
-        {seller.sell_gift_cards && (
-          <button
-            value="gift_card"
-            className={classnames(styles.button, 'button--outlined')}
-            onClick={voucherClickHandler}
-          >
-            {t('ownerPanel.voucher')}
-          </button>
-        )}
-        {activeCampaign && (
-          <button
-            value="buy_meal"
-            className={classnames(
-              styles.button,
-              !seller.sell_gift_cards && styles.moreThanTwoButtons,
-              'button--outlined'
-            )}
-            onClick={giftMealClickHandler}
-          >
-            {t('ownerPanel.giftmeal')}
-          </button>
-        )}
-      </div>
-      {validExtraInfo !== [] ? (
-        <div className={styles.extraInfoContainer}>
-          {validExtraInfo.map((current) => {
-            if (current === 'Website' || current === 'Menu') {
-              return (
-                <React.Fragment key={current}>
-                  <p key={current} className={styles.extraInfoKey}>
-                    {`${t('ownerPanel.extraInfo.' + current)}: `}
-                    <a
-                      className={styles.extraInfoValue}
-                      href={`${extraInfo[current]}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {current}
-                    </a>
-                  </p>
-                </React.Fragment>
-              );
-            } else {
-              return (
-                <React.Fragment key={current}>
-                  <p key={current} className={styles.extraInfoKey}>
-                    {`${t('ownerPanel.extraInfo.' + current)}: `}
-                    <span className={styles.extraInfoValue}>
-                      {extraInfo[current]}
-                    </span>
-                  </p>
-                </React.Fragment>
-              );
-            }
-          })}
-        </div>
-      ) : (
-        ''
-      )}
+              { showOrderNow &&
+                <OrderNow
+                showingAltLayout={false}
+                hours={sellerHours}
+                isMerchantOpen={isMerchantOpen}
+                deliveryService={deliveryService}
+                /> }
+              <button
+                className={classnames(styles['button__toggle-modal'],styles.button)}
+                onClick={() => toggleOrderNow(!showOrderNow)}
+              >
+                {
+                  showOrderNow
+                    ? 'Hide'
+                      : deliveryService.length > 1
+                      ? 'View Hours & Order'
+                        : 'View Hours'
+                }
+                <img src={chevron} alt="chevron" className={showOrderNow ? styles.flipped : styles.unflipped} />
+              </button>
+
+            </Panel>
+          : <Footer>
+              {showDonationsFooter ? <DonationButtons seller={seller} showModal={showModal} active={activeCampaign}/> : null}
+              <div className={styles.support}>
+                {seller.target_amount && (
+                  <ProgressBar
+                    amountRaised={seller.amount_raised}
+                    targetAmount={seller.target_amount}
+                    progressBarColor={seller.progress_bar_color}
+                    numContributions={seller.num_contributions}
+                    numDonations={seller.num_donations}
+                    numGiftCards={seller.num_gift_cards}
+                    donationAmount={seller.donation_amount}
+                    giftCardAmount={seller.gift_card_amount}
+                  />
+                )}
+                <button
+                  className={classnames(styles.button, 'button--filled', styles.support__button)}
+                  onClick={() => toggleDonationsFooter(!showDonationsFooter)}
+                >
+                  {showDonationsFooter ? 'Close' : 'Support'}
+                </button>
+              </div>
+          </Footer>
+      }
 
       <ModalBox
         purchaseType={purchaseType}
@@ -194,36 +149,38 @@ const OwnerPanel = ({ seller }: Props) => {
         nonProfitLocationId={seller.non_profit_location_id}
         campaignId={campaignId}
       />
-
-      <div className={styles.mapsContainer}>
-        {/* need to put in google API */}
-        {/* might need to use a react lib since it uses script tags */}
-        {/* https://www.npmjs.com/package/google-map-react */}
-      </div>
-    </Container>
+    </>
   );
 };
 
 export default OwnerPanel;
 
-const Container = styled.section`
-  display: flex;
-  width: 100%;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
-  flex-direction: column;
-  align-items: center;
-  padding: 18px 32px;
-
+const Panel = styled.section`
+  position: relative;
   order: 1;
   grid-row: 1;
+  width: 100%;
   @media (min-width: 900px) {
     position: sticky;
     top: 20px;
     order: 2;
     grid-column: 2;
   }
-  @media (max-width: 599px) {
-    font-size: 14px;
-    padding: 24px;
+`;
+
+const Footer = styled.section`
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 25px;
+  background-color: #fff;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+  @media (max-width: 600px) {
+    z-index: 6;
   }
 `;
