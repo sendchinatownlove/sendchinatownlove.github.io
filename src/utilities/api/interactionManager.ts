@@ -31,6 +31,15 @@ export const getSeller = async (id: string, lang?: string): Promise<any> => {
   });
 };
 
+// Fix return typing
+export const getSellerHours = async (id: string): Promise<any> => {
+  return await axios.get(sellers + id + '/open_hour');
+};
+
+export const getSellerDeliveryOptions = async (id: string): Promise<any> => {
+  return await axios.get(sellers + id + '/delivery_options');
+};
+
 // TODO(ArtyEmsee): add typing for stripe elements
 export const makePayment = async (
   stripe: any,
