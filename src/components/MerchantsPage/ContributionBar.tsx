@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -18,6 +18,21 @@ const ContributionBar = ({
   giftCardAmountRaised,
 }: Props) => {
   const { t } = useTranslation();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  const handleResize = useCallback(() => {
+    if (window.innerWidth < 641) {
+      setIsSmallScreen(true);
+    } else {
+      setIsSmallScreen(false);
+    }
+  }, [setIsSmallScreen]);
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [handleResize]);
 
   const totalRaised = useMemo(
     () => donationsRaised + giftAMealAmountRaised + giftCardAmountRaised,
@@ -32,6 +47,31 @@ const ContributionBar = ({
     }),
     [donationsRaised, giftAMealAmountRaised, giftCardAmountRaised, totalRaised],
   );
+
+  let textContainerStyle;
+  let voucherStyle;
+  let giftAMealStyle;
+  let donationsStyle;
+  if (isSmallScreen) {
+    textContainerStyle = {
+      flexDirection: 'column',
+    };
+  } else {
+    voucherStyle = {
+      // Keep at least 16px of space between voucher span and gift-a-meal span.
+      marginRight: '16px',
+    };
+    giftAMealStyle = {
+      position: 'absolute',
+      right: contributionBarProgress.donationsRaised <= 50
+        ? `${Math.max(contributionBarProgress.donationsRaised + (contributionBarProgress.giftAMealAmountRaised / 2), 20)}%`
+        : `${Math.min(contributionBarProgress.donationsRaised - (contributionBarProgress.giftAMealAmountRaised / 2), 80)}%`,
+    };
+    donationsStyle = {
+      // Keep at least 16px of space between gift-a-meal span and donation span.
+      marginLeft: '16px',
+    };
+  }
 
   return (
     <Container>
@@ -58,27 +98,16 @@ const ContributionBar = ({
           )`,
         }}
       />
-      <TextContainer>
-        <ContributionSpan style={{
-          // Keep at least 16px of space between voucher span and gift-a-meal span.
-          marginRight: '16px',
-        }}>
+      <TextContainer style={textContainerStyle}>
+        <ContributionSpan style={voucherStyle}>
             {t('contributionBar.vouchers')}:{' '}
             <b>${(Math.floor(giftCardAmountRaised) / 100).toLocaleString()}</b>
         </ContributionSpan>
-        <ContributionSpan style={{
-          position: 'absolute',
-          right: contributionBarProgress.donationsRaised < 50
-            ? `${contributionBarProgress.donationsRaised + (contributionBarProgress.giftAMealAmountRaised / 2)}%`
-            : `${contributionBarProgress.donationsRaised - (contributionBarProgress.giftAMealAmountRaised / 2)}%`,
-        }}>
+        <ContributionSpan style={giftAMealStyle}>
           {t('contributionBar.giftAMeal')}:{' '}
           <b>${(Math.floor(giftAMealAmountRaised) / 100).toLocaleString()}</b>
         </ContributionSpan>
-        <ContributionSpan style={{
-          // Keep at least 16px of space between gift-a-meal span and donation span.
-          marginLeft: '16px',
-        }}>
+        <ContributionSpan style={donationsStyle}>
           {t('contributionBar.donations')}:{' '}
           <b>${(Math.floor(donationsRaised) / 100).toLocaleString()}</b>
         </ContributionSpan>
