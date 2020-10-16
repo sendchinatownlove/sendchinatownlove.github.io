@@ -127,6 +127,7 @@ const SellerPage = (props: Props) => {
     fetchData(i18n.language);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18n.language]);
+
   return sellerData && !loading ? (
     <Container menuOpen={props.menuOpen}>
       {showAltLayout && <SellerName>{sellerData.name}</SellerName>}
@@ -166,7 +167,6 @@ const Container = styled.div`
   width: 90%;
   ${(props: Props) => props.menuOpen && 'display: none;'}
   `;
-// min-height: 1500px;
 
 const SellerName = styled.h1`
   font-weight: 600;
@@ -199,5 +199,3 @@ const ContentContainer = styled.div`
     padding-bottom: 25px;
   }
   `;
-
-  // min-height: 1200px;
