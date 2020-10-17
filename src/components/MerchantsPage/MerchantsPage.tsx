@@ -45,21 +45,21 @@ const MerchantsPage = (props: Props) => {
   const fetchData = async (lang?: string) => {
     const { data } = await getSellers(lang);
 
-    const tempContributions = data.reduce(
-      (totalContributions: ContributionsType, store: BrowsePageSeller) => ({
-        donationAmount:
-          totalContributions.donationAmount + store.donation_amount,
-        giftCardAmount:
-          totalContributions.giftCardAmount + store.gift_card_amount,
-        giftAMealAmount:
-          totalContributions.giftAMealAmount + store.gift_a_meal_amount,
-      }),
-      INITIAL_CONTRIBUTIONS
-    );
-
     setSellers(data);
     setFilter(data);
-    setContributions(tempContributions);
+    setContributions(
+      data.reduce(
+        (totalContributions: ContributionsType, store: BrowsePageSeller) => ({
+          donationAmount:
+            totalContributions.donationAmount + store.donation_amount,
+          giftCardAmount:
+            totalContributions.giftCardAmount + store.gift_card_amount,
+          giftAMealAmount:
+            totalContributions.giftAMealAmount + store.gift_a_meal_amount,
+        }),
+        INITIAL_CONTRIBUTIONS
+      )
+    );
   };
 
   useEffect(() => {
