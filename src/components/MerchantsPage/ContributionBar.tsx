@@ -52,7 +52,7 @@ const ContributionBar = ({
   let voucherStyle;
   let giftAMealStyle;
   let donationsStyle;
-  console.log(contributionBarProgress)
+  console.log(contributionBarProgress);
   if (isSmallScreen) {
     textContainerStyle = {
       flexDirection: 'column',
@@ -64,8 +64,20 @@ const ContributionBar = ({
     };
     giftAMealStyle = {
       position: 'absolute',
-      right: contributionBarProgress.donationsRaised <= 50 && `${Math.max(contributionBarProgress.donationsRaised + contributionBarProgress.giftAMealAmountRaised / 2, 20)}%`,
-      left: contributionBarProgress.donationsRaised > 50 && `${Math.min(contributionBarProgress.giftCardAmountRaised + contributionBarProgress.giftAMealAmountRaised / 2,80)}%`,
+      right:
+        contributionBarProgress.donationsRaised <= 50 &&
+        `${Math.max(
+          contributionBarProgress.donationsRaised +
+            contributionBarProgress.giftAMealAmountRaised / 2,
+          20
+        )}%`,
+      left:
+        contributionBarProgress.donationsRaised > 50 &&
+        `${Math.min(
+          contributionBarProgress.giftCardAmountRaised +
+            contributionBarProgress.giftAMealAmountRaised / 2,
+          80
+        )}%`,
     };
     donationsStyle = {
       // Keep at least 16px of space between gift-a-meal span and donation span.
