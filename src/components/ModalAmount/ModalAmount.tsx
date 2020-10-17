@@ -50,13 +50,13 @@ export const Modal = (props: Props) => {
 
   const headerText =
     props.purchaseType === 'donation'
-      ? t('purchase.donation')
-      : t('purchase.voucher');
+      ? t('purchase.donation', {seller: props.sellerName})
+      : t('purchase.voucher', {seller: props.sellerName});
 
   return (
     <ContentContainer id="donation-form" data-testid="Modal Amount">
       <Header>
-        {headerText} {props.sellerName}
+        {headerText}
       </Header>
 
       {props.sellerId === 'send-chinatown-love' && (

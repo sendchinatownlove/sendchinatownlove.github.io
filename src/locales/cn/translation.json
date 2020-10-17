@@ -43,8 +43,8 @@
     "meals": "meals"
   },
   "purchase": {
-    "donation": "捐款 - ",
-    "voucher": "购买礼品券 - "
+    "donation": "捐款 - {{seller}}",
+    "voucher": "购买礼品券 - {{seller}}"
   },
   "errorPage": {
     "body": {
