@@ -10,7 +10,7 @@ import Header from '../Navbar';
 import ScrollToTop from '../ScrollToTop';
 import { Page } from '../../consts';
 import ScreenName from '../../pages/PassportRedemption/ScreenName';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
 
 const trackingId = process.env.REACT_APP_GA_TRACKING_ID!;
@@ -78,18 +78,16 @@ const App = () => {
     }
 
     return (
-      <>
-        <ModalPaymentProvider>
-          <ScrollToTop />
-          <Header
-            menuOpen={menuOpen}
-            pageName={child}
-            setMenuOpen={setMenuOpen}
-          />
-          {component}
-          <Footer menuOpen={menuOpen} />
-        </ModalPaymentProvider>
-      </>
+      <ModalPaymentProvider>
+        <ScrollToTop />
+        <Header
+          menuOpen={menuOpen}
+          pageName={child}
+          setMenuOpen={setMenuOpen}
+        />
+        {component}
+        <Footer menuOpen={menuOpen} />
+      </ModalPaymentProvider>
     );
   };
 

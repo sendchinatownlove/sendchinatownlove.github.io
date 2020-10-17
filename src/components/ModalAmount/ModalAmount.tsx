@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-} from '../../utilities/hooks/ModalPaymentContext/context';
-import {
-  SET_MODAL_VIEW,
-  SET_AMOUNT,
-} from '../../utilities/hooks/ModalPaymentContext/constants';
+  ModalPaymentConstants
+} from '../../utilities/hooks/ModalPaymentContext';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
@@ -20,23 +17,23 @@ export interface Props {
 export const Modal = (props: Props) => {
   const { t } = useTranslation();
 
-  const { amount } = useModalPaymentState();
+  const { amount } = useModalPaymentState(null);
   const [isCustomAmount, setIsCustomAmount] = useState(true);
   const [selected, setSelected] = useState('');
-  const dispatch = useModalPaymentDispatch();
+  const dispatch = useModalPaymentDispatch(null);
   const minAmount = 5;
   const maxAmount = 10000;
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
     setSelected(text);
     setIsCustomAmount(customAmount);
-    dispatch({ type: SET_AMOUNT, payload: value });
+    dispatch({ type: ModalPaymentConstants.SET_AMOUNT, payload: value });
   };
 
   const openModal = (e: any) => {
     ReactPixel.trackCustom('PaymentNextButtonClick', { amount: amount });
     e.preventDefault();
-    dispatch({ type: SET_MODAL_VIEW, payload: 1 });
+    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 1 });
   };
 
   const validAmount = (value: string) => {

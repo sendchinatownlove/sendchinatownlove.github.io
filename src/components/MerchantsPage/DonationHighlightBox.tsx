@@ -1,7 +1,9 @@
 import * as React from 'react';
 import Modal from '../Modal';
-import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
-import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants 
+} from '../../utilities/hooks/ModalPaymentContext';
 import { smallScreens } from '../../utilities/general/responsive';
 import { getWebsiteImages } from '../../utilities/general/StoreImages';
 import { useTranslation } from 'react-i18next';
@@ -12,12 +14,12 @@ import { useWindowSize } from '../../utilities/hooks/helpers';
 const DonationHighlightBox = () => {
   const websiteImages = getWebsiteImages();
   const { t } = useTranslation();
-  const dispatch = useModalPaymentDispatch();
+  const dispatch = useModalPaymentDispatch(null);
 
   const openModal = (e: any) => {
     ReactPixel.trackCustom('DonationPoolButtonClick', {});
     e.preventDefault();
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 0 });
   };
 
   const containerClickHandler =

@@ -8,8 +8,7 @@ import { Campaign } from '../../../utilities/api/types';
 import { getDistributor, getSeller, getFiscalSponsor } from '../../../utilities';
 import { useEffect, useState } from 'react';
 import Modal from '../../Modal';
-import { useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../../utilities/hooks/ModalPaymentContext/constants';
+import { ModalPaymentConstants, useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext';
 
 interface Props {
   campaign: Campaign;
@@ -51,10 +50,10 @@ const CampaignListItem = (props: Props) => {
   );
   const campaignImageUrls = campaign.gallery_image_urls;
 
-  const dispatch = useModalPaymentDispatch(); //provide null according to Bruce's new branch
+  const dispatch = useModalPaymentDispatch(null); //provide null according to Bruce's new branch
   const showModal = (event: any) => {
     props.setSelectedCampaign(campaign.id);
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 0 });
   };
 
   return (
