@@ -109,7 +109,6 @@ const MerchantsPage = (props: Props) => {
                 <p>{t('merchantsPage.platformInfoDescription')}</p>
                 <p>{t('merchantsPage.platformInfoAction')}</p>
               </div>
-              {/* TODO: hook this part up to actual amounts - is there a total amount api call? */}
               <div className={styles.storeInfo}>
                 <ContributionBar
                   donationsRaised={contributions.donationAmount}
