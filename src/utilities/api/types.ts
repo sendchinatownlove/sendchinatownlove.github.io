@@ -76,6 +76,7 @@ export type BrowsePageSeller = {
   num_gift_cards: number;
   donation_amount: number;
   gift_card_amount: number;
+  gift_a_meal_amount: number;
   progress_bar_color: string;
   summary: string;
   story: string;

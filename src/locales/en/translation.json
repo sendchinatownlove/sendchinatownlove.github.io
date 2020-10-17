@@ -75,6 +75,7 @@
   },
   "contributionBar": {
     "header": "Total Raised",
+    "giftAMeal": "GIFT-A-MEAL",
     "vouchers": "VOUCHERS",
     "donations": "DONATIONS",
     "footer": "100% of all proceeds go to the businesses."
