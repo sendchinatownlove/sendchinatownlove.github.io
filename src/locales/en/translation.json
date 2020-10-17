@@ -43,8 +43,8 @@
     "meals": "meals"
   },
   "purchase": {
-    "donation": "Donation for ",
-    "voucher": "Voucher for "
+    "donation": "Donation for {{seller}}",
+    "voucher": "Voucher for {{seller}}"
   },
   "errorPage": {
     "body": {
