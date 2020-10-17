@@ -10,7 +10,7 @@ interface Props {
   giftCardAmountRaised: number;
 }
 
-const percentage = (raised: number, total: number) => raised / total * 100;
+const percentage = (raised: number, total: number) => (raised / total) * 100;
 
 const ContributionBar = ({
   donationsRaised,
@@ -36,7 +36,7 @@ const ContributionBar = ({
 
   const totalRaised = useMemo(
     () => donationsRaised + giftAMealAmountRaised + giftCardAmountRaised,
-    [donationsRaised, giftAMealAmountRaised, giftCardAmountRaised],
+    [donationsRaised, giftAMealAmountRaised, giftCardAmountRaised]
   );
 
   const contributionBarProgress = useMemo(
@@ -45,7 +45,7 @@ const ContributionBar = ({
       giftAMealAmountRaised: percentage(giftAMealAmountRaised, totalRaised),
       giftCardAmountRaised: percentage(giftCardAmountRaised, totalRaised),
     }),
-    [donationsRaised, giftAMealAmountRaised, giftCardAmountRaised, totalRaised],
+    [donationsRaised, giftAMealAmountRaised, giftCardAmountRaised, totalRaised]
   );
 
   let textContainerStyle;
@@ -63,9 +63,18 @@ const ContributionBar = ({
     };
     giftAMealStyle = {
       position: 'absolute',
-      right: contributionBarProgress.donationsRaised <= 50
-        ? `${Math.max(contributionBarProgress.donationsRaised + (contributionBarProgress.giftAMealAmountRaised / 2), 20)}%`
-        : `${Math.min(contributionBarProgress.donationsRaised - (contributionBarProgress.giftAMealAmountRaised / 2), 80)}%`,
+      right:
+        contributionBarProgress.donationsRaised <= 50
+          ? `${Math.max(
+              contributionBarProgress.donationsRaised +
+                contributionBarProgress.giftAMealAmountRaised / 2,
+              20
+            )}%`
+          : `${Math.min(
+              contributionBarProgress.donationsRaised -
+                contributionBarProgress.giftAMealAmountRaised / 2,
+              80
+            )}%`,
     };
     donationsStyle = {
       // Keep at least 16px of space between gift-a-meal span and donation span.
@@ -77,7 +86,7 @@ const ContributionBar = ({
     <Container>
       <Heading>
         {t('contributionBar.header')}: $
-        {Math.floor((totalRaised) / 100).toLocaleString()}
+        {Math.floor(totalRaised / 100).toLocaleString()}
       </Heading>
       <Contributions
         style={{
@@ -92,16 +101,22 @@ const ContributionBar = ({
             -45deg,
             #DD678A ${contributionBarProgress.donationsRaised}%,
             #3FD1D1 ${contributionBarProgress.donationsRaised}%,
-            #3FD1D1 ${contributionBarProgress.giftAMealAmountRaised + contributionBarProgress.donationsRaised}%,
-            #F6B917 ${contributionBarProgress.giftAMealAmountRaised + contributionBarProgress.donationsRaised}%,
+            #3FD1D1 ${
+              contributionBarProgress.giftAMealAmountRaised +
+              contributionBarProgress.donationsRaised
+            }%,
+            #F6B917 ${
+              contributionBarProgress.giftAMealAmountRaised +
+              contributionBarProgress.donationsRaised
+            }%,
             #F6B917 0%
           )`,
         }}
       />
       <TextContainer style={textContainerStyle}>
         <ContributionSpan style={voucherStyle}>
-            {t('contributionBar.vouchers')}:{' '}
-            <b>${(Math.floor(giftCardAmountRaised) / 100).toLocaleString()}</b>
+          {t('contributionBar.vouchers')}:{' '}
+          <b>${(Math.floor(giftCardAmountRaised) / 100).toLocaleString()}</b>
         </ContributionSpan>
         <ContributionSpan style={giftAMealStyle}>
           {t('contributionBar.giftAMeal')}:{' '}

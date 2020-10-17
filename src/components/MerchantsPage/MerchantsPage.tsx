@@ -21,10 +21,10 @@ interface Props {
 }
 
 type ContributionsType = {
-  donationAmount: number,
-  giftCardAmount: number,
-  giftAMealAmount: number,
-}
+  donationAmount: number;
+  giftCardAmount: number;
+  giftAMealAmount: number;
+};
 
 const INITIAL_CONTRIBUTIONS: ContributionsType = {
   donationAmount: 0,
@@ -38,18 +38,23 @@ const MerchantsPage = (props: Props) => {
   const { t, i18n } = useTranslation();
   const [sellers, setSellers] = useState<any | null>();
   const [filter, setFilter] = useState<any | null>();
-  const [contributions, setContributions] = useState<ContributionsType>(INITIAL_CONTRIBUTIONS);
+  const [contributions, setContributions] = useState<ContributionsType>(
+    INITIAL_CONTRIBUTIONS
+  );
 
   const fetchData = async (lang?: string) => {
     const { data } = await getSellers(lang);
 
     const tempContributions = data.reduce(
       (totalContributions: ContributionsType, store: BrowsePageSeller) => ({
-        donationAmount: totalContributions.donationAmount + store.donation_amount,
-        giftCardAmount: totalContributions.giftCardAmount + store.gift_card_amount,
-        giftAMealAmount: totalContributions.giftAMealAmount + store.gift_a_meal_amount,
+        donationAmount:
+          totalContributions.donationAmount + store.donation_amount,
+        giftCardAmount:
+          totalContributions.giftCardAmount + store.gift_card_amount,
+        giftAMealAmount:
+          totalContributions.giftAMealAmount + store.gift_a_meal_amount,
       }),
-      INITIAL_CONTRIBUTIONS,
+      INITIAL_CONTRIBUTIONS
     );
 
     setSellers(data);
@@ -111,7 +116,9 @@ const MerchantsPage = (props: Props) => {
                   giftAMealAmountRaised={contributions.giftAMealAmount}
                   // giftCardAmountRaised includes the amount from the gift-a-meal program.
                   // Subtract out contributions.giftAMealAmount so we don't overcount.
-                  giftCardAmountRaised={contributions.giftCardAmount - contributions.giftAMealAmount}
+                  giftCardAmountRaised={
+                    contributions.giftCardAmount - contributions.giftAMealAmount
+                  }
                 />
               </div>
             </div>
@@ -141,15 +148,18 @@ const MerchantsPage = (props: Props) => {
           <div className={styles.flyerContainer}>
             <p>
               {t('merchantsPage.flyerAsk') + ' '}
-              <a className={styles.redLink} href="https://www.sendchinatownlove.com/merchant-flyers.html">
+              <a
+                className={styles.redLink}
+                href="https://www.sendchinatownlove.com/merchant-flyers.html"
+              >
                 {t('merchantsPage.flyerDownload')}
               </a>
             </p>
           </div>
         </>
       ) : (
-          <LoaderFillerContainer />
-        )}
+        <LoaderFillerContainer />
+      )}
     </div>
   );
 };
