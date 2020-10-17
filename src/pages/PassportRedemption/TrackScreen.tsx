@@ -14,7 +14,7 @@ import {
   updateTicketContactId,
   getPassportTickets,
 } from '../../utilities/api/interactionManager';
-import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { ModalPaymentConstants } from '../../utilities/hooks/ModalPaymentContext';
 
 import CrawlInfoIcon from './CrawlInfoIcon.png';
 import CircleLogo from './CircleLogo.png';
@@ -121,9 +121,9 @@ const Track = ({ setCurrentScreenView }: Props) => {
                 setIsEmailValid(true);
               }}
               value={email}
-              pattern={EMAIL_REGEX.source}
+              pattern={ModalPaymentConstants.EMAIL_REGEX.source}
             />
-            {!!email && !EMAIL_REGEX.test(email) && (
+            {!!email && !ModalPaymentConstants.EMAIL_REGEX.test(email) && (
               <ErrorMessage>Please enter a valid email address.</ErrorMessage>
             )}
             {!isEmailValid && (
@@ -213,7 +213,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
           >
             Add Ticket
           </Button>
-          {!!email && EMAIL_REGEX.test(email) && (
+          {!!email && ModalPaymentConstants.EMAIL_REGEX.test(email) && (
             <Button
               className="linkButton"
               disabled={!email}

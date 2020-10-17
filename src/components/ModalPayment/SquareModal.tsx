@@ -11,11 +11,8 @@ import { makeSquarePayment, SquareLineItems, Buyer } from '../../utilities/api';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-} from '../../utilities/hooks/ModalPaymentContext/context';
-import {
-  EMAIL_REGEX,
-  SET_MODAL_VIEW,
-} from '../../utilities/hooks/ModalPaymentContext/constants';
+  ModalPaymentConstants
+} from '../../utilities/hooks/ModalPaymentContext';
 import styled from 'styled-components';
 
 type Props = {
@@ -43,8 +40,8 @@ const SquareModal = ({
   campaignId,
 }: Props) => {
   const { t } = useTranslation();
-  const { amount } = useModalPaymentState();
-  const dispatch = useModalPaymentDispatch();
+  const { amount } = useModalPaymentState(null);
+  const dispatch = useModalPaymentDispatch(null);
 
   const [isTermsChecked, setTermsChecked] = useState(false);
   const [isSubscriptionChecked, setSubscriptionChecked] = useState(true);
@@ -111,7 +108,7 @@ const SquareModal = ({
     )
       .then((res) => {
         if (res.status === 200) {
-          dispatch({ type: SET_MODAL_VIEW, payload: 2 });
+          dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 2 });
         }
       })
       .catch((err) => {
@@ -169,7 +166,7 @@ const SquareModal = ({
       isTermsChecked &&
         name.length > 0 &&
         email.length > 0 &&
-        EMAIL_REGEX.test(email)
+        ModalPaymentConstants.EMAIL_REGEX.test(email)
     );
   }, [isTermsChecked, name, email]);
 
@@ -224,7 +221,7 @@ const SquareModal = ({
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             placeholder="Email"
-            pattern={EMAIL_REGEX.source}
+            pattern={ModalPaymentConstants.EMAIL_REGEX.source}
             required
           />
         </RowFormat>
@@ -285,7 +282,7 @@ const SquareModal = ({
               <BackButton
                 type="button"
                 className={'modalButton--back'}
-                onClick={() => dispatch({ type: SET_MODAL_VIEW, payload: 0 })}
+                onClick={() => dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 0 })}
               >
                 ᐸ Back
               </BackButton>

@@ -5,14 +5,14 @@ import ErrorPage from '../404Page';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-} from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_SELLER_DATA } from '../../utilities/hooks/ModalPaymentContext/constants';
+  ModalPaymentConstants
+} from '../../utilities/hooks/ModalPaymentContext';
+
 import {
   getSeller,
   getSellerHours,
   getSellerDeliveryOptions,
 } from '../../utilities';
-
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
 import styled from 'styled-components';
@@ -111,7 +111,7 @@ const SellerPage = (props: Props) => {
     setLoading(true);
     const result = id && (await getSeller(id, lang));
     await dispatch({
-      type: SET_SELLER_DATA,
+      type: ModalPaymentConstants.SET_SELLER_DATA,
       payload: result.data,
     });
     const { data: hours } = await getSellerHours(id);
