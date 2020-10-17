@@ -52,7 +52,6 @@ const ContributionBar = ({
   let voucherStyle;
   let giftAMealStyle;
   let donationsStyle;
-  console.log(contributionBarProgress);
   if (isSmallScreen) {
     textContainerStyle = {
       flexDirection: 'column',
