@@ -12,6 +12,9 @@ interface Props {
 
 const percentage = (raised: number, total: number) => (raised / total) * 100;
 
+const centsToDollars = (cents: number) =>
+  Math.floor(cents / 100).toLocaleString();
+
 const ContributionBar = ({
   donationsRaised,
   giftAMealAmountRaised,
@@ -49,18 +52,12 @@ const ContributionBar = ({
   );
 
   let textContainerStyle;
-  let voucherStyle;
   let giftAMealStyle;
-  let donationsStyle;
   if (isSmallScreen) {
     textContainerStyle = {
       flexDirection: 'column',
     };
   } else {
-    voucherStyle = {
-      // Keep at least 16px of space between voucher span and gift-a-meal span.
-      marginRight: '16px',
-    };
     giftAMealStyle = {
       position: 'absolute',
       right:
@@ -73,22 +70,16 @@ const ContributionBar = ({
       left:
         contributionBarProgress.donationsRaised > 50 &&
         `${Math.min(
-          contributionBarProgress.giftCardAmountRaised +
-            contributionBarProgress.giftAMealAmountRaised / 2,
+          50 - contributionBarProgress.giftAMealAmountRaised / 2,
           80
         )}%`,
-    };
-    donationsStyle = {
-      // Keep at least 16px of space between gift-a-meal span and donation span.
-      marginLeft: '16px',
     };
   }
 
   return (
     <Container>
       <Heading>
-        {t('contributionBar.header')}: $
-        {Math.floor(totalRaised / 100).toLocaleString()}
+        {t('contributionBar.header')}: ${centsToDollars(totalRaised)}
       </Heading>
       <Contributions
         style={{
@@ -116,17 +107,17 @@ const ContributionBar = ({
         }}
       />
       <TextContainer style={textContainerStyle}>
-        <ContributionSpan style={voucherStyle}>
+        <ContributionSpan>
           {t('contributionBar.vouchers')}:{' '}
-          <b>${(Math.floor(giftCardAmountRaised) / 100).toLocaleString()}</b>
+          <b>${centsToDollars(giftCardAmountRaised)}</b>
         </ContributionSpan>
         <ContributionSpan style={giftAMealStyle}>
           {t('contributionBar.giftAMeal')}:{' '}
-          <b>${(Math.floor(giftAMealAmountRaised) / 100).toLocaleString()}</b>
+          <b>${centsToDollars(giftAMealAmountRaised)}</b>
         </ContributionSpan>
-        <ContributionSpan style={donationsStyle}>
+        <ContributionSpan>
           {t('contributionBar.donations')}:{' '}
-          <b>${(Math.floor(donationsRaised) / 100).toLocaleString()}</b>
+          <b>${centsToDollars(donationsRaised)}</b>
         </ContributionSpan>
       </TextContainer>
       <p>{t('contributionBar.footer')}</p>
