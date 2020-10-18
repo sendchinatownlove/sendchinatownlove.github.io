@@ -24,14 +24,12 @@ export const getSellers = async (lang?: string): Promise<any> => {
   });
 };
 
-// Fix return typing
 export const getSeller = async (id: string, lang?: string): Promise<any> => {
   return await axios.get(sellers + id, {
     params: { locale: localeFromLanguage(lang) },
   });
 };
 
-// Fix return typing
 export const getSellerHours = async (id: string): Promise<any> => {
   return await axios.get(sellers + id + '/open_hour');
 };

@@ -53,7 +53,7 @@ const OrderNow: FC<Props> = ({ showingAltLayout, hours, isMerchantOpen, delivery
                   <p className={styles.p__hours}>
                     <span className={classnames(styles['textHours--bold'],styles.textHours)}>{open_day}</span>
                     <span className={classnames(styles.textHours, styles.textHour__hours)}>
-                      {openTime + ' - ' + closeTime}
+                      {`${openTime} -  ${closeTime}`}
                     </span>
                   </p>
                 );
