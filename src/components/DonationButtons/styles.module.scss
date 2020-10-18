@@ -1,0 +1,48 @@
+@import '../../responsive';
+$container-size: 160px;
+
+.buttonContainer {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 30px;
+    column-gap: 20px;
+  
+    width: 100%;
+  
+    text-align: center;
+    margin: 15px 0px 25px 0px;
+  
+    @include for-phone-only {
+      row-gap: 27px;
+      column-gap: 12px;
+    }
+  }
+  
+  .button {
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  
+    &.moreThanTwoButtons,
+    &:only-child {
+      grid-column: 1 / span 2;
+    }
+  
+    &,
+    &:active,
+    &:hover {
+      min-width: auto;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  
+    @include for-phone-only {
+      font-size: 14px;
+    }
+  }

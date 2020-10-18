@@ -1,24 +1,30 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import { useState } from 'react';
 import classnames from 'classnames';
 import ReactMarkdown from "react-markdown";
 import styled from 'styled-components';
-import { Location, BrowsePageSeller } from '../../utilities';
+import { BrowsePageSeller } from '../../utilities';
 import StoreStory from '../StoreStory';
 import StoreMenu from './StoreMenuTab';
 import StoreGallery from './StoreGalleryTab';
 import StoreMerch from './StoreMerchTab';
 import StoreSocial from './StoreSocialTab';
+import StoreLocation from './StoreLocation';
 import styles from './styles.module.scss';
 import defaultStoreFront from './misc-store.png';
-import StoryStyles from '../StoreStory/styles.module.scss';
+import { useMedia } from 'use-media'
+import { OrderNow, MobileOrderWrapper } from '../OwnerPanel'
 
 type Props = {
   seller: BrowsePageSeller;
+  sellerHours: any[]
+  isMerchantOpen: boolean
+  deliveryService: any[]
 };
 
-export const StoreInfo: React.SFC<Props> = ({ seller }) => {
-  const { summary, story, cuisine_name, locations } = seller;
+export const StoreInfo: FC<Props> = ({ seller, sellerHours, isMerchantOpen, deliveryService }) => {
+  const showAltLayout = useMedia({maxWidth: 900})
+  const { summary, story, cuisine_name, locations, website_url } = seller;
 
   // modal functionality for menu and gallery tabs
   const [viewImage, setViewImage] = useState('');
@@ -59,28 +65,48 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
       {
         <img
           src={
-            seller.hero_image_url ? seller.hero_image_url : defaultStoreFront
+            seller.hero_image_url
+              ? seller.hero_image_url
+              : defaultStoreFront
           }
           alt={`${seller.name} Illustration`}
           className={styles.merchantIllustration}
         />
       }
+      {showAltLayout && <SellerName>{seller.name}</SellerName>}
 
-      <div className={styles.nationality}>{cuisine_name}</div>
-      <div>
-        {locations &&
-          locations.map((location: Location) => (
-            <React.Fragment key={location.seller_id}>
-              <div className={styles.address}>{location.address1}</div>
-              <div className={styles.address}>{location.address2}</div>
-              <div className={styles.address}>
-                {location.city}, {location.state} {location.zip_code}
-              </div>
-              <div className={styles.address}>{location.phone_number}</div>
-            </React.Fragment>
-          ))}
+      <div className={styles.section__information}>
+        <header className={styles.header__information}>
+          <div className={styles.wrapper__headerInfo}>
+            <div className={styles.nationality}>{cuisine_name}</div>
+            <StoreLocation locations={locations}/>
+            {website_url && <div className={styles.websiteUrl}>
+              <a href={`http://${website_url}`} target='_blank' rel='noopener noreferrer'className={styles.websiteUrl}>{website_url}</a>
+            </div>}
+          </div>
+          {
+            seller.owner_image_url && showAltLayout
+              ? <img
+                  className={styles.ownerImage}
+                  src={seller?.owner_image_url}
+                  alt={seller.owner_name}
+                />
+              : null
+          }
+        </header>
+
+        {showAltLayout && <MobileOrderWrapper hasDeliveryOptions={deliveryService.length > 1}>
+          <OrderNow
+            showingAltLayout={true}
+            hours={sellerHours}
+            deliveryService={deliveryService}
+            isMerchantOpen={isMerchantOpen}
+            />
+        </MobileOrderWrapper>
+        }
       </div>
-      <ReactMarkdown className={StoryStyles.container} source={summary}></ReactMarkdown>
+
+      {summary && <ReactMarkdown className={styles.container} source={summary}></ReactMarkdown>}
       <StoreNavContainer>
         {storeNavItems.map(
           (value) =>
@@ -104,20 +130,35 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
     </section>
   );
 };
-
+const SellerName = styled.h1`
+  font-weight: 600;
+  font-size: 32px;
+  max-width: 1200px;
+  margin: 22px auto 24px auto;
+  width: 100%;
+  line-height: 44px;
+  @media (min-width: 900px) {
+    width: 100%;
+    margin-top: 32px;
+  }
+`;
 const StoreNavContainer = styled.div`
   position: relative;
   overflow-y: scroll;
   white-space: nowrap;
   -ms-overflow-style: none;
 
-  padding-bottom: 27px;
-  margin-bottom: 40px;
+  padding-bottom: 14px;
+  margin: 56px 0 30px;
+
   border-bottom: 1px solid #dedede;
   width: 100%;
 
   &::-webkit-scrollbar {
     display: none;
+  }
+  @media (min-width: 900px) {
+    margin: 40px 0;
   }
 `;
 

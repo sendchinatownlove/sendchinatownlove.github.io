@@ -6,6 +6,9 @@
   @include for-tablet-landscape-up {
     margin-top: 0;
   }
+  @media (max-width: 900px) {
+    padding-bottom: 25px;
+  }
 }
 .merchantIllustrationContainer {
   background: #a9122a;
@@ -21,8 +24,8 @@
   font-size: smaller;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-top: 48px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
+  width: 100%;
 }
 
 p {
@@ -31,11 +34,66 @@ p {
   letter-spacing: 0.015em;
 }
 
+.container-address {
+  @include for-tablet-landscape-up {
+    width: 50%;
+  }
+}
+
 .address {
+  font-style: normal;
+  margin: 0;
+  padding: 0;
   font-size: 15px;
-  line-height: 1.75em;
+  line-height: 18px;
 }
 
 .storeDetails {
   margin-top: 50px;
+}
+
+.websiteUrl {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  text-decoration-line: underline;
+  margin-top: 12px;
+  color: #A8192E;
+  @include for-tablet-landscape-up {
+    width: 50%;
+    text-align: right;
+    margin-top: 0;
+  }
+}
+
+.header__information {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.wrapper__headerInfo {
+  width: 100%;
+  @include for-tablet-landscape-up {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+}
+
+.section__information {
+  position: relative;
+  min-height: 100px;
+  @include for-tablet-landscape-up {
+    margin-top: 40px;
+  }
+}
+
+.ownerImage {
+  @media (max-width: 900px) {
+      display: inline;
+      width: 85px;
+      height: 85px;
+      margin-right: 16px;
+  }
 }
