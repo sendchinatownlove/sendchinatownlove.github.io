@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Button } from './style';
-import { dateFormatter, makePlural } from '../../utilities/general/textFormatter';
+import {
+  dateFormatter,
+  makePlural,
+} from '../../utilities/general/textFormatter';
 
 interface Props {
   stamps: participatingSellerProps[];
@@ -35,7 +38,11 @@ const TicketRow = (props: Props) => {
 
   useEffect(() => {
     if (props.stamps.length === 3) {
-      if (props.stamps.every((stamp) => stamp.redeemed_at && stamp.sponsor_seller_id) ) {
+      if (
+        props.stamps.every(
+          (stamp) => stamp.redeemed_at && stamp.sponsor_seller_id
+        )
+      ) {
         const date = props.stamps[0].redeemed_at;
         setRedeemedOn(date);
         setStatus(RowStatuses.Redeemed);
@@ -55,7 +62,11 @@ const TicketRow = (props: Props) => {
         return `READY TO REDEEM`;
       default:
         if (props.stamps.length === 0) return;
-        return `${3 - props.stamps.length} MORE ${makePlural(3 - props.stamps.length, "stamp", 's')} UNTIL YOUR NEXT REWARD`;
+        return `${3 - props.stamps.length} MORE ${makePlural(
+          3 - props.stamps.length,
+          'stamp',
+          's'
+        )} UNTIL YOUR NEXT REWARD`;
     }
   };
 

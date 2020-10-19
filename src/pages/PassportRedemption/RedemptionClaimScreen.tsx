@@ -203,7 +203,7 @@ const Shadow = styled.div`
 const LogoImage = styled.img`
   width: 260px;
   border-radius: 20px;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
 `;
 
 const Footer = styled.div`

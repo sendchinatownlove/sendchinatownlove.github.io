@@ -6,7 +6,7 @@ enum Page {
   GiftAMeal,
   Merchants,
   Seller,
-};
+}
 
 const SquareErrors = {
   ADDRESS_VERIFICATION_FAILURE:
@@ -64,9 +64,9 @@ const SquareErrors = {
 };
 
 interface SocialMediaLink {
-  platform: 'facebook' | 'instagram' | 'wechat',
-  url: string,
-};
+  platform: 'facebook' | 'instagram' | 'wechat';
+  url: string;
+}
 
 const socialMediaLinks: SocialMediaLink[] = [
   {
@@ -79,7 +79,8 @@ const socialMediaLinks: SocialMediaLink[] = [
   },
   {
     platform: 'wechat',
-    url: 'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png',
+    url:
+      'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png',
   },
 ];
 

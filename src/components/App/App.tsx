@@ -134,7 +134,9 @@ const App = () => {
               return null;
             }}
           />
-          <Route path="/gift-a-meal-home">{returnComponent(Page.GiftAMeal)}</Route>
+          <Route path="/gift-a-meal-home">
+            {returnComponent(Page.GiftAMeal)}
+          </Route>
           <Route path="/merchants">{returnComponent(Page.Merchants)}</Route>
           <Route path="/:id">{returnComponent(Page.Seller)}</Route>
           <Route path="/:id#story">{returnComponent(Page.Seller)}</Route>
