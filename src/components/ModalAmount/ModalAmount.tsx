@@ -7,7 +7,10 @@ import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { formatCurrency } from '../../utilities/general/textFormatter'
 import { useTranslation } from 'react-i18next';
+import { Tooltip } from '@material-ui/core';
+import Help from '@material-ui/icons/Help';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
@@ -18,10 +21,15 @@ export interface Props {
 }
 
 export const Modal = (props: Props) => {
+  const CUSTOM_AMOUNT_MIN = 5_00;
+  const CUSTOM_AMOUNT_MAX = 10000_00;
+
   const { t } = useTranslation();
 
   const { amount } = useModalPaymentState();
+
   const [isCustomAmount, setIsCustomAmount] = useState(true);
+
   const [selected, setSelected] = useState('');
   const dispatch = useModalPaymentDispatch();
   const minAmount = 5;
@@ -72,7 +80,7 @@ export const Modal = (props: Props) => {
           {t('paymentProcessing.amount.label1')}
         </label>
         <br />
-        <SelectAmtContainer>
+        <SelectAmountContainer>
           {buttonAmounts.map((amount) => (
             <button
               key={amount.text}
@@ -89,7 +97,7 @@ export const Modal = (props: Props) => {
               {amount.text}
             </button>
           ))}
-        </SelectAmtContainer>
+        </SelectAmountContainer>
         <label htmlFor="custom-amount">
           {t('paymentProcessing.amount.label2')}
         </label>
@@ -131,6 +139,29 @@ export const Modal = (props: Props) => {
         )}
       </AmountContainer>
 
+      <hr />
+
+      <TransactionFeeContainer>
+        <p>
+          <b>{ t('paymentProcessing.amount.fees') }</b>
+          <span>
+            <Tooltip
+              title={ t('paymentProcessing.amount.feesTooltip').toString() }
+              placement="right"
+            >
+              <Help style={{ color: '#A6192E' }}/>
+            </Tooltip>
+          </span>
+        </p>
+        <p><b>{ formatCurrency(Number(3) * 100) }</b></p>
+      </TransactionFeeContainer>
+
+      <hr />
+
+      <TotalContainer>
+        <b>{ t('paymentProcessing.amount.total') }: <span>{ formatCurrency(Number(amount) * 100) }</span></b>
+      </TotalContainer>
+
       <NextButton
         type="button"
         className={'modalButton--filled'}
@@ -156,10 +187,10 @@ const ContentContainer = styled.form`
 const AmountContainer = styled.div`
   background-color: #f7f7f7;
   padding: 25px 35px;
-  margin-top: 30px;
+  margin: 30px;
 `;
 
-const SelectAmtContainer = styled.div`
+const SelectAmountContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -192,6 +223,25 @@ const CustomAmountInput = styled.input`
 
   @media (max-width: 450px) {
     width: 100%;
+  }
+`;
+
+const TransactionFeeContainer = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    font-size: 13px;
+    padding: 0;
+  }
+`;
+
+const TotalContainer = styled.label`
+  display: flex;
+  justify-content: flex-end;
+  span {
+    color: #DD678A;
   }
 `;
 

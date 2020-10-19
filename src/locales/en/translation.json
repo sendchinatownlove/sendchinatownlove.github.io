@@ -7,7 +7,10 @@
       "minimum": "Minimum",
       "maximum": "Maximum",
       "amount": "amount",
-      "submit": "Next"
+      "submit": "Next",
+      "fees": "Credit card processing fees",
+      "feesTooltip": "Credit card processing fees are added in order to help our small businesses get your full donation.",
+      "total": "Total amount"
     }
   },
   "navBar": {
