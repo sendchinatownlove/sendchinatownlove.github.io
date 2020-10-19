@@ -1,0 +1,25 @@
+@import '../../index.scss';
+
+.header {
+  background-color: $standard-red;
+  font-family: 'Open Sans';
+  font-style: normal;
+  padding: 80px 120px;
+
+  h1 {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: -0.01em;
+    line-height: 44px;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    color: white;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    line-height: 25px;
+    text-transform: uppercase;
+  }
+}
