@@ -1,44 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   useModalPaymentState,
-  useModalPaymentDispatch,
+  useModalPaymentDispatch
 } from '../../utilities/hooks/ModalPaymentContext/context';
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
+  SET_CUSTOM_INPUT
 } from '../../utilities/hooks/ModalPaymentContext/constants';
-import { formatCurrency } from '../../utilities/general/textFormatter'
+import { formatCurrency } from '../../utilities/general/textFormatter';
 import { useTranslation } from 'react-i18next';
 import { Tooltip } from '@material-ui/core';
 import Help from '@material-ui/icons/Help';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
+const validAmount = (value: string) => {
+  const r = /^[0-9.]+$/;
+  return r.test(value);
+};
+
+// @TODO: use fee builder from backend.
+const transactionFee = (amount: string) => {
+  if (!validAmount(amount)) return '';
+
+  const base = (Number(amount) * 0.029) + 0.30;
+  const roundedUp = Math.ceil(base * 100) / 100;
+  return roundedUp.toFixed(2);
+};
+
 export interface Props {
   purchaseType: string;
   sellerId: string;
   sellerName: string;
+  // TODO: add fees prop
 }
 
 export const Modal = (props: Props) => {
   const CUSTOM_AMOUNT_MIN = 5_00;
   const CUSTOM_AMOUNT_MAX = 10000_00;
+  const DEFAULT_AMOUNT = CUSTOM_AMOUNT_MIN;
 
   const { t } = useTranslation();
 
-  const { amount } = useModalPaymentState();
+  const { amount, customInput } = useModalPaymentState();
 
-  const [isCustomAmount, setIsCustomAmount] = useState(true);
+  const [selectedAmount, setSelectedAmount] = useState(amount);
+  const [feesAmount, setFeesAmount] = useState(transactionFee(amount));
+  // const [coveredAmount, setCoveredAmount] = useState(transactionFee(DEFAULT_AMOUNT));
+  const [isCustomInput, setIsCustomInput] = useState(customInput);
 
-  const [selected, setSelected] = useState('');
   const dispatch = useModalPaymentDispatch();
-  const minAmount = 5;
-  const maxAmount = 10000;
 
-  const handleAmount = (value: string, customAmount: boolean, text: string) => {
-    setSelected(text);
-    setIsCustomAmount(customAmount);
-    dispatch({ type: SET_AMOUNT, payload: value });
+  useEffect(() => {
+    dispatch({ type: SET_AMOUNT, payload: selectedAmount });
+  }, [selectedAmount, dispatch]);
+
+  useEffect(() => {
+    dispatch({ type: SET_CUSTOM_INPUT, payload: isCustomInput });
+  }, [isCustomInput, dispatch]);
+
+  const handleSelectAmount = (value: string) => {
+    setIsCustomInput(false);
+    setSelectedAmount(value);
+    // setFeesAmount(transactionFee(value));
+  };
+
+  const handleSelectCustom = (value: string) => {
+    setIsCustomInput(true);
+    setSelectedAmount(value);
+    // setFeesAmount(transactionFee(value));
   };
 
   const openModal = (e: any) => {
@@ -47,17 +78,7 @@ export const Modal = (props: Props) => {
     dispatch({ type: SET_MODAL_VIEW, payload: 1 });
   };
 
-  const validAmount = (value: string) => {
-    const r = /^[0-9]+$/;
-    return r.test(value);
-  };
-
-  const buttonAmounts = [
-    { value: '10', text: '$10' },
-    { value: '25', text: '$25' },
-    { value: '50', text: '$50' },
-    { value: '100', text: '$100' },
-  ];
+  const buttonAmounts = ['10', '25', '50', '100'];
 
   const headerText =
     props.purchaseType === 'donation'
@@ -67,76 +88,75 @@ export const Modal = (props: Props) => {
   return (
     <ContentContainer id="donation-form" data-testid="Modal Amount">
       <Header>
-        {headerText} {props.sellerName}
+        { `${ headerText } ${ props.sellerName }` }
       </Header>
-
-      {props.sellerId === 'send-chinatown-love' && (
-        <p>{t('donationPool.description2')}</p>
-      )}
-      <p>{t('paymentProcessing.amount.header')}</p>
+      {
+        props.sellerId === 'send-chinatown-love' &&
+        <p>{ t('donationPool.description2') }</p>
+      }
+      <p>{ t('paymentProcessing.amount.body1') }</p>
+      <p>{ t('paymentProcessing.amount.body2') }</p>
 
       <AmountContainer>
         <label htmlFor="select-amount">
-          {t('paymentProcessing.amount.label1')}
+          { t('paymentProcessing.amount.label1') }
         </label>
         <br />
         <SelectAmountContainer>
-          {buttonAmounts.map((amount) => (
+          { buttonAmounts.map((buttonAmount) => (
             <button
-              key={amount.text}
+              key={ buttonAmount }
               type="button"
               className={
-                selected === amount.text
+                selectedAmount === buttonAmount
                   ? 'modalButton--selected'
                   : 'modalButton--outlined'
               }
-              onClick={(e) => {
-                handleAmount(amount.value, false, amount.text);
-              }}
+              onClick={ (e) => handleSelectAmount(buttonAmount) }
             >
-              {amount.text}
+              { `$${ buttonAmount }` }
             </button>
-          ))}
+          )) }
         </SelectAmountContainer>
         <label htmlFor="custom-amount">
-          {t('paymentProcessing.amount.label2')}
+          { t('paymentProcessing.amount.label2') }
         </label>
         <br />
         <CustomAmountContainer>
           <CustomAmountInput
             name="custom-amount"
             type="number"
-            onFocus={(e) => handleAmount('', true, '')}
-            className={'modalInput--input'}
-            onChange={(e) => {
-              handleAmount(e.target.value, true, '');
-            }}
-            onKeyDown={(evt) =>
-              (evt.key === 'e' ||
-                evt.key === '+' ||
-                evt.key === '-' ||
-                evt.key === '.') &&
-              evt.preventDefault()
-            }
-            value={isCustomAmount ? amount : ''}
-            min="5"
-            max="10000"
+            onFocus={ (e) => setIsCustomInput(true) }
+            className={ 'modalInput--input' }
+            onChange={ (e) => handleSelectCustom(e.target.value) }
+            onKeyDown={ (e) => ['e', '+', '-', '.'].includes(e.key) && e.preventDefault() }
+            value={ selectedAmount }
+            min={ CUSTOM_AMOUNT_MIN }
+            max={ CUSTOM_AMOUNT_MAX }
           />
+          {
+            customInput &&
+            Number(amount) < CUSTOM_AMOUNT_MIN &&
+            <ErrorMessage>
+              {
+                `${ t('paymentProcessing.amount.minimum') }
+                ${ props.purchaseType === 'gift_card' ? 'voucher' : 'donation' }
+                ${ t('paymentProcessing.amount.amount') }: $${ CUSTOM_AMOUNT_MIN }`
+              }
+            </ErrorMessage>
+          }
+          {
+            customInput &&
+            Number(amount) > CUSTOM_AMOUNT_MAX &&
+            <ErrorMessage>
+              {
+                `${ t('paymentProcessing.amount.maximum') }
+                ${ props.purchaseType === 'gift_card' ? 'voucher' : 'donation' }
+                ${ t('paymentProcessing.amount.amount') }: $${ CUSTOM_AMOUNT_MAX }`
+              }
+            </ErrorMessage>
+          }
         </CustomAmountContainer>
-        {Number(amount) < minAmount && isCustomAmount && (
-          <ErrorMessage>
-            {t('paymentProcessing.amount.minimum')}{' '}
-            {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
-            {t('paymentProcessing.amount.amount')}: $5
-          </ErrorMessage>
-        )}
-        {Number(amount) > maxAmount && isCustomAmount && (
-          <ErrorMessage>
-            {t('paymentProcessing.amount.maximum')}{' '}
-            {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
-            {t('paymentProcessing.amount.amount')}: $10000
-          </ErrorMessage>
-        )}
       </AmountContainer>
 
       <hr />
@@ -149,11 +169,11 @@ export const Modal = (props: Props) => {
               title={ t('paymentProcessing.amount.feesTooltip').toString() }
               placement="right"
             >
-              <Help style={{ color: '#A6192E' }}/>
+              <Help style={ { color: '#A6192E' } } />
             </Tooltip>
           </span>
         </p>
-        <p><b>{ formatCurrency(Number(3) * 100) }</b></p>
+        <p><b>{ formatCurrency(feesAmount) }</b></p>
       </TransactionFeeContainer>
 
       <hr />
@@ -164,15 +184,15 @@ export const Modal = (props: Props) => {
 
       <NextButton
         type="button"
-        className={'modalButton--filled'}
-        onClick={openModal}
+        className={ 'modalButton--filled' }
+        onClick={ openModal }
         disabled={
-          Number(amount) < minAmount ||
-          Number(amount) > maxAmount ||
+          Number(amount) < CUSTOM_AMOUNT_MIN ||
+          Number(amount) > CUSTOM_AMOUNT_MAX ||
           !validAmount(amount)
         }
       >
-        {t('paymentProcessing.amount.submit')}
+        { t('paymentProcessing.amount.submit') }
       </NextButton>
     </ContentContainer>
   );
@@ -187,7 +207,7 @@ const ContentContainer = styled.form`
 const AmountContainer = styled.div`
   background-color: #f7f7f7;
   padding: 25px 35px;
-  margin: 30px;
+  margin: 30px 0;
 `;
 
 const SelectAmountContainer = styled.div`

@@ -1,6 +1,7 @@
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
+  SET_CUSTOM_INPUT,
   CLOSE_MODAL,
   CLEAR_FORMS,
   SET_SELLER_DATA,
@@ -21,6 +22,8 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
       return { ...state, modalView: payload };
     case SET_AMOUNT:
       return { ...state, amount: payload };
+    case SET_CUSTOM_INPUT:
+      return { ...state, customInput: payload };
     case SET_SELLER_DATA:
       return { ...state, sellerData: payload };
     case UPDATE_SELLER_DATA:

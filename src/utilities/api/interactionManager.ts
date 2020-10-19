@@ -129,6 +129,13 @@ export const makeSquarePayment = async (
     });
 };
 
+// @TODO: Coordinate with @Jeremy-Xue on endpoint URL
+export const getCampaignFees = async (id: string) =>
+  axios
+    .get(`${campaigns}${id}/fees`)
+    .then((res) => res)
+    .catch((err) => err);
+
 export const getVoucher = async (id: string) =>
   axios
     .get(vouchers + id)
