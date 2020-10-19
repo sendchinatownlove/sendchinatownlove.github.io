@@ -21,7 +21,7 @@ const DonationHighlightBox = () => {
   };
 
   const containerClickHandler =
-    useWindowSize().width < 600 ? openModal : () => { };
+    useWindowSize().width < 600 ? openModal : () => {};
 
   return (
     <Container>

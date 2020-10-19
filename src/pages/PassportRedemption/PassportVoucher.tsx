@@ -16,14 +16,20 @@ const Voucher = () => {
   let params = new URLSearchParams(useLocation().search);
 
   const convertToInt = (input: string | null) => {
-    if (input === null) { return null };
+    if (input === null) {
+      return null;
+    }
     const num = parseInt(input, 10);
     return num;
   };
 
   const convertToBool = (input: string | null) => {
-    if (input === 'true') { return true };
-    if (input === 'false') { return false };
+    if (input === 'true') {
+      return true;
+    }
+    if (input === 'false') {
+      return false;
+    }
     return null;
   };
 

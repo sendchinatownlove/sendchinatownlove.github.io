@@ -90,7 +90,11 @@ const Amount = (props: Props) => {
         <BackButton onClick={backToAmount}>BACK</BackButton>
         <Header>
           <HeaderText>{headerText}</HeaderText>
-          <MoreInfo showShadow={true} inverted={true} marginLeft={moreInfoMarginLeft} />
+          <MoreInfo
+            showShadow={true}
+            inverted={true}
+            marginLeft={moreInfoMarginLeft}
+          />
         </Header>
         <BalanceContainer>
           {!voucher.single_use ? (

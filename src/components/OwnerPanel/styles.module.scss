@@ -37,7 +37,7 @@ $container-size: 160px;
 
 .button {
   // NOTE: Open sans is default font for buttons?
-  font-family:'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
   font-size: 16px;
   letter-spacing: 0.05em;
@@ -59,8 +59,9 @@ $container-size: 160px;
     border: none;
     text-transform: uppercase;
 
-
-    &:hover, &:active, &:focus {
+    &:hover,
+    &:active,
+    &:focus {
       outline: none;
     }
 
@@ -74,7 +75,7 @@ $container-size: 160px;
     }
 
     @include for-tablet-landscape-up {
-      bottom: 0
+      bottom: 0;
     }
   }
   &__toggleMobileDropdown {
@@ -116,7 +117,7 @@ $container-size: 160px;
   overflow: hidden;
   margin-bottom: 20px;
 
-  @include for-tablet-landscape-up{
+  @include for-tablet-landscape-up {
     font-size: 14px;
     padding: 24px;
   }
@@ -206,7 +207,7 @@ $container-size: 160px;
 }
 
 .unflipped {
-  transform: rotate(0deg)
+  transform: rotate(0deg);
 }
 
 .support {
@@ -233,7 +234,7 @@ $container-size: 160px;
   }
 
   @media screen and (min-width: 900px) {
-    width :100%;
+    width: 100%;
   }
 }
 

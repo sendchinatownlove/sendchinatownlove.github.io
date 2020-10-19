@@ -24,7 +24,7 @@ const LyftCodeScreen = () => {
           if (res.status === 200 && res.data) {
             setCode(res.data.code);
           }
-        })
+        });
       }
     });
     // eslint-disable-next-line
@@ -40,15 +40,9 @@ const LyftCodeScreen = () => {
           Learn More
         </RedirectionLinks>
         <Logo src={CircleLogo} alt="scl-log" />
-        <RedirectionLinks href={MAILTO_URL}>
-          contact us
-        </RedirectionLinks>
+        <RedirectionLinks href={MAILTO_URL}>contact us</RedirectionLinks>
       </HeaderContainer>
-      <BodyContainer>
-        {code &&
-          <LyftCode code={code}></LyftCode>
-        }
-      </BodyContainer>
+      <BodyContainer>{code && <LyftCode code={code}></LyftCode>}</BodyContainer>
     </Container>
   );
 };

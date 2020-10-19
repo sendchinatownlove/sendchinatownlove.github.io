@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 interface Props {
   seller: BrowsePageSeller;
   showModal: Function;
-  active?: any
+  active?: any;
 }
 
 const DonationSection = ({ seller, showModal, active }: Props) => {
@@ -54,7 +54,8 @@ const DonationSection = ({ seller, showModal, active }: Props) => {
             {t('ownerPanel.voucher')}
           </button>
         )}
-        {active && <button
+        {active && (
+          <button
             value="buy_meal"
             className={classnames(
               styles.button,
@@ -65,7 +66,7 @@ const DonationSection = ({ seller, showModal, active }: Props) => {
           >
             {t('ownerPanel.giftmeal')}
           </button>
-          }
+        )}
       </div>
     </>
   );
