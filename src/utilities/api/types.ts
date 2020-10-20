@@ -26,12 +26,15 @@ export type Location = {
 };
 
 export type GiftCardDetails = {
-  gift_card_id: string;
-  receipt_id: string;
-  expiration: string;
   created_at: string;
-  updated_at: string;
+  email: string;
+  expiration: string | null;
+  latest_value: number;
+  name: string | null;
+  original_value: number;
   seller_gift_card_id: string;
+  single_use: boolean;
+  updated_at: string;
 };
 
 export type GiftCardAmounts = {
