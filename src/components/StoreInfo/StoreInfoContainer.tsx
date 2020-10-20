@@ -86,7 +86,7 @@ export const StoreInfo: FC<Props> = ({
             {website_url && (
               <div className={styles.websiteUrl}>
                 <a
-                  href={`http://${website_url}`}
+                  href={`${website_url}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.websiteUrl}
