@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderIntegration } from '../utilities/testing/render';
-import OwnerPanel from '../components/OwnerPanel';
+import { StoreInfo } from '../components/StoreInfo';
 import { fireEvent } from '@testing-library/react';
 
 const shunfaBakeryResponse: any = {
@@ -69,47 +69,45 @@ const shunfaBakeryResponse: any = {
   num_contributions: 187,
 };
 
-describe('Owner Panel', () => {
-  test('should display Owner Panel Display body values', async () => {
+describe('Store Info', () => {
+  test('should display Store Info body values', async () => {
     const { getByText, getByAltText } = renderIntegration(
       '/shunfa-bakery',
-      <OwnerPanel seller={shunfaBakeryResponse}/>
+      <StoreInfo seller={shunfaBakeryResponse}/>
     );
 
-    expect(getByText('Shunfa Bakery')).toBeInTheDocument();
-    expect(getByAltText('Shunfa Bakery')).toBeInTheDocument();
-
-    expect(getByText('$3,876 of $3,000')).toBeInTheDocument();
-    expect(getByText('187')).toBeInTheDocument();
-    expect(getByText('supporters')).toBeInTheDocument();
-
-    expect(getByText('Employees:')).toBeInTheDocument();
-    expect(getByText('Founded:')).toBeInTheDocument();
+    expect(getByAltText('Shunfa Bakery Illustration')).toBeInTheDocument();
+    expect(getByText('Bakery')).toBeInTheDocument();
+    expect(getByText('6221 Fort Hamilton Pkwy')).toBeInTheDocument();
+    expect(getByText('New York, NY 11219')).toBeInTheDocument();
+    expect(getByText('(718) 833-8884')).toBeInTheDocument();
+    expect(getByText('In the words of the owner Ping', {exact: false})).toBeInTheDocument();
   });
 
-  test('should show donation modal when donation button is touched', async () => {
-    const { getByRole, findByText } = renderIntegration(
+  test('should show gallery photos', async () => {
+    const { findAllByAltText, getByRole } = renderIntegration(
       '/shunfa-bakery',
-      <OwnerPanel seller={shunfaBakeryResponse}/>
+      <StoreInfo seller={shunfaBakeryResponse}/>
     );
 
-    const DonationButton = getByRole('button', {name: "Donation"});
-    fireEvent.click(DonationButton);
+    const GalleryButton = getByRole('button', {name: "gallery"});
+    fireEvent.click(GalleryButton);
 
-    const DonationHeader = await findByText("Donation for Shunfa Bakery");
-    expect(DonationHeader).toBeInTheDocument();
+    const MenuPhotos = await findAllByAltText("store-menu");
+    expect(MenuPhotos.length).toBe(5);
   });
 
-  test('should show voucher modal when voucher button is touched', async () => {
-    const { getByRole, findByText } = renderIntegration(
+  test('should show share information', async () => {
+    const { getByText, getByRole } = renderIntegration(
       '/shunfa-bakery',
-      <OwnerPanel seller={shunfaBakeryResponse}/>
+      <StoreInfo seller={shunfaBakeryResponse}/>
     );
 
-    const VoucherButton = getByRole('button', {name: "Voucher"});
-    fireEvent.click(VoucherButton);
-
-    const VoucherHeader = await findByText("Voucher for Shunfa Bakery");
-    expect(VoucherHeader).toBeInTheDocument();
+    const GalleryButton = getByRole('button', {name: "share"});
+    fireEvent.click(GalleryButton);
+    expect(getByText('FACEBOOK')).toBeInTheDocument();
+    expect(getByText('TWITTER')).toBeInTheDocument();
+    expect(getByText('EMAIL')).toBeInTheDocument();
+    expect(getByText('COPY TO CLIPBOARD')).toBeInTheDocument();
   });
 });
