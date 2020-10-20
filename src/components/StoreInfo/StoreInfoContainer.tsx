@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import classnames from 'classnames';
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import { Location, BrowsePageSeller } from '../../utilities';
 import StoreStory from '../StoreStory';
@@ -80,7 +80,10 @@ export const StoreInfo: React.SFC<Props> = ({ seller }) => {
             </React.Fragment>
           ))}
       </div>
-      <ReactMarkdown className={StoryStyles.container} source={summary}></ReactMarkdown>
+      <ReactMarkdown
+        className={StoryStyles.container}
+        source={summary}
+      ></ReactMarkdown>
       <StoreNavContainer>
         {storeNavItems.map(
           (value) =>

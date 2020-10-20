@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Modal from '../Modal';
-import { 
-  ModalPaymentConstants, 
-  useModalPaymentDispatch
+import {
+  ModalPaymentConstants,
+  useModalPaymentDispatch,
 } from '../../utilities/hooks/ModalPaymentContext';
 import {
   smallScreens,

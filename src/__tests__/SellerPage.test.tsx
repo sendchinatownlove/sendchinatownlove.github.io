@@ -90,14 +90,14 @@ describe('Seller Page', () => {
   test('should display SellerPage with succesful GET /seller request', async () => {
     const { findByTestId, findAllByText } = renderIntegration(
       '/shunfa-bakery',
-      <SellerPage menuOpen={false}/>
+      <SellerPage menuOpen={false} />
     );
 
     const StoryHeader = await findAllByText('Shunfa Bakery');
     const OwnerPanel = await findByTestId('owner-panel');
     const StoreInfo = await findByTestId('store-info');
 
-    console.log(StoryHeader)
+    console.log(StoryHeader);
     // expect(StoryHeader).toBeInTheDocument();
     expect(OwnerPanel).toBeInTheDocument();
     expect(StoreInfo).toBeInTheDocument();

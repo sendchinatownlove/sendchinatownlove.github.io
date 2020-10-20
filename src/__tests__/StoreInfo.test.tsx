@@ -73,7 +73,7 @@ describe('Store Info', () => {
   test('should display Store Info body values', async () => {
     const { getByText, getByAltText } = renderIntegration(
       '/shunfa-bakery',
-      <StoreInfo seller={shunfaBakeryResponse}/>
+      <StoreInfo seller={shunfaBakeryResponse} />
     );
 
     expect(getByAltText('Shunfa Bakery Illustration')).toBeInTheDocument();
@@ -81,29 +81,31 @@ describe('Store Info', () => {
     expect(getByText('6221 Fort Hamilton Pkwy')).toBeInTheDocument();
     expect(getByText('New York, NY 11219')).toBeInTheDocument();
     expect(getByText('(718) 833-8884')).toBeInTheDocument();
-    expect(getByText('In the words of the owner Ping', {exact: false})).toBeInTheDocument();
+    expect(
+      getByText('In the words of the owner Ping', { exact: false })
+    ).toBeInTheDocument();
   });
 
   test('should show gallery photos', async () => {
     const { findAllByAltText, getByRole } = renderIntegration(
       '/shunfa-bakery',
-      <StoreInfo seller={shunfaBakeryResponse}/>
+      <StoreInfo seller={shunfaBakeryResponse} />
     );
 
-    const GalleryButton = getByRole('button', {name: "gallery"});
+    const GalleryButton = getByRole('button', { name: 'gallery' });
     fireEvent.click(GalleryButton);
 
-    const MenuPhotos = await findAllByAltText("store-menu");
+    const MenuPhotos = await findAllByAltText('store-menu');
     expect(MenuPhotos.length).toBe(5);
   });
 
   test('should show share information', async () => {
     const { getByText, getByRole } = renderIntegration(
       '/shunfa-bakery',
-      <StoreInfo seller={shunfaBakeryResponse}/>
+      <StoreInfo seller={shunfaBakeryResponse} />
     );
 
-    const GalleryButton = getByRole('button', {name: "share"});
+    const GalleryButton = getByRole('button', { name: 'share' });
     fireEvent.click(GalleryButton);
     expect(getByText('FACEBOOK')).toBeInTheDocument();
     expect(getByText('TWITTER')).toBeInTheDocument();

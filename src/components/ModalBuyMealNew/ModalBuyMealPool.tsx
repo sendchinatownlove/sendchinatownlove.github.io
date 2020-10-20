@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-import { useModalPaymentDispatch, ModalPaymentConstants } from '../../utilities/hooks/ModalPaymentContext';
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+} from '../../utilities/hooks/ModalPaymentContext';
 import { useTranslation } from 'react-i18next';
 import CampaignInstructions from './CamapignInstructions';
 import ReactPixel from 'react-facebook-pixel';
@@ -24,7 +27,10 @@ export const Modal = (props: Props) => {
     const valueInt = parseInt(value, 10);
     setNumberOfMeals(isNaN(valueInt) ? 0 : valueInt);
     const totalMealPrice = valueInt * props.costPerMeal;
-    dispatch({ type: ModalPaymentConstants.SET_AMOUNT, payload: String(totalMealPrice) });
+    dispatch({
+      type: ModalPaymentConstants.SET_AMOUNT,
+      payload: String(totalMealPrice),
+    });
   };
 
   const openModal = (e: any) => {
@@ -40,7 +46,10 @@ export const Modal = (props: Props) => {
   const COST_LIMIT = 10000;
 
   useEffect(() => {
-    dispatch({ type: ModalPaymentConstants.SET_AMOUNT, payload: String(totalMealPrice) });
+    dispatch({
+      type: ModalPaymentConstants.SET_AMOUNT,
+      payload: String(totalMealPrice),
+    });
     // eslint-disable-next-line
   }, []);
 

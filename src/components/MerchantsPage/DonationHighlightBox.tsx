@@ -2,7 +2,7 @@ import * as React from 'react';
 import Modal from '../Modal';
 import {
   useModalPaymentDispatch,
-  ModalPaymentConstants 
+  ModalPaymentConstants,
 } from '../../utilities/hooks/ModalPaymentContext';
 import { smallScreens } from '../../utilities/general/responsive';
 import { getWebsiteImages } from '../../utilities/general/StoreImages';
@@ -23,7 +23,7 @@ const DonationHighlightBox = () => {
   };
 
   const containerClickHandler =
-    useWindowSize().width < 600 ? openModal : () => { };
+    useWindowSize().width < 600 ? openModal : () => {};
 
   return (
     <Container>

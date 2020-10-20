@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-  ModalPaymentConstants
+  ModalPaymentConstants,
 } from '../../utilities/hooks/ModalPaymentContext';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -50,14 +50,12 @@ export const Modal = (props: Props) => {
 
   const headerText =
     props.purchaseType === 'donation'
-      ? t('purchase.donation', {seller: props.sellerName})
-      : t('purchase.voucher', {seller: props.sellerName});
+      ? t('purchase.donation', { seller: props.sellerName })
+      : t('purchase.voucher', { seller: props.sellerName });
 
   return (
     <ContentContainer id="donation-form" data-testid="modal-amount">
-      <Header>
-        {headerText}
-      </Header>
+      <Header>{headerText}</Header>
 
       {props.sellerId === 'send-chinatown-love' && (
         <p>{t('donationPool.description2')}</p>

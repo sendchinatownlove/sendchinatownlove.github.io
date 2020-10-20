@@ -7,7 +7,7 @@ import ModalConfirmation from '../ModalConfirmation';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-  ModalPaymentConstants
+  ModalPaymentConstants,
 } from '../../utilities/hooks/ModalPaymentContext';
 import { getSeller } from '../../utilities';
 import styled from 'styled-components';
@@ -36,7 +36,10 @@ export const Modal = (props: Props) => {
     e.preventDefault();
     if (modalView === 2) {
       const { data } = props.sellerId && (await getSeller(props.sellerId));
-      dispatch({ type: ModalPaymentConstants.UPDATE_SELLER_DATA, payload: data.amount_raised });
+      dispatch({
+        type: ModalPaymentConstants.UPDATE_SELLER_DATA,
+        payload: data.amount_raised,
+      });
     }
     dispatch({ type: ModalPaymentConstants.CLOSE_MODAL, payload: undefined });
   };

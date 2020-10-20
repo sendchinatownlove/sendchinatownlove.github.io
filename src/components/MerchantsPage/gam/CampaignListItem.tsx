@@ -5,10 +5,17 @@ import { tabletScreens } from '../../../utilities/general/responsive';
 import { useTranslation } from 'react-i18next';
 import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
-import { getDistributor, getSeller, getFiscalSponsor } from '../../../utilities';
+import {
+  getDistributor,
+  getSeller,
+  getFiscalSponsor,
+} from '../../../utilities';
 import { useEffect, useState } from 'react';
 import Modal from '../../Modal';
-import { ModalPaymentConstants, useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext';
+import {
+  ModalPaymentConstants,
+  useModalPaymentDispatch,
+} from '../../../utilities/hooks/ModalPaymentContext';
 
 interface Props {
   campaign: Campaign;
@@ -81,7 +88,13 @@ const CampaignListItem = (props: Props) => {
           <Description>
             {campaign.description}{' '}
             {distributor && (
-              <a href={distributor.website_url} target="_blank" rel="noopener noreferrer">Learn more about {distributor.name}.</a>
+              <a
+                href={distributor.website_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Learn more about {distributor.name}.
+              </a>
             )}
           </Description>
           <CampaignProgressBar
@@ -122,24 +135,28 @@ const CampaignListItem = (props: Props) => {
           )}
         </ColumnContainer>
 
-        {
-          campaign.active && props.selectedCampaign === campaign.id && (
-            <ModalBox
-              purchaseType={'buy_meal'}
-              sellerId={merchant.seller_id}
-              sellerName={merchant.name}
-              costPerMeal={campaign.price_per_meal / 100}
-              nonProfitLocationId={merchant.non_profit_location_id}
-              campaignId={campaign.id}
-            />
-          )
-        }
-      </Container >
+        {campaign.active && props.selectedCampaign === campaign.id && (
+          <ModalBox
+            purchaseType={'buy_meal'}
+            sellerId={merchant.seller_id}
+            sellerName={merchant.name}
+            costPerMeal={campaign.price_per_meal / 100}
+            nonProfitLocationId={merchant.non_profit_location_id}
+            campaignId={campaign.id}
+          />
+        )}
+      </Container>
       {fiscalSponsor && (
         <FiscalSponsorContainer>
-          <FiscalSponsorImage src={fiscalSponsor.logo_image_url}></FiscalSponsorImage>
+          <FiscalSponsorImage
+            src={fiscalSponsor.logo_image_url}
+          ></FiscalSponsorImage>
           <FiscalSponsorDivider></FiscalSponsorDivider>
-          <FiscalSponsorText>{t('gamHome.listItem.fiscalSponsor', { sponsorName: fiscalSponsor.name })}</FiscalSponsorText>
+          <FiscalSponsorText>
+            {t('gamHome.listItem.fiscalSponsor', {
+              sponsorName: fiscalSponsor.name,
+            })}
+          </FiscalSponsorText>
         </FiscalSponsorContainer>
       )}
       <Border></Border>
@@ -322,7 +339,7 @@ const FiscalSponsorDivider = styled.div`
   margin-left: 18px;
   width: 5px;
   height: 37px;
-  background-color: #F5EC57;
+  background-color: #f5ec57;
 
   @media (${tabletScreens}) {
     height: 110px;
@@ -337,7 +354,7 @@ const FiscalSponsorText = styled.div`
   font-weight: normal;
   font-size: 13px;
   line-height: 18px;
-  color: #1E1E1E
+  color: #1e1e1e;
 `;
 
 const Border = styled.div`
