@@ -1,22 +1,55 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import styles from './styles.module.scss';
+import VoucherDashboard from './VoucherDashboard';
+import ErrorPage from '../../components/404Page';
+import Loader from '../../components/Loader/Loader';
+import {
+  getMerchantGiftCards,
+  getSeller,
+} from '../../utilities/api/interactionManager';
+import type { BrowsePageSeller, GiftCardDetails } from '../../utilities/api/types';
 
 const MerchantVoucherDashboardV2 = () => {
-  // TODO: API call to get gift card / seller info
-  return (
-    <div>
-      <div className={styles.header}>
-        <div className={styles.titleContainer}>
-          <h1>Voucher Tracker 礼品券记录</h1>
-          <h2>[shop name]</h2>
-        </div>
-        {/* TODO: Refresh and print buttons */}
-      </div>
-      {/* TODO: Stats bar (last updated, # active vouchers, total balance) */}
-      {/* TODO: Table */}
-    </div>
-  );
+  const [error, setError] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [seller, setSeller] = useState<BrowsePageSeller | null>(null);
+  const [giftCards, setGiftCards] = useState<GiftCardDetails[]>([]);
+
+  const params = useHistory();
+  const urlParams = (params.location.pathname.match(
+    /\/[^/]+/g
+  ) as string[]).map((param) => param.replace('/', ''));
+  const sellerId = urlParams[0];
+  const secretId = urlParams[2];
+
+  const fetchData = useCallback(async () => {
+    try {
+      const sellerResponse = await getSeller(sellerId);
+      const giftCardResponse = await getMerchantGiftCards(sellerId, secretId);
+
+      setSeller(sellerResponse.data);
+      setGiftCards(giftCardResponse.data);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+  
+  useEffect(() => {
+    setLoading(true);
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <Loader isPage={true} />;
+  } else if (error || !seller) {
+    return <ErrorPage menuOpen={false} />;
+  }
+
+  return <VoucherDashboard giftCards={giftCards} seller={seller} />;
 };
 
 export default MerchantVoucherDashboardV2;

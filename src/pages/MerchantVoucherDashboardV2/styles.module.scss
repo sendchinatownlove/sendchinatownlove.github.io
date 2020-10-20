@@ -6,7 +6,7 @@
   font-style: normal;
   padding: 80px 120px;
 
-  h1 {
+  .headerTitle {
     color: white;
     font-size: 32px;
     font-weight: bold;
@@ -15,11 +15,25 @@
     margin-bottom: 16px;
   }
 
-  h2 {
+  .headerSubtitle {
     color: white;
     font-size: 18px;
     letter-spacing: 0.05em;
     line-height: 25px;
     text-transform: uppercase;
+  }
+}
+
+.stats {
+  .statsSection {
+
+  }
+
+  .statsTitle {
+
+  }
+
+  .statsSubtitle {
+    
   }
 }
