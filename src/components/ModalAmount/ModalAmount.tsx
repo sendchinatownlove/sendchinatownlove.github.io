@@ -54,7 +54,7 @@ export const Modal = (props: Props) => {
       : t('purchase.voucher', {seller: props.sellerName});
 
   return (
-    <ContentContainer id="donation-form" data-testid="Modal Amount">
+    <ContentContainer id="donation-form" data-testid="modal-amount">
       <Header>
         {headerText}
       </Header>

@@ -30,20 +30,21 @@ const SellerPage = (props: Props) => {
   const dispatch = useModalPaymentDispatch(null);
   const { sellerData } = useModalPaymentState(null);
 
+  useEffect(() => {
+    fetchData(i18n.language);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i18n.language]);
+
   const fetchData = async (lang?) => {
     setLoading(true);
     const result = id && (await getSeller(id, lang));
-    await dispatch({
+    dispatch({
       type: ModalPaymentConstants.SET_SELLER_DATA,
       payload: result.data,
     });
     setLoading(false);
   };
 
-  useEffect(() => {
-    fetchData(i18n.language);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.language]);
   return sellerData && !loading ? (
     <Container menuOpen={props.menuOpen}>
       <SellerName>{sellerData.name}</SellerName>
