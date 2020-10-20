@@ -11,6 +11,7 @@ import styles from './styles.module.scss';
 const FilterableTable = require('react-filterable-table');
 
 interface Props {
+  fetchData: () => void;
   giftCards: GiftCardDetails[];
   organizationName: string;
 }
@@ -106,7 +107,7 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
   );
 };
 
-const VoucherDashboard = ({ giftCards, organizationName }: Props) => {
+const VoucherDashboard = ({ fetchData, giftCards, organizationName }: Props) => {
   const stats = useMemo(
     () => [
       {
@@ -137,7 +138,7 @@ const VoucherDashboard = ({ giftCards, organizationName }: Props) => {
           <div className={styles.headerSubtitle}>{organizationName}</div>
         </div>
         <div className={styles.actionButtons}>
-          <Button className={styles.refreshButton} variant="contained">
+          <Button className={styles.refreshButton} onClick={fetchData} variant="outlined">
             <RefreshIcon />
             <div className={styles.refreshText}>Refresh 刷新</div>
           </Button>
