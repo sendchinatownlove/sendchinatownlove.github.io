@@ -107,7 +107,11 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
   );
 };
 
-const VoucherDashboard = ({ fetchData, giftCards, organizationName }: Props) => {
+const VoucherDashboard = ({
+  fetchData,
+  giftCards,
+  organizationName,
+}: Props) => {
   const stats = useMemo(
     () => [
       {
@@ -138,7 +142,11 @@ const VoucherDashboard = ({ fetchData, giftCards, organizationName }: Props) => 
           <div className={styles.headerSubtitle}>{organizationName}</div>
         </div>
         <div className={styles.actionButtons}>
-          <Button className={styles.refreshButton} onClick={fetchData} variant="outlined">
+          <Button
+            className={styles.refreshButton}
+            onClick={fetchData}
+            variant="outlined"
+          >
             <RefreshIcon />
             <div className={styles.refreshText}>Refresh 刷新</div>
           </Button>
