@@ -164,10 +164,8 @@ $container-size: 160px;
     }
 
     @include for-tablet-landscape-up {
-      // FIXME
       margin: 0 0 20px 0;
       grid-column-gap: 32px;
-      // width: 464px;
     }
   }
 
