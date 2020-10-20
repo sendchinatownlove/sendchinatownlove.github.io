@@ -5,7 +5,7 @@ import ErrorPage from '../404Page';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-  ModalPaymentConstants
+  ModalPaymentConstants,
 } from '../../utilities/hooks/ModalPaymentContext';
 import { 
   getSeller,

@@ -12,7 +12,10 @@ import {
 } from '../../../utilities';
 import { useEffect, useState } from 'react';
 import Modal from '../../Modal';
-import { ModalPaymentConstants, useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext';
+import {
+  ModalPaymentConstants,
+  useModalPaymentDispatch,
+} from '../../../utilities/hooks/ModalPaymentContext';
 
 interface Props {
   campaign: Campaign;

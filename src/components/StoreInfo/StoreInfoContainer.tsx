@@ -121,7 +121,7 @@ export const StoreInfo: FC<Props> = ({
         <ReactMarkdown
           className={styles.container}
           source={summary}
-        ></ReactMarkdown>
+        />
       )}
       <StoreNavContainer>
         {storeNavItems.map(

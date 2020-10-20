@@ -11,7 +11,7 @@ import { makeSquarePayment, SquareLineItems, Buyer } from '../../utilities/api';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-  ModalPaymentConstants
+  ModalPaymentConstants,
 } from '../../utilities/hooks/ModalPaymentContext';
 import styled from 'styled-components';
 
@@ -282,7 +282,12 @@ const SquareModal = ({
               <BackButton
                 type="button"
                 className={'modalButton--back'}
-                onClick={() => dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 0 })}
+                onClick={() =>
+                  dispatch({
+                    type: ModalPaymentConstants.SET_MODAL_VIEW,
+                    payload: 0,
+                  })
+                }
               >
                 ᐸ Back
               </BackButton>

@@ -11,18 +11,21 @@ const dispatch = jest.fn();
 const renderModal = () => {
   return renderUnit(
     <ModalPaymentContext.ModalPaymentProvider>
-      <ModalPage 
-        purchaseType='donation'
-        sellerId='shunfa-bakery'
-        sellerName='Shunfa Bakery'
+      <ModalPage
+        purchaseType="donation"
+        sellerId="shunfa-bakery"
+        sellerName="Shunfa Bakery"
       />
     </ModalPaymentContext.ModalPaymentProvider>
   );
 };
 
 describe('Modal Page for payment processing', () => {
-
-  beforeEach(() => jest.spyOn(ModalPaymentContext, "useModalPaymentDispatch").mockImplementation(() => dispatch));
+  beforeEach(() =>
+    jest
+      .spyOn(ModalPaymentContext, 'useModalPaymentDispatch')
+      .mockImplementation(() => dispatch)
+  );
   afterEach(() => cleanup());
 
   test('Should display amount page for donations/giftcards', async () => {
@@ -54,12 +57,18 @@ describe('Modal Page for payment processing', () => {
   test('Clicking the next button should go to payment details amount', async () => {
     const { getByText } = renderModal();
     const amount1 = getByText('$10');
-    const customAmount =  getByText('Next');
+    const customAmount = getByText('Next');
 
     fireEvent.click(amount1);
     fireEvent.click(customAmount);
 
-    expect(dispatch).toHaveBeenNthCalledWith(1, { type: "SET_AMOUNT", payload: "10" });
-    expect(dispatch).toHaveBeenLastCalledWith({ type: "SET_MODAL_VIEW", payload: 1 });
+    expect(dispatch).toHaveBeenNthCalledWith(1, {
+      type: 'SET_AMOUNT',
+      payload: '10',
+    });
+    expect(dispatch).toHaveBeenLastCalledWith({
+      type: 'SET_MODAL_VIEW',
+      payload: 1,
+    });
   });
 });
