@@ -103,6 +103,7 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
       pageSizes={null} // Don't show the page size chooser.
       recordCountName="Voucher Found"
       recordCountNamePlural="Vouchers Found"
+      className={styles.tableContainer}
       topPagerVisible={false}
     />
   );
