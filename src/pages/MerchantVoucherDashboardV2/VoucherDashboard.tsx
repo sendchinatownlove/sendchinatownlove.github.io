@@ -1,3 +1,5 @@
+import Button from '@material-ui/core/Button';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import moment from 'moment';
 import React, { useMemo } from 'react';
 
@@ -130,11 +132,17 @@ const VoucherDashboard = ({ giftCards, organizationName }: Props) => {
   return (
     <div>
       <div className={styles.header}>
-        <div className={styles.titleContainer}>
+        <div>
           <div className={styles.headerTitle}>Voucher Tracker 礼品券记录</div>
           <div className={styles.headerSubtitle}>{organizationName}</div>
         </div>
-        {/* TODO: Refresh and print buttons */}
+        <div className={styles.actionButtons}>
+          <Button className={styles.refreshButton} variant="contained">
+            <RefreshIcon />
+            <div className={styles.refreshText}>Refresh 刷新</div>
+          </Button>
+          {/* TODO: Print button */}
+        </div>
       </div>
       <div className={styles.stats}>
         {stats.map((section) => (
