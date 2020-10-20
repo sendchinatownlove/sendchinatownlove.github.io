@@ -169,9 +169,7 @@ const Passport = (props: Props) => {
           Learn More
         </RedirectionLinks>
         <Logo src={CircleLogo} alt="scl-log" />
-        <RedirectionLinks href={MAILTO_URL}>
-          contact us
-        </RedirectionLinks>
+        <RedirectionLinks href={MAILTO_URL}>contact us</RedirectionLinks>
       </HeaderContainer>
       <BodyContainer>
         <FAQ
@@ -202,7 +200,7 @@ const Passport = (props: Props) => {
               </>
             )}
           </TitleRow>
-          <GiveawayPopover showInstagram={showInstagram} contactId={id}/>
+          <GiveawayPopover showInstagram={showInstagram} contactId={id} />
           {showLyftRewardPromo && (
             <LyftRewardPromo
               yesClickHander={lyftRewardYesClickHandler}
