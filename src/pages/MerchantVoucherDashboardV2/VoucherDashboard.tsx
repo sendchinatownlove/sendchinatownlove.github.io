@@ -36,7 +36,7 @@ const StatsSection = ({
   </div>
 );
 
-const GiftCardTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
+const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
   // TODO: Edit functionality.
   const fields = [
     {
@@ -143,7 +143,7 @@ const VoucherDashboard = ({ giftCards, organizationName }: Props) => {
       </div>
       <div className={styles.tableContainer}>
         {/* TODO: Custom search bar and hide GAM checkbox. */}
-        <GiftCardTable giftCards={giftCards} />
+        <VoucherTable giftCards={giftCards} />
       </div>
     </div>
   );
