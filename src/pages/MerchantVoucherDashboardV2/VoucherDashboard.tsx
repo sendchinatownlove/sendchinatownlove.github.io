@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
