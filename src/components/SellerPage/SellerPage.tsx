@@ -33,8 +33,8 @@ const SellerPage = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams<any>();
 
-  const dispatch = useModalPaymentDispatch();
-  const { sellerData } = useModalPaymentState();
+  const dispatch = useModalPaymentDispatch(null);
+  const { sellerData } = useModalPaymentState(null);
   const [sellerHours, setSellerHours] = useState<any[]>([]);
   const [isMerchantOpen, setIsMerchantOpen] = useState(false);
   const [deliveryServices, setDeliveryServices] = useState<any[]>([]);
@@ -107,10 +107,15 @@ const SellerPage = (props: Props) => {
     return false;
   };
 
+  useEffect(() => {
+    fetchData(i18n.language);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i18n.language]);
+
   const fetchData = async (lang?) => {
     setLoading(true);
     const result = id && (await getSeller(id, lang));
-    await dispatch({
+    dispatch({
       type: ModalPaymentConstants.SET_SELLER_DATA,
       payload: result.data,
     });
