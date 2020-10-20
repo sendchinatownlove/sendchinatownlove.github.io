@@ -2,10 +2,7 @@ import moment from 'moment';
 import React, { useMemo } from 'react';
 
 import type { FTRenderProps } from './types';
-import type {
-  BrowsePageSeller,
-  GiftCardDetails,
-} from '../../utilities/api/types';
+import type { GiftCardDetails } from '../../utilities/api/types';
 
 import styles from './styles.module.scss';
 
@@ -13,7 +10,7 @@ const FilterableTable = require('react-filterable-table');
 
 interface Props {
   giftCards: GiftCardDetails[];
-  seller: BrowsePageSeller;
+  organizationName: string;
 }
 
 const formatCentsAmount = (cents: number) => {
@@ -107,7 +104,7 @@ const GiftCardTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
   );
 };
 
-const VoucherDashboard = ({ giftCards, seller }: Props) => {
+const VoucherDashboard = ({ giftCards, organizationName }: Props) => {
   const stats = useMemo(
     () => [
       {
@@ -135,7 +132,7 @@ const VoucherDashboard = ({ giftCards, seller }: Props) => {
       <div className={styles.header}>
         <div className={styles.titleContainer}>
           <div className={styles.headerTitle}>Voucher Tracker 礼品券记录</div>
-          <div className={styles.headerSubtitle}>{seller.name}</div>
+          <div className={styles.headerSubtitle}>{organizationName}</div>
         </div>
         {/* TODO: Refresh and print buttons */}
       </div>

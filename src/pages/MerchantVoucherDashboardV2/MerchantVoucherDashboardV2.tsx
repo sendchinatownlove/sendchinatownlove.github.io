@@ -52,7 +52,7 @@ const MerchantVoucherDashboardV2 = () => {
     return <ErrorPage menuOpen={false} />;
   }
 
-  return <VoucherDashboard giftCards={giftCards} seller={seller} />;
+  return <VoucherDashboard giftCards={giftCards} organizationName={seller.name} />;
 };
 
 export default MerchantVoucherDashboardV2;
