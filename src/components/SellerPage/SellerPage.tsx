@@ -106,10 +106,15 @@ const SellerPage = (props: Props) => {
     return false;
   };
 
+  useEffect(() => {
+    fetchData(i18n.language);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i18n.language]);
+
   const fetchData = async (lang?) => {
     setLoading(true);
     const result = id && (await getSeller(id, lang));
-    await dispatch({
+    dispatch({
       type: ModalPaymentConstants.SET_SELLER_DATA,
       payload: result.data,
     });
@@ -124,11 +129,6 @@ const SellerPage = (props: Props) => {
 
     setLoading(false);
   };
-
-  useEffect(() => {
-    fetchData(i18n.language);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.language]);
 
   return sellerData && !loading ? (
     <Container menuOpen={props.menuOpen}>
