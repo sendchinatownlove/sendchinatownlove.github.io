@@ -36,10 +36,10 @@ const OrderNow: FC<Props> = ({ showingAltLayout, hours, isMerchantOpen, delivery
         <p className={styles.boldText}>Hours: </p>
         <div className={styles.orderNow__hours}>
           {hours.length > 0
-            ? hours.map((ele) => {
+            ? hours.map((ele, i) => {
                 if (ele.open_time === undefined) {
                   return (
-                    <p className={styles.p__hours}>
+                    <p className={styles.p__hours} key={`hours-closed-${i}`}>
                       <span className={classnames(styles['textHours--bold'],styles.textHours)}>{ele.open_day}</span>
                       <span className={classnames(styles.textHours, styles.textHour__hours)}>CLOSED</span>
                     </p>
@@ -50,7 +50,7 @@ const OrderNow: FC<Props> = ({ showingAltLayout, hours, isMerchantOpen, delivery
                 const closeTime = formatTime(close_time);
 
                 return (
-                  <p className={styles.p__hours}>
+                  <p className={styles.p__hours} key={`hours-${i}`}>
                     <span className={classnames(styles['textHours--bold'],styles.textHours)}>{open_day}</span>
                     <span className={classnames(styles.textHours, styles.textHour__hours)}>
                       {`${openTime} -  ${closeTime}`}
@@ -72,7 +72,7 @@ const OrderNow: FC<Props> = ({ showingAltLayout, hours, isMerchantOpen, delivery
       </p>
       <div className={styles.delivery_container}>
         {phone && <DeliveryButton imageUrl={phone.delivery_type.icon_url} name={phone.delivery_type.name} phone={phone.phone_number}/>}
-        { thirdPtyDelivery.map((ele) => <DeliveryButton imageUrl={ele.delivery_type.icon_url} name={ele.delivery_type.name} deliveryLink={ele.url}/>)}
+        { thirdPtyDelivery.map((ele, i) => <DeliveryButton imageUrl={ele.delivery_type.icon_url} name={ele.delivery_type.name} deliveryLink={ele.url} key={i}/>)}
       </div>
     </div>
   );
