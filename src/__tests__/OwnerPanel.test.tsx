@@ -73,7 +73,7 @@ describe('Owner Panel', () => {
   test('should display Owner Panel Display body values', async () => {
     const { getByText, getByAltText } = renderIntegration(
       '/shunfa-bakery',
-      <OwnerPanel seller={shunfaBakeryResponse}/>
+      <OwnerPanel seller={shunfaBakeryResponse} />
     );
 
     expect(getByText('Shunfa Bakery')).toBeInTheDocument();
@@ -90,26 +90,26 @@ describe('Owner Panel', () => {
   test('should show donation modal when donation button is touched', async () => {
     const { getByRole, findByText } = renderIntegration(
       '/shunfa-bakery',
-      <OwnerPanel seller={shunfaBakeryResponse}/>
+      <OwnerPanel seller={shunfaBakeryResponse} />
     );
 
-    const DonationButton = getByRole('button', {name: "Donation"});
+    const DonationButton = getByRole('button', { name: 'Donation' });
     fireEvent.click(DonationButton);
 
-    const DonationHeader = await findByText("Donation for Shunfa Bakery");
+    const DonationHeader = await findByText('Donation for Shunfa Bakery');
     expect(DonationHeader).toBeInTheDocument();
   });
 
   test('should show voucher modal when voucher button is touched', async () => {
     const { getByRole, findByText } = renderIntegration(
       '/shunfa-bakery',
-      <OwnerPanel seller={shunfaBakeryResponse}/>
+      <OwnerPanel seller={shunfaBakeryResponse} />
     );
 
-    const VoucherButton = getByRole('button', {name: "Voucher"});
+    const VoucherButton = getByRole('button', { name: 'Voucher' });
     fireEvent.click(VoucherButton);
 
-    const VoucherHeader = await findByText("Voucher for Shunfa Bakery");
+    const VoucherHeader = await findByText('Voucher for Shunfa Bakery');
     expect(VoucherHeader).toBeInTheDocument();
   });
 });

@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
+import styled from 'styled-components';
 
-import { useModalPaymentDispatch, ModalPaymentConstants } from '../../utilities/hooks/ModalPaymentContext';
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+} from '../../utilities/hooks/ModalPaymentContext';
 import { BrowsePageSeller } from '../../utilities/api/types';
 import { getCampaignsForMerchant } from '../../utilities';
+
 import Modal from '../Modal';
 import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
-import styled from 'styled-components';
+
 import styles from './styles.module.scss';
-import classnames from 'classnames';
 import chevron from './assets/chevron.svg';
 import DonationButtons from '../DonationButtons/DonationButtons';
 import OrderNow from './OrderNow';

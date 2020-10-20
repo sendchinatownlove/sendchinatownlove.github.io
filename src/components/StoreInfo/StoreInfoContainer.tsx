@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
-import { useState } from 'react';
+import React, { FC, useState } from 'react';
 import classnames from 'classnames';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
+
 import { BrowsePageSeller } from '../../utilities';
+import { OrderNow, MobileOrderWrapper } from '../OwnerPanel';
+
 import StoreStory from '../StoreStory';
 import StoreMenu from './StoreMenuTab';
 import StoreGallery from './StoreGalleryTab';
@@ -13,7 +15,6 @@ import StoreLocation from './StoreLocation';
 import styles from './styles.module.scss';
 import defaultStoreFront from './misc-store.png';
 import { useMedia } from 'use-media';
-import { OrderNow, MobileOrderWrapper } from '../OwnerPanel';
 
 type Props = {
   seller: BrowsePageSeller;
