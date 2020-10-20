@@ -40,6 +40,7 @@ const StatsSection = ({
 );
 
 const GiftCardTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
+  // TODO: Edit functionality.
   const fields = [
     {
       name: 'seller_gift_card_id',
@@ -144,6 +145,7 @@ const VoucherDashboard = ({ giftCards, seller }: Props) => {
         ))}
       </div>
       <div className={styles.tableContainer}>
+        {/* TODO: Custom search bar and hide GAM checkbox. */}
         <GiftCardTable giftCards={giftCards} />
       </div>
     </div>
