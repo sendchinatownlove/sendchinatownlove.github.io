@@ -4,11 +4,14 @@
 
 .header {
   background-color: $standard-red;
+  display: flex;
   font-family: 'Open Sans';
   font-style: normal;
+  justify-content: space-between;
   padding: 80px 120px;
 
   @media only screen and (max-width: 960px) {
+    flex-direction: column;
     padding: 40px 30px;
   }
 
@@ -31,6 +34,28 @@
     letter-spacing: 0.05em;
     line-height: 25px;
     text-transform: uppercase;
+  }
+
+  .actionButtons {
+    @media only screen and (max-width: 960px) {
+      margin-top: 32px;
+    }
+
+    .refreshButton {
+      background-color: #ffffff;
+      border-radius: 50px;
+      color: #a8192e;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 16px 50px;
+      text-transform: uppercase;
+
+      .refreshText {
+        font-family: 'Open Sans';
+        margin-left: 12px;
+      }
+    }
   }
 }
 
