@@ -39,12 +39,12 @@ const MerchantVoucherDashboardV2 = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [sellerId, secretId]);
 
   useEffect(() => {
     setLoading(true);
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   if (loading) {
     return <Loader isPage={true} />;
