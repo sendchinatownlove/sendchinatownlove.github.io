@@ -2,7 +2,10 @@ import moment from 'moment';
 import React, { useMemo } from 'react';
 
 import type { FTRenderProps } from './types';
-import type { BrowsePageSeller, GiftCardDetails } from '../../utilities/api/types';
+import type {
+  BrowsePageSeller,
+  GiftCardDetails,
+} from '../../utilities/api/types';
 
 import styles from './styles.module.scss';
 
@@ -23,14 +26,20 @@ const formatCentsAmount = (cents: number) => {
 
 const renderDate = (date: string) => moment(date).format('YYYY-MM-DD');
 
-const StatsSection = ({subtitle, title}: {subtitle: string, title: string}) => (
+const StatsSection = ({
+  subtitle,
+  title,
+}: {
+  subtitle: string;
+  title: string;
+}) => (
   <div>
     <div className={styles.statsTitle}>{title}</div>
     <div className={styles.statsSubtitle}>{subtitle}</div>
   </div>
 );
 
-const GiftCardTable = ({giftCards}: {giftCards: GiftCardDetails[]}) => {
+const GiftCardTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
   const fields = [
     {
       name: 'seller_gift_card_id',
@@ -61,6 +70,9 @@ const GiftCardTable = ({giftCards}: {giftCards: GiftCardDetails[]}) => {
       displayName: 'Date Last Used\n上次使用日期',
       sortable: true,
       render: (props: FTRenderProps) => {
+        // If the gift card hasn't been updated since creation (aka it's never
+        // been used), show "N/A" in the UI to denote that it hasn't been used
+        // yet.
         if (props.record.created_at === props.record.updated_at) {
           return 'N/A';
         }
@@ -80,7 +92,7 @@ const GiftCardTable = ({giftCards}: {giftCards: GiftCardDetails[]}) => {
     <FilterableTable
       data={giftCards}
       fields={fields}
-      headerVisible={false}  // Don't show the filter header.
+      headerVisible={false} // Don't show the filter header.
       initialSort="seller_gift_card_id"
       namespace="Vouchers"
       noFilteredRecordsMessage="No vouchers found for filter"
@@ -94,21 +106,28 @@ const GiftCardTable = ({giftCards}: {giftCards: GiftCardDetails[]}) => {
   );
 };
 
-const VoucherDashboard = ({giftCards, seller}: Props) => {
-  const stats = useMemo(() => ([
-    {
-      subtitle: moment().format('YYYY-MM-DD, h:mm A'),
-      title: 'Last Updated 上次更新时间',
-    },
-    {
-      subtitle: String(giftCards.filter((card) => card.latest_value > 0).length),
-      title: '# Active Vouchers  可使用的礼品券数量',
-    },
-    {
-      subtitle: formatCentsAmount(giftCards.reduce((total, curr) => total + curr.latest_value, 0)),
-      title: 'Total Balance  总结余',
-    },
-  ]), [giftCards]);
+const VoucherDashboard = ({ giftCards, seller }: Props) => {
+  const stats = useMemo(
+    () => [
+      {
+        subtitle: moment().format('YYYY-MM-DD, h:mm A'),
+        title: 'Last Updated 上次更新时间',
+      },
+      {
+        subtitle: String(
+          giftCards.filter((card) => card.latest_value > 0).length
+        ),
+        title: '# Active Vouchers  可使用的礼品券数量',
+      },
+      {
+        subtitle: formatCentsAmount(
+          giftCards.reduce((total, curr) => total + curr.latest_value, 0)
+        ),
+        title: 'Total Balance  总结余',
+      },
+    ],
+    [giftCards]
+  );
 
   return (
     <div>
@@ -120,7 +139,9 @@ const VoucherDashboard = ({giftCards, seller}: Props) => {
         {/* TODO: Refresh and print buttons */}
       </div>
       <div className={styles.stats}>
-        {stats.map(section => <StatsSection key={section.title} {...section} />)}
+        {stats.map((section) => (
+          <StatsSection key={section.title} {...section} />
+        ))}
       </div>
       <div className={styles.tableContainer}>
         <GiftCardTable giftCards={giftCards} />

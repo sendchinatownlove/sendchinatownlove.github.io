@@ -8,7 +8,10 @@ import {
   getMerchantGiftCards,
   getSeller,
 } from '../../utilities/api/interactionManager';
-import type { BrowsePageSeller, GiftCardDetails } from '../../utilities/api/types';
+import type {
+  BrowsePageSeller,
+  GiftCardDetails,
+} from '../../utilities/api/types';
 
 const MerchantVoucherDashboardV2 = () => {
   const [error, setError] = useState<boolean>(false);
@@ -37,7 +40,7 @@ const MerchantVoucherDashboardV2 = () => {
       setLoading(false);
     }
   }, []);
-  
+
   useEffect(() => {
     setLoading(true);
     fetchData();
