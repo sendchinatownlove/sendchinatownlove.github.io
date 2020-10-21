@@ -66,11 +66,11 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
     [editingRowGiftCardId]
   );
 
-  // Determine if the gift card created_at and updated_at are different (aka
-  // it's been used). We use this to show "N/A" in the cell or the last
-  // updated date.
+  // Determine if the gift card latest and original values are different
+  // (aka it's been used). We use this to show "N/A" in the cell or the
+  // last updated date.
   const voucherHasBeenUpdated = (voucher) =>
-    voucher.created_at !== voucher.updated_at;
+    voucher.latest_value !== voucher.original_value;
 
   const onSelectCell = useCallback((record) => {
     // This has to be a string because the onChange event below outputs a
@@ -109,10 +109,6 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
   };
 
   const renderLatestValue = ({ record, value }: FTRenderProps) => {
-    // This has to be a string because the onChange event below outputs a
-    // string value.
-    const valueInDollars = String(value / 100);
-
     if (isEditingCell(record)) {
       return (
         <div className={styles.editEndingBalance}>
