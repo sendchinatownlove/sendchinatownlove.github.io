@@ -69,14 +69,14 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
   // Determine if the gift card latest and original values are different
   // (aka it's been used). We use this to show "N/A" in the cell or the
   // last updated date.
-  const voucherHasBeenUpdated = (voucher) =>
+  const voucherHasBeenUsed = (voucher) =>
     voucher.latest_value !== voucher.original_value;
 
   const onSelectCell = useCallback((record) => {
     // This has to be a string because the onChange event below outputs a
     // string value.
     setLatestValue(String(record.latest_value / 100));
-    setUpdatedAt(voucherHasBeenUpdated(record) ? record.updated_at : null);
+    setUpdatedAt(voucherHasBeenUsed(record) ? record.updated_at : null);
     setEditingRowGiftCardId(record.seller_gift_card_id);
   }, []);
 
@@ -102,7 +102,7 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
 
     return (
       <EditCell
-        body={voucherHasBeenUpdated(record) ? renderDate(value) : 'N/A'}
+        body={voucherHasBeenUsed(record) ? renderDate(value) : 'N/A'}
         onSelect={() => onSelectCell(record)}
       />
     );
