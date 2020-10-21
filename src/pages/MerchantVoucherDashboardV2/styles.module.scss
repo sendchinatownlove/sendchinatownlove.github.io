@@ -184,3 +184,28 @@
     width: 18px;
   }
 }
+
+.endingBalance {
+  width: 180px;
+}
+
+.editEndingBalance {
+  > :first-child {
+    margin-bottom: 32px;
+  }
+
+  .saveButton {
+    background-color: #a8192e;
+    border-radius: 50px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 12px 36px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+.datePicker {
+  border-color: #a8192e;
+}

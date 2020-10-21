@@ -4,6 +4,9 @@ import ReactPixel from 'react-facebook-pixel';
 import ReactGA from 'react-ga';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
 
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
+
 import Footer from '../Footer';
 import Loader from '../Loader';
 import Header from '../Navbar';
@@ -99,55 +102,60 @@ const App = () => {
   return (
     <Router history={history}>
       <Suspense fallback={<Loader isPage={true} />}>
-        <Switch>
-          <Route path="/all">{returnComponent(Page.All)}</Route>
-          <Route path="/voucher/:id">
-            <VoucherProvider>
-              <VoucherRedemptionPage />
-            </VoucherProvider>
-          </Route>
-          <Route exact path="/passport">
-            <PassportRedemption screen={ScreenName.Track} />
-          </Route>
-          <Route exact path="/passport/:id/tickets">
-            <PassportRedemption screen={ScreenName.Dashboard} />
-          </Route>
-          <Route exact path="/passport/:id/redeem/:access_token">
-            <PassportRedemption screen={ScreenName.Redemption} />
-          </Route>
-          <Route
-            exact
-            path="/passport/:id/redeem/:access_token/sponsor/:sponsor_seller_id"
-          >
-            <PassportRedemption screen={ScreenName.Claim} />
-          </Route>
-          <Route exact path="/:seller_id/dashboard/:secret_id">
-            <MerchantVoucherDashboard />
-          </Route>
-          <Route exact path="/:seller_id/dashboard/:secret_id/v2">
-            <MerchantVoucherDashboardV2 />
-          </Route>
-          <Route path="/print-passport-voucher/:id/tickets/:tickets_secret">
-            <PassportVoucher />
-          </Route>
-          <Route exact path="/passport/lyft_rewards/:contact_id/redeem/:token">
-            <PassportRedemption screen={ScreenName.LyftCode} />
-          </Route>
-          <Route
-            path="/gift-a-meal"
-            component={() => {
-              window.location.href = 'https://www.gofundme.com/f/gift-a-meal';
-              return null;
-            }}
-          />
-          <Route path="/gift-a-meal-home">
-            {returnComponent(Page.GiftAMeal)}
-          </Route>
-          <Route path="/merchants">{returnComponent(Page.Merchants)}</Route>
-          <Route path="/:id">{returnComponent(Page.Seller)}</Route>
-          <Route path="/:id#story">{returnComponent(Page.Seller)}</Route>
-          <Route>{returnComponent(Page.Error)}</Route>
-        </Switch>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <Switch>
+            <Route path="/all">{returnComponent(Page.All)}</Route>
+            <Route path="/voucher/:id">
+              <VoucherProvider>
+                <VoucherRedemptionPage />
+              </VoucherProvider>
+            </Route>
+            <Route exact path="/passport">
+              <PassportRedemption screen={ScreenName.Track} />
+            </Route>
+            <Route exact path="/passport/:id/tickets">
+              <PassportRedemption screen={ScreenName.Dashboard} />
+            </Route>
+            <Route exact path="/passport/:id/redeem/:access_token">
+              <PassportRedemption screen={ScreenName.Redemption} />
+            </Route>
+            <Route
+              exact
+              path="/passport/:id/redeem/:access_token/sponsor/:sponsor_seller_id"
+            >
+              <PassportRedemption screen={ScreenName.Claim} />
+            </Route>
+            <Route exact path="/:seller_id/dashboard/:secret_id">
+              <MerchantVoucherDashboard />
+            </Route>
+            <Route exact path="/:seller_id/dashboard/:secret_id/v2">
+              <MerchantVoucherDashboardV2 />
+            </Route>
+            <Route path="/print-passport-voucher/:id/tickets/:tickets_secret">
+              <PassportVoucher />
+            </Route>
+            <Route
+              exact
+              path="/passport/lyft_rewards/:contact_id/redeem/:token"
+            >
+              <PassportRedemption screen={ScreenName.LyftCode} />
+            </Route>
+            <Route
+              path="/gift-a-meal"
+              component={() => {
+                window.location.href = 'https://www.gofundme.com/f/gift-a-meal';
+                return null;
+              }}
+            />
+            <Route path="/gift-a-meal-home">
+              {returnComponent(Page.GiftAMeal)}
+            </Route>
+            <Route path="/merchants">{returnComponent(Page.Merchants)}</Route>
+            <Route path="/:id">{returnComponent(Page.Seller)}</Route>
+            <Route path="/:id#story">{returnComponent(Page.Seller)}</Route>
+            <Route>{returnComponent(Page.Error)}</Route>
+          </Switch>
+        </MuiPickersUtilsProvider>
       </Suspense>
     </Router>
   );
