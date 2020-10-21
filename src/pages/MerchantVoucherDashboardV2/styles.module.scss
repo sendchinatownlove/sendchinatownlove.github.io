@@ -171,3 +171,16 @@
   max-width: none;
   width: 100%;
 }
+
+.editCell {
+  align-items: center;
+  display: flex;
+
+  .editIcon {
+    color: #a8192e;
+    height: 18px;
+    margin-left: 16px;
+    cursor: pointer;
+    width: 18px;
+  }
+}

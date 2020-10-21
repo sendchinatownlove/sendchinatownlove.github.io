@@ -5,6 +5,7 @@ import React, { useMemo, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import InputBase from '@material-ui/core/InputBase';
+import EditIcon from '@material-ui/icons/Edit';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -44,8 +45,14 @@ const StatsSection = ({
   </div>
 );
 
+const EditCell = ({body}: {body: JSX.IntrinsicElements | string}) => (
+  <div className={styles.editCell}>
+    {body}
+    <EditIcon classes={{root: styles.editIcon}} />
+  </div>
+);
+
 const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
-  // TODO: Edit functionality.
   const fields = [
     {
       name: 'seller_gift_card_id',
@@ -76,13 +83,16 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
       displayName: 'Date Last Used\n上次使用日期',
       sortable: true,
       render: (props: FTRenderProps) => {
+        let body;
         // If the gift card hasn't been updated since creation (aka it's never
         // been used), show "N/A" in the UI to denote that it hasn't been used
         // yet.
         if (props.record.created_at === props.record.updated_at) {
-          return 'N/A';
+          body = 'N/A';
+        } else {
+          body = renderDate(props.value);
         }
-        return renderDate(props.value);
+        return <EditCell body={body} />;
       },
     },
     {
@@ -90,10 +100,11 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
       displayName: 'Ending Balance\n结余',
       inputFilterable: true,
       sortable: true,
-      render: (props: FTRenderProps) => formatCentsAmount(props.value),
+      render: (props: FTRenderProps) => <EditCell body={formatCentsAmount(props.value)} />,
     },
   ];
 
+  // TODO: Hover and selected background colors.
   return (
     <FilterableTable
       data={giftCards}
