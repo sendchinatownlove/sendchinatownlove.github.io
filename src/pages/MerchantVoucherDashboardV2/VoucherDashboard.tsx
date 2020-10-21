@@ -159,7 +159,7 @@ const VoucherDashboard = ({
             </div>
           </div>
         </div>
-        <VoucherTable giftCards={filteredGiftCards} />
+        <VoucherTable fetchData={fetchData} giftCards={filteredGiftCards} />
       </div>
     </div>
   );

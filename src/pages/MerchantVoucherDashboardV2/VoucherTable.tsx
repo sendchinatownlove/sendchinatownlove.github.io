@@ -11,6 +11,7 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import type { FTRenderProps } from './types';
 import { formatCentsAmount } from './utils';
+import { updateVoucher } from '../../utilities/api/interactionManager';
 import type { GiftCardDetails } from '../../utilities/api/types';
 
 import styles from './styles.module.scss';
@@ -47,17 +48,17 @@ const EditCell = ({
   </div>
 );
 
-const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
+const VoucherTable = ({ fetchData, giftCards }: { fetchData: () => void, giftCards: GiftCardDetails[] }) => {
   const [editingRowGiftCardId, setEditingRowGiftCardId] = useState<
     string | null
   >(null);
-  const [latestValue, setLatestValue] = useState<string | null>(null);
-  const [updatedAt, setUpdatedAt] = useState<string | null>(null);
+  const [latestValue, setLatestValue] = useState<string>('');
+  const [updatedAt, setUpdatedAt] = useState<string>('');
 
   useEffect(() => {
     if (!editingRowGiftCardId) {
-      setLatestValue(null);
-      setUpdatedAt(null);
+      setLatestValue('');
+      setUpdatedAt('');
     }
   }, [editingRowGiftCardId]);
 
@@ -66,24 +67,30 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
     [editingRowGiftCardId]
   );
 
-  // Determine if the gift card created_at and updated_at are different (aka
+  // Determine if the gift card created_at and last_updated are different (aka
   // it's been used). We use this to show "N/A" in the cell or the last
   // updated date.
   const voucherHasBeenUpdated = (voucher) =>
-    voucher.created_at !== voucher.updated_at;
+    voucher.latest_value !== voucher.original_value;
 
   const onSelectCell = useCallback((record) => {
     // This has to be a string because the onChange event below outputs a
     // string value.
     setLatestValue(String(record.latest_value / 100));
-    setUpdatedAt(voucherHasBeenUpdated(record) ? record.updated_at : null);
+    setUpdatedAt(voucherHasBeenUpdated(record) ? record.last_updated : null);
     setEditingRowGiftCardId(record.seller_gift_card_id);
   }, []);
 
-  const onSave = useCallback(() => {
-    // TODO: Hit backend to update voucher.
-    setEditingRowGiftCardId(null);
-  }, []);
+  const onSave = useCallback(async (giftCardId: string) => {
+    try {
+      const latestValueCents = parseFloat(latestValue)*100;
+      await updateVoucher(giftCardId, latestValueCents, updatedAt);
+      setEditingRowGiftCardId(null);
+      fetchData();
+    } finally {
+
+    }
+  }, [fetchData, latestValue, updatedAt]);
 
   const renderUpdatedAt = ({ record, value }: FTRenderProps) => {
     if (isEditingCell(record)) {
@@ -93,7 +100,7 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
           emptyLabel="Date"
           format="YYYY-MM-DD"
           inputVariant="outlined"
-          onChange={(date) => setUpdatedAt(date ? date.toISOString() : null)}
+          onChange={(date) => setUpdatedAt(date ? date.toISOString() : '')}
           value={updatedAt}
           variant="inline"
         />
@@ -109,10 +116,6 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
   };
 
   const renderLatestValue = ({ record, value }: FTRenderProps) => {
-    // This has to be a string because the onChange event below outputs a
-    // string value.
-    const valueInDollars = String(value / 100);
-
     if (isEditingCell(record)) {
       return (
         <div className={styles.editEndingBalance}>
@@ -130,7 +133,7 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
           />
           <Button
             className={styles.saveButton}
-            onClick={onSave}
+            onClick={() => onSave(record.gift_card_id)}
             variant="outlined"
           >
             Save 储存
@@ -173,7 +176,7 @@ const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
       render: (props: FTRenderProps) => renderDate(props.value),
     },
     {
-      name: 'updated_at',
+      name: 'last_updated',
       displayName: 'Date Last Used\n上次使用日期',
       sortable: true,
       render: renderUpdatedAt,

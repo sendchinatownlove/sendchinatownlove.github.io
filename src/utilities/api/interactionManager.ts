@@ -135,9 +135,9 @@ export const getVoucher = async (id: string) =>
     .then((res) => res)
     .catch((err) => err);
 
-export const updateVoucher = async (id: string, amount: number) =>
+export const updateVoucher = async (id: string, amount: number, dateUsed?: string) =>
   axios
-    .put(vouchers + id, { amount })
+    .put(vouchers + id, { amount, date_used: dateUsed })
     .then((res) => res)
     .catch((err) => err);
 
