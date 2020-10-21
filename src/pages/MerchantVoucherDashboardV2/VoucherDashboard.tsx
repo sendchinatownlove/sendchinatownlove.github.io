@@ -5,6 +5,7 @@ import React, { useMemo, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import InputBase from '@material-ui/core/InputBase';
+import PrintIcon from '@material-ui/icons/Print';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -30,6 +31,17 @@ const formatCentsAmount = (cents: number) => {
 };
 
 const renderDate = (date: string) => moment(date).format('YYYY-MM-DD');
+
+const ActionButton = ({icon, onClick, text}: {icon: JSX.Element, onClick: () => void, text: string}) => (
+  <Button
+    className={styles.actionButton}
+    onClick={onClick}
+    variant="outlined"
+  >
+    {icon}
+    <div className={styles.actionButtonText}>{text}</div>
+  </Button>
+);
 
 const StatsSection = ({
   subtitle,
@@ -120,6 +132,7 @@ const VoucherDashboard = ({
 }: Props) => {
   const [searchFilter, setSearchFilter] = useState<string>('');
   const [filterGam, setFilterGam] = useState<boolean>(false);
+  const [printView, setPrintView] = useState<boolean>(false);
 
   const stats = useMemo(
     () => [
@@ -185,15 +198,16 @@ const VoucherDashboard = ({
           <div className={styles.headerSubtitle}>{organizationName}</div>
         </div>
         <div className={styles.actionButtons}>
-          <Button
-            className={styles.refreshButton}
+          {!printView && <ActionButton
+            icon={<RefreshIcon />}
             onClick={fetchData}
-            variant="outlined"
-          >
-            <RefreshIcon />
-            <div className={styles.refreshText}>Refresh 刷新</div>
-          </Button>
-          {/* TODO: Print button */}
+            text="Refresh 刷新"
+          />}
+          <ActionButton
+            icon={<PrintIcon />}
+            onClick={() => setPrintView(!printView)}
+            text="Toggle print"
+          />
         </div>
       </div>
       <div className={styles.stats}>
@@ -239,6 +253,7 @@ const VoucherDashboard = ({
             </div>
           </div>
         </div>
+        {/** TODO: Set arbitrarily large number on page size, hide edit icons, render grey boxes for n/a values, hide pagination, hide search */}
         <VoucherTable giftCards={filteredGiftCards} />
       </div>
     </div>
