@@ -165,17 +165,16 @@ $container-size: 160px;
     }
 
     @include for-tablet-landscape-up {
-      margin: 0 20px 20px 20px;
+      margin: 0 0 20px 0;
       grid-column-gap: 32px;
-      // width: 464px;
     }
   }
 
   &__hours {
-    width: 220px;
-    @include for-tablet-landscape-up {
-      width: 240px;
-    }
+    width: 100%;
+  }
+  @include for-tablet-portrait-up {
+    padding: 24px 36px;
   }
 }
 
@@ -184,10 +183,20 @@ $container-size: 160px;
   justify-content: space-between;
   align-items: baseline;
   margin: 0 auto 0 0;
+  width: 220px;
+  @include for-tablet-landscape-up {
+    width: 240px;
+  }
 }
 
 .p--noMargin {
-  margin: 0 auto;
+  margin: 0 0 0 66px;
+  @include for-tablet-portrait-up {
+    margin: 0 0 0 78px;
+  }
+  @include for-tablet-landscape-up {
+    margin: 0 0 0 50px;
+  }
 }
 
 .textHours {

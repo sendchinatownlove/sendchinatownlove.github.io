@@ -53,7 +53,11 @@ const MerchantVoucherDashboardV2 = () => {
   }
 
   return (
-    <VoucherDashboard giftCards={giftCards} organizationName={seller.name} />
+    <VoucherDashboard
+      fetchData={fetchData}
+      giftCards={giftCards}
+      organizationName={seller.name}
+    />
   );
 };
 
