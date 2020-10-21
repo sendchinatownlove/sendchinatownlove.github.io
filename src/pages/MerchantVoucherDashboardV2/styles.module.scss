@@ -12,7 +12,7 @@
 
   @media only screen and (max-width: 960px) {
     flex-direction: column;
-    padding: 40px 30px;
+    padding: 40px 28px;
   }
 
   @media only screen and (max-width: 414px) {
@@ -66,7 +66,7 @@
   padding: 48px 120px;
 
   @media only screen and (max-width: 960px) {
-    padding: 24px 30px;
+    padding: 24px 28px;
   }
 
   @media only screen and (max-width: 414px) {
@@ -98,14 +98,76 @@
   }
 }
 
-.tableContainer {
+.contentContainer {
   padding: 32px 120px;
 
   @media only screen and (max-width: 960px) {
-    padding: 16px 30px;
+    padding: 16px 28px;
   }
 
   @media only screen and (max-width: 414px) {
     padding: 16px 0;
   }
+}
+
+.filterSection {
+  display: flex;
+  margin-bottom: 28px;
+  width: 100%;
+}
+
+.searchBar {
+  border-radius: 5px;
+  border: 1px solid #c4c4c4;
+  display: flex;
+  flex-grow: 1;
+  padding: 16px;
+
+  .searchIcon {
+    color: $light-grey;
+    height: 18px;
+    margin-right: 12px;
+    pointer-events: none;
+    width: 18px;
+  }
+
+  .searchText {
+    width: 100%;
+  }
+}
+
+.filterGamContainer {
+  align-items: center;
+  display: flex;
+  margin-left: 60px;
+
+  @media only screen and (max-width: 960px) {
+    margin-left: 8px;
+  }
+
+  .checkbox {
+    width: 48px;
+    height: 48px;
+  }
+
+  .filterGamText {
+    flex-shrink: 0;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    @media only screen and (max-width: 960px) {
+      flex-shrink: 1;
+    }
+  }
+
+  .filterGamSelected {
+    color: #a8192e;
+  }
+}
+
+.tableContainer {
+  max-width: none;
+  width: 100%;
 }
