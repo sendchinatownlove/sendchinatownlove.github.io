@@ -17,7 +17,13 @@ const FilterableTable = require('react-filterable-table');
 
 const renderDate = (date: string) => moment(date).format('YYYY-MM-DD');
 
-const VoucherTable = ({ fetchData, giftCards }: { fetchData: () => void, giftCards: GiftCardDetails[] }) => {
+const VoucherTable = ({
+  fetchData,
+  giftCards,
+}: {
+  fetchData: () => void;
+  giftCards: GiftCardDetails[];
+}) => {
   const [editingRowGiftCardId, setEditingRowGiftCardId] = useState<
     string | null
   >(null);
@@ -47,14 +53,17 @@ const VoucherTable = ({ fetchData, giftCards }: { fetchData: () => void, giftCar
     setEditingRowGiftCardId(record.seller_gift_card_id);
   }, []);
 
-  const onSave = useCallback(async (giftCardId: string) => {
-    const latestValueCents = parseFloat(latestValue)*100;
-    await updateVoucher(giftCardId, latestValueCents);
-    setEditingRowGiftCardId(null);
-    fetchData();
-    // TODO: Show success banner.
-    // TODO: Show error banner on error.
-  }, [fetchData, latestValue]);
+  const onSave = useCallback(
+    async (giftCardId: string) => {
+      const latestValueCents = parseFloat(latestValue) * 100;
+      await updateVoucher(giftCardId, latestValueCents);
+      setEditingRowGiftCardId(null);
+      fetchData();
+      // TODO: Show success banner.
+      // TODO: Show error banner on error.
+    },
+    [fetchData, latestValue]
+  );
 
   const renderLatestValue = ({ record, value }: FTRenderProps) => {
     if (isEditingCell(record)) {
@@ -108,19 +117,20 @@ const VoucherTable = ({ fetchData, giftCards }: { fetchData: () => void, giftCar
       name: 'original_value',
       displayName: 'Original Amount\n购买金额',
       sortable: true,
-      render: ({value}: FTRenderProps) => formatCentsAmount(value),
+      render: ({ value }: FTRenderProps) => formatCentsAmount(value),
     },
     {
       name: 'created_at',
       displayName: 'Date Purchased\n购买日期',
       sortable: true,
-      render: ({value}: FTRenderProps) => renderDate(value),
+      render: ({ value }: FTRenderProps) => renderDate(value),
     },
     {
       name: 'last_updated',
       displayName: 'Date Last Used\n上次使用日期',
       sortable: true,
-      render: ({record, value}: FTRenderProps) => voucherHasBeenUpdated(record) ? renderDate(value) : 'N/A',
+      render: ({ record, value }: FTRenderProps) =>
+        voucherHasBeenUpdated(record) ? renderDate(value) : 'N/A',
     },
     {
       name: 'latest_value',
