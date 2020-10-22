@@ -35,24 +35,6 @@ const VoucherTable = ({
     }
   }, [editingRowGiftCardId]);
 
-  const isEditingCell = useCallback(
-    (voucher) => voucher.seller_gift_card_id === editingRowGiftCardId,
-    [editingRowGiftCardId]
-  );
-
-  // Determine if the gift card created_at and last_updated are different (aka
-  // it's been used). We use this to show "N/A" in the cell or the last
-  // updated date.
-  const voucherHasBeenUpdated = (voucher) =>
-    voucher.latest_value !== voucher.original_value;
-
-  const onSelectCell = useCallback((record) => {
-    // This has to be a string because the onChange event below outputs a
-    // string value.
-    setLatestValue(String(record.latest_value / 100));
-    setEditingRowGiftCardId(record.seller_gift_card_id);
-  }, []);
-
   const onSave = useCallback(
     async (giftCardId: string) => {
       const latestValueCents = parseFloat(latestValue) * 100;
@@ -66,7 +48,7 @@ const VoucherTable = ({
   );
 
   const renderLatestValue = ({ record, value }: FTRenderProps) => {
-    if (isEditingCell(record)) {
+    if (record.seller_gift_card_id === editingRowGiftCardId) {
       return (
         <div className={styles.editEndingBalance}>
           <TextField
@@ -91,6 +73,13 @@ const VoucherTable = ({
         </div>
       );
     }
+
+    const onSelectCell = (record) => {
+      // This has to be a string because the onChange event below outputs a
+      // string value.
+      setLatestValue(String(record.latest_value / 100));
+      setEditingRowGiftCardId(record.seller_gift_card_id);
+    };
 
     return (
       <div className={styles.editCell} onClick={() => onSelectCell(record)}>
@@ -130,7 +119,12 @@ const VoucherTable = ({
       displayName: 'Date Last Used\n上次使用日期',
       sortable: true,
       render: ({ record, value }: FTRenderProps) =>
-        voucherHasBeenUpdated(record) ? renderDate(value) : 'N/A',
+        // Determine if the gift card latest and original values are different
+        // (aka it's been used). We use this to show "N/A" in the cell or the
+        // last updated date.
+        record.latest_value !== record.original_value
+          ? renderDate(value)
+          : 'N/A',
     },
     {
       name: 'latest_value',
