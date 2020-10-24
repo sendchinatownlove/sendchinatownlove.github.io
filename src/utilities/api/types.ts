@@ -30,8 +30,10 @@ export type GiftCardDetails = {
   email: string;
   expiration: string | null;
   gift_card_id: string;
-  // The latest gift card amount's created_at date. This denotes the last
-  // time that the gift card was updated.
+  /**
+   * The latest gift card amount's created_at date. This denotes the last
+   * time that the gift card was updated.
+   */
   last_updated: string;
   latest_value: number;
   name: string | null;
