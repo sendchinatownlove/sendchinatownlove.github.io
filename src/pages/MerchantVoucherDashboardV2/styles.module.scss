@@ -171,3 +171,38 @@
   max-width: none;
   width: 100%;
 }
+
+.editCell {
+  align-items: center;
+  display: flex;
+
+  .editIcon {
+    color: #a8192e;
+    height: 18px;
+    margin-left: 16px;
+    cursor: pointer;
+    width: 18px;
+  }
+}
+
+.endingBalance {
+  width: 180px;
+}
+
+.editEndingBalance {
+  > :first-child {
+    margin-bottom: 32px;
+  }
+
+  .saveButton {
+    background-color: #a8192e;
+    border-radius: 50px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 12px 36px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}

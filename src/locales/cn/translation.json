@@ -120,7 +120,7 @@
       "step1": "第一步：",
       "step1Text": "捐款给爱心餐活动",
       "step2": "第二步：",
-      "step2Text": "捐款收益全数归给我们的商家",
+      "step2Text": "Vouchers are created to be redeemed as meals",
       "step3": "第三步：",
       "step3Text": "我们将餐券捐给社区公益团体",
       "step4": "第四步：",
@@ -168,5 +168,10 @@
     "codeTitle": "Here is your Free Lyft Citi Bike Day Pass code",
     "codeSubtitle": "TAP TO COPY",
     "codeCopied": "COPIED"
+  },
+  "lightUpChinatown": {
+    "headerText": "Light Up Chinatown",
+    "headerSubtext": "Let’s light up Chinatown, one lantern at a time.",
+    "donationTierText": "Light Up Chinatown donation tiers"
   }
 }

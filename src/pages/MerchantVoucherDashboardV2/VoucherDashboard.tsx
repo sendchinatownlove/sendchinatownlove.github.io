@@ -9,28 +9,17 @@ import PrintIcon from '@material-ui/icons/Print';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import SearchIcon from '@material-ui/icons/Search';
 
-import type { FTRenderProps } from './types';
+import VoucherTable from './VoucherTable';
+import { formatCentsAmount } from './utils';
 import type { GiftCardDetails } from '../../utilities/api/types';
 
 import styles from './styles.module.scss';
-
-const FilterableTable = require('react-filterable-table');
 
 interface Props {
   fetchData: () => void;
   giftCards: GiftCardDetails[];
   organizationName: string;
 }
-
-const formatCentsAmount = (cents: number) => {
-  return Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumSignificantDigits: 4,
-  }).format(cents / 100);
-};
-
-const renderDate = (date: string) => moment(date).format('YYYY-MM-DD');
 
 const ActionButton = ({icon, onClick, text}: {icon: JSX.Element, onClick: () => void, text: string}) => (
   <Button
@@ -42,7 +31,6 @@ const ActionButton = ({icon, onClick, text}: {icon: JSX.Element, onClick: () => 
     <div className={styles.actionButtonText}>{text}</div>
   </Button>
 );
-
 const StatsSection = ({
   subtitle,
   title,
@@ -55,75 +43,6 @@ const StatsSection = ({
     <div className={styles.statsSubtitle}>{subtitle}</div>
   </div>
 );
-
-const VoucherTable = ({ giftCards }: { giftCards: GiftCardDetails[] }) => {
-  // TODO: Edit functionality.
-  const fields = [
-    {
-      name: 'seller_gift_card_id',
-      displayName: 'Voucher Code\n礼品券号码',
-      sortable: true,
-    },
-    {
-      name: 'email',
-      displayName: 'Email\n电子邮件',
-      sortable: true,
-      thClassName: 'table-email-header',
-      tdClassName: 'table-email-container',
-    },
-    {
-      name: 'original_value',
-      displayName: 'Original Amount\n购买金额',
-      sortable: true,
-      render: (props: FTRenderProps) => formatCentsAmount(props.value),
-    },
-    {
-      name: 'created_at',
-      displayName: 'Date Purchased\n购买日期',
-      sortable: true,
-      render: (props: FTRenderProps) => renderDate(props.value),
-    },
-    {
-      name: 'updated_at',
-      displayName: 'Date Last Used\n上次使用日期',
-      sortable: true,
-      render: (props: FTRenderProps) => {
-        // If the gift card hasn't been updated since creation (aka it's never
-        // been used), show "N/A" in the UI to denote that it hasn't been used
-        // yet.
-        if (props.record.created_at === props.record.updated_at) {
-          return 'N/A';
-        }
-        return renderDate(props.value);
-      },
-    },
-    {
-      name: 'latest_value',
-      displayName: 'Ending Balance\n结余',
-      inputFilterable: true,
-      sortable: true,
-      render: (props: FTRenderProps) => formatCentsAmount(props.value),
-    },
-  ];
-
-  return (
-    <FilterableTable
-      data={giftCards}
-      fields={fields}
-      headerVisible={false} // Don't show the filter header.
-      initialSort="seller_gift_card_id"
-      namespace="Vouchers"
-      noFilteredRecordsMessage="No vouchers found for filter"
-      noRecordsMessage="No vouchers in our system yet!"
-      pageSize={20}
-      pageSizes={null} // Don't show the page size chooser.
-      recordCountName="Voucher Found"
-      recordCountNamePlural="Vouchers Found"
-      className={styles.tableContainer}
-      topPagerVisible={false}
-    />
-  );
-};
 
 const VoucherDashboard = ({
   fetchData,
@@ -254,7 +173,7 @@ const VoucherDashboard = ({
           </div>
         </div>
         {/** TODO: Set arbitrarily large number on page size, hide edit icons, render grey boxes for n/a values, hide pagination, hide search */}
-        <VoucherTable giftCards={filteredGiftCards} />
+        <VoucherTable fetchData={fetchData} giftCards={filteredGiftCards} />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ enum Page {
   GiftAMeal,
   Merchants,
   Seller,
+  LightUpChinatown,
 }
 
 const SquareErrors = {
