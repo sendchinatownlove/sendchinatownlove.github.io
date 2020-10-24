@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import classnames from 'classnames';
+import { useModalPaymentDispatch, ModalPaymentConstants } from '../../utilities/hooks/ModalPaymentContext';
 import { BrowsePageSeller } from '../../utilities/api/types';
 import { getCampaignsForMerchant } from '../../utilities';
 import Modal from '../Modal';
@@ -31,7 +31,7 @@ const OwnerPanel = ({
 }: Props) => {
   const showAltLayout = useMedia({ minWidth: 900 });
 
-  const dispatch = useModalPaymentDispatch();
+  const dispatch = useModalPaymentDispatch(null);
   const [purchaseType, setPurchaseType] = useState('');
   const [activeCampaign, setActiveCampaign] = useState<any | null>();
   const [pricePerMeal, setPricePerMeal] = useState(0);
@@ -59,7 +59,7 @@ const OwnerPanel = ({
   }, [seller.seller_id]);
 
   const showModal = (event: any) => {
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 0 });
     setPurchaseType(event.target.value);
   };
 
