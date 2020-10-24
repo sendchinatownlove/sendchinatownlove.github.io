@@ -35,6 +35,7 @@ history.listen((location) => {
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const GiftAMealPage = lazy(() => import('../MerchantsPage/gam/GiftAMealPage'));
+const LightUpChinatownPage = lazy(() => import('../LightUpChinatown/LightUpChinatownPage'));
 const ErrorPage = lazy(() => import('../404Page'));
 const VoucherRedemptionPage = lazy(() =>
   import('../../pages/VoucherRedemption')
@@ -74,6 +75,9 @@ const App = () => {
         break;
       case Page.GiftAMeal:
         component = <GiftAMealPage menuOpen={menuOpen} />;
+        break;
+      case Page.LightUpChinatown:
+        component = <LightUpChinatownPage />;
         break;
       case Page.Error:
       default:
@@ -142,6 +146,9 @@ const App = () => {
           />
           <Route path="/gift-a-meal-home">
             {returnComponent(Page.GiftAMeal)}
+          </Route>
+          <Route path="/light-up-chinatown">
+            {returnComponent(Page.LightUpChinatown)}
           </Route>
           <Route path="/merchants">{returnComponent(Page.Merchants)}</Route>
           <Route path="/:id">{returnComponent(Page.Seller)}</Route>
