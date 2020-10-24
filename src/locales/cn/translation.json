@@ -168,5 +168,10 @@
     "codeTitle": "Here is your Free Lyft Citi Bike Day Pass code",
     "codeSubtitle": "TAP TO COPY",
     "codeCopied": "COPIED"
+  },
+  "lightUpChinatown": {
+    "headerText": "Light Up Chinatown",
+    "headerSubtext": "Let’s light up Chinatown, one lantern at a time.",
+    "donationTierText": "Light Up Chinatown donation tiers"
   }
 }
