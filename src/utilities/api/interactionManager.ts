@@ -25,6 +25,7 @@ export const getSellers = async (lang?: string): Promise<any> => {
 };
 
 export const getSeller = async (id: string, lang?: string): Promise<any> => {
+  console.log('not getSeller testing');
   return await axios.get(sellers + id, {
     params: { locale: localeFromLanguage(lang) },
   });
@@ -172,6 +173,7 @@ export const getCampaigns = async (): Promise<any> => {
 export const getCampaignsForMerchant = async (
   seller_id: string
 ): Promise<any> => {
+  console.log('not getCampaignsForMerchant testing');
   return await axios
     .get(sellers + seller_id + '/campaigns')
     .then((res) => res)

@@ -66,7 +66,7 @@ export const StoreInfo: FC<Props> = ({
   };
 
   return (
-    <section className={classnames(styles.container)} data-testid="Store Info">
+    <section className={classnames(styles.container)} data-testid="store-info">
       {
         <img
           src={
@@ -118,10 +118,7 @@ export const StoreInfo: FC<Props> = ({
       </div>
 
       {summary && (
-        <ReactMarkdown
-          className={styles.container}
-          source={summary}
-        ></ReactMarkdown>
+        <ReactMarkdown className={styles.container} source={summary} />
       )}
       <StoreNavContainer>
         {storeNavItems.map(
