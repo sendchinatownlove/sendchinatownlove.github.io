@@ -41,5 +41,4 @@ describe('Owner Panel', () => {
     expect(getByText('7')).toBeInTheDocument();
     expect(getByText('supporters')).toBeInTheDocument();
   });
-  
 });
