@@ -15,7 +15,7 @@ import type {
 
 const MerchantVoucherDashboardV2 = () => {
   const [error, setError] = useState<boolean>(false);
-  const [pageLoaded, setPageLoaded] = useState<boolean>(false);
+  const [pageLoading, setPageLoading] = useState<boolean>(false);
 
   const [seller, setSeller] = useState<BrowsePageSeller | null>(null);
   const [giftCards, setGiftCards] = useState<GiftCardDetails[]>([]);
@@ -40,16 +40,16 @@ const MerchantVoucherDashboardV2 = () => {
   }, [sellerId, secretId]);
 
   useEffect(() => {
-    setPageLoaded(true);
+    setPageLoading(true);
 
     try {
       fetchData();
     } finally {
-      setPageLoaded(false);
+      setPageLoading(false);
     }
   }, [fetchData]);
 
-  if (pageLoaded) {
+  if (pageLoading) {
     return <Loader isPage={true} />;
   } else if (error || !seller) {
     return <ErrorPage menuOpen={false} />;
