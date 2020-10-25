@@ -110,11 +110,6 @@ const SellerPage = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, i18n.language]);
 
-  useEffect(() => {
-    fetchData(i18n.language);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.language]);
-
   const fetchData = async (lang?) => {
     setLoading(true);
     const result = id && (await getSeller(id, lang));

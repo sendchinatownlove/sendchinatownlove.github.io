@@ -10,11 +10,11 @@ describe('Seller Page', () => {
       '/shunfa-bakery'
     );
 
-    // const StoryHeader = await findAllByText('Shunfa Bakery');
+    const StoryHeader = await findAllByText('Shunfa Bakery');
     const OwnerPanel = await findByTestId('owner-panel');
     const StoreInfo = await findByTestId('store-info');
 
-    // expect(StoryHeader).toBeInTheDocument();
+    expect(StoryHeader.length).toBe(2);
     expect(OwnerPanel).toBeInTheDocument();
     expect(StoreInfo).toBeInTheDocument();
   });
