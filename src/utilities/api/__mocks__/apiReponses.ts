@@ -175,4 +175,9 @@ const successfulSellerDeliverOptionsResponse: any = [
   },
 ];
 
-export { successfulSellerResponse, successfulCampaignResponse, succesfulSellerHoursResponse, successfulSellerDeliverOptionsResponse }
+export {
+  successfulSellerResponse,
+  successfulCampaignResponse,
+  succesfulSellerHoursResponse,
+  successfulSellerDeliverOptionsResponse,
+};

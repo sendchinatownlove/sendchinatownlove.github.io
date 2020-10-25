@@ -1,4 +1,8 @@
-jest.mock("../../utilities/api/interactionManager");
+jest.mock('../../utilities/api/interactionManager');
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: () => ({ id: 'shunfa-bakery' }),
+}));
 
 import React from 'react';
 import { render } from '@testing-library/react';
@@ -7,15 +11,13 @@ import * as ReactRouter from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext';
 import i18n from '../../i18n';
-import "../../../__mocks__/matchMedia.mock";
+import '../../../__mocks__/matchMedia.mock';
 
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useParams: () => ({ id: "shunfa-bakery" })
-}));
-
-const renderIntegration = (initialPage = '', component: React.ReactNode, route?: any) => {
+const renderIntegration = (
+  initialPage = '',
+  component: React.ReactNode,
+  route?: any
+) => {
   return render(
     <ReactRouter.MemoryRouter initialEntries={[initialPage]}>
       <I18nextProvider i18n={i18n}>

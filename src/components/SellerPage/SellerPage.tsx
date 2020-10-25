@@ -5,12 +5,12 @@ import ErrorPage from '../404Page';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-  ModalPaymentConstants
+  ModalPaymentConstants,
 } from '../../utilities/hooks/ModalPaymentContext';
-import { 
+import {
   getSeller,
   getSellerHours,
-  getSellerDeliveryOptions
+  getSellerDeliveryOptions,
 } from '../../utilities';
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';

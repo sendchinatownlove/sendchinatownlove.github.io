@@ -72,7 +72,9 @@ const App = () => {
         component = <Redirect to="/all" />;
         break;
       case Page.Seller:
-        component = <SellerPage menuOpen={menuOpen} showAltLayout={showAltLayout}/>;
+        component = (
+          <SellerPage menuOpen={menuOpen} showAltLayout={showAltLayout} />
+        );
         break;
       case Page.GiftAMeal:
         component = <GiftAMealPage menuOpen={menuOpen} />;

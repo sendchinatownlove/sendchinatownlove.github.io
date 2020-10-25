@@ -2,17 +2,22 @@ import React from 'react';
 import { renderIntegration } from '../utilities/testing/render';
 import { StoreInfo } from '../components/StoreInfo';
 import { fireEvent } from '@testing-library/react';
-import { successfulSellerResponse, succesfulSellerHoursResponse, successfulSellerDeliverOptionsResponse } from "../utilities/api/__mocks__/apiReponses";
+import {
+  successfulSellerResponse,
+  succesfulSellerHoursResponse,
+  successfulSellerDeliverOptionsResponse,
+} from '../utilities/api/__mocks__/apiReponses';
 
-const renderStoreInfo = () => renderIntegration(
-  '/shunfa-bakery',
-  <StoreInfo
-    seller={successfulSellerResponse}
-    sellerHours={succesfulSellerHoursResponse}
-    isMerchantOpen={false}
-    deliveryService={successfulSellerDeliverOptionsResponse}
-  />
-);
+const renderStoreInfo = () =>
+  renderIntegration(
+    '/shunfa-bakery',
+    <StoreInfo
+      seller={successfulSellerResponse}
+      sellerHours={succesfulSellerHoursResponse}
+      isMerchantOpen={false}
+      deliveryService={successfulSellerDeliverOptionsResponse}
+    />
+  );
 describe('Store Info', () => {
   test('should display Store Info body values', async () => {
     const { getByText, getByAltText } = renderStoreInfo();

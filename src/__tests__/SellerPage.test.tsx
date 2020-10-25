@@ -6,7 +6,7 @@ describe('Seller Page', () => {
   test('should display SellerPage with succesful GET /seller request', async () => {
     const { findByTestId, findAllByText } = renderIntegration(
       '/shunfa-bakery',
-      <SellerPage menuOpen={false} showAltLayout={true}/>,
+      <SellerPage menuOpen={false} showAltLayout={true} />,
       '/shunfa-bakery'
     );
 

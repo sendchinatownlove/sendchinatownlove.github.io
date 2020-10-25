@@ -30,9 +30,8 @@ const OwnerPanel = ({
   sellerHours,
   isMerchantOpen,
   deliveryService,
-  showAltLayout
+  showAltLayout,
 }: Props) => {
-
   const dispatch = useModalPaymentDispatch(null);
   const [purchaseType, setPurchaseType] = useState('');
   const [activeCampaign, setActiveCampaign] = useState<any | null>();

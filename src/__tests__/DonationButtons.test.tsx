@@ -3,21 +3,21 @@ import { cleanup, fireEvent } from '@testing-library/react';
 
 import { renderIntegration } from '../utilities/testing/render';
 import DonationButtons from '../components/DonationButtons';
-import { successfulSellerResponse } from "../utilities/api/__mocks__/apiReponses";
+import { successfulSellerResponse } from '../utilities/api/__mocks__/apiReponses';
 
 const showModal = jest.fn();
 
-const renderDonationButtons = () => renderIntegration(
-  '/shunfa-bakery',
-  <DonationButtons 
-    seller={successfulSellerResponse} 
-    showModal={showModal}
-    active={true}
-  />
-);
+const renderDonationButtons = () =>
+  renderIntegration(
+    '/shunfa-bakery',
+    <DonationButtons
+      seller={successfulSellerResponse}
+      showModal={showModal}
+      active={true}
+    />
+  );
 
 describe('Donation Buttons', () => {
-
   afterEach(() => cleanup());
 
   test('should show donation modal when donation button is touched', async () => {
