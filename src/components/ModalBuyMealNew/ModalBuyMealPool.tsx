@@ -6,6 +6,8 @@ import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
 } from '../../utilities/hooks/ModalPaymentContext/constants';
+import { getCampaignsForMerchant, getDistributor } from '../../utilities/api/interactionManager'
+
 import { useTranslation } from 'react-i18next';
 import CampaignInstructions from './CamapignInstructions';
 import ReactPixel from 'react-facebook-pixel';
@@ -23,6 +25,7 @@ export const Modal = (props: Props) => {
 
   // set initial number of meals to 1
   const [numberOfMeals, setNumberOfMeals] = useState(1);
+  const [campaignDistributor, setCampaignDistributor] = useState<any>([])
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
     const valueInt = parseInt(value, 10);
@@ -45,8 +48,34 @@ export const Modal = (props: Props) => {
 
   useEffect(() => {
     dispatch({ type: SET_AMOUNT, payload: String(totalMealPrice) });
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch, totalMealPrice]);
+
+  const fetchData = async (sellerId: string) => {
+    // NOTE(wilsonj806) Showing the campaign that ends the soonest
+    const {data} = await getCampaignsForMerchant(sellerId)
+
+    const { data: distributor } = await getDistributor(data[0].distributor_id)
+    setCampaignDistributor(distributor)
+  }
+
+  useEffect(() => {
+    fetchData(props.sellerId)
+  }, [props.sellerId])
+
+  const Distributor = (
+      <>
+        <a
+          href={campaignDistributor.website_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.link}
+        >
+          {' '}
+          {campaignDistributor.name}
+        </a>
+        { ' '}
+      </>
+    )
 
   return (
     <form data-testid="ModalBuyMeal">
@@ -59,35 +88,7 @@ export const Modal = (props: Props) => {
       </div>
       <p className={styles.description}>
         {t('buyMealPool.description.weAre')}
-        <a
-          href="https://www.apexforyouth.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.link}
-        >
-          {' '}
-          APEX for Youth
-        </a>
-        ,
-        <a
-          href="http://www.lajornadany.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.link}
-        >
-          {' '}
-          La Jornada Food Pantry
-        </a>
-        ,
-        <a
-          href="https://www.cpc-nyc.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.link}
-        >
-          {' '}
-          the Chinese-American Planning Council{' '}
-        </a>
+        { Distributor }
         {t('buyMealPool.description.andRestaurants')}
         <span className={styles.bold}>
           {' '}
