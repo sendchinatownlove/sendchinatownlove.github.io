@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import moment from 'moment';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -10,15 +10,45 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import VoucherTable from './VoucherTable';
 import { formatCentsAmount } from './utils';
+import Loader from '../../components/Loader/Loader';
 import type { GiftCardDetails } from '../../utilities/api/types';
 
 import styles from './styles.module.scss';
 
 interface Props {
-  fetchData: () => void;
+  fetchData: () => Promise<void>;
   giftCards: GiftCardDetails[];
   organizationName: string;
 }
+
+const RefreshButton = ({ onClick }: { onClick: () => Promise<void> }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+
+    // onClick handler is passed in from merchant dashboard parent
+    // component. It handles the error async state.
+    try {
+      await onClick();
+    } finally {
+      setLoading(false);
+    }
+  }, [onClick]);
+
+  return (
+    <Button
+      className={styles.refreshButton}
+      onClick={fetchData}
+      variant="outlined"
+    >
+      <div className={styles.refreshButtonIcon}>
+        {loading ? <Loader size="24px" /> : <RefreshIcon />}
+      </div>
+      <div className={styles.refreshText}>Refresh 刷新</div>
+    </Button>
+  );
+};
 
 const StatsSection = ({
   subtitle,
@@ -44,10 +74,6 @@ const VoucherDashboard = ({
   const stats = useMemo(
     () => [
       {
-        subtitle: moment().format('YYYY-MM-DD, h:mm A'),
-        title: 'Last Updated 上次更新时间',
-      },
-      {
         subtitle: String(
           giftCards.filter((card) => card.latest_value > 0).length
         ),
@@ -58,6 +84,10 @@ const VoucherDashboard = ({
           giftCards.reduce((total, curr) => total + curr.latest_value, 0)
         ),
         title: 'Total Balance  总结余',
+      },
+      {
+        subtitle: moment().format('YYYY-MM-DD, h:mm A'),
+        title: 'Last Updated 上次更新时间',
       },
     ],
     [giftCards]
@@ -105,14 +135,7 @@ const VoucherDashboard = ({
           <div className={styles.headerSubtitle}>{organizationName}</div>
         </div>
         <div className={styles.actionButtons}>
-          <Button
-            className={styles.refreshButton}
-            onClick={fetchData}
-            variant="outlined"
-          >
-            <RefreshIcon />
-            <div className={styles.refreshText}>Refresh 刷新</div>
-          </Button>
+          <RefreshButton onClick={fetchData} />
           {/* TODO: Print button */}
         </div>
       </div>

@@ -51,6 +51,12 @@
       padding: 16px 50px;
       text-transform: uppercase;
 
+      .refreshButtonIcon {
+        display: flex;
+        height: 24px;
+        width: 24px;
+      }
+
       .refreshText {
         font-family: 'Open Sans';
         margin-left: 12px;
