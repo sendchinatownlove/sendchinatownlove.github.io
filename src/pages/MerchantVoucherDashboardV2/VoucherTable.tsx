@@ -143,9 +143,6 @@ const VoucherTable = ({
     },
   ];
 
-  {
-    /** TODO: render grey boxes for n/a values, hide search */
-  }
   // TODO: Hover and selected background colors.
   return (
     <FilterableTable
