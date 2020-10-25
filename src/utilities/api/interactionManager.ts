@@ -18,7 +18,7 @@ import {
 } from './endpoints';
 
 // Fix return typing
-export const getSellers = async (lang?: string): Promise<any> => {
+export const getSellers = async (lang?: string): Promise<any> => {  
   return await axios.get(sellers, {
     params: { locale: localeFromLanguage(lang) },
   });
