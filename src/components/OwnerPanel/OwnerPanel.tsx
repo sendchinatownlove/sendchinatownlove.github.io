@@ -14,13 +14,13 @@ import styles from './styles.module.scss';
 import chevron from './assets/chevron.svg';
 import DonationButtons from '../DonationButtons';
 import OrderNow from './OrderNow';
-import { useMedia } from 'use-media';
 
 interface Props {
   seller: BrowsePageSeller;
   sellerHours: any[];
   isMerchantOpen: boolean;
   deliveryService: any[];
+  showAltLayout?: boolean;
 }
 
 const ModalBox: any = Modal;
@@ -30,8 +30,8 @@ const OwnerPanel = ({
   sellerHours,
   isMerchantOpen,
   deliveryService,
+  showAltLayout
 }: Props) => {
-  const showAltLayout = useMedia({ minWidth: 900 });
 
   const dispatch = useModalPaymentDispatch(null);
   const [purchaseType, setPurchaseType] = useState('');

@@ -5,7 +5,7 @@ import ErrorPage from '../404Page';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-  ModalPaymentConstants,
+  ModalPaymentConstants
 } from '../../utilities/hooks/ModalPaymentContext';
 import { 
   getSeller,
@@ -107,9 +107,9 @@ const SellerPage = (props: Props) => {
   };
 
   useEffect(() => {
-    fetchData(i18n.language);
+    if (id) fetchData(i18n.language);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.language]);
+  }, [id, i18n.language]);
 
   const fetchData = async (lang?) => {
     setLoading(true);
@@ -130,6 +130,8 @@ const SellerPage = (props: Props) => {
     setLoading(false);
   };
 
+  console.log("id: "+id);
+
   return sellerData && !loading ? (
     <Container menuOpen={props.menuOpen}>
       {showAltLayout && <SellerName>{sellerData.name}</SellerName>}
@@ -146,6 +148,7 @@ const SellerPage = (props: Props) => {
           sellerHours={sellerHours}
           isMerchantOpen={isMerchantOpen}
           deliveryService={deliveryServices}
+          showAltLayout={showAltLayout}
         />
       </ContentContainer>
     </Container>

@@ -1,8 +1,8 @@
-import {succesfulSellerResponse, successfulCampaignResponse, succesfulSellerHoursResponse, successfulSellerDeliverOptionsResponse} from "./apiReponses";
+import {successfulSellerResponse, successfulCampaignResponse, succesfulSellerHoursResponse, successfulSellerDeliverOptionsResponse} from "./apiReponses";
 
 const getSeller = () => {
   return Promise.resolve()
-    .then(() => ({data: succesfulSellerResponse}));
+    .then(() => ({data: successfulSellerResponse}));
 };
 
 const getCampaignsForMerchant = () => {
@@ -28,7 +28,7 @@ exports.getCampaignsForMerchant = getSellerDeliveryOptions;
 //   return {
 //     ...jest.requireActual('../utilities/api'),
 //     getSeller: jest.fn(() => ({
-//       data: succesfulSellerResponse,
+//       data: successfulSellerResponse,
 //     })),
 //   };
 // });

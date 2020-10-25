@@ -1,4 +1,4 @@
-const succesfulSellerResponse: any = {
+const successfulSellerResponse: any = {
   id: 1,
   seller_id: 'shunfa-bakery',
   cuisine_name: 'Bakery',
@@ -175,4 +175,4 @@ const successfulSellerDeliverOptionsResponse: any = [
   },
 ];
 
-export { succesfulSellerResponse, successfulCampaignResponse, succesfulSellerHoursResponse, successfulSellerDeliverOptionsResponse }
+export { successfulSellerResponse, successfulCampaignResponse, succesfulSellerHoursResponse, successfulSellerDeliverOptionsResponse }

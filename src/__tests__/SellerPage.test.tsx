@@ -6,7 +6,8 @@ describe('Seller Page', () => {
   test('should display SellerPage with succesful GET /seller request', async () => {
     const { findByTestId, findAllByText } = renderIntegration(
       '/shunfa-bakery',
-      <SellerPage menuOpen={false} />
+      <SellerPage menuOpen={false} />,
+      'shunfa-bakery'
     );
 
     const StoryHeader = await findAllByText('Shunfa Bakery');
