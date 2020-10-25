@@ -37,6 +37,10 @@
   }
 
   .actionButtons {
+    > :first-child {
+      margin-right: 24px;
+    }
+
     @media only screen and (max-width: 960px) {
       margin-top: 32px;
     }
@@ -205,4 +209,10 @@
     text-transform: uppercase;
     white-space: nowrap;
   }
+}
+
+.greyBox {
+  background-color: #eaeaea;
+  height: 40px;
+  width: 126px;
 }

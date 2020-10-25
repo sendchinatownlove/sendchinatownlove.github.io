@@ -46,6 +46,7 @@
     "react-share": "^4.2.1",
     "react-social-icons": "^4.1.0",
     "react-square-payment-form": "^0.6.3",
+    "react-to-print": "^2.10.3",
     "react-youtube": "^7.11.3",
     "reactjs-popup": "^1.5.0",
     "redux": "^4.0.5",
