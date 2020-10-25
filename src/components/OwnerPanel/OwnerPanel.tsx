@@ -66,7 +66,7 @@ const OwnerPanel = ({
   };
 
   return (
-    <>
+    <OwnerContainer data-testid="owner-panel">
       {showAltLayout ? (
         <Panel>
           <div className={styles.subsection}>
@@ -173,12 +173,16 @@ const OwnerPanel = ({
         nonProfitLocationId={seller.non_profit_location_id}
         campaignId={campaignId}
       />
-    </>
+    </OwnerContainer>
   );
 };
 
 export default OwnerPanel;
 
+const OwnerContainer = styled.div`
+  margin: 0 auto;
+  width: 100%;
+`;
 const Panel = styled.section`
   position: relative;
   order: 1;

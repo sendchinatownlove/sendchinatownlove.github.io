@@ -3,6 +3,7 @@ import React, { lazy, Suspense, useState } from 'react';
 import ReactPixel from 'react-facebook-pixel';
 import ReactGA from 'react-ga';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import { useMedia } from 'use-media';
 
 import Footer from '../Footer';
 import Loader from '../Loader';
@@ -59,6 +60,7 @@ ReactPixel.init(pixelId, undefined, options);
 
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const showAltLayout = useMedia({ minWidth: 900 });
 
   const returnComponent = (child: Page) => {
     let component;
@@ -70,7 +72,7 @@ const App = () => {
         component = <Redirect to="/all" />;
         break;
       case Page.Seller:
-        component = <SellerPage menuOpen={menuOpen} />;
+        component = <SellerPage menuOpen={menuOpen} showAltLayout={showAltLayout}/>;
         break;
       case Page.GiftAMeal:
         component = <GiftAMealPage menuOpen={menuOpen} />;

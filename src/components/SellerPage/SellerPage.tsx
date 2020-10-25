@@ -16,18 +16,17 @@ import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { useMedia } from 'use-media';
 
 import ReactPixel from 'react-facebook-pixel';
 
 interface Props {
   menuOpen: boolean;
+  showAltLayout: boolean;
 }
 
 ReactPixel.trackCustom('SellerPageView', {});
 const SellerPage = (props: Props) => {
   const { i18n } = useTranslation();
-  const showAltLayout = useMedia({ minWidth: 900 });
 
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams<any>();
@@ -130,11 +129,9 @@ const SellerPage = (props: Props) => {
     setLoading(false);
   };
 
-  console.log("id: "+id);
-
   return sellerData && !loading ? (
-    <Container menuOpen={props.menuOpen}>
-      {showAltLayout && <SellerName>{sellerData.name}</SellerName>}
+    <Container {...props}>
+      {props.showAltLayout && <SellerName>{sellerData.name}</SellerName>}
       <ContentContainer>
         {/* TODO(ArtyEmsee): Fix object mapping */}
         <StoreInfo
@@ -148,7 +145,7 @@ const SellerPage = (props: Props) => {
           sellerHours={sellerHours}
           isMerchantOpen={isMerchantOpen}
           deliveryService={deliveryServices}
-          showAltLayout={showAltLayout}
+          showAltLayout={props.showAltLayout}
         />
       </ContentContainer>
     </Container>
