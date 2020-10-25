@@ -11,9 +11,8 @@ import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
-import classnames from 'classnames';
 import chevron from './assets/chevron.svg';
-import DonationButtons from '../DonationButtons/DonationButtons';
+import DonationButtons from '../DonationButtons';
 import OrderNow from './OrderNow';
 import { useMedia } from 'use-media';
 
