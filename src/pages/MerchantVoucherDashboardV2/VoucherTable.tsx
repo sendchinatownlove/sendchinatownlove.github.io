@@ -61,7 +61,7 @@ const VoucherTable = ({
         setErrorType(null);
         setShowSuccessBanner(true);
       } catch (error) {
-        if (error.message.indexOf('422') === -1) {
+        if (error.message.includes('422')) {
           setErrorType(ERROR_TYPE.VALIDATION);
         } else {
           setErrorType(ERROR_TYPE.GENERIC);
