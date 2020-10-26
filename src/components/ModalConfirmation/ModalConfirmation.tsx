@@ -24,7 +24,7 @@ const ModalConfirmation = (props: Props) => {
   };
 
   return (
-    <Container data-testid="Modal Confirmation">
+    <Container data-testid="modal-confirmation">
       <h2>Thank you!</h2>
       <p>{confirmationText()}</p>
 
