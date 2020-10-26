@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import moment from 'moment';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -8,6 +8,8 @@ import InputBase from '@material-ui/core/InputBase';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import SearchIcon from '@material-ui/icons/Search';
 
+import { SuccessfulSaveBanner, SaveErrorBanner } from './Banners';
+import type { ErrorTypeValues } from './Banners';
 import VoucherTable from './VoucherTable';
 import { formatCentsAmount } from './utils';
 import type { GiftCardDetails } from '../../utilities/api/types';
@@ -41,11 +43,21 @@ const VoucherDashboard = ({
   const [searchFilter, setSearchFilter] = useState<string>('');
   const [filterGam, setFilterGam] = useState<boolean>(false);
 
+  const [showSuccessBanner, setShowSuccessBanner] = useState<boolean>(false);
+  const [errorType, setErrorType] = useState<ErrorTypeValues | null>(null);
+
+  useEffect(() => {
+    if (showSuccessBanner) {
+      // Close success banner after 15 sec.
+      setTimeout(() => setShowSuccessBanner(false), 15000);
+    }
+  }, [showSuccessBanner]);
+
   const stats = useMemo(
     () => [
       {
         subtitle: moment().format('YYYY-MM-DD, h:mm A'),
-        title: 'Last Updated 上次更新时间',
+        title: 'Last Updated  上次更新时间',
       },
       {
         subtitle: String(
@@ -121,6 +133,8 @@ const VoucherDashboard = ({
           <StatsSection key={section.title} {...section} />
         ))}
       </div>
+      {showSuccessBanner && <SuccessfulSaveBanner />}
+      {errorType && <SaveErrorBanner errorType={errorType} />}
       <div className={styles.contentContainer}>
         <div className={styles.filterSection}>
           <div className={styles.searchBar}>
@@ -159,7 +173,12 @@ const VoucherDashboard = ({
             </div>
           </div>
         </div>
-        <VoucherTable fetchData={fetchData} giftCards={filteredGiftCards} />
+        <VoucherTable
+          fetchData={fetchData}
+          giftCards={filteredGiftCards}
+          setErrorType={setErrorType}
+          setShowSuccessBanner={setShowSuccessBanner}
+        />
       </div>
     </div>
   );

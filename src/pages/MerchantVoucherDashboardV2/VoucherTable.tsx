@@ -6,6 +6,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import EditIcon from '@material-ui/icons/Edit';
 
+import { ERROR_TYPE } from './Banners';
+import type { ErrorTypeValues } from './Banners';
 import type { FTRenderProps } from './types';
 import { formatCentsAmount } from './utils';
 import { updateVoucher } from '../../utilities/api/interactionManager';
@@ -20,9 +22,13 @@ const renderDate = (date: string) => moment(date).format('YYYY-MM-DD');
 const VoucherTable = ({
   fetchData,
   giftCards,
+  setErrorType,
+  setShowSuccessBanner,
 }: {
   fetchData: () => void;
   giftCards: GiftCardDetails[];
+  setErrorType: (type: ErrorTypeValues | null) => void;
+  setShowSuccessBanner: (showSuccessBanner: boolean) => void;
 }) => {
   const [editingRowGiftCardId, setEditingRowGiftCardId] = useState<
     string | null
@@ -30,21 +36,32 @@ const VoucherTable = ({
   const [latestValue, setLatestValue] = useState<string>('');
 
   useEffect(() => {
+    // Reset error banner after selected row changes.
+    setErrorType(null);
+
     if (!editingRowGiftCardId) {
       setLatestValue('');
     }
-  }, [editingRowGiftCardId]);
+  }, [editingRowGiftCardId, setErrorType]);
 
   const onSave = useCallback(
     async (giftCardId: string) => {
-      const latestValueCents = parseFloat(latestValue) * 100;
-      await updateVoucher(giftCardId, latestValueCents);
-      setEditingRowGiftCardId(null);
-      fetchData();
-      // TODO: Show success banner.
-      // TODO: Show error banner on error.
+      try {
+        const latestValueCents = parseFloat(latestValue) * 100;
+        await updateVoucher(giftCardId, latestValueCents);
+        fetchData();
+        setEditingRowGiftCardId(null);
+        setErrorType(null);
+        setShowSuccessBanner(true);
+      } catch (error) {
+        if (error.message.indexOf('422') === -1) {
+          setErrorType(ERROR_TYPE.VALIDATION);
+        } else {
+          setErrorType(ERROR_TYPE.GENERIC);
+        }
+      }
     },
-    [fetchData, latestValue]
+    [fetchData, latestValue, setErrorType, setShowSuccessBanner]
   );
 
   const renderLatestValue = ({ record, value }: FTRenderProps) => {
