@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
-import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
 import {
-  SET_MODAL_VIEW,
-  SET_AMOUNT,
-} from '../../utilities/hooks/ModalPaymentContext/constants';
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+} from '../../utilities/hooks/ModalPaymentContext';
 import { useTranslation } from 'react-i18next';
 import walletImage from './wallet.png';
 import cardImage from './card.png';
@@ -20,7 +19,7 @@ export interface Props {
 
 export const Modal = (props: Props) => {
   const { t } = useTranslation();
-  const dispatch = useModalPaymentDispatch();
+  const dispatch = useModalPaymentDispatch(null);
 
   // set initial number of meals to 1
   const [numberOfMeals, setNumberOfMeals] = useState(1);
@@ -29,7 +28,10 @@ export const Modal = (props: Props) => {
     const valueInt = parseInt(value, 10);
     setNumberOfMeals(isNaN(valueInt) ? 0 : valueInt);
     const totalMealPrice = valueInt * props.costPerMeal;
-    dispatch({ type: SET_AMOUNT, payload: String(totalMealPrice) });
+    dispatch({
+      type: ModalPaymentConstants.SET_AMOUNT,
+      payload: String(totalMealPrice),
+    });
   };
 
   const openModal = (e: any) => {
@@ -37,7 +39,7 @@ export const Modal = (props: Props) => {
       numberOfMeals: numberOfMeals,
     });
     e.preventDefault();
-    dispatch({ type: SET_MODAL_VIEW, payload: 1 });
+    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 1 });
   };
 
   const totalMealPrice = numberOfMeals * props.costPerMeal;

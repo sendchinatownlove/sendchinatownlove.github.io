@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import classnames from 'classnames';
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+} from '../../utilities/hooks/ModalPaymentContext';
 import { BrowsePageSeller } from '../../utilities/api/types';
 import { getCampaignsForMerchant } from '../../utilities';
 import Modal from '../Modal';
@@ -8,17 +11,16 @@ import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
-import classnames from 'classnames';
 import chevron from './assets/chevron.svg';
-import DonationButtons from '../DonationButtons/DonationButtons';
+import DonationButtons from '../DonationButtons';
 import OrderNow from './OrderNow';
-import { useMedia } from 'use-media';
 
 interface Props {
   seller: BrowsePageSeller;
   sellerHours: any[];
   isMerchantOpen: boolean;
   deliveryService: any[];
+  showAltLayout?: boolean;
 }
 
 const ModalBox: any = Modal;
@@ -28,10 +30,9 @@ const OwnerPanel = ({
   sellerHours,
   isMerchantOpen,
   deliveryService,
+  showAltLayout,
 }: Props) => {
-  const showAltLayout = useMedia({ minWidth: 900 });
-
-  const dispatch = useModalPaymentDispatch();
+  const dispatch = useModalPaymentDispatch(null);
   const [purchaseType, setPurchaseType] = useState('');
   const [activeCampaign, setActiveCampaign] = useState<any | null>();
   const [pricePerMeal, setPricePerMeal] = useState(0);
@@ -59,12 +60,12 @@ const OwnerPanel = ({
   }, [seller.seller_id]);
 
   const showModal = (event: any) => {
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 0 });
     setPurchaseType(event.target.value);
   };
 
   return (
-    <>
+    <OwnerContainer data-testid="owner-panel">
       {showAltLayout ? (
         <Panel>
           <div className={styles.subsection}>
@@ -171,12 +172,16 @@ const OwnerPanel = ({
         nonProfitLocationId={seller.non_profit_location_id}
         campaignId={campaignId}
       />
-    </>
+    </OwnerContainer>
   );
 };
 
 export default OwnerPanel;
 
+const OwnerContainer = styled.div`
+  margin: 0 auto;
+  width: 100%;
+`;
 const Panel = styled.section`
   position: relative;
   order: 1;

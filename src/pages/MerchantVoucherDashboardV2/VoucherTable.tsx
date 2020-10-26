@@ -19,16 +19,23 @@ const FilterableTable = require('react-filterable-table');
 
 const renderDate = (date: string) => moment(date).format('YYYY-MM-DD');
 
+// Determine if the gift card latest and original values are different
+// (aka it's been used).
+const hasBeenUsed = (record: any) =>
+  record.latest_value !== record.original_value;
+
 const VoucherTable = ({
   fetchData,
   giftCards,
   setErrorType,
   setShowSuccessBanner,
+  showPrintView,
 }: {
   fetchData: () => void;
   giftCards: GiftCardDetails[];
   setErrorType: (type: ErrorTypeValues | null) => void;
   setShowSuccessBanner: (showSuccessBanner: boolean) => void;
+  showPrintView: boolean;
 }) => {
   const [editingRowGiftCardId, setEditingRowGiftCardId] = useState<
     string | null
@@ -65,43 +72,43 @@ const VoucherTable = ({
   );
 
   const renderLatestValue = ({ record, value }: FTRenderProps) => {
-    if (record.seller_gift_card_id === editingRowGiftCardId) {
+    if (showPrintView && !hasBeenUsed(record)) {
+      return <div className={styles.greyBox} />;
+    } else if (record.seller_gift_card_id !== editingRowGiftCardId) {
+      const onSelectCell = (record: any) => {
+        // This has to be a string because the onChange event below outputs a
+        // string value.
+        setLatestValue(String(record.latest_value / 100));
+        setEditingRowGiftCardId(record.seller_gift_card_id);
+      };
+
       return (
-        <div className={styles.editEndingBalance}>
-          <TextField
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">$</InputAdornment>
-              ),
-            }}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setLatestValue(event.target.value)
-            }
-            value={latestValue}
-            variant="outlined"
-          />
-          <Button
-            className={styles.saveButton}
-            onClick={() => onSave(record.gift_card_id)}
-            variant="outlined"
-          >
-            Save 储存
-          </Button>
+        <div className={styles.editCell} onClick={() => onSelectCell(record)}>
+          {formatCentsAmount(value)}
+          {!showPrintView && <EditIcon classes={{ root: styles.editIcon }} />}
         </div>
       );
     }
 
-    const onSelectCell = (record) => {
-      // This has to be a string because the onChange event below outputs a
-      // string value.
-      setLatestValue(String(record.latest_value / 100));
-      setEditingRowGiftCardId(record.seller_gift_card_id);
-    };
-
     return (
-      <div className={styles.editCell} onClick={() => onSelectCell(record)}>
-        {formatCentsAmount(value)}
-        <EditIcon classes={{ root: styles.editIcon }} />
+      <div className={styles.editEndingBalance}>
+        <TextField
+          InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          }}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setLatestValue(event.target.value)
+          }
+          value={latestValue}
+          variant="outlined"
+        />
+        <Button
+          className={styles.saveButton}
+          onClick={() => onSave(record.gift_card_id)}
+          variant="outlined"
+        >
+          Save 储存
+        </Button>
       </div>
     );
   };
@@ -135,13 +142,14 @@ const VoucherTable = ({
       name: 'last_updated',
       displayName: 'Date Last Used\n上次使用日期',
       sortable: true,
-      render: ({ record, value }: FTRenderProps) =>
-        // Determine if the gift card latest and original values are different
-        // (aka it's been used). We use this to show "N/A" in the cell or the
-        // last updated date.
-        record.latest_value !== record.original_value
-          ? renderDate(value)
-          : 'N/A',
+      render: ({ record, value }: FTRenderProps) => {
+        if (hasBeenUsed(record)) {
+          return renderDate(value);
+        } else if (showPrintView) {
+          return <div className={styles.greyBox} />;
+        }
+        return 'N/A';
+      },
     },
     {
       name: 'latest_value',
@@ -155,6 +163,7 @@ const VoucherTable = ({
   // TODO: Hover and selected background colors.
   return (
     <FilterableTable
+      bottomPagerVisible={!showPrintView}
       className={styles.tableContainer}
       data={giftCards}
       fields={fields}
@@ -163,7 +172,8 @@ const VoucherTable = ({
       namespace="Vouchers"
       noFilteredRecordsMessage="No vouchers found for filter"
       noRecordsMessage="No vouchers in our system yet!"
-      pageSize={20}
+      // Kind of a hack, but show all of the gift cards if we're in print view.
+      pageSize={showPrintView ? 100000 : 20}
       pageSizes={null} // Don't show the page size chooser.
       recordCountName="Voucher Found"
       recordCountNamePlural="Vouchers Found"
