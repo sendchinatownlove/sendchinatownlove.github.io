@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useReactToPrint } from 'react-to-print';
 
 import VoucherDashboard from './VoucherDashboard';
 import ErrorPage from '../../components/404Page';
@@ -19,6 +20,19 @@ const MerchantVoucherDashboardV2 = () => {
 
   const [seller, setSeller] = useState<BrowsePageSeller | null>(null);
   const [giftCards, setGiftCards] = useState<GiftCardDetails[]>([]);
+
+  const printRef = useRef(null);
+  const [showPrintView, setShowPrintView] = useState<boolean>(false);
+  const handlePrint = useReactToPrint({
+    content: () => printRef.current,
+    onAfterPrint: () => setShowPrintView(false),
+  });
+  const print = useCallback(async () => {
+    if (handlePrint) {
+      setShowPrintView(true);
+      handlePrint();
+    }
+  }, [handlePrint]);
 
   const params = useHistory();
   const urlParams = (params.location.pathname.match(
@@ -56,11 +70,15 @@ const MerchantVoucherDashboardV2 = () => {
   }
 
   return (
-    <VoucherDashboard
-      fetchData={fetchData}
-      giftCards={giftCards}
-      organizationName={seller.name}
-    />
+    <div ref={printRef}>
+      <VoucherDashboard
+        fetchData={fetchData}
+        giftCards={giftCards}
+        handlePrint={print}
+        organizationName={seller.name}
+        showPrintView={showPrintView}
+      />
+    </div>
   );
 };
 

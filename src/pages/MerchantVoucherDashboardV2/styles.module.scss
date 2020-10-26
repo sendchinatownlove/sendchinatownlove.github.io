@@ -37,11 +37,15 @@
   }
 
   .actionButtons {
+    > :first-child {
+      margin-right: 24px;
+    }
+
     @media only screen and (max-width: 960px) {
       margin-top: 32px;
     }
 
-    .refreshButton {
+    .loadingButton {
       background-color: #ffffff;
       border-radius: 50px;
       color: #a8192e;
@@ -51,13 +55,13 @@
       padding: 16px 50px;
       text-transform: uppercase;
 
-      .refreshButtonIcon {
+      .loadingButtonIcon {
         display: flex;
         height: 24px;
         width: 24px;
       }
 
-      .refreshText {
+      .loadingText {
         font-family: 'Open Sans';
         margin-left: 12px;
       }
@@ -211,4 +215,10 @@
     text-transform: uppercase;
     white-space: nowrap;
   }
+}
+
+.greyBox {
+  background-color: #eaeaea;
+  height: 40px;
+  width: 126px;
 }

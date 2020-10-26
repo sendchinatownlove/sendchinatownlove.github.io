@@ -5,6 +5,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import InputBase from '@material-ui/core/InputBase';
+import PrintIcon from '@material-ui/icons/Print';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -18,13 +19,23 @@ import styles from './styles.module.scss';
 interface Props {
   fetchData: () => Promise<void>;
   giftCards: GiftCardDetails[];
+  handlePrint: () => Promise<void>;
   organizationName: string;
+  showPrintView: boolean;
 }
 
-const RefreshButton = ({ onClick }: { onClick: () => Promise<void> }) => {
+const LoadingButton = ({
+  icon,
+  onClick,
+  text,
+}: {
+  icon: React.FunctionComponent;
+  onClick: () => Promise<void>;
+  text: string;
+}) => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const fetchData = useCallback(async () => {
+  const click = useCallback(async () => {
     setLoading(true);
 
     // onClick handler is passed in from merchant dashboard parent
@@ -36,16 +47,14 @@ const RefreshButton = ({ onClick }: { onClick: () => Promise<void> }) => {
     }
   }, [onClick]);
 
+  const Icon = icon;
+
   return (
-    <Button
-      className={styles.refreshButton}
-      onClick={fetchData}
-      variant="outlined"
-    >
-      <div className={styles.refreshButtonIcon}>
-        {loading ? <Loader size="24px" /> : <RefreshIcon />}
+    <Button className={styles.loadingButton} onClick={click} variant="outlined">
+      <div className={styles.loadingButtonIcon}>
+        {loading ? <Loader size="24px" /> : <Icon />}
       </div>
-      <div className={styles.refreshText}>Refresh 刷新</div>
+      <div className={styles.loadingText}>{text}</div>
     </Button>
   );
 };
@@ -66,7 +75,9 @@ const StatsSection = ({
 const VoucherDashboard = ({
   fetchData,
   giftCards,
+  handlePrint,
   organizationName,
+  showPrintView,
 }: Props) => {
   const [searchFilter, setSearchFilter] = useState<string>('');
   const [filterGam, setFilterGam] = useState<boolean>(false);
@@ -134,10 +145,20 @@ const VoucherDashboard = ({
           <div className={styles.headerTitle}>Voucher Tracker 礼品券记录</div>
           <div className={styles.headerSubtitle}>{organizationName}</div>
         </div>
-        <div className={styles.actionButtons}>
-          <RefreshButton onClick={fetchData} />
-          {/* TODO: Print button */}
-        </div>
+        {!showPrintView && (
+          <div className={styles.actionButtons}>
+            <LoadingButton
+              icon={RefreshIcon}
+              onClick={fetchData}
+              text="Refresh 刷新"
+            />
+            <LoadingButton
+              icon={PrintIcon}
+              onClick={handlePrint}
+              text="Print 打印"
+            />
+          </div>
+        )}
       </div>
       <div className={styles.stats}>
         {stats.map((section) => (
@@ -145,44 +166,50 @@ const VoucherDashboard = ({
         ))}
       </div>
       <div className={styles.contentContainer}>
-        <div className={styles.filterSection}>
-          <div className={styles.searchBar}>
-            <div className={styles.searchIcon}>
-              <SearchIcon />
+        {!showPrintView && (
+          <div className={styles.filterSection}>
+            <div className={styles.searchBar}>
+              <div className={styles.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                className={styles.searchText}
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearchFilter(event.target.value)
+                }
+                placeholder="Search by Voucher Code or Email Address 使用礼品券号码或电子邮件搜寻"
+              />
             </div>
-            <InputBase
-              className={styles.searchText}
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setSearchFilter(event.target.value)
-              }
-              placeholder="Search by Voucher Code or Email Address 使用礼品券号码或电子邮件搜寻"
-            />
-          </div>
-          <div className={styles.filterGamContainer}>
-            <Checkbox
-              checked={filterGam}
-              className={styles.checkbox}
-              classes={{
-                colorSecondary: filterGam ? styles.filterGamSelected : '',
-              }}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setFilterGam(event.target.checked)
-              }
-            />
-            <div
-              className={classNames({
-                [styles.filterGamText]: true,
-                [styles.filterGamSelected]: filterGam,
-              })}
-            >
-              Hide gift-a-meal vouchers
-              <br />
-              隐藏爱心餐餐券
+            <div className={styles.filterGamContainer}>
+              <Checkbox
+                checked={filterGam}
+                className={styles.checkbox}
+                classes={{
+                  colorSecondary: filterGam ? styles.filterGamSelected : '',
+                }}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  setFilterGam(event.target.checked)
+                }
+              />
+              <div
+                className={classNames({
+                  [styles.filterGamText]: true,
+                  [styles.filterGamSelected]: filterGam,
+                })}
+              >
+                Hide gift-a-meal vouchers
+                <br />
+                隐藏爱心餐餐券
+              </div>
             </div>
           </div>
-        </div>
-        <VoucherTable fetchData={fetchData} giftCards={filteredGiftCards} />
+        )}
+        <VoucherTable
+          fetchData={fetchData}
+          giftCards={filteredGiftCards}
+          showPrintView={showPrintView}
+        />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import React, { lazy, Suspense, useState } from 'react';
 import ReactPixel from 'react-facebook-pixel';
 import ReactGA from 'react-ga';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import { useMedia } from 'use-media';
 
 import Footer from '../Footer';
 import Loader from '../Loader';
@@ -10,7 +11,7 @@ import Header from '../Navbar';
 import ScrollToTop from '../ScrollToTop';
 import { Page } from '../../consts';
 import ScreenName from '../../pages/PassportRedemption/ScreenName';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext/context';
+import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
 
 const trackingId = process.env.REACT_APP_GA_TRACKING_ID!;
@@ -35,19 +36,21 @@ history.listen((location) => {
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const GiftAMealPage = lazy(() => import('../MerchantsPage/gam/GiftAMealPage'));
-const LightUpChinatownPage = lazy(() => import('../LightUpChinatown/LightUpChinatownPage'));
+const LightUpChinatownPage = lazy(
+  () => import('../LightUpChinatown/LightUpChinatownPage')
+);
 const ErrorPage = lazy(() => import('../404Page'));
-const VoucherRedemptionPage = lazy(() =>
-  import('../../pages/VoucherRedemption')
+const VoucherRedemptionPage = lazy(
+  () => import('../../pages/VoucherRedemption')
 );
-const MerchantVoucherDashboard = lazy(() =>
-  import('../../pages/MerchantVoucherDashboard')
+const MerchantVoucherDashboard = lazy(
+  () => import('../../pages/MerchantVoucherDashboard')
 );
-const MerchantVoucherDashboardV2 = lazy(() =>
-  import('../../pages/MerchantVoucherDashboardV2')
+const MerchantVoucherDashboardV2 = lazy(
+  () => import('../../pages/MerchantVoucherDashboardV2')
 );
-const PassportVoucher = lazy(() =>
-  import('../../pages/PassportRedemption/PassportVoucher')
+const PassportVoucher = lazy(
+  () => import('../../pages/PassportRedemption/PassportVoucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
 
@@ -60,6 +63,7 @@ ReactPixel.init(pixelId, undefined, options);
 
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const showAltLayout = useMedia({ minWidth: 900 });
 
   const returnComponent = (child: Page) => {
     let component;
@@ -71,7 +75,9 @@ const App = () => {
         component = <Redirect to="/all" />;
         break;
       case Page.Seller:
-        component = <SellerPage menuOpen={menuOpen} />;
+        component = (
+          <SellerPage menuOpen={menuOpen} showAltLayout={showAltLayout} />
+        );
         break;
       case Page.GiftAMeal:
         component = <GiftAMealPage menuOpen={menuOpen} />;
@@ -85,18 +91,16 @@ const App = () => {
     }
 
     return (
-      <>
-        <ModalPaymentProvider>
-          <ScrollToTop />
-          <Header
-            menuOpen={menuOpen}
-            pageName={child}
-            setMenuOpen={setMenuOpen}
-          />
-          {component}
-          <Footer menuOpen={menuOpen} />
-        </ModalPaymentProvider>
-      </>
+      <ModalPaymentProvider>
+        <ScrollToTop />
+        <Header
+          menuOpen={menuOpen}
+          pageName={child}
+          setMenuOpen={setMenuOpen}
+        />
+        {component}
+        <Footer menuOpen={menuOpen} />
+      </ModalPaymentProvider>
     );
   };
 

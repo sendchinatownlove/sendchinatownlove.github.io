@@ -5,36 +5,34 @@ import ErrorPage from '../404Page';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-} from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_SELLER_DATA } from '../../utilities/hooks/ModalPaymentContext/constants';
+  ModalPaymentConstants,
+} from '../../utilities/hooks/ModalPaymentContext';
 import {
   getSeller,
   getSellerHours,
   getSellerDeliveryOptions,
 } from '../../utilities';
-
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { useMedia } from 'use-media';
 
 import ReactPixel from 'react-facebook-pixel';
 
 interface Props {
   menuOpen: boolean;
+  showAltLayout: boolean;
 }
 
 ReactPixel.trackCustom('SellerPageView', {});
 const SellerPage = (props: Props) => {
   const { i18n } = useTranslation();
-  const showAltLayout = useMedia({ minWidth: 900 });
 
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams<any>();
 
-  const dispatch = useModalPaymentDispatch();
-  const { sellerData } = useModalPaymentState();
+  const dispatch = useModalPaymentDispatch(null);
+  const { sellerData } = useModalPaymentState(null);
   const [sellerHours, setSellerHours] = useState<any[]>([]);
   const [isMerchantOpen, setIsMerchantOpen] = useState(false);
   const [deliveryServices, setDeliveryServices] = useState<any[]>([]);
@@ -107,11 +105,16 @@ const SellerPage = (props: Props) => {
     return false;
   };
 
+  useEffect(() => {
+    if (id) fetchData(i18n.language);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, i18n.language]);
+
   const fetchData = async (lang?) => {
     setLoading(true);
-    const result = id && (await getSeller(id, lang));
-    await dispatch({
-      type: SET_SELLER_DATA,
+    const result = await getSeller(id, lang);
+    dispatch({
+      type: ModalPaymentConstants.SET_SELLER_DATA,
       payload: result.data,
     });
     const { data: hours } = await getSellerHours(id);
@@ -126,14 +129,9 @@ const SellerPage = (props: Props) => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    fetchData(i18n.language);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.language]);
-
   return sellerData && !loading ? (
-    <Container menuOpen={props.menuOpen}>
-      {showAltLayout && <SellerName>{sellerData.name}</SellerName>}
+    <Container {...props}>
+      {props.showAltLayout && <SellerName>{sellerData.name}</SellerName>}
       <ContentContainer>
         {/* TODO(ArtyEmsee): Fix object mapping */}
         <StoreInfo
@@ -147,6 +145,7 @@ const SellerPage = (props: Props) => {
           sellerHours={sellerHours}
           isMerchantOpen={isMerchantOpen}
           deliveryService={deliveryServices}
+          showAltLayout={props.showAltLayout}
         />
       </ContentContainer>
     </Container>
