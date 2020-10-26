@@ -45,7 +45,7 @@
       margin-top: 32px;
     }
 
-    .actionButton {
+    .loadingButton {
       background-color: #ffffff;
       border-radius: 50px;
       color: #a8192e;
@@ -55,7 +55,13 @@
       padding: 16px 50px;
       text-transform: uppercase;
 
-      .actionButtonText {
+      .loadingButtonIcon {
+        display: flex;
+        height: 24px;
+        width: 24px;
+      }
+
+      .loadingText {
         font-family: 'Open Sans';
         margin-left: 12px;
       }

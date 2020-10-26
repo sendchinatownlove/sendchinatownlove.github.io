@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import moment from 'moment';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -11,32 +11,53 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import VoucherTable from './VoucherTable';
 import { formatCentsAmount } from './utils';
+import Loader from '../../components/Loader/Loader';
 import type { GiftCardDetails } from '../../utilities/api/types';
 
 import styles from './styles.module.scss';
 
 interface Props {
-  fetchData: () => void;
+  fetchData: () => Promise<void>;
   giftCards: GiftCardDetails[];
-  handlePrint: () => void;
+  handlePrint: () => Promise<void>;
   organizationName: string;
   showPrintView: boolean;
 }
 
-const ActionButton = ({
+const LoadingButton = ({
   icon,
   onClick,
   text,
 }: {
-  icon: JSX.Element;
-  onClick: () => void;
+  icon: React.FunctionComponent;
+  onClick: () => Promise<void>;
   text: string;
-}) => (
-  <Button className={styles.actionButton} onClick={onClick} variant="outlined">
-    {icon}
-    <div className={styles.actionButtonText}>{text}</div>
-  </Button>
-);
+}) => {
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const click = useCallback(async () => {
+    setLoading(true);
+
+    // onClick handler is passed in from merchant dashboard parent
+    // component. It handles the error async state.
+    try {
+      await onClick();
+    } finally {
+      setLoading(false);
+    }
+  }, [onClick]);
+
+  const Icon = icon;
+
+  return (
+    <Button className={styles.loadingButton} onClick={click} variant="outlined">
+      <div className={styles.loadingButtonIcon}>
+        {loading ? <Loader size="24px" /> : <Icon />}
+      </div>
+      <div className={styles.loadingText}>{text}</div>
+    </Button>
+  );
+};
 
 const StatsSection = ({
   subtitle,
@@ -64,10 +85,6 @@ const VoucherDashboard = ({
   const stats = useMemo(
     () => [
       {
-        subtitle: moment().format('YYYY-MM-DD, h:mm A'),
-        title: 'Last Updated 上次更新时间',
-      },
-      {
         subtitle: String(
           giftCards.filter((card) => card.latest_value > 0).length
         ),
@@ -78,6 +95,10 @@ const VoucherDashboard = ({
           giftCards.reduce((total, curr) => total + curr.latest_value, 0)
         ),
         title: 'Total Balance  总结余',
+      },
+      {
+        subtitle: moment().format('YYYY-MM-DD, h:mm A'),
+        title: 'Last Updated 上次更新时间',
       },
     ],
     [giftCards]
@@ -126,14 +147,14 @@ const VoucherDashboard = ({
         </div>
         {!showPrintView && (
           <div className={styles.actionButtons}>
-            <ActionButton
-              icon={<RefreshIcon />}
+            <LoadingButton
+              icon={RefreshIcon}
               onClick={fetchData}
               text="Refresh 刷新"
             />
-            <ActionButton
-              icon={<PrintIcon />}
-              onClick={() => handlePrint()}
+            <LoadingButton
+              icon={PrintIcon}
+              onClick={handlePrint}
               text="Print 打印"
             />
           </div>
