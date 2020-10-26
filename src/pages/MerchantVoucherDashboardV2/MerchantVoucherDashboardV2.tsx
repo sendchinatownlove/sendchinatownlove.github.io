@@ -16,7 +16,7 @@ import type {
 
 const MerchantVoucherDashboardV2 = () => {
   const [error, setError] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [pageLoading, setPageLoading] = useState<boolean>(false);
 
   const [seller, setSeller] = useState<BrowsePageSeller | null>(null);
   const [giftCards, setGiftCards] = useState<GiftCardDetails[]>([]);
@@ -27,7 +27,7 @@ const MerchantVoucherDashboardV2 = () => {
     content: () => printRef.current,
     onAfterPrint: () => setShowPrintView(false),
   });
-  const print = useCallback(() => {
+  const print = useCallback(async () => {
     if (handlePrint) {
       setShowPrintView(true);
       handlePrint();
@@ -42,7 +42,6 @@ const MerchantVoucherDashboardV2 = () => {
   const secretId = urlParams[2];
 
   const fetchData = useCallback(async () => {
-    setLoading(true);
     try {
       const sellerResponse = await getSeller(sellerId);
       const giftCardResponse = await getMerchantGiftCards(sellerId, secretId);
@@ -51,16 +50,20 @@ const MerchantVoucherDashboardV2 = () => {
       setGiftCards(giftCardResponse.data);
     } catch {
       setError(true);
-    } finally {
-      setLoading(false);
     }
   }, [sellerId, secretId]);
 
   useEffect(() => {
-    fetchData();
+    setPageLoading(true);
+
+    try {
+      fetchData();
+    } finally {
+      setPageLoading(false);
+    }
   }, [fetchData]);
 
-  if (loading) {
+  if (pageLoading) {
     return <Loader isPage={true} />;
   } else if (error || !seller) {
     return <ErrorPage menuOpen={false} />;
