@@ -9,6 +9,8 @@ import {
   SET_CUSTOM_INPUT
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { formatCurrency } from '../../utilities/general/textFormatter';
+import {  } from '../../utilities/general/paymentCalculator';
+import { getFees } from '../../utilities/api/interactionManager';
 import { useTranslation } from 'react-i18next';
 import { Tooltip } from '@material-ui/core';
 import Help from '@material-ui/icons/Help';
@@ -18,15 +20,6 @@ import ReactPixel from 'react-facebook-pixel';
 const validAmount = (value: string) => {
   const r = /^[0-9.]+$/;
   return r.test(value);
-};
-
-// @TODO: use fee builder from backend.
-const transactionFee = (amount: string) => {
-  if (!validAmount(amount)) return '';
-
-  const base = (Number(amount) * 0.029) + 0.30;
-  const roundedUp = Math.ceil(base * 100) / 100;
-  return roundedUp.toFixed(2);
 };
 
 export interface Props {
@@ -46,11 +39,26 @@ export const Modal = (props: Props) => {
   const { amount, customInput } = useModalPaymentState();
 
   const [selectedAmount, setSelectedAmount] = useState(amount);
-  const [feesAmount, setFeesAmount] = useState(transactionFee(amount));
-  // const [coveredAmount, setCoveredAmount] = useState(transactionFee(DEFAULT_AMOUNT));
+  const [feesAmount, setFeesAmount] = useState('0');
+  const [flat, setFlat] = useState(0);
+  const [multiplier, setMultiplier] = useState(0);
   const [isCustomInput, setIsCustomInput] = useState(customInput);
 
   const dispatch = useModalPaymentDispatch();
+
+  useEffect(() => {
+    getFees('square')
+      .then((res) => {
+        const { fee } = res
+
+        if (fee) {
+          setFlat(fee.flat)
+          setMultiplier(fee.multiplier)
+        }
+
+        setFeesAmount(transactionFee(amount))
+      })
+  }, [])
 
   useEffect(() => {
     dispatch({ type: SET_AMOUNT, payload: selectedAmount });
@@ -60,16 +68,22 @@ export const Modal = (props: Props) => {
     dispatch({ type: SET_CUSTOM_INPUT, payload: isCustomInput });
   }, [isCustomInput, dispatch]);
 
+  const transactionFee = (amount: string) => {
+    if (!validAmount(amount)) return '';
+
+    return ((Number(amount) + flat) / (1 - multiplier)).toFixed(2);
+  };
+
   const handleSelectAmount = (value: string) => {
     setIsCustomInput(false);
     setSelectedAmount(value);
-    // setFeesAmount(transactionFee(value));
+    setFeesAmount(transactionFee(value));
   };
 
   const handleSelectCustom = (value: string) => {
     setIsCustomInput(true);
     setSelectedAmount(value);
-    // setFeesAmount(transactionFee(value));
+    setFeesAmount(transactionFee(value));
   };
 
   const openModal = (e: any) => {

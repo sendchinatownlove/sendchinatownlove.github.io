@@ -6,6 +6,7 @@ import {
   sellers,
   vouchers,
   campaigns,
+  fees,
   distributors,
   passportVouchers,
   contacts,
@@ -130,9 +131,9 @@ export const makeSquarePayment = async (
 };
 
 // @TODO: Coordinate with @Jeremy-Xue on endpoint URL
-export const getCampaignFees = async (id: string) =>
+export const getFees = async (name: string) =>
   axios
-    .get(`${campaigns}${id}/fees`)
+    .get(fees + name)
     .then((res) => res)
     .catch((err) => err);
 
