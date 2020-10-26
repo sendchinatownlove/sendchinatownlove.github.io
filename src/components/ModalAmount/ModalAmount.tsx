@@ -9,7 +9,6 @@ import {
   SET_CUSTOM_INPUT
 } from '../../utilities/hooks/ModalPaymentContext/constants';
 import { formatCurrency } from '../../utilities/general/textFormatter';
-import {  } from '../../utilities/general/paymentCalculator';
 import { getFees } from '../../utilities/api/interactionManager';
 import { useTranslation } from 'react-i18next';
 import { Tooltip } from '@material-ui/core';
@@ -49,16 +48,16 @@ export const Modal = (props: Props) => {
   useEffect(() => {
     getFees('square')
       .then((res) => {
-        const { fee } = res
+        const { fee } = res;
 
         if (fee) {
-          setFlat(fee.flat)
-          setMultiplier(fee.multiplier)
+          setFlat(fee.flat);
+          setMultiplier(fee.multiplier);
         }
 
-        setFeesAmount(transactionFee(amount))
-      })
-  }, [])
+        setFeesAmount(transactionFee(amount));
+      });
+  }, []);
 
   useEffect(() => {
     dispatch({ type: SET_AMOUNT, payload: selectedAmount });
@@ -187,7 +186,7 @@ export const Modal = (props: Props) => {
             </Tooltip>
           </span>
         </p>
-        <p><b>{ formatCurrency(feesAmount) }</b></p>
+        <p><b>{ formatCurrency(Number(feesAmount)) }</b></p>
       </TransactionFeeContainer>
 
       <hr />
