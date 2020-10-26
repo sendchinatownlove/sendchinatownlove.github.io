@@ -16,8 +16,10 @@ export type ErrorTypeValues = typeof ERROR_TYPE[ErrorTypeKeys];
 const ERROR_COPY_ENGLISH = {
   GENERIC:
     'There was an error saving your changes. Please refresh your page and try again.',
-  // Right now, the only validation error we have on the update voucher
-  // endpoint is if the amount is higher than the current voucher value.
+  /**
+   * Right now, the only validation error we have on the update voucher endpoint
+   * is if the amount is higher than the current voucher value.
+   */
   VALIDATION:
     'The ending balance entered is higher than the current voucher balance. Please enter a value the same or lower than the current balance before saving.',
 };
