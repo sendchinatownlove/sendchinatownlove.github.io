@@ -128,11 +128,12 @@ const OrderNow: FC<Props> = ({
             phone={phone.phone_number}
           />
         )}
-        {thirdPtyDelivery.map((ele) => (
+        {thirdPtyDelivery.map((ele, i) => (
           <DeliveryButton
             imageUrl={ele.delivery_type.icon_url}
             name={ele.delivery_type.name}
             deliveryLink={ele.url}
+            key={i}
           />
         ))}
       </div>
