@@ -65,7 +65,6 @@ const MerchantVoucherDashboardV2 = () => {
     onPageLoad();
   }, [onPageLoad]);
 
-  console.log(pageLoading, seller);
   if (pageLoading) {
     return <Loader isPage={true} />;
   } else if (error || !seller) {
