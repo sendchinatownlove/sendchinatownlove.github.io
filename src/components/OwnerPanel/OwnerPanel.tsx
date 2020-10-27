@@ -63,6 +63,20 @@ const OwnerPanel = ({
     setPurchaseType(event.target.value);
   };
 
+  const OrderNowModalBtn = (
+    <button
+      className={classnames(styles['button__toggle-modal'], styles.button)}
+      onClick={() => toggleOrderNow(false)}
+    >
+      Hide
+      <img
+        src={chevron}
+        alt="chevron"
+        className={showOrderNow ? styles.flipped : styles.unflipped}
+      />
+    </button>
+  );
+
   return (
     <>
       {showAltLayout ? (
@@ -98,6 +112,24 @@ const OwnerPanel = ({
               showModal={showModal}
               active={activeCampaign}
             />
+            {!showOrderNow && (
+              <button
+                className={classnames(
+                  styles['button__toggle-modal'],
+                  styles.button
+                )}
+                onClick={() => toggleOrderNow(true)}
+              >
+                {deliveryService.length > 1
+                  ? 'View Hours & Order'
+                  : 'View Hours'}
+                <img
+                  src={chevron}
+                  alt="chevron"
+                  className={showOrderNow ? styles.flipped : styles.unflipped}
+                />
+              </button>
+            )}
           </div>
 
           {showOrderNow && (
@@ -106,26 +138,9 @@ const OwnerPanel = ({
               hours={sellerHours}
               isMerchantOpen={isMerchantOpen}
               deliveryService={deliveryService}
+              ModalButton={OrderNowModalBtn}
             />
           )}
-          <button
-            className={classnames(
-              styles['button__toggle-modal'],
-              styles.button
-            )}
-            onClick={() => toggleOrderNow(!showOrderNow)}
-          >
-            {showOrderNow
-              ? 'Hide'
-              : deliveryService.length > 1
-              ? 'View Hours & Order'
-              : 'View Hours'}
-            <img
-              src={chevron}
-              alt="chevron"
-              className={showOrderNow ? styles.flipped : styles.unflipped}
-            />
-          </button>
         </Panel>
       ) : (
         <Footer>
