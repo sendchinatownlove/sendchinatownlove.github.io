@@ -199,7 +199,7 @@
   }
 
   .filterGamSelected {
-    color: #a8192e;
+    color: #a8192e !important;
   }
 }
 
@@ -231,7 +231,7 @@
   }
 
   .saveButton {
-    background-color: #a8192e;
+    background-color: #000000;
     border-radius: 50px;
     color: #ffffff;
     font-size: 14px;
@@ -240,6 +240,11 @@
     padding: 12px 36px;
     text-transform: uppercase;
     white-space: nowrap;
+  }
+
+  .saveButton:hover {
+    background-color: #a8192e;
+    transition: background-color 0.5s ease;
   }
 }
 

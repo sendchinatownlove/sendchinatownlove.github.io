@@ -8,7 +8,6 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { ERROR_TYPE } from './Banners';
 import type { ErrorTypeValues } from './Banners';
-import type { FTRenderProps } from './types';
 import { formatCentsAmount } from './utils';
 import { updateVoucher } from '../../utilities/api/interactionManager';
 import type { GiftCardDetails } from '../../utilities/api/types';
@@ -21,7 +20,7 @@ const renderDate = (date: string) => moment(date).format('YYYY-MM-DD');
 
 // Determine if the gift card latest and original values are different
 // (aka it's been used).
-const hasBeenUsed = (record: any) =>
+const hasBeenUsed = (record: GiftCardDetails) =>
   record.latest_value !== record.original_value;
 
 const VoucherTable = ({
@@ -37,27 +36,34 @@ const VoucherTable = ({
   setShowSuccessBanner: (showSuccessBanner: boolean) => void;
   showPrintView: boolean;
 }) => {
-  const [editingRowGiftCardId, setEditingRowGiftCardId] = useState<
-    string | null
-  >(null);
+  const [
+    editingGiftCard,
+    setEditingGiftCard,
+  ] = useState<GiftCardDetails | null>(null);
   const [latestValue, setLatestValue] = useState<string>('');
 
   useEffect(() => {
     // Reset error banner after selected row changes.
     setErrorType(null);
 
-    if (!editingRowGiftCardId) {
+    if (!editingGiftCard) {
       setLatestValue('');
     }
-  }, [editingRowGiftCardId, setErrorType]);
+  }, [editingGiftCard, setErrorType]);
 
   const onSave = useCallback(
     async (giftCardId: string) => {
+      const latestValueCents = parseFloat(latestValue) * 100;
+
+      if (latestValueCents === editingGiftCard?.latest_value) {
+        setEditingGiftCard(null);
+        return;
+      }
+
       try {
-        const latestValueCents = parseFloat(latestValue) * 100;
         await updateVoucher(giftCardId, latestValueCents);
         fetchData();
-        setEditingRowGiftCardId(null);
+        setEditingGiftCard(null);
         setErrorType(null);
         setShowSuccessBanner(true);
       } catch (error) {
@@ -68,18 +74,26 @@ const VoucherTable = ({
         }
       }
     },
-    [fetchData, latestValue, setErrorType, setShowSuccessBanner]
+    [
+      editingGiftCard,
+      fetchData,
+      latestValue,
+      setErrorType,
+      setShowSuccessBanner,
+    ]
   );
 
   const renderLatestValue = ({ record, value }: FTRenderProps) => {
     if (showPrintView && !hasBeenUsed(record)) {
       return <div className={styles.greyBox} />;
-    } else if (record.seller_gift_card_id !== editingRowGiftCardId) {
-      const onSelectCell = (record: any) => {
+    } else if (
+      record.seller_gift_card_id !== editingGiftCard?.seller_gift_card_id
+    ) {
+      const onSelectCell = (record: GiftCardDetails) => {
         // This has to be a string because the onChange event below outputs a
         // string value.
         setLatestValue(String(record.latest_value / 100));
-        setEditingRowGiftCardId(record.seller_gift_card_id);
+        setEditingGiftCard(record);
       };
 
       return (
@@ -181,5 +195,27 @@ const VoucherTable = ({
     />
   );
 };
+
+/**
+ * Filterable Table Props
+ *
+ * From the react-filterable-table documentation
+ */
+export interface FTRenderProps {
+  /**
+   * The same field object that this render function was passed into.
+   * We'll have access to any props on it, including that 'someRandomProp' one we put on there.
+   * Those can be functions, too, so we can add custom onClick handlers to our return value.
+   */
+  field: any;
+  /**
+   * The data record for the whole row.
+   */
+  record: GiftCardDetails;
+  /**
+   * Value of the field in the data.
+   */
+  value: any;
+}
 
 export default VoucherTable;
