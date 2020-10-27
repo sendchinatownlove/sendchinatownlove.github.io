@@ -1,7 +1,9 @@
+import classNames from 'classnames';
 import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import EditIcon from '@material-ui/icons/Edit';
@@ -17,6 +19,7 @@ import styles from './styles.module.scss';
 const FilterableTable = require('react-filterable-table');
 
 const renderDate = (date: string) => moment(date).format('YYYY-MM-DD');
+const centsToDollarString = (cents: number) => String(cents / 100);
 
 // Determine if the gift card latest and original values are different
 // (aka it's been used).
@@ -92,20 +95,58 @@ const VoucherTable = ({
       const onSelectCell = (record: GiftCardDetails) => {
         // This has to be a string because the onChange event below outputs a
         // string value.
-        setLatestValue(String(record.latest_value / 100));
+        setLatestValue(centsToDollarString(record.latest_value));
         setEditingGiftCard(record);
       };
 
       return (
-        <div className={styles.editCell} onClick={() => onSelectCell(record)}>
+        <div className={styles.editCell}>
           {formatCentsAmount(value)}
-          {!showPrintView && <EditIcon classes={{ root: styles.editIcon }} />}
+          <div
+            className={styles.editIconContainer}
+            onClick={() => onSelectCell(record)}
+          >
+            {!showPrintView && record.latest_value !== 0 && (
+              <EditIcon classes={{ root: styles.editIcon }} />
+            )}
+          </div>
         </div>
       );
     }
 
-    return (
-      <div className={styles.editEndingBalance}>
+    let input;
+    if (record.single_use) {
+      // Single use vouchers should be used in full amount.
+      const originalValueString = centsToDollarString(record.original_value);
+      const voucherUsed = latestValue !== originalValueString;
+      input = (
+        <div className={styles.markUsedContainer}>
+          <Checkbox
+            checked={voucherUsed}
+            classes={{
+              checked: voucherUsed ? styles.markedUsed : '',
+              colorSecondary: voucherUsed ? styles.markedUsed : '',
+            }}
+            onChange={() =>
+              voucherUsed
+                ? setLatestValue(originalValueString)
+                : setLatestValue(String(0))
+            }
+          />
+          <div
+            className={classNames({
+              [styles.markUsedLabel]: true,
+              [styles.markedUsed]: voucherUsed,
+            })}
+          >
+            Mark as used
+            <br />
+            标记为已使用
+          </div>
+        </div>
+      );
+    } else {
+      input = (
         <TextField
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
@@ -116,6 +157,12 @@ const VoucherTable = ({
           value={latestValue}
           variant="outlined"
         />
+      );
+    }
+
+    return (
+      <div className={styles.editEndingBalance}>
+        {input}
         <Button
           className={styles.saveButton}
           onClick={() => onSave(record.gift_card_id)}
