@@ -93,35 +93,8 @@ export const Modal = (props: Props) => {
       </div>
       <p className={styles.description}>
         {t('buyMealPool.description.weAre')}
-        <a
-          href="https://www.apexforyouth.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.link}
-        >
-          {' '}
-          APEX for Youth
-        </a>
-        ,
-        <a
-          href="http://www.lajornadany.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.link}
-        >
-          {' '}
-          La Jornada Food Pantry
-        </a>
-        ,
-        <a
-          href="https://www.cpc-nyc.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.link}
-        >
-          {' '}
-          the Chinese-American Planning Council{' '}
-        </a>
+        {/* Note(wilsonj806)Only renders one single distributor*/}
+        <Distributor />
         {t('buyMealPool.description.andRestaurants')}
         <span className={styles.bold}>
           {' '}
