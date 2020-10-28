@@ -53,7 +53,8 @@ export const Modal = (props: Props) => {
       type: ModalPaymentConstants.SET_AMOUNT,
       payload: String(totalMealPrice),
     });
-  }, [dispatch, totalMealPrice]);
+    // eslint-disable-next-line
+  }, []);
 
   const fetchData = async (sellerId: string) => {
     // Note(wilsonj806) Showing the campaign that expires first
