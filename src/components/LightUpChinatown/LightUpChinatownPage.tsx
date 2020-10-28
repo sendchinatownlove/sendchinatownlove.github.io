@@ -3,41 +3,36 @@ import styled from 'styled-components';
 import lanternHeader from './images/lantern-header.png';
 import lanternFooter from './images/lantern-footer.png';
 import mapImg from './images/map.png';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
   const today = new Date();
-  const campaignEndDate = new Date("11/30/2020");
+  const campaignEndDate = new Date('11/30/2020');
   const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
 
   return (
     <React.Fragment>
       <Banner>
-        <Hero
-          height={304}
-          src={lanternHeader}
-          alt="lantern overlay"
-        />
-        <HeaderText>
-          {t('lightUpChinatown.headerText')}
-        </HeaderText>
-        <HeaderSubtext>
-          {t('lightUpChinatown.headerSubtext')}
-        </HeaderSubtext>
+        <Hero height={304} src={lanternHeader} alt="lantern overlay" />
+        <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
+        <HeaderSubtext>{t('lightUpChinatown.headerSubtext')}</HeaderSubtext>
       </Banner>
       <Container>
         <TextContainer>
-          <SummaryHeader>
-            {t('lightUpChinatown.summaryHeader')}
-          </SummaryHeader>
-          <SummaryBody>
-            {t('lightUpChinatown.summaryBody1')}
-          </SummaryBody>
+          <SummaryHeader>{t('lightUpChinatown.summaryHeader')}</SummaryHeader>
+          <SummaryBody>{t('lightUpChinatown.summaryBody1')}</SummaryBody>
           <br></br>
           <SummaryBody>
-            {t('lightUpChinatown.summaryBody2')}
+            <Trans i18nKey="lightUpChinatown.summaryBody2">
+              {/* {t('lightUpChinatown.summaryBody2')} */}
+              Support the Light Up Chinatown project by contributing to{' '}
+              <strong>“Adopt-A-Lantern!”</strong> In addition to light fixtures
+              being installed, beautiful outdoor lanterns will be hung along
+              Mott Street from Canal to Bayard to welcome patrons into our
+              wonderful community, right in time for the holidays.
+            </Trans>
           </SummaryBody>
           <br></br>
           <SummaryBody>
@@ -46,24 +41,30 @@ const LightUpChinatownPage = () => {
             <p>{t('lightUpChinatown.phase3')}</p>
           </SummaryBody>
           <br></br>
-          <SummaryBody>
-            {t('lightUpChinatown.summaryBody3')}
-          </SummaryBody>
+          <SummaryBody>{t('lightUpChinatown.summaryBody3')}</SummaryBody>
           <br></br>
           <SummaryBody>
-            {t('lightUpChinatown.summaryBody4')}
+            <Trans i18nKey="lightUpChinatown.summaryBody4">
+              <strong>Send Chinatown Love</strong> along with{' '}
+              <strong>
+                Pearl River Mart, 46 Mott St Bakery, CCBA, Chinese Chamber of
+                Commerce
+              </strong>{' '}
+              and <strong>UDO</strong> are partnering to raise funds to light up
+              major blocks of Chinatown. We hope you will join us.
+            </Trans>
           </SummaryBody>
         </TextContainer>
         <MapContainer>
           <Map src={mapImg} /> {/* TODO: Replace with GIF */}
-          <CampaignInfoText color={"#1E1E1E"}>
+          <CampaignInfoText color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignHeader')}
           </CampaignInfoText>
-          <CampaignInfoText color={"#1E1E1E"}>
+          <CampaignInfoTime color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignDates')}
-          </CampaignInfoText>
-          <CampaignInfoText color={"#CF6E8A"}>
-            {daysUntilEnd}{' '}{t('lightUpChinatown.campaignDaysLeft')}
+          </CampaignInfoTime>
+          <CampaignInfoText color={'#CF6E8A'}>
+            {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
           </CampaignInfoText>
         </MapContainer>
       </Container>
@@ -73,11 +74,7 @@ const LightUpChinatownPage = () => {
         </DonationTiersText>
       </DonationTierContainer>
       <Banner>
-        <Hero
-          height={395}
-          src={lanternFooter}
-          alt="lantern overlay"
-        />
+        <Hero height={395} src={lanternFooter} alt="lantern overlay" />
       </Banner>
     </React.Fragment>
   );
@@ -107,7 +104,7 @@ const TextContainer = styled.section`
 `;
 
 const Hero = styled.img`
-  height: ${props => props.height}px;
+  height: ${(props) => props.height}px;
   width: 100vw;
 `;
 
@@ -123,7 +120,7 @@ const HeaderText = styled.div`
   font-size: 32px;
   line-height: 44px;
   letter-spacing: 0.02em;
-  color: #FFFFFF;
+  color: #ffffff;
   position: absolute;
   top: 35%;
   left: 50%;
@@ -141,7 +138,7 @@ const HeaderSubtext = styled.div`
   font-size: 24px;
   line-height: 33px;
   letter-spacing: -0.01em;
-  color: #FFFFFF;
+  color: #ffffff;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -162,7 +159,7 @@ const DonationTiersText = styled.div`
   text-transform: uppercase;
   color: #000000;
   padding-bottom: 15px;
-  border-bottom: 1px solid #DEDEDE;
+  border-bottom: 1px solid #dedede;
 `;
 
 const SummaryHeader = styled.div`
@@ -172,7 +169,7 @@ const SummaryHeader = styled.div`
   font-size: 32px;
   line-height: 44px;
   letter-spacing: 0.02em;
-  color: ##1E1E1E;
+  color: ##1e1e1e;
   margin-bottom: 40px;
 `;
 
@@ -181,7 +178,7 @@ const SummaryBody = styled.div`
   font-style: normal;
   font-size: 18px;
   line-height: 20px;
-  color: ##1E1E1E;
+  color: ##1e1e1e;
 `;
 
 const MapContainer = styled.section`
@@ -213,7 +210,11 @@ const CampaignInfoText = styled.div`
   font-weight: bold;
   font-size: 16px;
   line-height: 35px;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
+`;
+
+const CampaignInfoTime = styled(CampaignInfoText)`
+  font-size: 18px;
 `;
 
 const DonationTierContainer = styled.section`
