@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import moment from 'moment';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -53,6 +53,21 @@ const VoucherTable = ({
       setLatestValue('');
     }
   }, [editingGiftCard, setErrorType]);
+
+  const tableRef = useRef();
+  useEffect(() => {
+    // This is very hacky but we need it to force the table to re-render
+    // when we print. react-filterable-table only updates page size on
+    // component mount or when an internal .updatePageSize method is
+    // called. See below for details:
+    // https://github.com/ianwitherow/react-filterable-table/blob/master/src/Components/FilterableTable.jsx#L23
+    // https://github.com/ianwitherow/react-filterable-table/blob/master/src/Components/FilterableTable.jsx#L224
+    if (showPrintView) {
+      (tableRef?.current as any).updatePageSize({ target: { value: 1000 } });
+    } else {
+      (tableRef?.current as any).updatePageSize({ target: { value: 20 } });
+    }
+  }, [showPrintView]);
 
   const onSave = useCallback(
     async (giftCardId: string) => {
@@ -221,7 +236,6 @@ const VoucherTable = ({
     },
   ];
 
-  // TODO: Hover and selected background colors.
   return (
     <FilterableTable
       bottomPagerVisible={!showPrintView}
@@ -233,11 +247,10 @@ const VoucherTable = ({
       namespace="Vouchers"
       noFilteredRecordsMessage="No vouchers found for filter"
       noRecordsMessage="No vouchers in our system yet!"
-      // Kind of a hack, but show all of the gift cards if we're in print view.
-      pageSize={showPrintView ? 100000 : 20}
       pageSizes={null} // Don't show the page size chooser.
       recordCountName="Voucher Found"
       recordCountNamePlural="Vouchers Found"
+      ref={tableRef}
       topPagerVisible={false}
     />
   );
