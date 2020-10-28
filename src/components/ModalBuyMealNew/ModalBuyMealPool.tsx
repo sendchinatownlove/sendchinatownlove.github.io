@@ -67,6 +67,20 @@ export const Modal = (props: Props) => {
     fetchData(props.sellerId);
   }, [props.sellerId]);
 
+  const Distributor = () => (
+    <>
+      <a
+        href={campaignDistributor.website_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.link}
+      >
+        {' '}
+        {campaignDistributor.name}
+      </a>{' '}
+    </>
+  );
+
   return (
     <form data-testid="ModalBuyMeal">
       <div>
