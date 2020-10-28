@@ -5,10 +5,6 @@ import {
   useModalPaymentDispatch,
   ModalPaymentConstants,
 } from '../../utilities/hooks/ModalPaymentContext';
-import {
-  getCampaignsForMerchant,
-  getDistributor,
-} from '../../utilities/api/interactionManager';
 import { useTranslation } from 'react-i18next';
 import CampaignInstructions from './CamapignInstructions';
 import ReactPixel from 'react-facebook-pixel';
@@ -26,7 +22,6 @@ export const Modal = (props: Props) => {
 
   // set initial number of meals to 1
   const [numberOfMeals, setNumberOfMeals] = useState(1);
-  const [campaignDistributor, setCampaignDistributor] = useState<any>([]);
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
     const valueInt = parseInt(value, 10);
@@ -55,33 +50,8 @@ export const Modal = (props: Props) => {
       type: ModalPaymentConstants.SET_AMOUNT,
       payload: String(totalMealPrice),
     });
-  }, [dispatch, totalMealPrice]);
-
-  const fetchData = async (sellerId: string) => {
-    // NOTE(wilsonj806) Showing the campaign that ends the soonest
-    const { data } = await getCampaignsForMerchant(sellerId);
-
-    const { data: distributor } = await getDistributor(data[0].distributor_id);
-    setCampaignDistributor(distributor);
-  };
-
-  useEffect(() => {
-    fetchData(props.sellerId);
-  }, [props.sellerId]);
-
-  const Distributor = () => (
-    <>
-      <a
-        href={campaignDistributor.website_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.link}
-      >
-        {' '}
-        {campaignDistributor.name}
-      </a>{' '}
-    </>
-  );
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <form data-testid="ModalBuyMeal">
