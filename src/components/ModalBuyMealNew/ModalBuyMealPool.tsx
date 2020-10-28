@@ -50,8 +50,7 @@ export const Modal = (props: Props) => {
       type: ModalPaymentConstants.SET_AMOUNT,
       payload: String(totalMealPrice),
     });
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch, totalMealPrice]);
 
   return (
     <form data-testid="ModalBuyMeal">
