@@ -5,14 +5,13 @@ import {
   useModalPaymentDispatch,
   ModalPaymentConstants,
 } from '../../utilities/hooks/ModalPaymentContext';
+import { useTranslation } from 'react-i18next';
+import CampaignInstructions from './CamapignInstructions';
+import ReactPixel from 'react-facebook-pixel';
 import {
   getCampaignsForMerchant,
   getDistributor,
 } from '../../utilities/api/interactionManager';
-
-import { useTranslation } from 'react-i18next';
-import CampaignInstructions from './CamapignInstructions';
-import ReactPixel from 'react-facebook-pixel';
 
 export interface Props {
   purchaseType: string;
