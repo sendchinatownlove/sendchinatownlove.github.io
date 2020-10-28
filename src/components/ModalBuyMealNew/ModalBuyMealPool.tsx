@@ -8,6 +8,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import CampaignInstructions from './CamapignInstructions';
 import ReactPixel from 'react-facebook-pixel';
+import { getCampaignsForMerchant, getDistributor } from '../../utilities';
 
 export interface Props {
   purchaseType: string;
@@ -22,6 +23,8 @@ export const Modal = (props: Props) => {
 
   // set initial number of meals to 1
   const [numberOfMeals, setNumberOfMeals] = useState(1);
+
+  const [campaignDistributor, setCampaignDistributor] = useState<any>([]);
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
     const valueInt = parseInt(value, 10);
@@ -51,6 +54,18 @@ export const Modal = (props: Props) => {
       payload: String(totalMealPrice),
     });
   }, [dispatch, totalMealPrice]);
+
+  const fetchData = async (sellerId: string) => {
+    // Note(wilsonj806) Showing the campaign that expires first
+    // will need to update this if we render multiple distributors
+    const { data } = await getCampaignsForMerchant(sellerId);
+    const { data: distrib } = await getDistributor(data[0].distributor_id);
+    setCampaignDistributor(distrib);
+  };
+
+  useEffect(() => {
+    fetchData(props.sellerId);
+  }, [props.sellerId]);
 
   return (
     <form data-testid="ModalBuyMeal">
