@@ -73,10 +73,6 @@ $container-size: 160px;
       left: calc((100% - 342px) / 2);
       width: 342px;
     }
-
-    @include for-tablet-landscape-up {
-      // bottom: -18px;
-    }
   }
   &__toggleMobileDropdown {
     display: flex;
