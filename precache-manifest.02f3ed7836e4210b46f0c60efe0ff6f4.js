@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a3c6c0c5793f78c9f1726f821d90ef4a",
+    "revision": "b81ca78febc1840840de270ffb57b414",
     "url": "/index.html"
   },
   {
@@ -28,7 +28,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/css/9.d34afdd0.chunk.css"
   },
   {
-    "revision": "8df204155f9899cfd399",
+    "revision": "8c3dbc8073e11dce683f",
     "url": "/static/css/main.ef9aa2ff.chunk.css"
   },
   {
@@ -76,8 +76,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/16.80c141e4.chunk.js"
   },
   {
-    "revision": "049db87a51a926f637be",
-    "url": "/static/js/17.58cc5f5e.chunk.js"
+    "revision": "d4215754d0424be97d54",
+    "url": "/static/js/17.f762814a.chunk.js"
   },
   {
     "revision": "300d045ec776bbe79e24",
@@ -132,12 +132,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/9.309dcf07.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8df204155f9899cfd399",
-    "url": "/static/js/main.7e9477ab.chunk.js"
+    "revision": "8c3dbc8073e11dce683f",
+    "url": "/static/js/main.9014b742.chunk.js"
   },
   {
-    "revision": "9814707a98142fff1f42",
-    "url": "/static/js/runtime-main.69638aeb.js"
+    "revision": "ec7d6eac9840aea414c4",
+    "url": "/static/js/runtime-main.894fffdb.js"
   },
   {
     "revision": "f72ee01693c673c09463dfdaa57b3652",
@@ -216,16 +216,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/lantern-footer.da139363.png"
   },
   {
-    "revision": "3056ce4ed23c5410c6c9d2a7853b78b6",
-    "url": "/static/media/lantern-header.3056ce4e.png"
+    "revision": "0e901363cce1dbfaa2832ea5b21f26aa",
+    "url": "/static/media/lantern-hero-top.0e901363.png"
+  },
+  {
+    "revision": "7293af692bdefb518b51d5f4a6c6aa6e",
+    "url": "/static/media/light-up-map.7293af69.gif"
   },
   {
     "revision": "909f1479b519e732b5a828cc5a69317a",
     "url": "/static/media/logo.909f1479.svg"
-  },
-  {
-    "revision": "db219052e01b9604521716a2aa035f46",
-    "url": "/static/media/map.db219052.png"
   },
   {
     "revision": "7e1a70b6774c5a168940bee9068ea1a0",
