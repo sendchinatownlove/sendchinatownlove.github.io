@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
 import lanternFooter from './images/lantern-footer.png';
 import mapImg from './images/light-up-map.gif';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -24,7 +24,15 @@ const LightUpChinatownPage = () => {
           <SummaryHeader>{t('lightUpChinatown.summaryHeader')}</SummaryHeader>
           <SummaryBody>{t('lightUpChinatown.summaryBody1')}</SummaryBody>
           <br></br>
-          <SummaryBody>{t('lightUpChinatown.summaryBody2')}</SummaryBody>
+          <SummaryBody>
+            <Trans i18nKey="lightUpChinatown.summaryBody2">
+              Support the Light Up Chinatown project by contributing to
+              <strong>“Adopt-A-Lantern!”</strong> In addition to light fixtures
+              being installed, beautiful outdoor lanterns will be hung along
+              Mott Street from Canal to Bayard to welcome patrons into our
+              wonderful community, right in time for the holidays.
+            </Trans>
+          </SummaryBody>
           <br></br>
           <SummaryBody>
             <p>{t('lightUpChinatown.phase1')}</p>
@@ -34,16 +42,27 @@ const LightUpChinatownPage = () => {
           <br></br>
           <SummaryBody>{t('lightUpChinatown.summaryBody3')}</SummaryBody>
           <br></br>
-          <SummaryBody>{t('lightUpChinatown.summaryBody4')}</SummaryBody>
+          <SummaryBody>
+            <Trans i18nKey="lightUpChinatown.summaryBody4">
+              <strong>Send Chinatown Love</strong> along with
+              <strong>
+                Pearl River Mart, 46 Mott St Bakery, CCBA, Chinese Chamber of
+                Commerce
+              </strong>
+              and <strong>UDO</strong> are partnering to raise funds to light up
+              major blocks of Chinatown. We hope you will join us.
+            </Trans>
+          </SummaryBody>
         </TextContainer>
         <MapContainer>
           <Map src={mapImg} /> {/* TODO: Replace with GIF */}
           <CampaignInfoText color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignHeader')}
           </CampaignInfoText>
-          <CampaignInfoText color={'#1E1E1E'}>
+          <CampaignInfoTime color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignDates')}
-          </CampaignInfoText>
+          </CampaignInfoTime>
+
           <CampaignInfoText color={'#CF6E8A'}>
             {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
           </CampaignInfoText>
@@ -206,6 +225,10 @@ const CampaignInfoText = styled.div`
   font-size: 16px;
   line-height: 35px;
   color: ${(props) => props.color};
+`;
+
+const CampaignInfoTime = styled(CampaignInfoText)`
+  font-size: 18px;
 `;
 
 const DonationTierContainer = styled.section`
