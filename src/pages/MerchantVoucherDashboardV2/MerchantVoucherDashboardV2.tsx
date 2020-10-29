@@ -16,7 +16,7 @@ import type {
 
 const MerchantVoucherDashboardV2 = () => {
   const [error, setError] = useState<boolean>(false);
-  const [pageLoading, setPageLoading] = useState<boolean>(false);
+  const [pageLoading, setPageLoading] = useState<boolean>(true);
 
   const [seller, setSeller] = useState<BrowsePageSeller | null>(null);
   const [giftCards, setGiftCards] = useState<GiftCardDetails[]>([]);
@@ -53,15 +53,17 @@ const MerchantVoucherDashboardV2 = () => {
     }
   }, [sellerId, secretId]);
 
-  useEffect(() => {
-    setPageLoading(true);
-
+  const onPageLoad = useCallback(async () => {
     try {
-      fetchData();
+      await fetchData();
     } finally {
       setPageLoading(false);
     }
   }, [fetchData]);
+
+  useEffect(() => {
+    onPageLoad();
+  }, [onPageLoad]);
 
   if (pageLoading) {
     return <Loader isPage={true} />;

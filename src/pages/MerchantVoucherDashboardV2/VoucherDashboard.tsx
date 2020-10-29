@@ -200,6 +200,7 @@ const VoucherDashboard = ({
                 checked={filterGam}
                 className={styles.checkbox}
                 classes={{
+                  checked: filterGam ? styles.filterGamSelected : '',
                   colorSecondary: filterGam ? styles.filterGamSelected : '',
                 }}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>

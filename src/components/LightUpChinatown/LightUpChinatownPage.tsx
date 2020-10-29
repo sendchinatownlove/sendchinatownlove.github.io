@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import lanternHeader from './images/lantern-header.png';
+import lanternHeroTop from './images/lantern-hero-top.png';
 import lanternFooter from './images/lantern-footer.png';
-import mapImg from './images/map.png';
+import mapImg from './images/light-up-map.gif';
 import { Trans, useTranslation } from 'react-i18next';
 
 const LightUpChinatownPage = () => {
@@ -15,7 +15,7 @@ const LightUpChinatownPage = () => {
   return (
     <React.Fragment>
       <Banner>
-        <Hero height={304} src={lanternHeader} alt="lantern overlay" />
+        <Hero height={304} src={lanternHeroTop} alt="lantern overlay" />
         <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
         <HeaderSubtext>{t('lightUpChinatown.headerSubtext')}</HeaderSubtext>
       </Banner>
@@ -62,6 +62,7 @@ const LightUpChinatownPage = () => {
           <CampaignInfoTime color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignDates')}
           </CampaignInfoTime>
+
           <CampaignInfoText color={'#CF6E8A'}>
             {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
           </CampaignInfoText>
@@ -72,9 +73,15 @@ const LightUpChinatownPage = () => {
           {t('lightUpChinatown.donationTierText')}
         </DonationTiersText>
       </DonationTierContainer>
-      <Banner>
-        <Hero height={395} src={lanternFooter} alt="lantern overlay" />
-      </Banner>
+      <BottomBanner>
+        <BottomHero height={395} src={lanternFooter} alt="lantern overlay" />
+        <FooterText>
+          {t('lightUpChinatown.ceremony1')}
+          <br></br>
+          <br></br>
+          {t('lightUpChinatown.ceremony2')}
+        </FooterText>
+      </BottomBanner>
     </React.Fragment>
   );
 };
@@ -121,12 +128,15 @@ const HeaderText = styled.div`
   letter-spacing: 0.02em;
   color: #ffffff;
   position: absolute;
-  top: 35%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   @media (max-width: 599px) {
     top: 30%;
+    text-align: start;
+    left: 30%;
+    transform: translate(-30%, -50%);
   }
 `;
 
@@ -139,12 +149,17 @@ const HeaderSubtext = styled.div`
   letter-spacing: -0.01em;
   color: #ffffff;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   @media (max-width: 599px) {
-    top: 65%;
+    font-size: 16px;
+    line-height: 22px;
+    top: 55%;
+    text-align: start;
+    left: 30%;
+    transform: translate(-30%, -50%);
   }
 `;
 
@@ -222,6 +237,38 @@ const DonationTierContainer = styled.section`
   align-items: center;
   @media (max-width: 599px) {
     padding: 0px 35px;
+  }
+`;
+
+const BottomBanner = styled.div`
+  position: relative;
+  text-align: center;
+`;
+
+const BottomHero = styled.img`
+  height: ${(props) => props.height}px;
+  width: 100vw;
+  filter: brightness(50%);
+`;
+
+const FooterText = styled.div`
+  text-align: start;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 32px;
+  color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  @media (max-width: 599px) {
+    font-size: 14px;
+    line-height: 24px;
+    left: 30%;
+    transform: translate(-30%, -50%);
   }
 `;
 

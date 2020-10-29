@@ -25,7 +25,6 @@ export const getSellers = async (lang?: string): Promise<any> => {
 };
 
 export const getSeller = async (id: string, lang?: string): Promise<any> => {
-  console.log('not getSeller testing');
   return await axios.get(sellers + id, {
     params: { locale: localeFromLanguage(lang) },
   });

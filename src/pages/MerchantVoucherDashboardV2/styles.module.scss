@@ -199,7 +199,7 @@
   }
 
   .filterGamSelected {
-    color: #a8192e;
+    color: #a8192e !important;
   }
 }
 
@@ -211,6 +211,11 @@
 .editCell {
   align-items: center;
   display: flex;
+
+  .editIconContainer {
+    align-items: center;
+    display: flex;
+  }
 
   .editIcon {
     color: #a8192e;
@@ -227,11 +232,11 @@
 
 .editEndingBalance {
   > :first-child {
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
 
   .saveButton {
-    background-color: #a8192e;
+    background-color: #000000;
     border-radius: 50px;
     color: #ffffff;
     font-size: 14px;
@@ -240,6 +245,38 @@
     padding: 12px 36px;
     text-transform: uppercase;
     white-space: nowrap;
+  }
+
+  .saveButton:hover {
+    background-color: #a8192e;
+    transition: background-color 0.5s ease;
+  }
+
+  .markUsedContainer {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    @media only screen and (max-width: 960px) {
+      margin-left: 8px;
+    }
+
+    .markUsedLabel {
+      flex-shrink: 0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      width: 120px;
+
+      @media only screen and (max-width: 960px) {
+        flex-shrink: 1;
+      }
+    }
+
+    .markedUsed {
+      color: #a8192e;
+    }
   }
 }
 
