@@ -26,8 +26,7 @@ const LightUpChinatownPage = () => {
           <br></br>
           <SummaryBody>
             <Trans i18nKey="lightUpChinatown.summaryBody2">
-              {/* {t('lightUpChinatown.summaryBody2')} */}
-              Support the Light Up Chinatown project by contributing to{' '}
+              Support the Light Up Chinatown project by contributing to
               <strong>“Adopt-A-Lantern!”</strong> In addition to light fixtures
               being installed, beautiful outdoor lanterns will be hung along
               Mott Street from Canal to Bayard to welcome patrons into our
@@ -45,11 +44,11 @@ const LightUpChinatownPage = () => {
           <br></br>
           <SummaryBody>
             <Trans i18nKey="lightUpChinatown.summaryBody4">
-              <strong>Send Chinatown Love</strong> along with{' '}
+              <strong>Send Chinatown Love</strong> along with
               <strong>
                 Pearl River Mart, 46 Mott St Bakery, CCBA, Chinese Chamber of
                 Commerce
-              </strong>{' '}
+              </strong>
               and <strong>UDO</strong> are partnering to raise funds to light up
               major blocks of Chinatown. We hope you will join us.
             </Trans>
