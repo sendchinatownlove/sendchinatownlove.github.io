@@ -166,16 +166,13 @@ const NavBar = (props: Props) => {
           <ReactNavLink
             href="https://www.sendchinatownlove.com/ways-to-donate.html"
             onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}
             compact={hamburgerOpen.toString()}
             active={isMerchantsPathActive.toString()}
           >
             {t('navBar.header.merchants')}
+            {dropdownOpen && <Dropdown>{drop}</Dropdown>}
           </ReactNavLink>
-          {dropdownOpen && (
-            <Dropdown onMouseLeave={() => setDropdownOpen(false)}>
-              {drop}
-            </Dropdown>
-          )}
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/about.html"
@@ -361,7 +358,6 @@ const Close = styled(CloseIcon)`
 
 const Dropdown = styled.div`
   z-index: ${theme.maxzIndex};
-  left: 138px;
   top: 20px;
   width: 212px;
   height: 184px;
