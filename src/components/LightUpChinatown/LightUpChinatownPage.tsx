@@ -1,44 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
-import lanternHeader from './images/lantern-header.png';
+import lanternHeroTop from './images/lantern-hero-top.png';
 import lanternFooter from './images/lantern-footer.png';
-import mapImg from './images/map.png';
+import mapImg from './images/light-up-map.gif';
 import { useTranslation } from 'react-i18next';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
   const today = new Date();
-  const campaignEndDate = new Date("11/30/2020");
+  const campaignEndDate = new Date('11/30/2020');
   const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
 
   return (
     <React.Fragment>
       <Banner>
-        <Hero
-          height={304}
-          src={lanternHeader}
-          alt="lantern overlay"
-        />
-        <HeaderText>
-          {t('lightUpChinatown.headerText')}
-        </HeaderText>
-        <HeaderSubtext>
-          {t('lightUpChinatown.headerSubtext')}
-        </HeaderSubtext>
+        <Hero height={304} src={lanternHeroTop} alt="lantern overlay" />
+        <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
+        <HeaderSubtext>{t('lightUpChinatown.headerSubtext')}</HeaderSubtext>
       </Banner>
       <Container>
         <TextContainer>
-          <SummaryHeader>
-            {t('lightUpChinatown.summaryHeader')}
-          </SummaryHeader>
-          <SummaryBody>
-            {t('lightUpChinatown.summaryBody1')}
-          </SummaryBody>
+          <SummaryHeader>{t('lightUpChinatown.summaryHeader')}</SummaryHeader>
+          <SummaryBody>{t('lightUpChinatown.summaryBody1')}</SummaryBody>
           <br></br>
-          <SummaryBody>
-            {t('lightUpChinatown.summaryBody2')}
-          </SummaryBody>
+          <SummaryBody>{t('lightUpChinatown.summaryBody2')}</SummaryBody>
           <br></br>
           <SummaryBody>
             <p>{t('lightUpChinatown.phase1')}</p>
@@ -46,24 +32,20 @@ const LightUpChinatownPage = () => {
             <p>{t('lightUpChinatown.phase3')}</p>
           </SummaryBody>
           <br></br>
-          <SummaryBody>
-            {t('lightUpChinatown.summaryBody3')}
-          </SummaryBody>
+          <SummaryBody>{t('lightUpChinatown.summaryBody3')}</SummaryBody>
           <br></br>
-          <SummaryBody>
-            {t('lightUpChinatown.summaryBody4')}
-          </SummaryBody>
+          <SummaryBody>{t('lightUpChinatown.summaryBody4')}</SummaryBody>
         </TextContainer>
         <MapContainer>
           <Map src={mapImg} /> {/* TODO: Replace with GIF */}
-          <CampaignInfoText color={"#1E1E1E"}>
+          <CampaignInfoText color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignHeader')}
           </CampaignInfoText>
-          <CampaignInfoText color={"#1E1E1E"}>
+          <CampaignInfoText color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignDates')}
           </CampaignInfoText>
-          <CampaignInfoText color={"#CF6E8A"}>
-            {daysUntilEnd}{' '}{t('lightUpChinatown.campaignDaysLeft')}
+          <CampaignInfoText color={'#CF6E8A'}>
+            {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
           </CampaignInfoText>
         </MapContainer>
       </Container>
@@ -72,13 +54,15 @@ const LightUpChinatownPage = () => {
           {t('lightUpChinatown.donationTierText')}
         </DonationTiersText>
       </DonationTierContainer>
-      <Banner>
-        <Hero
-          height={395}
-          src={lanternFooter}
-          alt="lantern overlay"
-        />
-      </Banner>
+      <BottomBanner>
+        <BottomHero height={395} src={lanternFooter} alt="lantern overlay" />
+        <FooterText>
+          {t('lightUpChinatown.ceremony1')}
+          <br></br>
+          <br></br>
+          {t('lightUpChinatown.ceremony2')}
+        </FooterText>
+      </BottomBanner>
     </React.Fragment>
   );
 };
@@ -107,7 +91,7 @@ const TextContainer = styled.section`
 `;
 
 const Hero = styled.img`
-  height: ${props => props.height}px;
+  height: ${(props) => props.height}px;
   width: 100vw;
 `;
 
@@ -123,14 +107,17 @@ const HeaderText = styled.div`
   font-size: 32px;
   line-height: 44px;
   letter-spacing: 0.02em;
-  color: #FFFFFF;
+  color: #ffffff;
   position: absolute;
-  top: 35%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   @media (max-width: 599px) {
     top: 30%;
+    text-align: start;
+    left: 30%;
+    transform: translate(-30%, -50%);
   }
 `;
 
@@ -141,14 +128,19 @@ const HeaderSubtext = styled.div`
   font-size: 24px;
   line-height: 33px;
   letter-spacing: -0.01em;
-  color: #FFFFFF;
+  color: #ffffff;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
   @media (max-width: 599px) {
-    top: 65%;
+    font-size: 16px;
+    line-height: 22px;
+    top: 55%;
+    text-align: start;
+    left: 30%;
+    transform: translate(-30%, -50%);
   }
 `;
 
@@ -162,7 +154,7 @@ const DonationTiersText = styled.div`
   text-transform: uppercase;
   color: #000000;
   padding-bottom: 15px;
-  border-bottom: 1px solid #DEDEDE;
+  border-bottom: 1px solid #dedede;
 `;
 
 const SummaryHeader = styled.div`
@@ -172,7 +164,7 @@ const SummaryHeader = styled.div`
   font-size: 32px;
   line-height: 44px;
   letter-spacing: 0.02em;
-  color: ##1E1E1E;
+  color: ##1e1e1e;
   margin-bottom: 40px;
 `;
 
@@ -181,7 +173,7 @@ const SummaryBody = styled.div`
   font-style: normal;
   font-size: 18px;
   line-height: 20px;
-  color: ##1E1E1E;
+  color: ##1e1e1e;
 `;
 
 const MapContainer = styled.section`
@@ -213,7 +205,7 @@ const CampaignInfoText = styled.div`
   font-weight: bold;
   font-size: 16px;
   line-height: 35px;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
 `;
 
 const DonationTierContainer = styled.section`
@@ -222,6 +214,38 @@ const DonationTierContainer = styled.section`
   align-items: center;
   @media (max-width: 599px) {
     padding: 0px 35px;
+  }
+`;
+
+const BottomBanner = styled.div`
+  position: relative;
+  text-align: center;
+`;
+
+const BottomHero = styled.img`
+  height: ${(props) => props.height}px;
+  width: 100vw;
+  filter: brightness(50%);
+`;
+
+const FooterText = styled.div`
+  text-align: start;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 32px;
+  color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  @media (max-width: 599px) {
+    font-size: 14px;
+    line-height: 24px;
+    left: 30%;
+    transform: translate(-30%, -50%);
   }
 `;
 
