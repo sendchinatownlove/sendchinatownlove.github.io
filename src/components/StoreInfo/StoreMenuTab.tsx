@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowsePageSeller } from '../../utilities';
+import { BrowsePageSeller } from '../../utilities/api';
 import styled from 'styled-components';
 
 export interface Props {

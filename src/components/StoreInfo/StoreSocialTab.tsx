@@ -8,7 +8,7 @@ import {
   FacebookShareButton,
   TwitterShareButton,
 } from 'react-share';
-import { BrowsePageSeller } from '../../utilities';
+import { BrowsePageSeller } from '../../utilities/api';
 import styled from 'styled-components';
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';

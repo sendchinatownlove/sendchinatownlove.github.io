@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
 import {
   useModalPaymentDispatch,
   ModalPaymentConstants,
-} from '../../utilities/hooks/ModalPaymentContext';
+  ModalPaymentTypes,
+} from '../../../utilities/hooks/ModalPaymentContext';
 import { useTranslation } from 'react-i18next';
-import walletImage from './wallet.png';
-import cardImage from './card.png';
+import CampaignInstructions from './CamapignInstructions';
 import ReactPixel from 'react-facebook-pixel';
+import { getCampaignsForMerchant, getDistributor } from '../../../utilities';
 
 export interface Props {
-  purchaseType: string;
   sellerId: string;
   sellerName: string;
   costPerMeal: number;
@@ -23,6 +23,8 @@ export const Modal = (props: Props) => {
 
   // set initial number of meals to 1
   const [numberOfMeals, setNumberOfMeals] = useState(1);
+
+  const [campaignDistributor, setCampaignDistributor] = useState<any>([]);
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
     const valueInt = parseInt(value, 10);
@@ -39,36 +41,71 @@ export const Modal = (props: Props) => {
       numberOfMeals: numberOfMeals,
     });
     e.preventDefault();
-    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 1 });
+    dispatch({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.card_details,
+    });
   };
 
   const totalMealPrice = numberOfMeals * props.costPerMeal;
   const totalAmount = { value: totalMealPrice, text: '$' + totalMealPrice };
   const COST_LIMIT = 10000;
 
+  useEffect(() => {
+    dispatch({
+      type: ModalPaymentConstants.SET_AMOUNT,
+      payload: String(totalMealPrice),
+    });
+    // eslint-disable-next-line
+  }, []);
+
+  const fetchData = async (sellerId: string) => {
+    // Note(wilsonj806) Showing the campaign that expires first
+    // will need to update this if we render multiple distributors
+    const { data } = await getCampaignsForMerchant(sellerId);
+    const { data: distrib } = await getDistributor(data[0].distributor_id);
+    setCampaignDistributor(distrib);
+  };
+
+  useEffect(() => {
+    fetchData(props.sellerId);
+  }, [props.sellerId]);
+
+  const Distributor = () => (
+    <>
+      <a
+        href={campaignDistributor.website_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.link}
+      >
+        {' '}
+        {campaignDistributor.name}
+      </a>{' '}
+    </>
+  );
+
   return (
     <form data-testid="ModalBuyMeal">
       <div>
-        <h1>{t('buyMeal.header') + props.sellerName}</h1>
+        <div className={styles.header}>
+          {props.sellerId
+            ? t('buyMeal.header') + props.sellerName
+            : t('buyMealPool.header')}
+        </div>
       </div>
-      <p>{t('buyMeal.subheader')}</p>
+      <p className={styles.description}>
+        {t('buyMealPool.description.weAre')}
+        {/* Note(wilsonj806)Only renders one single distributor*/}
+        <Distributor />
+        {t('buyMealPool.description.andRestaurants')}
+        <span className={styles.bold}>
+          {' '}
+          {t('buyMealPool.description.allItTakes')} ${props.costPerMeal}
+        </span>
+      </p>
 
-      <div className={styles.illustrationsContainer}>
-        <img
-          src={walletImage}
-          alt={'How it works'}
-          className={styles.illustrationLeading}
-        />
-        <img
-          src={cardImage}
-          alt={'How it works'}
-          className={styles.illustrationTrailing}
-        />
-      </div>
-      <div className={styles.explantionContainer}>
-        <p className={styles.explanation}>{t('buyMeal.explanationFirst')}</p>
-        <p className={styles.explanation}>{t('buyMeal.explanationSecond')}</p>
-      </div>
+      <CampaignInstructions />
 
       <div className={styles.amountContainer}>
         <label htmlFor="select-amount">{t('buyMeal.prompt')}</label>

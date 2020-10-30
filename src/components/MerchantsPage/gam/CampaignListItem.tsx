@@ -9,12 +9,13 @@ import {
   getDistributor,
   getSeller,
   getFiscalSponsor,
-} from '../../../utilities';
+} from '../../../utilities/api';
 import { useEffect, useState } from 'react';
-import Modal from '../../Modal';
+import Modal from '../../ModalPayment';
 import {
   ModalPaymentConstants,
   useModalPaymentDispatch,
+  ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
 
 interface Props {
@@ -27,6 +28,7 @@ const ModalBox: any = Modal;
 
 const CampaignListItem = (props: Props) => {
   const { t } = useTranslation();
+  const dispatch = useModalPaymentDispatch(null); //provide null according to Bruce's new branch
 
   const [distributor, setDistributor] = useState<any | null>();
   const [merchant, setMerchant] = useState<any | null>();
@@ -57,10 +59,12 @@ const CampaignListItem = (props: Props) => {
   );
   const campaignImageUrls = campaign.gallery_image_urls;
 
-  const dispatch = useModalPaymentDispatch(null); //provide null according to Bruce's new branch
   const showModal = (event: any) => {
     props.setSelectedCampaign(campaign.id);
-    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 0 });
+    dispatch({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.buy_meal,
+    });
   };
 
   return (
@@ -137,7 +141,6 @@ const CampaignListItem = (props: Props) => {
 
         {campaign.active && props.selectedCampaign === campaign.id && (
           <ModalBox
-            purchaseType={'buy_meal'}
             sellerId={merchant.seller_id}
             sellerName={merchant.name}
             costPerMeal={campaign.price_per_meal / 100}

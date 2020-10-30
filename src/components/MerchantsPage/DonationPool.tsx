@@ -1,8 +1,9 @@
 import * as React from 'react';
-import Modal from '../Modal';
+import Modal from '../ModalPayment';
 import {
   ModalPaymentConstants,
   useModalPaymentDispatch,
+  ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
 import {
   smallScreens,
@@ -21,7 +22,10 @@ const DonationPoolBox = () => {
   const openModal = (e: any) => {
     ReactPixel.trackCustom('DonationPoolButtonClick', {});
     e.preventDefault();
-    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 0 });
+    dispatch({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.donation,
+    });
   };
 
   return (
@@ -40,7 +44,6 @@ const DonationPoolBox = () => {
         <Image src={websiteImages.skyline} alt="banner" />
 
         <Modal
-          purchaseType={'donation'}
           sellerId={'send-chinatown-love'}
           sellerName={'Send Chinatown Love Fund'}
           costPerMeal={0}
