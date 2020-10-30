@@ -11,7 +11,7 @@ import {
   getSeller,
   getSellerHours,
   getSellerDeliveryOptions,
-} from '../../utilities';
+} from '../../utilities/api';
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
 import styled from 'styled-components';

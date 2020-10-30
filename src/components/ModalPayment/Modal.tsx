@@ -1,20 +1,18 @@
 import React from 'react';
-import { v4 as uuid } from 'uuid';
-import ModalAmount from '../ModalAmount';
-import ModalBuyMealNew from '../ModalBuyMealNew';
-import { SquareModal } from '../ModalPayment';
-import ModalConfirmation from '../ModalConfirmation';
+import ModalAmount from './ModalAmount';
+import ModalBuyMeal from './ModalBuyMeal';
+import ModalCardDetails from './ModalCardDetails';
+import ModalConfirmation from './ModalConfirmation';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
   ModalPaymentConstants,
+  ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
-import { getSeller } from '../../utilities';
-import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
+import styled from 'styled-components';
 
 export interface Props {
-  purchaseType: string;
   sellerId: string;
   sellerName: string;
   costPerMeal: number;
@@ -27,21 +25,29 @@ export interface ModalProps {
 }
 
 export const Modal = (props: Props) => {
-  const idempotencyKey = uuid();
   const { modalView } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
 
   const closeModal = async (e: any) => {
     ReactPixel.trackCustom('ModalCloseButtonClick', {});
     e.preventDefault();
-    if (modalView === 2) {
-      const { data } = props.sellerId && (await getSeller(props.sellerId));
-      dispatch({
-        type: ModalPaymentConstants.UPDATE_SELLER_DATA,
-        payload: data.amount_raised,
-      });
-    }
     dispatch({ type: ModalPaymentConstants.CLOSE_MODAL, payload: undefined });
+  };
+
+  const renderModalPage = (type) => {
+    switch (type) {
+      case ModalPaymentTypes.modalPages.donation:
+      case ModalPaymentTypes.modalPages.gift_card:
+        return <ModalAmount {...props} />;
+      case ModalPaymentTypes.modalPages.buy_meal:
+        return <ModalBuyMeal {...props} />;
+      case ModalPaymentTypes.modalPages.card_details:
+        return <ModalCardDetails {...props} />;
+      case ModalPaymentTypes.modalPages.confirmation:
+        return <ModalConfirmation {...props} />;
+      default:
+        return;
+    }
   };
 
   return (
@@ -49,20 +55,7 @@ export const Modal = (props: Props) => {
       <CloseButtonContainer>
         <CloseButton onClick={closeModal}>×</CloseButton>
       </CloseButtonContainer>
-      <ViewContainer>
-        {modalView === 0 && props.purchaseType !== 'buy_meal' && (
-          <ModalAmount {...props} />
-        )}
-        {modalView === 0 && props.purchaseType === 'buy_meal' && (
-          <ModalBuyMealNew {...props} />
-        )}
-        {modalView === 1 && (
-          <SquareModal {...props} idempotencyKey={idempotencyKey} />
-        )}
-        {modalView === 2 && (
-          <ModalConfirmation {...props} closeModal={closeModal} />
-        )}
-      </ViewContainer>
+      <ViewContainer>{renderModalPage(modalView)}</ViewContainer>
     </ModalContainer>
   );
 };
@@ -70,7 +63,7 @@ export const Modal = (props: Props) => {
 export default Modal;
 
 const ModalContainer = styled.div`
-  display: ${(props: ModalProps) => (props.modalView > -1 ? 'flex' : 'none')};
+  display: ${(props: ModalProps) => (props.modalView ? 'flex' : 'none')};
   flex-direction: column;
   margin: 0 auto;
 

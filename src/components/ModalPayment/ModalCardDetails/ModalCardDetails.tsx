@@ -4,22 +4,28 @@ import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+import { v4 as uuid } from 'uuid';
+
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
-import { SquareErrors, hasKey } from '../../consts';
-import { makeSquarePayment, SquareLineItems, Buyer } from '../../utilities/api';
+
+import { SquareErrors, hasKey } from '../../../consts';
+import {
+  makeSquarePayment,
+  SquareLineItems,
+  Buyer,
+} from '../../../utilities/api';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
   ModalPaymentConstants,
-} from '../../utilities/hooks/ModalPaymentContext';
-import styled from 'styled-components';
+  ModalPaymentTypes,
+} from '../../../utilities/hooks/ModalPaymentContext';
 
 type Props = {
-  purchaseType: string;
   sellerId: string;
   sellerName: string;
-  idempotencyKey: string;
   costPerMeal: number;
   nonProfitLocationId?: string;
   campaignId?: string;
@@ -30,17 +36,16 @@ type ErrorMessage = {
   detail: string;
 };
 
-const SquareModal = ({
-  purchaseType,
+const ModalCardDetails = ({
   sellerId,
   sellerName,
-  idempotencyKey,
   costPerMeal,
   nonProfitLocationId,
   campaignId,
 }: Props) => {
+  const idempotencyKey = uuid();
   const { t } = useTranslation();
-  const { amount } = useModalPaymentState(null);
+  const { amount, purchaseType } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
 
   const [isTermsChecked, setTermsChecked] = useState(false);
@@ -50,17 +55,34 @@ const SquareModal = ({
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
 
+  let applicationId, locationId;
+  if (
+    purchaseType === ModalPaymentTypes.modalPages.buy_meal &&
+    nonProfitLocationId === process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID
+  ) {
+    applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
+    locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
+  } else {
+    applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';
+    locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
+  }
+
   const checkTermsAgreement = () => setTermsChecked(!isTermsChecked);
+
   const checkSubscriptionAgreement = () =>
     setSubscriptionChecked(!isSubscriptionChecked);
 
   const numberOfMeals = Number(amount) / costPerMeal;
   const mealText = numberOfMeals > 1 ? 'meals' : 'meal';
   const numberOfMealsText =
-    purchaseType === 'buy_meal' ? `(${numberOfMeals} ${mealText})` : '';
+    purchaseType === ModalPaymentTypes.modalPages.buy_meal
+      ? `(${numberOfMeals} ${mealText})`
+      : '';
 
   const cardNonceResponseReceived = (errors: any[], nonce: string) => {
     setErrorsMessages([]);
+    const is_distribution =
+      purchaseType === ModalPaymentTypes.modalPages.buy_meal;
 
     if (errors && errors.length > 0 && errors[0]) {
       setErrorsMessages(errors.map((error) => error.message));
@@ -68,27 +90,25 @@ const SquareModal = ({
     }
 
     // 'buy_meal' is still represented as a gift card when calling the API
-    const payment: SquareLineItems =
-      purchaseType === 'buy_meal'
-        ? times(
-            () => ({
-              amount: Number(costPerMeal) * 100,
-              currency: 'usd',
-              item_type: 'gift_card',
-              quantity: 1,
-            }),
-            numberOfMeals
-          )
-        : [
-            {
-              amount: Number(amount) * 100,
-              currency: 'usd',
-              item_type: purchaseType,
-              quantity: 1,
-            },
-          ];
+    const payment: SquareLineItems = is_distribution
+      ? times(
+          () => ({
+            amount: Number(costPerMeal) * 100,
+            currency: 'usd',
+            item_type: 'gift_card',
+            quantity: 1,
+          }),
+          numberOfMeals
+        )
+      : [
+          {
+            amount: Number(amount) * 100,
+            currency: 'usd',
+            item_type: purchaseType,
+            quantity: 1,
+          },
+        ];
 
-    const is_distribution = purchaseType === 'buy_meal';
     const buyer: Buyer = {
       name,
       email,
@@ -108,7 +128,10 @@ const SquareModal = ({
     )
       .then((res) => {
         if (res.status === 200) {
-          dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 2 });
+          dispatch({
+            type: ModalPaymentConstants.SET_MODAL_VIEW,
+            payload: ModalPaymentTypes.modalPages.confirmation,
+          });
         }
       })
       .catch((err) => {
@@ -136,25 +159,13 @@ const SquareModal = ({
       });
   };
 
-  let applicationId, locationId;
-  if (
-    purchaseType === 'buy_meal' &&
-    nonProfitLocationId === process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID
-  ) {
-    applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
-    locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
-  } else {
-    applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';
-    locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
-  }
-
-  const purchaseTypePhrase = (shouldLowerCase) => {
+  const purchaseTypePhrase = (shouldLowerCase, purchaseType) => {
     switch (purchaseType) {
-      case 'donation':
+      case ModalPaymentTypes.modalPages.donation:
         return shouldLowerCase ? 'donation' : 'Donation';
-      case 'gift_card':
-        return shouldLowerCase ? 'voucher purchase' : 'Voucher purchase';
-      case 'buy_meal':
+      case ModalPaymentTypes.modalPages.gift_card:
+        return `${shouldLowerCase ? 'v' : 'V'}oucher purchase`;
+      case ModalPaymentTypes.modalPages.buy_meal:
         return 'Gift a Meal purchase';
       default:
         return 'Donation';
@@ -170,27 +181,28 @@ const SquareModal = ({
     );
   }, [isTermsChecked, name, email]);
 
-  const setDisclaimerLanguage = (type: string) => {
-    if (sellerId === 'send-chinatown-love') type = 'donation-pool';
+  const setDisclaimerLanguage = (
+    type: string | ModalPaymentTypes.modalPages
+  ) => {
+    if (sellerId === 'send-chinatown-love')
+      type = ModalPaymentTypes.modalPages.donation_pool;
 
     switch (type) {
-      case 'donation':
-        return t(`By proceeding with your transaction, you understand that you are
-          making a donation to ${sellerName}. No goods or services were
-          exchanged for this donation.`);
-      case 'donation-pool':
-        return t(`By proceeding with your transaction, you understand that
-          you are making a donation to all merchants partnered with Send Chinatown Love
-          Inc. The full donation pool will be split among these merchants. No goods or
-          services were exchanged for this donation.`);
-      case 'gift_card':
-        return t(`By proceeding with your purchase, you understand that the voucher card
-          is not redeemable for cash and can only be used at ${sellerName}. All
-          purchases are final. In the event that the merchant is no longer open
-          at the time of redemption, Send Chinatown Love Inc. will not be able
-          to refund your purchase. Balance displayed in the voucher may or may not
-          represent the final balance. Final balance information is subject to
-          ${sellerName}'s most recent records.`);
+      case ModalPaymentTypes.modalPages.donation:
+        return t(
+          'modalPayment.modalCardDetails.disclaimer.donation',
+          sellerName
+        );
+      case ModalPaymentTypes.modalPages.donation_pool:
+        return t(
+          'modalPayment.modalCardDetails.disclaimer.donation_pool',
+          sellerName
+        );
+      case ModalPaymentTypes.modalPages.gift_card:
+        return t(
+          'modalPayment.modalCardDetails.disclaimer.gift_card',
+          sellerName
+        );
       default:
         break;
     }
@@ -198,29 +210,38 @@ const SquareModal = ({
 
   return (
     <div>
-      <Header>Complete your {purchaseTypePhrase(true)}</Header>
-      <p>Please add your payment information below</p>
+      <Header>
+        {t('modalPayment.modalCardDetails.header.completeYour')}{' '}
+        {purchaseTypePhrase(true, purchaseType)}
+      </Header>
+      <p>{t('modalPayment.modalCardDetails.body.paymentInfo')}</p>
 
       <PaymentContainer>
-        <Subheader>Payment Information</Subheader>
+        <Subheader>
+          {t('modalPayment.modalCardDetails.header.paymentInfo')}
+        </Subheader>
         <RowFormat>
-          <LabelText htmlFor="name">Full Name</LabelText>
+          <LabelText htmlFor="name">
+            {t('modalPayment.modalCardDetails.body.fullName')}
+          </LabelText>
           <InputText
             name="name"
             type="text"
             className="modalInput--input"
             onChange={(e) => setName(e.target.value)}
             value={name}
-            placeholder="Name"
+            placeholder={t('modalPayment.modalCardDetails.placeholders.name')}
           />
-          <LabelText htmlFor="email">Email</LabelText>
+          <LabelText htmlFor="email">
+            {t('modalPayment.modalCardDetails.body.email')}
+          </LabelText>
           <InputText
             name="email"
             type="email"
             className="modalInput--input"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
-            placeholder="Email"
+            placeholder={t('modalPayment.modalCardDetails.placeholders.email')}
             pattern={ModalPaymentConstants.EMAIL_REGEX.source}
             required
           />
@@ -246,7 +267,7 @@ const SquareModal = ({
             <Subheader>Checkout details</Subheader>
             <span>
               {' '}
-              {purchaseTypePhrase(false)} of{' '}
+              {purchaseTypePhrase(false, purchaseType)} of{' '}
               <b>
                 ${amount} {numberOfMealsText}
               </b>{' '}
@@ -272,9 +293,7 @@ const SquareModal = ({
                 checked={isSubscriptionChecked}
               />
               <span>
-                I'd like to receive email updates from Send Chinatown Love, such
-                as when the merchant receives my donation/purchase or when a new
-                merchant is onboarded
+                {t('modalPayment.modalCardDetails.body.emailUpdates')}
               </span>
             </CheckboxContainer>
             <Disclaimer>{setDisclaimerLanguage(purchaseType)}</Disclaimer>
@@ -285,7 +304,7 @@ const SquareModal = ({
                 onClick={() =>
                   dispatch({
                     type: ModalPaymentConstants.SET_MODAL_VIEW,
-                    payload: 0,
+                    payload: purchaseType,
                   })
                 }
               >
@@ -300,7 +319,7 @@ const SquareModal = ({
   );
 };
 
-export default SquareModal;
+export default ModalCardDetails;
 
 const PaymentContainer = styled.div`
   display: flex;

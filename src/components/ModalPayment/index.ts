@@ -1,1 +1,2 @@
-export { default as SquareModal } from './SquareModal';
+export { default } from './Modal';
+export type { Props } from './Modal';

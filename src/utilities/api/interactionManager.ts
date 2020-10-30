@@ -174,7 +174,6 @@ export const getCampaigns = async (): Promise<any> => {
 export const getCampaignsForMerchant = async (
   seller_id: string
 ): Promise<any> => {
-  console.log('not getCampaignsForMerchant testing');
   return await axios
     .get(sellers + seller_id + '/campaigns')
     .then((res) => res)

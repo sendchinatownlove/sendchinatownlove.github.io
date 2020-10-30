@@ -10,7 +10,7 @@ import MerchantCard from './MerchantCard';
 import MerchantDescriptionBanner from './MerchantDescriptionBanner';
 import NavBar from './MerchantNavBar';
 import { LoaderFillerContainer } from '../Loader';
-import { getSellers } from '../../utilities';
+import { getSellers } from '../../utilities/api';
 import type { BrowsePageSeller } from '../../utilities/api/types';
 import { getWebsiteImages } from '../../utilities/general/StoreImages';
 

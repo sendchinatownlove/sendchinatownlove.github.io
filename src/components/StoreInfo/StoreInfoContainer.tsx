@@ -3,7 +3,7 @@ import { useState } from 'react';
 import classnames from 'classnames';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
-import { BrowsePageSeller } from '../../utilities';
+import { BrowsePageSeller } from '../../utilities/api';
 import StoreStory from '../StoreStory';
 import StoreMenu from './StoreMenuTab';
 import StoreGallery from './StoreGalleryTab';

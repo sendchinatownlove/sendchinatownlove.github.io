@@ -14,14 +14,16 @@ import { BrowsePageSeller } from '../../api/types';
 export type ModalPaymentState = {
   amount: string;
   customInput: boolean;
-  modalView: number;
+  purchaseType: modalPages | null;
+  modalView: modalPages | null;
   sellerData: BrowsePageSeller;
 };
 
 export const defaultState: ModalPaymentState = {
   amount: '5',
   customInput: false,
-  modalView: -1,
+  modalView: null,
+  purchaseType: null,
   sellerData: {
     id: 0,
     seller_id: '',
@@ -54,3 +56,12 @@ export const defaultState: ModalPaymentState = {
     logo_image_url: '',
   },
 };
+
+export enum modalPages {
+  donation = 'donation',
+  donation_pool = 'donation_pool',
+  gift_card = 'gift_card',
+  buy_meal = 'buy_meal',
+  card_details = 'card_details',
+  confirmation = 'confirmation',
+}

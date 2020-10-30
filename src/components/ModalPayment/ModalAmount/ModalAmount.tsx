@@ -3,13 +3,13 @@ import {
   useModalPaymentState,
   useModalPaymentDispatch,
   ModalPaymentConstants,
-} from '../../utilities/hooks/ModalPaymentContext';
+  ModalPaymentTypes,
+} from '../../../utilities/hooks/ModalPaymentContext';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
 export interface Props {
-  purchaseType: string;
   sellerId: string;
   sellerName: string;
 }
@@ -17,7 +17,7 @@ export interface Props {
 export const Modal = (props: Props) => {
   const { t } = useTranslation();
 
-  const { amount } = useModalPaymentState(null);
+  const { amount, modalView } = useModalPaymentState(null);
   const [isCustomAmount, setIsCustomAmount] = useState(true);
   const [selected, setSelected] = useState('');
   const dispatch = useModalPaymentDispatch(null);
@@ -33,7 +33,10 @@ export const Modal = (props: Props) => {
   const openModal = (e: any) => {
     ReactPixel.trackCustom('PaymentNextButtonClick', { amount: amount });
     e.preventDefault();
-    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 1 });
+    dispatch({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.card_details,
+    });
   };
 
   const validAmount = (value: string) => {
@@ -48,10 +51,12 @@ export const Modal = (props: Props) => {
     { value: '100', text: '$100' },
   ];
 
-  const headerText =
-    props.purchaseType === 'donation'
-      ? t('purchase.donation', { seller: props.sellerName })
-      : t('purchase.voucher', { seller: props.sellerName });
+  const purchaseIsDonation =
+    modalView === ModalPaymentTypes.modalPages.donation;
+
+  const headerText = purchaseIsDonation
+    ? t('purchase.donation', { seller: props.sellerName })
+    : t('purchase.voucher', { seller: props.sellerName });
 
   return (
     <ContentContainer id="donation-form" data-testid="modal-amount">
@@ -113,14 +118,14 @@ export const Modal = (props: Props) => {
         {Number(amount) < minAmount && isCustomAmount && (
           <ErrorMessage>
             {t('paymentProcessing.amount.minimum')}{' '}
-            {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
+            {purchaseIsDonation ? 'donation' : 'voucher'}{' '}
             {t('paymentProcessing.amount.amount')}: $5
           </ErrorMessage>
         )}
         {Number(amount) > maxAmount && isCustomAmount && (
           <ErrorMessage>
             {t('paymentProcessing.amount.maximum')}{' '}
-            {props.purchaseType === 'gift_card' ? 'voucher' : 'donation'}{' '}
+            {purchaseIsDonation ? 'donation' : 'voucher'}{' '}
             {t('paymentProcessing.amount.amount')}: $10000
           </ErrorMessage>
         )}
