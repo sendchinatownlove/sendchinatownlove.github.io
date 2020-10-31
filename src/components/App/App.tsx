@@ -46,6 +46,9 @@ const VoucherRedemptionPage = lazy(
 const MerchantVoucherDashboard = lazy(
   () => import('../../pages/MerchantVoucherDashboard')
 );
+const MerchantVoucherDashboardV2 = lazy(
+  () => import('../../pages/MerchantVoucherDashboardV2')
+);
 const PassportVoucher = lazy(
   () => import('../../pages/PassportRedemption/PassportVoucher')
 );
@@ -126,8 +129,11 @@ const App = () => {
           >
             <PassportRedemption screen={ScreenName.Claim} />
           </Route>
-          <Route path="/:seller_id/dashboard/:secret_id">
+          <Route exact path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
+          </Route>
+          <Route exact path="/:seller_id/dashboard/:secret_id/v2">
+            <MerchantVoucherDashboardV2 />
           </Route>
           <Route path="/print-passport-voucher/:id/tickets/:tickets_secret">
             <PassportVoucher />

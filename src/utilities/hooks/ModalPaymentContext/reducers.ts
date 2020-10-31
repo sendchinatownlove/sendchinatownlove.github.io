@@ -5,6 +5,7 @@ import {
   CLEAR_FORMS,
   SET_SELLER_DATA,
   UPDATE_SELLER_DATA,
+  SET_LIC_DATA,
 } from './constants';
 import { defaultState, ModalPaymentState, modalPages } from './types';
 
@@ -21,7 +22,8 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
       if (
         payload === modalPages.donation ||
         payload === modalPages.gift_card ||
-        payload === modalPages.buy_meal
+        payload === modalPages.buy_meal ||
+        payload === modalPages.light_up_chinatown
       ) {
         return { ...state, modalView: payload, purchaseType: payload };
       }
@@ -46,6 +48,14 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
         customInput: false,
         amount: defaultState.amount,
         purchaseType: null,
+      };
+    case SET_LIC_DATA:
+      return {
+        ...state,
+        licData: {
+          ...state.licData,
+          [payload.key]: payload.value,
+        },
       };
     case CLEAR_FORMS:
       return defaultState;

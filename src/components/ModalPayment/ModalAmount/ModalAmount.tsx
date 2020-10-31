@@ -9,6 +9,8 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
+import { RowFormat, LabelText, InputText, Subheader } from '../styles';
+
 export interface Props {
   sellerId: string;
   sellerName: string;
@@ -44,28 +46,64 @@ export const Modal = (props: Props) => {
     return r.test(value);
   };
 
-  const buttonAmounts = [
-    { value: '10', text: '$10' },
-    { value: '25', text: '$25' },
-    { value: '50', text: '$50' },
-    { value: '100', text: '$100' },
-  ];
+  const buttonAmounts =
+    modalView === ModalPaymentTypes.modalPages.light_up_chinatown
+      ? [
+          { value: '25', text: '$25' },
+          { value: '45', text: '$45' },
+          { value: '150', text: '$150' },
+          { value: '300', text: '$300' },
+        ]
+      : [
+          { value: '10', text: '$10' },
+          { value: '25', text: '$25' },
+          { value: '50', text: '$50' },
+          { value: '100', text: '$100' },
+        ];
 
   const purchaseIsDonation =
     modalView === ModalPaymentTypes.modalPages.donation;
 
-  const headerText = purchaseIsDonation
-    ? t('purchase.donation', { seller: props.sellerName })
-    : t('purchase.voucher', { seller: props.sellerName });
+  const getHeaderText = (purchase_type, sellerName) => {
+    switch (purchase_type) {
+      case ModalPaymentTypes.modalPages.donation:
+        return t('purchase.donation', { seller: sellerName });
+      case ModalPaymentTypes.modalPages.gift_card:
+        return t('purchase.voucher', { seller: sellerName });
+      case ModalPaymentTypes.modalPages.light_up_chinatown:
+        return t('purchase.donation_to', { seller: sellerName });
+      default:
+        return t('purchase.donation', { seller: sellerName });
+    }
+  };
+
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    dispatch({
+      type: ModalPaymentConstants.SET_LIC_DATA,
+      payload: {
+        key: e.target.name,
+        value: e.target.value,
+      },
+    });
+  };
 
   return (
     <ContentContainer id="donation-form" data-testid="modal-amount">
-      <Header>{headerText}</Header>
+      <Header>{getHeaderText(modalView, props.sellerName)}</Header>
 
       {props.sellerId === 'send-chinatown-love' && (
         <p>{t('donationPool.description2')}</p>
       )}
-      <p>{t('paymentProcessing.amount.header')}</p>
+      <p>
+        {t(
+          `paymentProcessing.amount.${
+            modalView === ModalPaymentTypes.modalPages.light_up_chinatown
+              ? 'light_up_chinatown'
+              : 'header'
+          }`
+        )}
+      </p>
 
       <AmountContainer>
         <label htmlFor="select-amount">
@@ -130,7 +168,61 @@ export const Modal = (props: Props) => {
           </ErrorMessage>
         )}
       </AmountContainer>
-
+      {amount >= 45 && (
+        <AmountContainer>
+          <Subheader>{t('paymentProcessing.amount.adopt_lantern')}</Subheader>
+          <label>{t('paymentProcessing.amount.tier_2_donation')}</label>
+          <br />
+          <br />
+          <label>{t('paymentProcessing.amount.personalize')}</label>
+          <br />
+          <br />
+          <SingleRowFormat>
+            <RowFormat width="38%">
+              <LabelText htmlFor="name">
+                {t('paymentProcessing.amount.labels.first_name')}
+              </LabelText>
+              <InputText
+                name="first_name"
+                type="text"
+                className="modalInput--input"
+                onChange={handleOnChange}
+                placeholder={t(
+                  'paymentProcessing.amount.place_holder.first_name'
+                )}
+              />
+            </RowFormat>
+            <RowFormat width="20%" mobileWidth="30%">
+              <LabelText htmlFor="email">
+                {t('paymentProcessing.amount.labels.middle_initial')}
+              </LabelText>
+              <InputText
+                name="middle_initial"
+                type="text"
+                className="modalInput--input"
+                onChange={handleOnChange}
+                placeholder={t(
+                  'paymentProcessing.amount.place_holder.middle_initial'
+                )}
+              />
+            </RowFormat>
+            <RowFormat width="38%">
+              <LabelText htmlFor="email">
+                {t('paymentProcessing.amount.labels.last_name')}
+              </LabelText>
+              <InputText
+                name="last_name"
+                type="text"
+                className="modalInput--input"
+                onChange={handleOnChange}
+                placeholder={t(
+                  'paymentProcessing.amount.place_holder.last_name'
+                )}
+              />
+            </RowFormat>
+          </SingleRowFormat>
+        </AmountContainer>
+      )}
       <NextButton
         type="button"
         className={'modalButton--filled'}
@@ -177,6 +269,15 @@ const CustomAmountContainer = styled.div`
     top: 0;
     left: 8px;
     z-index: 1;
+  }
+`;
+
+const SingleRowFormat = styled(RowFormat)`
+  flex-direction: row;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 800px) {
+    flex-direction: column;
   }
 `;
 

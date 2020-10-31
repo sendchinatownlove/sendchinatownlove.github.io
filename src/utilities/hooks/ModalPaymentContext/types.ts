@@ -17,6 +17,11 @@ export type ModalPaymentState = {
   purchaseType: modalPages | null;
   modalView: modalPages | null;
   sellerData: BrowsePageSeller;
+  licData: {
+    first_name: string;
+    middle_initial: string;
+    last_name: string;
+  };
 };
 
 export const defaultState: ModalPaymentState = {
@@ -55,10 +60,16 @@ export const defaultState: ModalPaymentState = {
     non_profit_location_id: '',
     logo_image_url: '',
   },
+  licData: {
+    first_name: '',
+    middle_initial: '',
+    last_name: '',
+  },
 };
 
 export enum modalPages {
   donation = 'donation',
+  light_up_chinatown = 'light_up_chinatown',
   donation_pool = 'donation_pool',
   gift_card = 'gift_card',
   buy_meal = 'buy_meal',

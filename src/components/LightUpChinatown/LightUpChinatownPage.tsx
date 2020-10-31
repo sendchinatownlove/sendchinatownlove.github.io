@@ -5,12 +5,29 @@ import lanternFooter from './images/lantern-footer.png';
 import mapImg from './images/light-up-map.gif';
 import { Trans, useTranslation } from 'react-i18next';
 
+import Modal from '../ModalPayment';
+
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+  ModalPaymentTypes,
+} from '../../utilities/hooks/ModalPaymentContext';
+
 const LightUpChinatownPage = () => {
+  const ModalPaymentDispatcher = useModalPaymentDispatch(null);
   const { t } = useTranslation();
   const today = new Date();
   const campaignEndDate = new Date('11/30/2020');
   const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
+
+  const openModal = (event) => {
+    event.preventDefault();
+    ModalPaymentDispatcher({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: event.target.value,
+    });
+  };
 
   return (
     <React.Fragment>
@@ -62,7 +79,6 @@ const LightUpChinatownPage = () => {
           <CampaignInfoTime color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignDates')}
           </CampaignInfoTime>
-
           <CampaignInfoText color={'#CF6E8A'}>
             {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
           </CampaignInfoText>
@@ -81,7 +97,21 @@ const LightUpChinatownPage = () => {
           <br></br>
           {t('lightUpChinatown.ceremony2')}
         </FooterText>
+
+        <button
+          className={'button--filled'}
+          onClick={openModal}
+          value={ModalPaymentTypes.modalPages.light_up_chinatown}
+        >
+          Donation
+        </button>
       </BottomBanner>
+
+      <Modal
+        sellerId="light-up-chinatown"
+        sellerName="Light Up Chinatown"
+        costPerMeal={0}
+      />
     </React.Fragment>
   );
 };

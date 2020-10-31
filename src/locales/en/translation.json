@@ -2,12 +2,28 @@
   "paymentProcessing": {
     "amount": {
       "header": "100% of your support will go to the merchant toward their operating costs. Your transaction is secure, encrypted and directly goes to the owner for sustaining their business.",
+      "light_up_chinatown": "100% of donation goes towards permanent light fixtures throughout Chinatown.",
       "label1": "Select amount",
       "label2": "Other:",
       "minimum": "Minimum",
       "maximum": "Maximum",
       "amount": "amount",
-      "submit": "Next"
+      "submit": "Next",
+      "adopt_lantern": "Adopt-a-Lantern!",
+      "tier_2_donation": "Thank you for donating $45 or more.",
+      "personalize": "Personalize your lantern with your or a loved one’s name.",
+      "labels": {
+        "amount": "amount",
+        "first_name": "first name",
+        "middle_initial": "middle initial",
+        "last_name": "last name"
+      },
+      "place_holder": {
+        "amount": "amount",
+        "first_name": "Enter first name",
+        "middle_initial": "Enter middle initial",
+        "last_name": "Enter last name"
+      }
     }
   },
   "navBar": {
@@ -44,7 +60,9 @@
   },
   "purchase": {
     "donation": "Donation for {{seller}}",
-    "voucher": "Voucher for {{seller}}"
+    "voucher": "Voucher for {{seller}}",
+    "donation_to": "Donation to {{seller}}",
+    "voucher_to": "Voucher to {{seller}}"
   },
   "errorPage": {
     "body": {
@@ -66,12 +84,14 @@
       "disclaimer": {
         "donation": "By proceeding with your transaction, you understand that you are making a donation to {{sellerName}}. No goods or services were exchanged for this donation.",
         "donation_pool": "By proceeding with your transaction, you understand that you are making a donation to all merchants partnered with Send Chinatown Love Inc. The full donation pool will be split among these merchants. No goods or services were exchanged for this donation.",
-        "gift_card": "By proceeding with your purchase, you understand that the voucher card is not redeemable for cash and can only be used at {{sellerName}}. All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase. Balance displayed in the voucher may or may not represent the final balance. Final balance information is subject to {{sellerName}} most recent records."
+        "gift_card": "By proceeding with your purchase, you understand that the voucher card is not redeemable for cash and can only be used at {{sellerName}}. All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase. Balance displayed in the voucher may or may not represent the final balance. Final balance information is subject to {{sellerName}} most recent records.",
+        "light_up_chinatown": "By proceeding with your transaction, you understand that you are making a donation to the Light Up Chinatown Project. This Project is directed towards supporting Chinatown as a whole, rather than any individual merchant."
       },
       "header": {
         "completeYour": "Complete your ",
         "paymentInfo": "Payment Information",
-        "checkout": "Checkout details"
+        "checkout": "Checkout details",
+        "light_up_chinatown_donation": "Light Up Chinatown Donation"
       },
       "body": {
         "paymentInfo": "Please add your payment information below",
@@ -82,6 +102,18 @@
       "placeholders": {
         "name": "Name",
         "email": "Email"
+      },
+      "details": {
+        "donation": "Donation details",
+        "voucher": "Purchase details"
+      },
+      "message": {
+        "donation": "Donation",
+        "one_time_donation": "One-Time Donation",
+        "monthly_donation": "Monthly Donation",
+        "light_up_chinatown_tier_2": "Adopt-a-Lantern Donation",
+        "voucher": "Voucher Purchase",
+        "lic_name": "Name for personalized lantern: "
       }
     }
   },
