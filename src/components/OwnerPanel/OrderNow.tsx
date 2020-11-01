@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { useState, useEffect, FC, ReactElement } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.scss';
 
@@ -11,6 +11,7 @@ interface Props {
   hours: any[];
   isMerchantOpen: boolean;
   deliveryService?: any[];
+  ModalButton?: ReactElement;
 }
 
 const OrderNow: FC<Props> = ({
@@ -18,6 +19,7 @@ const OrderNow: FC<Props> = ({
   hours,
   isMerchantOpen,
   deliveryService,
+  ModalButton,
 }) => {
   const [phone, setPhone] = useState<any | null>(null);
   const [thirdPtyDelivery, setThirdPtyDelivery] = useState<any[]>([]);
@@ -33,6 +35,8 @@ const OrderNow: FC<Props> = ({
       setThirdPtyDelivery(copy);
     }
   }, [deliveryService]);
+
+  const HideModalButton = () => ModalButton || null;
 
   return (
     <div className={classnames(styles.subsection, styles.orderNow)}>
@@ -124,14 +128,16 @@ const OrderNow: FC<Props> = ({
             phone={phone.phone_number}
           />
         )}
-        {thirdPtyDelivery.map((ele) => (
+        {thirdPtyDelivery.map((ele, i) => (
           <DeliveryButton
             imageUrl={ele.delivery_type.icon_url}
             name={ele.delivery_type.name}
             deliveryLink={ele.url}
+            key={i}
           />
         ))}
       </div>
+      <HideModalButton />
     </div>
   );
 };
