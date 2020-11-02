@@ -131,6 +131,11 @@ const MerchantsPage = (props: Props) => {
 
             <div className={styles.storeInfoContainer}>
               <NavBar filterStoreType={filterStoreType} />
+              <h2>
+                <b>{t('merchantsPage.merchantHeader')}</b>
+              </h2>
+              <br />
+              <br />
 
               <div className={styles.merchantsContainer}>
                 {filter.map((store: any) =>
