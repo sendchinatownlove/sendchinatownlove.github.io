@@ -51,11 +51,15 @@ const ContributionBar = ({
     [donationsRaised, giftAMealAmountRaised, giftCardAmountRaised, totalRaised]
   );
 
+  let containerStyle;
   let textContainerStyle;
   let giftAMealStyle;
   if (isSmallScreen) {
     textContainerStyle = {
       flexDirection: 'column',
+    };
+    containerStyle = {
+      margin: '0 3vw',
     };
   } else {
     giftAMealStyle = {
@@ -77,7 +81,7 @@ const ContributionBar = ({
   }
 
   return (
-    <Container>
+    <Container style={containerStyle}>
       <Heading>
         {t('contributionBar.header')}: ${centsToDollars(totalRaised)}
       </Heading>
