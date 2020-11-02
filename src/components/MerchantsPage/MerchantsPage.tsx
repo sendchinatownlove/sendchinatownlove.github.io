@@ -27,9 +27,9 @@ type ContributionsType = {
 };
 
 const INITIAL_CONTRIBUTIONS: ContributionsType = {
-  donationAmount: 100,
-  giftCardAmount: 300,
-  giftAMealAmount: 100,
+  donationAmount: 0,
+  giftCardAmount: 0,
+  giftAMealAmount: 0,
 };
 
 ReactPixel.trackCustom('MerchantsPageView', {});
