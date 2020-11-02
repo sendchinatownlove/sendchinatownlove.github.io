@@ -83,9 +83,9 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
 
   useEffect(() => {
     function handleResize() {
-      setVh(window.innerHeight * 0.01)
+      setVh(window.innerHeight * 0.01);
     }
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize);
   });
 
   return (
@@ -281,7 +281,7 @@ const SingleRewardContainer = styled.button<{
   outline: none;
   border-radius: 5px;
   cursor: ${(props) => (props.numRewards > 0 ? 'pointer' : 'auto')};
-  
+
   display: flex;
   flex-direction: column;
   place-self: center;
@@ -299,7 +299,7 @@ const SingleRewardInfo = styled.div`
 const LogoImage = styled.img`
   width: 130px;
   border-radius: 20px;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
 `;
 
 const Buffer = styled.div`

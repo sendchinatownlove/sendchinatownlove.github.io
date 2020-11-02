@@ -5,11 +5,18 @@ import { tabletScreens } from '../../../utilities/general/responsive';
 import { useTranslation } from 'react-i18next';
 import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
-import { getDistributor, getSeller, getFiscalSponsor } from '../../../utilities';
+import {
+  getDistributor,
+  getSeller,
+  getFiscalSponsor,
+} from '../../../utilities/api';
 import { useEffect, useState } from 'react';
-import Modal from '../../Modal';
-import { useModalPaymentDispatch } from '../../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../../utilities/hooks/ModalPaymentContext/constants';
+import Modal from '../../ModalPayment';
+import {
+  ModalPaymentConstants,
+  useModalPaymentDispatch,
+  ModalPaymentTypes,
+} from '../../../utilities/hooks/ModalPaymentContext';
 
 interface Props {
   campaign: Campaign;
@@ -21,6 +28,7 @@ const ModalBox: any = Modal;
 
 const CampaignListItem = (props: Props) => {
   const { t } = useTranslation();
+  const dispatch = useModalPaymentDispatch(null); //provide null according to Bruce's new branch
 
   const [distributor, setDistributor] = useState<any | null>();
   const [merchant, setMerchant] = useState<any | null>();
@@ -51,10 +59,12 @@ const CampaignListItem = (props: Props) => {
   );
   const campaignImageUrls = campaign.gallery_image_urls;
 
-  const dispatch = useModalPaymentDispatch(); //provide null according to Bruce's new branch
   const showModal = (event: any) => {
     props.setSelectedCampaign(campaign.id);
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+    dispatch({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.buy_meal,
+    });
   };
 
   return (
@@ -82,7 +92,13 @@ const CampaignListItem = (props: Props) => {
           <Description>
             {campaign.description}{' '}
             {distributor && (
-              <a href={distributor.website_url} target="_blank" rel="noopener noreferrer">Learn more about {distributor.name}.</a>
+              <a
+                href={distributor.website_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Learn more about {distributor.name}.
+              </a>
             )}
           </Description>
           <CampaignProgressBar
@@ -123,24 +139,27 @@ const CampaignListItem = (props: Props) => {
           )}
         </ColumnContainer>
 
-        {
-          campaign.active && props.selectedCampaign === campaign.id && (
-            <ModalBox
-              purchaseType={'buy_meal'}
-              sellerId={merchant.seller_id}
-              sellerName={merchant.name}
-              costPerMeal={campaign.price_per_meal / 100}
-              nonProfitLocationId={merchant.non_profit_location_id}
-              campaignId={campaign.id}
-            />
-          )
-        }
-      </Container >
+        {campaign.active && props.selectedCampaign === campaign.id && (
+          <ModalBox
+            sellerId={merchant.seller_id}
+            sellerName={merchant.name}
+            costPerMeal={campaign.price_per_meal / 100}
+            nonProfitLocationId={merchant.non_profit_location_id}
+            campaignId={campaign.id}
+          />
+        )}
+      </Container>
       {fiscalSponsor && (
         <FiscalSponsorContainer>
-          <FiscalSponsorImage src={fiscalSponsor.logo_image_url}></FiscalSponsorImage>
+          <FiscalSponsorImage
+            src={fiscalSponsor.logo_image_url}
+          ></FiscalSponsorImage>
           <FiscalSponsorDivider></FiscalSponsorDivider>
-          <FiscalSponsorText>{t('gamHome.listItem.fiscalSponsor', { sponsorName: fiscalSponsor.name })}</FiscalSponsorText>
+          <FiscalSponsorText>
+            {t('gamHome.listItem.fiscalSponsor', {
+              sponsorName: fiscalSponsor.name,
+            })}
+          </FiscalSponsorText>
         </FiscalSponsorContainer>
       )}
       <Border></Border>
@@ -323,7 +342,7 @@ const FiscalSponsorDivider = styled.div`
   margin-left: 18px;
   width: 5px;
   height: 37px;
-  background-color: #F5EC57;
+  background-color: #f5ec57;
 
   @media (${tabletScreens}) {
     height: 110px;
@@ -338,7 +357,7 @@ const FiscalSponsorText = styled.div`
   font-weight: normal;
   font-size: 13px;
   line-height: 18px;
-  color: #1E1E1E
+  color: #1e1e1e;
 `;
 
 const Border = styled.div`

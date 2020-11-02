@@ -58,7 +58,7 @@ p {
   line-height: 19px;
   text-decoration-line: underline;
   margin-top: 12px;
-  color: #A8192E;
+  color: #a8192e;
   @include for-tablet-landscape-up {
     width: 50%;
     text-align: right;
@@ -78,7 +78,6 @@ p {
     display: flex;
     flex-wrap: wrap;
   }
-
 }
 
 .section__information {
@@ -91,9 +90,9 @@ p {
 
 .ownerImage {
   @media (max-width: 900px) {
-      display: inline;
-      width: 85px;
-      height: 85px;
-      margin-right: 16px;
+    display: inline;
+    width: 85px;
+    height: 85px;
+    margin-right: 16px;
   }
 }

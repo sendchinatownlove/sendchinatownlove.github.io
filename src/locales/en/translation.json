@@ -47,8 +47,8 @@
     "meals": "meals"
   },
   "purchase": {
-    "donation": "Donation for",
-    "voucher": "Voucher for"
+    "donation": "Donation for {{seller}}",
+    "voucher": "Voucher for {{seller}}"
   },
   "errorPage": {
     "body": {
@@ -63,7 +63,32 @@
     "platformInfoDescription": "We are providing an online platform to low-tech, cash-only, Asian-owned small businesses that have been disproportionately impacted by COVID-19.",
     "platformInfoAction": "Support local merchants by making a donation or purchasing a voucher from them.",
     "flyerAsk": "Know of any business owners that fit our target merchant?",
-    "flyerDownload": "Download our flyer to share with them."
+    "flyerDownload": "Download our flyer to share with them.",
+    "merchantHeader": "Our Merchants"
+  },
+  "modalPayment": {
+    "modalCardDetails": {
+      "disclaimer": {
+        "donation": "By proceeding with your transaction, you understand that you are making a donation to {{sellerName}}. No goods or services were exchanged for this donation.",
+        "donation_pool": "By proceeding with your transaction, you understand that you are making a donation to all merchants partnered with Send Chinatown Love Inc. The full donation pool will be split among these merchants. No goods or services were exchanged for this donation.",
+        "gift_card": "By proceeding with your purchase, you understand that the voucher card is not redeemable for cash and can only be used at {{sellerName}}. All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase. Balance displayed in the voucher may or may not represent the final balance. Final balance information is subject to {{sellerName}} most recent records."
+      },
+      "header": {
+        "completeYour": "Complete your ",
+        "paymentInfo": "Payment Information",
+        "checkout": "Checkout details"
+      },
+      "body": {
+        "paymentInfo": "Please add your payment information below",
+        "fullName": "Full Name",
+        "email": "Email",
+        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded"
+      },
+      "placeholders": {
+        "name": "Name",
+        "email": "Email"
+      }
+    }
   },
   "merchantNavBar": {
     "all": "All",
@@ -124,7 +149,7 @@
       "step1": "Step 1: ",
       "step1Text": "Donate to Gift-a-Meal",
       "step2": "Step 2: ",
-      "step2Text": "100% of donations still go directly to our merchants",
+      "step2Text": "Vouchers are created to be redeemed as meals",
       "step3": "Step 3: ",
       "step3Text": "Vouchers are donated to our community partners",
       "step4": "Step 4: ",
@@ -172,5 +197,23 @@
     "codeTitle": "Here is your Free Lyft Citi Bike Day Pass code",
     "codeSubtitle": "TAP TO COPY",
     "codeCopied": "COPIED"
+  },
+  "lightUpChinatown": {
+    "headerText": "Light Up Chinatown",
+    "headerSubtext": "Let’s light up Chinatown, one lantern at a time.",
+    "donationTierText": "Light Up Chinatown donation tiers",
+    "summaryHeader": "Let’s Light Up Chinatown!",
+    "summaryBody1": "Now that outdoor dining is extended year round, we want Chinatown streets to be amply lit for diners and residents.",
+    "summaryBody2": "Support the Light Up Chinatown project by contributing to <1>“Adopt-A-Lantern!”</1> In addition to light fixtures being installed, beautiful outdoor lanterns will be hung along Mott Street from Canal to Bayard to welcome patrons into our wonderful community, right in time for the holidays.",
+    "summaryBody3": "Purchasing a lantern will act as a donation towards the Light Up Chinatown project and with your contributions, we can represent Chinatown to be the vibrant and NYC cultural icon it has always been. This project is so important to show Chinatown is open for business and together, we are on our way to recovery.",
+    "summaryBody4": "<2>Send Chinatown Love</2> along with <2>Pearl River Mart, 46 Mott St Bakery, CCBA, Chinese Chamber of Commerce</2> and <2>UDO</2> are partnering to raise funds to light up major blocks of Chinatown. We hope you will join us.",
+    "phase1": "Phase 1: Lanterns on Mott Street",
+    "phase2": "Phase 2: Light up Bayard Street to Pell Street",
+    "phase3": "Phase 3: Light up the rest of Chinatown",
+    "campaignHeader": "Light Up Chinatown Fundraising Campaign:",
+    "campaignDates": "November 1 - 30, 2020",
+    "campaignDaysLeft": "More Days Left",
+    "ceremony1": "Our big reveal of “Light Up Chinatown” is planned for the second week of December in celebration of the Winter Solstice. We hope you and your family will join us for this festive evening. Together, we can find light in the darkness.",
+    "ceremony2": "When you make a lantern donation, you will receive an email once we finalize the date and time."
   }
 }

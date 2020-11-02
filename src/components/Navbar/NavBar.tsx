@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Logo } from '../Logos';
-import { Page } from '../../consts'
+import { Page } from '../../consts';
 
 interface Props {
   menuOpen: boolean;
@@ -46,26 +46,33 @@ const NavBar = (props: Props) => {
   };
 
   const dropdownOptions = [
-    { url: "/merchants", translation: "donate", external: false },
-    { url: "/gift-a-meal-home", translation: "gift-a-meal", external: false },
-    { url: "https://stickylocals.com/scl", translation: "sticky-locals-x-scl", external: true  },
-    { url: "https://www.friendofafriend.studio/shop", translation: "friendofafriend-studioxscl", external: true }
-  ]
- 
-  const drop = 
-    dropdownOptions.map(option => {
-      const { url, translation, external } = option; 
-        return external ? (
-            <DropdownItem href={url}>
-              { t(`navBar.header.waystodonate.${translation}`) }
-            </DropdownItem>
-            ) : (
-            <DropdownItemLink to={url} onClick={(e) => props.setMenuOpen(false)}>
-              { t(`navBar.header.waystodonate.${translation}`) }
-            </DropdownItemLink>
-            )
-    })
-  
+    { url: '/merchants', translation: 'donate', external: false },
+    { url: '/gift-a-meal-home', translation: 'gift-a-meal', external: false },
+    {
+      url: 'https://stickylocals.com/scl',
+      translation: 'sticky-locals-x-scl',
+      external: true,
+    },
+    {
+      url: 'https://www.friendofafriend.studio/shop',
+      translation: 'friendofafriend-studioxscl',
+      external: true,
+    },
+  ];
+
+  const drop = dropdownOptions.map((option) => {
+    const { url, translation, external } = option;
+    return external ? (
+      <DropdownItem href={url}>
+        {t(`navBar.header.waystodonate.${translation}`)}
+      </DropdownItem>
+    ) : (
+      <DropdownItemLink to={url} onClick={(e) => props.setMenuOpen(false)}>
+        {t(`navBar.header.waystodonate.${translation}`)}
+      </DropdownItemLink>
+    );
+  });
+
   const isMerchantsPathActive = props.pageName === Page.All;
 
   useEffect(() => {
@@ -118,18 +125,8 @@ const NavBar = (props: Props) => {
             <p>{t('navBar.header.merchants')}</p>
           </ReactNavLink>
           <DropdownButton onClick={handleDropdownOpen}>›</DropdownButton>
-        </DropdownButtonContainer >
-        {dropdownOpen && (
-          <DropdownMobile>
-            {drop}
-          </DropdownMobile>
-        )}
-        <NavLink
-          compact={hamburgerOpen.toString()}
-          href="https://www.sendchinatownlove.com/food-crawl.html"
-          i18nText="SCL FOOD CRAWL"
-          altText="SCL FOOD CRAWL"
-        />
+        </DropdownButtonContainer>
+        {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
         <NavLink
           compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/about.html"
@@ -169,22 +166,13 @@ const NavBar = (props: Props) => {
           <ReactNavLink
             href="https://www.sendchinatownlove.com/ways-to-donate.html"
             onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}
             compact={hamburgerOpen.toString()}
             active={isMerchantsPathActive.toString()}
           >
             {t('navBar.header.merchants')}
+            {dropdownOpen && <Dropdown>{drop}</Dropdown>}
           </ReactNavLink>
-          {dropdownOpen && (
-            <Dropdown onMouseLeave={() => setDropdownOpen(false)}>
-               {drop}
-            </Dropdown>
-          )}
-          <NavLink
-            compact={hamburgerOpen.toString()}
-            href="https://www.sendchinatownlove.com/food-crawl.html"
-            i18nText="SCL FOOD CRAWL"
-            altText="SCL FOOD CRAWL"
-          />
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/about.html"
@@ -370,7 +358,6 @@ const Close = styled(CloseIcon)`
 
 const Dropdown = styled.div`
   z-index: ${theme.maxzIndex};
-  left: 138px;
   top: 20px;
   width: 212px;
   height: 184px;
@@ -387,7 +374,7 @@ const DropdownMobile = styled.div`
   position: relative;
   bottom: 8px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
 `;
@@ -402,7 +389,7 @@ const DropItem = styled.div`
   text-decoration: none;
   color: black;
   @media (max-width: 920px) {
-    color:grey;
+    color: grey;
     margin: 0px;
   }
 `;
@@ -422,4 +409,3 @@ const DropdownButton = styled.h1`
   position: absolute;
   left: 280px;
 `;
-

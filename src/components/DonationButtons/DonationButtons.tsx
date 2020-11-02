@@ -1,14 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import classnames from 'classnames';
-import { BrowsePageSeller } from '../../utilities/api/types';
 import ReactPixel from 'react-facebook-pixel';
+
+import { BrowsePageSeller } from '../../utilities/api/types';
+import { ModalPaymentTypes } from '../../utilities/hooks/ModalPaymentContext';
+
 import styles from './styles.module.scss';
 
 interface Props {
   seller: BrowsePageSeller;
   showModal: Function;
-  active?: any
+  active?: any;
 }
 
 const DonationSection = ({ seller, showModal, active }: Props) => {
@@ -34,7 +37,7 @@ const DonationSection = ({ seller, showModal, active }: Props) => {
       <div className={styles.buttonContainer}>
         {seller.accept_donations && (
           <button
-            value="donation"
+            value={ModalPaymentTypes.modalPages.donation}
             className={classnames(
               styles.button,
               active && styles.moreThanTwoButtons,
@@ -47,15 +50,16 @@ const DonationSection = ({ seller, showModal, active }: Props) => {
         )}
         {seller.sell_gift_cards && (
           <button
-            value="gift_card"
+            value={ModalPaymentTypes.modalPages.gift_card}
             className={classnames(styles.button, 'button--outlined')}
             onClick={voucherClickHander}
           >
             {t('ownerPanel.voucher')}
           </button>
         )}
-        {active && <button
-            value="buy_meal"
+        {active && (
+          <button
+            value={ModalPaymentTypes.modalPages.buy_meal}
             className={classnames(
               styles.button,
               !active && styles.moreThanTwoButtons,
@@ -65,7 +69,7 @@ const DonationSection = ({ seller, showModal, active }: Props) => {
           >
             {t('ownerPanel.giftmeal')}
           </button>
-          }
+        )}
       </div>
     </>
   );

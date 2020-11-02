@@ -1,40 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
+import classnames from 'classnames';
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+} from '../../utilities/hooks/ModalPaymentContext';
 import { BrowsePageSeller } from '../../utilities/api/types';
 import { getCampaignsForMerchant } from '../../utilities';
-import Modal from '../Modal';
+import Modal from '../ModalPayment';
 import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
-import classnames from 'classnames';
 import chevron from './assets/chevron.svg';
-import DonationButtons from '../DonationButtons/DonationButtons';
+import DonationButtons from '../DonationButtons';
 import OrderNow from './OrderNow';
-import { useMedia } from 'use-media';
-
 
 interface Props {
   seller: BrowsePageSeller;
-  sellerHours: any[]
-  isMerchantOpen: boolean
-  deliveryService: any[]
+  sellerHours: any[];
+  isMerchantOpen: boolean;
+  deliveryService: any[];
+  showAltLayout?: boolean;
 }
-
 
 const ModalBox: any = Modal;
 
-const OwnerPanel = ({ seller, sellerHours, isMerchantOpen, deliveryService }: Props) => {
-  const showAltLayout = useMedia({minWidth: 900})
-
-  const dispatch = useModalPaymentDispatch();
-  const [purchaseType, setPurchaseType] = useState('');
+const OwnerPanel = ({
+  seller,
+  sellerHours,
+  isMerchantOpen,
+  deliveryService,
+  showAltLayout,
+}: Props) => {
+  const dispatch = useModalPaymentDispatch(null);
   const [activeCampaign, setActiveCampaign] = useState<any | null>();
   const [pricePerMeal, setPricePerMeal] = useState(0);
   const [campaignId, setCampaignId] = useState('');
   const [showOrderNow, toggleOrderNow] = useState(true);
-  const [showDonationsFooter, toggleDonationsFooter] = useState(false)
+  const [showDonationsFooter, toggleDonationsFooter] = useState(false);
 
   const fetchData = async (seller_id: string) => {
     const campaigns = await getCampaignsForMerchant(seller_id);
@@ -56,105 +59,144 @@ const OwnerPanel = ({ seller, sellerHours, isMerchantOpen, deliveryService }: Pr
   }, [seller.seller_id]);
 
   const showModal = (event: any) => {
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
-    setPurchaseType(event.target.value);
+    dispatch({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: event.target.value,
+    });
   };
 
+  const OrderNowModalBtn = (
+    <button
+      className={classnames(styles['button__toggle-modal'], styles.button)}
+      onClick={() => toggleOrderNow(false)}
+    >
+      Hide
+      <img
+        src={chevron}
+        alt="chevron"
+        className={showOrderNow ? styles.flipped : styles.unflipped}
+      />
+    </button>
+  );
+
   return (
-    <>
-      {
-        showAltLayout
-          ? <Panel>
-              <div className={styles.subsection}>
-                <figure className={styles.ownerContainer}>
-                  <img
-                    className={styles.ownerImage}
-                    src={
-                      seller?.owner_image_url
-                        ? seller?.owner_image_url
-                        : defaultOwnerImage
-                    }
-                    alt={seller.owner_name}
-                  />
-                </figure>
-
-                <h2 className={styles.ownerName}>{seller.owner_name}</h2>
-                {seller.target_amount && (
-                  <ProgressBar
-                    amountRaised={seller.amount_raised}
-                    targetAmount={seller.target_amount}
-                    progressBarColor={seller.progress_bar_color}
-                    numContributions={seller.num_contributions}
-                    numDonations={seller.num_donations}
-                    numGiftCards={seller.num_gift_cards}
-                    donationAmount={seller.donation_amount}
-                    giftCardAmount={seller.gift_card_amount}
-                  />
-                )}
-                <DonationButtons seller={seller} showModal={showModal} active={activeCampaign} />
-              </div>
-
-              { showOrderNow &&
-                <OrderNow
-                showingAltLayout={false}
-                hours={sellerHours}
-                isMerchantOpen={isMerchantOpen}
-                deliveryService={deliveryService}
-                /> }
-              <button
-                className={classnames(styles['button__toggle-modal'],styles.button)}
-                onClick={() => toggleOrderNow(!showOrderNow)}
-              >
-                {
-                  showOrderNow
-                    ? 'Hide'
-                      : deliveryService.length > 1
-                      ? 'View Hours & Order'
-                        : 'View Hours'
+    <OwnerContainer data-testid="owner-panel">
+      {showAltLayout ? (
+        <Panel>
+          <div className={styles.subsection}>
+            <figure className={styles.ownerContainer}>
+              <img
+                className={styles.ownerImage}
+                src={
+                  seller?.owner_image_url
+                    ? seller?.owner_image_url
+                    : defaultOwnerImage
                 }
-                <img src={chevron} alt="chevron" className={showOrderNow ? styles.flipped : styles.unflipped} />
-              </button>
+                alt={seller.owner_name}
+              />
+            </figure>
 
-            </Panel>
-          : <Footer>
-              {showDonationsFooter ? <DonationButtons seller={seller} showModal={showModal} active={activeCampaign}/> : null}
-              <div className={styles.support}>
-                {seller.target_amount && (
-                  <ProgressBar
-                    amountRaised={seller.amount_raised}
-                    targetAmount={seller.target_amount}
-                    progressBarColor={seller.progress_bar_color}
-                    numContributions={seller.num_contributions}
-                    numDonations={seller.num_donations}
-                    numGiftCards={seller.num_gift_cards}
-                    donationAmount={seller.donation_amount}
-                    giftCardAmount={seller.gift_card_amount}
-                  />
+            <h2 className={styles.ownerName}>{seller.owner_name}</h2>
+            {seller.target_amount && (
+              <ProgressBar
+                amountRaised={seller.amount_raised}
+                targetAmount={seller.target_amount}
+                progressBarColor={seller.progress_bar_color}
+                numContributions={seller.num_contributions}
+                numDonations={seller.num_donations}
+                numGiftCards={seller.num_gift_cards}
+                donationAmount={seller.donation_amount}
+                giftCardAmount={seller.gift_card_amount}
+              />
+            )}
+            <DonationButtons
+              seller={seller}
+              showModal={showModal}
+              active={activeCampaign}
+            />
+            {!showOrderNow && (
+              <button
+                className={classnames(
+                  styles['button__toggle-modal'],
+                  styles.button
                 )}
-                <button
-                  className={classnames(styles.button, 'button--filled', styles.support__button)}
-                  onClick={() => toggleDonationsFooter(!showDonationsFooter)}
-                >
-                  {showDonationsFooter ? 'Close' : 'Support'}
-                </button>
-              </div>
-          </Footer>
-      }
+                onClick={() => toggleOrderNow(true)}
+              >
+                {deliveryService.length > 1
+                  ? 'View Hours & Order'
+                  : 'View Hours'}
+                <img
+                  src={chevron}
+                  alt="chevron"
+                  className={showOrderNow ? styles.flipped : styles.unflipped}
+                />
+              </button>
+            )}
+          </div>
+
+          {showOrderNow && (
+            <OrderNow
+              showingAltLayout={false}
+              hours={sellerHours}
+              isMerchantOpen={isMerchantOpen}
+              deliveryService={deliveryService}
+              ModalButton={OrderNowModalBtn}
+            />
+          )}
+        </Panel>
+      ) : (
+        <Footer>
+          {showDonationsFooter ? (
+            <DonationButtons
+              seller={seller}
+              showModal={showModal}
+              active={activeCampaign}
+            />
+          ) : null}
+          <div className={styles.support}>
+            {seller.target_amount && (
+              <ProgressBar
+                amountRaised={seller.amount_raised}
+                targetAmount={seller.target_amount}
+                progressBarColor={seller.progress_bar_color}
+                numContributions={seller.num_contributions}
+                numDonations={seller.num_donations}
+                numGiftCards={seller.num_gift_cards}
+                donationAmount={seller.donation_amount}
+                giftCardAmount={seller.gift_card_amount}
+              />
+            )}
+            <button
+              className={classnames(
+                styles.button,
+                'button--filled',
+                styles.support__button
+              )}
+              onClick={() => toggleDonationsFooter(!showDonationsFooter)}
+            >
+              {showDonationsFooter ? 'Close' : 'Support'}
+            </button>
+          </div>
+        </Footer>
+      )}
 
       <ModalBox
-        purchaseType={purchaseType}
         sellerId={seller.seller_id}
         sellerName={seller.name}
         costPerMeal={pricePerMeal / 100}
         nonProfitLocationId={seller.non_profit_location_id}
         campaignId={campaignId}
       />
-    </>
+    </OwnerContainer>
   );
 };
 
 export default OwnerPanel;
 
+const OwnerContainer = styled.div`
+  margin: 0 auto;
+  width: 100%;
+`;
 const Panel = styled.section`
   position: relative;
   order: 1;

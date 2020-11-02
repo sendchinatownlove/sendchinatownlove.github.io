@@ -93,8 +93,8 @@ const ContributionBar = ({
           background: `linear-gradient(
             -45deg,
             #DD678A ${contributionBarProgress.donationsRaised}%,
-            #3FD1D1 ${contributionBarProgress.donationsRaised}%,
-            #3FD1D1 ${
+            #E49155 ${contributionBarProgress.donationsRaised}%,
+            #E49155 ${
               contributionBarProgress.giftAMealAmountRaised +
               contributionBarProgress.donationsRaised
             }%,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
-import { getCampaigns } from '../../../utilities';
+import { getCampaigns } from '../../../utilities/api';
 import illustrated_flatlay_hero from '../images/illustrated_flatlay_hero.png';
 import CampaignInstructions from './CampaignInstructions';
 import NoActiveCampaignsBox from './NoCampaignsBox';

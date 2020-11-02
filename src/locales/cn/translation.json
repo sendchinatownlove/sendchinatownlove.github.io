@@ -47,8 +47,8 @@
     "meals": "meals"
   },
   "purchase": {
-    "donation": "捐款 - ",
-    "voucher": "购买礼品券 - "
+    "donation": "捐款 - {{seller}}",
+    "voucher": "购买礼品券 - {{seller}}"
   },
   "errorPage": {
     "body": {
@@ -63,7 +63,8 @@
     "platformInfoDescription": "我们提供線上平台來帮助受到疫情影响，不会使用科技，只收现金的亚裔传统商家。",
     "platformInfoAction": "我们透过募款以及贩售礼品券来帮助这些商家。",
     "flyerAsk": "认识需要协助的小型商家业者？",
-    "flyerDownload": "下载传单分享给他们。"
+    "flyerDownload": "下载传单分享给他们。",
+    "merchantHeader": "我們的商家"
   },
   "merchantNavBar": {
     "all": "所有的商家",
@@ -124,7 +125,7 @@
       "step1": "第一步：",
       "step1Text": "捐款给爱心餐活动",
       "step2": "第二步：",
-      "step2Text": "捐款收益全数归给我们的商家",
+      "step2Text": "Vouchers are created to be redeemed as meals",
       "step3": "第三步：",
       "step3Text": "我们将餐券捐给社区公益团体",
       "step4": "第四步：",
@@ -172,5 +173,23 @@
     "codeTitle": "Here is your Free Lyft Citi Bike Day Pass code",
     "codeSubtitle": "TAP TO COPY",
     "codeCopied": "COPIED"
+  },
+  "lightUpChinatown": {
+    "headerText": "Light Up Chinatown",
+    "headerSubtext": "Let’s light up Chinatown, one lantern at a time.",
+    "donationTierText": "Light Up Chinatown donation tiers",
+    "summaryHeader": "Let’s Light Up Chinatown!",
+    "summaryBody1": "Now that outdoor dining is extended year round, we want Chinatown streets to be amply lit for diners and residents.",
+    "summaryBody2": "Support the Light Up Chinatown project by contributing to “Adopt-A-Lantern!” In addition to light fixtures being installed, beautiful outdoor lanterns will be hung along Mott Street from Canal to Bayard to welcome patrons into our wonderful community, right in time for the holidays.",
+    "summaryBody3": "Purchasing a lantern will act as a donation towards the Light Up Chinatown project and with your contributions, we can represent Chinatown to be the vibrant and NYC cultural icon it has always been. This project is so important to show Chinatown is open for business and together, we are on our way to recovery.",
+    "summaryBody4": "Send Chinatown Love along with Pearl River Mart, 46 Mott St Bakery, CCBA, Chinese Chamber of Commerce and UDO are partnering to raise funds to light up major blocks of Chinatown. We hope you will join us.",
+    "phase1": "Phase 1: Lanterns on Mott Street",
+    "phase2": "Phase 2: Light up Bayard Street to Pell Street",
+    "phase3": "Phase 3: Light up the rest of Chinatown",
+    "campaignHeader": "Light Up Chinatown Fundraising Campaign:",
+    "campaignDates": "November 1 - 30, 2020",
+    "campaignDaysLeft": "More Days Left",
+    "ceremony1": "Our big reveal of “Light Up Chinatown” is planned for the second week of December in celebration of the Winter Solstice. We hope you and your family will join us for this festive evening. Together, we can find light in the darkness.",
+    "ceremony2": "When you make a lantern donation, you will receive an email once we finalize the date and time."
   }
 }

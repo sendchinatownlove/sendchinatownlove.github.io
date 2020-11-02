@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { useState } from 'react';
 import classnames from 'classnames';
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
-import { BrowsePageSeller } from '../../utilities';
+import { BrowsePageSeller } from '../../utilities/api';
 import StoreStory from '../StoreStory';
 import StoreMenu from './StoreMenuTab';
 import StoreGallery from './StoreGalleryTab';
@@ -12,18 +12,23 @@ import StoreSocial from './StoreSocialTab';
 import StoreLocation from './StoreLocation';
 import styles from './styles.module.scss';
 import defaultStoreFront from './misc-store.png';
-import { useMedia } from 'use-media'
-import { OrderNow, MobileOrderWrapper } from '../OwnerPanel'
+import { useMedia } from 'use-media';
+import { OrderNow, MobileOrderWrapper } from '../OwnerPanel';
 
 type Props = {
   seller: BrowsePageSeller;
-  sellerHours: any[]
-  isMerchantOpen: boolean
-  deliveryService: any[]
+  sellerHours: any[];
+  isMerchantOpen: boolean;
+  deliveryService: any[];
 };
 
-export const StoreInfo: FC<Props> = ({ seller, sellerHours, isMerchantOpen, deliveryService }) => {
-  const showAltLayout = useMedia({maxWidth: 900})
+export const StoreInfo: FC<Props> = ({
+  seller,
+  sellerHours,
+  isMerchantOpen,
+  deliveryService,
+}) => {
+  const showAltLayout = useMedia({ maxWidth: 900 });
   const { summary, story, cuisine_name, locations, website_url } = seller;
 
   // modal functionality for menu and gallery tabs
@@ -61,13 +66,11 @@ export const StoreInfo: FC<Props> = ({ seller, sellerHours, isMerchantOpen, deli
   };
 
   return (
-    <section className={classnames(styles.container)} data-testid="Store Info">
+    <section className={classnames(styles.container)} data-testid="store-info">
       {
         <img
           src={
-            seller.hero_image_url
-              ? seller.hero_image_url
-              : defaultStoreFront
+            seller.hero_image_url ? seller.hero_image_url : defaultStoreFront
           }
           alt={`${seller.name} Illustration`}
           className={styles.merchantIllustration}
@@ -79,34 +82,44 @@ export const StoreInfo: FC<Props> = ({ seller, sellerHours, isMerchantOpen, deli
         <header className={styles.header__information}>
           <div className={styles.wrapper__headerInfo}>
             <div className={styles.nationality}>{cuisine_name}</div>
-            <StoreLocation locations={locations}/>
-            {website_url && <div className={styles.websiteUrl}>
-              <a href={`http://${website_url}`} target='_blank' rel='noopener noreferrer'className={styles.websiteUrl}>{website_url}</a>
-            </div>}
+            <StoreLocation locations={locations} />
+            {website_url && (
+              <div className={styles.websiteUrl}>
+                <a
+                  href={`${website_url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.websiteUrl}
+                >
+                  {website_url}
+                </a>
+              </div>
+            )}
           </div>
-          {
-            seller.owner_image_url && showAltLayout
-              ? <img
-                  className={styles.ownerImage}
-                  src={seller?.owner_image_url}
-                  alt={seller.owner_name}
-                />
-              : null
-          }
+          {seller.owner_image_url && showAltLayout ? (
+            <img
+              className={styles.ownerImage}
+              src={seller?.owner_image_url}
+              alt={seller.owner_name}
+            />
+          ) : null}
         </header>
 
-        {showAltLayout && <MobileOrderWrapper hasDeliveryOptions={deliveryService.length > 1}>
-          <OrderNow
-            showingAltLayout={true}
-            hours={sellerHours}
-            deliveryService={deliveryService}
-            isMerchantOpen={isMerchantOpen}
+        {showAltLayout && (
+          <MobileOrderWrapper hasDeliveryOptions={deliveryService.length > 1}>
+            <OrderNow
+              showingAltLayout={true}
+              hours={sellerHours}
+              deliveryService={deliveryService}
+              isMerchantOpen={isMerchantOpen}
             />
-        </MobileOrderWrapper>
-        }
+          </MobileOrderWrapper>
+        )}
       </div>
 
-      {summary && <ReactMarkdown className={styles.container} source={summary}></ReactMarkdown>}
+      {summary && (
+        <ReactMarkdown className={styles.container} source={summary} />
+      )}
       <StoreNavContainer>
         {storeNavItems.map(
           (value) =>

@@ -37,7 +37,7 @@ $container-size: 160px;
 
 .button {
   // NOTE: Open sans is default font for buttons?
-  font-family:'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
   font-size: 16px;
   letter-spacing: 0.05em;
@@ -59,8 +59,9 @@ $container-size: 160px;
     border: none;
     text-transform: uppercase;
 
-
-    &:hover, &:active, &:focus {
+    &:hover,
+    &:active,
+    &:focus {
       outline: none;
     }
 
@@ -71,10 +72,6 @@ $container-size: 160px;
     @include for-tablet-portrait-up {
       left: calc((100% - 342px) / 2);
       width: 342px;
-    }
-
-    @include for-tablet-landscape-up {
-      bottom: 0
     }
   }
   &__toggleMobileDropdown {
@@ -113,10 +110,9 @@ $container-size: 160px;
   align-items: center;
   padding: 20px 16px 18px 16px;
   position: relative;
-  overflow: hidden;
   margin-bottom: 20px;
 
-  @include for-tablet-landscape-up{
+  @include for-tablet-landscape-up {
     font-size: 14px;
     padding: 24px;
   }
@@ -164,17 +160,16 @@ $container-size: 160px;
     }
 
     @include for-tablet-landscape-up {
-      margin: 0 20px 20px 20px;
+      margin: 0 0 20px 0;
       grid-column-gap: 32px;
-      // width: 464px;
     }
   }
 
   &__hours {
-    width: 220px;
-    @include for-tablet-landscape-up {
-      width: 240px;
-    }
+    width: 100%;
+  }
+  @include for-tablet-portrait-up {
+    padding: 24px 36px;
   }
 }
 
@@ -183,10 +178,20 @@ $container-size: 160px;
   justify-content: space-between;
   align-items: baseline;
   margin: 0 auto 0 0;
+  width: 220px;
+  @include for-tablet-landscape-up {
+    width: 240px;
+  }
 }
 
 .p--noMargin {
-  margin: 0 auto;
+  margin: 0 0 0 66px;
+  @include for-tablet-portrait-up {
+    margin: 0 0 0 78px;
+  }
+  @include for-tablet-landscape-up {
+    margin: 0 0 0 50px;
+  }
 }
 
 .textHours {
@@ -206,7 +211,7 @@ $container-size: 160px;
 }
 
 .unflipped {
-  transform: rotate(0deg)
+  transform: rotate(0deg);
 }
 
 .support {
@@ -233,7 +238,7 @@ $container-size: 160px;
   }
 
   @media screen and (min-width: 900px) {
-    width :100%;
+    width: 100%;
   }
 }
 

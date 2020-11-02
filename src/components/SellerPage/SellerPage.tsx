@@ -5,35 +5,37 @@ import ErrorPage from '../404Page';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
-} from '../../utilities/hooks/ModalPaymentContext/context';
-import { SET_SELLER_DATA } from '../../utilities/hooks/ModalPaymentContext/constants';
-import { getSeller, getSellerHours,getSellerDeliveryOptions } from '../../utilities';
-
+  ModalPaymentConstants,
+} from '../../utilities/hooks/ModalPaymentContext';
+import {
+  getSeller,
+  getSellerHours,
+  getSellerDeliveryOptions,
+} from '../../utilities/api';
 import { useParams } from 'react-router-dom';
 import Loader from '../Loader';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { useMedia } from 'use-media'
 
 import ReactPixel from 'react-facebook-pixel';
 
 interface Props {
   menuOpen: boolean;
+  showAltLayout: boolean;
 }
 
 ReactPixel.trackCustom('SellerPageView', {});
 const SellerPage = (props: Props) => {
   const { i18n } = useTranslation();
-  const showAltLayout = useMedia({minWidth: 900})
 
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams<any>();
 
-  const dispatch = useModalPaymentDispatch();
-  const { sellerData } = useModalPaymentState();
-  const [sellerHours, setSellerHours] = useState<any[]>([])
-  const [isMerchantOpen, setIsMerchantOpen] = useState(false)
-  const [deliveryServices, setDeliveryServices] = useState<any[]>([])
+  const dispatch = useModalPaymentDispatch(null);
+  const { sellerData } = useModalPaymentState(null);
+  const [sellerHours, setSellerHours] = useState<any[]>([]);
+  const [isMerchantOpen, setIsMerchantOpen] = useState(false);
+  const [deliveryServices, setDeliveryServices] = useState<any[]>([]);
 
   const buildWeeklyHours = (hours: any[] = []) => {
     const dayEnum = {
@@ -43,108 +45,108 @@ const SellerPage = (props: Props) => {
       WED: 3,
       THU: 4,
       FRI: 5,
-      SAT: 6
-    }
+      SAT: 6,
+    };
 
-    const copy = [...hours].sort((a,b) => {
+    const copy = [...hours].sort((a, b) => {
       if (dayEnum[a.open_day] > dayEnum[b.open_day]) {
-        return 1
+        return 1;
       } else {
-        return -1
+        return -1;
       }
-    })
+    });
     const res = [
-      { open_day: 'Sun'},
-      { open_day: 'Mon'},
-      { open_day: 'Tue'},
-      { open_day: 'Wed'},
-      { open_day: 'Thu'},
-      { open_day: 'Fri'},
-      { open_day: 'Sat'},
-    ]
+      { open_day: 'Sun' },
+      { open_day: 'Mon' },
+      { open_day: 'Tue' },
+      { open_day: 'Wed' },
+      { open_day: 'Thu' },
+      { open_day: 'Fri' },
+      { open_day: 'Sat' },
+    ];
     if (copy.length === 0) {
-        return copy
+      return copy;
     }
     for (let i = 0; i < copy.length; i++) {
-        const ind: number = dayEnum[copy[i].open_day]
-        res[ind] = {...copy[i], open_day: res[ind].open_day}
+      const ind: number = dayEnum[copy[i].open_day];
+      res[ind] = { ...copy[i], open_day: res[ind].open_day };
     }
-    return res
-  }
-
+    return res;
+  };
 
   const findIfOpen = (hours: any[] = []): boolean => {
     const rightNow = new Date();
     const day = rightNow.getDay();
 
     if (hours.length === 0 || !hours[day].open_time) {
-      return false
+      return false;
     }
-    const hourRightNow = rightNow.getHours()
-    const minRightNow = rightNow.getMinutes()
+    const hourRightNow = rightNow.getHours();
+    const minRightNow = rightNow.getMinutes();
 
-    const openHr = parseInt(hours[day].open_time.slice(11,13))
-    const closeHr = parseInt(hours[day].close_time.slice(11,13))
+    const openHr = parseInt(hours[day].open_time.slice(11, 13));
+    const closeHr = parseInt(hours[day].close_time.slice(11, 13));
 
     if (hourRightNow === openHr) {
-      const openMin = parseInt(hours[day].open_time.slice(14,16))
+      const openMin = parseInt(hours[day].open_time.slice(14, 16));
 
-      return minRightNow >= openMin ? true : false
+      return minRightNow >= openMin ? true : false;
     } else if (hourRightNow === closeHr) {
-      const closeMin = parseInt(hours[day].close_time.slice(14,16))
+      const closeMin = parseInt(hours[day].close_time.slice(14, 16));
 
-      return minRightNow <= closeMin ? true : false
+      return minRightNow <= closeMin ? true : false;
     }
 
     if (hourRightNow > openHr && hourRightNow < closeHr) {
-      return true
+      return true;
     } else if (hourRightNow < openHr || hourRightNow > closeHr) {
-      return false
+      return false;
     }
-    return false
-  }
+    return false;
+  };
+
+  useEffect(() => {
+    if (id) fetchData(i18n.language);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, i18n.language]);
 
   const fetchData = async (lang?) => {
     setLoading(true);
-    const result = id && (await getSeller(id, lang));
-    await dispatch({
-      type: SET_SELLER_DATA,
+    const result = await getSeller(id, lang);
+    dispatch({
+      type: ModalPaymentConstants.SET_SELLER_DATA,
       payload: result.data,
     });
     const { data: hours } = await getSellerHours(id);
-    const weeklyHours = buildWeeklyHours(hours)
+    const weeklyHours = buildWeeklyHours(hours);
     setSellerHours(weeklyHours);
-    const checkHours = findIfOpen(weeklyHours)
-    setIsMerchantOpen(checkHours)
+    const checkHours = findIfOpen(weeklyHours);
+    setIsMerchantOpen(checkHours);
 
-    const { data } = await getSellerDeliveryOptions(id)
-    setDeliveryServices(data)
+    const { data } = await getSellerDeliveryOptions(id);
+    setDeliveryServices(data);
 
     setLoading(false);
   };
 
-  useEffect(() => {
-    fetchData(i18n.language);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [i18n.language]);
-
   return sellerData && !loading ? (
-    <Container menuOpen={props.menuOpen}>
-      {showAltLayout && <SellerName>{sellerData.name}</SellerName>}
+    <Container {...props}>
+      {props.showAltLayout && <SellerName>{sellerData.name}</SellerName>}
       <ContentContainer>
         {/* TODO(ArtyEmsee): Fix object mapping */}
         <StoreInfo
-        seller={sellerData}
-        sellerHours={sellerHours}
-        isMerchantOpen={isMerchantOpen}
-        deliveryService={deliveryServices}
+          seller={sellerData}
+          sellerHours={sellerHours}
+          isMerchantOpen={isMerchantOpen}
+          deliveryService={deliveryServices}
         />
         <OwnerPanel
           seller={sellerData}
           sellerHours={sellerHours}
           isMerchantOpen={isMerchantOpen}
           deliveryService={deliveryServices}
-          />
+          showAltLayout={props.showAltLayout}
+        />
       </ContentContainer>
     </Container>
   ) : (
@@ -166,7 +168,7 @@ const Container = styled.div`
   margin: 0 auto;
   width: 90%;
   ${(props: Props) => props.menuOpen && 'display: none;'}
-  `;
+`;
 
 const SellerName = styled.h1`
   font-weight: 600;
@@ -198,4 +200,4 @@ const ContentContainer = styled.div`
     margin-top: 0;
     padding-bottom: 25px;
   }
-  `;
+`;

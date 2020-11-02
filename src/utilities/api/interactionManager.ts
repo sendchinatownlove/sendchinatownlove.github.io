@@ -147,7 +147,9 @@ export const updateVoucher = async (id: string, amount: number) =>
   axios
     .put(vouchers + id, { amount })
     .then((res) => res)
-    .catch((err) => err);
+    .catch((err) => {
+      throw err;
+    });
 
 export const getMerchantGiftCards = async (
   seller_id: string,

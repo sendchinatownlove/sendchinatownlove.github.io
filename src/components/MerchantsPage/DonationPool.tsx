@@ -1,7 +1,10 @@
 import * as React from 'react';
-import Modal from '../Modal';
-import { SET_MODAL_VIEW } from '../../utilities/hooks/ModalPaymentContext/constants';
-import { useModalPaymentDispatch } from '../../utilities/hooks/ModalPaymentContext/context';
+import Modal from '../ModalPayment';
+import {
+  ModalPaymentConstants,
+  useModalPaymentDispatch,
+  ModalPaymentTypes,
+} from '../../utilities/hooks/ModalPaymentContext';
 import {
   smallScreens,
   tabletScreens,
@@ -14,12 +17,15 @@ import ReactPixel from 'react-facebook-pixel';
 const DonationPoolBox = () => {
   const websiteImages = getWebsiteImages();
   const { t } = useTranslation();
-  const dispatch = useModalPaymentDispatch();
+  const dispatch = useModalPaymentDispatch(null);
 
   const openModal = (e: any) => {
     ReactPixel.trackCustom('DonationPoolButtonClick', {});
     e.preventDefault();
-    dispatch({ type: SET_MODAL_VIEW, payload: 0 });
+    dispatch({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.donation,
+    });
   };
 
   return (
@@ -38,7 +44,6 @@ const DonationPoolBox = () => {
         <Image src={websiteImages.skyline} alt="banner" />
 
         <Modal
-          purchaseType={'donation'}
           sellerId={'send-chinatown-love'}
           sellerName={'Send Chinatown Love Fund'}
           costPerMeal={0}
