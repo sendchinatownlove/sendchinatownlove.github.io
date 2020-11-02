@@ -59,7 +59,8 @@
     "platformInfoDescription": "We are providing an online platform to low-tech, cash-only, Asian-owned small businesses that have been disproportionately impacted by COVID-19.",
     "platformInfoAction": "Support local merchants by making a donation or purchasing a voucher from them.",
     "flyerAsk": "Know of any business owners that fit our target merchant?",
-    "flyerDownload": "Download our flyer to share with them."
+    "flyerDownload": "Download our flyer to share with them.",
+    "merchantHeader": "Our Merchants"
   },
   "modalPayment": {
     "modalCardDetails": {

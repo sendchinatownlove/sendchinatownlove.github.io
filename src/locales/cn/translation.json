@@ -59,7 +59,8 @@
     "platformInfoDescription": "我们提供線上平台來帮助受到疫情影响，不会使用科技，只收现金的亚裔传统商家。",
     "platformInfoAction": "我们透过募款以及贩售礼品券来帮助这些商家。",
     "flyerAsk": "认识需要协助的小型商家业者？",
-    "flyerDownload": "下载传单分享给他们。"
+    "flyerDownload": "下载传单分享给他们。",
+    "merchantHeader": "我們的商家"
   },
   "merchantNavBar": {
     "all": "所有的商家",
