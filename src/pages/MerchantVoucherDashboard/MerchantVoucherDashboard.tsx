@@ -9,19 +9,10 @@ import {
   getMerchantGiftCards,
   getSeller,
 } from '../../utilities/api/interactionManager';
-<<<<<<< HEAD
-import { formatCurrency } from '../../utilities/general/textFormatter'
-import Loader from '../../components/Loader/Loader';
-import styles from './styles.module.scss';
-import ErrorPage from '../../components/404Page';
-import { Checkbox } from '@material-ui/core';
-const FilterableTable = require('react-filterable-table');
-=======
 import type {
   BrowsePageSeller,
   GiftCardDetails,
 } from '../../utilities/api/types';
->>>>>>> f6464a23d785ab6358095b83ef408c8381e61005
 
 const MerchantVoucherDashboard = () => {
   const [error, setError] = useState<boolean>(false);
@@ -62,27 +53,11 @@ const MerchantVoucherDashboard = () => {
     }
   }, [sellerId, secretId]);
 
-<<<<<<< HEAD
-  useEffect(() => {
-    fetchData();
-
-    // eslint-disable-next-line
-  }, [shouldFilterGAM]);
-
-  const renderAmount = (props: FTRenderProps) => {
-    return formatCurrency(Number(props.value), 0)
-  };
-
-  const renderDate = (props: FTRenderProps) => {
-    if (!props.value) {
-      return 'N/A';
-=======
   const onPageLoad = useCallback(async () => {
     try {
       await fetchData();
     } finally {
       setPageLoading(false);
->>>>>>> f6464a23d785ab6358095b83ef408c8381e61005
     }
   }, [fetchData]);
 
