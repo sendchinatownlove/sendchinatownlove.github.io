@@ -5,7 +5,7 @@ import {
   CLEAR_FORMS,
   SET_SELLER_DATA,
   UPDATE_SELLER_DATA,
-  SET_LIC_DATA,
+  SET_LUC_DATA,
 } from './constants';
 import { defaultState, ModalPaymentState, modalPages } from './types';
 
@@ -49,11 +49,11 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
         amount: defaultState.amount,
         purchaseType: null,
       };
-    case SET_LIC_DATA:
+    case SET_LUC_DATA:
       return {
         ...state,
-        licData: {
-          ...state.licData,
+        lucData: {
+          ...state.lucData,
           [payload.key]: payload.value,
         },
       };

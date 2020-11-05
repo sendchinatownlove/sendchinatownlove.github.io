@@ -10,7 +10,7 @@ const CLOSE_MODAL = 'CLOSE_MODAL';
 const CLEAR_FORMS = 'CLEAR_FORMS';
 
 const SET_SELLER_DATA = 'SET_SELLER_DATA';
-const SET_LIC_DATA = 'SET_LIC_DATA';
+const SET_LUC_DATA = 'SET_LUC_DATA';
 const UPDATE_SELLER_DATA = 'UPDATE_SELLER_DATA';
 
 const EMAIL_REGEX = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
@@ -22,5 +22,5 @@ export {
   EMAIL_REGEX,
   SET_SELLER_DATA,
   UPDATE_SELLER_DATA,
-  SET_LIC_DATA,
+  SET_LUC_DATA,
 };

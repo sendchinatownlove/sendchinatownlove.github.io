@@ -17,10 +17,10 @@ export type ModalPaymentState = {
   purchaseType: modalPages | null;
   modalView: modalPages | null;
   sellerData: BrowsePageSeller;
-  licData: {
-    first_name: string;
-    middle_initial: string;
-    last_name: string;
+  lucData: {
+    firstName: string;
+    middleInitial: string;
+    lastName: string;
   };
 };
 
@@ -60,10 +60,10 @@ export const defaultState: ModalPaymentState = {
     non_profit_location_id: '',
     logo_image_url: '',
   },
-  licData: {
-    first_name: '',
-    middle_initial: '',
-    last_name: '',
+  lucData: {
+    firstName: '',
+    middleInitial: '',
+    lastName: '',
   },
 };
 

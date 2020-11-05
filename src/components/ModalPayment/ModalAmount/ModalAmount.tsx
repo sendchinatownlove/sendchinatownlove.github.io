@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
 import { RowFormat, LabelText, InputText, Subheader } from '../styles';
+import {LIGHT_UP_CHINATOWN_TIER_1_LIMIT} from '../consts';
 
 export interface Props {
   sellerId: string;
@@ -19,7 +20,7 @@ export interface Props {
 export const Modal = (props: Props) => {
   const { t } = useTranslation();
 
-  const { amount, modalView } = useModalPaymentState(null);
+  const { amount, modalView, lucData } = useModalPaymentState(null);
   const [isCustomAmount, setIsCustomAmount] = useState(true);
   const [selected, setSelected] = useState('');
   const dispatch = useModalPaymentDispatch(null);
@@ -46,26 +47,17 @@ export const Modal = (props: Props) => {
     return r.test(value);
   };
 
-  const buttonAmounts =
-    modalView === ModalPaymentTypes.modalPages.light_up_chinatown
-      ? [
-          { value: '25', text: '$25' },
-          { value: '45', text: '$45' },
-          { value: '150', text: '$150' },
-          { value: '300', text: '$300' },
-        ]
-      : [
-          { value: '10', text: '$10' },
-          { value: '25', text: '$25' },
-          { value: '50', text: '$50' },
-          { value: '100', text: '$100' },
-        ];
+  const buttonAmountsArray = modalView === ModalPaymentTypes.modalPages.light_up_chinatown
+    ? [25, 45, 150, 300]
+    : [10, 25, 50, 100];
+  
+  const buttonAmounts = buttonAmountsArray.map(x => ({ value: x.toString(), text: '$' + x.toString()}));
 
   const purchaseIsDonation =
     modalView === ModalPaymentTypes.modalPages.donation;
 
-  const getHeaderText = (purchase_type, sellerName) => {
-    switch (purchase_type) {
+  const getHeaderText = (purchaseType, sellerName) => {
+    switch (purchaseType) {
       case ModalPaymentTypes.modalPages.donation:
         return t('purchase.donation', { seller: sellerName });
       case ModalPaymentTypes.modalPages.gift_card:
@@ -80,7 +72,7 @@ export const Modal = (props: Props) => {
   const handleOnChange = (e) => {
     e.preventDefault();
     dispatch({
-      type: ModalPaymentConstants.SET_LIC_DATA,
+      type: ModalPaymentConstants.SET_LUC_DATA,
       payload: {
         key: e.target.name,
         value: e.target.value,
@@ -168,7 +160,7 @@ export const Modal = (props: Props) => {
           </ErrorMessage>
         )}
       </AmountContainer>
-      {amount >= 45 && (
+      {amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT && (
         <AmountContainer>
           <Subheader>{t('paymentProcessing.amount.adopt_lantern')}</Subheader>
           <label>{t('paymentProcessing.amount.tier_2_donation')}</label>
@@ -179,45 +171,48 @@ export const Modal = (props: Props) => {
           <br />
           <SingleRowFormat>
             <RowFormat width="38%">
-              <LabelText htmlFor="name">
+              <LabelText htmlFor="first_name">
                 {t('paymentProcessing.amount.labels.first_name')}
               </LabelText>
               <InputText
-                name="first_name"
+                name="firstName"
                 type="text"
                 className="modalInput--input"
                 onChange={handleOnChange}
                 placeholder={t(
                   'paymentProcessing.amount.place_holder.first_name'
                 )}
+                value={lucData.firstName}
               />
             </RowFormat>
             <RowFormat width="20%" mobileWidth="30%">
-              <LabelText htmlFor="email">
+              <LabelText htmlFor="middle_initial">
                 {t('paymentProcessing.amount.labels.middle_initial')}
               </LabelText>
               <InputText
-                name="middle_initial"
+                name="middleInitial"
                 type="text"
                 className="modalInput--input"
                 onChange={handleOnChange}
                 placeholder={t(
                   'paymentProcessing.amount.place_holder.middle_initial'
                 )}
+                value={lucData.middleInitial}
               />
             </RowFormat>
             <RowFormat width="38%">
-              <LabelText htmlFor="email">
+              <LabelText htmlFor="last_name">
                 {t('paymentProcessing.amount.labels.last_name')}
               </LabelText>
               <InputText
-                name="last_name"
+                name="lastName"
                 type="text"
                 className="modalInput--input"
                 onChange={handleOnChange}
                 placeholder={t(
                   'paymentProcessing.amount.place_holder.last_name'
                 )}
+                value={lucData.lastName}
               />
             </RowFormat>
           </SingleRowFormat>

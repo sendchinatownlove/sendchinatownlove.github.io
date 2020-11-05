@@ -11,6 +11,8 @@ import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 
 import { SquareErrors, hasKey } from '../../../consts';
+import {LIGHT_UP_CHINATOWN_TIER_1_LIMIT} from '../consts';
+
 import {
   makeSquarePayment,
   SquareLineItems,
@@ -45,7 +47,7 @@ const ModalCardDetails = ({
 }: Props) => {
   const idempotencyKey = uuid();
   const { t } = useTranslation();
-  const { amount, purchaseType, licData } = useModalPaymentState(null);
+  const { amount, purchaseType, lucData } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
 
   const [isTermsChecked, setTermsChecked] = useState(false);
@@ -181,7 +183,7 @@ const ModalCardDetails = ({
       case ModalPaymentTypes.modalPages.donation:
         return t('modalPayment.modalCardDetails.message.donation');
       case ModalPaymentTypes.modalPages.light_up_chinatown:
-        if (amount >= 45)
+        if (amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT)
           return t(
             'modalPayment.modalCardDetails.message.light_up_chinatown_tier_2'
           );
@@ -232,24 +234,20 @@ const ModalCardDetails = ({
   };
 
   const setDetailsText = (
-    type: string | ModalPaymentTypes.modalPages,
+    type: ModalPaymentTypes.modalPages,
     amount: number
   ) => {
     if (sellerId === 'send-chinatown-love')
       type = ModalPaymentTypes.modalPages.donation_pool;
 
-    let message;
-
     if (
       type === ModalPaymentTypes.modalPages.gift_card ||
-      (ModalPaymentTypes.modalPages.light_up_chinatown && amount >= 45)
+      (type === ModalPaymentTypes.modalPages.light_up_chinatown && amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT)
     ) {
-      message = t('modalPayment.modalCardDetails.details.voucher');
+      return t('modalPayment.modalCardDetails.details.voucher');
     } else {
-      message = t('modalPayment.modalCardDetails.details.donation');
-    }
-
-    return message;
+      return t('modalPayment.modalCardDetails.details.donation');
+    }    
   };
 
   return (
@@ -319,16 +317,18 @@ const ModalCardDetails = ({
               to {sellerName}{' '}
             </span>
 
-            {licData.first_name !== '' && (
+            {lucData.firstName !== '' && (
               <span>
                 <br />
                 <br />
                 {t('modalPayment.modalCardDetails.message.lic_name')}
                 <b>
-                  {`${licData.first_name} ${
-                    licData.middle_initial.length > 0 &&
-                    licData.middle_initial.substring(0, 1).toUpperCase()
-                  }. ${licData.last_name}`}
+                  {`${lucData.firstName} 
+                  ${
+                    lucData.middleInitial.length > 0 ?
+                    lucData.middleInitial.substring(0, 1).toUpperCase() + ". " : ''
+                  } 
+                  ${lucData.lastName}`}
                 </b>
               </span>
             )}
