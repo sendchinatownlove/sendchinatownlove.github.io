@@ -11,7 +11,7 @@ import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 
 import { SquareErrors, hasKey } from '../../../consts';
-import {LIGHT_UP_CHINATOWN_TIER_1_LIMIT} from '../consts';
+import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../consts';
 
 import {
   makeSquarePayment,
@@ -242,12 +242,13 @@ const ModalCardDetails = ({
 
     if (
       type === ModalPaymentTypes.modalPages.gift_card ||
-      (type === ModalPaymentTypes.modalPages.light_up_chinatown && amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT)
+      (type === ModalPaymentTypes.modalPages.light_up_chinatown &&
+        amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT)
     ) {
       return t('modalPayment.modalCardDetails.details.voucher');
     } else {
       return t('modalPayment.modalCardDetails.details.donation');
-    }    
+    }
   };
 
   return (
@@ -321,15 +322,25 @@ const ModalCardDetails = ({
               <span>
                 <br />
                 <br />
-                {t('modalPayment.modalCardDetails.message.lic_name')}
+                {t('modalPayment.modalCardDetails.message.luc_name')}
                 <b>
                   {`${lucData.firstName} 
                   ${
-                    lucData.middleInitial.length > 0 ?
-                    lucData.middleInitial.substring(0, 1).toUpperCase() + ". " : ''
+                    lucData.middleInitial.length > 0
+                      ? lucData.middleInitial.substring(0, 1).toUpperCase() +
+                        '. '
+                      : ''
                   } 
                   ${lucData.lastName}`}
                 </b>
+              </span>
+            )}
+            {lucData.address !== '' && (
+              <span>
+                <br />
+                <br />
+                {t('modalPayment.modalCardDetails.message.luc_address')}
+                <b>{`${lucData.address}, ${lucData.city}, ${lucData.state} ${lucData.zipCode}`}</b>
               </span>
             )}
             <p />

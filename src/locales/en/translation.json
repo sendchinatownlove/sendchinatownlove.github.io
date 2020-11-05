@@ -9,20 +9,39 @@
       "maximum": "Maximum",
       "amount": "amount",
       "submit": "Next",
-      "adopt_lantern": "Adopt-a-Lantern!",
+      "adopt_lantern_tier_2": "Adopt-a-Lantern!",
+      "adopt_lantern_tier_3": "Adopt-a-Lantern, Keep-a-Lantern!",
+      "light_up_chinatown_address": {
+        "disclaimer_1": "You will be able to pick up your custom lantern at ",
+        "disclaimer_2": "This information will also be emailed to you.",
+        "address": "Chinese Chamber of Commerce, 33 Bowery # C202, New York, NY 10002.",
+        "address_button": " I’m from out of town and would like my lantern shipped to me.",
+        "cancel_address_button": "Cancel adding address"
+      },
       "tier_2_donation": "Thank you for donating $45 or more.",
+      "tier_3_donation": "Thank you for donating $150 or more.",
       "personalize": "Personalize your lantern with your or a loved one’s name.",
       "labels": {
         "amount": "amount",
         "first_name": "first name",
         "middle_initial": "middle initial",
-        "last_name": "last name"
+        "last_name": "last name",
+        "full_name": "Full Name",
+        "address": "Address",
+        "city": "City",
+        "state": "State",
+        "zip_code": "Zip code"
       },
       "place_holder": {
         "amount": "amount",
         "first_name": "Enter first name",
         "middle_initial": "Enter middle initial",
-        "last_name": "Enter last name"
+        "last_name": "Enter last name",
+        "full_name": "Enter full name",
+        "address": "Enter street address",
+        "city": "Enter city",
+        "state": "Enter state",
+        "zip_code": "Enter zip code"
       }
     }
   },
@@ -113,7 +132,8 @@
         "monthly_donation": "Monthly Donation",
         "light_up_chinatown_tier_2": "Adopt-a-Lantern Donation",
         "voucher": "Voucher Purchase",
-        "lic_name": "Name for personalized lantern: "
+        "luc_name": "Name for personalized lantern: ",
+        "luc_address": "Shipping Address: "
       }
     }
   },

@@ -9,8 +9,9 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
-import { RowFormat, LabelText, InputText, Subheader } from '../styles';
-import {LIGHT_UP_CHINATOWN_TIER_1_LIMIT} from '../consts';
+import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../consts';
+
+import LanternForm from './LanternForm';
 
 export interface Props {
   sellerId: string;
@@ -20,10 +21,10 @@ export interface Props {
 export const Modal = (props: Props) => {
   const { t } = useTranslation();
 
-  const { amount, modalView, lucData } = useModalPaymentState(null);
+  const { amount, modalView } = useModalPaymentState(null);
+  const dispatch = useModalPaymentDispatch(null);
   const [isCustomAmount, setIsCustomAmount] = useState(true);
   const [selected, setSelected] = useState('');
-  const dispatch = useModalPaymentDispatch(null);
   const minAmount = 5;
   const maxAmount = 10000;
 
@@ -47,11 +48,15 @@ export const Modal = (props: Props) => {
     return r.test(value);
   };
 
-  const buttonAmountsArray = modalView === ModalPaymentTypes.modalPages.light_up_chinatown
-    ? [25, 45, 150, 300]
-    : [10, 25, 50, 100];
-  
-  const buttonAmounts = buttonAmountsArray.map(x => ({ value: x.toString(), text: '$' + x.toString()}));
+  const buttonAmountsArray =
+    modalView === ModalPaymentTypes.modalPages.light_up_chinatown
+      ? [25, 45, 150, 300]
+      : [10, 25, 50, 100];
+
+  const buttonAmounts = buttonAmountsArray.map((x) => ({
+    value: x.toString(),
+    text: '$' + x.toString(),
+  }));
 
   const purchaseIsDonation =
     modalView === ModalPaymentTypes.modalPages.donation;
@@ -67,17 +72,6 @@ export const Modal = (props: Props) => {
       default:
         return t('purchase.donation', { seller: sellerName });
     }
-  };
-
-  const handleOnChange = (e) => {
-    e.preventDefault();
-    dispatch({
-      type: ModalPaymentConstants.SET_LUC_DATA,
-      payload: {
-        key: e.target.name,
-        value: e.target.value,
-      },
-    });
   };
 
   return (
@@ -160,64 +154,7 @@ export const Modal = (props: Props) => {
           </ErrorMessage>
         )}
       </AmountContainer>
-      {amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT && (
-        <AmountContainer>
-          <Subheader>{t('paymentProcessing.amount.adopt_lantern')}</Subheader>
-          <label>{t('paymentProcessing.amount.tier_2_donation')}</label>
-          <br />
-          <br />
-          <label>{t('paymentProcessing.amount.personalize')}</label>
-          <br />
-          <br />
-          <SingleRowFormat>
-            <RowFormat width="38%">
-              <LabelText htmlFor="first_name">
-                {t('paymentProcessing.amount.labels.first_name')}
-              </LabelText>
-              <InputText
-                name="firstName"
-                type="text"
-                className="modalInput--input"
-                onChange={handleOnChange}
-                placeholder={t(
-                  'paymentProcessing.amount.place_holder.first_name'
-                )}
-                value={lucData.firstName}
-              />
-            </RowFormat>
-            <RowFormat width="20%" mobileWidth="30%">
-              <LabelText htmlFor="middle_initial">
-                {t('paymentProcessing.amount.labels.middle_initial')}
-              </LabelText>
-              <InputText
-                name="middleInitial"
-                type="text"
-                className="modalInput--input"
-                onChange={handleOnChange}
-                placeholder={t(
-                  'paymentProcessing.amount.place_holder.middle_initial'
-                )}
-                value={lucData.middleInitial}
-              />
-            </RowFormat>
-            <RowFormat width="38%">
-              <LabelText htmlFor="last_name">
-                {t('paymentProcessing.amount.labels.last_name')}
-              </LabelText>
-              <InputText
-                name="lastName"
-                type="text"
-                className="modalInput--input"
-                onChange={handleOnChange}
-                placeholder={t(
-                  'paymentProcessing.amount.place_holder.last_name'
-                )}
-                value={lucData.lastName}
-              />
-            </RowFormat>
-          </SingleRowFormat>
-        </AmountContainer>
-      )}
+      {amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT && <LanternForm />}
       <NextButton
         type="button"
         className={'modalButton--filled'}
@@ -264,15 +201,6 @@ const CustomAmountContainer = styled.div`
     top: 0;
     left: 8px;
     z-index: 1;
-  }
-`;
-
-const SingleRowFormat = styled(RowFormat)`
-  flex-direction: row;
-  justify-content: space-between;
-
-  @media only screen and (max-width: 800px) {
-    flex-direction: column;
   }
 `;
 
