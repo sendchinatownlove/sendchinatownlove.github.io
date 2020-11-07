@@ -25,7 +25,9 @@ const GiftAMealPage = (props: Props) => {
       (campaign: any) => campaign.active && campaign.valid
     );
     setActiveCampaigns(active);
-    const past = campaignData.data.filter((campaign: any) => !campaign.active);
+    const past = campaignData.data
+      .filter((campaign: any) => !campaign.active)
+      .reverse();
     setPastCampaigns(past);
   };
 
