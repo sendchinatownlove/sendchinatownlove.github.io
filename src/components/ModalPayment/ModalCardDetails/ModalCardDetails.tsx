@@ -373,10 +373,6 @@ const CheckboxContainer = styled.label`
   :hover {
     text-decoration: underline;
   }
-
-  > span {
-    padding: 9px 9px 9px 0px;
-  }
 `;
 
 const ButtonRow = styled.div`
