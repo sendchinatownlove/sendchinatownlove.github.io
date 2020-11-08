@@ -1,7 +1,8 @@
 {
   "paymentProcessing": {
     "amount": {
-      "header": "100% of your support will go to the merchant toward their operating costs. Your transaction is secure, encrypted and directly goes to the owner for sustaining their business.",
+      "body1": "Your transaction is secure, encrypted and directly goes to the owner for sustaining their business.",
+      "body2": "Please select or enter an amount.",
       "label1": "Select amount",
       "label2": "Other:",
       "minimum": "Minimum",

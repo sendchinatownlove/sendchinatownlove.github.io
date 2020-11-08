@@ -68,7 +68,8 @@ export const Modal = (props: Props) => {
       {props.sellerId === 'send-chinatown-love' && (
         <p>{t('donationPool.description2')}</p>
       )}
-      <p>{t('paymentProcessing.amount.header')}</p>
+      <p>{t('paymentProcessing.amount.body1')}</p>
+      <p>{t('paymentProcessing.amount.body2')}</p>
 
       <AmountContainer>
         <label htmlFor="select-amount">
