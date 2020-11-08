@@ -28,3 +28,12 @@ export function formatTime(time) {
 
   return `${hours}:${minutes}${suffix}`;
 }
+
+export function formatCurrency(cents: number, decimals: number = 2) {
+  return Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  }).format(cents / 100);
+}

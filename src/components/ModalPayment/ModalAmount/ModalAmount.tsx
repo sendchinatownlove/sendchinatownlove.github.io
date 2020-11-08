@@ -5,7 +5,10 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
+import { formatCurrency } from '../../../utilities/general/textFormatter';
 import { useTranslation } from 'react-i18next';
+import { Tooltip } from '@material-ui/core';
+import Help from '@material-ui/icons/Help';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
@@ -131,6 +134,34 @@ export const Modal = (props: Props) => {
         )}
       </AmountContainer>
 
+      <hr />
+
+      <TransactionFeeContainer>
+        <p>
+          <b>{t('paymentProcessing.amount.fees')}</b>
+          <span>
+            <Tooltip
+              title={t('paymentProcessing.amount.feesTooltip').toString()}
+              placement="right"
+            >
+              <Help style={{ color: '#A6192E' }} />
+            </Tooltip>
+          </span>
+        </p>
+        <p>
+          <b>{formatCurrency(Number(0) /* TODO: feesAmount */)}</b>
+        </p>
+      </TransactionFeeContainer>
+
+      <hr />
+
+      <TotalContainer>
+        <b>
+          {t('paymentProcessing.amount.total')}:{' '}
+          <span>{formatCurrency(Number(amount) * 100)}</span>
+        </b>
+      </TotalContainer>
+
       <NextButton
         type="button"
         className={'modalButton--filled'}
@@ -177,6 +208,24 @@ const CustomAmountContainer = styled.div`
     top: 0;
     left: 8px;
     z-index: 1;
+  }
+`;
+
+const TransactionFeeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  p {
+    font-size: 13px;
+    padding: 0;
+  }
+`;
+
+const TotalContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  span {
+    color: #dd678a;
   }
 `;
 
