@@ -36,14 +36,17 @@ export const Modal = (props: Props) => {
     //        need a way to pass multiple fees by PaymentType/Campaign(?).
     getFee('square').then((res) => {
       if (res.status === 200) {
-        if (res.data && res.data.active) setFees([res.data]);
+        const squareFee = res.data;
+
+        if (squareFee && squareFee.active) {
+          dispatch({
+            type: ModalPaymentConstants.SET_FEES,
+            payload: [squareFee],
+          });
+        }
       }
     });
-  }, []);
-
-  const setFees = (fees: FeeParams[]) => {
-    dispatch({ type: ModalPaymentConstants.SET_FEES, payload: fees });
-  };
+  }, [dispatch]);
 
   const closeModal = async (e: any) => {
     ReactPixel.trackCustom('ModalCloseButtonClick', {});
