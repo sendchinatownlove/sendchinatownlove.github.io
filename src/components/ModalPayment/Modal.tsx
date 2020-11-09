@@ -36,7 +36,7 @@ export const Modal = (props: Props) => {
     //        need a way to pass multiple fees by PaymentType/Campaign(?).
     getFee('square').then((res) => {
       if (res.status === 200) {
-        if (res.data) setFees([res.data]);
+        if (res.data && res.data.active) setFees([res.data]);
       }
     });
   }, []);
