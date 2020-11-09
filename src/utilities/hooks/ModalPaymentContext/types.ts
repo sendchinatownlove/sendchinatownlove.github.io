@@ -9,10 +9,11 @@
  *
  */
 
-import { BrowsePageSeller } from '../../api/types';
+import { BrowsePageSeller, FeeParams } from '../../api/types';
 
 export type ModalPaymentState = {
   amount: string;
+  fees?: FeeParams[];
   customInput: boolean;
   purchaseType: modalPages | null;
   modalView: modalPages | null;
@@ -21,6 +22,7 @@ export type ModalPaymentState = {
 
 export const defaultState: ModalPaymentState = {
   amount: '5',
+  fees: [],
   customInput: false,
   modalView: null,
   purchaseType: null,

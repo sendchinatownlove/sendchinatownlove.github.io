@@ -20,7 +20,7 @@ export interface Props {
 export const Modal = (props: Props) => {
   const { t } = useTranslation();
 
-  const { amount, modalView } = useModalPaymentState(null);
+  const { amount, fees, modalView } = useModalPaymentState(null);
   const [isCustomAmount, setIsCustomAmount] = useState(true);
   const [selected, setSelected] = useState('');
   const dispatch = useModalPaymentDispatch(null);

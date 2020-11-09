@@ -181,9 +181,16 @@ export const getCampaignsForMerchant = async (
     .catch((err) => err);
 };
 
-export const getFees = async (fee_name: string) => {
+export const getFees = async () => {
   return await axios
-    .get(fees + fee_name)
+    .get(fees)
+    .then((res) => res)
+    .catch((err) => err);
+};
+
+export const getFee = async (name: string) => {
+  return await axios
+    .get(fees + name)
     .then((res) => res)
     .catch((err) => err);
 };
