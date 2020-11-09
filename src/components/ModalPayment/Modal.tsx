@@ -9,7 +9,6 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
-import { FeeParams } from '../../utilities/api/types';
 import { getFee } from '../../utilities/api/interactionManager';
 import ReactPixel from 'react-facebook-pixel';
 import styled from 'styled-components';
@@ -20,7 +19,6 @@ export interface Props {
   costPerMeal: number;
   nonProfitLocationId?: string;
   campaignId?: string;
-  fees?: FeeParams[];
 }
 
 export interface ModalProps {
