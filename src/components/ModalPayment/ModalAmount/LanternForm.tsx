@@ -42,6 +42,13 @@ export const LanternForm = (props) => {
   const handleAddress = (e, bool) => {
     e.preventDefault();
     setShowAddress(bool);
+
+    if (!bool){
+      dispatch({
+        type: ModalPaymentConstants.CLEAR_ADDRESS,
+        payload: null,
+      });
+    }
   };
 
   return (
@@ -213,7 +220,7 @@ export const LanternForm = (props) => {
                       placeholder={t(
                         'paymentProcessing.amount.place_holder.zip_code'
                       )}
-                      value={lucData.lastName}
+                      value={lucData.zipCode}
                     />
                   </RowFormat>
                 </StateZipRow>

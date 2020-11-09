@@ -6,6 +6,7 @@ import {
   SET_SELLER_DATA,
   UPDATE_SELLER_DATA,
   SET_LUC_DATA,
+  CLEAR_ADDRESS,
 } from './constants';
 import { defaultState, ModalPaymentState, modalPages } from './types';
 
@@ -59,6 +60,18 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
       };
     case CLEAR_FORMS:
       return defaultState;
+    case CLEAR_ADDRESS:
+      return{
+        ...state,
+        lucData: {
+          ...state.lucData,
+          fullName: '',
+          address: '',
+          city: '',
+          state: '',
+          zipCode: '',
+        }
+      }
     default:
       return state;
   }

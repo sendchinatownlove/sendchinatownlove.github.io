@@ -154,7 +154,7 @@ export const Modal = (props: Props) => {
           </ErrorMessage>
         )}
       </AmountContainer>
-      {amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT && <LanternForm />}
+      {modalView === ModalPaymentTypes.modalPages.light_up_chinatown && amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT && <LanternForm />}
       <NextButton
         type="button"
         className={'modalButton--filled'}
