@@ -4,6 +4,7 @@ import lanternHeroTop from './images/lantern-hero-top.png';
 import lanternFooter from './images/lantern-footer.png';
 import mapImg from './images/light-up-map.gif';
 import { Trans, useTranslation } from 'react-i18next';
+import DonationSection from './DonationSection';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -62,17 +63,14 @@ const LightUpChinatownPage = () => {
           <CampaignInfoTime color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignDates')}
           </CampaignInfoTime>
-
           <CampaignInfoText color={'#CF6E8A'}>
             {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
           </CampaignInfoText>
         </MapContainer>
       </Container>
-      <DonationTierContainer>
-        <DonationTiersText>
-          {t('lightUpChinatown.donationTierText')}
-        </DonationTiersText>
-      </DonationTierContainer>
+      <DonationContainer>
+        <DonationSection></DonationSection>
+      </DonationContainer>
       <BottomBanner>
         <BottomHero height={395} src={lanternFooter} alt="lantern overlay" />
         <FooterText>
@@ -163,19 +161,6 @@ const HeaderSubtext = styled.div`
   }
 `;
 
-const DonationTiersText = styled.div`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #000000;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #dedede;
-`;
-
 const SummaryHeader = styled.div`
   font-family: Open Sans;
   font-style: normal;
@@ -231,12 +216,11 @@ const CampaignInfoTime = styled(CampaignInfoText)`
   font-size: 18px;
 `;
 
-const DonationTierContainer = styled.section`
-  max-width: 1440px;
-  margin: 35px auto;
+const DonationContainer = styled.section`
+  background: #f7f7f7;
   align-items: center;
   @media (max-width: 599px) {
-    padding: 0px 35px;
+    padding: 0px 15px;
   }
 `;
 
