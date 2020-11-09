@@ -32,8 +32,8 @@ export const Modal = (props: Props) => {
   const dispatch = useModalPaymentDispatch(null);
 
   useEffect(() => {
-    // @TODO: For now we are only applying the Square fee, but backend eventually
-    //        needs a way to pass multiple fees by PaymentType/Campaign(?).
+    // @TODO: For now we are only applying the Square fee, but backend may eventually
+    //        need a way to pass multiple fees by PaymentType/Campaign(?).
     getFee('square').then((res) => {
       if (res.status === 200) {
         if (res.data) setFees([res.data]);
