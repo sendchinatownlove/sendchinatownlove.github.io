@@ -9,6 +9,10 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
+import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../consts';
+
+import LanternForm from './LanternForm';
+
 export interface Props {
   sellerId: string;
   sellerName: string;
@@ -18,9 +22,9 @@ export const Modal = (props: Props) => {
   const { t } = useTranslation();
 
   const { amount, modalView } = useModalPaymentState(null);
+  const dispatch = useModalPaymentDispatch(null);
   const [isCustomAmount, setIsCustomAmount] = useState(true);
   const [selected, setSelected] = useState('');
-  const dispatch = useModalPaymentDispatch(null);
   const minAmount = 5;
   const maxAmount = 10000;
 
@@ -44,28 +48,48 @@ export const Modal = (props: Props) => {
     return r.test(value);
   };
 
-  const buttonAmounts = [
-    { value: '10', text: '$10' },
-    { value: '25', text: '$25' },
-    { value: '50', text: '$50' },
-    { value: '100', text: '$100' },
-  ];
+  const buttonAmountsArray =
+    modalView === ModalPaymentTypes.modalPages.light_up_chinatown
+      ? [25, 45, 150, 300]
+      : [10, 25, 50, 100];
+
+  const buttonAmounts = buttonAmountsArray.map((x) => ({
+    value: x.toString(),
+    text: '$' + x.toString(),
+  }));
 
   const purchaseIsDonation =
     modalView === ModalPaymentTypes.modalPages.donation;
 
-  const headerText = purchaseIsDonation
-    ? t('purchase.donation', { seller: props.sellerName })
-    : t('purchase.voucher', { seller: props.sellerName });
+  const getHeaderText = (purchaseType, sellerName) => {
+    switch (purchaseType) {
+      case ModalPaymentTypes.modalPages.donation:
+        return t('purchase.donation', { seller: sellerName });
+      case ModalPaymentTypes.modalPages.gift_card:
+        return t('purchase.voucher', { seller: sellerName });
+      case ModalPaymentTypes.modalPages.light_up_chinatown:
+        return t('purchase.donation_to', { seller: sellerName });
+      default:
+        return t('purchase.donation', { seller: sellerName });
+    }
+  };
 
   return (
     <ContentContainer id="donation-form" data-testid="modal-amount">
-      <Header>{headerText}</Header>
+      <Header>{getHeaderText(modalView, props.sellerName)}</Header>
 
       {props.sellerId === 'send-chinatown-love' && (
         <p>{t('donationPool.description2')}</p>
       )}
-      <p>{t('paymentProcessing.amount.header')}</p>
+      <p>
+        {t(
+          `paymentProcessing.amount.${
+            modalView === ModalPaymentTypes.modalPages.light_up_chinatown
+              ? 'light_up_chinatown'
+              : 'header'
+          }`
+        )}
+      </p>
 
       <AmountContainer>
         <label htmlFor="select-amount">
@@ -130,7 +154,8 @@ export const Modal = (props: Props) => {
           </ErrorMessage>
         )}
       </AmountContainer>
-
+      {modalView === ModalPaymentTypes.modalPages.light_up_chinatown &&
+        amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT && <LanternForm />}
       <NextButton
         type="button"
         className={'modalButton--filled'}

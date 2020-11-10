@@ -7,6 +7,7 @@ import goal1Img from './images/goal_1.png';
 import goal2Img from './images/goal_2.png';
 
 import { Trans, useTranslation } from 'react-i18next';
+
 import DonationSection from './DonationSection';
 import DonationDetail from './DonationDetail';
 
