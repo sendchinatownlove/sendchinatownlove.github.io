@@ -70,7 +70,7 @@ const LightUpChinatownPage = () => {
         </MapContainer>
       </Container>
       <DonationContainer>
-        <DonationSection></DonationSection>
+        <DonationSection />
       </DonationContainer>
       <LightUpFaq />
     </React.Fragment>
@@ -103,6 +103,7 @@ const TextContainer = styled.section`
 const Hero = styled.img`
   height: ${(props) => props.height}px;
   width: 100vw;
+  object-fit: cover;
 `;
 
 const Banner = styled.div`

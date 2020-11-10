@@ -41,7 +41,7 @@ const LightUpFaq = () => {
           </QuestionContainer>
         ))}
 
-        {/* FAQ question 4 & 5 have links, and needed to be split out. See below. */}
+        {/* FAQ question 4 & 5 have links and needed to be split out. See below. */}
         <QuestionContainer>
           <span>
             <Question> 4.</Question>
