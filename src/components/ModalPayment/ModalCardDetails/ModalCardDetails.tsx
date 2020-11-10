@@ -45,7 +45,7 @@ const ModalCardDetails = ({
 }: Props) => {
   const idempotencyKey = uuid();
   const { t } = useTranslation();
-  const { amount, purchaseType } = useModalPaymentState(null);
+  const { amount, feesAmount, purchaseType } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
 
   const [isTermsChecked, setTermsChecked] = useState(false);
@@ -108,6 +108,15 @@ const ModalCardDetails = ({
             quantity: 1,
           },
         ];
+
+    if (feesAmount) {
+      payment.push({
+        amount: feesAmount,
+        currency: 'usd',
+        item_type: 'transaction_fees',
+        quantity: 1,
+      });
+    }
 
     const buyer: Buyer = {
       name,
