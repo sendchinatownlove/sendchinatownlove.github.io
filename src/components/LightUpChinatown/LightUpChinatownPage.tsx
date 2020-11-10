@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
-import lanternFooter from './images/lantern-footer.png';
 import mapImg from './images/light-up-map.gif';
 import { Trans, useTranslation } from 'react-i18next';
 import DonationSection from './DonationSection';
+
+import LightUpFaq from './LightUpFaq';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -71,15 +72,7 @@ const LightUpChinatownPage = () => {
       <DonationContainer>
         <DonationSection></DonationSection>
       </DonationContainer>
-      <BottomBanner>
-        <BottomHero height={395} src={lanternFooter} alt="lantern overlay" />
-        <FooterText>
-          {t('lightUpChinatown.ceremony1')}
-          <br></br>
-          <br></br>
-          {t('lightUpChinatown.ceremony2')}
-        </FooterText>
-      </BottomBanner>
+      <LightUpFaq />
     </React.Fragment>
   );
 };
@@ -221,38 +214,6 @@ const DonationContainer = styled.section`
   align-items: center;
   @media (max-width: 599px) {
     padding: 0px 15px;
-  }
-`;
-
-const BottomBanner = styled.div`
-  position: relative;
-  text-align: center;
-`;
-
-const BottomHero = styled.img`
-  height: ${(props) => props.height}px;
-  width: 100vw;
-  filter: brightness(50%);
-`;
-
-const FooterText = styled.div`
-  text-align: start;
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 32px;
-  color: #ffffff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  @media (max-width: 599px) {
-    font-size: 14px;
-    line-height: 24px;
-    left: 30%;
-    transform: translate(-30%, -50%);
   }
 `;
 
