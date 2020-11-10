@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
 import mapImg from './images/light-up-map.gif';
 import { Trans, useTranslation } from 'react-i18next';
+
 import DonationSection from './DonationSection';
 import DonationDetail from './DonationDetail';
 

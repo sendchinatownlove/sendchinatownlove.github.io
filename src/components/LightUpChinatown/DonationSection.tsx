@@ -8,8 +8,26 @@ import {
 import lantern45 from './images/lantern_45.png';
 import lantern150 from './images/lantern_150.png';
 
+import Modal from '../ModalPayment';
+
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+  ModalPaymentTypes,
+} from '../../utilities/hooks/ModalPaymentContext';
+
 const DonationSection = () => {
   const { t } = useTranslation();
+
+  const ModalPaymentDispatcher = useModalPaymentDispatch(null);
+
+  const openModal = (event) => {
+    event.preventDefault();
+    ModalPaymentDispatcher({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.light_up_chinatown,
+    });
+  };
   return (
     <React.Fragment>
       <Container>
@@ -26,7 +44,7 @@ const DonationSection = () => {
           </Description>
         </ColumnContainer>
         <ColumnContainer>
-          <Button className={'button--filled'} onClick={() => {}}>
+          <Button className={'button--filled'} onClick={openModal}>
             {t('donationBox.button')}
           </Button>
         </ColumnContainer>
@@ -39,6 +57,11 @@ const DonationSection = () => {
           <Image src={lantern150}></Image>
         </ColumnContainer>
       </ImageContainer>
+      <Modal
+        sellerId="light-up-chinatown"
+        sellerName="Light Up Chinatown"
+        costPerMeal={0}
+      />
     </React.Fragment>
   );
 };

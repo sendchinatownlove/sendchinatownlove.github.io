@@ -44,8 +44,7 @@ const Container = styled.div`
     auto;
   ${(props: ContainerProps) =>
     !props.isOnLandingPage && 'border-bottom: 1px solid #f7f7f7;'}
-  ${(props: ContainerProps) =>
-    !props.isOnLandingPage && 'padding: 10px 2.5%;'}
+  ${(props: ContainerProps) => !props.isOnLandingPage && 'padding: 10px 2.5%;'}
   color: black;
   text-align: center;
 `;
