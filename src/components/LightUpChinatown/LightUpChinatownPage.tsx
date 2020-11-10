@@ -4,6 +4,7 @@ import lanternHeroTop from './images/lantern-hero-top.png';
 import mapImg from './images/light-up-map.gif';
 import { Trans, useTranslation } from 'react-i18next';
 import DonationSection from './DonationSection';
+import DonationDetail from './DonationDetail';
 
 import LightUpFaq from './LightUpFaq';
 
@@ -72,6 +73,9 @@ const LightUpChinatownPage = () => {
       <DonationContainer>
         <DonationSection />
       </DonationContainer>
+      <DonationDetailContainer>
+        <DonationDetail></DonationDetail>
+      </DonationDetailContainer>
       <LightUpFaq />
     </React.Fragment>
   );
@@ -212,6 +216,14 @@ const CampaignInfoTime = styled(CampaignInfoText)`
 
 const DonationContainer = styled.section`
   background: #f7f7f7;
+  align-items: center;
+  @media (max-width: 599px) {
+    padding: 0px 15px;
+  }
+`;
+
+const DonationDetailContainer = styled.section`
+  background: #f2e0e1;
   align-items: center;
   @media (max-width: 599px) {
     padding: 0px 15px;
