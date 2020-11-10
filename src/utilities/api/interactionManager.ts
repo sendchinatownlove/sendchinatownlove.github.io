@@ -113,7 +113,8 @@ export const makeSquarePayment = async (
         line_items: payment,
         email,
         name,
-        seller_id: sellerId,
+        seller_id: '',
+        project_id: 1,
         idempotency_key: idempotencyKey,
         is_subscribed: isSubscribed,
         is_distribution: isDistribution, // TODO: deprecate this in favor of campaignId
