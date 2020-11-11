@@ -55,6 +55,12 @@ const ModalCardDetails = ({
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
 
+  let lucData = {
+    recipientName: 'Someone S. Special',
+    recipientAddress: '123 Main Street, New York NY 10000',
+    projectId: '1',
+  };
+
   let applicationId, locationId;
   if (
     purchaseType === ModalPaymentTypes.modalPages.buy_meal &&
@@ -118,13 +124,18 @@ const ModalCardDetails = ({
     };
 
     setCanSubmit(false);
+
+    const { projectId, ...metadata } = lucData;
+
     return makeSquarePayment(
       nonce,
-      sellerId,
+      lucData ? '' : sellerId,
       payment,
       buyer,
       is_distribution,
-      campaignId
+      campaignId,
+      lucData ? projectId : '',
+      lucData ? JSON.stringify(metadata) : ''
     )
       .then((res) => {
         if (res.status === 200) {
