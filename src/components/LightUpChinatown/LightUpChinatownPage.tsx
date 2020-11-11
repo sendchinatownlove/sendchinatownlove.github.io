@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
 import mapImg from './images/light-up-map.gif';
+import costBreakdownImg from './images/cost-breakdown.png';
+
 import { Trans, useTranslation } from 'react-i18next';
 import DonationSection from './DonationSection';
 import DonationDetail from './DonationDetail';
@@ -76,6 +78,11 @@ const LightUpChinatownPage = () => {
       <DonationDetailContainer>
         <DonationDetail></DonationDetail>
       </DonationDetailContainer>
+      <DonationContainer>
+        <CostBreakdownImageContainer>
+          <CostBreakdownImage src={costBreakdownImg}></CostBreakdownImage>
+        </CostBreakdownImageContainer>
+      </DonationContainer>
       <LightUpFaq />
     </React.Fragment>
   );
@@ -217,8 +224,9 @@ const CampaignInfoTime = styled(CampaignInfoText)`
 const DonationContainer = styled.section`
   background: #f7f7f7;
   align-items: center;
+  padding: 30px;
   @media (max-width: 599px) {
-    padding: 0px 15px;
+    padding: 15px 15px;
   }
 `;
 
@@ -227,6 +235,23 @@ const DonationDetailContainer = styled.section`
   align-items: center;
   @media (max-width: 599px) {
     padding: 0px 15px;
+  }
+`;
+
+const CostBreakdownImageContainer = styled.div`
+  background: #ffffff;
+  border-radius: 24px;
+  max-width: 1220px;
+  margin: 0 auto;
+  @media (max-width: 599px) {
+    max-width: 350px;
+  }
+`;
+
+const CostBreakdownImage = styled.img`
+  max-width: 1220px;
+  @media (max-width: 599px) {
+    max-width: 350px;
   }
 `;
 
