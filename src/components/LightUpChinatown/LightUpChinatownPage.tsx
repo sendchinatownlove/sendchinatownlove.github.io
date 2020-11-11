@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
 import mapImg from './images/light-up-map.gif';
 import costBreakdownImg from './images/cost-breakdown.png';
+import goal1Img from './images/goal_1.png';
+import goal2Img from './images/goal_2.png';
 
 import { Trans, useTranslation } from 'react-i18next';
 import DonationSection from './DonationSection';
@@ -58,9 +60,8 @@ const LightUpChinatownPage = () => {
               major blocks of Chinatown. We hope you will join us.
             </Trans>
           </SummaryBody>
-        </TextContainer>
-        <MapContainer>
-          <Map src={mapImg} /> {/* TODO: Replace with GIF */}
+          <br></br>
+          <br></br>
           <CampaignInfoText color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignHeader')}
           </CampaignInfoText>
@@ -70,6 +71,20 @@ const LightUpChinatownPage = () => {
           <CampaignInfoText color={'#CF6E8A'}>
             {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
           </CampaignInfoText>
+        </TextContainer>
+        <MapContainer>
+          <Map src={mapImg} />
+          <br></br>
+          <GoalContainer>
+            <GoalPill src={goal1Img}></GoalPill>
+            <GoalText>{t('lightUpChinatown.goal1')}</GoalText>
+          </GoalContainer>
+          <br></br>
+          <br></br>
+          <GoalContainer>
+            <GoalPill src={goal2Img}></GoalPill>
+            <GoalText>{t('lightUpChinatown.goal2')}</GoalText>
+          </GoalContainer>
         </MapContainer>
       </Container>
       <DonationContainer>
@@ -252,6 +267,35 @@ const CostBreakdownImage = styled.img`
   max-width: 1220px;
   @media (max-width: 599px) {
     max-width: 350px;
+`;
+
+const GoalContainer = styled.div`
+  display: inline-block;
+`;
+
+const GoalPill = styled.img`
+  max-width: 93px;
+  display: inline-block;
+  float: left;
+  margin-right: 20px;
+  @media (max-width: 599px) {
+    max-width: 76px;
+  }
+`;
+
+const GoalText = styled.div`
+  max-width: 224px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+  color: #1e1e1e;
+  display: inline-block;
+  float: left;
+  @media (max-width: 599px) {
+    font-size: 14px;
+    line-height: 19px;
   }
 `;
 
