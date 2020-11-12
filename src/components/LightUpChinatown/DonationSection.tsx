@@ -50,7 +50,6 @@ const Container = styled.div`
   justify-content: space-between;
   max-width: 1440px;
   margin: auto;
-  padding-top: 35px;
   @media (${tabletScreens}) {
     flex-direction: column;
     position: relative;
