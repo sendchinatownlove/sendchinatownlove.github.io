@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
 import lanternFooter from './images/lantern-footer.png';
+import partners_46 from './images/partners_46.png';
+import partners_ccba from './images/partners_ccba.png';
+import partners_cccny from './images/partners_cccny.png';
+import partners_prm from './images/partners_prm.png';
+import partners_udooda from './images/partners_udooda.png';
 import mapImg from './images/light-up-map.gif';
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -62,7 +67,6 @@ const LightUpChinatownPage = () => {
           <CampaignInfoTime color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignDates')}
           </CampaignInfoTime>
-
           <CampaignInfoText color={'#CF6E8A'}>
             {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
           </CampaignInfoText>
@@ -73,6 +77,16 @@ const LightUpChinatownPage = () => {
           {t('lightUpChinatown.donationTierText')}
         </DonationTiersText>
       </DonationTierContainer>
+      <Banner>
+        <HeaderText>{"Header text here!"}</HeaderText>
+        <Container>
+          <img src={partners_46} alt="Logo" />
+          <img src={partners_ccba} alt="Logo" />
+          <img src={partners_cccny} alt="Logo" />
+          <img src={partners_prm} alt="Logo" />
+          <img src={partners_udooda} alt="Logo" />
+        </Container>
+      </Banner>
       <BottomBanner>
         <BottomHero height={395} src={lanternFooter} alt="lantern overlay" />
         <FooterText>
