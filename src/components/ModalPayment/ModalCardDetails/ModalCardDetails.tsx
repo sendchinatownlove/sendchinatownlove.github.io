@@ -10,8 +10,7 @@ import { v4 as uuid } from 'uuid';
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 
-import { SquareErrors, hasKey } from '../../../consts';
-import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../consts';
+import { SquareErrors, hasKey, LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../../../consts';
 
 import {
   makeSquarePayment,
@@ -323,7 +322,7 @@ const ModalCardDetails = ({
                 <br />
                 <br />
                 {t('modalPayment.modalCardDetails.message.luc_name')}
-                <b>
+                <BoldText>
                   {`${lucData.firstName} 
                   ${
                     lucData.middleInitial.length > 0
@@ -332,7 +331,7 @@ const ModalCardDetails = ({
                       : ''
                   } 
                   ${lucData.lastName}`}
-                </b>
+                </BoldText>
               </span>
             )}
             {lucData.address !== '' && (
@@ -340,7 +339,7 @@ const ModalCardDetails = ({
                 <br />
                 <br />
                 {t('modalPayment.modalCardDetails.message.luc_address')}
-                <b>{`${lucData.address}, ${lucData.city}, ${lucData.state} ${lucData.zipCode}`}</b>
+                <BoldText>{`${lucData.address}, ${lucData.city}, ${lucData.state} ${lucData.zipCode}`}</BoldText>
               </span>
             )}
             <p />
@@ -413,6 +412,10 @@ export const RowFormat = styled.div`
 
 export const LabelText = styled.label`
   color: #373f4a;
+`;
+
+const BoldText = styled.span`
+  font-weight: bold;
 `;
 
 export const InputText = styled.input`

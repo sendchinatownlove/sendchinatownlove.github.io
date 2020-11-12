@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { RowFormat, Subheader, LabelText, InputText } from '../styles';
-import { LIGHT_UP_CHINATOWN_TIER_2_LIMIT } from '../consts';
+import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT, LIGHT_UP_CHINATOWN_TIER_2_LIMIT } from '../../../consts';
 
 import {
   useModalPaymentState,
@@ -25,8 +25,8 @@ export const LanternForm = (props) => {
       : 'paymentProcessing.amount.adopt_lantern_tier_2';
   const subText =
     amount >= LIGHT_UP_CHINATOWN_TIER_2_LIMIT
-      ? 'paymentProcessing.amount.tier_3_donation'
-      : 'paymentProcessing.amount.tier_2_donation';
+      ? t('paymentProcessing.amount.tier_3_donation', {limit: LIGHT_UP_CHINATOWN_TIER_2_LIMIT})
+      : t('paymentProcessing.amount.tier_2_donation', {limit: LIGHT_UP_CHINATOWN_TIER_1_LIMIT});
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ export const LanternForm = (props) => {
     });
   };
 
-  const handleAddress = (e, bool) => {
+  const shouldShowAddress = (e, bool) => {
     e.preventDefault();
     setShowAddress(bool);
 
@@ -112,12 +112,10 @@ export const LanternForm = (props) => {
               {t(
                 'paymentProcessing.amount.light_up_chinatown_address.disclaimer_1'
               )}
-            </span>
-            <b>
+            <strong>
               {' '}
               {t('paymentProcessing.amount.light_up_chinatown_address.address')}
-            </b>
-            <span>
+            </strong>
               {' '}
               {t(
                 'paymentProcessing.amount.light_up_chinatown_address.disclaimer_2'
@@ -127,7 +125,7 @@ export const LanternForm = (props) => {
           <br />
           <br />
 
-          <TextTrigger onClick={(e) => handleAddress(e, true)}>
+          <TextTrigger onClick={(e) => shouldShowAddress(e, true)}>
             {' '}
             {t(
               'paymentProcessing.amount.light_up_chinatown_address.address_button'
@@ -136,7 +134,7 @@ export const LanternForm = (props) => {
           <br />
           <br />
 
-          {showAddress && (
+          {(showAddress || lucData.address !== '') && (
             <>
               <NameRow>
                 <RowFormat width="65%" mobileWidth="100%">
@@ -154,7 +152,7 @@ export const LanternForm = (props) => {
                     value={lucData.fullName}
                   />
                 </RowFormat>
-                <TextTrigger onClick={(e) => handleAddress(e, false)}>
+                <TextTrigger onClick={(e) => shouldShowAddress(e, false)}>
                   {' '}
                   {t(
                     'paymentProcessing.amount.light_up_chinatown_address.cancel_address_button'

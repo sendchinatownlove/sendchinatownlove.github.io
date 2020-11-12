@@ -10,7 +10,7 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
-import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../consts';
+import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../../../consts';
 
 import { getSeller } from '../../../utilities';
 

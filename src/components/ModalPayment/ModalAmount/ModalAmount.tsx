@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
-import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../consts';
+import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../../../consts';
 
 import LanternForm from './LanternForm';
 

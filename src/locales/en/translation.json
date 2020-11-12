@@ -14,12 +14,12 @@
       "light_up_chinatown_address": {
         "disclaimer_1": "You will be able to pick up your custom lantern at ",
         "disclaimer_2": "This information will also be emailed to you.",
-        "address": "Chinese Chamber of Commerce, 33 Bowery # C202, New York, NY 10002.",
+        "address": "Chinese Consolidated Benevolent Association (CCBA), 62 Mott Street, New York, NY 10013.",
         "address_button": " I’m from out of town and would like my lantern shipped to me.",
         "cancel_address_button": "Cancel adding address"
       },
-      "tier_2_donation": "Thank you for donating $45 or more.",
-      "tier_3_donation": "Thank you for donating $150 or more.",
+      "tier_2_donation": "Thank you for donating ${{limit}} or more.",
+      "tier_3_donation": "Thank you for donating ${{limit}} or more.",
       "personalize": "Personalize your lantern with your or a loved one’s name.",
       "labels": {
         "amount": "amount",
@@ -265,7 +265,7 @@
     "ceremony2": "When you make a lantern donation, you will receive an email once we finalize the date and time.",
     "donationTitle": "Donate to Light Up Chinatown",
     "donationDescription1": "100% of the donations, no matter how big or small, will go towards permanent light fixtures and lanterns throughout Chinatown.",
-    "donationDescription2": "If you donate between $45 and $150 or more, you will be eligible to participate in “Adopt-a-Lantern” where you will be able to receive some perks with your generous donation.",
+    "donationDescription2": "If you donate between ${{limit1}} and ${{limit2}} or more, you will be eligible to participate in “Adopt-a-Lantern” where you will be able to receive some perks with your generous donation.",
     "faq": "Frequently Asked Questions",
     "faqQuestion1": "How will my donation for this project benefit Chinatown?",
     "faqAnswer1": "Your donation will help permanently light up Chinatown streets and create a warm and welcoming ambience to ensure consistent foot traffic and the longevity of Chinatown businesses. For donations that qualify, you will receive a lantern and be invited to the Winter Solstice Lighting Ceremony.",
