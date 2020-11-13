@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
-import mapImg from './images/light-up-map.gif';
+import mapImg from './images/light-up-map.png';
 import costBreakdownImg from './images/cost-breakdown.png';
 import goal1Img from './images/goal_1.png';
 import goal2Img from './images/goal_2.png';
@@ -33,31 +33,25 @@ const LightUpChinatownPage = () => {
           <br></br>
           <SummaryBody>
             <Trans i18nKey="lightUpChinatown.summaryBody2">
-              Support the Light Up Chinatown project by contributing to
-              <strong>“Adopt-A-Lantern!”</strong> In addition to light fixtures
-              being installed, beautiful outdoor lanterns will be hung along
-              Mott Street from Canal to Bayard to welcome patrons into our
-              wonderful community, right in time for the holidays.
+              Support the Light Up Chinatown project through donations and
+              contributing to <strong>“Adopt-a-Lantern!”</strong> In addition to
+              light fixtures being installed, beautiful outdoor lanterns will
+              also be hung along Mott Street from Canal to Bayard to welcome
+              patrons into our wonderful community, right in time for the
+              holidays.
             </Trans>
-          </SummaryBody>
-          <br></br>
-          <SummaryBody>
-            <p>{t('lightUpChinatown.phase1')}</p>
-            <p>{t('lightUpChinatown.phase2')}</p>
-            <p>{t('lightUpChinatown.phase3')}</p>
           </SummaryBody>
           <br></br>
           <SummaryBody>{t('lightUpChinatown.summaryBody3')}</SummaryBody>
           <br></br>
           <SummaryBody>
             <Trans i18nKey="lightUpChinatown.summaryBody4">
-              <strong>Send Chinatown Love</strong> along with
-              <strong>
-                Pearl River Mart, 46 Mott St Bakery, CCBA, Chinese Chamber of
-                Commerce
-              </strong>
-              and <strong>UDO</strong> are partnering to raise funds to light up
-              major blocks of Chinatown. We hope you will join us.
+              We will be having an in-person{' '}
+              <strong>“Light Up Chinatown”</strong> ceremony that will be
+              planned for December in celebration of the Winter Solstice. When
+              you make a qualifying donation of $150 or more, you will receive
+              an email invitation with details including date, time, and
+              location.
             </Trans>
           </SummaryBody>
           <br></br>
@@ -196,8 +190,12 @@ const SummaryBody = styled.div`
   font-family: Open Sans;
   font-style: normal;
   font-size: 18px;
-  line-height: 20px;
+  line-height: 32px;
   color: ##1e1e1e;
+  @media (max-width: 599px) {
+    font-size: 12px;
+    line-height: 16px;
+  }
 `;
 
 const MapContainer = styled.section`
