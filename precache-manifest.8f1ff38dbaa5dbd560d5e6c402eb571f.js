@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f97a89f3058ec70dd33c0f514f01c04e",
+    "revision": "15ee9456b39028684e035a2e7166b13b",
     "url": "/index.html"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/css/9.18f0232b.chunk.css"
   },
   {
-    "revision": "69027bea0f2b47d2eefd",
+    "revision": "e72efad1e482338a24ec",
     "url": "/static/css/main.ef9aa2ff.chunk.css"
   },
   {
@@ -48,8 +48,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/10.cbb6aad4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "fa4b263fec064dc42a44",
-    "url": "/static/js/11.b8b3695e.chunk.js"
+    "revision": "a16400f25269cd998855",
+    "url": "/static/js/11.82183c26.chunk.js"
   },
   {
     "revision": "35a6ca890d6231a2f44b",
@@ -124,12 +124,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/9.5e14530c.chunk.js"
   },
   {
-    "revision": "69027bea0f2b47d2eefd",
-    "url": "/static/js/main.709a2ac6.chunk.js"
+    "revision": "e72efad1e482338a24ec",
+    "url": "/static/js/main.c1a39c04.chunk.js"
   },
   {
-    "revision": "cdda71feaa519001fe84",
-    "url": "/static/js/runtime-main.f2af9774.js"
+    "revision": "c7d2a49e3259d42f2873",
+    "url": "/static/js/runtime-main.b304c941.js"
   },
   {
     "revision": "f72ee01693c673c09463dfdaa57b3652",
@@ -180,8 +180,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/citi_bike.df5a5640.png"
   },
   {
-    "revision": "52dd4b5ae55f07e2c229b1c407594050",
-    "url": "/static/media/cost-breakdown.52dd4b5a.png"
+    "revision": "a55e2d4ddc789b51a736edb536550eab",
+    "url": "/static/media/cost-breakdown.a55e2d4d.png"
   },
   {
     "revision": "46412c79a0082e73eb711911bf68237d",
@@ -208,6 +208,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/illustrated_flatlay_hero.050015e1.png"
   },
   {
+    "revision": "7d87b184a9149c53bdfd67b591749aa7",
+    "url": "/static/media/lantern-150.7d87b184.png"
+  },
+  {
+    "revision": "7bf34e9341231c8c1b1206498ff01f4b",
+    "url": "/static/media/lantern-45.7bf34e93.png"
+  },
+  {
     "revision": "da139363fdb3163f5566d3ef64df326b",
     "url": "/static/media/lantern-footer.da139363.png"
   },
@@ -216,16 +224,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/lantern-hero-top.0e901363.png"
   },
   {
-    "revision": "544f9e1fd6acf44802b8c25f575e62c0",
-    "url": "/static/media/lantern_150.544f9e1f.png"
-  },
-  {
-    "revision": "e0f7c7fd52ebadaf5482c1040655f923",
-    "url": "/static/media/lantern_45.e0f7c7fd.png"
-  },
-  {
-    "revision": "7293af692bdefb518b51d5f4a6c6aa6e",
-    "url": "/static/media/light-up-map.7293af69.gif"
+    "revision": "c3422ba3b7c9c134a22871bedf07b150",
+    "url": "/static/media/light-up-map.c3422ba3.png"
   },
   {
     "revision": "909f1479b519e732b5a828cc5a69317a",
