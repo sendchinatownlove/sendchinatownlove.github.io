@@ -107,8 +107,17 @@ SingleRedemption.defaultProps = {
 };
 
 const SingleVoucher = styled.article`
-  width: 500px;
-  background: #faf4ea;
+  width: 50%;
+  background-color: #faf4ea;
+  padding-top: 26px;
+  height: 600px;
+  margin-right: 10px;
+  @media print {
+    width: 50%;
+    border: 1px solid black;
+    height: auto;
+    overflow-y: visible;
+  }
 `;
 
 const VoucherHeader = styled.header`
