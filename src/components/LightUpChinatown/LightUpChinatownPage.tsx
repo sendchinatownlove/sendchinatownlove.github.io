@@ -18,10 +18,10 @@ const LightUpChinatownPage = () => {
   const [contributions, setContributions] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
-      // setContributions(data.contributions.raised);
-      setContributions(100000); // dummy value before backend route is present in background manager
-    };
+    // const fetchData = async () => {
+    // setContributions(data.contributions.raised);
+    // setContributions(100000); // dummy value before backend route is present in background manager
+    // };
   }, []);
 
   return (
