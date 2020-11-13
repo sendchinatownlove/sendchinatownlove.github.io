@@ -69,24 +69,35 @@ const GoalImage1 = styled.div`
   box-sizing: border-box;
   position: absolute;
   left: 50%;
-  right: 50%;
   border-radius: 12px;
 `;
 const GoalImage2 = styled(GoalImage1)`
   left: 98%;
+  @media (max-width: 920px) {
+    left: 92%;
+  }
 `;
+
 const GoalContainer = styled.div`
   width: 100%;
   postion: relative;
   height: 18px;
   font-size: 13px;
   white-space: nowrap;
+  @media (max-width: 920px) {
+    font-size: 8px;
+  }
 `;
+
 const Goal1 = styled.div`
   position: absolute;
   left: 48%;
 `;
+
 const Goal2 = styled.div`
   position: absolute;
   left: 86%;
+  @media (max-width: 920px) {
+    left: 80%;
+  }
 `;

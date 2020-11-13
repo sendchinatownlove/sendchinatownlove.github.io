@@ -230,7 +230,6 @@ const CampaignInfoTime = styled(CampaignInfoText)`
 
 const DonationProgress = styled.div`
   position: relative;
-  // background: red;
   padding: 0 8% 0 8%;
   height: 93px;
   margin: 58px 0 58px 0;
