@@ -15,14 +15,14 @@ const LightUpChinatownPage = () => {
   const campaignEndDate = new Date('11/30/2020');
   const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
-  const [contributions, _] = useState(0);
+  const [contributions, setContributions] = useState(0);
 
   useEffect(() => {
+    setContributions(15000);
     // TODO: use the below after backend route to fetch raised is implemented
     //
     // const fetchData = async () => {
     // setContributions(data.contributions.raised);
-    // setContributions(100000); // dummy value before backend route is present in background manager
     // };
   }, []);
 
