@@ -1,11 +1,12 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
 import mapImg from './images/light-up-map.gif';
 import { Trans, useTranslation } from 'react-i18next';
 import DonationSection from './DonationSection';
 import DonationDetail from './DonationDetail';
-
+import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
 
 const LightUpChinatownPage = () => {
@@ -14,6 +15,14 @@ const LightUpChinatownPage = () => {
   const campaignEndDate = new Date('11/30/2020');
   const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
+  const [contributions, setContributions] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // setContributions(data.contributions.raised);
+      setContributions(100000); // dummy value before backend route is present in background manager
+    };
+  }, []);
 
   return (
     <React.Fragment>
@@ -70,6 +79,9 @@ const LightUpChinatownPage = () => {
           </CampaignInfoText>
         </MapContainer>
       </Container>
+      <DonationProgress>
+        <DonationProgressBar raised={contributions}></DonationProgressBar>
+      </DonationProgress>
       <DonationContainer>
         <DonationSection />
       </DonationContainer>
@@ -212,6 +224,14 @@ const CampaignInfoText = styled.div`
 
 const CampaignInfoTime = styled(CampaignInfoText)`
   font-size: 18px;
+`;
+
+const DonationProgress = styled.div`
+  position: relative;
+  // background: red;
+  padding: 0 8% 0 8%;
+  height: 93px;
+  margin: 58px 0 58px 0;
 `;
 
 const DonationContainer = styled.section`
