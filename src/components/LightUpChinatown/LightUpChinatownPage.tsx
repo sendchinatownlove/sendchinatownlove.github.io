@@ -139,10 +139,7 @@ const PartnersLogoContainer = styled.div`
   width: 100%;
 `;
 
-const PartnerLogo = styled.div`
-  max-height: 130px;
-  max-width: 200px;
-`;
+const PartnerLogo = styled.div``;
 
 const PartnerThanksTitle = styled.div`
   font-family: Open Sans;
