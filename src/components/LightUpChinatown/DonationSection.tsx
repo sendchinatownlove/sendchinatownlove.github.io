@@ -5,8 +5,8 @@ import {
   tabletScreens,
   phoneScreens,
 } from '../../utilities/general/responsive';
-import lantern45 from './images/lantern_45.png';
-import lantern150 from './images/lantern_150.png';
+import lantern45 from './images/lantern-45.png';
+import lantern150 from './images/lantern-150.png';
 
 const DonationSection = () => {
   const { t } = useTranslation();
@@ -123,11 +123,11 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
   height: 250px;
-  padding-left: 150px;
-  padding-right: 150px;
+  padding-left: 200px;
+  padding-right: 200px;
   @media (${tabletScreens}) {
     height: 130px;
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 `;
