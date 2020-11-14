@@ -12,7 +12,7 @@ import DonationSection from './DonationSection';
 import DonationDetail from './DonationDetail';
 import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
-import { getLightUpChinatownDonation } from '../../utilities/api';
+import { getProject, light_up_chinatown_id } from '../../utilities/api';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -23,12 +23,12 @@ const LightUpChinatownPage = () => {
   const [contributions, setContributions] = useState<number>(0);
 
   const fetchData = async (project_id: number) => {
-    const { data } = await getLightUpChinatownDonation(project_id);
+    const { data } = await getProject(project_id);
     setContributions(data.amount_raised);
   };
 
   useEffect(() => {
-    fetchData(1);
+    fetchData(light_up_chinatown_id);
   }, []);
 
   return (
