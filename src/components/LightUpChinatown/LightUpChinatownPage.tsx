@@ -8,7 +8,15 @@ import partners_cccny from './images/partners_cccny.png';
 import partners_prm from './images/partners_prm.png';
 import partners_udooda from './images/partners_udooda.png';
 import mapImg from './images/light-up-map.gif';
+import costBreakdownImg from './images/cost-breakdown.png';
+import goal1Img from './images/goal_1.png';
+import goal2Img from './images/goal_2.png';
+
 import { Trans, useTranslation } from 'react-i18next';
+import DonationSection from './DonationSection';
+import DonationDetail from './DonationDetail';
+
+import LightUpFaq from './LightUpFaq';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -58,9 +66,8 @@ const LightUpChinatownPage = () => {
               major blocks of Chinatown. We hope you will join us.
             </Trans>
           </SummaryBody>
-        </TextContainer>
-        <MapContainer>
-          <Map src={mapImg} /> {/* TODO: Replace with GIF */}
+          <br></br>
+          <br></br>
           <CampaignInfoText color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignHeader')}
           </CampaignInfoText>
@@ -70,35 +77,83 @@ const LightUpChinatownPage = () => {
           <CampaignInfoText color={'#CF6E8A'}>
             {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
           </CampaignInfoText>
+        </TextContainer>
+        <MapContainer>
+          <Map src={mapImg} />
+          <br></br>
+          <GoalContainer>
+            <GoalPill src={goal1Img}></GoalPill>
+            <GoalText>{t('lightUpChinatown.goal1')}</GoalText>
+          </GoalContainer>
+          <br></br>
+          <br></br>
+          <GoalContainer>
+            <GoalPill src={goal2Img}></GoalPill>
+            <GoalText>{t('lightUpChinatown.goal2')}</GoalText>
+          </GoalContainer>
         </MapContainer>
       </Container>
-      <DonationTierContainer>
-        <DonationTiersText>
-          {t('lightUpChinatown.donationTierText')}
-        </DonationTiersText>
-      </DonationTierContainer>
+      <DonationContainer>
+        <DonationSection />
+      </DonationContainer>
+      <DonationDetailContainer>
+        <DonationDetail></DonationDetail>
+      </DonationDetailContainer>
+      <DonationContainer>
+        <CostBreakdownImageContainer>
+          <CostBreakdownImage src={costBreakdownImg}></CostBreakdownImage>
+        </CostBreakdownImageContainer>
+      </DonationContainer>
+      <LightUpFaq />
       <Banner>
-        <HeaderText>{"Header text here!"}</HeaderText>
-        <Container>
-          <img src={partners_46} alt="Logo" />
-          <img src={partners_ccba} alt="Logo" />
-          <img src={partners_cccny} alt="Logo" />
-          <img src={partners_prm} alt="Logo" />
-          <img src={partners_udooda} alt="Logo" />
-        </Container>
+        <PartnerThanksTitle>
+          {t('lightUpChinatown.partnerThanks')}
+        </PartnerThanksTitle>
+        <PartnersLogoContainer>
+          <PartnerLogo>
+            <img src={partners_46} alt="Logo" />
+          </PartnerLogo>
+          <PartnerLogo>
+            <img src={partners_ccba} alt="Logo" />
+          </PartnerLogo>
+          <PartnerLogo>
+            <img src={partners_cccny} alt="Logo" />
+          </PartnerLogo>
+          <PartnerLogo>
+            <img src={partners_prm} alt="Logo" />
+          </PartnerLogo>
+          <PartnerLogo>
+            <img src={partners_udooda} alt="Logo" />
+          </PartnerLogo>
+        </PartnersLogoContainer>
       </Banner>
-      <BottomBanner>
-        <BottomHero height={395} src={lanternFooter} alt="lantern overlay" />
-        <FooterText>
-          {t('lightUpChinatown.ceremony1')}
-          <br></br>
-          <br></br>
-          {t('lightUpChinatown.ceremony2')}
-        </FooterText>
-      </BottomBanner>
     </React.Fragment>
   );
 };
+
+const PartnersLogoContainer = styled.div`
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+`;
+
+const PartnerLogo = styled.div`
+  max-height: 130px;
+  max-width: 200px;
+`;
+
+const PartnerThanksTitle = styled.div`
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 32px;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #1e1e1e;
+`;
 
 const Container = styled.section`
   max-width: 1440px;
@@ -126,6 +181,7 @@ const TextContainer = styled.section`
 const Hero = styled.img`
   height: ${(props) => props.height}px;
   width: 100vw;
+  object-fit: cover;
 `;
 
 const Banner = styled.div`
@@ -175,19 +231,6 @@ const HeaderSubtext = styled.div`
     left: 30%;
     transform: translate(-30%, -50%);
   }
-`;
-
-const DonationTiersText = styled.div`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #000000;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #dedede;
 `;
 
 const SummaryHeader = styled.div`
@@ -245,44 +288,66 @@ const CampaignInfoTime = styled(CampaignInfoText)`
   font-size: 18px;
 `;
 
-const DonationTierContainer = styled.section`
-  max-width: 1440px;
-  margin: 35px auto;
+const DonationContainer = styled.section`
+  background: #f7f7f7;
   align-items: center;
+  padding: 30px;
   @media (max-width: 599px) {
-    padding: 0px 35px;
+    padding: 15px 15px;
   }
 `;
 
-const BottomBanner = styled.div`
-  position: relative;
-  text-align: center;
+const DonationDetailContainer = styled.section`
+  background: #f2e0e1;
+  align-items: center;
+  @media (max-width: 599px) {
+    padding: 0px 15px;
+  }
 `;
 
-const BottomHero = styled.img`
-  height: ${(props) => props.height}px;
-  width: 100vw;
-  filter: brightness(50%);
+const CostBreakdownImageContainer = styled.div`
+  background: #ffffff;
+  border-radius: 24px;
+  max-width: 1220px;
+  margin: 0 auto;
+  @media (max-width: 599px) {
+    max-width: 350px;
+  }
 `;
 
-const FooterText = styled.div`
-  text-align: start;
+const CostBreakdownImage = styled.img`
+  max-width: 1220px;
+  @media (max-width: 599px) {
+    max-width: 350px;
+`;
+
+const GoalContainer = styled.div`
+  display: inline-block;
+`;
+
+const GoalPill = styled.img`
+  max-width: 93px;
+  display: inline-block;
+  float: left;
+  margin-right: 20px;
+  @media (max-width: 599px) {
+    max-width: 76px;
+  }
+`;
+
+const GoalText = styled.div`
+  max-width: 224px;
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
-  line-height: 32px;
-  color: #ffffff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+  line-height: 25px;
+  color: #1e1e1e;
+  display: inline-block;
+  float: left;
   @media (max-width: 599px) {
     font-size: 14px;
-    line-height: 24px;
-    left: 30%;
-    transform: translate(-30%, -50%);
+    line-height: 19px;
   }
 `;
 

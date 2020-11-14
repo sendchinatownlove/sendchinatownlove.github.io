@@ -13,7 +13,8 @@ import BackImage from './VoucherBack.png';
 
 const Voucher = () => {
   const { id, tickets_secret } = useParams();
-  let params = new URLSearchParams(useLocation().search);
+  const location = useLocation().search;
+  let params = new URLSearchParams(location);
 
   const convertToInt = (input: string | null) => {
     if (input === null) {
@@ -41,28 +42,27 @@ const Voucher = () => {
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantTickets, setRestaurantTickets] = useState<any | null>();
 
-  const getAllTickets = async () => {
-    const {
-      data: { name },
-    } = await getParticipatingMerchant(id);
-    const { data: allTickets } = await getParticipatingMerchantTickets(
-      id,
-      tickets_secret,
-      page,
-      items,
-      printed,
-      associated
-    );
-
-    if (allTickets && name) {
-      setRestaurantName(name);
-      setRestaurantTickets(allTickets);
-    }
-  };
-
   useEffect(() => {
+    const getAllTickets = async () => {
+      const {
+        data: { name },
+      } = await getParticipatingMerchant(id);
+      const { data: allTickets } = await getParticipatingMerchantTickets(
+        id,
+        tickets_secret,
+        page,
+        items,
+        printed,
+        associated
+      );
+
+      if (allTickets && name) {
+        setRestaurantName(name);
+        setRestaurantTickets(allTickets);
+      }
+    };
     getAllTickets();
-  });
+  }, [id, location, tickets_secret, associated, items, page, printed]);
 
   const formatTicketCode = (code) => {
     const formattedCode = code.split('');
