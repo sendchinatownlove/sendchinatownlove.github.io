@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
 import lanternFooter from './images/lantern-footer.png';
-import partners_46 from './images/partners_46.png';
-import partners_ccba from './images/partners_ccba.png';
-import partners_cccny from './images/partners_cccny.png';
-import partners_prm from './images/partners_prm.png';
-import partners_udooda from './images/partners_udooda.png';
+import partners_46 from './images/partners-46.png';
+import partners_ccba from './images/partners-ccba.png';
+import partners_cccny from './images/partners-cccny.png';
+import partners_prm from './images/partners-prm.png';
+import partners_udooda from './images/partners-udooda.png';
 import mapImg from './images/light-up-map.gif';
 import costBreakdownImg from './images/cost-breakdown.png';
 import goal1Img from './images/goal_1.png';
@@ -110,11 +110,20 @@ const LightUpChinatownPage = () => {
           {t('lightUpChinatown.partnerThanks')}
         </PartnerThanksTitle>
         <PartnersLogoContainer>
-          <PartnerLogo src={partners_46} alt="Logo" />
-          <PartnerLogo src={partners_ccba} alt="Logo" />
-          <PartnerLogo src={partners_cccny} alt="Logo" />
-          <PartnerLogo src={partners_prm} alt="Logo" />
-          <PartnerLogo src={partners_udooda} alt="Logo" />
+          <PartnerLogo src={partners_46} alt="46 Mott" />
+          <PartnerLogo
+            src={partners_ccba}
+            alt="Chinese Consolidated Benevolent Association"
+          />
+          <PartnerLogo
+            src={partners_cccny}
+            alt="Chinese Chamber of Commerce NY"
+          />
+          <PartnerLogo src={partners_prm} alt="Pearl River Mart" />
+          <PartnerLogo
+            src={partners_udooda}
+            alt="United Democratic Organization"
+          />
         </PartnersLogoContainer>
       </Banner>
     </React.Fragment>
