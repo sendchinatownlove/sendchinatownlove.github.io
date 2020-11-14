@@ -110,21 +110,11 @@ const LightUpChinatownPage = () => {
           {t('lightUpChinatown.partnerThanks')}
         </PartnerThanksTitle>
         <PartnersLogoContainer>
-          <PartnerLogo>
-            <img src={partners_46} alt="Logo" />
-          </PartnerLogo>
-          <PartnerLogo>
-            <img src={partners_ccba} alt="Logo" />
-          </PartnerLogo>
-          <PartnerLogo>
-            <img src={partners_cccny} alt="Logo" />
-          </PartnerLogo>
-          <PartnerLogo>
-            <img src={partners_prm} alt="Logo" />
-          </PartnerLogo>
-          <PartnerLogo>
-            <img src={partners_udooda} alt="Logo" />
-          </PartnerLogo>
+          <PartnerLogo src={partners_46} alt="Logo" />
+          <PartnerLogo src={partners_ccba} alt="Logo" />
+          <PartnerLogo src={partners_cccny} alt="Logo" />
+          <PartnerLogo src={partners_prm} alt="Logo" />
+          <PartnerLogo src={partners_udooda} alt="Logo" />
         </PartnersLogoContainer>
       </Banner>
     </React.Fragment>
@@ -134,12 +124,14 @@ const LightUpChinatownPage = () => {
 const PartnersLogoContainer = styled.div`
   display: inline-flex;
   flex-direction: row;
-  align-items: center;
   flex-wrap: wrap;
-  width: 100%;
+  justify-content: center;
 `;
 
-const PartnerLogo = styled.div``;
+const PartnerLogo = styled.img`
+  max-height: 130px;
+  padding: 20px;
+`;
 
 const PartnerThanksTitle = styled.div`
   font-family: Open Sans;
