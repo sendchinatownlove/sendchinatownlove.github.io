@@ -12,6 +12,7 @@ import DonationSection from './DonationSection';
 import DonationDetail from './DonationDetail';
 import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
+import { getLightUpChinatownDonation } from '../../utilities/api';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -19,15 +20,24 @@ const LightUpChinatownPage = () => {
   const campaignEndDate = new Date('11/30/2020');
   const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
-  const [contributions, setContributions] = useState(0);
+  const [contributions, setContributions] = useState<number>(0);
 
+  // useEffect(() => {
+  //   setContributions(15000);
+  //   // TODO: use the below after backend route to fetch raised is implemented
+  //   //
+  //   // const fetchData = async () => {
+  //   // setContributions(data.contributions.raised);
+  //   // };
+  // }, []);
+
+  const fetchData = async (project_id: number) => {
+    const { data } = await getLightUpChinatownDonation(project_id);
+    setContributions(data.amount_raised);
+    setContributions(1000);
+  };
   useEffect(() => {
-    setContributions(15000);
-    // TODO: use the below after backend route to fetch raised is implemented
-    //
-    // const fetchData = async () => {
-    // setContributions(data.contributions.raised);
-    // };
+    fetchData(1);
   }, []);
 
   return (

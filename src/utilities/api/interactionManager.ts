@@ -15,6 +15,7 @@ import {
   locations,
   lyftRewards,
   nonprofits,
+  projects,
 } from './endpoints';
 
 // Fix return typing
@@ -344,5 +345,11 @@ export const getLyftReward = async (contact_id: number) =>
 export const redeemToken = async (contact_id: number, token: string) =>
   axios
     .post(contacts + contact_id + '/' + lyftRewards + token + '/redeem/')
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getLightUpChinatownDonation = async (project_id: number) =>
+  axios
+    .get(projects + project_id)
     .then((res) => res)
     .catch((err) => err);
