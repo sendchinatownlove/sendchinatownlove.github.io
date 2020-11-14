@@ -9,15 +9,15 @@ interface Props {
 const centsToDollars = (cents: number) =>
   Math.floor(cents / 100).toLocaleString();
 
-const DonationProgressBar = (raised) => {
+const DonationProgressBar = (props: Props) => {
   const { t } = useTranslation();
-  const percentage = `(${raised} / 47000) * 100`;
+  const percentage = (props.raised / 47000) * 100;
 
   return (
     <BarContainer>
       <ProgressBarHeader>
-        {t('lightUpChinatown.progressBarHeader')} :{' '}
-        <strong>${centsToDollars(raised)} </strong>
+        {t('lightUpChinatown.progressBarHeader')}{' '}
+        <strong>${centsToDollars(props.raised)} </strong>
       </ProgressBarHeader>
       <ProgressBar>
         <Filler style={{ width: `${percentage}%` }} />
@@ -55,10 +55,10 @@ const ProgressBar = styled.div`
 `;
 
 const Filler = styled.div`
-  height:100%
-  border-radius:inherit;
-  box-shadow:inherit;
-  background:#F6C342;
+  height: 25px;
+  border-radius: inherit;
+  box-shadow: inherit;
+  background: #f6c342;
 `;
 
 const GoalImage1 = styled.div`
@@ -69,6 +69,7 @@ const GoalImage1 = styled.div`
   box-sizing: border-box;
   position: absolute;
   left: 50%;
+  bottom: 0;
   border-radius: 12px;
 `;
 const GoalImage2 = styled(GoalImage1)`
