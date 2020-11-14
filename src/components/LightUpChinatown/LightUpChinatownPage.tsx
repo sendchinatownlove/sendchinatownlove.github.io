@@ -33,7 +33,7 @@ const LightUpChinatownPage = () => {
 
   const fetchData = async (project_id: number) => {
     const { data } = await getLightUpChinatownDonation(project_id);
-    setContributions(data.amount_raised);
+    // setContributions(data.amount_raised);
     setContributions(1000);
   };
   useEffect(() => {
