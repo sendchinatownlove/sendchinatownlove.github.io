@@ -13,10 +13,12 @@ import goal1Img from './images/goal_1.png';
 import goal2Img from './images/goal_2.png';
 
 import { Trans, useTranslation } from 'react-i18next';
+
 import DonationSection from './DonationSection';
 import DonationDetail from './DonationDetail';
 import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
+import { getProject, light_up_chinatown_id } from '../../utilities/api';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -24,15 +26,17 @@ const LightUpChinatownPage = () => {
   const campaignEndDate = new Date('11/30/2020');
   const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
-  const [contributions, setContributions] = useState(0);
+  const [contributions, setContributions] = useState<number>(0);
+
+  const fetchData = async (project_id: number) => {
+    const { data } = await getProject(project_id);
+    if (data) {
+      setContributions(data.amount_raised);
+    }
+  };
 
   useEffect(() => {
-    setContributions(15000);
-    // TODO: use the below after backend route to fetch raised is implemented
-    //
-    // const fetchData = async () => {
-    // setContributions(data.contributions.raised);
-    // };
+    fetchData(light_up_chinatown_id);
   }, []);
 
   return (

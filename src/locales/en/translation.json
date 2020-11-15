@@ -2,12 +2,47 @@
   "paymentProcessing": {
     "amount": {
       "header": "100% of your support will go to the merchant toward their operating costs. Your transaction is secure, encrypted and directly goes to the owner for sustaining their business.",
+      "light_up_chinatown": "100% of donation goes towards permanent light fixtures throughout Chinatown.",
       "label1": "Select amount",
       "label2": "Other:",
       "minimum": "Minimum",
       "maximum": "Maximum",
       "amount": "amount",
-      "submit": "Next"
+      "submit": "Next",
+      "adopt_lantern_tier_2": "Adopt-a-Lantern!",
+      "adopt_lantern_tier_3": "Adopt-a-Lantern, Keep-a-Lantern!",
+      "light_up_chinatown_address": {
+        "disclaimer_1": "You will be able to pick up your custom lantern at ",
+        "disclaimer_2": "This information will also be emailed to you.",
+        "address": "Chinese Consolidated Benevolent Association (CCBA), 62 Mott Street, New York, NY 10013.",
+        "address_button": " I’m from out of town and would like my lantern shipped to me.",
+        "cancel_address_button": "Cancel adding address"
+      },
+      "tier_2_donation": "Thank you for donating ${{limit}} or more.",
+      "tier_3_donation": "Thank you for donating ${{limit}} or more.",
+      "personalize": "Personalize your lantern with your or a loved one’s name.",
+      "labels": {
+        "amount": "amount",
+        "first_name": "first name",
+        "middle_initial": "middle initial",
+        "last_name": "last name",
+        "full_name": "Full Name",
+        "address": "Address",
+        "city": "City",
+        "state": "State",
+        "zip_code": "Zip code"
+      },
+      "place_holder": {
+        "amount": "amount",
+        "first_name": "Enter first name",
+        "middle_initial": "Enter middle initial",
+        "last_name": "Enter last name",
+        "full_name": "Enter full name",
+        "address": "Enter street address",
+        "city": "Enter city",
+        "state": "Enter state",
+        "zip_code": "Enter zip code"
+      }
     }
   },
   "navBar": {
@@ -44,7 +79,9 @@
   },
   "purchase": {
     "donation": "Donation for {{seller}}",
-    "voucher": "Voucher for {{seller}}"
+    "voucher": "Voucher for {{seller}}",
+    "donation_to": "Donation to {{seller}}",
+    "voucher_to": "Voucher to {{seller}}"
   },
   "errorPage": {
     "body": {
@@ -67,12 +104,14 @@
       "disclaimer": {
         "donation": "By proceeding with your transaction, you understand that you are making a donation to {{sellerName}}. No goods or services were exchanged for this donation.",
         "donation_pool": "By proceeding with your transaction, you understand that you are making a donation to all merchants partnered with Send Chinatown Love Inc. The full donation pool will be split among these merchants. No goods or services were exchanged for this donation.",
-        "gift_card": "By proceeding with your purchase, you understand that the voucher card is not redeemable for cash and can only be used at {{sellerName}}. All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase. Balance displayed in the voucher may or may not represent the final balance. Final balance information is subject to {{sellerName}} most recent records."
+        "gift_card": "By proceeding with your purchase, you understand that the voucher card is not redeemable for cash and can only be used at {{sellerName}}. All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase. Balance displayed in the voucher may or may not represent the final balance. Final balance information is subject to {{sellerName}} most recent records.",
+        "light_up_chinatown": "By proceeding with your transaction, you understand that you are making a donation to the Light Up Chinatown Project. This Project is directed towards supporting Chinatown as a whole, rather than any individual merchant."
       },
       "header": {
         "completeYour": "Complete your ",
         "paymentInfo": "Payment Information",
-        "checkout": "Checkout details"
+        "checkout": "Checkout details",
+        "light_up_chinatown_donation": "Light Up Chinatown Donation"
       },
       "body": {
         "paymentInfo": "Please add your payment information below",
@@ -83,6 +122,19 @@
       "placeholders": {
         "name": "Name",
         "email": "Email"
+      },
+      "details": {
+        "donation": "Donation details",
+        "voucher": "Purchase details"
+      },
+      "message": {
+        "donation": "Donation",
+        "one_time_donation": "One-Time Donation",
+        "monthly_donation": "Monthly Donation",
+        "light_up_chinatown_tier_2": "Adopt-a-Lantern Donation",
+        "voucher": "Voucher Purchase",
+        "luc_name": "Name for personalized lantern: ",
+        "luc_address": "Shipping Address: "
       }
     }
   },
@@ -213,7 +265,7 @@
     "ceremony2": "When you make a lantern donation, you will receive an email once we finalize the date and time.",
     "donationTitle": "Donate to Light Up Chinatown",
     "donationDescription1": "100% of the donations, no matter how big or small, will go towards permanent light fixtures and lanterns throughout Chinatown.",
-    "donationDescription2": "If you donate between $45 and $150 or more, you will be eligible to participate in “Adopt-a-Lantern” where you will be able to receive some perks with your generous donation.",
+    "donationDescription2": "If you donate between ${{limit_1}} and ${{limit_2}} or more, you will be eligible to participate in “Adopt-a-Lantern” where you will be able to receive some perks with your generous donation.",
     "faq": "Frequently Asked Questions",
     "faqQuestion1": "How will my donation for this project benefit Chinatown?",
     "faqAnswer1": "Your donation will help permanently light up Chinatown streets and create a warm and welcoming ambience to ensure consistent foot traffic and the longevity of Chinatown businesses. For donations that qualify, you will receive a lantern and be invited to the Winter Solstice Lighting Ceremony.",
