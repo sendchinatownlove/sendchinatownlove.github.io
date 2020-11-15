@@ -3,7 +3,10 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { RowFormat, Subheader, LabelText, InputText } from '../styles';
-import { LIGHT_UP_CHINATOWN_TIER_2_MIN, LIGHT_UP_CHINATOWN_TIER_3_MIN } from '../../../consts';
+import {
+  LIGHT_UP_CHINATOWN_TIER_2_MIN,
+  LIGHT_UP_CHINATOWN_TIER_3_MIN,
+} from '../../../consts';
 
 import {
   useModalPaymentState,
@@ -25,8 +28,12 @@ export const LanternForm = (props) => {
       : 'paymentProcessing.amount.adopt_lantern_tier_2';
   const subText =
     amount >= LIGHT_UP_CHINATOWN_TIER_3_MIN
-      ? t('paymentProcessing.amount.tier_3_donation', {limit: LIGHT_UP_CHINATOWN_TIER_3_MIN})
-      : t('paymentProcessing.amount.tier_2_donation', {limit: LIGHT_UP_CHINATOWN_TIER_2_MIN});
+      ? t('paymentProcessing.amount.tier_3_donation', {
+          limit: LIGHT_UP_CHINATOWN_TIER_3_MIN,
+        })
+      : t('paymentProcessing.amount.tier_2_donation', {
+          limit: LIGHT_UP_CHINATOWN_TIER_2_MIN,
+        });
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -112,11 +119,12 @@ export const LanternForm = (props) => {
               {t(
                 'paymentProcessing.amount.light_up_chinatown_address.disclaimer_1'
               )}
-            <strong>
-              {' '}
-              {t('paymentProcessing.amount.light_up_chinatown_address.address')}
-            </strong>
-              {' '}
+              <strong>
+                {' '}
+                {t(
+                  'paymentProcessing.amount.light_up_chinatown_address.address'
+                )}
+              </strong>{' '}
               {t(
                 'paymentProcessing.amount.light_up_chinatown_address.disclaimer_2'
               )}

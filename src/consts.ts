@@ -92,4 +92,12 @@ function hasKey<O>(obj: O, key: keyof any): key is keyof O {
 const LIGHT_UP_CHINATOWN_TIER_2_MIN = 45;
 const LIGHT_UP_CHINATOWN_TIER_3_MIN = 150;
 
-export { MAILTO_URL, Page, SquareErrors, hasKey, socialMediaLinks, LIGHT_UP_CHINATOWN_TIER_2_MIN, LIGHT_UP_CHINATOWN_TIER_3_MIN };
+export {
+  MAILTO_URL,
+  Page,
+  SquareErrors,
+  hasKey,
+  socialMediaLinks,
+  LIGHT_UP_CHINATOWN_TIER_2_MIN,
+  LIGHT_UP_CHINATOWN_TIER_3_MIN,
+};
