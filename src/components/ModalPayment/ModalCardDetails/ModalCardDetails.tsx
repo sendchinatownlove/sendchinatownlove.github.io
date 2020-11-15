@@ -10,7 +10,13 @@ import { v4 as uuid } from 'uuid';
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 
-import { SquareErrors, hasKey } from '../../../consts';
+import {
+  SquareErrors,
+  hasKey,
+  LIGHT_UP_CHINATOWN_TIER_2_MIN,
+} from '../../../consts';
+import { modalPages } from '../../../utilities/hooks/ModalPaymentContext/types';
+
 import {
   makeSquarePayment,
   SquareLineItems,
@@ -45,7 +51,7 @@ const ModalCardDetails = ({
 }: Props) => {
   const idempotencyKey = uuid();
   const { t } = useTranslation();
-  const { amount, purchaseType } = useModalPaymentState(null);
+  const { amount, purchaseType, lucData } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
 
   const [isTermsChecked, setTermsChecked] = useState(false);
@@ -55,7 +61,8 @@ const ModalCardDetails = ({
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
 
-  let applicationId, locationId;
+  let applicationId, locationId, projectId;
+
   if (
     purchaseType === ModalPaymentTypes.modalPages.buy_meal &&
     nonProfitLocationId === process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID
@@ -65,6 +72,11 @@ const ModalCardDetails = ({
   } else {
     applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
+  }
+
+  if (sellerId === 'light-up-chinatown') {
+    sellerId = '';
+    projectId = '1';
   }
 
   const checkTermsAgreement = () => setTermsChecked(!isTermsChecked);
@@ -89,6 +101,15 @@ const ModalCardDetails = ({
       return;
     }
 
+    const purchaseTypeToItemType = (purchaseType: string) => {
+      switch (purchaseType) {
+        case modalPages.light_up_chinatown:
+          return modalPages.donation;
+        default:
+          return purchaseType;
+      }
+    };
+
     // 'buy_meal' is still represented as a gift card when calling the API
     const payment: SquareLineItems = is_distribution
       ? times(
@@ -104,7 +125,7 @@ const ModalCardDetails = ({
           {
             amount: Number(amount) * 100,
             currency: 'usd',
-            item_type: purchaseType,
+            item_type: purchaseTypeToItemType(purchaseType),
             quantity: 1,
           },
         ];
@@ -118,13 +139,16 @@ const ModalCardDetails = ({
     };
 
     setCanSubmit(false);
+
     return makeSquarePayment(
       nonce,
       sellerId,
       payment,
       buyer,
       is_distribution,
-      campaignId
+      campaignId,
+      projectId,
+      projectId ? JSON.stringify(lucData) : null
     )
       .then((res) => {
         if (res.status === 200) {
@@ -159,16 +183,37 @@ const ModalCardDetails = ({
       });
   };
 
-  const purchaseTypePhrase = (shouldLowerCase, purchaseType) => {
+  const purchaseTypeHeader = (purchaseType) => {
     switch (purchaseType) {
       case ModalPaymentTypes.modalPages.donation:
-        return shouldLowerCase ? 'donation' : 'Donation';
+        return 'donation';
+      case ModalPaymentTypes.modalPages.light_up_chinatown:
+        return t(
+          'modalPayment.modalCardDetails.header.light_up_chinatown_donation'
+        );
       case ModalPaymentTypes.modalPages.gift_card:
-        return `${shouldLowerCase ? 'v' : 'V'}oucher purchase`;
+        return `voucher purchase`;
       case ModalPaymentTypes.modalPages.buy_meal:
         return 'Gift a Meal purchase';
       default:
         return 'Donation';
+    }
+  };
+
+  const purchaseTypeMessage = (purchaseType, amount) => {
+    switch (purchaseType) {
+      case ModalPaymentTypes.modalPages.donation:
+        return t('modalPayment.modalCardDetails.message.donation');
+      case ModalPaymentTypes.modalPages.light_up_chinatown:
+        if (amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN)
+          return t(
+            'modalPayment.modalCardDetails.message.light_up_chinatown_tier_2'
+          );
+        else return t('modalPayment.modalCardDetails.message.donation');
+      case ModalPaymentTypes.modalPages.gift_card:
+        return t('modalPayment.modalCardDetails.message.voucher');
+      default:
+        return t('modalPayment.modalCardDetails.message.donation');
     }
   };
 
@@ -203,8 +248,28 @@ const ModalCardDetails = ({
           'modalPayment.modalCardDetails.disclaimer.gift_card',
           sellerName
         );
+      case ModalPaymentTypes.modalPages.light_up_chinatown:
+        return t('modalPayment.modalCardDetails.disclaimer.light_up_chinatown');
       default:
         break;
+    }
+  };
+
+  const setDetailsText = (
+    type: ModalPaymentTypes.modalPages,
+    amount: number
+  ) => {
+    if (sellerId === 'send-chinatown-love')
+      type = ModalPaymentTypes.modalPages.donation_pool;
+
+    if (
+      type === ModalPaymentTypes.modalPages.gift_card ||
+      (type === ModalPaymentTypes.modalPages.light_up_chinatown &&
+        amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN)
+    ) {
+      return t('modalPayment.modalCardDetails.details.voucher');
+    } else {
+      return t('modalPayment.modalCardDetails.details.donation');
     }
   };
 
@@ -212,7 +277,7 @@ const ModalCardDetails = ({
     <div>
       <Header>
         {t('modalPayment.modalCardDetails.header.completeYour')}{' '}
-        {purchaseTypePhrase(true, purchaseType)}
+        {purchaseTypeHeader(purchaseType)}
       </Header>
       <p>{t('modalPayment.modalCardDetails.body.paymentInfo')}</p>
 
@@ -264,15 +329,42 @@ const ModalCardDetails = ({
               ))}
             </div>
             <br />
-            <Subheader>Checkout details</Subheader>
+            <Subheader>{setDetailsText(purchaseType, amount)}</Subheader>
+
             <span>
               {' '}
-              {purchaseTypePhrase(false, purchaseType)} of{' '}
+              {purchaseTypeMessage(purchaseType, amount)} of{' '}
               <b>
                 ${amount} {numberOfMealsText}
               </b>{' '}
               to {sellerName}{' '}
             </span>
+
+            {lucData.firstName !== '' && (
+              <span>
+                <br />
+                <br />
+                {t('modalPayment.modalCardDetails.message.luc_name')}
+                <BoldText>
+                  {`${lucData.firstName} 
+                  ${
+                    lucData.middleInitial.length > 0
+                      ? lucData.middleInitial.substring(0, 1).toUpperCase() +
+                        '. '
+                      : ''
+                  } 
+                  ${lucData.lastName}`}
+                </BoldText>
+              </span>
+            )}
+            {lucData.address !== '' && (
+              <span>
+                <br />
+                <br />
+                {t('modalPayment.modalCardDetails.message.luc_address')}
+                <BoldText>{`${lucData.address}, ${lucData.city}, ${lucData.state} ${lucData.zipCode}`}</BoldText>
+              </span>
+            )}
             <p />
             <CheckboxContainer>
               <Checkbox
@@ -331,7 +423,7 @@ const PaymentContainer = styled.div`
   }
 `;
 
-const RowFormat = styled.div`
+export const RowFormat = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -341,11 +433,15 @@ const RowFormat = styled.div`
   text-transform: uppercase;
 `;
 
-const LabelText = styled.label`
+export const LabelText = styled.label`
   color: #373f4a;
 `;
 
-const InputText = styled.input`
+const BoldText = styled.span`
+  font-weight: bold;
+`;
+
+export const InputText = styled.input`
   font-size: 14px;
   color: #373f4a;
   border: 1px solid #dedede;

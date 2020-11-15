@@ -5,11 +5,33 @@ import {
   tabletScreens,
   phoneScreens,
 } from '../../utilities/general/responsive';
-import lantern45 from './images/lantern_45.png';
-import lantern150 from './images/lantern_150.png';
+import lantern45 from './images/lantern-45.png';
+import lantern150 from './images/lantern-150.png';
+
+import Modal from '../ModalPayment';
+
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+  ModalPaymentTypes,
+} from '../../utilities/hooks/ModalPaymentContext';
+import {
+  LIGHT_UP_CHINATOWN_TIER_2_MIN,
+  LIGHT_UP_CHINATOWN_TIER_3_MIN,
+} from '../../consts';
 
 const DonationSection = () => {
   const { t } = useTranslation();
+
+  const ModalPaymentDispatcher = useModalPaymentDispatch(null);
+
+  const openModal = (event) => {
+    event.preventDefault();
+    ModalPaymentDispatcher({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.light_up_chinatown,
+    });
+  };
   return (
     <React.Fragment>
       <Container>
@@ -22,11 +44,14 @@ const DonationSection = () => {
           </Description>
           <br></br>
           <Description>
-            {t('lightUpChinatown.donationDescription2')}
+            {t('lightUpChinatown.donationDescription2', {
+              limit_1: LIGHT_UP_CHINATOWN_TIER_2_MIN,
+              limit_2: LIGHT_UP_CHINATOWN_TIER_3_MIN,
+            })}
           </Description>
         </ColumnContainer>
         <ColumnContainer>
-          <Button className={'button--filled'} onClick={() => {}}>
+          <Button className={'button--filled'} onClick={openModal}>
             {t('donationBox.button')}
           </Button>
         </ColumnContainer>
@@ -39,6 +64,11 @@ const DonationSection = () => {
           <Image src={lantern150}></Image>
         </ColumnContainer>
       </ImageContainer>
+      <Modal
+        sellerId="light-up-chinatown"
+        sellerName="Light Up Chinatown"
+        costPerMeal={0}
+      />
     </React.Fragment>
   );
 };
@@ -50,7 +80,6 @@ const Container = styled.div`
   justify-content: space-between;
   max-width: 1440px;
   margin: auto;
-  padding-top: 35px;
   @media (${tabletScreens}) {
     flex-direction: column;
     position: relative;
@@ -124,11 +153,11 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
   height: 250px;
-  padding-left: 150px;
-  padding-right: 150px;
+  padding-left: 200px;
+  padding-right: 200px;
   @media (${tabletScreens}) {
     height: 130px;
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 `;

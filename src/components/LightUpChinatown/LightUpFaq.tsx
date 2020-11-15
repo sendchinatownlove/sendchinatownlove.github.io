@@ -54,6 +54,19 @@ const LightUpFaq = () => {
         </a>
       ),
     },
+    {
+      question: t('lightUpChinatown.faqQuestion7'),
+      answer: (
+        <a
+          href="https://merchant.sendchinatownlove.com/all"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {' '}
+          here{' '}
+        </a>
+      ),
+    },
   ];
 
   return (
