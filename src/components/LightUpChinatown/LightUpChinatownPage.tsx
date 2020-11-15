@@ -120,7 +120,6 @@ const LightUpChinatownPage = () => {
           <CostBreakdownImage src={costBreakdownImg}></CostBreakdownImage>
         </CostBreakdownImageContainer>
       </DonationContainer>
-      <LightUpFaq />
       <Banner>
         <PartnerThanksTitle>
           {t('lightUpChinatown.partnerThanks')}
@@ -142,6 +141,7 @@ const LightUpChinatownPage = () => {
           />
         </PartnersLogoContainer>
       </Banner>
+      <LightUpFaq />
     </React.Fragment>
   );
 };
@@ -151,6 +151,7 @@ const PartnersLogoContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 40px;
 `;
 
 const PartnerLogo = styled.img`
@@ -164,9 +165,14 @@ const PartnerThanksTitle = styled.div`
   font-weight: bold;
   font-size: 32px;
   line-height: 32px;
+  margin-top: 40px;
   margin-bottom: 40px;
   text-align: center;
   color: #1e1e1e;
+  @media (max-width: 599px) {
+    font-size: 18px;
+    line-height: 26px;
+  }
 `;
 
 const Container = styled.section`
