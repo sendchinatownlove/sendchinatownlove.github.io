@@ -126,7 +126,7 @@ const App = () => {
           >
             <PassportRedemption screen={ScreenName.Claim} />
           </Route>
-          <Route path="/:seller_id/dashboard/:secret_id">
+          <Route exact path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
           </Route>
           <Route path="/print-passport-voucher/:id/tickets/:tickets_secret">

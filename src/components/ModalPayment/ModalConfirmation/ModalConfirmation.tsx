@@ -8,15 +8,19 @@ import {
   useModalPaymentState,
   useModalPaymentDispatch,
   ModalPaymentConstants,
+  ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
+import { LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
+
 import { getSeller } from '../../../utilities';
+
 export type Props = {
   sellerId: string;
   sellerName: string;
 };
 
 const ModalConfirmation = (props: Props) => {
-  const { purchaseType } = useModalPaymentState(null);
+  const { purchaseType, amount } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
 
   const closeModal = async (e: any) => {
@@ -31,14 +35,18 @@ const ModalConfirmation = (props: Props) => {
     dispatch({ type: ModalPaymentConstants.CLOSE_MODAL, payload: undefined });
   };
 
-  const confirmationText = () => {
+  const confirmationText = (purchaseType, sellerName, amount) => {
     switch (purchaseType) {
-      case 'donation':
-        return `We appreciate your support. We'll let you know when ${props.sellerName} receives your donation!`;
-      case 'gift_card':
-        return `We appreciate your support. We'll email you your voucher when ${props.sellerName} opens back up!`;
-      case 'buy_meal':
-        return `We appreciate your support for ${props.sellerName} and for those in need! Please check your email for your receipt.`;
+      case ModalPaymentTypes.modalPages.donation:
+        return `We appreciate your support. We'll let you know when ${sellerName} receives your donation!`;
+      case ModalPaymentTypes.modalPages.light_up_chinatown:
+        if (amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN)
+          return 'You will receive an email in the next couple weeks about our Lighting Ceremony in December.';
+        return `You will receive an email with receipt for your donation.`;
+      case ModalPaymentTypes.modalPages.gift_card:
+        return `We appreciate your support. We'll email you your voucher when ${sellerName} opens back up!`;
+      case ModalPaymentTypes.modalPages.buy_meal:
+        return `We appreciate your support for ${sellerName} and for those in need! Please check your email for your receipt.`;
       default:
         return `Unexpected occurrence.`;
     }
@@ -47,7 +55,7 @@ const ModalConfirmation = (props: Props) => {
   return (
     <Container data-testid="modal-confirmation">
       <h2>Thank you!</h2>
-      <p>{confirmationText()}</p>
+      <p>{confirmationText(purchaseType, props.sellerName, amount)}</p>
 
       <ThankYouImage src={confirmationPic} alt="Logo" />
 
