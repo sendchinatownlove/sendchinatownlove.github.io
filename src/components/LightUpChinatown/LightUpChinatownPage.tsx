@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
 import partners_46 from './images/partners-46.png';
@@ -6,7 +7,7 @@ import partners_ccba from './images/partners-ccba.png';
 import partners_cccny from './images/partners-cccny.png';
 import partners_prm from './images/partners-prm.png';
 import partners_udooda from './images/partners-udooda.png';
-import mapImg from './images/light-up-map.gif';
+import mapImg from './images/light-up-map.png';
 import costBreakdownImg from './images/cost-breakdown.png';
 import goal1Img from './images/goal_1.png';
 import goal2Img from './images/goal_2.png';
@@ -14,7 +15,7 @@ import goal2Img from './images/goal_2.png';
 import { Trans, useTranslation } from 'react-i18next';
 import DonationSection from './DonationSection';
 import DonationDetail from './DonationDetail';
-
+import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
 
 const LightUpChinatownPage = () => {
@@ -23,6 +24,16 @@ const LightUpChinatownPage = () => {
   const campaignEndDate = new Date('11/30/2020');
   const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
+  const [contributions, setContributions] = useState(0);
+
+  useEffect(() => {
+    setContributions(15000);
+    // TODO: use the below after backend route to fetch raised is implemented
+    //
+    // const fetchData = async () => {
+    // setContributions(data.contributions.raised);
+    // };
+  }, []);
 
   return (
     <React.Fragment>
@@ -38,31 +49,25 @@ const LightUpChinatownPage = () => {
           <br></br>
           <SummaryBody>
             <Trans i18nKey="lightUpChinatown.summaryBody2">
-              Support the Light Up Chinatown project by contributing to
-              <strong>“Adopt-A-Lantern!”</strong> In addition to light fixtures
-              being installed, beautiful outdoor lanterns will be hung along
-              Mott Street from Canal to Bayard to welcome patrons into our
-              wonderful community, right in time for the holidays.
+              Support the Light Up Chinatown project through donations and
+              contributing to <strong>“Adopt-a-Lantern!”</strong> In addition to
+              light fixtures being installed, beautiful outdoor lanterns will
+              also be hung along Mott Street from Canal to Bayard to welcome
+              patrons into our wonderful community, right in time for the
+              holidays.
             </Trans>
-          </SummaryBody>
-          <br></br>
-          <SummaryBody>
-            <p>{t('lightUpChinatown.phase1')}</p>
-            <p>{t('lightUpChinatown.phase2')}</p>
-            <p>{t('lightUpChinatown.phase3')}</p>
           </SummaryBody>
           <br></br>
           <SummaryBody>{t('lightUpChinatown.summaryBody3')}</SummaryBody>
           <br></br>
           <SummaryBody>
             <Trans i18nKey="lightUpChinatown.summaryBody4">
-              <strong>Send Chinatown Love</strong> along with
-              <strong>
-                Pearl River Mart, 46 Mott St Bakery, CCBA, Chinese Chamber of
-                Commerce
-              </strong>
-              and <strong>UDO</strong> are partnering to raise funds to light up
-              major blocks of Chinatown. We hope you will join us.
+              We will be having an in-person{' '}
+              <strong>“Light Up Chinatown”</strong> ceremony that will be
+              planned for December in celebration of the Winter Solstice. When
+              you make a qualifying donation of $150 or more, you will receive
+              an email invitation with details including date, time, and
+              location.
             </Trans>
           </SummaryBody>
           <br></br>
@@ -92,6 +97,9 @@ const LightUpChinatownPage = () => {
           </GoalContainer>
         </MapContainer>
       </Container>
+      <DonationProgress>
+        <DonationProgressBar raised={contributions}></DonationProgressBar>
+      </DonationProgress>
       <DonationContainer>
         <DonationSection />
       </DonationContainer>
@@ -245,8 +253,12 @@ const SummaryBody = styled.div`
   font-family: Open Sans;
   font-style: normal;
   font-size: 18px;
-  line-height: 20px;
+  line-height: 32px;
   color: ##1e1e1e;
+  @media (max-width: 599px) {
+    font-size: 12px;
+    line-height: 16px;
+  }
 `;
 
 const MapContainer = styled.section`
@@ -283,6 +295,13 @@ const CampaignInfoText = styled.div`
 
 const CampaignInfoTime = styled(CampaignInfoText)`
   font-size: 18px;
+`;
+
+const DonationProgress = styled.div`
+  position: relative;
+  padding: 0 8% 0 8%;
+  height: 93px;
+  margin: 58px 0 58px 0;
 `;
 
 const DonationContainer = styled.section`
