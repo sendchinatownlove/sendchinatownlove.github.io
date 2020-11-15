@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SingleRedemption from './SingleRedemption';
+import SingleRedemption from '../../components/SingleVoucherRedemption/SingleRedemption';
 
 // NOTE(wilsonj806): This voucher printout is NOT connected to any API, and all data needs to be hardcoded
 const DetachedVoucherPrintouts = ({ vouchers }) => {
@@ -22,7 +22,7 @@ DetachedVoucherPrintouts.defaultProps = {
       state: 'NY',
       zip_code: '10002',
       qr_url: '',
-      value: 20,
+      value: 2000,
       expiration_date: '12/32/2020',
     },
     {
@@ -34,7 +34,7 @@ DetachedVoucherPrintouts.defaultProps = {
       state: 'NY',
       zip_code: '10002',
       qr_url: '',
-      value: 20,
+      value: 2000,
       expiration_date: '12/32/2020',
     },
     {},
@@ -46,14 +46,17 @@ DetachedVoucherPrintouts.defaultProps = {
   ],
 };
 const Row = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (min-width: 1440px) {
+    width: 1200px;
+  }
 `;
 const PrintoutContainer = styled.div`
-  width: 100%;
+  width: 100vw;
   @media print {
     & ${Row}:not(:last-child) {
       margin-bottom: 36px;
