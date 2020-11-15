@@ -19,6 +19,10 @@ const LightUpFaq = () => {
       question: t('lightUpChinatown.faqQuestion3'),
       answer: t('lightUpChinatown.faqAnswer3'),
     },
+    {
+      question: t('lightUpChinatown.faqQuestion4'),
+      answer: t('lightUpChinatown.faqAnswer4'),
+    },
   ];
 
   return (
@@ -44,12 +48,12 @@ const LightUpFaq = () => {
         {/* FAQ question 4 & 5 have links and needed to be split out. See below. */}
         <QuestionContainer>
           <span>
-            <Question> 4.</Question>
+            <Question> 5.</Question>
           </span>
           <span>
-            <Question> {t('lightUpChinatown.faqQuestion4')} </Question>
+            <Question> {t('lightUpChinatown.faqQuestion5')} </Question>
             <Answer>
-              <Trans i18nKey="lightUpChinatown.faqAnswer4">
+              <Trans i18nKey="lightUpChinatown.faqAnswer5">
                 {' '}
                 Please contact us at{' '}
                 <a href="mailto: hello@sendchinatownlove.com">
@@ -63,12 +67,12 @@ const LightUpFaq = () => {
 
         <QuestionContainer>
           <span>
-            <Question> 5.</Question>
+            <Question> 6.</Question>
           </span>
           <span>
-            <Question> {t('lightUpChinatown.faqQuestion5')} </Question>
+            <Question> {t('lightUpChinatown.faqQuestion6')} </Question>
             <Answer>
-              <Trans i18nKey="lightUpChinatown.faqAnswer5">
+              <Trans i18nKey="lightUpChinatown.faqAnswer6">
                 {' '}
                 Thank you for sending Chinatown your love! To continue
                 supporting this community, check out our{' '}
@@ -81,6 +85,35 @@ const LightUpFaq = () => {
                 </a>{' '}
                 for the full list of Asian-owned businesses we’re working with
                 to make a donation or buy a gift card!{' '}
+              </Trans>
+            </Answer>
+          </span>
+        </QuestionContainer>
+
+        <QuestionContainer>
+          <span>
+            <Question> 7.</Question>
+          </span>
+          <span>
+            <Question> {t('lightUpChinatown.faqQuestion7')} </Question>
+            <Answer>
+              <Trans i18nKey="lightUpChinatown.faqAnswer7">
+                {' '}
+                Send Chinatown Love is a New York-based, entirely volunteer-run
+                organization that helps the Chinatowns across the city get back
+                on their feet by supporting immigrant-owned, small businesses
+                that make up the fabric of these neighborhoods. The goal of Send
+                Chinatown Love is to facilitate community support by creating
+                digital platforms for restaurants and stores in need so that
+                they may be able to sustain themselves now and into the future.
+                Check out our full list of partner merchants{' '}
+                <a
+                  href="https://merchant.sendchinatownlove.com/all"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  here
+                </a>
               </Trans>
             </Answer>
           </span>

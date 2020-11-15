@@ -23,7 +23,7 @@ import { getProject, light_up_chinatown_id } from '../../utilities/api';
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
   const today = new Date();
-  const campaignEndDate = new Date('11/30/2020');
+  const campaignEndDate = new Date('12/15/2020');
   const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
   const [contributions, setContributions] = useState<number>(0);
@@ -53,27 +53,29 @@ const LightUpChinatownPage = () => {
           <br></br>
           <SummaryBody>
             <Trans i18nKey="lightUpChinatown.summaryBody2">
-              Support the Light Up Chinatown project through donations and
-              contributing to <strong>“Adopt-a-Lantern!”</strong> In addition to
-              light fixtures being installed, beautiful outdoor lanterns will
-              also be hung along Mott Street from Canal to Bayard to welcome
-              patrons into our wonderful community, right in time for the
-              holidays.
+              Patrick Mock, manager of 46 Mott St Bakery and community advocate,
+              had an idea to light up Chinatown streets to draw customers back
+              to Chinatown. And with the help of <strong>Jenny Low</strong>,{' '}
+              <strong>Chung Seto</strong> of UDO, <strong>Joanne Kwong</strong>{' '}
+              of Pearl River Mart and <strong>Send Chinatown Love</strong>, the
+              Light Up Chinatown project was born.
             </Trans>
           </SummaryBody>
-          <br></br>
-          <SummaryBody>{t('lightUpChinatown.summaryBody3')}</SummaryBody>
           <br></br>
           <SummaryBody>
-            <Trans i18nKey="lightUpChinatown.summaryBody4">
-              We will be having an in-person{' '}
-              <strong>“Light Up Chinatown”</strong> ceremony that will be
-              planned for December in celebration of the Winter Solstice. When
-              you make a qualifying donation of $150 or more, you will receive
-              an email invitation with details including date, time, and
-              location.
+            <Trans i18nKey="lightUpChinatown.summaryBody3">
+              Support the Light Up Chinatown project by donating today. All
+              proceeds will go towards installing permanent light fixtures and
+              traditional lanterns in the neighborhood. Participate in our{' '}
+              <strong>“Adopt-a-Lantern”</strong> initiative with a $45 donation:
+              your personalized lantern will be hung up on Mott Street. Donate
+              $150 or more and you will receive an additional lantern to take
+              home as a keepsake. You will also be invited to the “Light Up
+              Chinatown” ceremony in December celebrating the Winter Solstice.
             </Trans>
           </SummaryBody>
+          <br></br>
+          <SummaryBody>{t('lightUpChinatown.summaryBody4')}</SummaryBody>
           <br></br>
           <br></br>
           <CampaignInfoText color={'#1E1E1E'}>
@@ -112,6 +114,9 @@ const LightUpChinatownPage = () => {
       </DonationDetailContainer>
       <DonationContainer>
         <CostBreakdownImageContainer>
+          <CostBreakdownHeader>
+            {t('lightUpChinatown.costBreakdown')}
+          </CostBreakdownHeader>
           <CostBreakdownImage src={costBreakdownImg}></CostBreakdownImage>
         </CostBreakdownImageContainer>
       </DonationContainer>
@@ -326,6 +331,7 @@ const DonationDetailContainer = styled.section`
 `;
 
 const CostBreakdownImageContainer = styled.div`
+  text-align: center;
   background: #ffffff;
   border-radius: 24px;
   max-width: 1220px;
@@ -335,9 +341,27 @@ const CostBreakdownImageContainer = styled.div`
   }
 `;
 
+const CostBreakdownHeader = styled.div`
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 44px;
+  letter-spacing: 0.02em;
+  color: #000000;
+  padding-top: 80px;
+  @media (max-width: 599px) {
+    padding-top: 20px;
+    font-size: 22px;
+    line-height: 30px;
+  }
+`;
+
 const CostBreakdownImage = styled.img`
+  max-height: 700px;
   max-width: 1220px;
   @media (max-width: 599px) {
+    max-height: 340px;
     max-width: 350px;
 `;
 
