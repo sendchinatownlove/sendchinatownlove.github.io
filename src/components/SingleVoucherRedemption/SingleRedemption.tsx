@@ -1,12 +1,14 @@
 import React, { FC } from 'react';
 import FooterSR from './FooterSingleRedemption';
 import styled from 'styled-components';
-import VoucherMerchant from './VoucherMerchant';
-import VoucherAmount from './VoucherAmount';
-import VoucherCode from './VoucherCode';
-import VoucherSeparator from './VoucherSeparator';
-import VoucherQr from './VoucherQR';
-import Faq from './FaqContainer';
+import {
+  Faq,
+  VoucherMerchant,
+  VoucherAmount,
+  VoucherQr,
+  VoucherSeparator,
+  VoucherCode,
+} from './';
 
 interface Props {
   name?: string;
@@ -79,7 +81,7 @@ const SingleVoucher = styled.article`
   max-width: 600px;
   background-color: #faf4ea;
   padding-top: 26px;
-  height: 700px;
+  height: 760px;
   &:first-child {
     border-right: 1px solid lightgrey;
   }
@@ -127,6 +129,7 @@ const VoucherBody = styled.div`
   }
 `;
 
-SingleVoucher.displayName = 'Voucher';
-VoucherHeader.displayName = 'Voucher Header';
-VoucherBody.displayName = 'Voucher Body';
+// NOTE(wilsonj806): Uncomment for debugging
+// SingleVoucher.displayName = 'Voucher';
+// VoucherHeader.displayName = 'Voucher Header';
+// VoucherBody.displayName = 'Voucher Body';

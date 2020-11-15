@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import SingleRedemption from '../../components/SingleVoucherRedemption/SingleRedemption';
+import SingleRedemption from '../../components/SingleVoucherRedemption';
+import { getDistributor } from '../../utilities/api/interactionManager';
 
 // NOTE(wilsonj806): This voucher printout is NOT connected to any API, and all data needs to be hardcoded
 const DetachedVoucherPrintouts = ({ vouchers }) => {
-  const Vouchers = buildVouchers(vouchers);
+  const [distributor_image, setDistributorImage] = useState('');
+  const { distributor_id } = useParams<any>();
+  useEffect(() => {
+    if (distributor_id) {
+      getDistributor(distributor_id).then(({ data }) => {
+        setDistributorImage(data.image_url);
+      });
+    }
+  }, [distributor_id]);
+
+  const Vouchers =
+    distributor_image && buildVouchers(vouchers, distributor_image);
   return <PrintoutContainer>{Vouchers}</PrintoutContainer>;
 };
 
@@ -63,19 +76,27 @@ const PrintoutContainer = styled.div`
     }
   }
 `;
+// NOTE(wilsonj806): Uncomment for debugging
+// Row.displayName = 'Row';
 
-Row.displayName = 'Row';
-
-function buildVouchers(vouchers: any[]) {
+function buildVouchers(vouchers: any[], distributor_image: string) {
   const res: any[] = [];
   let temp;
   for (let i = 0; i < vouchers.length; i++) {
     if (i % 2 !== 0) {
       const curr = vouchers[i];
       const jsx = (
-        <Row>
-          <SingleRedemption {...temp} />
-          <SingleRedemption {...curr} />
+        <Row key={`Row: ${(i + 1) / 2}`}>
+          <SingleRedemption
+            {...temp}
+            key={i - 1}
+            distributor_image={distributor_image}
+          />
+          <SingleRedemption
+            {...curr}
+            key={i}
+            distributor_image={distributor_image}
+          />
         </Row>
       );
       res.push(jsx);
