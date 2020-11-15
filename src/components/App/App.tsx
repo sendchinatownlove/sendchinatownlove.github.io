@@ -46,10 +46,13 @@ const VoucherRedemptionPage = lazy(() =>
 const MerchantVoucherDashboard = lazy(() =>
   import('../../pages/MerchantVoucherDashboard')
 );
-const PassportVoucher = lazy(() =>
-  import('../../pages/PassportRedemption/PassportVoucher')
+const PassportVoucher = lazy(
+  () => import('../../pages/PassportRedemption/PassportVoucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
+const DetachedVoucherPrintouts = lazy(() =>
+  import('../../pages/VoucherManagement/DetachedVoucherPrintout')
+);
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
