@@ -99,7 +99,9 @@ export const makeSquarePayment = async (
   payment: SquareLineItems,
   buyer: Buyer,
   isDistribution: boolean,
-  campaignId?: string
+  campaignId?: string,
+  projectId?: string,
+  metadata?: string | null
 ) => {
   const { email, name } = buyer;
   const idempotencyKey = buyer.idempotency_key;
@@ -115,10 +117,12 @@ export const makeSquarePayment = async (
         email,
         name,
         seller_id: sellerId,
+        project_id: projectId,
         idempotency_key: idempotencyKey,
         is_subscribed: isSubscribed,
         is_distribution: isDistribution, // TODO: deprecate this in favor of campaignId
         campaign_id: campaignId,
+        metadata: metadata,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )

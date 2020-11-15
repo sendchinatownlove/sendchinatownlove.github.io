@@ -10,7 +10,12 @@ import { v4 as uuid } from 'uuid';
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 
-import { SquareErrors, hasKey, LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
+import {
+  SquareErrors,
+  hasKey,
+  LIGHT_UP_CHINATOWN_TIER_2_MIN,
+} from '../../../consts';
+import { modalPages } from '../../../utilities/hooks/ModalPaymentContext/types';
 
 import {
   makeSquarePayment,
@@ -56,7 +61,8 @@ const ModalCardDetails = ({
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
 
-  let applicationId, locationId;
+  let applicationId, locationId, projectId;
+
   if (
     purchaseType === ModalPaymentTypes.modalPages.buy_meal &&
     nonProfitLocationId === process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID
@@ -66,6 +72,11 @@ const ModalCardDetails = ({
   } else {
     applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
+  }
+
+  if (sellerId === 'light-up-chinatown') {
+    sellerId = '';
+    projectId = '1';
   }
 
   const checkTermsAgreement = () => setTermsChecked(!isTermsChecked);
@@ -90,6 +101,15 @@ const ModalCardDetails = ({
       return;
     }
 
+    const purchaseTypeToItemType = (purchaseType: string) => {
+      switch (purchaseType) {
+        case modalPages.light_up_chinatown:
+          return modalPages.donation;
+        default:
+          return purchaseType;
+      }
+    };
+
     // 'buy_meal' is still represented as a gift card when calling the API
     const payment: SquareLineItems = is_distribution
       ? times(
@@ -105,7 +125,7 @@ const ModalCardDetails = ({
           {
             amount: Number(amount) * 100,
             currency: 'usd',
-            item_type: purchaseType,
+            item_type: purchaseTypeToItemType(purchaseType),
             quantity: 1,
           },
         ];
@@ -119,13 +139,16 @@ const ModalCardDetails = ({
     };
 
     setCanSubmit(false);
+
     return makeSquarePayment(
       nonce,
       sellerId,
       payment,
       buyer,
       is_distribution,
-      campaignId
+      campaignId,
+      projectId,
+      projectId ? JSON.stringify(lucData) : null
     )
       .then((res) => {
         if (res.status === 200) {
