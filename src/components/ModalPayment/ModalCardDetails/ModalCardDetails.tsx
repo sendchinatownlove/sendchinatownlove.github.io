@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid';
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
 
-import { SquareErrors, hasKey, LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../../../consts';
+import { SquareErrors, hasKey, LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
 
 import {
   makeSquarePayment,
@@ -182,7 +182,7 @@ const ModalCardDetails = ({
       case ModalPaymentTypes.modalPages.donation:
         return t('modalPayment.modalCardDetails.message.donation');
       case ModalPaymentTypes.modalPages.light_up_chinatown:
-        if (amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT)
+        if (amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN)
           return t(
             'modalPayment.modalCardDetails.message.light_up_chinatown_tier_2'
           );
@@ -242,7 +242,7 @@ const ModalCardDetails = ({
     if (
       type === ModalPaymentTypes.modalPages.gift_card ||
       (type === ModalPaymentTypes.modalPages.light_up_chinatown &&
-        amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT)
+        amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN)
     ) {
       return t('modalPayment.modalCardDetails.details.voucher');
     } else {

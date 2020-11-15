@@ -15,7 +15,7 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
-import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT, LIGHT_UP_CHINATOWN_TIER_2_LIMIT } from '../../consts';
+import { LIGHT_UP_CHINATOWN_TIER_2_MIN, LIGHT_UP_CHINATOWN_TIER_3_MIN } from '../../consts';
 
 const DonationSection = () => {
   const { t } = useTranslation();
@@ -41,7 +41,7 @@ const DonationSection = () => {
           </Description>
           <br></br>
           <Description>
-            {t('lightUpChinatown.donationDescription2', {limit1: LIGHT_UP_CHINATOWN_TIER_1_LIMIT, limit2: LIGHT_UP_CHINATOWN_TIER_2_LIMIT})}
+            {t('lightUpChinatown.donationDescription2', {limit_1: LIGHT_UP_CHINATOWN_TIER_2_MIN, limit_2: LIGHT_UP_CHINATOWN_TIER_3_MIN})}
           </Description>
         </ColumnContainer>
         <ColumnContainer>

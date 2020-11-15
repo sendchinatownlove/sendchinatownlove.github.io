@@ -265,7 +265,7 @@
     "ceremony2": "When you make a lantern donation, you will receive an email once we finalize the date and time.",
     "donationTitle": "Donate to Light Up Chinatown",
     "donationDescription1": "100% of the donations, no matter how big or small, will go towards permanent light fixtures and lanterns throughout Chinatown.",
-    "donationDescription2": "If you donate between ${{limit1}} and ${{limit2}} or more, you will be eligible to participate in “Adopt-a-Lantern” where you will be able to receive some perks with your generous donation.",
+    "donationDescription2": "If you donate between ${{limit_1}} and ${{limit_2}} or more, you will be eligible to participate in “Adopt-a-Lantern” where you will be able to receive some perks with your generous donation.",
     "faq": "Frequently Asked Questions",
     "faqQuestion1": "How will my donation for this project benefit Chinatown?",
     "faqAnswer1": "Your donation will help permanently light up Chinatown streets and create a warm and welcoming ambience to ensure consistent foot traffic and the longevity of Chinatown businesses. For donations that qualify, you will receive a lantern and be invited to the Winter Solstice Lighting Ceremony.",

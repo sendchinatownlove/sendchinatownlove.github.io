@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
-import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../../../consts';
+import { LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
 
 import LanternForm from './LanternForm';
 
@@ -155,7 +155,7 @@ export const Modal = (props: Props) => {
         )}
       </AmountContainer>
       {modalView === ModalPaymentTypes.modalPages.light_up_chinatown &&
-        amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT && <LanternForm />}
+        amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN && <LanternForm />}
       <NextButton
         type="button"
         className={'modalButton--filled'}

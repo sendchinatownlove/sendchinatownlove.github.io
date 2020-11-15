@@ -10,7 +10,7 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
-import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT } from '../../../consts';
+import { LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
 
 import { getSeller } from '../../../utilities';
 
@@ -40,7 +40,7 @@ const ModalConfirmation = (props: Props) => {
       case ModalPaymentTypes.modalPages.donation:
         return `We appreciate your support. We'll let you know when ${sellerName} receives your donation!`;
       case ModalPaymentTypes.modalPages.light_up_chinatown:
-        if (amount >= LIGHT_UP_CHINATOWN_TIER_1_LIMIT)
+        if (amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN)
           return 'You will receive an email in the next couple weeks about our Lighting Ceremony in December.';
         return `You will receive an email with receipt for your donation.`;
       case ModalPaymentTypes.modalPages.gift_card:

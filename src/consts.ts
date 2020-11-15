@@ -89,7 +89,7 @@ function hasKey<O>(obj: O, key: keyof any): key is keyof O {
   return key in obj;
 }
 
-const LIGHT_UP_CHINATOWN_TIER_1_LIMIT = 45;
-const LIGHT_UP_CHINATOWN_TIER_2_LIMIT = 150;
+const LIGHT_UP_CHINATOWN_TIER_2_MIN = 45;
+const LIGHT_UP_CHINATOWN_TIER_3_MIN = 150;
 
-export { MAILTO_URL, Page, SquareErrors, hasKey, socialMediaLinks, LIGHT_UP_CHINATOWN_TIER_1_LIMIT, LIGHT_UP_CHINATOWN_TIER_2_LIMIT };
+export { MAILTO_URL, Page, SquareErrors, hasKey, socialMediaLinks, LIGHT_UP_CHINATOWN_TIER_2_MIN, LIGHT_UP_CHINATOWN_TIER_3_MIN };

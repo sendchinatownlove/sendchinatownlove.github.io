@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { RowFormat, Subheader, LabelText, InputText } from '../styles';
-import { LIGHT_UP_CHINATOWN_TIER_1_LIMIT, LIGHT_UP_CHINATOWN_TIER_2_LIMIT } from '../../../consts';
+import { LIGHT_UP_CHINATOWN_TIER_2_MIN, LIGHT_UP_CHINATOWN_TIER_3_MIN } from '../../../consts';
 
 import {
   useModalPaymentState,
@@ -20,13 +20,13 @@ export const LanternForm = (props) => {
   const [showAddress, setShowAddress] = React.useState(false);
 
   const subHeader =
-    amount >= LIGHT_UP_CHINATOWN_TIER_2_LIMIT
+    amount >= LIGHT_UP_CHINATOWN_TIER_3_MIN
       ? 'paymentProcessing.amount.adopt_lantern_tier_3'
       : 'paymentProcessing.amount.adopt_lantern_tier_2';
   const subText =
-    amount >= LIGHT_UP_CHINATOWN_TIER_2_LIMIT
-      ? t('paymentProcessing.amount.tier_3_donation', {limit: LIGHT_UP_CHINATOWN_TIER_2_LIMIT})
-      : t('paymentProcessing.amount.tier_2_donation', {limit: LIGHT_UP_CHINATOWN_TIER_1_LIMIT});
+    amount >= LIGHT_UP_CHINATOWN_TIER_3_MIN
+      ? t('paymentProcessing.amount.tier_3_donation', {limit: LIGHT_UP_CHINATOWN_TIER_3_MIN})
+      : t('paymentProcessing.amount.tier_2_donation', {limit: LIGHT_UP_CHINATOWN_TIER_2_MIN});
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -104,7 +104,7 @@ export const LanternForm = (props) => {
         </RowFormat>
       </SingleRowFormat>
 
-      {amount >= LIGHT_UP_CHINATOWN_TIER_2_LIMIT && (
+      {amount >= LIGHT_UP_CHINATOWN_TIER_3_MIN && (
         <>
           <label>
             <span>
