@@ -50,6 +50,7 @@ const PassportVoucher = lazy(() =>
   import('../../pages/PassportRedemption/PassportVoucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
+
 const options = {
   autoConfig: true, // set pixel's autoConfig
   debug: true, // enable logs
