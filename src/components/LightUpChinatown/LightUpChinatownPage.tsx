@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
-import lanternFooter from './images/lantern-footer.png';
 import partners_46 from './images/partners-46.png';
 import partners_ccba from './images/partners-ccba.png';
 import partners_cccny from './images/partners-cccny.png';
