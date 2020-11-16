@@ -105,9 +105,6 @@ const LightUpChinatownPage = () => {
       </DonationDetailContainer>
       <DonationContainer>
         <CostBreakdownImageContainer>
-          <CostBreakdownHeader>
-            {t('lightUpChinatown.costBreakdown')}
-          </CostBreakdownHeader>
           <CostBreakdownImage src={costBreakdownImg}></CostBreakdownImage>
         </CostBreakdownImageContainer>
       </DonationContainer>
@@ -330,31 +327,16 @@ const DonationDetailContainer = styled.section`
 const CostBreakdownImageContainer = styled.div`
   text-align: center;
   background: #ffffff;
-  border-radius: 24px;
+  border-radius: 12px;
   max-width: 1220px;
   margin: 0 auto;
   @media (max-width: 599px) {
-    max-width: 350px;
-  }
-`;
-
-const CostBreakdownHeader = styled.div`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 32px;
-  line-height: 44px;
-  letter-spacing: 0.02em;
-  color: #000000;
-  padding-top: 80px;
-  @media (max-width: 599px) {
-    padding-top: 20px;
-    font-size: 22px;
-    line-height: 30px;
+    max-width: 400px;
   }
 `;
 
 const CostBreakdownImage = styled.img`
+  border-radius: 12px;
   max-height: 700px;
   max-width: 1220px;
   @media (max-width: 599px) {
