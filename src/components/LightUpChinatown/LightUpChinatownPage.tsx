@@ -11,6 +11,7 @@ import mapImg from './images/light-up-map.png';
 import costBreakdownImg from './images/cost-breakdown.png';
 import goal1Img from './images/goal_1.png';
 import goal2Img from './images/goal_2.png';
+import Modal from '../ModalPayment';
 
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -20,6 +21,12 @@ import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
 import { getProject, light_up_chinatown_id } from '../../utilities/api';
 
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+  ModalPaymentTypes,
+} from '../../utilities/hooks/ModalPaymentContext';
+
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
   const today = new Date();
@@ -28,6 +35,15 @@ const LightUpChinatownPage = () => {
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
   const [contributions, setContributions] = useState<number>(0);
 
+  const ModalPaymentDispatcher = useModalPaymentDispatch(null);
+
+  const openModal = (event) => {
+    event.preventDefault();
+    ModalPaymentDispatcher({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.light_up_chinatown,
+    });
+  };
   const fetchData = async (project_id: number) => {
     const { data } = await getProject(project_id);
     if (data) {
@@ -43,6 +59,7 @@ const LightUpChinatownPage = () => {
     <React.Fragment>
       <Banner>
         <Hero height={304} src={lanternHeroTop} alt="lantern overlay" />
+        <Button onClick={openModal}>{t('donationBox.button')}</Button>
         <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
         <HeaderSubtext>{t('lightUpChinatown.headerSubtext')}</HeaderSubtext>
       </Banner>
@@ -133,6 +150,26 @@ const LightUpChinatownPage = () => {
     </React.Fragment>
   );
 };
+
+const Button = styled.div`
+  text-align: center;
+  line-height: 40px;
+  width: 300px;
+  height: 60px;
+  cursor: pointer;
+  margin: 80px 0px 0px 0px;
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  position: absolute;
+  left: 42%;
+  top: 70%;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 100px;
+  padding: 10px 22px;
+`;
 
 const PartnersLogoContainer = styled.div`
   display: inline-flex;
