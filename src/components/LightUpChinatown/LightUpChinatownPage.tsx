@@ -11,7 +11,7 @@ import mapImg from './images/light-up-map.png';
 import costBreakdownImg from './images/cost-breakdown.png';
 import goal1Img from './images/goal_1.png';
 import goal2Img from './images/goal_2.png';
-import Modal from '../ModalPayment';
+import './fonts.css';
 
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -20,6 +20,10 @@ import DonationDetail from './DonationDetail';
 import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
 import { getProject, light_up_chinatown_id } from '../../utilities/api';
+import {
+  tabletScreens,
+  phoneScreens,
+} from '../../utilities/general/responsive';
 
 import {
   useModalPaymentDispatch,
@@ -55,11 +59,18 @@ const LightUpChinatownPage = () => {
     fetchData(light_up_chinatown_id);
   }, []);
 
+  // Adding a function that changes button color from white to red on mouseover
+  const changeButtonColor = (e) => {
+    console.log(e.target);
+  };
   return (
     <React.Fragment>
       <Banner>
-        <Hero height={304} src={lanternHeroTop} alt="lantern overlay" />
-        <Button onClick={openModal}>{t('donationBox.button')}</Button>
+        <Hero height={480} src={lanternHeroTop} alt="lantern overlay" />
+
+        <ButtonWrapper>
+          <Button onClick={openModal}>{t('donationBox.button')}</Button>
+        </ButtonWrapper>
         <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
         <HeaderSubtext>{t('lightUpChinatown.headerSubtext')}</HeaderSubtext>
       </Banner>
@@ -150,27 +161,45 @@ const LightUpChinatownPage = () => {
     </React.Fragment>
   );
 };
-
+// left: 42%;
+// top: 70%;
 const Button = styled.div`
-  text-align: center;
   line-height: 40px;
-  width: 300px;
-  height: 60px;
+  width: 11%;
+  min-width: 150px;
+  top: 67%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   cursor: pointer;
-  margin: 80px 0px 0px 0px;
+
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.05em;
+  font-size: 18px;
+  letter-spacing: 0.12em;
   position: absolute;
-  left: 42%;
-  top: 70%;
-  margin: 0 auto;
+
+  box-shadow: 0 0 0.5pt 0.5pt black;
   background-color: #ffffff;
   border-radius: 100px;
-  padding: 10px 22px;
-`;
+  padding: 10px 10px 10px 10px;
+  @media (${phoneScreens}) {
+    font-size: 14px;
+    letter-spacing: 0.08em;
+  }
 
+  &:hover {
+    color: #ab192e;
+    box-shadow: 0 0 1pt 1pt #ab192e;
+  }
+`;
+// background: #ab192e;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
 const PartnersLogoContainer = styled.div`
   display: inline-flex;
   flex-direction: row;
@@ -225,8 +254,8 @@ const TextContainer = styled.section`
 
 const Hero = styled.img`
   height: ${(props) => props.height}px;
-  width: 100vw;
   object-fit: cover;
+  width: 100vw;
 `;
 
 const Banner = styled.div`
@@ -238,12 +267,12 @@ const HeaderText = styled.div`
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
-  font-size: 32px;
+  font-size: 40px;
   line-height: 44px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   color: #ffffff;
   position: absolute;
-  top: 45%;
+  top: 38%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
@@ -259,12 +288,12 @@ const HeaderSubtext = styled.div`
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 33px;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
   color: #ffffff;
   position: absolute;
-  top: 60%;
+  top: 54%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
