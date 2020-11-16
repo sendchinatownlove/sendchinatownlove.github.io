@@ -16,10 +16,10 @@
       "merchants": "WAYS TO DONATE",
       "waystodonate": {
         "donate": "DONATE",
-        "light-up-chinatown": "LIGHT UP CHINATOWN",
         "gift-a-meal": "GIFT-A-MEAL",
         "sticky-locals-x-scl": "STICKY LOCALS X SCL"
-      }
+      },
+      "light-up-chinatown": "LIGHT UP CHINATOWN"
     },
     "languages": {
       "english": "ENG",
