@@ -46,11 +46,11 @@ export const LanternForm = (props) => {
     });
   };
 
-  const shouldShowAddress = (e, bool) => {
+  const handleAddress = (e, shouldShowAddress) => {
     e.preventDefault();
-    setShowAddress(bool);
+    setShowAddress(shouldShowAddress);
 
-    if (!bool) {
+    if (!shouldShowAddress) {
       dispatch({
         type: ModalPaymentConstants.CLEAR_ADDRESS,
         payload: null,
@@ -133,7 +133,7 @@ export const LanternForm = (props) => {
           <br />
           <br />
 
-          <TextTrigger onClick={(e) => shouldShowAddress(e, true)}>
+          <TextTrigger onClick={(e) => handleAddress(e, true)}>
             {' '}
             {t(
               'paymentProcessing.amount.light_up_chinatown_address.address_button'
@@ -160,7 +160,7 @@ export const LanternForm = (props) => {
                     value={lucData.fullName}
                   />
                 </RowFormat>
-                <TextTrigger onClick={(e) => shouldShowAddress(e, false)}>
+                <TextTrigger onClick={(e) => handleAddress(e, false)}>
                   {' '}
                   {t(
                     'paymentProcessing.amount.light_up_chinatown_address.cancel_address_button'

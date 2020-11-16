@@ -362,7 +362,7 @@ const ModalCardDetails = ({
                 <br />
                 <br />
                 {t('modalPayment.modalCardDetails.message.luc_address')}
-                <BoldText>{`${lucData.address}, ${lucData.city}, ${lucData.state} ${lucData.zipCode}`}</BoldText>
+                <BoldText>{`${lucData.fullName}, ${lucData.address}, ${lucData.city}, ${lucData.state} ${lucData.zipCode}`}</BoldText>
               </span>
             )}
             <p />
