@@ -47,15 +47,15 @@ const NavBar = (props: Props) => {
 
   const dropdownOptions = [
     { url: '/merchants', translation: 'donate', external: false },
+    {
+      url: '/light-up-chinatown',
+      translation: 'light-up-chinatown',
+      external: false,
+    },
     { url: '/gift-a-meal-home', translation: 'gift-a-meal', external: false },
     {
       url: 'https://stickylocals.com/scl',
       translation: 'sticky-locals-x-scl',
-      external: true,
-    },
-    {
-      url: 'https://www.friendofafriend.studio/shop',
-      translation: 'friendofafriend-studioxscl',
       external: true,
     },
   ];
