@@ -52,9 +52,9 @@
       "waystodonate": {
         "donate": "DONATE",
         "gift-a-meal": "GIFT-A-MEAL",
-        "sticky-locals-x-scl": "STICKY LOCALS X SCL",
-        "friendofafriend-studioxscl": "FRIEND OF A FRIEND STUDIO X SCL"
-      }
+        "sticky-locals-x-scl": "STICKY LOCALS X SCL"
+      },
+      "light-up-chinatown": "LIGHT UP CHINATOWN"
     },
     "languages": {
       "english": "ENG",
