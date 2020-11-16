@@ -62,13 +62,7 @@ const LightUpChinatownPage = () => {
             </Trans>
           </SummaryBody>
           <br></br>
-          <SummaryBody>
-            <Trans i18nKey="lightUpChinatown.summaryBody3">
-              Support the Light Up Chinatown project by donating today. All
-              proceeds will go towards installing permanent light fixtures and
-              traditional lanterns in the neighborhood. Participate in our{' '}
-            </Trans>
-          </SummaryBody>
+          <SummaryBody>{t('lightUpChinatown.summaryBody3')}</SummaryBody>
           <br></br>
           <SummaryBody>{t('lightUpChinatown.summaryBody4')}</SummaryBody>
           <br></br>
