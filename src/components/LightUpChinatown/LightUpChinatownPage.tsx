@@ -20,10 +20,7 @@ import DonationDetail from './DonationDetail';
 import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
 import { getProject, light_up_chinatown_id } from '../../utilities/api';
-import {
-  tabletScreens,
-  phoneScreens,
-} from '../../utilities/general/responsive';
+import { phoneScreens } from '../../utilities/general/responsive';
 
 import {
   useModalPaymentDispatch,
@@ -59,10 +56,6 @@ const LightUpChinatownPage = () => {
     fetchData(light_up_chinatown_id);
   }, []);
 
-  // Adding a function that changes button color from white to red on mouseover
-  const changeButtonColor = (e) => {
-    console.log(e.target);
-  };
   return (
     <React.Fragment>
       <Banner>
