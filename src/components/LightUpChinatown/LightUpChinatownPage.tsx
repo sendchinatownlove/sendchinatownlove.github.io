@@ -59,10 +59,7 @@ const LightUpChinatownPage = () => {
     <React.Fragment>
       <Banner>
         <Hero height={352} src={lanternHeroTop} alt="lantern overlay" />
-
-        <ButtonWrapper>
-          <Button onClick={openModal}>{t('donationBox.button')}</Button>
-        </ButtonWrapper>
+        <Button onClick={openModal}>{t('donationBox.button')}</Button>
         <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
         <HeaderSubtext>{t('lightUpChinatown.headerSubtext')}</HeaderSubtext>
       </Banner>
@@ -153,14 +150,10 @@ const LightUpChinatownPage = () => {
     </React.Fragment>
   );
 };
-// left: 42%;
-// top: 70%;
-const Button = styled.div`
-  line-height: 40px;
-  width: 15%;
-  min-width: 150px;
-  max-width: 220px;
 
+const Button = styled.div`
+  line-height: 37px;
+  width: 212px;
   position: absolute;
   top: 67%;
   left: 0;
@@ -178,23 +171,14 @@ const Button = styled.div`
   border-radius: 100px;
   padding: 10px 10px 10px 10px;
   @media (${phoneScreens}) {
-    font-size: 14px;
     letter-spacing: 0.08em;
-    line-height: 30px;
   }
-
   &:hover {
     color: #ab192e;
     box-shadow: 0 0 1pt 1pt #ab192e;
   }
 `;
-// background: #ab192e;
 
-const ButtonWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
 const PartnersLogoContainer = styled.div`
   display: inline-flex;
   flex-direction: row;
