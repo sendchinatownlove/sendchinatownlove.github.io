@@ -67,15 +67,12 @@ const LightUpChinatownPage = () => {
               Support the Light Up Chinatown project by donating today. All
               proceeds will go towards installing permanent light fixtures and
               traditional lanterns in the neighborhood. Participate in our{' '}
-              <strong>“Adopt-a-Lantern”</strong> initiative with a $45 donation:
-              your personalized lantern will be hung up on Mott Street. Donate
-              $150 or more and you will receive an additional lantern to take
-              home as a keepsake. You will also be invited to the “Light Up
-              Chinatown” ceremony in December celebrating the Winter Solstice.
             </Trans>
           </SummaryBody>
           <br></br>
           <SummaryBody>{t('lightUpChinatown.summaryBody4')}</SummaryBody>
+          <br></br>
+          <SummaryBody>{t('lightUpChinatown.summaryBody5')}</SummaryBody>
           <br></br>
           <br></br>
           <CampaignInfoText color={'#1E1E1E'}>
