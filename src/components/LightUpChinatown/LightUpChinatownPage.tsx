@@ -11,7 +11,6 @@ import mapImg from './images/light-up-map.png';
 import costBreakdownImg from './images/cost-breakdown.png';
 import goal1Img from './images/goal_1.png';
 import goal2Img from './images/goal_2.png';
-import './fonts.css';
 
 import { Trans, useTranslation } from 'react-i18next';
 
@@ -59,7 +58,7 @@ const LightUpChinatownPage = () => {
   return (
     <React.Fragment>
       <Banner>
-        <Hero height={480} src={lanternHeroTop} alt="lantern overlay" />
+        <Hero height={352} src={lanternHeroTop} alt="lantern overlay" />
 
         <ButtonWrapper>
           <Button onClick={openModal}>{t('donationBox.button')}</Button>
@@ -260,7 +259,7 @@ const HeaderText = styled.div`
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 32px;
   line-height: 44px;
   letter-spacing: 0.01em;
   color: #ffffff;
@@ -281,7 +280,7 @@ const HeaderSubtext = styled.div`
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 33px;
   letter-spacing: 0.01em;
   color: #ffffff;
