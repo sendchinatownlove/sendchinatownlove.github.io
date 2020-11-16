@@ -157,8 +157,11 @@ const LightUpChinatownPage = () => {
 // top: 70%;
 const Button = styled.div`
   line-height: 40px;
-  width: 11%;
+  width: 15%;
   min-width: 150px;
+  max-width: 220px;
+
+  position: absolute;
   top: 67%;
   left: 0;
   right: 0;
@@ -169,7 +172,6 @@ const Button = styled.div`
   font-weight: 700;
   font-size: 18px;
   letter-spacing: 0.12em;
-  position: absolute;
 
   box-shadow: 0 0 0.5pt 0.5pt black;
   background-color: #ffffff;
@@ -178,6 +180,7 @@ const Button = styled.div`
   @media (${phoneScreens}) {
     font-size: 14px;
     letter-spacing: 0.08em;
+    line-height: 30px;
   }
 
   &:hover {
