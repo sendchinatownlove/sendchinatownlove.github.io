@@ -12,8 +12,11 @@ const StoreLocation: FC<Props> = ({ locations }) => {
       {locations && (
         <div className={styles['container-address']}>
           {locations.length > 0
-            ? locations.map((location: Location) => (
-                <div key={location.seller_id}>
+            ? locations.map((location: Location, i) => (
+                <div
+                  className={styles.wrap__singleLocation}
+                  key={location.seller_id}
+                >
                   <address>
                     <p className={styles.address}>
                       {location.address1 + (location.address2 || '')}
