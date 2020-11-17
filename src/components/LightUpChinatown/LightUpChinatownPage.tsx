@@ -204,6 +204,8 @@ const PartnersLogoContainer = styled.div`
 const PartnerLogo = styled.img`
   max-height: 130px;
   padding: 20px;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
 `;
 
 const PartnerThanksTitle = styled.div`
@@ -411,7 +413,6 @@ const GoalText = styled.div`
   line-height: 25px;
   color: #1e1e1e;
   display: inline-block;
-  text-align: left;
   float: left;
   @media (max-width: 599px) {
     font-size: 14px;
