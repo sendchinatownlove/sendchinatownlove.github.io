@@ -58,9 +58,6 @@ export const Modal = (props: Props) => {
     text: '$' + x.toString(),
   }));
 
-  const purchaseIsDonation =
-    modalView === ModalPaymentTypes.modalPages.donation;
-
   const getHeaderText = (purchaseType, sellerName) => {
     switch (purchaseType) {
       case ModalPaymentTypes.modalPages.donation:
@@ -142,14 +139,12 @@ export const Modal = (props: Props) => {
         {Number(amount) < minAmount && isCustomAmount && (
           <ErrorMessage>
             {t('paymentProcessing.amount.minimum')}{' '}
-            {purchaseIsDonation ? 'donation' : 'voucher'}{' '}
             {t('paymentProcessing.amount.amount')}: $5
           </ErrorMessage>
         )}
         {Number(amount) > maxAmount && isCustomAmount && (
           <ErrorMessage>
             {t('paymentProcessing.amount.maximum')}{' '}
-            {purchaseIsDonation ? 'donation' : 'voucher'}{' '}
             {t('paymentProcessing.amount.amount')}: $10000
           </ErrorMessage>
         )}
