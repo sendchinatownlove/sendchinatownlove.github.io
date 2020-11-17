@@ -26,7 +26,7 @@ const MegaGamListItem = ({ campaign }: Props) => {
           {campaign.active && (
             // TODO: Open payment modal.
             <Button className="button--filled" onClick={undefined}>
-              {t('gamHome.listItem.giftButton')}
+              {t('gamHome.megaGamListItem.giftButton')}
             </Button>
           )}
         </DonationContainer>
