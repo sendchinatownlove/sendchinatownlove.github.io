@@ -367,7 +367,8 @@ const Dropdown = styled.div`
   z-index: ${theme.maxzIndex};
   top: 20px;
   width: 212px;
-  height: 184px;
+  height: auto;
+  padding-bottom: 20px;
   a:hover {
     color: ${theme.navHoverColor};
   }
