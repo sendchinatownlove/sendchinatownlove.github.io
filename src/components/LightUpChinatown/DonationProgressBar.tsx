@@ -11,7 +11,7 @@ const centsToDollars = (cents: number) =>
 
 const DonationProgressBar = (props: Props) => {
   const { t } = useTranslation();
-  const percentage = (props.raised / 47000) * 100;
+  const percentage = (props.raised / 4700000) * 100;
 
   return (
     <BarContainer>
