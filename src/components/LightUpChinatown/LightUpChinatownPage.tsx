@@ -26,7 +26,7 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
-import { url } from 'inspector';
+//import { url } from 'inspector'; // Will use this after making topBanner into a styled component
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -243,12 +243,6 @@ const TextContainer = styled.section`
   @media (max-width: 599px) {
     padding: 35px 0px;
   }
-`;
-
-const Hero = styled.img`
-  height: ${(props) => props.height}px;
-  object-fit: cover;
-  width: 100vw;
 `;
 
 const Banner = styled.div`
