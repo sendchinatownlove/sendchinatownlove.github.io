@@ -26,6 +26,7 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
+import { url } from 'inspector';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -56,13 +57,30 @@ const LightUpChinatownPage = () => {
   }, []);
 
   return (
+    // Need to update topBanner to styled component
     <React.Fragment>
-      <Banner>
-        <Hero height={352} src={lanternHeroTop} alt="lantern overlay" />
-        <Button onClick={openModal}>{t('donationBox.button')}</Button>
+      <div
+        className="topBanner"
+        style={{
+          height: '352px',
+          backgroundImage: 'url(' + lanternHeroTop + ')',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          alignContent: 'center',
+          paddingTop: '100px',
+          paddingBottom: '50px',
+          paddingLeft: '25px',
+          paddingRight: '25px',
+        }}
+      >
         <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
         <HeaderSubtext>{t('lightUpChinatown.headerSubtext')}</HeaderSubtext>
-      </Banner>
+        <Button onClick={openModal}>{t('donationBox.button')}</Button>
+      </div>
       <Container>
         <TextContainer>
           <SummaryHeader>{t('lightUpChinatown.summaryHeader')}</SummaryHeader>
@@ -151,16 +169,12 @@ const LightUpChinatownPage = () => {
   );
 };
 
-const Button = styled.div`
-  line-height: 37px;
-  width: 212px;
-  position: absolute;
-  top: 67%;
-  left: 0;
-  right: 0;
+const Button = styled.span`
   margin: 0 auto;
   cursor: pointer;
-
+  width: 212px;
+  line-height: 37px;
+  text-align: center;
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
   font-size: 18px;
@@ -242,7 +256,8 @@ const Banner = styled.div`
   text-align: center;
 `;
 
-const HeaderText = styled.div`
+const HeaderText = styled.span`
+  margin: 0 auto;
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
@@ -250,20 +265,16 @@ const HeaderText = styled.div`
   line-height: 44px;
   letter-spacing: 0.01em;
   color: #ffffff;
-  position: absolute;
-  top: 38%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+
   @media (max-width: 599px) {
-    top: 30%;
-    text-align: start;
-    left: 30%;
-    transform: translate(-30%, -50%);
+    margin-left: 0;
+    text-align: left;
   }
 `;
 
-const HeaderSubtext = styled.div`
+const HeaderSubtext = styled.span`
+  margin: 0 auto;
+
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
@@ -271,18 +282,12 @@ const HeaderSubtext = styled.div`
   line-height: 33px;
   letter-spacing: 0.01em;
   color: #ffffff;
-  position: absolute;
-  top: 54%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
   @media (max-width: 599px) {
     font-size: 16px;
     line-height: 22px;
-    top: 55%;
-    text-align: start;
-    left: 30%;
-    transform: translate(-30%, -50%);
+    width: 215px;
+    text-align: left;
+    margin-left: 0;
   }
 `;
 
