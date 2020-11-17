@@ -413,6 +413,7 @@ const GoalText = styled.div`
   line-height: 25px;
   color: #1e1e1e;
   display: inline-block;
+
   float: left;
   @media (max-width: 599px) {
     font-size: 14px;
