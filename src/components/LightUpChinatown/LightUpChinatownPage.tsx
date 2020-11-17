@@ -204,6 +204,8 @@ const PartnersLogoContainer = styled.div`
 const PartnerLogo = styled.img`
   max-height: 130px;
   padding: 20px;
+  max-width: 100%;
+  overflow-x: hidden;
 `;
 
 const PartnerThanksTitle = styled.div`
