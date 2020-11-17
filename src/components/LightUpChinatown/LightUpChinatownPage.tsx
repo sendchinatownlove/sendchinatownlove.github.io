@@ -19,6 +19,14 @@ import DonationDetail from './DonationDetail';
 import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
 import { getProject, light_up_chinatown_id } from '../../utilities/api';
+import { phoneScreens } from '../../utilities/general/responsive';
+
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+  ModalPaymentTypes,
+} from '../../utilities/hooks/ModalPaymentContext';
+//import { url } from 'inspector'; // Will use this after making topBanner into a styled component
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -28,6 +36,15 @@ const LightUpChinatownPage = () => {
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
   const [contributions, setContributions] = useState<number>(0);
 
+  const ModalPaymentDispatcher = useModalPaymentDispatch(null);
+
+  const openModal = (event) => {
+    event.preventDefault();
+    ModalPaymentDispatcher({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.light_up_chinatown,
+    });
+  };
   const fetchData = async (project_id: number) => {
     const { data } = await getProject(project_id);
     if (data) {
@@ -40,12 +57,30 @@ const LightUpChinatownPage = () => {
   }, []);
 
   return (
+    // Need to update topBanner to styled component
     <React.Fragment>
-      <Banner>
-        <Hero height={304} src={lanternHeroTop} alt="lantern overlay" />
+      <div
+        className="topBanner"
+        style={{
+          height: '352px',
+          backgroundImage: 'url(' + lanternHeroTop + ')',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          alignContent: 'center',
+          paddingTop: '100px',
+          paddingBottom: '50px',
+          paddingLeft: '25px',
+          paddingRight: '25px',
+        }}
+      >
         <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
         <HeaderSubtext>{t('lightUpChinatown.headerSubtext')}</HeaderSubtext>
-      </Banner>
+        <Button onClick={openModal}>{t('donationBox.button')}</Button>
+      </div>
       <Container>
         <TextContainer>
           <SummaryHeader>{t('lightUpChinatown.summaryHeader')}</SummaryHeader>
@@ -134,6 +169,30 @@ const LightUpChinatownPage = () => {
   );
 };
 
+const Button = styled.span`
+  margin: 0 auto;
+  cursor: pointer;
+  width: 212px;
+  line-height: 37px;
+  text-align: center;
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+
+  box-shadow: 0 0 0.5pt 0.5pt black;
+  background-color: #ffffff;
+  border-radius: 100px;
+  padding: 10px 10px 10px 10px;
+  @media (${phoneScreens}) {
+    letter-spacing: 0.08em;
+  }
+  &:hover {
+    color: #ab192e;
+    box-shadow: 0 0 1pt 1pt #ab192e;
+  }
+`;
+
 const PartnersLogoContainer = styled.div`
   display: inline-flex;
   flex-direction: row;
@@ -186,58 +245,43 @@ const TextContainer = styled.section`
   }
 `;
 
-const Hero = styled.img`
-  height: ${(props) => props.height}px;
-  width: 100vw;
-  object-fit: cover;
-`;
-
 const Banner = styled.div`
   position: relative;
   text-align: center;
 `;
 
-const HeaderText = styled.div`
+const HeaderText = styled.span`
+  margin: 0 auto;
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 32px;
   line-height: 44px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   color: #ffffff;
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+
   @media (max-width: 599px) {
-    top: 30%;
-    text-align: start;
-    left: 30%;
-    transform: translate(-30%, -50%);
+    margin-left: 0;
+    text-align: left;
   }
 `;
 
-const HeaderSubtext = styled.div`
+const HeaderSubtext = styled.span`
+  margin: 0 auto;
+
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
   line-height: 33px;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
   color: #ffffff;
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
   @media (max-width: 599px) {
     font-size: 16px;
     line-height: 22px;
-    top: 55%;
-    text-align: start;
-    left: 30%;
-    transform: translate(-30%, -50%);
+    width: 215px;
+    text-align: left;
+    margin-left: 0;
   }
 `;
 
