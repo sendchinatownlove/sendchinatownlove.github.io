@@ -2,8 +2,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import { Campaign } from '../../../utilities/api/types';
-import { tabletScreens } from '../../../utilities/general/responsive';
+import type {
+  Campaign,
+  SellerDistributorPair,
+} from '../../../../utilities/api/types';
+import { tabletScreens } from '../../../../utilities/general/responsive';
+import SellerDistributorPair from './SellerDistributorPair';
 
 interface Props {
   campaign: Campaign;
@@ -37,7 +41,13 @@ const MegaGamListItem = ({ campaign }: Props) => {
           </LearnMoreText>
           {/* TODO: Add seller/distributor pairs. */}
           <SellerDistributorPairs>
-            _SELLER_DISTRIBUTOR_PAIRS_
+            {campaign.seller_distributor_pairs.map(
+              (sellerDistributorPair: SellerDistributorPair) => (
+                <SellerDistributorPair
+                  sellerDistributorPair={sellerDistributorPair}
+                />
+              )
+            )}
           </SellerDistributorPairs>
         </SellerDistributorContent>
       </Content>
