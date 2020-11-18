@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
-import { LIGHT_UP_CHINATOWN_TIER_2_MIN, MEGA_GAM } from '../../../consts';
+import { LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
 
 import LanternForm from './LanternForm';
 
@@ -246,5 +246,8 @@ const SubHeader = styled.p`
 `;
 
 const MegaGAMBar = styled.div<{ modalView: ModalPaymentTypes.modalPages }>`
-  display: ${(props) => (props.modalView === MEGA_GAM ? 'inline' : 'none')};
+  display: ${(props) =>
+    props.modalView === ModalPaymentTypes.modalPages.mega_gam
+      ? 'inline'
+      : 'none'};
 `;
