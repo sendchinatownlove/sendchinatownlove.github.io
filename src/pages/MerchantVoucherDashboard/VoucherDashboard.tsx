@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import moment from 'moment';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -9,6 +9,8 @@ import PrintIcon from '@material-ui/icons/Print';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import SearchIcon from '@material-ui/icons/Search';
 
+import { SuccessfulSaveBanner, SaveErrorBanner } from './Banners';
+import type { ErrorTypeValues } from './Banners';
 import VoucherTable from './VoucherTable';
 import { formatCentsAmount } from './utils';
 import Loader from '../../components/Loader/Loader';
@@ -81,6 +83,16 @@ const VoucherDashboard = ({
 }: Props) => {
   const [searchFilter, setSearchFilter] = useState<string>('');
   const [filterGam, setFilterGam] = useState<boolean>(false);
+
+  const [showSuccessBanner, setShowSuccessBanner] = useState<boolean>(false);
+  const [errorType, setErrorType] = useState<ErrorTypeValues | null>(null);
+
+  useEffect(() => {
+    if (showSuccessBanner) {
+      // Close success banner after 15 sec.
+      setTimeout(() => setShowSuccessBanner(false), 15000);
+    }
+  }, [showSuccessBanner]);
 
   const stats = useMemo(
     () => [
@@ -165,6 +177,8 @@ const VoucherDashboard = ({
           <StatsSection key={section.title} {...section} />
         ))}
       </div>
+      {showSuccessBanner && <SuccessfulSaveBanner />}
+      {errorType && <SaveErrorBanner errorType={errorType} />}
       <div className={styles.contentContainer}>
         {!showPrintView && (
           <div className={styles.filterSection}>
@@ -186,6 +200,7 @@ const VoucherDashboard = ({
                 checked={filterGam}
                 className={styles.checkbox}
                 classes={{
+                  checked: filterGam ? styles.filterGamSelected : '',
                   colorSecondary: filterGam ? styles.filterGamSelected : '',
                 }}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -208,6 +223,8 @@ const VoucherDashboard = ({
         <VoucherTable
           fetchData={fetchData}
           giftCards={filteredGiftCards}
+          setErrorType={setErrorType}
+          setShowSuccessBanner={setShowSuccessBanner}
           showPrintView={showPrintView}
         />
       </div>

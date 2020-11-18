@@ -11,17 +11,31 @@
 
 import { BrowsePageSeller } from '../../api/types';
 
+export type lucData = {
+  firstName: string;
+  middleInitial: string;
+  lastName: string;
+  fullName: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+};
+
 export type ModalPaymentState = {
   amount: string;
   customInput: boolean;
-  modalView: number;
+  purchaseType: modalPages | null;
+  modalView: modalPages | null;
   sellerData: BrowsePageSeller;
+  lucData: lucData;
 };
 
 export const defaultState: ModalPaymentState = {
   amount: '5',
   customInput: false,
-  modalView: -1,
+  modalView: null,
+  purchaseType: null,
   sellerData: {
     id: 0,
     seller_id: '',
@@ -53,4 +67,24 @@ export const defaultState: ModalPaymentState = {
     non_profit_location_id: '',
     logo_image_url: '',
   },
+  lucData: {
+    firstName: '',
+    middleInitial: '',
+    lastName: '',
+    fullName: '',
+    address: '',
+    city: '',
+    state: '',
+    zipCode: '',
+  },
 };
+
+export enum modalPages {
+  donation = 'donation',
+  light_up_chinatown = 'light_up_chinatown',
+  donation_pool = 'donation_pool',
+  gift_card = 'gift_card',
+  buy_meal = 'buy_meal',
+  card_details = 'card_details',
+  confirmation = 'confirmation',
+}

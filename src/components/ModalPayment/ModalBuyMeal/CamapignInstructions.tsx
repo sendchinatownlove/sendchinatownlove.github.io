@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { useTranslation } from 'react-i18next';
 
-import gam_icon_step1 from '../MerchantsPage/images/gam_icon_step1.svg';
-import gam_icon_step2 from '../MerchantsPage/images/gam_icon_step2.svg';
-import gam_icon_step3 from '../MerchantsPage/images/gam_icon_step3.svg';
-import gam_icon_step4 from '../MerchantsPage/images/gam_icon_step4.svg';
+import gam_icon_step1 from '../../MerchantsPage/images/gam_icon_step1.svg';
+import gam_icon_step2 from '../../MerchantsPage/images/gam_icon_step2.svg';
+import gam_icon_step3 from '../../MerchantsPage/images/gam_icon_step3.svg';
+import gam_icon_step4 from '../../MerchantsPage/images/gam_icon_step4.svg';
 
 const CampaignInstructions = () => {
   const { t } = useTranslation();

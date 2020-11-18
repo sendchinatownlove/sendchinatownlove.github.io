@@ -10,7 +10,7 @@ import MerchantCard from './MerchantCard';
 import MerchantDescriptionBanner from './MerchantDescriptionBanner';
 import NavBar from './MerchantNavBar';
 import { LoaderFillerContainer } from '../Loader';
-import { getSellers } from '../../utilities';
+import { getSellers } from '../../utilities/api';
 import type { BrowsePageSeller } from '../../utilities/api/types';
 import { getWebsiteImages } from '../../utilities/general/StoreImages';
 
@@ -131,6 +131,11 @@ const MerchantsPage = (props: Props) => {
 
             <div className={styles.storeInfoContainer}>
               <NavBar filterStoreType={filterStoreType} />
+              <h2>
+                <b>{t('merchantsPage.merchantHeader')}</b>
+              </h2>
+              <br />
+              <br />
 
               <div className={styles.merchantsContainer}>
                 {filter.map((store: any) =>

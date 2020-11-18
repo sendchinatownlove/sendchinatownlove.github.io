@@ -5,8 +5,10 @@ import {
   CLEAR_FORMS,
   SET_SELLER_DATA,
   UPDATE_SELLER_DATA,
+  SET_LUC_DATA,
+  CLEAR_ADDRESS,
 } from './constants';
-import { defaultState, ModalPaymentState } from './types';
+import { defaultState, ModalPaymentState, modalPages } from './types';
 
 export interface Action {
   type: string;
@@ -18,7 +20,16 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
 
   switch (type) {
     case SET_MODAL_VIEW:
+      if (
+        payload === modalPages.donation ||
+        payload === modalPages.gift_card ||
+        payload === modalPages.buy_meal ||
+        payload === modalPages.light_up_chinatown
+      ) {
+        return { ...state, modalView: payload, purchaseType: payload };
+      }
       return { ...state, modalView: payload };
+
     case SET_AMOUNT:
       return { ...state, amount: payload };
     case SET_SELLER_DATA:
@@ -34,12 +45,33 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
     case CLOSE_MODAL:
       return {
         ...state,
-        modalView: -1,
+        modalView: null,
         customInput: false,
         amount: defaultState.amount,
+        purchaseType: null,
+      };
+    case SET_LUC_DATA:
+      return {
+        ...state,
+        lucData: {
+          ...state.lucData,
+          [payload.key]: payload.value,
+        },
       };
     case CLEAR_FORMS:
       return defaultState;
+    case CLEAR_ADDRESS:
+      return {
+        ...state,
+        lucData: {
+          ...state.lucData,
+          fullName: '',
+          address: '',
+          city: '',
+          state: '',
+          zipCode: '',
+        },
+      };
     default:
       return state;
   }

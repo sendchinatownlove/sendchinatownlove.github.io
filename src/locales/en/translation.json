@@ -2,12 +2,47 @@
   "paymentProcessing": {
     "amount": {
       "header": "100% of your support will go to the merchant toward their operating costs. Your transaction is secure, encrypted and directly goes to the owner for sustaining their business.",
+      "light_up_chinatown": "100% of donation goes towards permanent light fixtures throughout Chinatown.",
       "label1": "Select amount",
       "label2": "Other:",
       "minimum": "Minimum",
       "maximum": "Maximum",
       "amount": "amount",
-      "submit": "Next"
+      "submit": "Next",
+      "adopt_lantern_tier_2": "Adopt-a-Lantern!",
+      "adopt_lantern_tier_3": "Adopt-a-Lantern, Keep-a-Lantern!",
+      "light_up_chinatown_address": {
+        "disclaimer_1": "You will be able to pick up your custom lantern at ",
+        "disclaimer_2": "This information will also be emailed to you.",
+        "address": "Chinese Consolidated Benevolent Association (CCBA), 62 Mott Street, New York, NY 10013.",
+        "address_button": " I’m from out of town and would like my lantern shipped to me.",
+        "cancel_address_button": "Cancel adding address"
+      },
+      "tier_2_donation": "Thank you for donating ${{limit}} or more.",
+      "tier_3_donation": "Thank you for donating ${{limit}} or more.",
+      "personalize": "Personalize your lantern with your or a loved one’s name.",
+      "labels": {
+        "amount": "amount",
+        "first_name": "first name",
+        "middle_initial": "middle initial",
+        "last_name": "last name",
+        "full_name": "Full Name",
+        "address": "Address",
+        "city": "City",
+        "state": "State",
+        "zip_code": "Zip code"
+      },
+      "place_holder": {
+        "amount": "amount",
+        "first_name": "Enter first name",
+        "middle_initial": "Enter middle initial",
+        "last_name": "Enter last name",
+        "full_name": "Enter full name",
+        "address": "Enter street address",
+        "city": "Enter city",
+        "state": "Enter state",
+        "zip_code": "Enter zip code"
+      }
     }
   },
   "navBar": {
@@ -17,9 +52,9 @@
       "waystodonate": {
         "donate": "DONATE",
         "gift-a-meal": "GIFT-A-MEAL",
-        "sticky-locals-x-scl": "STICKY LOCALS X SCL",
-        "friendofafriend-studioxscl": "FRIEND OF A FRIEND STUDIO X SCL"
-      }
+        "sticky-locals-x-scl": "STICKY LOCALS X SCL"
+      },
+      "light-up-chinatown": "LIGHT UP CHINATOWN"
     },
     "languages": {
       "english": "ENG",
@@ -44,7 +79,9 @@
   },
   "purchase": {
     "donation": "Donation for {{seller}}",
-    "voucher": "Voucher for {{seller}}"
+    "voucher": "Voucher for {{seller}}",
+    "donation_to": "Donation to {{seller}}",
+    "voucher_to": "Voucher to {{seller}}"
   },
   "errorPage": {
     "body": {
@@ -59,7 +96,47 @@
     "platformInfoDescription": "We are providing an online platform to low-tech, cash-only, Asian-owned small businesses that have been disproportionately impacted by COVID-19.",
     "platformInfoAction": "Support local merchants by making a donation or purchasing a voucher from them.",
     "flyerAsk": "Know of any business owners that fit our target merchant?",
-    "flyerDownload": "Download our flyer to share with them."
+    "flyerDownload": "Download our flyer to share with them.",
+    "merchantHeader": "Our Merchants"
+  },
+  "modalPayment": {
+    "modalCardDetails": {
+      "disclaimer": {
+        "donation": "By proceeding with your transaction, you understand that you are making a donation to {{sellerName}}. No goods or services were exchanged for this donation.",
+        "donation_pool": "By proceeding with your transaction, you understand that you are making a donation to all merchants partnered with Send Chinatown Love Inc. The full donation pool will be split among these merchants. No goods or services were exchanged for this donation.",
+        "gift_card": "By proceeding with your purchase, you understand that the voucher card is not redeemable for cash and can only be used at {{sellerName}}. All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase. Balance displayed in the voucher may or may not represent the final balance. Final balance information is subject to {{sellerName}} most recent records.",
+        "light_up_chinatown": "By proceeding with your transaction, you understand that you are making a donation to the Light Up Chinatown Project. This Project is directed towards supporting Chinatown as a whole, rather than any individual merchant."
+      },
+      "header": {
+        "completeYour": "Complete your ",
+        "paymentInfo": "Payment Information",
+        "checkout": "Checkout details",
+        "light_up_chinatown_donation": "Light Up Chinatown Donation"
+      },
+      "body": {
+        "paymentInfo": "Please add your payment information below",
+        "fullName": "Full Name",
+        "email": "Email",
+        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded"
+      },
+      "placeholders": {
+        "name": "Name",
+        "email": "Email"
+      },
+      "details": {
+        "donation": "Donation details",
+        "voucher": "Purchase details"
+      },
+      "message": {
+        "donation": "Donation",
+        "one_time_donation": "One-Time Donation",
+        "monthly_donation": "Monthly Donation",
+        "light_up_chinatown_tier_2": "Adopt-a-Lantern Donation",
+        "voucher": "Voucher Purchase",
+        "luc_name": "Name for personalized lantern: ",
+        "luc_address": "Shipping Address: "
+      }
+    }
   },
   "merchantNavBar": {
     "all": "All",
@@ -172,6 +249,47 @@
   "lightUpChinatown": {
     "headerText": "Light Up Chinatown",
     "headerSubtext": "Let’s light up Chinatown, one lantern at a time.",
-    "donationTierText": "Light Up Chinatown donation tiers"
+    "donationTierText": "Light Up Chinatown donation tiers",
+    "summaryHeader": "Let’s Light Up Chinatown!",
+    "summaryBody1": "Chinatown was hit hardest as fears about the coronavirus circulated in the United States in late January. Rumors swirled about the virus being present in Chinatown, and as xenophobia grew, restaurants’ revenue steeply declined. Without the regular volume of customers and foot traffic in Chinatown, the future of its many small, immigrant-owned businesses seemed bleak.",
+    "summaryBody2": "Patrick Mock, manager of 46 Mott St Bakery and community advocate, had an idea to light up Chinatown streets to draw customers back to Chinatown. With the help of City Council District 1 candidate Jenny Low, Chung Seto of United Democratic Organization (UDO), Joanne Kwong of Pearl River Mart and Send Chinatown Love, the <1>Light Up Chinatown</1> project was born.",
+    "summaryBody3": "Support the Light Up Chinatown project by donating today where all proceeds will go towards installing permanent light fixtures and traditional lanterns in the neighborhood.",
+    "summaryBody4": "All donations are welcome and no amount is too small. If you donate $45 or more, a personalized lantern will be hung on Mott Street and if you donate $150 or more, you will receive an additional lantern to take home as a keepsake.",
+    "summaryBody5": "Help us show that Chinatown is open for business and light the path forward for the neighborhood’s small business owners by supporting the Light Up Chinatown project today.",
+    "campaignHeader": "Light Up Chinatown Fundraising Campaign:",
+    "campaignDates": "November 16 - December 15, 2020",
+    "campaignDaysLeft": "More Days Left",
+    "progressBarHeader": "Total Raised: ",
+    "raiseGoal1": " GOAL 1: $23.5k",
+    "raiseGoal2": " GOAL 2: $47k",
+    "ceremony1": "Our big reveal of “Light Up Chinatown” is planned for the second week of December in celebration of the Winter Solstice. We hope you and your family will join us for this festive evening. Together, we can find light in the darkness.",
+    "ceremony2": "When you make a lantern donation, you will receive an email once we finalize the date and time.",
+    "donationTitle": "Donate to Light Up Chinatown",
+    "donationDescription1": "100% of the donations, no matter how big or small, will go towards permanent light fixtures and lanterns throughout Chinatown.",
+    "donationDescription2": "If you donate more than ${{limit_1}}, you will be eligible to participate in “Adopt-a-Lantern” where you will receive some perks for your generous donation.",
+    "faq": "Frequently Asked Questions",
+    "faqQuestion1": "How will my donation for this project benefit Chinatown?",
+    "faqAnswer1": "Your donation will help permanently light up Chinatown streets and create a warm and welcoming ambience to ensure consistent foot traffic and the longevity of Chinatown businesses. For donations that are $150 and more, you will receive a lantern and be invited to the Winter Solstice Lighting Ceremony.",
+    "faqQuestion2": "What is the “Light Up Chinatown” Ceremony?",
+    "faqAnswer2": "In celebration of the Winter Solstice, there will be an all-day event in Chinatown to honor the start of the season and a “Light Up Chinatown” Ceremony. During the celebration, all are welcome to enjoy delicious food and holiday shopping. Invitations with exact details will be sent to those who donated $150+ to our Light Up Chinatown Fundraising Campaign.",
+    "faqQuestion3": "How will the light fixtures and lanterns be installed for “Light Up Chinatown”?",
+    "faqAnswer3": "<0>Alternative Earth Care</0> has a four man team that will install 14 sections of lighting on Mott Street from Canal to Bayard with lanterns hung between each light bulb for Light Up Chinatown.",
+    "faqQuestion4": "I donated $150+, where can I pick up my personalized lantern?",
+    "faqAnswer4": "Pick up location is at CCBA, 62 Mott Street, New York, NY 10013. You will receive an email confirmation with detailed instructions on what time to pick up the lantern.",
+    "faqQuestion5": "I have not received an email confirmation. Who can I contact?",
+    "faqAnswer5": "Please contact us at <0>hello@sendchinatownlove.com</0> with the subject line “Light Up Chinatown”.",
+    "faqQuestion6": "I love Chinatown and I’d love to further support its businesses. Where can I do that?",
+    "faqAnswer6": "Thank you for sending Chinatown your love! To continue supporting this community, check out our <0>merchant page</0> for the full list of Asian-owned businesses we’re working with to make a donation or buy a gift card!",
+    "faqQuestion7": "What is Send Chinatown Love?",
+    "faqAnswer7": "Send Chinatown Love is a New York-based, entirely volunteer-run organization that helps the Chinatowns across the city get back on their feet by supporting immigrant-owned, small businesses that make up the fabric of these neighborhoods. The goal of Send Chinatown Love is to facilitate community support by creating digital platforms for restaurants and stores in need so that they can sustain themselves now and into the future. Check out our full list of partner merchants <0>here</0>.",
+    "donationDetail1": "1 x 12-inch lantern with your personalization hung on Mott Street",
+    "donationDetail2": "Funding permanent light fixtures throughout Chinatown",
+    "donationDetail3": "1 x 14-inch lantern with your personalization hung on Mott Street",
+    "donationDetail4": "1 x 12-inch custom designed lantern by a local artist to take home with you ",
+    "donationDetail5": "*A limited number of invitations to our Winter Solstice Celebration and lighting ceremony in December will be given to our largest donors",
+    "goal1": "Permanent light fixtures and lanterns on Mott St from Canal St to Bayard St",
+    "goal2": "Permanent light fixtures on Bayard St from Mott St to Bowery St",
+    "partnerThanks": "Thank you to our Chinatown Partners who make this possible!",
+    "costBreakdown": "How do the Costs Breakdown?"
   }
 }

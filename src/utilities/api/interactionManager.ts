@@ -15,6 +15,7 @@ import {
   locations,
   lyftRewards,
   nonprofits,
+  projects,
 } from './endpoints';
 
 // Fix return typing
@@ -25,7 +26,6 @@ export const getSellers = async (lang?: string): Promise<any> => {
 };
 
 export const getSeller = async (id: string, lang?: string): Promise<any> => {
-  console.log('not getSeller testing');
   return await axios.get(sellers + id, {
     params: { locale: localeFromLanguage(lang) },
   });
@@ -99,7 +99,9 @@ export const makeSquarePayment = async (
   payment: SquareLineItems,
   buyer: Buyer,
   isDistribution: boolean,
-  campaignId?: string
+  campaignId?: string,
+  projectId?: string,
+  metadata?: string | null
 ) => {
   const { email, name } = buyer;
   const idempotencyKey = buyer.idempotency_key;
@@ -115,10 +117,12 @@ export const makeSquarePayment = async (
         email,
         name,
         seller_id: sellerId,
+        project_id: projectId,
         idempotency_key: idempotencyKey,
         is_subscribed: isSubscribed,
         is_distribution: isDistribution, // TODO: deprecate this in favor of campaignId
         campaign_id: campaignId,
+        metadata: metadata,
       },
       { headers: { 'Access-Control-Allow-Origin': '*' } }
     )
@@ -140,7 +144,9 @@ export const updateVoucher = async (id: string, amount: number) =>
   axios
     .put(vouchers + id, { amount })
     .then((res) => res)
-    .catch((err) => err);
+    .catch((err) => {
+      throw err;
+    });
 
 export const getMerchantGiftCards = async (
   seller_id: string,
@@ -173,7 +179,6 @@ export const getCampaigns = async (): Promise<any> => {
 export const getCampaignsForMerchant = async (
   seller_id: string
 ): Promise<any> => {
-  console.log('not getCampaignsForMerchant testing');
   return await axios
     .get(sellers + seller_id + '/campaigns')
     .then((res) => res)
@@ -346,3 +351,11 @@ export const redeemToken = async (contact_id: number, token: string) =>
     .post(contacts + contact_id + '/' + lyftRewards + token + '/redeem/')
     .then((res) => res)
     .catch((err) => err);
+
+export const getProject = async (project_id: number) =>
+  axios
+    .get(projects + project_id)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const light_up_chinatown_id = 1;

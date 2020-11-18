@@ -6,7 +6,7 @@ import {
 } from '../../utilities/hooks/ModalPaymentContext';
 import { BrowsePageSeller } from '../../utilities/api/types';
 import { getCampaignsForMerchant } from '../../utilities';
-import Modal from '../Modal';
+import Modal from '../ModalPayment';
 import ProgressBar from '../ProgressBar';
 import defaultOwnerImage from './assets/female.svg';
 import styled from 'styled-components';
@@ -33,7 +33,6 @@ const OwnerPanel = ({
   showAltLayout,
 }: Props) => {
   const dispatch = useModalPaymentDispatch(null);
-  const [purchaseType, setPurchaseType] = useState('');
   const [activeCampaign, setActiveCampaign] = useState<any | null>();
   const [pricePerMeal, setPricePerMeal] = useState(0);
   const [campaignId, setCampaignId] = useState('');
@@ -60,9 +59,25 @@ const OwnerPanel = ({
   }, [seller.seller_id]);
 
   const showModal = (event: any) => {
-    dispatch({ type: ModalPaymentConstants.SET_MODAL_VIEW, payload: 0 });
-    setPurchaseType(event.target.value);
+    dispatch({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: event.target.value,
+    });
   };
+
+  const OrderNowModalBtn = (
+    <button
+      className={classnames(styles['button__toggle-modal'], styles.button)}
+      onClick={() => toggleOrderNow(false)}
+    >
+      Hide
+      <img
+        src={chevron}
+        alt="chevron"
+        className={showOrderNow ? styles.flipped : styles.unflipped}
+      />
+    </button>
+  );
 
   return (
     <OwnerContainer data-testid="owner-panel">
@@ -99,6 +114,24 @@ const OwnerPanel = ({
               showModal={showModal}
               active={activeCampaign}
             />
+            {!showOrderNow && (
+              <button
+                className={classnames(
+                  styles['button__toggle-modal'],
+                  styles.button
+                )}
+                onClick={() => toggleOrderNow(true)}
+              >
+                {deliveryService.length > 1
+                  ? 'View Hours & Order'
+                  : 'View Hours'}
+                <img
+                  src={chevron}
+                  alt="chevron"
+                  className={showOrderNow ? styles.flipped : styles.unflipped}
+                />
+              </button>
+            )}
           </div>
 
           {showOrderNow && (
@@ -107,26 +140,9 @@ const OwnerPanel = ({
               hours={sellerHours}
               isMerchantOpen={isMerchantOpen}
               deliveryService={deliveryService}
+              ModalButton={OrderNowModalBtn}
             />
           )}
-          <button
-            className={classnames(
-              styles['button__toggle-modal'],
-              styles.button
-            )}
-            onClick={() => toggleOrderNow(!showOrderNow)}
-          >
-            {showOrderNow
-              ? 'Hide'
-              : deliveryService.length > 1
-              ? 'View Hours & Order'
-              : 'View Hours'}
-            <img
-              src={chevron}
-              alt="chevron"
-              className={showOrderNow ? styles.flipped : styles.unflipped}
-            />
-          </button>
         </Panel>
       ) : (
         <Footer>
@@ -165,7 +181,6 @@ const OwnerPanel = ({
       )}
 
       <ModalBox
-        purchaseType={purchaseType}
         sellerId={seller.seller_id}
         sellerName={seller.name}
         costPerMeal={pricePerMeal / 100}
