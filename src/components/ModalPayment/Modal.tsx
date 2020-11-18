@@ -27,7 +27,6 @@ export interface ModalProps {
 export const Modal = (props: Props) => {
   const { modalView } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
-  console.log('Modal', modalView, 'Props', props);
   const closeModal = async (e: any) => {
     ReactPixel.trackCustom('ModalCloseButtonClick', {});
     e.preventDefault();

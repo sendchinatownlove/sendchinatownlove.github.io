@@ -18,9 +18,10 @@ export interface Props {
   sellerName: string;
 }
 
+const MEGA_GAM = 'mega_gam';
+
 export const Modal = (props: Props) => {
   const { t } = useTranslation();
-
   const { amount, modalView } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
   const [isCustomAmount, setIsCustomAmount] = useState(true);
@@ -67,7 +68,10 @@ export const Modal = (props: Props) => {
       case ModalPaymentTypes.modalPages.light_up_chinatown:
         return t('purchase.donation_to', { seller: sellerName });
       case ModalPaymentTypes.modalPages.mega_gam:
-        return t('purchase.donation_to', { seller: sellerName }); // todo: confirm which copy to use & who the seller is
+        return t(
+          'purchase.mega_gam',
+          sellerName ? { seller: sellerName } : { seller: 'Seller is blank' }
+        ); // todo: confirm which copy to use & who the seller is
       default:
         return t('purchase.donation', { seller: sellerName });
     }
@@ -92,6 +96,7 @@ export const Modal = (props: Props) => {
     <ContentContainer id="donation-form" data-testid="modal-amount">
       <Header>{getHeaderText(modalView, props.sellerName)}</Header>
       <SubHeader>{getSubheaderText(modalView)}</SubHeader>
+      <MegaGAMBar modalView={modalView}>MEGA GAM BAR</MegaGAMBar>
       <AmountContainer>
         <label htmlFor="select-amount">
           {t('paymentProcessing.amount.label1')}
@@ -237,8 +242,11 @@ const Header = styled.div`
   font-weight: 600;
 `;
 
-const SubHeader = styled.div`
-  font-family: 'Open Sans', sans-serif;
+const SubHeader = styled.p`
   font-size: 16px;
-  font-weight: 400;
+  margin-top: 16px;
+`;
+
+const MegaGAMBar = styled.div<{ modalView: string }>`
+  display: ${(props) => (props.modalView === MEGA_GAM ? 'inline' : 'none')};
 `;

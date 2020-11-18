@@ -14,7 +14,7 @@ import {
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
 
-const MegaGAMModal: any = Modal;
+const MegaGAMModal: any = Modal; // todo: figure out what props are needed
 
 interface Props {
   menuOpen: boolean;
@@ -78,7 +78,8 @@ const GiftAMealPage = (props: Props) => {
       >
         {t('gamHome.backButton')}
       </button>
-      {/* <MegaGAMModal></MegaGAMModal> */}
+      <MegaGAMModal></MegaGAMModal>
+      {/* Delete button below after testing */}
       <button onClick={showModal}>GAM DONATE</button>
       {activeCampaigns.length ? (
         <>
