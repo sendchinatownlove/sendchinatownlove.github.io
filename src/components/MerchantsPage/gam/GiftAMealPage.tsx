@@ -12,9 +12,18 @@ import {
   ModalPaymentConstants,
   useModalPaymentDispatch,
   ModalPaymentTypes,
+  useModalPaymentState,
 } from '../../../utilities/hooks/ModalPaymentContext';
 
-const MegaGAMModal: any = Modal; // todo: figure out what props are needed
+// todo: figure out what props are needed for MegaGAMModal
+// Props are for Modal are
+// sellerId: string;
+// sellerName: string;
+// costPerMeal: number;
+// nonProfitLocationId?: string;
+// campaignId?: string;
+
+const MegaGAMModal: any = Modal;
 
 interface Props {
   menuOpen: boolean;

@@ -6,6 +6,7 @@ import 'react-square-payment-form/lib/default.css';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
+import { MEGA_GAM } from '../../../consts';
 
 import SquareCardForm from './SquareCardForm';
 import SubmissionButton from './SubmissionButton';
@@ -345,7 +346,11 @@ const ModalCardDetails = ({
               <b>
                 ${amount} {numberOfMealsText}
               </b>{' '}
-              to {sellerName}{' '}
+              {/* For megagam, confirm which sellerName to use in line below */}
+              to{' '}
+              {purchaseType === MEGA_GAM
+                ? 'MEGA GAM - GET SELLER(S) INFO'
+                : sellerName}{' '}
             </span>
 
             {lucData.firstName !== '' && (

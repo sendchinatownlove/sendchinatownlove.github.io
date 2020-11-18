@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
-import { LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
+import { LIGHT_UP_CHINATOWN_TIER_2_MIN, MEGA_GAM } from '../../../consts';
 
 import LanternForm from './LanternForm';
 
@@ -17,8 +17,6 @@ export interface Props {
   sellerId: string;
   sellerName: string;
 }
-
-const MEGA_GAM = 'mega_gam';
 
 export const Modal = (props: Props) => {
   const { t } = useTranslation();
