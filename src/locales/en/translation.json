@@ -3,6 +3,7 @@
     "amount": {
       "header": "100% of your support will go to the merchant toward their operating costs. Your transaction is secure, encrypted and directly goes to the owner for sustaining their business.",
       "light_up_chinatown": "100% of donation goes towards permanent light fixtures throughout Chinatown.",
+      "mega_gam":"MegaGAM version: 100% of your support will go to the merchant.",
       "label1": "Select amount",
       "label2": "Other:",
       "minimum": "Minimum",

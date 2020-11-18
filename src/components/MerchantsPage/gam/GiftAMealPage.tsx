@@ -78,7 +78,7 @@ const GiftAMealPage = (props: Props) => {
       >
         {t('gamHome.backButton')}
       </button>
-      <MegaGAMModal p={1}></MegaGAMModal>
+      {/* <MegaGAMModal></MegaGAMModal> */}
       <button onClick={showModal}>GAM DONATE</button>
       {activeCampaigns.length ? (
         <>

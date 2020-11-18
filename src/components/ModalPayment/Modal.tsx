@@ -47,7 +47,7 @@ export const Modal = (props: Props) => {
       case ModalPaymentTypes.modalPages.confirmation:
         return <ModalConfirmation {...props} />;
       case ModalPaymentTypes.modalPages.mega_gam:
-        return <div>Hey</div>; // fill in with my Modal ccomponent
+        return <ModalAmount {...props} />;
       default:
         return;
     }

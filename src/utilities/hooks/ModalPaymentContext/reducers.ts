@@ -24,7 +24,8 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
         payload === modalPages.donation ||
         payload === modalPages.gift_card ||
         payload === modalPages.buy_meal ||
-        payload === modalPages.light_up_chinatown
+        payload === modalPages.light_up_chinatown ||
+        payload === modalPages.mega_gam
       ) {
         return { ...state, modalView: payload, purchaseType: payload };
       }
