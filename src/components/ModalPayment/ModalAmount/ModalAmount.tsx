@@ -245,6 +245,6 @@ const SubHeader = styled.p`
   margin-top: 16px;
 `;
 
-const MegaGAMBar = styled.div<{ modalView: string }>`
+const MegaGAMBar = styled.div<{ modalView: ModalPaymentTypes.modalPages }>`
   display: ${(props) => (props.modalView === MEGA_GAM ? 'inline' : 'none')};
 `;

@@ -21,6 +21,7 @@ import {
 // costPerMeal: number;
 // nonProfitLocationId?: string;
 // campaignId?: string;
+// In addition to above, we also need donation amounts as props for the megaGAM modal
 
 const MegaGAMModal: any = Modal;
 
