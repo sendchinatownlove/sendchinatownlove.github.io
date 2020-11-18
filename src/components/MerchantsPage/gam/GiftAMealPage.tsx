@@ -7,6 +7,14 @@ import NoActiveCampaignsBox from './NoCampaignsBox';
 import CampaignListItem from './CampaignListItem';
 import VideoComponent from './VideoComponent';
 import { useTranslation } from 'react-i18next';
+import Modal from '../../ModalPayment';
+import {
+  ModalPaymentConstants,
+  useModalPaymentDispatch,
+  ModalPaymentTypes,
+} from '../../../utilities/hooks/ModalPaymentContext';
+
+const MegaGAMModal: any = Modal;
 
 interface Props {
   menuOpen: boolean;
@@ -14,7 +22,7 @@ interface Props {
 
 const GiftAMealPage = (props: Props) => {
   const { t } = useTranslation();
-
+  const dispatch = useModalPaymentDispatch(null);
   const [activeCampaigns, setActiveCampaigns] = useState([]);
   const [pastCampaigns, setPastCampaigns] = useState([]);
   const [selectedCampaign, setSelectedCampaign] = useState(null);
@@ -35,6 +43,13 @@ const GiftAMealPage = (props: Props) => {
     fetchData();
     // eslint-disable-next-line
   }, []);
+
+  const showModal = (event: any) => {
+    dispatch({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.mega_gam,
+    });
+  };
 
   return (
     <div
@@ -63,6 +78,8 @@ const GiftAMealPage = (props: Props) => {
       >
         {t('gamHome.backButton')}
       </button>
+      <MegaGAMModal p={1}></MegaGAMModal>
+      <button onClick={showModal}>GAM DONATE</button>
       {activeCampaigns.length ? (
         <>
           <h5 className={styles.campaignHeader}>
