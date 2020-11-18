@@ -12,7 +12,6 @@ import {
   ModalPaymentConstants,
   useModalPaymentDispatch,
   ModalPaymentTypes,
-  useModalPaymentState,
 } from '../../../utilities/hooks/ModalPaymentContext';
 
 // todo: figure out what props are needed for MegaGAMModal
