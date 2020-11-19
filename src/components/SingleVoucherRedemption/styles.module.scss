@@ -1,0 +1,121 @@
+.header__merchant {
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.header__voucherAmount {
+  width: 45%;
+  height: 100%;
+}
+
+.heading__merchantName {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.heading__amount {
+  font-weight: bold;
+  font-size: 40px;
+  color: #a8192e;
+}
+
+.header__address {
+  display: block;
+  font-size: 14px;
+}
+
+.text__amountDescription {
+  display: block;
+  width: 100%;
+  text-align: right;
+  font-size: 14px;
+}
+
+.faq {
+  background: white;
+  width: 100%;
+  font-size: 10px;
+  padding: 18px 28px;
+  @media print {
+    height: 38vh;
+  }
+}
+
+.faq__p {
+  margin: 0 10px 19px;
+  @media print {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+.boldText {
+  font-weight: bold;
+}
+
+.body__voucherCode {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  border-right: 1px dashed #959595;
+}
+
+.heading__voucherCode {
+  line-height: 166%;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.text__codeDescription {
+  width: 65%;
+  display: block;
+}
+
+.body__separator {
+  top: 0;
+  position: absolute;
+  height: 180px;
+  width: 14px;
+  @media print {
+    height: 22vh;
+  }
+}
+
+.separator__text {
+  font-size: 12px;
+  position: relative;
+  background: #faf4ea;
+  width: 14px;
+  &Center {
+    top: 50%;
+  }
+
+  &Bottom {
+    position: absolute;
+    left: 12%;
+    top: calc(100% - 14px);
+  }
+}
+
+.body__QrImage {
+  width: calc(50% - 88px);
+  margin: 0 44px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.qrImage {
+  max-width: 78px;
+  height: auto;
+}

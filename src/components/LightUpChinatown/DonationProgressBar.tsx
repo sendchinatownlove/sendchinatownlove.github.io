@@ -11,13 +11,15 @@ const centsToDollars = (cents: number) =>
 
 const DonationProgressBar = (props: Props) => {
   const { t } = useTranslation();
-  const percentage = (props.raised / 47000) * 100;
+  const percentage = (props.raised / 4700000) * 100;
 
   return (
     <BarContainer>
       <ProgressBarHeader>
-        {t('lightUpChinatown.progressBarHeader')}{' '}
-        <strong>${centsToDollars(props.raised)} </strong>
+        <strong>
+          {t('lightUpChinatown.progressBarHeader')} $
+          {centsToDollars(props.raised)}
+        </strong>
       </ProgressBarHeader>
       <ProgressBar>
         <Filler style={{ width: `${percentage}%` }} />
@@ -61,44 +63,39 @@ const Filler = styled.div`
   background: #f6c342;
 `;
 
-const GoalImage1 = styled.div`
+const GoalImage = styled.div`
   width: 25px;
   height: 25px;
   background: #ffffff;
   border: 4px solid #ff3a2f;
   box-sizing: border-box;
   position: absolute;
-  left: 50%;
   bottom: 0;
   border-radius: 12px;
 `;
-const GoalImage2 = styled(GoalImage1)`
-  left: 98%;
-  @media (max-width: 920px) {
-    left: 92%;
-  }
+
+const GoalImage1 = styled(GoalImage)`
+  left: calc(50% - 25px);
+`;
+
+const GoalImage2 = styled(GoalImage)`
+  right: 0;
 `;
 
 const GoalContainer = styled.div`
   width: 100%;
-  postion: relative;
+  position: relative;
   height: 18px;
   font-size: 13px;
   white-space: nowrap;
-  @media (max-width: 920px) {
-    font-size: 8px;
-  }
 `;
 
 const Goal1 = styled.div`
   position: absolute;
-  left: 48%;
+  left: calc(50% - 50px);
 `;
 
 const Goal2 = styled.div`
   position: absolute;
-  left: 86%;
-  @media (max-width: 920px) {
-    left: 80%;
-  }
+  right: 0;
 `;
