@@ -268,16 +268,17 @@ const ModalCardDetails = ({
     type: ModalPaymentTypes.modalPages,
     amount: number
   ) => {
-    switch (true) {
-      case sellerId === 'send-chinatown-love':
-        return t('modalPayment.modalCardDetails.details.donation');
-      case type === ModalPaymentTypes.modalPages.gift_card:
-        return t('modalPayment.modalCardDetails.details.voucher');
-      case type === ModalPaymentTypes.modalPages.light_up_chinatown &&
-        amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN:
-        return t('modalPayment.modalCardDetails.details.voucher');
-      default:
-        return t('modalPayment.modalCardDetails.details.donation');
+    if (sellerId === 'send-chinatown-love') {
+      return t('modalPayment.modalCardDetails.details.donation');
+    } else if (type === ModalPaymentTypes.modalPages.gift_card) {
+      return t('modalPayment.modalCardDetails.details.voucher');
+    } else if (
+      type === ModalPaymentTypes.modalPages.light_up_chinatown &&
+      amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN
+    ) {
+      return t('modalPayment.modalCardDetails.details.voucher');
+    } else {
+      return t('modalPayment.modalCardDetails.details.donation');
     }
   };
 
