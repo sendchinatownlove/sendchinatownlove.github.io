@@ -66,25 +66,20 @@ export const Modal = (props: Props) => {
       case ModalPaymentTypes.modalPages.light_up_chinatown:
         return t('purchase.donation_to', { seller: sellerName });
       case ModalPaymentTypes.modalPages.mega_gam:
-        return t(
-          'purchase.mega_gam',
-          sellerName ? { seller: sellerName } : { seller: 'Seller is blank' }
-        ); // todo: confirm which copy to use & who the seller is
+        return t('purchase.mega_gam'); // todo: confirm which copy to use & who the seller is
       default:
         return t('purchase.donation', { seller: sellerName });
     }
   };
 
-  const getSubheaderText = (purchaseType) => {
+  const getSubheaderText = (purchaseType: ModalPaymentTypes.modalPages) => {
     switch (purchaseType) {
-      case ModalPaymentTypes.modalPages.donation:
-        return t('paymentProcessing.amount.header');
-      case ModalPaymentTypes.modalPages.gift_card:
-        return t('paymentProcessing.amount.header');
       case ModalPaymentTypes.modalPages.light_up_chinatown:
         return t('paymentProcessing.amount.light_up_chinatown');
       case ModalPaymentTypes.modalPages.mega_gam:
         return t('paymentProcessing.amount.mega_gam');
+      case ModalPaymentTypes.modalPages.donation:
+      case ModalPaymentTypes.modalPages.gift_card:
       default:
         return t('paymentProcessing.amount.header');
     }

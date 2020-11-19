@@ -83,7 +83,7 @@
     "voucher": "Voucher for {{seller}}",
     "donation_to": "Donation to {{seller}}",
     "voucher_to": "Voucher to {{seller}}",
-    "mega_gam": "Title of MegaGAM December etc, update seller(s) {{seller}}"
+    "mega_gam": "Title of MegaGAM December etc"
   },
   "errorPage": {
     "body": {
