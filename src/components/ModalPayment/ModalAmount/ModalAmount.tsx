@@ -88,6 +88,9 @@ export const Modal = (props: Props) => {
   return (
     <ContentContainer id="donation-form" data-testid="modal-amount">
       <Header>{getHeaderText(modalView, props.sellerName)}</Header>
+      {props.sellerId === 'send-chinatown-love' && (
+        <p>{t('donationPool.description2')}</p>
+      )}
       <SubHeader>{getSubheaderText(modalView)}</SubHeader>
       <MegaGAMBar modalView={modalView}>MEGA GAM BAR</MegaGAMBar>
       <AmountContainer>
