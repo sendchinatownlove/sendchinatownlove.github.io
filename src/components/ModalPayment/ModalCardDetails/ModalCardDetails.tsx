@@ -253,12 +253,7 @@ const ModalCardDetails = ({
       case ModalPaymentTypes.modalPages.light_up_chinatown:
         return t('modalPayment.modalCardDetails.disclaimer.light_up_chinatown');
       case ModalPaymentTypes.modalPages.mega_gam:
-        return t(
-          'modalPayment.modalCardDetails.disclaimer.mega_gam',
-          sellerName
-            ? { sellerName: sellerName }
-            : { sellerName: 'ADD SELLER(S)' } // Remove this line once we have sellerName being passed in
-        ); // todo: confirm which copy to use & who the seller is for MegaGAM. Currently there's no sellerName being passed so it is blank.
+        return t('modalPayment.modalCardDetails.disclaimer.mega_gam');
       default:
         break;
     }
