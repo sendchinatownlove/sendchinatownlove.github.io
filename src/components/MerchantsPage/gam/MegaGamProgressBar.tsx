@@ -3,6 +3,8 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
+import ProgressBar from './ProgressBar';
+
 const PROGRESS_BAR_COLOR = '#CF6E8A';
 
 const centsToDollars = (cents: number) =>
@@ -40,19 +42,18 @@ const MegaGamProgressBar = ({
   const daysLeftInCampaign = moment(endDate).diff(moment(), 'days');
 
   return (
-    <ProgressBarContainer>
+    <Container>
       <TotalRaised>
         Total Raised:{' '}
         <TotalRaisedAmount>${totalRaisedDollars}</TotalRaisedAmount>
       </TotalRaised>
-      <TargetAmountBar className="progress-bar">
-        <CurrentProgressBar
-          style={{
-            backgroundColor: PROGRESS_BAR_COLOR,
-            width: `${Math.min(percentRaised, 100)}%`,
-          }}
-        ></CurrentProgressBar>
-      </TargetAmountBar>
+      <ProgressBarContainer>
+        <ProgressBar
+          amount={{ current: totalRaised, target: targetAmount }}
+          color={PROGRESS_BAR_COLOR}
+          size="LARGE"
+        />
+      </ProgressBarContainer>
       <div>
         <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
           {percentRaised}% {t('buyMeal.toTarget')}
@@ -68,13 +69,13 @@ const MegaGamProgressBar = ({
           {t('buyMeal.days')}
         </EndsAtContainer>
       )}
-    </ProgressBarContainer>
+    </Container>
   );
 };
 
 export default MegaGamProgressBar;
 
-const ProgressBarContainer = styled.div`
+const Container = styled.div`
   flex: 1;
   font-size: 18px;
   margin-right: 60px;
@@ -92,15 +93,8 @@ const TotalRaisedAmount = styled.span`
   font-weight: 800;
 `;
 
-const TargetAmountBar = styled.div`
-  background-color: #eaeaea;
-  border-radius: 24px;
+const ProgressBarContainer = styled.div`
   margin-bottom: 12px;
-  overflow: hidden;
-`;
-
-const CurrentProgressBar = styled.div`
-  height: 24px;
 `;
 
 const ProgressTextContainer = styled.span`
