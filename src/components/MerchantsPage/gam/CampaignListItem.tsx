@@ -37,7 +37,9 @@ const CampaignListItem = (props: Props) => {
 
   const fetchData = async () => {
     const distributorData = await getDistributor(campaign.distributor_id);
-    const merchantData = await getSeller(campaign.seller_id);
+    const seller_id = campaign.seller_distributor_pairs[0].seller_id;
+    const merchantData = await getSeller(seller_id);
+
     setDistributor(distributorData.data);
     setMerchant(merchantData.data);
     if (campaign.nonprofit_id) {
@@ -92,13 +94,16 @@ const CampaignListItem = (props: Props) => {
           <Description>
             {campaign.description}{' '}
             {distributor && (
-              <a
-                href={distributor.website_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn more about {distributor.name}.
-              </a>
+              <span>
+                Learn more about{' '}
+                <a
+                  href={distributor.website_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {distributor.name}.
+                </a>
+              </span>
             )}
           </Description>
           <CampaignProgressBar
