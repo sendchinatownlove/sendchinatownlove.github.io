@@ -17,8 +17,7 @@ const MegaGamListItem = ({ campaign }: Props) => {
       <Content>
         {/* TODO: Figure out if this is the correct header. If so, we need to translate. */}
         <Header>Mega-GAM</Header>
-        {/* TODO: Don't hard code this. Figure out where we should get this data from. */}
-        <Subheader>December Campaign</Subheader>
+        <Subheader>{campaign.name}</Subheader>
         <Description>{campaign.description}</Description>
         <DonationContainer>
           {/* TODO: Add donation data UI. */}
