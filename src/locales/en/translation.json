@@ -218,6 +218,9 @@
       "viewButton": "Visit Merchant",
       "giftButton": "Gift Meal",
       "fiscalSponsor": "Donations for this campaign are in partnership with {{sponsorName}}, a non-profit organization under IRS code 501(c)(3). Your donation will be tax deductible to the extent allowable by law."
+    },
+    "megaGamListItem": {
+      "giftButton": "Gift Meals"
     }
   },
   "buyMealPool": {

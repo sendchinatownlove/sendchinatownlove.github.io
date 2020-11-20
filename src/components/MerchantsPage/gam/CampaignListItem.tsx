@@ -20,8 +20,8 @@ import {
 
 interface Props {
   campaign: Campaign;
-  selectedCampaign: null | number;
-  setSelectedCampaign: Function;
+  selectedCampaignId: null | number;
+  setSelectedCampaignId: Function;
 }
 
 const ModalBox: any = Modal;
@@ -60,7 +60,7 @@ const CampaignListItem = (props: Props) => {
   const campaignImageUrls = campaign.gallery_image_urls;
 
   const showModal = (event: any) => {
-    props.setSelectedCampaign(campaign.id);
+    props.setSelectedCampaignId(campaign.id);
     dispatch({
       type: ModalPaymentConstants.SET_MODAL_VIEW,
       payload: ModalPaymentTypes.modalPages.buy_meal,
@@ -139,7 +139,7 @@ const CampaignListItem = (props: Props) => {
           )}
         </ColumnContainer>
 
-        {campaign.active && props.selectedCampaign === campaign.id && (
+        {campaign.active && props.selectedCampaignId === campaign.id && (
           <ModalBox
             sellerId={merchant.seller_id}
             sellerName={merchant.name}
