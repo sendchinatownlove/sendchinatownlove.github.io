@@ -225,15 +225,17 @@ const PartnerThanksTitle = styled.div`
 `;
 
 const Container = styled.section`
-  max-width: 1440px;
+  width: 90%;
   margin: 0 auto;
-  padding: 0px 25px;
+  padding: 40px 25px 0px;
   align-items: center;
   display: flex;
   flex-direction: column;
   @media (min-width: 900px) {
     display: grid;
     grid-column-gap: 116px;
+    padding-top: 80px;
+    max-width: 1280px;
   }
 `;
 
