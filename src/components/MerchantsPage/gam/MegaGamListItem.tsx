@@ -17,7 +17,7 @@ const MegaGamListItem = ({ campaign }: Props) => {
       <Content>
         {/* TODO: Figure out if this is the correct header. If so, we need to translate. */}
         <Header>Mega-GAM</Header>
-        <Subheader>{campaign.name}</Subheader>
+        <Subheader>{campaign.display_name}</Subheader>
         <Description>{campaign.description}</Description>
         <DonationContainer>
           {/* TODO: Add donation data UI. */}
@@ -48,6 +48,7 @@ const Container = styled.div`
   background-color: #f7f7f7;
   display: flex;
   flex-direction: column;
+  margin-bottom: 56px;
 `;
 
 // TODO: Figure out how this image should scale.

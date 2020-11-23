@@ -121,6 +121,7 @@ export type Campaign = {
   amount_raised: number;
   created_at: string;
   description: string;
+  display_name: string;
   distributor_id: string;
   end_date: string;
   gallery_image_urls: string[];
@@ -128,7 +129,6 @@ export type Campaign = {
   last_contribution: string;
   location_id: string;
   nonprofit_id: string;
-  name: string;
   project_id: number;
   price_per_meal: number;
   seller_id: string;
