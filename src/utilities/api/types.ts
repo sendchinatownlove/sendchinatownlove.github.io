@@ -106,7 +106,7 @@ export type BrowsePageSeller = {
   logo_image_url: string;
 };
 
-type SellerDistributorPair = {
+export type SellerDistributorPair = {
   distributor_id: number;
   distributor_image_url: string;
   distributor_name: string;

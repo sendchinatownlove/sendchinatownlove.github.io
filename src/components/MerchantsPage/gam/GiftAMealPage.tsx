@@ -6,7 +6,7 @@ import type { Campaign } from '../../../utilities/api';
 import illustrated_flatlay_hero from '../images/illustrated_flatlay_hero.png';
 import CampaignInstructions from './CampaignInstructions';
 import CampaignListItem from './CampaignListItem';
-import MegaGamListItem from './MegaGamListItem';
+import MegaGamListItem from './MegaGamListItem/MegaGamListItem';
 import NoActiveCampaignsBox from './NoCampaignsBox';
 import VideoComponent from './VideoComponent';
 
