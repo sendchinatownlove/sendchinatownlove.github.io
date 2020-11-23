@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import ProgressBar from './ProgressBar';
+import ProgressBar, { SIZE_TYPE } from './ProgressBar';
 
 interface Props {
   isActive: boolean;
@@ -63,7 +63,7 @@ const CampaignProgressBar = ({
         <ProgressBar
           amount={{ current: numContributions, target: targetAmount }}
           color={progressBarColor}
-          size="SMALL"
+          size={SIZE_TYPE.SMALL}
         />
       </ProgressBarContainer>
       <div>

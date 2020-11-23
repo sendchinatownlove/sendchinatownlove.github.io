@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import ProgressBar from './ProgressBar';
+import ProgressBar from '../ProgressBar';
 
 const PROGRESS_BAR_COLOR = '#CF6E8A';
 

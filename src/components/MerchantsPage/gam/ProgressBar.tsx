@@ -9,7 +9,12 @@ const calculatePercentRaised = (raised: number, target: number) => {
   return Math.round((raised / target) * 100);
 };
 
-type SizeType = 'SMALL' | 'LARGE';
+export const SIZE_TYPE = {
+  SMALL: 'SMALL',
+  LARGE: 'LARGE',
+};
+type SizeKeys = keyof typeof SIZE_TYPE;
+type SizeType = typeof SIZE_TYPE[SizeKeys];
 
 interface Props {
   amount: {

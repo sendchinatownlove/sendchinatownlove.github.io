@@ -13,7 +13,7 @@ const LightUpFaq = () => {
     },
     {
       question: t('lightUpChinatown.faqQuestion2'),
-      answer: t('lightUpChinatown.faqAnswer2'),
+      answer: <p />,
     },
     {
       question: t('lightUpChinatown.faqQuestion3'),
@@ -78,7 +78,7 @@ const LightUpFaq = () => {
 
       <FaqContainer>
         {faqQuestions.map((faq, idx) => (
-          <QuestionContainer>
+          <QuestionContainer key={'LUCFaq' + idx}>
             <span>
               <Question> {`${idx + 1}.`}</Question>
             </span>

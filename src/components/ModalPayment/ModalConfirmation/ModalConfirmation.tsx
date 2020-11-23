@@ -26,12 +26,15 @@ const ModalConfirmation = (props: Props) => {
   const closeModal = async (e: any) => {
     ReactPixel.trackCustom('ModalConfirmationButtonClick', {});
     e.preventDefault();
-
-    const { data } = props.sellerId && (await getSeller(props.sellerId));
-    dispatch({
-      type: ModalPaymentConstants.UPDATE_SELLER_DATA,
-      payload: data.amount_raised,
-    });
+    // @TODO(wilsonj806) Replace the below with a proper fix
+    //...for differentiating between a seller and a project
+    if (props.sellerId !== 'light-up-chinatown') {
+      const { data } = props.sellerId && (await getSeller(props.sellerId));
+      dispatch({
+        type: ModalPaymentConstants.UPDATE_SELLER_DATA,
+        payload: data.amount_raised,
+      });
+    }
     dispatch({ type: ModalPaymentConstants.CLOSE_MODAL, payload: undefined });
   };
 

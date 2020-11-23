@@ -2,9 +2,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import type { Campaign } from '../../../utilities/api';
-import { tabletScreens } from '../../../utilities/general/responsive';
+import type {
+  Campaign,
+  SellerDistributorPair as SellerDistributorPairType,
+} from '../../../../utilities/api/types';
+import { tabletScreens } from '../../../../utilities/general/responsive';
 import MegaGamProgressBar from './MegaGamProgressBar';
+import SellerDistributorPair from './SellerDistributorPair';
 
 interface Props {
   campaign: Campaign;
@@ -40,9 +44,15 @@ const MegaGamListItem = ({ campaign }: Props) => {
           <LearnMoreText>
             Learn more about our participating merchants:
           </LearnMoreText>
-          {/* TODO: Add seller/distributor pairs. */}
           <SellerDistributorPairs>
-            _SELLER_DISTRIBUTOR_PAIRS_
+            {campaign.seller_distributor_pairs.map(
+              (sellerDistributorPair: SellerDistributorPairType) => (
+                <SellerDistributorPair
+                  key={`${sellerDistributorPair.distributor_id};${sellerDistributorPair.seller_id}`}
+                  sellerDistributorPair={sellerDistributorPair}
+                />
+              )
+            )}
           </SellerDistributorPairs>
         </SellerDistributorContent>
       </Content>
@@ -151,6 +161,11 @@ const LearnMoreText = styled.div`
 const SellerDistributorPairs = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 100%;
+
+  > :not(:last-child) {
+    margin-right: 28px;
+  }
 `;
 
 export default MegaGamListItem;
