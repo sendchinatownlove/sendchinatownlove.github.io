@@ -23,8 +23,10 @@ const DonationProgressBar = (props: Props) => {
       </ProgressBarHeader>
       <ProgressBar>
         <Filler style={{ width: `${percentage}%` }} />
-        <GoalImage1 />
-        <GoalImage2 />
+        <GoalImage className={`left ${percentage >= 50 ? 'completed' : ''}`} />
+        <GoalImage
+          className={`right ${percentage === 100 ? 'completed' : ''}`}
+        />
       </ProgressBar>
       <GoalContainer>
         <Goal1>{t('lightUpChinatown.raiseGoal1')}</Goal1>
@@ -68,20 +70,23 @@ const Filler = styled.div`
 const GoalImage = styled.div`
   width: 25px;
   height: 25px;
-  background: #ffffff;
   border: 4px solid #ff3a2f;
   box-sizing: border-box;
   position: absolute;
   bottom: 0;
   border-radius: 12px;
-`;
+  background: white;
+  &.left {
+    left: calc(50% - 25px);
+  }
 
-const GoalImage1 = styled(GoalImage)`
-  left: calc(50% - 25px);
-`;
+  &.right {
+    right: 0;
+  }
 
-const GoalImage2 = styled(GoalImage)`
-  right: 0;
+  &.completed {
+    background-color: #ff3a2f;
+  }
 `;
 
 const GoalContainer = styled.div`
