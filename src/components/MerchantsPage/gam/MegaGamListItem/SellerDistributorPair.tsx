@@ -13,6 +13,7 @@ const SellerDistributorPair = ({ sellerDistributorPair }: Props) => (
       <img
         src={sellerDistributorPair.seller_image_url}
         style={{ width: '100%' }}
+        alt="seller"
       />
     </MerchantImage>
     <PairContent>
@@ -24,6 +25,7 @@ const SellerDistributorPair = ({ sellerDistributorPair }: Props) => (
         <img
           src={sellerDistributorPair.distributor_image_url}
           style={{ height: '100%' }}
+          alt="distributor"
         />
       </DistributorImage>
     </PairContent>
