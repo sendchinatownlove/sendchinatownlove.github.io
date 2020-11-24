@@ -10,7 +10,6 @@ import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
 import { LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
-
 import LanternForm from './LanternForm';
 
 export interface Props {

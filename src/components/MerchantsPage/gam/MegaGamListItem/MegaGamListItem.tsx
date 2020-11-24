@@ -9,6 +9,13 @@ import type {
 import { tabletScreens } from '../../../../utilities/general/responsive';
 import MegaGamProgressBar from './MegaGamProgressBar';
 import SellerDistributorPair from './SellerDistributorPair';
+import Modal from '../../../ModalPayment';
+
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+  ModalPaymentTypes,
+} from '../../../../utilities/hooks/ModalPaymentContext';
 
 interface Props {
   campaign: Campaign;
@@ -16,6 +23,17 @@ interface Props {
 
 const MegaGamListItem = ({ campaign }: Props) => {
   const { t } = useTranslation();
+
+  const ModalPaymentDispatcher = useModalPaymentDispatch(null);
+
+  const openModal = (event) => {
+    event.preventDefault();
+    ModalPaymentDispatcher({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.mega_gam,
+    });
+  };
+
   return (
     <Container>
       <HeroImage heroImageUrl={campaign.gallery_image_urls[0]} />
@@ -33,9 +51,19 @@ const MegaGamListItem = ({ campaign }: Props) => {
           />
           {campaign.active && (
             // TODO: Open payment modal.
-            <Button className="button--filled" onClick={undefined}>
+            <Button className="button--filled" onClick={openModal}>
               <ButtonText>{t('gamHome.megaGamListItem.giftButton')}</ButtonText>
             </Button>
+          )}
+          {campaign.active && (
+            <Modal
+              sellerId={''}
+              sellerName={''}
+              costPerMeal={campaign.price_per_meal}
+              nonProfitLocationId={''}
+              projectId={campaign.project_id}
+              campaign={campaign}
+            />
           )}
         </DonationContainer>
         <SellerDistributorContent>

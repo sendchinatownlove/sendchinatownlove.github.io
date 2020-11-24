@@ -1,3 +1,4 @@
+import { ModalPaymentTypes } from '.';
 import {
   SET_MODAL_VIEW,
   SET_AMOUNT,
@@ -24,14 +25,26 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
         payload === modalPages.donation ||
         payload === modalPages.gift_card ||
         payload === modalPages.buy_meal ||
-        payload === modalPages.light_up_chinatown
+        payload === modalPages.light_up_chinatown ||
+        payload === modalPages.mega_gam
       ) {
         return { ...state, modalView: payload, purchaseType: payload };
       }
       return { ...state, modalView: payload };
 
     case SET_AMOUNT:
-      return { ...state, amount: payload };
+      // TODO (billy-yuan): Confirm whether MegaGam campaigns in the future will have donation matching.
+      // If so, then isMatching === true should determine whether `match` (a number) will be a state
+      if (state.modalView === ModalPaymentTypes.modalPages.mega_gam) {
+        return {
+          ...state,
+          amount: payload.amount,
+          matchAmount: payload.matchAmount,
+        };
+      } else {
+        return { ...state, amount: payload };
+      }
+
     case SET_SELLER_DATA:
       return { ...state, sellerData: payload };
     case UPDATE_SELLER_DATA:

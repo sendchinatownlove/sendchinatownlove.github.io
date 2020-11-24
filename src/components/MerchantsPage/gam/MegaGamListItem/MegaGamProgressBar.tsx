@@ -15,6 +15,7 @@ interface Props {
   isActive: boolean;
   targetAmount: number; // In cents.
   totalRaised: number; // In cents.
+  isModal?: boolean;
 }
 
 const MegaGamProgressBar = ({
@@ -22,6 +23,7 @@ const MegaGamProgressBar = ({
   isActive,
   targetAmount,
   totalRaised,
+  isModal,
 }: Props) => {
   const { t } = useTranslation();
 
@@ -42,7 +44,7 @@ const MegaGamProgressBar = ({
   const daysLeftInCampaign = moment(endDate).diff(moment(), 'days');
 
   return (
-    <Container>
+    <Container isModal={isModal}>
       <TotalRaised>
         Total Raised:{' '}
         <TotalRaisedAmount>${totalRaisedDollars}</TotalRaisedAmount>
@@ -77,7 +79,8 @@ export default MegaGamProgressBar;
 
 const Container = styled.div`
   flex: 1;
-  font-size: 18px;
+  font-size: ${({ isModal }: { isModal: boolean | undefined }) =>
+    isModal ? '15px' : '18px'};
   margin-right: 60px;
   padding: 16px 0;
   width: 100%;

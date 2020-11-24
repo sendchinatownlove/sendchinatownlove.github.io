@@ -1,6 +1,7 @@
 import React from 'react';
 import ModalAmount from './ModalAmount';
 import ModalBuyMeal from './ModalBuyMeal';
+import ModalMegaGam from './ModalMegaGam';
 import ModalCardDetails from './ModalCardDetails';
 import ModalConfirmation from './ModalConfirmation';
 import {
@@ -9,6 +10,8 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
+
+import type { Campaign } from '../../utilities/api/types';
 import ReactPixel from 'react-facebook-pixel';
 import styled from 'styled-components';
 
@@ -17,7 +20,8 @@ export interface Props {
   sellerName: string;
   costPerMeal: number;
   nonProfitLocationId?: string;
-  campaignId?: string;
+  projectId?: number;
+  campaign?: Campaign;
 }
 
 export interface ModalProps {
@@ -46,6 +50,8 @@ export const Modal = (props: Props) => {
         return <ModalCardDetails {...props} />;
       case ModalPaymentTypes.modalPages.confirmation:
         return <ModalConfirmation {...props} />;
+      case ModalPaymentTypes.modalPages.mega_gam:
+        return <ModalMegaGam {...props} />;
       default:
         return;
     }
