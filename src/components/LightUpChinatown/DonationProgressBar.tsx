@@ -39,8 +39,12 @@ const DonationProgressBar = (props: Props) => {
         <RenderFinalGoal />
       </ProgressBar>
       <GoalContainer>
-        <Goal1>{t('lightUpChinatown.raiseGoal1')}</Goal1>
-        <Goal2>{t('lightUpChinatown.raiseGoal2')}</Goal2>
+        <GoalText className={`left ${percentage >= 50 && 'completed'}`}>
+          {t('lightUpChinatown.raiseGoal1')}
+        </GoalText>
+        <GoalText className={`right ${percentage >= 100 && 'completed'}`}>
+          {t('lightUpChinatown.raiseGoal2')}
+        </GoalText>
       </GoalContainer>
     </BarContainer>
   );
@@ -110,12 +114,17 @@ const GoalContainer = styled.div`
   white-space: nowrap;
 `;
 
-const Goal1 = styled.div`
+const GoalText = styled.div`
   position: absolute;
-  left: calc(50% - 50px);
-`;
+  &.left {
+    left: calc(50% - 50px);
+  }
 
-const Goal2 = styled.div`
-  position: absolute;
-  right: 0;
+  &.right {
+    right: 0;
+  }
+
+  &.completed {
+    font-weight: bold;
+  }
 `;
