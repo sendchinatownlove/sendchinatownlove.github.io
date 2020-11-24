@@ -52,7 +52,8 @@ const DonationProgressBar = (props: Props) => {
 export default DonationProgressBar;
 
 const BarContainer = styled.div`
-  width: 1280px;
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 25px;
   height: 93px;
