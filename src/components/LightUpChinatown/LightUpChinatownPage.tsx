@@ -380,18 +380,15 @@ const CostBreakdownImageContainer = styled.div`
   border-radius: 12px;
   max-width: 1220px;
   margin: 0 auto;
-  @media (max-width: 599px) {
-    max-width: 400px;
+  @media (max-width: 900px) {
+    max-width: 700px;
   }
 `;
 
 const CostBreakdownImage = styled.img`
   border-radius: 12px;
-  max-height: 700px;
-  max-width: 1220px;
-  @media (max-width: 599px) {
-    max-height: 340px;
-    max-width: 350px;
+  width: 100%;
+  height: auto;
 `;
 
 const GoalContainer = styled.div`
