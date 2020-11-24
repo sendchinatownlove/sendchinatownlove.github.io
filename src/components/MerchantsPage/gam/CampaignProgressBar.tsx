@@ -2,6 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
+import ProgressBar, { SIZE_TYPE } from './ProgressBar';
+
 interface Props {
   isActive: boolean;
   numContributions: number;
@@ -22,10 +24,6 @@ const CampaignProgressBar = ({
   const { t } = useTranslation();
 
   // "73% to target (73 out of 100 meals)"
-  const progressWidth = (raised: number, target: number) => {
-    if (raised < target) return (raised / target) * 100;
-    return 100;
-  };
   const progressPercent = Math.floor((numContributions / targetAmount) * 100);
 
   // "Ends in 2 days"
@@ -57,18 +55,17 @@ const CampaignProgressBar = ({
   };
 
   return (
-    <ProgressBarContainer>
+    <Container>
       <TimeStamp>
         {lastContributionTimeAsPresentable(timeSinceLastContribution)}
       </TimeStamp>
-      <TargetAmountBar className="progress-bar">
-        <CurrentProgressBar
-          style={{
-            width: `${progressWidth(numContributions, targetAmount)}%`,
-            backgroundColor: progressBarColor,
-          }}
-        ></CurrentProgressBar>
-      </TargetAmountBar>
+      <ProgressBarContainer>
+        <ProgressBar
+          amount={{ current: numContributions, target: targetAmount }}
+          color={progressBarColor}
+          size={SIZE_TYPE.SMALL}
+        />
+      </ProgressBarContainer>
       <div>
         <ProgressTextContainer color={progressBarColor}>
           {progressPercent}% {t('buyMeal.toTarget')}
@@ -85,13 +82,13 @@ const CampaignProgressBar = ({
           {t('buyMeal.days')}
         </div>
       )}
-    </ProgressBarContainer>
+    </Container>
   );
 };
 
 export default CampaignProgressBar;
 
-const ProgressBarContainer = styled.div`
+const Container = styled.div`
   width: 100%;
   padding: 15px 0;
 `;
@@ -105,15 +102,8 @@ const ProgressTextContainer = styled.span`
   color: ${(props) => props.color};
 `;
 
-const TargetAmountBar = styled.div`
-  background-color: #dedede;
-  height: 12px;
+const ProgressBarContainer = styled.div`
   margin-bottom: 15px;
-`;
-
-const CurrentProgressBar = styled.div`
-  background-color: #dd678a;
-  height: 12px;
 `;
 
 const TimeStamp = styled.div`
