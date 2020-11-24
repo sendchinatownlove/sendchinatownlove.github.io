@@ -115,9 +115,7 @@ const LightUpChinatownPage = () => {
         </TextContainer>
         <MapContainer>
           <Map
-            src={
-              'https://storage.cloud.google.com/sendchinatownlove-assets/public/assets/light-up-chinatown/light-up-chinatown-map.gif'
-            }
+            src="https://storage.cloud.google.com/sendchinatownlove-assets/public/assets/light-up-chinatown/light-up-chinatown-map.gif"
             alt="Light Up Chinatown Map"
           />
           <br></br>
