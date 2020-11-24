@@ -380,9 +380,6 @@ const CostBreakdownImageContainer = styled.div`
   border-radius: 12px;
   max-width: 1220px;
   margin: 0 auto;
-  @media (max-width: 900px) {
-    max-width: 700px;
-  }
 `;
 
 const CostBreakdownImage = styled.img`
