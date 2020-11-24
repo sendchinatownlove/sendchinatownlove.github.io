@@ -17,6 +17,11 @@ const DonationProgressBar = (props: Props) => {
   const { t } = useTranslation();
   const percentage = (props.raised / 4700000) * 100;
 
+  const RenderFinalGoal = () =>
+    percentage >= 100 ? null : (
+      <GoalImage className={`right ${percentage === 100 ? 'completed' : ''}`} />
+    );
+
   return (
     <BarContainer>
       <ProgressBarHeader>
@@ -26,14 +31,12 @@ const DonationProgressBar = (props: Props) => {
         </strong>
       </ProgressBarHeader>
       <ProgressBar>
-        <Filler style={{ width: `${percentage}%` }} />
+        <Filler style={{ width: `${percentage >= 100 ? 100 : percentage}%` }} />
         <GoalImageLeft
           className={`left ${percentage >= 50 ? 'completed' : ''}`}
           percentage={percentage}
         />
-        <GoalImage
-          className={`right ${percentage === 100 ? 'completed' : ''}`}
-        />
+        <RenderFinalGoal />
       </ProgressBar>
       <GoalContainer>
         <Goal1>{t('lightUpChinatown.raiseGoal1')}</Goal1>
@@ -83,10 +86,6 @@ const GoalImage = styled.div`
   bottom: 0;
   border-radius: 12px;
   background: white;
-  // &.left {
-  //   left: calc(50% - 25px);
-  // }
-
   &.right {
     right: 0;
   }
@@ -99,7 +98,7 @@ const GoalImage = styled.div`
 const GoalImageLeft = styled(GoalImage)`
   ${(props: GoalImgLeftProps) =>
     props.percentage >= 50
-      ? `left: calc(${props.percentage}% - 25px)`
+      ? `left: calc(${props.percentage < 100 ? props.percentage : 100}% - 25px)`
       : `left: calc(50% - 25px)`}
 `;
 
