@@ -50,6 +50,9 @@ const ModalConfirmation = (props: Props) => {
         return `We appreciate your support. We'll email you your voucher when ${sellerName} opens back up!`;
       case ModalPaymentTypes.modalPages.buy_meal:
         return `We appreciate your support for ${sellerName} and for those in need! Please check your email for your receipt.`;
+      case ModalPaymentTypes.modalPages.mega_gam:
+        // to do: Enter mega gam confirmation
+        return;
       default:
         return `Unexpected occurrence.`;
     }

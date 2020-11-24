@@ -87,4 +87,5 @@ export enum modalPages {
   buy_meal = 'buy_meal',
   card_details = 'card_details',
   confirmation = 'confirmation',
+  mega_gam = 'mega_gam',
 }

@@ -2,6 +2,7 @@
   "paymentProcessing": {
     "amount": {
       "header": "您的爱心将会全数送到商家手里，帮助他们负担营运支出。您的网上交易资料将会做加密处理，款项会直接交给商家以支持他们。",
+      "mega_gam": "MegaGAM version: 100% of your support will go to the merchant.",
       "label1": "选择金额",
       "label2": "其他金额",
       "minimum": "最低",
@@ -44,7 +45,8 @@
   },
   "purchase": {
     "donation": "捐款 - {{seller}}",
-    "voucher": "购买礼品券 - {{seller}}"
+    "voucher": "购买礼品券 - {{seller}}",
+    "mega_gam": "Title of MegaGAM December etc"
   },
   "errorPage": {
     "body": {
@@ -61,6 +63,46 @@
     "flyerAsk": "认识需要协助的小型商家业者？",
     "flyerDownload": "下载传单分享给他们。",
     "merchantHeader": "我們的商家"
+  },
+  "modalPayment": {
+    "modalCardDetails": {
+      "disclaimer": {
+        "donation": "By proceeding with your transaction, you understand that you are making a donation to {{sellerName}}. No goods or services were exchanged for this donation.",
+        "donation_pool": "By proceeding with your transaction, you understand that you are making a donation to all merchants partnered with Send Chinatown Love Inc. The full donation pool will be split among these merchants. No goods or services were exchanged for this donation.",
+        "gift_card": "By proceeding with your purchase, you understand that the voucher card is not redeemable for cash and can only be used at {{sellerName}}. All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase. Balance displayed in the voucher may or may not represent the final balance. Final balance information is subject to {{sellerName}} most recent records.",
+        "light_up_chinatown": "By proceeding with your transaction, you understand that you are making a donation to the Light Up Chinatown Project. This Project is directed towards supporting Chinatown as a whole, rather than any individual merchant.",
+        "mega_gam": "Megagam Disclaimer"
+      },
+      "header": {
+        "completeYour": "Complete your ",
+        "paymentInfo": "Payment Information",
+        "checkout": "Checkout details",
+        "light_up_chinatown_donation": "Light Up Chinatown Donation"
+      },
+      "body": {
+        "paymentInfo": "Please add your payment information below",
+        "fullName": "Full Name",
+        "email": "Email",
+        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded"
+      },
+      "placeholders": {
+        "name": "Name",
+        "email": "Email"
+      },
+      "details": {
+        "donation": "Donation details",
+        "voucher": "Purchase details"
+      },
+      "message": {
+        "donation": "Donation",
+        "one_time_donation": "One-Time Donation",
+        "monthly_donation": "Monthly Donation",
+        "light_up_chinatown_tier_2": "Adopt-a-Lantern Donation",
+        "voucher": "Voucher Purchase",
+        "luc_name": "Name for personalized lantern: ",
+        "luc_address": "Shipping Address: "
+      }
+    }
   },
   "merchantNavBar": {
     "all": "所有的商家",

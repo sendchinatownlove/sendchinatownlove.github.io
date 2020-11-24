@@ -46,6 +46,8 @@ export const Modal = (props: Props) => {
         return <ModalCardDetails {...props} />;
       case ModalPaymentTypes.modalPages.confirmation:
         return <ModalConfirmation {...props} />;
+      case ModalPaymentTypes.modalPages.mega_gam:
+        return <ModalAmount {...props} />;
       default:
         return;
     }

@@ -195,6 +195,8 @@ const ModalCardDetails = ({
         return `voucher purchase`;
       case ModalPaymentTypes.modalPages.buy_meal:
         return 'Gift a Meal purchase';
+      case ModalPaymentTypes.modalPages.mega_gam:
+        return 'Gift-a-Meal purchase'; // to do: get latest copy for mega gam
       default:
         return 'Donation';
     }
@@ -250,6 +252,8 @@ const ModalCardDetails = ({
         );
       case ModalPaymentTypes.modalPages.light_up_chinatown:
         return t('modalPayment.modalCardDetails.disclaimer.light_up_chinatown');
+      case ModalPaymentTypes.modalPages.mega_gam:
+        return t('modalPayment.modalCardDetails.disclaimer.mega_gam');
       default:
         break;
     }
@@ -337,6 +341,7 @@ const ModalCardDetails = ({
               <b>
                 ${amount} {numberOfMealsText}
               </b>{' '}
+              {/* todo: For megagam, confirm which name to use in line below */}
               to {sellerName}{' '}
             </span>
 
