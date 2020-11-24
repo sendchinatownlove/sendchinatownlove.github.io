@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
-
+import { useTranslation } from 'react-i18next';
 import confirmationPic from './chinatown-logo.png';
 
 import {
@@ -18,6 +18,7 @@ import { getSeller } from '../../../utilities';
 export type Props = {
   sellerId: string;
   sellerName: string;
+  projectId?: number | undefined;
 };
 
 const lucHeroImage =
@@ -27,13 +28,18 @@ const ModalConfirmation = (props: Props) => {
   const { purchaseType, amount } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
   const modalRef = useScrollToElement();
+  const { t } = useTranslation();
 
   const closeModal = async (e: any) => {
     ReactPixel.trackCustom('ModalConfirmationButtonClick', {});
     e.preventDefault();
     // @TODO(wilsonj806) Replace the below with a proper fix
     //...for differentiating between a seller and a project
-    if (props.sellerId !== 'light-up-chinatown') {
+    if (
+      !props.projectId &&
+      props.sellerId &&
+      props.sellerId !== 'light-up-chinatown'
+    ) {
       const { data } = props.sellerId && (await getSeller(props.sellerId));
       dispatch({
         type: ModalPaymentConstants.UPDATE_SELLER_DATA,
@@ -55,6 +61,15 @@ const ModalConfirmation = (props: Props) => {
         return `We appreciate your support. We'll email you your voucher when ${sellerName} opens back up!`;
       case ModalPaymentTypes.modalPages.buy_meal:
         return `We appreciate your support for ${sellerName} and for those in need! Please check your email for your receipt.`;
+      case ModalPaymentTypes.modalPages.mega_gam:
+        return (
+          <span>
+            {t('modalPayment.modalConfirmation.mega_gam_line_1')}
+            <br />
+            <br />
+            {t('modalPayment.modalConfirmation.mega_gam_line_2')}
+          </span>
+        );
       default:
         return `Unexpected occurrence.`;
     }

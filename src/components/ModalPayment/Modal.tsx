@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import ModalAmount from './ModalAmount';
 import ModalBuyMeal from './ModalBuyMeal';
+import ModalMegaGam from './ModalMegaGam';
 import ModalCardDetails from './ModalCardDetails';
 import ModalConfirmation from './ModalConfirmation';
 import {
@@ -10,6 +11,7 @@ import {
   ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
 import { getFee } from '../../utilities/api/interactionManager';
+
 import ReactPixel from 'react-facebook-pixel';
 import styled from 'styled-components';
 
@@ -64,6 +66,8 @@ export const Modal = (props: Props) => {
         return <ModalCardDetails {...props} />;
       case ModalPaymentTypes.modalPages.confirmation:
         return <ModalConfirmation {...props} />;
+      case ModalPaymentTypes.modalPages.mega_gam:
+        return <ModalMegaGam {...props} />;
       default:
         return;
     }
