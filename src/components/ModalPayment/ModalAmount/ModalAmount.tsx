@@ -13,6 +13,10 @@ import Help from '@material-ui/icons/Help';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
+import { LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
+
+import LanternForm from './LanternForm';
+
 export interface Props {
   sellerId: string;
   sellerName: string;
@@ -73,24 +77,45 @@ export const Modal = (props: Props) => {
     return r.test(value);
   };
 
-  const buttonAmounts = ['10', '25', '50', '100'];
+  const buttonAmountsArray =
+    modalView === ModalPaymentTypes.modalPages.light_up_chinatown
+      ? [25, 45, 150, 300]
+      : [10, 25, 50, 100];
 
-  const purchaseIsDonation =
-    modalView === ModalPaymentTypes.modalPages.donation;
+  const buttonAmounts = buttonAmountsArray.map((x) => ({
+    value: x.toString(),
+    text: '$' + x.toString(),
+  }));
 
-  const headerText = purchaseIsDonation
-    ? t('purchase.donation', { seller: props.sellerName })
-    : t('purchase.voucher', { seller: props.sellerName });
+  const getHeaderText = (purchaseType, sellerName) => {
+    switch (purchaseType) {
+      case ModalPaymentTypes.modalPages.donation:
+        return t('purchase.donation', { seller: sellerName });
+      case ModalPaymentTypes.modalPages.gift_card:
+        return t('purchase.voucher', { seller: sellerName });
+      case ModalPaymentTypes.modalPages.light_up_chinatown:
+        return t('purchase.donation_to', { seller: sellerName });
+      default:
+        return t('purchase.donation', { seller: sellerName });
+    }
+  };
 
   return (
     <ContentContainer id="donation-form" data-testid="modal-amount">
-      <Header>{headerText}</Header>
+      <Header>{getHeaderText(modalView, props.sellerName)}</Header>
 
       {props.sellerId === 'send-chinatown-love' && (
         <p>{t('donationPool.description2')}</p>
       )}
-      <p>{t('paymentProcessing.amount.body1')}</p>
-      <p>{t('paymentProcessing.amount.body2')}</p>
+      <p>
+        {t(
+          `paymentProcessing.amount.${
+            modalView === ModalPaymentTypes.modalPages.light_up_chinatown
+              ? 'light_up_chinatown'
+              : 'header'
+          }`
+        )}
+      </p>
 
       <AmountContainer>
         <label htmlFor="select-amount">
@@ -100,18 +125,18 @@ export const Modal = (props: Props) => {
         <SelectAmtContainer>
           {buttonAmounts.map((amount) => (
             <button
-              key={`$${amount}`}
+              key={amount.value}
               type="button"
               className={
-                selectedAmount === `$${amount}`
+                selectedAmount === amount.value
                   ? 'modalButton--selected'
                   : 'modalButton--outlined'
               }
               onClick={(e) => {
-                handleSelectAmount(amount, false, `$${amount}`);
+                handleSelectAmount(amount.value, false, amount.text);
               }}
             >
-              {`$${amount}`}
+              {amount.text}
             </button>
           ))}
         </SelectAmtContainer>
@@ -137,14 +162,12 @@ export const Modal = (props: Props) => {
         {Number(amount) < CUSTOM_AMOUNT_MIN && isCustomAmount && (
           <ErrorMessage>
             {t('paymentProcessing.amount.minimum')}{' '}
-            {purchaseIsDonation ? 'donation' : 'voucher'}{' '}
             {t('paymentProcessing.amount.amount')}: $5
           </ErrorMessage>
         )}
         {Number(amount) > CUSTOM_AMOUNT_MAX && isCustomAmount && (
           <ErrorMessage>
             {t('paymentProcessing.amount.maximum')}{' '}
-            {purchaseIsDonation ? 'donation' : 'voucher'}{' '}
             {t('paymentProcessing.amount.amount')}: $10000
           </ErrorMessage>
         )}
@@ -180,6 +203,8 @@ export const Modal = (props: Props) => {
         </b>
       </TotalContainer>
 
+      {modalView === ModalPaymentTypes.modalPages.light_up_chinatown &&
+        amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN && <LanternForm />}
       <NextButton
         type="button"
         className={'modalButton--filled'}

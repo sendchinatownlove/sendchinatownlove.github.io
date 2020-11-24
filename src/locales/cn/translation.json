@@ -21,9 +21,9 @@
       "waystodonate": {
         "donate": "DONATE",
         "gift-a-meal": "GIFT-A-MEAL",
-        "sticky-locals-x-scl": "STICKY LOCALS X SCL",
-        "friendofafriend-studioxscl": "FRIEND OF A FRIEND STUDIO X SCL"
-      }
+        "sticky-locals-x-scl": "STICKY LOCALS X SCL"
+      },
+      "light-up-chinatown": "LIGHT UP CHINATOWN"
     },
     "languages": {
       "english": "ENG",
@@ -146,6 +146,9 @@
       "viewButton": "查看商家",
       "giftButton": "捐爱心餐",
       "fiscalSponsor": "Donations for this campaign are in partnership with {{sponsorName}}, a non-profit organization under IRS code 501(c)(3). Your donation will be tax deductible to the extent allowable by law."
+    },
+    "megaGamListItem": {
+      "giftButton": "捐爱心餐"
     }
   },
   "buyMealPool": {
@@ -179,17 +182,44 @@
     "headerSubtext": "Let’s light up Chinatown, one lantern at a time.",
     "donationTierText": "Light Up Chinatown donation tiers",
     "summaryHeader": "Let’s Light Up Chinatown!",
-    "summaryBody1": "Now that outdoor dining is extended year round, we want Chinatown streets to be amply lit for diners and residents.",
-    "summaryBody2": "Support the Light Up Chinatown project by contributing to “Adopt-A-Lantern!” In addition to light fixtures being installed, beautiful outdoor lanterns will be hung along Mott Street from Canal to Bayard to welcome patrons into our wonderful community, right in time for the holidays.",
-    "summaryBody3": "Purchasing a lantern will act as a donation towards the Light Up Chinatown project and with your contributions, we can represent Chinatown to be the vibrant and NYC cultural icon it has always been. This project is so important to show Chinatown is open for business and together, we are on our way to recovery.",
-    "summaryBody4": "Send Chinatown Love along with Pearl River Mart, 46 Mott St Bakery, CCBA, Chinese Chamber of Commerce and UDO are partnering to raise funds to light up major blocks of Chinatown. We hope you will join us.",
-    "phase1": "Phase 1: Lanterns on Mott Street",
-    "phase2": "Phase 2: Light up Bayard Street to Pell Street",
-    "phase3": "Phase 3: Light up the rest of Chinatown",
+    "summaryBody1": "Chinatown was hit hardest as fears about the coronavirus circulated in the United States in late January. Rumors swirled about the virus being present in Chinatown, and as xenophobia grew, restaurants’ revenue steeply declined. Without the regular volume of customers and foot traffic in Chinatown, the future of its many small, immigrant-owned businesses seemed bleak.",
+    "summaryBody2": "Patrick Mock, manager of 46 Mott St Bakery and community advocate, had an idea to light up Chinatown streets to draw customers back to Chinatown. With the help of City Council District 1 candidate Jenny Low, Chung Seto of United Democratic Organization (UDO), Joanne Kwong of Pearl River Mart and Send Chinatown Love, the <1>Light Up Chinatown</1> project was born.",
+    "summaryBody3": "Support the Light Up Chinatown project by donating today where all proceeds will go towards installing permanent light fixtures and traditional lanterns in the neighborhood.",
+    "summaryBody4": "All donations are welcome and no amount is too small. If you donate $45 or more, a personalized lantern will be hung on Mott Street and if you donate $150 or more, you will receive an additional lantern to take home as a keepsake.",
+    "summaryBody5": "Help us show that Chinatown is open for business and light the path forward for the neighborhood’s small business owners by supporting the Light Up Chinatown project today.",
     "campaignHeader": "Light Up Chinatown Fundraising Campaign:",
-    "campaignDates": "November 1 - 30, 2020",
+    "campaignDates": "November 16 - December 15, 2020",
     "campaignDaysLeft": "More Days Left",
+    "progressBarHeader": "Total Raised: ",
+    "raiseGoal1": " GOAL 1: $23.5k",
+    "raiseGoal2": " GOAL 2: $47k",
     "ceremony1": "Our big reveal of “Light Up Chinatown” is planned for the second week of December in celebration of the Winter Solstice. We hope you and your family will join us for this festive evening. Together, we can find light in the darkness.",
-    "ceremony2": "When you make a lantern donation, you will receive an email once we finalize the date and time."
+    "ceremony2": "When you make a lantern donation, you will receive an email once we finalize the date and time.",
+    "donationTitle": "Donate to Light Up Chinatown",
+    "donationDescription1": "100% of the donations, no matter how big or small, will go towards permanent light fixtures and lanterns throughout Chinatown.",
+    "donationDescription2": "If you donate more than ${{limit_1}}, you will be eligible to participate in “Adopt-a-Lantern” where you will be able to receive some perks with your generous donation.",
+    "faq": "Frequently Asked Questions",
+    "faqQuestion1": "How will my donation for this project benefit Chinatown?",
+    "faqAnswer1": "Your donation will help permanently light up Chinatown streets and create a warm and welcoming ambience to ensure consistent foot traffic and the longevity of Chinatown businesses. For donations that are $150 and more, you will receive a lantern and be invited to the Winter Solstice Lighting Ceremony.",
+    "faqQuestion2": "What is the “Light Up Chinatown” Ceremony?",
+    "faqAnswer2": "In celebration of the Winter Solstice, there will be an all-day event in Chinatown to honor the start of the season and a “Light Up Chinatown” Ceremony. During the celebration, all are welcome to enjoy delicious food and holiday shopping. Invitations with exact details will be sent to those who donated $150+ to our Light Up Chinatown Fundraising Campaign. <0 /> The ceremony will follow social distancing regulations set forth by the government due to the COVID-19 pandemic, and as a result, may need to be modified.",
+    "faqQuestion3": "How will the light fixtures and lanterns be installed for “Light Up Chinatown”?",
+    "faqAnswer3": "<0>Alternative Earth Care</0> has a four man team that will install 14 sections of lighting on Mott Street from Canal to Bayard with lanterns hung between each light bulb for Light Up Chinatown.",
+    "faqQuestion4": "I donated $150+, where can I pick up my personalized lantern?",
+    "faqAnswer4": "Pick up location is at CCBA, 62 Mott Street, New York, NY 10013. You will receive an email confirmation with detailed instructions on what time to pick up the lantern.",
+    "faqQuestion5": "I have not received an email confirmation. Who can I contact?",
+    "faqAnswer5": "Please contact us at <0>hello@sendchinatownlove.com</0> with the subject line “Light Up Chinatown”.",
+    "faqQuestion6": "I love Chinatown and I’d love to further support its businesses. Where can I do that?",
+    "faqAnswer6": "Thank you for sending Chinatown your love! To continue supporting this community, check out our <0>merchant page</0> for the full list of Asian-owned businesses we’re working with to make a donation or buy a gift card!",
+    "faqQuestion7": "What is Send Chinatown Love?",
+    "faqAnswer7": "Send Chinatown Love is a New York-based, entirely volunteer-run organization that helps the Chinatowns across the city get back on their feet by supporting immigrant-owned, small businesses that make up the fabric of these neighborhoods. The goal of Send Chinatown Love is to facilitate community support by creating digital platforms for restaurants and stores in need so that they can sustain themselves now and into the future. Check out our full list of partner merchants <0>here</0>.",
+    "donationDetail1": "1 x 12-inch lantern with your personalization hung on Mott Street",
+    "donationDetail2": "Funding permanent light fixtures throughout Chinatown",
+    "donationDetail3": "1 x 14-inch lantern with your personalization hung on Mott Street",
+    "donationDetail4": "1 x 12-inch custom designed lantern by a local artist to take home with you ",
+    "donationDetail5": "*A limited number of invitations to our Winter Solstice Celebration and lighting ceremony in December will be given to our largest donors",
+    "goal1":"Permanent light fixtures and lanterns on Mott St from Canal St to Bayard St",
+    "goal2":"Permanent light fixtures on Bayard St from Mott St to Bowery St",
+    "costBreakdown": "How do the Costs Breakdown?"
   }
 }

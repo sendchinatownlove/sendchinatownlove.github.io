@@ -56,6 +56,7 @@ export const Modal = (props: Props) => {
     switch (type) {
       case ModalPaymentTypes.modalPages.donation:
       case ModalPaymentTypes.modalPages.gift_card:
+      case ModalPaymentTypes.modalPages.light_up_chinatown:
         return <ModalAmount {...props} />;
       case ModalPaymentTypes.modalPages.buy_meal:
         return <ModalBuyMeal {...props} />;

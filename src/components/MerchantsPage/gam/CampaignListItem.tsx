@@ -20,8 +20,8 @@ import {
 
 interface Props {
   campaign: Campaign;
-  selectedCampaign: null | number;
-  setSelectedCampaign: Function;
+  selectedCampaignId: null | number;
+  setSelectedCampaignId: Function;
 }
 
 const ModalBox: any = Modal;
@@ -37,7 +37,9 @@ const CampaignListItem = (props: Props) => {
 
   const fetchData = async () => {
     const distributorData = await getDistributor(campaign.distributor_id);
-    const merchantData = await getSeller(campaign.seller_id);
+    const seller_id = campaign.seller_distributor_pairs[0].seller_id;
+    const merchantData = await getSeller(seller_id);
+
     setDistributor(distributorData.data);
     setMerchant(merchantData.data);
     if (campaign.nonprofit_id) {
@@ -60,7 +62,7 @@ const CampaignListItem = (props: Props) => {
   const campaignImageUrls = campaign.gallery_image_urls;
 
   const showModal = (event: any) => {
-    props.setSelectedCampaign(campaign.id);
+    props.setSelectedCampaignId(campaign.id);
     dispatch({
       type: ModalPaymentConstants.SET_MODAL_VIEW,
       payload: ModalPaymentTypes.modalPages.buy_meal,
@@ -92,13 +94,16 @@ const CampaignListItem = (props: Props) => {
           <Description>
             {campaign.description}{' '}
             {distributor && (
-              <a
-                href={distributor.website_url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn more about {distributor.name}.
-              </a>
+              <span>
+                Learn more about{' '}
+                <a
+                  href={distributor.website_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {distributor.name}.
+                </a>
+              </span>
             )}
           </Description>
           <CampaignProgressBar
@@ -139,7 +144,7 @@ const CampaignListItem = (props: Props) => {
           )}
         </ColumnContainer>
 
-        {campaign.active && props.selectedCampaign === campaign.id && (
+        {campaign.active && props.selectedCampaignId === campaign.id && (
           <ModalBox
             sellerId={merchant.seller_id}
             sellerName={merchant.name}

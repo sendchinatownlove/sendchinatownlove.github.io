@@ -113,21 +113,33 @@ export type BrowsePageSeller = {
   logo_image_url: string;
 };
 
-export type Campaign = {
-  id: number;
-  active: boolean;
-  valid: boolean;
-  description: string;
+export type SellerDistributorPair = {
+  distributor_id: number;
+  distributor_image_url: string;
+  distributor_name: string;
   seller_id: string;
-  distributor_id: string;
-  nonprofit_id: string;
-  location_id: string;
-  end_date: string;
-  created_at: string;
-  updated_at: string;
-  gallery_image_urls: string[];
-  target_amount: number;
-  price_per_meal: number;
+  seller_image_url: string;
+  seller_name: string;
+};
+
+export type Campaign = {
+  active: boolean;
+  amount_allocated: number;
   amount_raised: number;
+  created_at: string;
+  description: string;
+  distributor_id: string;
+  end_date: string;
+  gallery_image_urls: string[];
   last_contribution: string;
+  location_id: string;
+  nonprofit_id: string;
+  project_id: number;
+  price_per_meal: number;
+  seller_id: string;
+  seller_distributor_pairs: SellerDistributorPair[];
+  id: number;
+  target_amount: number;
+  updated_at: string;
+  valid: boolean;
 };

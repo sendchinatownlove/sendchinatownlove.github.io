@@ -46,10 +46,14 @@ const VoucherRedemptionPage = lazy(
 const MerchantVoucherDashboard = lazy(
   () => import('../../pages/MerchantVoucherDashboard')
 );
+
 const PassportVoucher = lazy(
   () => import('../../pages/PassportRedemption/PassportVoucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
+const DetachedVoucherPrintouts = lazy(
+  () => import('../../pages/VoucherManagement/DetachedVoucherPrintout')
+);
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
@@ -126,7 +130,7 @@ const App = () => {
           >
             <PassportRedemption screen={ScreenName.Claim} />
           </Route>
-          <Route path="/:seller_id/dashboard/:secret_id">
+          <Route exact path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
           </Route>
           <Route path="/print-passport-voucher/:id/tickets/:tickets_secret">
@@ -142,6 +146,12 @@ const App = () => {
               return null;
             }}
           />
+          <Route
+            exact
+            path="/distributor/:distributor_id/dashboard/print-detached"
+          >
+            <DetachedVoucherPrintouts />
+          </Route>
           <Route path="/gift-a-meal-home">
             {returnComponent(Page.GiftAMeal)}
           </Route>
