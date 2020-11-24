@@ -6,6 +6,10 @@ interface Props {
   raised: number;
 }
 
+interface GoalImgLeftProps {
+  percentage: number;
+}
+
 const centsToDollars = (cents: number) =>
   Math.floor(cents / 100).toLocaleString();
 
@@ -23,7 +27,10 @@ const DonationProgressBar = (props: Props) => {
       </ProgressBarHeader>
       <ProgressBar>
         <Filler style={{ width: `${percentage}%` }} />
-        <GoalImage className={`left ${percentage >= 50 ? 'completed' : ''}`} />
+        <GoalImageLeft
+          className={`left ${percentage >= 50 ? 'completed' : ''}`}
+          percentage={percentage}
+        />
         <GoalImage
           className={`right ${percentage === 100 ? 'completed' : ''}`}
         />
@@ -76,9 +83,9 @@ const GoalImage = styled.div`
   bottom: 0;
   border-radius: 12px;
   background: white;
-  &.left {
-    left: calc(50% - 25px);
-  }
+  // &.left {
+  //   left: calc(50% - 25px);
+  // }
 
   &.right {
     right: 0;
@@ -87,6 +94,13 @@ const GoalImage = styled.div`
   &.completed {
     background-color: #ff3a2f;
   }
+`;
+
+const GoalImageLeft = styled(GoalImage)`
+  ${(props: GoalImgLeftProps) =>
+    props.percentage >= 50
+      ? `left: calc(${props.percentage}% - 25px)`
+      : `left: calc(50% - 25px)`}
 `;
 
 const GoalContainer = styled.div`
