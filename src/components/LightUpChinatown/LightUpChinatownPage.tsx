@@ -7,7 +7,6 @@ import partners_ccba from './images/partners-ccba.png';
 import partners_cccny from './images/partners-cccny.png';
 import partners_prm from './images/partners-prm.png';
 import partners_udooda from './images/partners-udooda.png';
-import mapImg from './images/light-up-map.png';
 import costBreakdownImg from './images/cost-breakdown.png';
 import goal1Img from './images/goal_1.png';
 import goal2Img from './images/goal_2.png';
@@ -115,7 +114,12 @@ const LightUpChinatownPage = () => {
           </CampaignInfoText>
         </TextContainer>
         <MapContainer>
-          <Map src={mapImg} />
+          <Map
+            src={
+              'https://storage.cloud.google.com/sendchinatownlove-assets/public/assets/light-up-chinatown/light-up-chinatown-map.gif'
+            }
+            alt="Light Up Chinatown Map"
+          />
           <br></br>
           <GoalContainer>
             <GoalPill src={goal1Img}></GoalPill>
