@@ -115,8 +115,8 @@ const LightUpChinatownPage = () => {
         </TextContainer>
         <MapContainer>
           <Map
-            src="https://storage.cloud.google.com/sendchinatownlove-assets/public/assets/light-up-chinatown/light-up-chinatown-map.gif"
-            alt="Light Up Chinatown Map"
+            src="https://storage.googleapis.com/sendchinatownlove-assets/public/assets/light-up-chinatown/light-up-chinatown-map.gif"
+            alt="Light Up Chinatown Fundraising Goals Map"
           />
           <br></br>
           <GoalContainer>
