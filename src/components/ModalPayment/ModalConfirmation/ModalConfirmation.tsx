@@ -19,6 +19,9 @@ export type Props = {
   sellerName: string;
 };
 
+const lucHeroImage =
+  'https://storage.cloud.google.com/sendchinatownlove-assets/public/assets/light-up-chinatown/modal-payment-confirm-hero-LUC.png';
+
 const ModalConfirmation = (props: Props) => {
   const { purchaseType, amount } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
@@ -55,12 +58,18 @@ const ModalConfirmation = (props: Props) => {
     }
   };
 
+  // @TODO(wilsonj806) Replace the below with a proper fix
+  //...for differentiating between a seller and a project
+
+  const confirmHeroImage =
+    props.sellerId === 'light-up-chinatown' ? lucHeroImage : confirmationPic;
+
   return (
     <Container data-testid="modal-confirmation">
       <h2>Thank you!</h2>
       <p>{confirmationText(purchaseType, props.sellerName, amount)}</p>
 
-      <ThankYouImage src={confirmationPic} alt="Logo" />
+      <ThankYouImage src={confirmHeroImage} alt="Logo" />
 
       <FinishButton
         className="modalButton--filled"
