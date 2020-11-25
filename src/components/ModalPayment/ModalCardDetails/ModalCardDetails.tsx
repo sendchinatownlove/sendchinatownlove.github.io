@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { times } from 'lodash/fp';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
@@ -16,6 +16,7 @@ import {
   LIGHT_UP_CHINATOWN_TIER_2_MIN,
 } from '../../../consts';
 import { modalPages } from '../../../utilities/hooks/ModalPaymentContext/types';
+import useScrollToTop from '../../../utilities/hooks/useScrollToTop';
 
 import {
   makeSquarePayment,
@@ -53,7 +54,7 @@ const ModalCardDetails = ({
   const { t } = useTranslation();
   const { amount, purchaseType, lucData } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
-  const modalRef = useRef<any>(null);
+  const modalRef = useScrollToTop();
 
   const [isTermsChecked, setTermsChecked] = useState(false);
   const [isSubscriptionChecked, setSubscriptionChecked] = useState(true);
@@ -61,10 +62,6 @@ const ModalCardDetails = ({
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
-
-  useEffect(() => {
-    modalRef.current && modalRef.current.scrollIntoView();
-  }, [modalRef]);
 
   let applicationId, locationId, projectId;
 
@@ -279,7 +276,7 @@ const ModalCardDetails = ({
   };
 
   return (
-    <div>
+    <FormContainer>
       <Header ref={modalRef}>
         {t('modalPayment.modalCardDetails.header.completeYour')}{' '}
         {purchaseTypeHeader(purchaseType)}
@@ -412,11 +409,16 @@ const ModalCardDetails = ({
           </SquarePaymentForm>
         </SquareFormContainer>
       </PaymentContainer>
-    </div>
+    </FormContainer>
   );
 };
 
 export default ModalCardDetails;
+
+const FormContainer = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
+`;
 
 const PaymentContainer = styled.div`
   display: flex;

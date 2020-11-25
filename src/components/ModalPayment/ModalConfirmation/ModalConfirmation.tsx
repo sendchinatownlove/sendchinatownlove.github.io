@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
@@ -10,6 +10,7 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
+import useScrollToTop from '../../../utilities/hooks/useScrollToTop';
 import { LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
 
 import { getSeller } from '../../../utilities';
@@ -25,6 +26,7 @@ const lucHeroImage =
 const ModalConfirmation = (props: Props) => {
   const { purchaseType, amount } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
+  const modalRef = useScrollToTop();
 
   const closeModal = async (e: any) => {
     ReactPixel.trackCustom('ModalConfirmationButtonClick', {});
@@ -66,7 +68,7 @@ const ModalConfirmation = (props: Props) => {
 
   return (
     <Container data-testid="modal-confirmation">
-      <h2>Thank you!</h2>
+      <h2 ref={modalRef}>Thank you!</h2>
       <p>{confirmationText(purchaseType, props.sellerName, amount)}</p>
 
       <ThankYouImage src={confirmHeroImage} alt="Logo" />
@@ -84,7 +86,7 @@ const ModalConfirmation = (props: Props) => {
 export default ModalConfirmation;
 
 const Container = styled.div`
-  max-height: 80%;
+  height: 100%;
   margin-bottom: 25px;
 `;
 
