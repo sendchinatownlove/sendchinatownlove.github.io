@@ -115,7 +115,10 @@ const LightUpChinatownPage = () => {
           </CampaignInfoText>
         </TextContainer>
         <MapContainer>
-          <Map src={lucGif} alt="Light Up Chinatown Fundraising Goals Map" />
+          <Map
+            src="https://storage.googleapis.com/sendchinatownlove-assets/public/assets/light-up-chinatown/light-up-chinatown-map.gif"
+            alt="Light Up Chinatown Fundraising Goals Map"
+          />
           <br></br>
           <GoalContainer>
             <GoalPill src={goal1Img}></GoalPill>
