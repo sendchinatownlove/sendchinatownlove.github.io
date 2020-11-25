@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
-import lucGif from './images/light-up-chinatown-map.gif';
 import partners_46 from './images/partners-46.png';
 import partners_ccba from './images/partners-ccba.png';
 import partners_cccny from './images/partners-cccny.png';
