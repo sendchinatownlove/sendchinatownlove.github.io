@@ -1,6 +1,12 @@
 @import '../../../index.scss';
 @import '../../../responsive';
 
+.form {
+  height: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
 .header {
   font-family: 'Open Sans', sans-serif;
   font-size: 32px;
