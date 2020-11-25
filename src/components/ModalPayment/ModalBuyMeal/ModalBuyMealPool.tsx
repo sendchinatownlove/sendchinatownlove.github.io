@@ -17,7 +17,7 @@ export interface Props {
   costPerMeal: number;
 }
 
-export const Modal = (props: Props) => {
+export const ModalBuyMeal = (props: Props) => {
   const { t } = useTranslation();
   const dispatch = useModalPaymentDispatch(null);
 
@@ -157,4 +157,4 @@ export const Modal = (props: Props) => {
   );
 };
 
-export default Modal;
+export default ModalBuyMeal;

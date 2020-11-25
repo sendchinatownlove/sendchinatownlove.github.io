@@ -18,7 +18,7 @@ export interface Props {
   sellerName: string;
 }
 
-export const Modal = (props: Props) => {
+export const ModalAmount = (props: Props) => {
   const { t } = useTranslation();
 
   const { amount, modalView } = useModalPaymentState(null);
@@ -167,7 +167,7 @@ export const Modal = (props: Props) => {
   );
 };
 
-export default Modal;
+export default ModalAmount;
 
 const ContentContainer = styled.form`
   height: 360px;
