@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { times } from 'lodash/fp';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
@@ -53,6 +53,7 @@ const ModalCardDetails = ({
   const { t } = useTranslation();
   const { amount, purchaseType, lucData } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
+  const modalRef = useRef<any>(null);
 
   const [isTermsChecked, setTermsChecked] = useState(false);
   const [isSubscriptionChecked, setSubscriptionChecked] = useState(true);
@@ -60,6 +61,10 @@ const ModalCardDetails = ({
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
+
+  useEffect(() => {
+    modalRef.current && modalRef.current.scrollIntoView();
+  }, [modalRef]);
 
   let applicationId, locationId, projectId;
 
@@ -275,7 +280,7 @@ const ModalCardDetails = ({
 
   return (
     <div>
-      <Header>
+      <Header ref={modalRef}>
         {t('modalPayment.modalCardDetails.header.completeYour')}{' '}
         {purchaseTypeHeader(purchaseType)}
       </Header>
