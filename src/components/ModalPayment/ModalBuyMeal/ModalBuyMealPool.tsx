@@ -27,7 +27,7 @@ export const Modal = (props: Props) => {
   const [campaignDistributor, setCampaignDistributor] = useState<any>([]);
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
-    const valueInt = parseInt(value, 10);
+    const valueInt = Math.min(MAX_MEALS, parseInt(value, 10));
     setNumberOfMeals(isNaN(valueInt) ? 0 : valueInt);
     const totalMealPrice = valueInt * props.costPerMeal;
     dispatch({
@@ -50,6 +50,7 @@ export const Modal = (props: Props) => {
   const totalMealPrice = numberOfMeals * props.costPerMeal;
   const totalAmount = { value: totalMealPrice, text: '$' + totalMealPrice };
   const COST_LIMIT = 10000;
+  const MAX_MEALS = 1000; // TODO: figure out max meals we allow
 
   useEffect(() => {
     dispatch({
