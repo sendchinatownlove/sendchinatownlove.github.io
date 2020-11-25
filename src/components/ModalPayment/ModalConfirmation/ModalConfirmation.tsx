@@ -58,6 +58,9 @@ const ModalConfirmation = (props: Props) => {
     }
   };
 
+  // @TODO(wilsonj806) Replace the below with a proper fix
+  //...for differentiating between a seller and a project
+
   const confirmHeroImage =
     props.sellerId === 'light-up-chinatown' ? lucHeroImage : confirmationPic;
 
