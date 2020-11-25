@@ -65,28 +65,35 @@ export const Modal = (props: Props) => {
         return t('purchase.voucher', { seller: sellerName });
       case ModalPaymentTypes.modalPages.light_up_chinatown:
         return t('purchase.donation_to', { seller: sellerName });
+      case ModalPaymentTypes.modalPages.mega_gam:
+        return t('purchase.mega_gam'); // todo: confirm which copy to use & who the seller is
       default:
         return t('purchase.donation', { seller: sellerName });
+    }
+  };
+
+  const getSubheaderText = (purchaseType: ModalPaymentTypes.modalPages) => {
+    switch (purchaseType) {
+      case ModalPaymentTypes.modalPages.light_up_chinatown:
+        return t('paymentProcessing.amount.light_up_chinatown');
+      case ModalPaymentTypes.modalPages.mega_gam:
+        return t('paymentProcessing.amount.mega_gam');
+      case ModalPaymentTypes.modalPages.donation:
+      case ModalPaymentTypes.modalPages.gift_card:
+      default:
+        return t('paymentProcessing.amount.header');
     }
   };
 
   return (
     <ContentContainer id="donation-form" data-testid="modal-amount">
       <Header>{getHeaderText(modalView, props.sellerName)}</Header>
-
       {props.sellerId === 'send-chinatown-love' && (
         <p>{t('donationPool.description2')}</p>
       )}
-      <p>
-        {t(
-          `paymentProcessing.amount.${
-            modalView === ModalPaymentTypes.modalPages.light_up_chinatown
-              ? 'light_up_chinatown'
-              : 'header'
-          }`
-        )}
-      </p>
-
+      <SubHeader>{getSubheaderText(modalView)}</SubHeader>
+      {/* // todo: Add MegaGAM Donation bar below */}
+      {modalView === ModalPaymentTypes.modalPages.mega_gam ? null : null}
       <AmountContainer>
         <label htmlFor="select-amount">
           {t('paymentProcessing.amount.label1')}
@@ -230,4 +237,8 @@ const Header = styled.div`
   font-family: 'Open Sans', sans-serif;
   font-size: 30px;
   font-weight: 600;
+`;
+
+const SubHeader = styled.p`
+  margin-top: 16px;
 `;
