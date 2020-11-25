@@ -121,9 +121,11 @@ export type Campaign = {
   amount_raised: number;
   created_at: string;
   description: string;
+  display_name: string;
   distributor_id: string;
   end_date: string;
   gallery_image_urls: string[];
+  id: number;
   last_contribution: string;
   location_id: string;
   nonprofit_id: string;
@@ -131,7 +133,6 @@ export type Campaign = {
   price_per_meal: number;
   seller_id: string;
   seller_distributor_pairs: SellerDistributorPair[];
-  id: number;
   target_amount: number;
   updated_at: string;
   valid: boolean;
