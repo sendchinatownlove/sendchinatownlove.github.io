@@ -136,7 +136,7 @@ const ModalCardDetails = ({
       payment.push({
         amount: feesAmount,
         currency: 'usd',
-        item_type: 'transaction_fees',
+        item_type: 'transaction_fee',
         quantity: 1,
       });
     }
@@ -284,6 +284,10 @@ const ModalCardDetails = ({
     }
   };
 
+  const total = () => {
+    return (Number(amount) * 100 + feesAmount) / 100;
+  };
+
   return (
     <div>
       <Header>
@@ -346,7 +350,7 @@ const ModalCardDetails = ({
               {' '}
               {purchaseTypeMessage(purchaseType, amount)} of{' '}
               <b>
-                ${amount} {numberOfMealsText}
+                ${total()} {numberOfMealsText}
               </b>{' '}
               to {sellerName}{' '}
             </span>
