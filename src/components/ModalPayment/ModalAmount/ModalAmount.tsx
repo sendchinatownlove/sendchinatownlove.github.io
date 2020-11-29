@@ -184,7 +184,7 @@ export const Modal = (props: Props) => {
                   title={t('paymentProcessing.amount.feesTooltip').toString()}
                   placement="right"
                 >
-                  <Help style={{ color: '#A6192E' }} />
+                  <Help style={{ color: '#A6192E', fontSize: '1rem' }} />
                 </Tooltip>
               </span>
             </p>
