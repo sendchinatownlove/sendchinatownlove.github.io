@@ -11,5 +11,5 @@ export function calculateFeeAmount(donationAmount: number, fee: FeeParams) {
   const flat = Number(fee.flat_cost) || 0;
   const rate = Number(fee.multiplier) || 0;
 
-  return (donationAmount + flat) / (1 - rate) - donationAmount;
+  return Math.ceil((donationAmount + flat) / (1 - rate) - donationAmount);
 }
