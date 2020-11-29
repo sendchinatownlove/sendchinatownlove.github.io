@@ -183,9 +183,9 @@ const AmountContainer = styled.div`
 
 const SelectAmtContainer = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  flex-direction: row;
   margin: 15px 0px;
 `;
 

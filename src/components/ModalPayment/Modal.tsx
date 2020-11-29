@@ -82,12 +82,9 @@ const ViewContainer = styled.div`
   margin: 0 auto;
   height: 100%;
   width: 100%;
-  padding: 0 50px;
-
-  @media only screen and (max-width: 450px) {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
+  padding: 0 4%;
+  @media min-width: 1000px {
+    padding: 0 50px;
   }
 `;
 const CloseButtonContainer = styled.div`
