@@ -11,10 +11,16 @@ interface Props {
   progressBarColor: string;
   lastContributionTime: Date;
   endDate: Date;
+  isModal: boolean;
+}
+
+interface CampaignDescriptorContainerProps {
+  isModal: boolean;
 }
 
 const CampaignProgressBar = ({
   isActive,
+  isModal,
   numContributions,
   targetAmount,
   progressBarColor,
@@ -66,27 +72,31 @@ const CampaignProgressBar = ({
           size={SIZE_TYPE.SMALL}
         />
       </ProgressBarContainer>
-      <div>
+      <CampaignDescriptorContainer isModal={isModal}>
         <ProgressTextContainer color={progressBarColor}>
           {progressPercent}% {t('buyMeal.toTarget')}
         </ProgressTextContainer>{' '}
         ({numContributions} {t('buyMeal.outOf')} {targetAmount}{' '}
         {t('buyMeal.meals')})
-      </div>
+      </CampaignDescriptorContainer>
       {isActive && (
-        <div>
+        <CampaignDescriptorContainer className="right" isModal={isModal}>
           {t('buyMeal.endsIn')}{' '}
           <ProgressTextContainer color={progressBarColor}>
             {Math.ceil(daysUntilEnd)}
           </ProgressTextContainer>{' '}
           {t('buyMeal.days')}
-        </div>
+        </CampaignDescriptorContainer>
       )}
     </Container>
   );
 };
 
 export default CampaignProgressBar;
+
+CampaignProgressBar.defaultProps = {
+  isModal: false,
+};
 
 const Container = styled.div`
   width: 100%;
@@ -115,4 +125,23 @@ const TimeStamp = styled.div`
   letter-spacing: 0.02em;
   color: #9e9e9e;
   margin-bottom: 10px;
+`;
+
+const CampaignDescriptorContainer = styled.div`
+  ${(props: CampaignDescriptorContainerProps) =>
+    props.isModal
+      ? `
+    width: 100%;
+    display: inline-block;
+    @media (min-width: 600px) {
+      width: 50%;
+
+      &.right {
+        text-align: right;
+      }
+    }
+  `
+      : `
+    width: auto;
+  `}
 `;
