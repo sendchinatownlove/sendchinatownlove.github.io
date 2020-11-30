@@ -290,28 +290,30 @@ const ModalCardDetails = ({
         <RowFormat>
           <LabelText htmlFor="name">
             {t('modalPayment.modalCardDetails.body.fullName')}
+            <InputText
+              name="name"
+              type="text"
+              className="modalInput--input"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              placeholder={t('modalPayment.modalCardDetails.placeholders.name')}
+            />
           </LabelText>
-          <InputText
-            name="name"
-            type="text"
-            className="modalInput--input"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            placeholder={t('modalPayment.modalCardDetails.placeholders.name')}
-          />
           <LabelText htmlFor="email">
             {t('modalPayment.modalCardDetails.body.email')}
+            <InputText
+              name="email"
+              type="email"
+              className="modalInput--input"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              placeholder={t(
+                'modalPayment.modalCardDetails.placeholders.email'
+              )}
+              pattern={ModalPaymentConstants.EMAIL_REGEX.source}
+              required
+            />
           </LabelText>
-          <InputText
-            name="email"
-            type="email"
-            className="modalInput--input"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            placeholder={t('modalPayment.modalCardDetails.placeholders.email')}
-            pattern={ModalPaymentConstants.EMAIL_REGEX.source}
-            required
-          />
         </RowFormat>
         <SquareFormContainer>
           <SquarePaymentForm
@@ -348,13 +350,13 @@ const ModalCardDetails = ({
                 <br />
                 {t('modalPayment.modalCardDetails.message.luc_name')}
                 <BoldText>
-                  {`${lucData.firstName} 
+                  {`${lucData.firstName}
                   ${
                     lucData.middleInitial.length > 0
                       ? lucData.middleInitial.substring(0, 1).toUpperCase() +
                         '. '
                       : ''
-                  } 
+                  }
                   ${lucData.lastName}`}
                 </BoldText>
               </span>
@@ -438,10 +440,19 @@ export const RowFormat = styled.div`
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   text-transform: uppercase;
+  @media (min-width: 900px) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
 `;
 
 export const LabelText = styled.label`
   color: #373f4a;
+  width: 100%;
+  @media (min-width: 900px) {
+    width: 50%;
+    margin-right: 16px;
+  }
 `;
 
 const BoldText = styled.span`
