@@ -6,6 +6,7 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
+import CampaignProgressBar from '../../MerchantsPage/gam/CampaignProgressBar';
 import { useTranslation } from 'react-i18next';
 import CampaignInstructions from './CamapignInstructions';
 import ReactPixel from 'react-facebook-pixel';
@@ -15,6 +16,7 @@ export interface Props {
   sellerId: string;
   sellerName: string;
   costPerMeal: number;
+  campaignId?: string;
 }
 
 export const ModalBuyMeal = (props: Props) => {
@@ -24,6 +26,7 @@ export const ModalBuyMeal = (props: Props) => {
   // set initial number of meals to 1
   const [numberOfMeals, setNumberOfMeals] = useState(1);
 
+  const [campaign, setCampaign] = useState<any>({});
   const [campaignDistributor, setCampaignDistributor] = useState<any>([]);
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
@@ -59,17 +62,22 @@ export const ModalBuyMeal = (props: Props) => {
     // eslint-disable-next-line
   }, []);
 
-  const fetchData = async (sellerId: string) => {
+  const fetchData = async (sellerId: string, campaignId?: string) => {
     // Note(wilsonj806) Showing the campaign that expires first
     // will need to update this if we render multiple distributors
     const { data } = await getCampaignsForMerchant(sellerId);
-    const { data: distrib } = await getDistributor(data[0].distributor_id);
+
+    const campaign = data.find((ele) => campaignId === ele.id);
+    const { data: distrib } = await getDistributor(campaign.distributor_id);
     setCampaignDistributor(distrib);
+    setCampaign(campaign);
   };
 
   useEffect(() => {
-    fetchData(props.sellerId);
-  }, [props.sellerId]);
+    if (props.campaignId) {
+      fetchData(props.sellerId, props.campaignId);
+    }
+  }, [props.sellerId, props.campaignId]);
 
   const Distributor = () => (
     <>
@@ -83,6 +91,14 @@ export const ModalBuyMeal = (props: Props) => {
         {campaignDistributor.name}
       </a>{' '}
     </>
+  );
+
+  const mealsRaised = Math.floor(
+    campaign.amount_raised / campaign.price_per_meal
+  );
+
+  const targetMeals = Math.floor(
+    campaign.target_amount / campaign.price_per_meal
   );
 
   return (
@@ -106,6 +122,15 @@ export const ModalBuyMeal = (props: Props) => {
       </p>
 
       <CampaignInstructions />
+      <CampaignProgressBar
+        isModal={true}
+        isActive={campaign.active}
+        numContributions={mealsRaised}
+        targetAmount={targetMeals}
+        progressBarColor={'#cf6e8a'}
+        lastContributionTime={new Date(campaign.last_contribution)}
+        endDate={new Date(campaign.end_date)}
+      />
 
       <div className={styles.amountContainer}>
         <label htmlFor="select-amount">{t('buyMeal.prompt')}</label>

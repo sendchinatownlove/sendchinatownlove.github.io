@@ -27,6 +27,7 @@
 
   @include for-phone-only {
     flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -66,7 +67,10 @@
 
 .total {
   flex-grow: 1;
-  text-align: center;
+  text-align: left;
+  @media (min-width: 900px) {
+    text-align: center;
+  }
 }
 
 .illustrationsContainer {
@@ -169,11 +173,17 @@
 // CampaignInstructions styling
 .modalBackground {
   background-color: $standard-red;
-  display: flex;
+  display: none;
+  visibility: hidden;
   justify-content: center;
   align-items: center;
   padding: 20px 10px;
   margin: 20px 0;
+
+  @media (min-width: 600px) {
+    display: flex;
+    visibility: visible;
+  }
 }
 
 .modalInstructionsGrid {
