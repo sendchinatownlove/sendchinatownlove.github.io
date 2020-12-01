@@ -62,9 +62,8 @@ export const ModalBuyMeal = (props: Props) => {
     // eslint-disable-next-line
   }, []);
 
-  const fetchData = async (sellerId: string, campaignId?: string) => {
-    // Note(wilsonj806) Showing the campaign that expires first
-    // will need to update this if we render multiple distributors
+  // Note(wilsonj806) fetches data based on the passed in campaign id
+  const fetchData = async (sellerId: string, campaignId: string) => {
     const { data } = await getCampaignsForMerchant(sellerId);
 
     const campaign = data.find((ele) => campaignId === ele.id);
