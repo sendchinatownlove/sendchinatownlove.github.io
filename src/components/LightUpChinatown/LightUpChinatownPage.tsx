@@ -2,11 +2,6 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
-import partners_46 from './images/partners-46.png';
-import partners_ccba from './images/partners-ccba.png';
-import partners_cccny from './images/partners-cccny.png';
-import partners_prm from './images/partners-prm.png';
-import partners_udooda from './images/partners-udooda.png';
 import mapImg from './images/light-up-map.png';
 import costBreakdownImg from './images/cost-breakdown.png';
 import goal1Img from './images/goal_1.png';
@@ -18,6 +13,7 @@ import DonationSection from './DonationSection';
 import DonationDetail from './DonationDetail';
 import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
+import LightUpPartners from './LightUpPartners';
 import { getProject, light_up_chinatown_id } from '../../utilities/api';
 import { phoneScreens } from '../../utilities/general/responsive';
 
@@ -139,27 +135,7 @@ const LightUpChinatownPage = () => {
           <CostBreakdownImage src={costBreakdownImg}></CostBreakdownImage>
         </CostBreakdownImageContainer>
       </DonationContainer>
-      <Banner>
-        <PartnerThanksTitle>
-          {t('lightUpChinatown.partnerThanks')}
-        </PartnerThanksTitle>
-        <PartnersLogoContainer>
-          <PartnerLogo src={partners_46} alt="46 Mott" />
-          <PartnerLogo
-            src={partners_ccba}
-            alt="Chinese Consolidated Benevolent Association"
-          />
-          <PartnerLogo
-            src={partners_cccny}
-            alt="Chinese Chamber of Commerce NY"
-          />
-          <PartnerLogo src={partners_prm} alt="Pearl River Mart" />
-          <PartnerLogo
-            src={partners_udooda}
-            alt="United Democratic Organization"
-          />
-        </PartnersLogoContainer>
-      </Banner>
+      <LightUpPartners />
       <LightUpFaq />
     </React.Fragment>
   );
@@ -189,37 +165,6 @@ const Button = styled.span`
   }
 `;
 
-const PartnersLogoContainer = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 40px;
-`;
-
-const PartnerLogo = styled.img`
-  max-height: 130px;
-  padding: 20px;
-  max-width: 100%;
-  overflow-x: hidden;
-`;
-
-const PartnerThanksTitle = styled.div`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 32px;
-  line-height: 32px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  text-align: center;
-  color: #1e1e1e;
-  @media (max-width: 599px) {
-    font-size: 18px;
-    line-height: 26px;
-  }
-`;
-
 const Container = styled.section`
   width: 90%;
   margin: 0 auto;
@@ -244,11 +189,6 @@ const TextContainer = styled.section`
   @media (max-width: 599px) {
     padding: 35px 0px;
   }
-`;
-
-const Banner = styled.div`
-  position: relative;
-  text-align: center;
 `;
 
 const HeaderText = styled.span`
