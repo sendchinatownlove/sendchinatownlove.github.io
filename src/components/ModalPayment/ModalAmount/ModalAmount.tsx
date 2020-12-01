@@ -72,7 +72,7 @@ export const ModalAmount = (props: Props) => {
   };
 
   return (
-    <ContentContainer>
+    <ContentContainer id="donation-form" data-testid="modal-amount">
       <Header>{getHeaderText(modalView, props.sellerName)}</Header>
 
       {props.sellerId === 'send-chinatown-love' && (
@@ -234,5 +234,3 @@ const Header = styled.div`
   font-size: 30px;
   font-weight: 600;
 `;
-
-ContentContainer.displayName = 'Donation Pool Amount Form';
