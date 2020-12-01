@@ -36,11 +36,11 @@ const LightUpChinatownPage = () => {
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
   const [contributions, setContributions] = useState<number>(0);
 
-  const ModalPaymentDispatcher = useModalPaymentDispatch(null);
+  const modalPaymentDispatcher = useModalPaymentDispatch(null);
 
   const openModal = (event) => {
     event.preventDefault();
-    ModalPaymentDispatcher({
+    modalPaymentDispatcher({
       type: ModalPaymentConstants.SET_MODAL_VIEW,
       payload: ModalPaymentTypes.modalPages.light_up_chinatown,
     });
@@ -83,7 +83,6 @@ const LightUpChinatownPage = () => {
       </div>
       <Container>
         <TextContainer>
-          <SummaryHeader>{t('lightUpChinatown.summaryHeader')}</SummaryHeader>
           <SummaryBody>{t('lightUpChinatown.summaryBody1')}</SummaryBody>
           <br></br>
           <SummaryBody>
@@ -105,12 +104,9 @@ const LightUpChinatownPage = () => {
           <br></br>
           <br></br>
           <CampaignInfoText color={'#1E1E1E'}>
-            {t('lightUpChinatown.campaignHeader')}
-          </CampaignInfoText>
-          <CampaignInfoTime color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignDates')}
-          </CampaignInfoTime>
-          <CampaignInfoText color={'#CF6E8A'}>
+          </CampaignInfoText>
+          <CampaignInfoText color={'#A8192E'}>
             {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
           </CampaignInfoText>
         </TextContainer>
@@ -243,6 +239,7 @@ const TextContainer = styled.section`
   align-items: start;
   display: flex;
   flex-direction: column;
+  font-size: 18px;
   width: 100%;
   @media (max-width: 599px) {
     padding: 35px 0px;
@@ -272,7 +269,6 @@ const HeaderText = styled.span`
 
 const HeaderSubtext = styled.span`
   margin: 0 auto;
-
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
@@ -289,21 +285,9 @@ const HeaderSubtext = styled.span`
   }
 `;
 
-const SummaryHeader = styled.div`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 32px;
-  line-height: 44px;
-  letter-spacing: 0.02em;
-  color: ##1e1e1e;
-  margin-bottom: 40px;
-`;
-
 const SummaryBody = styled.div`
   font-family: Open Sans;
   font-style: normal;
-  font-size: 18px;
   line-height: 32px;
   color: ##1e1e1e;
   @media (max-width: 599px) {
@@ -339,13 +323,8 @@ const CampaignInfoText = styled.div`
   font-family: Open Sans;
   font-style: normal;
   font-weight: bold;
-  font-size: 16px;
   line-height: 35px;
   color: ${(props) => props.color};
-`;
-
-const CampaignInfoTime = styled(CampaignInfoText)`
-  font-size: 18px;
 `;
 
 const DonationProgress = styled.div`
