@@ -15,6 +15,13 @@ export type SquarePaymentParams = {
 
 export type SquareLineItems = Array<SquarePaymentParams>;
 
+export type FeeParams = {
+  name: string;
+  multiplier: number;
+  flat_cost: number;
+  active: boolean;
+};
+
 export type Location = {
   seller_id: number;
   address1: string;

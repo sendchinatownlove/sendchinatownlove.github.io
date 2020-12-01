@@ -9,6 +9,9 @@
       "maximum": "Maximum",
       "amount": "amount",
       "submit": "Next",
+      "fees": "Credit card processing fees",
+      "feesTooltip": "Credit card processing fees are added in order to help our small businesses get your full donation.",
+      "total": "Total amount",
       "adopt_lantern_tier_2": "Adopt-a-Lantern!",
       "adopt_lantern_tier_3": "Adopt-a-Lantern, Keep-a-Lantern!",
       "light_up_chinatown_address": {
