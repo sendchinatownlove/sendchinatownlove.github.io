@@ -64,8 +64,7 @@ const PartnerThanksTitle = styled.div`
   font-weight: bold;
   font-size: 32px;
   line-height: 32px;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin: 40px 0;
   text-align: center;
   color: #1e1e1e;
   @media (max-width: 599px) {
