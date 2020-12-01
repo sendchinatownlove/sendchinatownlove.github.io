@@ -6,6 +6,7 @@ import {
   sellers,
   vouchers,
   campaigns,
+  fees,
   distributors,
   passportVouchers,
   contacts,
@@ -181,6 +182,20 @@ export const getCampaignsForMerchant = async (
 ): Promise<any> => {
   return await axios
     .get(sellers + seller_id + '/campaigns')
+    .then((res) => res)
+    .catch((err) => err);
+};
+
+export const getFees = async () => {
+  return await axios
+    .get(fees)
+    .then((res) => res)
+    .catch((err) => err);
+};
+
+export const getFee = async (name: string) => {
+  return await axios
+    .get(fees + name)
     .then((res) => res)
     .catch((err) => err);
 };

@@ -107,7 +107,10 @@ const LightUpChinatownPage = () => {
           </CampaignInfoText>
         </TextContainer>
         <MapContainer>
-          <Map src={mapImg} />
+          <Map
+            src="https://storage.googleapis.com/sendchinatownlove-assets/public/assets/light-up-chinatown/light-up-chinatown-map.gif"
+            alt="Light Up Chinatown Fundraising Goals Map"
+          />
           <br></br>
           <GoalContainer>
             <GoalPill src={goal1Img}></GoalPill>
@@ -297,18 +300,12 @@ const CostBreakdownImageContainer = styled.div`
   border-radius: 12px;
   max-width: 1220px;
   margin: 0 auto;
-  @media (max-width: 599px) {
-    max-width: 400px;
-  }
 `;
 
 const CostBreakdownImage = styled.img`
   border-radius: 12px;
-  max-height: 700px;
-  max-width: 1220px;
-  @media (max-width: 599px) {
-    max-height: 340px;
-    max-width: 350px;
+  width: 100%;
+  height: auto;
 `;
 
 const GoalContainer = styled.div`

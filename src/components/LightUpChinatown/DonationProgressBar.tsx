@@ -6,12 +6,21 @@ interface Props {
   raised: number;
 }
 
+interface GoalImgLeftProps {
+  percentage: number;
+}
+
 const centsToDollars = (cents: number) =>
   Math.floor(cents / 100).toLocaleString();
 
 const DonationProgressBar = (props: Props) => {
   const { t } = useTranslation();
   const percentage = (props.raised / 4700000) * 100;
+
+  const RenderFinalGoal = () =>
+    percentage >= 100 ? null : (
+      <GoalImage className={`right ${percentage === 100 ? 'completed' : ''}`} />
+    );
 
   return (
     <BarContainer>
@@ -22,13 +31,20 @@ const DonationProgressBar = (props: Props) => {
         </strong>
       </ProgressBarHeader>
       <ProgressBar>
-        <Filler style={{ width: `${percentage}%` }} />
-        <GoalImage1 />
-        <GoalImage2 />
+        <Filler style={{ width: `${percentage >= 100 ? 100 : percentage}%` }} />
+        <GoalImageLeft
+          className={`left ${percentage >= 50 ? 'completed' : ''}`}
+          percentage={percentage}
+        />
+        <RenderFinalGoal />
       </ProgressBar>
       <GoalContainer>
-        <Goal1>{t('lightUpChinatown.raiseGoal1')}</Goal1>
-        <Goal2>{t('lightUpChinatown.raiseGoal2')}</Goal2>
+        <GoalText className={`left ${percentage >= 50 && 'completed'}`}>
+          {t('lightUpChinatown.raiseGoal1')}
+        </GoalText>
+        <GoalText className={`right ${percentage >= 100 && 'completed'}`}>
+          {t('lightUpChinatown.raiseGoal2')}
+        </GoalText>
       </GoalContainer>
     </BarContainer>
   );
@@ -37,6 +53,9 @@ export default DonationProgressBar;
 
 const BarContainer = styled.div`
   width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 25px;
   height: 93px;
   display: flex;
   justify-content: space-between;
@@ -66,20 +85,26 @@ const Filler = styled.div`
 const GoalImage = styled.div`
   width: 25px;
   height: 25px;
-  background: #ffffff;
   border: 4px solid #ff3a2f;
   box-sizing: border-box;
   position: absolute;
   bottom: 0;
   border-radius: 12px;
+  background: white;
+  &.right {
+    right: 0;
+  }
+
+  &.completed {
+    background-color: #ff3a2f;
+  }
 `;
 
-const GoalImage1 = styled(GoalImage)`
-  left: calc(50% - 25px);
-`;
-
-const GoalImage2 = styled(GoalImage)`
-  right: 0;
+const GoalImageLeft = styled(GoalImage)`
+  ${(props: GoalImgLeftProps) =>
+    props.percentage >= 50
+      ? `left: calc(${props.percentage < 100 ? props.percentage : 100}% - 25px)`
+      : `left: calc(50% - 25px)`}
 `;
 
 const GoalContainer = styled.div`
@@ -90,12 +115,17 @@ const GoalContainer = styled.div`
   white-space: nowrap;
 `;
 
-const Goal1 = styled.div`
+const GoalText = styled.div`
   position: absolute;
-  left: calc(50% - 50px);
-`;
+  &.left {
+    left: calc(50% - 50px);
+  }
 
-const Goal2 = styled.div`
-  position: absolute;
-  right: 0;
+  &.right {
+    right: 0;
+  }
+
+  &.completed {
+    font-weight: bold;
+  }
 `;

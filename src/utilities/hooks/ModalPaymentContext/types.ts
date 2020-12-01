@@ -3,13 +3,15 @@
  *
  * @typedef {Object} DefaultModalPaymentState
  * @property {number} amount - amount (in cents)
+ * @property {number} feesAmount - amount of fees (in cents)
+ * @property {FeeParams[]} fees - fee params used to calculate feesAmount
  * @property {boolean} customInput - if a user used the custom input
  * @property {boolean} close - modal for closing the payment modal
  * @property {number} modalView - expiration year
  *
  */
 
-import { BrowsePageSeller } from '../../api/types';
+import { BrowsePageSeller, FeeParams } from '../../api/types';
 
 export type lucData = {
   firstName: string;
@@ -23,7 +25,9 @@ export type lucData = {
 };
 
 export type ModalPaymentState = {
-  amount: string;
+  amount: string; // @TODO: refactor amount to be type number
+  feesAmount?: number;
+  fees?: FeeParams[];
   customInput: boolean;
   purchaseType: modalPages | null;
   modalView: modalPages | null;
@@ -33,6 +37,8 @@ export type ModalPaymentState = {
 
 export const defaultState: ModalPaymentState = {
   amount: '5',
+  feesAmount: 0,
+  fees: [],
   customInput: false,
   modalView: null,
   purchaseType: null,

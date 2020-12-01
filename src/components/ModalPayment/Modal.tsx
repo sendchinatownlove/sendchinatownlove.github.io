@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ModalAmount from './ModalAmount';
 import ModalBuyMeal from './ModalBuyMeal';
 import ModalCardDetails from './ModalCardDetails';
@@ -9,6 +9,7 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
+import { getFee } from '../../utilities/api/interactionManager';
 import ReactPixel from 'react-facebook-pixel';
 import styled from 'styled-components';
 
@@ -27,6 +28,23 @@ export interface ModalProps {
 export const Modal = (props: Props) => {
   const { modalView } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
+
+  useEffect(() => {
+    // @TODO: For now we are only applying the Square fee, but backend may eventually
+    //        need a way to pass multiple fees by PaymentType/Campaign(?).
+    getFee('square').then((res) => {
+      if (res.status === 200) {
+        const squareFee = res.data;
+
+        if (squareFee && squareFee.active) {
+          dispatch({
+            type: ModalPaymentConstants.SET_FEES,
+            payload: [squareFee],
+          });
+        }
+      }
+    });
+  }, [dispatch]);
 
   const closeModal = async (e: any) => {
     ReactPixel.trackCustom('ModalCloseButtonClick', {});
