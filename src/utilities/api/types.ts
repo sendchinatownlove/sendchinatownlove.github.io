@@ -135,7 +135,7 @@ export type Campaign = {
   id: number;
   last_contribution: string;
   location_id: string;
-  nonprofit_id: string;
+  nonprofit_id: number | null;
   project_id: number;
   price_per_meal: number;
   seller_id: string;
@@ -143,4 +143,14 @@ export type Campaign = {
   target_amount: number;
   updated_at: string;
   valid: boolean;
+};
+
+export type Nonprofit = {
+  contact_id: number;
+  created_at: string;
+  fee_id: number;
+  id: number;
+  logo_image_url: string;
+  name: string;
+  updated_at: string;
 };

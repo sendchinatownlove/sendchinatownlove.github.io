@@ -5,11 +5,7 @@ import { tabletScreens } from '../../../utilities/general/responsive';
 import { useTranslation } from 'react-i18next';
 import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
-import {
-  getDistributor,
-  getSeller,
-  getFiscalSponsor,
-} from '../../../utilities/api';
+import { getDistributor, getSeller } from '../../../utilities/api';
 import { useEffect, useState } from 'react';
 import Modal from '../../ModalPayment';
 import {
@@ -17,6 +13,7 @@ import {
   useModalPaymentDispatch,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
+import FiscalSponsor from './FiscalSponsor';
 
 interface Props {
   campaign: Campaign;
@@ -32,7 +29,6 @@ const CampaignListItem = (props: Props) => {
 
   const [distributor, setDistributor] = useState<any | null>();
   const [merchant, setMerchant] = useState<any | null>();
-  const [fiscalSponsor, setFiscalSponsor] = useState<any | null>();
   const campaign = props.campaign;
 
   const fetchData = async () => {
@@ -42,10 +38,6 @@ const CampaignListItem = (props: Props) => {
 
     setDistributor(distributorData.data);
     setMerchant(merchantData.data);
-    if (campaign.nonprofit_id) {
-      const fiscalSponsor = await getFiscalSponsor(campaign.nonprofit_id);
-      setFiscalSponsor(fiscalSponsor.data);
-    }
   };
 
   useEffect(() => {
@@ -154,17 +146,9 @@ const CampaignListItem = (props: Props) => {
           />
         )}
       </Container>
-      {fiscalSponsor && (
+      {campaign.nonprofit_id && (
         <FiscalSponsorContainer>
-          <FiscalSponsorImage
-            src={fiscalSponsor.logo_image_url}
-          ></FiscalSponsorImage>
-          <FiscalSponsorDivider></FiscalSponsorDivider>
-          <FiscalSponsorText>
-            {t('gamHome.listItem.fiscalSponsor', {
-              sponsorName: fiscalSponsor.name,
-            })}
-          </FiscalSponsorText>
+          <FiscalSponsor nonprofitId={campaign.nonprofit_id} />
         </FiscalSponsorContainer>
       )}
       <Border></Border>
@@ -319,50 +303,11 @@ const DistributorImage = styled.img`
 `;
 
 const FiscalSponsorContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 55px;
-  position: relative;
-
-  @media (${tabletScreens}) {
-    margin-bottom: 30px;
-  }
-`;
-
-const FiscalSponsorImage = styled.img`
   margin-left: 28%;
-  max-height: 35px;
-  max-width: 80px;
 
   @media (${tabletScreens}) {
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
     margin-left: 0%;
   }
-`;
-
-const FiscalSponsorDivider = styled.div`
-  margin-left: 18px;
-  width: 5px;
-  height: 37px;
-  background-color: #f5ec57;
-
-  @media (${tabletScreens}) {
-    height: 110px;
-    margin-left: 27%;
-  }
-`;
-
-const FiscalSponsorText = styled.div`
-  margin-left: 6px;
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
-  color: #1e1e1e;
 `;
 
 const Border = styled.div`

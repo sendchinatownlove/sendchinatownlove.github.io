@@ -7,6 +7,7 @@ import type {
   SellerDistributorPair as SellerDistributorPairType,
 } from '../../../../utilities/api/types';
 import { tabletScreens } from '../../../../utilities/general/responsive';
+import FiscalSponsor from '../FiscalSponsor';
 import MegaGamProgressBar from './MegaGamProgressBar';
 import SellerDistributorPair from './SellerDistributorPair';
 
@@ -55,7 +56,14 @@ const MegaGamListItem = ({ campaign }: Props) => {
           </SellerDistributorPairs>
         </SellerDistributorContent>
       </Content>
-      {/* TODO: Add fiscal sponsor. */}
+      {campaign.nonprofit_id && (
+        <div>
+          <Divider />
+          <FiscalSponsorContainer>
+            <FiscalSponsor nonprofitId={campaign.nonprofit_id} />
+          </FiscalSponsorContainer>
+        </div>
+      )}
     </Container>
   );
 };
@@ -167,5 +175,12 @@ const SellerDistributorPairs = styled.div`
     margin-right: 28px;
   }
 `;
+
+const Divider = styled.div`
+  border-bottom: 1px solid #e5e5e5;
+  margin: 0 10% 58px 10%;
+`;
+
+const FiscalSponsorContainer = styled.div``;
 
 export default MegaGamListItem;
