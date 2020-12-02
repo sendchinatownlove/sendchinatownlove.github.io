@@ -74,7 +74,8 @@ const FiscalSponsorDivider = styled.div`
   margin-left: 18px;
   width: 5px;
   height: 37px;
-  background-color: #f5ec57;
+  background-color: #f8ba17;
+  flex-shrink: 0;
 
   @media (${tabletScreens}) {
     height: 110px;
