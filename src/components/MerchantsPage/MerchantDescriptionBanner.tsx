@@ -19,8 +19,6 @@ const MerchantDescriptionBanner = () => {
             <Bullets>{t('descriptionBox.bullet1')}</Bullets>
             <Bullets>{t('descriptionBox.bullet2')}</Bullets>
             <Bullets>{t('descriptionBox.bullet3')}</Bullets>
-            <Bullets>{t('descriptionBox.bullet4')}</Bullets>
-            <Bullets>{t('descriptionBox.bullet5')}</Bullets>
           </List>
         </div>
         <img

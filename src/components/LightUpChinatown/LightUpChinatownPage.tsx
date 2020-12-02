@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
-import mapImg from './images/light-up-map.png';
 import costBreakdownImg from './images/cost-breakdown.png';
 import goal1Img from './images/goal_1.png';
 import goal2Img from './images/goal_2.png';
