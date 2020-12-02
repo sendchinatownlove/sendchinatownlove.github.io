@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
+import { tabletScreens } from '../../../utilities/general/responsive';
 import ProgressBar from './ProgressBar';
 
 const PROGRESS_BAR_COLOR = '#CF6E8A';
@@ -79,6 +80,10 @@ const Container = styled.div`
   margin-right: 60px;
   padding: 16px 0;
   width: 100%;
+
+  @media (${tabletScreens}) {
+    margin-right: 0;
+  }
 `;
 
 const TotalRaised = styled.div`
