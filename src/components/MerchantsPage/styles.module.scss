@@ -147,7 +147,7 @@
   display: grid;
   grid-template-rows: 1fr;
   margin-bottom: 150px;
-  max-height: 240px;
+  max-height: 220px;
 
   @include for-phone-only {
     max-height: 400px;
@@ -191,7 +191,7 @@
   grid-row: 1;
   grid-column: 1;
   background-color: #a8192e;
-  height: 240px;
+  height: 220px;
   width: 100vw;
   position: relative;
   left: 50%;

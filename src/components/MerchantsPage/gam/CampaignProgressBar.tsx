@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { tabletScreens } from '../../../utilities/general/responsive';
 import ProgressBar from './ProgressBar';
+import type { SizeType } from './ProgressBar';
 
 const PROGRESS_BAR_COLOR = '#CF6E8A';
 
@@ -15,6 +16,7 @@ interface Props {
   endDate: string;
   isActive: boolean;
   pricePerMeal: number; // In cents.
+  size: SizeType;
   targetAmount: number; // In cents.
   totalRaised: number; // In cents.
 }
@@ -23,6 +25,7 @@ const CampaignProgressBar = ({
   endDate,
   isActive,
   pricePerMeal,
+  size,
   targetAmount,
   totalRaised,
 }: Props) => {
@@ -49,16 +52,16 @@ const CampaignProgressBar = ({
         <ProgressBar
           amount={{ current: totalRaised, target: targetAmount }}
           color={PROGRESS_BAR_COLOR}
-          size="LARGE"
+          size={size}
         />
       </ProgressBarContainer>
-      <div>
+      <SubText>
         <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
           {percentRaised}% {t('buyMeal.toTarget')}
         </ProgressTextContainer>{' '}
         ({Math.round(totalRaised / pricePerMeal)} {t('buyMeal.outOf')}{' '}
         {Math.round(targetAmount / pricePerMeal)} {t('buyMeal.meals')})
-      </div>
+      </SubText>
       {isActive && (
         <EndsAtContainer>
           {t('buyMeal.endsIn')}{' '}
@@ -96,6 +99,10 @@ const TotalRaisedAmount = styled.span`
   font-weight: 800;
 `;
 
+const SubText = styled.div`
+  font-size: 16px;
+`;
+
 const ProgressBarContainer = styled.div`
   margin-bottom: 12px;
 `;
@@ -106,5 +113,6 @@ const ProgressTextContainer = styled.span`
 `;
 
 const EndsAtContainer = styled.div`
+  font-size: 16px;
   margin-top: 12px;
 `;

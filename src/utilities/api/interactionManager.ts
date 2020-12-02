@@ -207,7 +207,7 @@ export const getDistributor = async (id: string): Promise<any> => {
     .catch((err) => err);
 };
 
-export const getFiscalSponsor = async (id: string): Promise<any> => {
+export const getFiscalSponsor = async (id: number): Promise<any> => {
   return await axios
     .get(nonprofits + id)
     .then((res) => res)
