@@ -1,86 +1,75 @@
+import moment from 'moment';
 import * as React from 'react';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
 
-import ProgressBar, { SIZE_TYPE } from './ProgressBar';
+import { tabletScreens } from '../../../utilities/general/responsive';
+import ProgressBar from './ProgressBar';
+import type { SizeType } from './ProgressBar';
+
+const PROGRESS_BAR_COLOR = '#CF6E8A';
+
+const centsToDollars = (cents: number) =>
+  Math.floor(cents / 100).toLocaleString();
 
 interface Props {
+  endDate: string;
   isActive: boolean;
-  numContributions: number;
-  targetAmount: number;
-  progressBarColor: string;
-  lastContributionTime: Date;
-  endDate: Date;
+  pricePerMeal: number; // In cents.
+  size: SizeType;
+  targetAmount: number; // In cents.
+  totalRaised: number; // In cents.
 }
 
 const CampaignProgressBar = ({
-  isActive,
-  numContributions,
-  targetAmount,
-  progressBarColor,
-  lastContributionTime,
   endDate,
+  isActive,
+  pricePerMeal,
+  size,
+  targetAmount,
+  totalRaised,
 }: Props) => {
   const { t } = useTranslation();
 
-  // "73% to target (73 out of 100 meals)"
-  const progressPercent = Math.floor((numContributions / targetAmount) * 100);
+  const totalRaisedDollars = centsToDollars(totalRaised);
 
-  // "Ends in 2 days"
-  const timeUntilEnd = endDate.getTime() - Date.now();
-  const daysUntilEnd = timeUntilEnd > 0 ? timeUntilEnd / (1000 * 3600 * 24) : 0;
-
-  // "Last contribution made 2h ago"
-  const timeSinceLastContribution = Date.now() - lastContributionTime.getTime();
-  const lastContributionTimeAsPresentable = (
-    timeSinceLastContribution: number
-  ) => {
-    const minutesSinceLastConstribution =
-      timeSinceLastContribution / (1000 * 60);
-    if (minutesSinceLastConstribution < 60) {
-      return `${t('buyMeal.lastContributionMade')} ${Math.floor(
-        minutesSinceLastConstribution
-      )}m ${t('buyMeal.ago')}`;
+  const calculatePercentRaised = (raised: number, target: number) => {
+    if (!raised) {
+      return 0;
     }
-    const hoursSinceLastContribution = minutesSinceLastConstribution / 60;
-    if (hoursSinceLastContribution < 24) {
-      return `${t('buyMeal.lastContributionMade')} ${Math.floor(
-        hoursSinceLastContribution
-      )}h ${t('buyMeal.ago')}`;
-    }
-    const daysSinceLastContribution = hoursSinceLastContribution / 24;
-    return `${t('buyMeal.lastContributionMade')} ${Math.floor(
-      daysSinceLastContribution
-    )}d ${t('buyMeal.ago')}`;
+    // TODO: Confirm the % we want to show if raised > target.
+    return Math.round((raised / target) * 100);
   };
+  const percentRaised = calculatePercentRaised(totalRaised, targetAmount);
 
   return (
     <Container>
-      <TimeStamp>
-        {lastContributionTimeAsPresentable(timeSinceLastContribution)}
-      </TimeStamp>
+      <TotalRaised>
+        Total Raised:{' '}
+        <TotalRaisedAmount>${totalRaisedDollars}</TotalRaisedAmount>
+      </TotalRaised>
       <ProgressBarContainer>
         <ProgressBar
-          amount={{ current: numContributions, target: targetAmount }}
-          color={progressBarColor}
-          size={SIZE_TYPE.SMALL}
+          amount={{ current: totalRaised, target: targetAmount }}
+          color={PROGRESS_BAR_COLOR}
+          size={size}
         />
       </ProgressBarContainer>
-      <div>
-        <ProgressTextContainer color={progressBarColor}>
-          {progressPercent}% {t('buyMeal.toTarget')}
+      <SubText>
+        <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
+          {percentRaised}% {t('buyMeal.toTarget')}
         </ProgressTextContainer>{' '}
-        ({numContributions} {t('buyMeal.outOf')} {targetAmount}{' '}
-        {t('buyMeal.meals')})
-      </div>
+        ({Math.round(totalRaised / pricePerMeal)} {t('buyMeal.outOf')}{' '}
+        {Math.round(targetAmount / pricePerMeal)} {t('buyMeal.meals')})
+      </SubText>
       {isActive && (
-        <div>
+        <EndsAtContainer>
           {t('buyMeal.endsIn')}{' '}
-          <ProgressTextContainer color={progressBarColor}>
-            {Math.ceil(daysUntilEnd)}
+          <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
+            {moment(endDate).diff(moment(), 'days')}
           </ProgressTextContainer>{' '}
           {t('buyMeal.days')}
-        </div>
+        </EndsAtContainer>
       )}
     </Container>
   );
@@ -89,30 +78,53 @@ const CampaignProgressBar = ({
 export default CampaignProgressBar;
 
 const Container = styled.div`
+  flex: 1;
+  font-size: 18px;
+  margin-right: 60px;
+  padding: 16px 0;
   width: 100%;
-  padding: 15px 0;
+
+  @media (${tabletScreens}) {
+    margin-right: 0;
+  }
+
+  @media (${tabletScreens}) {
+    font-size: 14px;
+  }
 `;
 
-const ProgressTextContainer = styled.span`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 22px;
-  color: ${(props) => props.color};
+const TotalRaised = styled.div`
+  color: #000000;
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+`;
+
+const TotalRaisedAmount = styled.span`
+  font-weight: 800;
+`;
+
+const SubText = styled.div`
+  font-size: 16px;
+
+  @media (${tabletScreens}) {
+    font-size: 14px;
+  }
 `;
 
 const ProgressBarContainer = styled.div`
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 `;
 
-const TimeStamp = styled.div`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
-  letter-spacing: 0.02em;
-  color: #9e9e9e;
-  margin-bottom: 10px;
+const ProgressTextContainer = styled.span`
+  color: ${({ color }: { color: string }) => color};
+  font-weight: 600;
+`;
+
+const EndsAtContainer = styled.div`
+  font-size: 16px;
+  margin-top: 12px;
+
+  @media (${tabletScreens}) {
+    font-size: 14px;
+  }
 `;

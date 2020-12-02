@@ -7,8 +7,9 @@ import type {
   SellerDistributorPair as SellerDistributorPairType,
 } from '../../../../utilities/api/types';
 import { tabletScreens } from '../../../../utilities/general/responsive';
+import CampaignProgressBar from '../CampaignProgressBar';
 import FiscalSponsor from '../FiscalSponsor';
-import MegaGamProgressBar from './MegaGamProgressBar';
+import { SIZE_TYPE } from '../ProgressBar';
 import SellerDistributorPair from './SellerDistributorPair';
 
 interface Props {
@@ -26,9 +27,11 @@ const MegaGamListItem = ({ campaign }: Props) => {
         <Subheader>{campaign.display_name}</Subheader>
         <Description>{campaign.description}</Description>
         <DonationContainer>
-          <MegaGamProgressBar
+          <CampaignProgressBar
             endDate={campaign.end_date}
             isActive={campaign.active}
+            pricePerMeal={campaign.price_per_meal}
+            size={SIZE_TYPE.LARGE}
             targetAmount={campaign.target_amount}
             totalRaised={campaign.amount_raised}
           />
@@ -104,6 +107,7 @@ const Header = styled.div`
   margin-bottom: 16px;
 
   @media (${tabletScreens}) {
+    font-size: 14px;
     margin-bottom: 8px;
   }
 `;
@@ -115,6 +119,7 @@ const Subheader = styled.div`
   margin-bottom: 36px;
 
   @media (${tabletScreens}) {
+    font-size: 16px;
     margin-bottom: 16px;
   }
 `;
@@ -122,6 +127,10 @@ const Subheader = styled.div`
 const Description = styled.div`
   font-size: 18px;
   margin-bottom: 24px;
+
+  @media (${tabletScreens}) {
+    font-size: 14px;
+  }
 `;
 
 const DonationContainer = styled.div`
