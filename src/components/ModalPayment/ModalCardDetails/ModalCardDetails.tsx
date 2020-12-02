@@ -16,7 +16,7 @@ import {
   LIGHT_UP_CHINATOWN_TIER_2_MIN,
 } from '../../../consts';
 import { modalPages } from '../../../utilities/hooks/ModalPaymentContext/types';
-import useScrollToTop from '../../../utilities/hooks/useScrollToTop';
+import useScrollToElement from '../../../utilities/hooks/useScrollToElement';
 
 import {
   makeSquarePayment,
@@ -54,7 +54,7 @@ const ModalCardDetails = ({
   const { t } = useTranslation();
   const { amount, purchaseType, lucData } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
-  const modalRef = useScrollToTop();
+  const modalRef = useScrollToElement();
 
   const [isTermsChecked, setTermsChecked] = useState(false);
   const [isSubscriptionChecked, setSubscriptionChecked] = useState(true);

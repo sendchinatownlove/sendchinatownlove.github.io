@@ -10,7 +10,7 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
-import useScrollToTop from '../../../utilities/hooks/useScrollToTop';
+import useScrollToElement from '../../../utilities/hooks/useScrollToElement';
 import { LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
 
 import { getSeller } from '../../../utilities';
@@ -26,7 +26,7 @@ const lucHeroImage =
 const ModalConfirmation = (props: Props) => {
   const { purchaseType, amount } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
-  const modalRef = useScrollToTop();
+  const modalRef = useScrollToElement();
 
   const closeModal = async (e: any) => {
     ReactPixel.trackCustom('ModalConfirmationButtonClick', {});

@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 
-const useScrollToTop = () => {
+const useScrollToElement = () => {
   const modalRef = useRef<any>(null);
 
   const width = Math.max(document.body.scrollWidth, document.body.offsetWidth);
@@ -13,4 +13,4 @@ const useScrollToTop = () => {
   return modalRef;
 };
 
-export default useScrollToTop;
+export default useScrollToElement;
