@@ -19,7 +19,7 @@ interface Props {
 const MegaGamListItem = ({ campaign }: Props) => {
   const { t } = useTranslation();
   return (
-    <Container>
+    <Container isActive={campaign.active}>
       <HeroImage heroImageUrl={campaign.gallery_image_urls[0]} />
       <Content>
         {/* TODO: Figure out if this is the correct header. If so, we need to translate. */}
@@ -59,7 +59,7 @@ const MegaGamListItem = ({ campaign }: Props) => {
           </SellerDistributorPairs>
         </SellerDistributorContent>
       </Content>
-      {campaign.nonprofit_id && (
+      {campaign.active && campaign.nonprofit_id && (
         <div>
           <Divider />
           <FiscalSponsorContainer>
@@ -72,16 +72,18 @@ const MegaGamListItem = ({ campaign }: Props) => {
 };
 
 const Container = styled.div`
-  background-color: #f7f7f7;
+  background-color: ${({ isActive }: { isActive: boolean }) =>
+    isActive ? '#f7f7f7' : '#ffffff'};
   display: flex;
   flex-direction: column;
-  margin-bottom: 56px;
+  margin-bottom: ${({ isActive }: { isActive: boolean }) =>
+    isActive ? '56px' : '0'};
 `;
 
 // TODO: Figure out how this image should scale.
 const HeroImage = styled.div`
-  background-image: url('${(props: { heroImageUrl: string }) =>
-    props.heroImageUrl}');
+  background-image: url('${({ heroImageUrl }: { heroImageUrl: string }) =>
+    heroImageUrl}');
   background-size: cover;
   height: 252px;
   width: 100%;
