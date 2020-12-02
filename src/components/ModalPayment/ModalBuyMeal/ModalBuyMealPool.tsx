@@ -101,7 +101,7 @@ export const ModalBuyMeal = (props: Props) => {
   );
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} data-testid="ModalBuyMeal">
       <div>
         <div className={styles.header}>
           {props.sellerId
