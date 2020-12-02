@@ -160,7 +160,6 @@ const LearnMoreText = styled.div`
 
 const SellerDistributorPairs = styled.div`
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
 
@@ -169,6 +168,8 @@ const SellerDistributorPairs = styled.div`
   }
 
   @media (${tabletScreens}) {
+    flex-wrap: wrap;
+
     > * {
       margin-bottom: 8px;
       margin-right: 0 !important;

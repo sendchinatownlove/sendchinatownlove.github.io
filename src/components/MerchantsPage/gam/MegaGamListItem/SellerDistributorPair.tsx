@@ -9,7 +9,13 @@ interface Props {
 }
 
 const SellerDistributorPair = ({ sellerDistributorPair }: Props) => (
-  <Container>
+  <Container
+    onClick={() =>
+      window.open(
+        `https://merchant.sendchinatownlove.com/${sellerDistributorPair.seller_id}`
+      )
+    }
+  >
     <MerchantImage>
       <img
         alt="merchant"
@@ -37,6 +43,10 @@ const Container = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   overflow: hidden;
   width: 270px;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const MerchantImage = styled.div`
@@ -54,7 +64,14 @@ const PairContent = styled.div`
 `;
 
 const PairText = styled.div`
+  font-size: 13px;
+  font-weight: 600;
   margin-right: 8px;
+
+  @media (${tabletScreens}) {
+    font-weight: 500;
+    font-size: 11px;
+  }
 `;
 
 const DistributorImage = styled.div`
