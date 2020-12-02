@@ -84,7 +84,7 @@ const Content = styled.div`
   padding: 44px 66px;
 
   @media (${tabletScreens}) {
-    padding: 16px 36px;
+    padding: 16px 28px;
   }
 `;
 
@@ -160,11 +160,20 @@ const LearnMoreText = styled.div`
 
 const SellerDistributorPairs = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
 
   > :not(:last-child) {
     margin-right: 28px;
+  }
+
+  @media (${tabletScreens}) {
+    > * {
+      margin-bottom: 8px;
+      margin-right: 0 !important;
+      width: 48%;
+    }
   }
 `;
 

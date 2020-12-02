@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import type { SellerDistributorPair as SellerDistributorPairType } from '../../../../utilities/api/types';
+import { tabletScreens } from '../../../../utilities/general/responsive';
 
 interface Props {
   sellerDistributorPair: SellerDistributorPairType;
@@ -17,10 +18,7 @@ const SellerDistributorPair = ({ sellerDistributorPair }: Props) => (
       />
     </MerchantImage>
     <PairContent>
-      <PairText>
-        {sellerDistributorPair.seller_name} x{' '}
-        {sellerDistributorPair.distributor_name}
-      </PairText>
+      <PairText>{sellerDistributorPair.seller_name}</PairText>
       <DistributorImage>
         <img
           alt="distributor"
@@ -43,6 +41,10 @@ const Container = styled.div`
 
 const MerchantImage = styled.div`
   display: flex;
+
+  @media (${tabletScreens}) {
+    display: none;
+  }
 `;
 
 const PairContent = styled.div`
