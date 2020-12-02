@@ -87,6 +87,10 @@ const Container = styled.div`
   @media (${tabletScreens}) {
     margin-right: 0;
   }
+
+  @media (${tabletScreens}) {
+    font-size: 14px;
+  }
 `;
 
 const TotalRaised = styled.div`
@@ -101,6 +105,10 @@ const TotalRaisedAmount = styled.span`
 
 const SubText = styled.div`
   font-size: 16px;
+
+  @media (${tabletScreens}) {
+    font-size: 14px;
+  }
 `;
 
 const ProgressBarContainer = styled.div`
@@ -115,4 +123,8 @@ const ProgressTextContainer = styled.span`
 const EndsAtContainer = styled.div`
   font-size: 16px;
   margin-top: 12px;
+
+  @media (${tabletScreens}) {
+    font-size: 14px;
+  }
 `;

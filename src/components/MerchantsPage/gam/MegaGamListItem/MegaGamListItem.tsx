@@ -107,6 +107,7 @@ const Header = styled.div`
   margin-bottom: 16px;
 
   @media (${tabletScreens}) {
+    font-size: 14px;
     margin-bottom: 8px;
   }
 `;
@@ -118,6 +119,7 @@ const Subheader = styled.div`
   margin-bottom: 36px;
 
   @media (${tabletScreens}) {
+    font-size: 16px;
     margin-bottom: 16px;
   }
 `;
@@ -125,6 +127,10 @@ const Subheader = styled.div`
 const Description = styled.div`
   font-size: 18px;
   margin-bottom: 24px;
+
+  @media (${tabletScreens}) {
+    font-size: 14px;
+  }
 `;
 
 const DonationContainer = styled.div`
