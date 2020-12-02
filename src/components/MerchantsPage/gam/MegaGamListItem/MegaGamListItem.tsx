@@ -7,7 +7,7 @@ import type {
   SellerDistributorPair as SellerDistributorPairType,
 } from '../../../../utilities/api/types';
 import { tabletScreens } from '../../../../utilities/general/responsive';
-import MegaGamProgressBar from './MegaGamProgressBar';
+import CampaignProgressBar from '../CampaignProgressBar';
 import SellerDistributorPair from './SellerDistributorPair';
 
 interface Props {
@@ -25,9 +25,10 @@ const MegaGamListItem = ({ campaign }: Props) => {
         <Subheader>{campaign.display_name}</Subheader>
         <Description>{campaign.description}</Description>
         <DonationContainer>
-          <MegaGamProgressBar
+          <CampaignProgressBar
             endDate={campaign.end_date}
             isActive={campaign.active}
+            pricePerMeal={campaign.price_per_meal}
             targetAmount={campaign.target_amount}
             totalRaised={campaign.amount_raised}
           />

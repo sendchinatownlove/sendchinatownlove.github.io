@@ -53,12 +53,6 @@ const CampaignListItem = (props: Props) => {
     // eslint-disable-next-line
   }, []);
 
-  const mealsRaised = Math.floor(
-    campaign.amount_raised / campaign.price_per_meal
-  );
-  const targetMeals = Math.floor(
-    campaign.target_amount / campaign.price_per_meal
-  );
   const campaignImageUrls = campaign.gallery_image_urls;
 
   const showModal = (event: any) => {
@@ -107,12 +101,11 @@ const CampaignListItem = (props: Props) => {
             )}
           </Description>
           <CampaignProgressBar
+            endDate={campaign.end_date}
             isActive={campaign.active}
-            numContributions={mealsRaised}
-            targetAmount={targetMeals}
-            progressBarColor={'#CF6E8A'}
-            lastContributionTime={new Date(campaign.last_contribution)}
-            endDate={new Date(campaign.end_date)}
+            pricePerMeal={campaign.price_per_meal}
+            targetAmount={campaign.target_amount}
+            totalRaised={campaign.amount_raised}
           />
         </ColumnContainer>
         <ColumnContainer>
