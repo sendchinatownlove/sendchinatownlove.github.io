@@ -141,12 +141,11 @@ const CampaignListItem = (props: Props) => {
           />
         )}
       </Container>
-      {campaign.nonprofit_id && (
+      {campaign.active && campaign.nonprofit_id && (
         <FiscalSponsorContainer>
           <FiscalSponsor nonprofitId={campaign.nonprofit_id} />
         </FiscalSponsorContainer>
       )}
-      <Border></Border>
     </React.Fragment>
   );
 };
@@ -161,7 +160,6 @@ const Container = styled.div`
   @media (${tabletScreens}) {
     max-height: 1000px;
     flex-direction: column;
-    margin: 0 17px;
     position: relative;
     padding-top: 15px;
   }
@@ -170,7 +168,7 @@ const Container = styled.div`
 const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem 1.5rem;
+  padding: 2rem;
 
   @media (${tabletScreens}) {
     padding: 0.5rem 1rem 0.75rem;
@@ -303,10 +301,4 @@ const FiscalSponsorContainer = styled.div`
   @media (${tabletScreens}) {
     margin-left: 0%;
   }
-`;
-
-const Border = styled.div`
-  width: 100%;
-  height: 1px;
-  border-bottom: 1px solid #e5e5e5;
 `;

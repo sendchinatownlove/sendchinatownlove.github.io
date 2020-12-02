@@ -19,47 +19,56 @@ interface Props {
 const MegaGamListItem = ({ campaign }: Props) => {
   const { t } = useTranslation();
   return (
-    <Container>
-      <HeroImage heroImageUrl={campaign.gallery_image_urls[0]} />
-      <Content>
-        {/* TODO: Figure out if this is the correct header. If so, we need to translate. */}
-        <Header>Mega-GAM</Header>
-        <Subheader>{campaign.display_name}</Subheader>
-        <Description>{campaign.description}</Description>
-        <DonationContainer>
-          <CampaignProgressBar
-            endDate={campaign.end_date}
+    <Container isActive={campaign.active}>
+      <ImageContentContainer isActive={campaign.active}>
+        <CampaignImageContainer isActive={campaign.active}>
+          <CampaignImage
+            heroImageUrl={campaign.gallery_image_urls[0]}
             isActive={campaign.active}
-            pricePerMeal={campaign.price_per_meal}
-            size={SIZE_TYPE.LARGE}
-            targetAmount={campaign.target_amount}
-            totalRaised={campaign.amount_raised}
           />
-          {campaign.active && (
-            // TODO: Open payment modal.
-            <Button className="button--filled" onClick={undefined}>
-              <ButtonText>{t('gamHome.megaGamListItem.giftButton')}</ButtonText>
-            </Button>
-          )}
-        </DonationContainer>
-        <SellerDistributorContent>
-          {/* TODO: Translate. */}
-          <LearnMoreText>
-            Learn more about our participating merchants:
-          </LearnMoreText>
-          <SellerDistributorPairs>
-            {campaign.seller_distributor_pairs.map(
-              (sellerDistributorPair: SellerDistributorPairType) => (
-                <SellerDistributorPair
-                  key={`${sellerDistributorPair.distributor_id};${sellerDistributorPair.seller_id}`}
-                  sellerDistributorPair={sellerDistributorPair}
-                />
-              )
+        </CampaignImageContainer>
+        <CampaignContent>
+          {/* TODO: Figure out if this is the correct header. If so, we need to translate. */}
+          <Header>Mega-GAM</Header>
+          <Subheader>{campaign.display_name}</Subheader>
+          <Description>{campaign.description}</Description>
+          <DonationContainer>
+            <CampaignProgressBar
+              endDate={campaign.end_date}
+              isActive={campaign.active}
+              pricePerMeal={campaign.price_per_meal}
+              size={campaign.active ? SIZE_TYPE.LARGE : SIZE_TYPE.SMALL}
+              targetAmount={campaign.target_amount}
+              totalRaised={campaign.amount_raised}
+            />
+            {campaign.active && (
+              // TODO: Open payment modal.
+              <Button className="button--filled" onClick={undefined}>
+                <ButtonText>
+                  {t('gamHome.megaGamListItem.giftButton')}
+                </ButtonText>
+              </Button>
             )}
-          </SellerDistributorPairs>
-        </SellerDistributorContent>
-      </Content>
-      {campaign.nonprofit_id && (
+          </DonationContainer>
+        </CampaignContent>
+      </ImageContentContainer>
+      <SellerDistributorContent>
+        {/* TODO: Translate. */}
+        <LearnMoreText>
+          Learn more about our participating merchants:
+        </LearnMoreText>
+        <SellerDistributorPairs>
+          {campaign.seller_distributor_pairs.map(
+            (sellerDistributorPair: SellerDistributorPairType) => (
+              <SellerDistributorPair
+                key={`${sellerDistributorPair.distributor_id};${sellerDistributorPair.seller_id}`}
+                sellerDistributorPair={sellerDistributorPair}
+              />
+            )
+          )}
+        </SellerDistributorPairs>
+      </SellerDistributorContent>
+      {campaign.active && campaign.nonprofit_id && (
         <div>
           <Divider />
           <FiscalSponsorContainer>
@@ -72,30 +81,79 @@ const MegaGamListItem = ({ campaign }: Props) => {
 };
 
 const Container = styled.div`
-  background-color: #f7f7f7;
+  background-color: ${({ isActive }: { isActive: boolean }) =>
+    isActive ? '#f7f7f7' : '#ffffff'};
   display: flex;
   flex-direction: column;
-  margin-bottom: 56px;
+  margin-bottom: ${({ isActive }: { isActive: boolean }) =>
+    isActive ? '56px' : '0'};
 `;
 
-// TODO: Figure out how this image should scale.
-const HeroImage = styled.div`
-  background-image: url('${(props: { heroImageUrl: string }) =>
-    props.heroImageUrl}');
-  background-size: cover;
-  height: 252px;
-  width: 100%;
-
-  @media (${tabletScreens}) {
-    height: 106px;
-  }
+const ImageContentContainer = styled.div`
+  display: flex;
+  flex-direction: ${({ isActive }: { isActive: boolean }) =>
+    isActive ? 'column' : 'row'};
 `;
 
-const Content = styled.div`
+const CampaignImageContainer = styled.div`
+  ${({ isActive }: { isActive: boolean }) => {
+    if (isActive) {
+      return `
+      @media (${tabletScreens}) {
+        height: 106px;
+      }
+      `;
+    }
+
+    return `
+    align-items: center;
+    display: flex;
+    `;
+  }}
+`;
+
+// TODO: Figure out how this image should scale for active/inactive.
+const CampaignImage = styled.div`
+  ${({
+    heroImageUrl,
+    isActive,
+  }: {
+    heroImageUrl: string;
+    isActive: boolean;
+  }) => {
+    if (isActive) {
+      return `
+        background-image: url('${heroImageUrl}');
+        background-size: cover;
+        height: 252px;
+        width: 100%;
+
+        @media (${tabletScreens}) {
+          height: 106px;
+        }
+        `;
+    }
+
+    return `
+      background-image: url('${heroImageUrl}');
+      border-radius: 5px;
+      height: 240px;
+      width: 240px;
+
+      @media (${tabletScreens}) {
+        height: 100px;
+        width: 100%;
+      }
+      `;
+  }}
+`;
+
+const CampaignContent = styled.div`
+  flex-grow: 1;
   padding: 44px 66px;
 
   @media (${tabletScreens}) {
-    padding: 16px 28px;
+    padding: 16px 28px 40px;
   }
 `;
 
@@ -141,6 +199,7 @@ const DonationContainer = styled.div`
 
   @media (${tabletScreens}) {
     flex-direction: column;
+    margin-bottom: 0;
   }
 `;
 
@@ -169,6 +228,11 @@ const ButtonText = styled.div`
 const SellerDistributorContent = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0 44px 66px;
+
+  @media (${tabletScreens}) {
+    padding: 0 16px 28px;
+  }
 `;
 
 const LearnMoreText = styled.div`
