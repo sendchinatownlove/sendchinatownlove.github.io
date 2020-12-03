@@ -6,24 +6,28 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
+import CampaignProgressBar from '../../MerchantsPage/gam/CampaignProgressBar';
 import { useTranslation } from 'react-i18next';
 import CampaignInstructions from './CamapignInstructions';
 import ReactPixel from 'react-facebook-pixel';
 import { getCampaignsForMerchant, getDistributor } from '../../../utilities';
+import { SIZE_TYPE } from '../../MerchantsPage/gam/ProgressBar';
 
 export interface Props {
   sellerId: string;
   sellerName: string;
   costPerMeal: number;
+  campaignId?: string;
 }
 
-export const Modal = (props: Props) => {
+export const ModalBuyMeal = (props: Props) => {
   const { t } = useTranslation();
   const dispatch = useModalPaymentDispatch(null);
 
   // set initial number of meals to 1
   const [numberOfMeals, setNumberOfMeals] = useState(1);
 
+  const [campaign, setCampaign] = useState<any>({});
   const [campaignDistributor, setCampaignDistributor] = useState<any>([]);
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
@@ -60,17 +64,21 @@ export const Modal = (props: Props) => {
     // eslint-disable-next-line
   }, []);
 
-  const fetchData = async (sellerId: string) => {
-    // Note(wilsonj806) Showing the campaign that expires first
-    // will need to update this if we render multiple distributors
+  // Note(wilsonj806) fetches data based on the passed in campaign id
+  const fetchData = async (sellerId: string, campaignId: string) => {
     const { data } = await getCampaignsForMerchant(sellerId);
-    const { data: distrib } = await getDistributor(data[0].distributor_id);
+
+    const campaign = data.find((ele) => campaignId === ele.id);
+    const { data: distrib } = await getDistributor(campaign.distributor_id);
     setCampaignDistributor(distrib);
+    setCampaign(campaign);
   };
 
   useEffect(() => {
-    fetchData(props.sellerId);
-  }, [props.sellerId]);
+    if (props.campaignId) {
+      fetchData(props.sellerId, props.campaignId);
+    }
+  }, [props.sellerId, props.campaignId]);
 
   const Distributor = () => (
     <>
@@ -87,7 +95,7 @@ export const Modal = (props: Props) => {
   );
 
   return (
-    <form data-testid="ModalBuyMeal">
+    <form className={styles.form} data-testid="ModalBuyMeal">
       <div>
         <div className={styles.header}>
           {props.sellerId
@@ -107,6 +115,15 @@ export const Modal = (props: Props) => {
       </p>
 
       <CampaignInstructions />
+      <CampaignProgressBar
+        isModal={true}
+        endDate={campaign.end_date}
+        isActive={campaign.active}
+        pricePerMeal={campaign.price_per_meal}
+        targetAmount={campaign.target_amount}
+        size={SIZE_TYPE.LARGE}
+        totalRaised={campaign.amount_raised}
+      />
 
       <div className={styles.amountContainer}>
         <label htmlFor="select-amount">{t('buyMeal.prompt')}</label>
@@ -158,4 +175,4 @@ export const Modal = (props: Props) => {
   );
 };
 
-export default Modal;
+export default ModalBuyMeal;

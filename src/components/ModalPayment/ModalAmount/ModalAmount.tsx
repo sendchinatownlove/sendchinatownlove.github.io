@@ -22,7 +22,7 @@ export interface Props {
   sellerName: string;
 }
 
-export const Modal = (props: Props) => {
+export const ModalAmount = (props: Props) => {
   const { t } = useTranslation();
 
   const { amount, feesAmount, fees, modalView } = useModalPaymentState(null);
@@ -221,10 +221,12 @@ export const Modal = (props: Props) => {
   );
 };
 
-export default Modal;
+export default ModalAmount;
 
 const ContentContainer = styled.form`
   height: 360px;
+  max-width: 960px;
+  margin: 0 auto;
 `;
 
 const AmountContainer = styled.div`
@@ -235,9 +237,9 @@ const AmountContainer = styled.div`
 
 const SelectAmtContainer = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  flex-direction: row;
   margin: 15px 0px;
 `;
 

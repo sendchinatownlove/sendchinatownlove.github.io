@@ -12,7 +12,7 @@ type Props = {};
 
 const SquareCardForm = (props: Props) => {
   return (
-    <fieldset className="sq-fieldset">
+    <SquareCardFieldset className="sq-fieldset">
       <CreditCardNumberInput />
 
       <SquareCardRow>
@@ -26,17 +26,30 @@ const SquareCardForm = (props: Props) => {
           <CreditCardPostalCodeInput />
         </SquareCardItem>
       </SquareCardRow>
-    </fieldset>
+    </SquareCardFieldset>
   );
 };
 
 export default SquareCardForm;
+
+const SquareCardFieldset = styled.fieldset`
+@media (min-width: 900px) {
+  display: flex;
+  justify-content: space-between
+  flex-wrap: nowrap;
+}
+`;
 
 const SquareCardRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100% !important;
+  @media (min-width: 900px) {
+    margin-left: 16px;
+    min-width: 440px;
+    width: 50% !important;
+  }
 `;
 
 const SquareCardItem = styled.div`

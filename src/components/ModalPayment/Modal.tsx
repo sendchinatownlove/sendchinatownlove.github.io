@@ -88,38 +88,21 @@ const ModalContainer = styled.div`
 
   background-color: white;
   position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
   z-index: 10;
   padding-bottom: 40px;
-
-  max-height: 85vh;
-  width: 725px;
-  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
-  height: 65%;
-
-  @media only screen and (max-width: 799px) {
-    width: 85%;
-  }
-
-  @media only screen and (max-width: 450px) {
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-  }
+  width: 100%;
+  height: 100%;
 `;
 const ViewContainer = styled.div`
   overflow-y: scroll;
   margin: 0 auto;
   height: 100%;
   width: 100%;
-  padding: 0 50px;
-
-  @media only screen and (max-width: 450px) {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
+  padding: 0 4%;
+  @media min-width: 1000px {
+    padding: 0 50px;
   }
 `;
 const CloseButtonContainer = styled.div`

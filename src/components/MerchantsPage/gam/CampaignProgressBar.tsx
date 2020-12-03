@@ -1,5 +1,6 @@
 import moment from 'moment';
-import * as React from 'react';
+import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -14,6 +15,7 @@ const centsToDollars = (cents: number) =>
 
 interface Props {
   endDate: string;
+  isModal: boolean;
   isActive: boolean;
   pricePerMeal: number; // In cents.
   size: SizeType;
@@ -21,8 +23,13 @@ interface Props {
   totalRaised: number; // In cents.
 }
 
+interface CampaignDescriptorContainerProps {
+  isModal: boolean;
+}
+
 const CampaignProgressBar = ({
   endDate,
+  isModal,
   isActive,
   pricePerMeal,
   size,
@@ -55,15 +62,16 @@ const CampaignProgressBar = ({
           size={size}
         />
       </ProgressBarContainer>
-      <SubText>
+      <CampaignDescriptorContainer isModal={isModal}>
         <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
           {percentRaised}% {t('buyMeal.toTarget')}
         </ProgressTextContainer>{' '}
         ({Math.round(totalRaised / pricePerMeal)} {t('buyMeal.outOf')}{' '}
         {Math.round(targetAmount / pricePerMeal)} {t('buyMeal.meals')})
-      </SubText>
+      </CampaignDescriptorContainer>
       {isActive && (
-        <EndsAtContainer>
+        <EndsAtContainer isModal={isModal}>
+
           {t('buyMeal.endsIn')}{' '}
           <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
             {moment(endDate).diff(moment(), 'days')}
@@ -76,6 +84,10 @@ const CampaignProgressBar = ({
 };
 
 export default CampaignProgressBar;
+
+CampaignProgressBar.defaultProps = {
+  isModal: false,
+};
 
 const Container = styled.div`
   flex: 1;
@@ -103,14 +115,6 @@ const TotalRaisedAmount = styled.span`
   font-weight: 800;
 `;
 
-const SubText = styled.div`
-  font-size: 16px;
-
-  @media (${tabletScreens}) {
-    font-size: 14px;
-  }
-`;
-
 const ProgressBarContainer = styled.div`
   margin-bottom: 12px;
 `;
@@ -120,11 +124,33 @@ const ProgressTextContainer = styled.span`
   font-weight: 600;
 `;
 
-const EndsAtContainer = styled.div`
+const CampaignDescriptorContainer = styled.div`
   font-size: 16px;
-  margin-top: 12px;
-
   @media (${tabletScreens}) {
     font-size: 14px;
   }
+  ${(props: CampaignDescriptorContainerProps) =>
+    props.isModal
+      ? `
+    width: 100%;
+    display: inline-block;
+    @media (min-width: 600px) {
+      width: 50%;
+
+    }
+  `
+      : `
+    width: auto;
+  `}
+`;
+
+const EndsAtContainer = styled(CampaignDescriptorContainer)`
+  ${(props: CampaignDescriptorContainerProps) =>
+    props.isModal &&
+    `
+  @media (min-width: 600px) {
+    text-align: right;
+
+  }
+  `}
 `;

@@ -16,6 +16,7 @@ import {
   LIGHT_UP_CHINATOWN_TIER_2_MIN,
 } from '../../../consts';
 import { modalPages } from '../../../utilities/hooks/ModalPaymentContext/types';
+import useScrollToElement from '../../../utilities/hooks/useScrollToElement';
 
 import {
   makeSquarePayment,
@@ -55,6 +56,7 @@ const ModalCardDetails = ({
     null
   );
   const dispatch = useModalPaymentDispatch(null);
+  const modalRef = useScrollToElement();
 
   const [isTermsChecked, setTermsChecked] = useState(false);
   const [isSubscriptionChecked, setSubscriptionChecked] = useState(true);
@@ -289,8 +291,8 @@ const ModalCardDetails = ({
   };
 
   return (
-    <div>
-      <Header>
+    <FormContainer>
+      <Header ref={modalRef}>
         {t('modalPayment.modalCardDetails.header.completeYour')}{' '}
         {purchaseTypeHeader(purchaseType)}
       </Header>
@@ -303,28 +305,30 @@ const ModalCardDetails = ({
         <RowFormat>
           <LabelText htmlFor="name">
             {t('modalPayment.modalCardDetails.body.fullName')}
+            <InputText
+              name="name"
+              type="text"
+              className="modalInput--input"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              placeholder={t('modalPayment.modalCardDetails.placeholders.name')}
+            />
           </LabelText>
-          <InputText
-            name="name"
-            type="text"
-            className="modalInput--input"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            placeholder={t('modalPayment.modalCardDetails.placeholders.name')}
-          />
           <LabelText htmlFor="email">
             {t('modalPayment.modalCardDetails.body.email')}
+            <InputText
+              name="email"
+              type="email"
+              className="modalInput--input"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              placeholder={t(
+                'modalPayment.modalCardDetails.placeholders.email'
+              )}
+              pattern={ModalPaymentConstants.EMAIL_REGEX.source}
+              required
+            />
           </LabelText>
-          <InputText
-            name="email"
-            type="email"
-            className="modalInput--input"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            placeholder={t('modalPayment.modalCardDetails.placeholders.email')}
-            pattern={ModalPaymentConstants.EMAIL_REGEX.source}
-            required
-          />
         </RowFormat>
         <SquareFormContainer>
           <SquarePaymentForm
@@ -422,11 +426,16 @@ const ModalCardDetails = ({
           </SquarePaymentForm>
         </SquareFormContainer>
       </PaymentContainer>
-    </div>
+    </FormContainer>
   );
 };
 
 export default ModalCardDetails;
+
+const FormContainer = styled.div`
+  margin: 0 auto;
+  max-width: 960px;
+`;
 
 const PaymentContainer = styled.div`
   display: flex;
@@ -446,10 +455,19 @@ export const RowFormat = styled.div`
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 14px;
   text-transform: uppercase;
+  @media (min-width: 900px) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
 `;
 
 export const LabelText = styled.label`
   color: #373f4a;
+  width: 100%;
+  @media (min-width: 900px) {
+    width: 50%;
+    margin-right: 16px;
+  }
 `;
 
 const BoldText = styled.span`

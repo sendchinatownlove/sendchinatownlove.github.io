@@ -47,7 +47,7 @@ const OwnerPanel = ({
       if (active) {
         setActiveCampaign(active);
         setPricePerMeal(active.price_per_meal);
-        setCampaignId(active.campaign_id);
+        setCampaignId(active.id);
       }
     }
   };
