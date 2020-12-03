@@ -78,10 +78,13 @@ const CampaignProgressBar = ({
 export default CampaignProgressBar;
 
 const Container = styled.div`
+  display: flex;
   flex: 1;
+  flex-direction: column;
   font-size: 18px;
+  justify-content: flex-end;
   margin-right: 60px;
-  padding: 16px 0;
+  padding-top: 16px;
   width: 100%;
 
   @media (${tabletScreens}) {

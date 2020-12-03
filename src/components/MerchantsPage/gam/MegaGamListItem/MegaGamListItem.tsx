@@ -52,7 +52,7 @@ const MegaGamListItem = ({ campaign }: Props) => {
           </DonationContainer>
         </CampaignContent>
       </ImageContentContainer>
-      <SellerDistributorContent>
+      <SellerDistributorContent isActive={campaign.active}>
         {/* TODO: Translate. */}
         <LearnMoreText>
           Learn more about our participating merchants:
@@ -85,29 +85,37 @@ const Container = styled.div`
     isActive ? '#f7f7f7' : '#ffffff'};
   display: flex;
   flex-direction: column;
-  margin-bottom: ${({ isActive }: { isActive: boolean }) =>
-    isActive ? '56px' : '0'};
 `;
 
 const ImageContentContainer = styled.div`
   display: flex;
   flex-direction: ${({ isActive }: { isActive: boolean }) =>
     isActive ? 'column' : 'row'};
+  margin-bottom: ${({ isActive }: { isActive: boolean }) =>
+    isActive ? '60px' : '42px'};
+
+  @media (${tabletScreens}) {
+    flex-direction: column;
+  }
 `;
 
 const CampaignImageContainer = styled.div`
   ${({ isActive }: { isActive: boolean }) => {
+    let margin;
     if (isActive) {
-      return `
-      @media (${tabletScreens}) {
-        height: 106px;
-      }
-      `;
+      margin = '0';
+    } else {
+      margin = '16px 16px 0';
     }
 
     return `
-    align-items: center;
-    display: flex;
+      align-items: center;
+      display: flex;
+
+      @media (${tabletScreens}) {
+        height: 106px;
+        margin: ${margin};
+      }
     `;
   }}
 `;
@@ -153,7 +161,7 @@ const CampaignContent = styled.div`
   padding: 44px 66px;
 
   @media (${tabletScreens}) {
-    padding: 16px 28px 40px;
+    padding: 16px 16px 0px;
   }
 `;
 
@@ -195,11 +203,9 @@ const DonationContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 60px;
 
   @media (${tabletScreens}) {
     flex-direction: column;
-    margin-bottom: 0;
   }
 `;
 
@@ -231,7 +237,9 @@ const SellerDistributorContent = styled.div`
   padding: 0 44px 66px;
 
   @media (${tabletScreens}) {
-    padding: 0 16px 28px;
+    padding: 0 16px;
+    padding-bottom: ${({ isActive }: { isActive: boolean }) =>
+      isActive ? '44px' : '16px'};
   }
 `;
 

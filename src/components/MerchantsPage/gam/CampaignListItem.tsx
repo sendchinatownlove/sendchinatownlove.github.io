@@ -59,7 +59,7 @@ const CampaignListItem = (props: Props) => {
   return (
     <React.Fragment>
       <Container>
-        <ColumnContainer>
+        <EndColumnContainer>
           {campaignImageUrls && campaignImageUrls.length && (
             <CampaignImageContainer>
               <CampaignImage
@@ -68,8 +68,8 @@ const CampaignListItem = (props: Props) => {
               />
             </CampaignImageContainer>
           )}
-        </ColumnContainer>
-        <ColumnContainer>
+        </EndColumnContainer>
+        <MiddleColumnContainer>
           {merchant && merchant.locations && merchant.locations.length && (
             <Location>{merchant.locations[0].city}</Location>
           )}
@@ -101,8 +101,8 @@ const CampaignListItem = (props: Props) => {
             targetAmount={campaign.target_amount}
             totalRaised={campaign.amount_raised}
           />
-        </ColumnContainer>
-        <ColumnContainer>
+        </MiddleColumnContainer>
+        <EndColumnContainer>
           <ImagesContainer>
             {distributor && (
               <a href={distributor.website_url}>
@@ -125,11 +125,13 @@ const CampaignListItem = (props: Props) => {
             </Button>
           )}
           {campaign.active && (
-            <Button className={'button--filled'} onClick={showModal}>
-              {t('gamHome.listItem.giftButton')}
-            </Button>
+            <GiftButtonContainer>
+              <Button className={'button--filled'} onClick={showModal}>
+                {t('gamHome.listItem.giftButton')}
+              </Button>
+            </GiftButtonContainer>
           )}
-        </ColumnContainer>
+        </EndColumnContainer>
 
         {campaign.active && props.selectedCampaignId === campaign.id && (
           <ModalBox
@@ -154,25 +156,21 @@ export default CampaignListItem;
 
 const Container = styled.div`
   display: flex;
-  max-height: 800px;
   justify-content: space-between;
+  padding: 44px 0;
 
   @media (${tabletScreens}) {
-    max-height: 1000px;
     flex-direction: column;
+    padding: 16px;
     position: relative;
-    padding-top: 15px;
   }
 `;
 
-const ColumnContainer = styled.div`
+const EndColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem;
 
   @media (${tabletScreens}) {
-    padding: 0.5rem 1rem 0.75rem;
-
     > span {
       margin: 2.5px 0;
     }
@@ -186,6 +184,17 @@ const ColumnContainer = styled.div`
       object-fit: cover;
       object-position: 0 25%;
     }
+  }
+`;
+
+const MiddleColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 0 126px 0 66px;
+
+  @media (${tabletScreens}) {
+    margin: 0 0 42px 0;
   }
 `;
 
@@ -242,17 +251,19 @@ const Button = styled.div`
   width: 240px;
   letter-spacing: 0.15em;
   cursor: pointer;
-  margin-bottom: 18px;
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
   font-size: 16px;
   letter-spacing: 0.05em;
 
-  @media (max-width: 550px) {
+  @media (${tabletScreens}) {
     font-size: 14px;
     width: 100%;
-    margin-bottom: 10px;
   }
+`;
+
+const GiftButtonContainer = styled.div`
+  margin-top: 18px;
 `;
 
 const ImagesContainer = styled.span`
@@ -272,20 +283,23 @@ const ImagesContainer = styled.span`
 `;
 
 const CampaignImageContainer = styled.div`
+  align-items: center;
+  display: flex;
+  height: 100%;
+  width: 100%;
+`;
+
+const CampaignImage = styled.img`
+  border-radius: 5px;
   height: 240px;
+  object-fit: cover;
   width: 240px;
 
   @media (${tabletScreens}) {
     height: 100px;
+    margin-bottom: 16px;
     width: 100%;
   }
-`;
-
-const CampaignImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 5px;
 `;
 
 const DistributorImage = styled.img`
