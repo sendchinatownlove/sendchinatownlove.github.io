@@ -135,9 +135,6 @@ const CampaignDescriptorContainer = styled.div`
     @media (min-width: 600px) {
       width: 50%;
 
-      &.right {
-        text-align: right;
-      }
     }
   `
       : `
@@ -146,7 +143,11 @@ const CampaignDescriptorContainer = styled.div`
 `;
 
 const EndsAtContainer = styled(CampaignDescriptorContainer)`
+  ${(props: CampaignDescriptorContainerProps) =>
+    props.isModal &&
+    `
   @media (min-width: 600px) {
     text-align: right;
   }
+  `}
 `;
