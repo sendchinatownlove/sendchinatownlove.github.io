@@ -6,6 +6,7 @@ import {
   sellers,
   vouchers,
   campaigns,
+  fees,
   distributors,
   passportVouchers,
   contacts,
@@ -185,6 +186,20 @@ export const getCampaignsForMerchant = async (
     .catch((err) => err);
 };
 
+export const getFees = async () => {
+  return await axios
+    .get(fees)
+    .then((res) => res)
+    .catch((err) => err);
+};
+
+export const getFee = async (name: string) => {
+  return await axios
+    .get(fees + name)
+    .then((res) => res)
+    .catch((err) => err);
+};
+
 export const getDistributor = async (id: string): Promise<any> => {
   return await axios
     .get(distributors + id)
@@ -192,7 +207,7 @@ export const getDistributor = async (id: string): Promise<any> => {
     .catch((err) => err);
 };
 
-export const getFiscalSponsor = async (id: string): Promise<any> => {
+export const getFiscalSponsor = async (id: number): Promise<any> => {
   return await axios
     .get(nonprofits + id)
     .then((res) => res)

@@ -5,11 +5,7 @@ import { tabletScreens } from '../../../utilities/general/responsive';
 import { useTranslation } from 'react-i18next';
 import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
-import {
-  getDistributor,
-  getSeller,
-  getFiscalSponsor,
-} from '../../../utilities/api';
+import { getDistributor, getSeller } from '../../../utilities/api';
 import { useEffect, useState } from 'react';
 import Modal from '../../ModalPayment';
 import {
@@ -17,6 +13,8 @@ import {
   useModalPaymentDispatch,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
+import FiscalSponsor from './FiscalSponsor';
+import { SIZE_TYPE } from './ProgressBar';
 
 interface Props {
   campaign: Campaign;
@@ -32,7 +30,6 @@ const CampaignListItem = (props: Props) => {
 
   const [distributor, setDistributor] = useState<any | null>();
   const [merchant, setMerchant] = useState<any | null>();
-  const [fiscalSponsor, setFiscalSponsor] = useState<any | null>();
   const campaign = props.campaign;
 
   const fetchData = async () => {
@@ -42,10 +39,6 @@ const CampaignListItem = (props: Props) => {
 
     setDistributor(distributorData.data);
     setMerchant(merchantData.data);
-    if (campaign.nonprofit_id) {
-      const fiscalSponsor = await getFiscalSponsor(campaign.nonprofit_id);
-      setFiscalSponsor(fiscalSponsor.data);
-    }
   };
 
   useEffect(() => {
@@ -53,12 +46,6 @@ const CampaignListItem = (props: Props) => {
     // eslint-disable-next-line
   }, []);
 
-  const mealsRaised = Math.floor(
-    campaign.amount_raised / campaign.price_per_meal
-  );
-  const targetMeals = Math.floor(
-    campaign.target_amount / campaign.price_per_meal
-  );
   const campaignImageUrls = campaign.gallery_image_urls;
 
   const showModal = (event: any) => {
@@ -107,12 +94,12 @@ const CampaignListItem = (props: Props) => {
             )}
           </Description>
           <CampaignProgressBar
+            endDate={campaign.end_date}
             isActive={campaign.active}
-            numContributions={mealsRaised}
-            targetAmount={targetMeals}
-            progressBarColor={'#CF6E8A'}
-            lastContributionTime={new Date(campaign.last_contribution)}
-            endDate={new Date(campaign.end_date)}
+            pricePerMeal={campaign.price_per_meal}
+            size={SIZE_TYPE.SMALL}
+            targetAmount={campaign.target_amount}
+            totalRaised={campaign.amount_raised}
           />
         </ColumnContainer>
         <ColumnContainer>
@@ -154,20 +141,11 @@ const CampaignListItem = (props: Props) => {
           />
         )}
       </Container>
-      {fiscalSponsor && (
+      {campaign.active && campaign.nonprofit_id && (
         <FiscalSponsorContainer>
-          <FiscalSponsorImage
-            src={fiscalSponsor.logo_image_url}
-          ></FiscalSponsorImage>
-          <FiscalSponsorDivider></FiscalSponsorDivider>
-          <FiscalSponsorText>
-            {t('gamHome.listItem.fiscalSponsor', {
-              sponsorName: fiscalSponsor.name,
-            })}
-          </FiscalSponsorText>
+          <FiscalSponsor nonprofitId={campaign.nonprofit_id} />
         </FiscalSponsorContainer>
       )}
-      <Border></Border>
     </React.Fragment>
   );
 };
@@ -182,7 +160,6 @@ const Container = styled.div`
   @media (${tabletScreens}) {
     max-height: 1000px;
     flex-direction: column;
-    margin: 0 17px;
     position: relative;
     padding-top: 15px;
   }
@@ -191,7 +168,7 @@ const Container = styled.div`
 const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem 1.5rem;
+  padding: 2rem;
 
   @media (${tabletScreens}) {
     padding: 0.5rem 1rem 0.75rem;
@@ -319,54 +296,9 @@ const DistributorImage = styled.img`
 `;
 
 const FiscalSponsorContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 55px;
-  position: relative;
-
-  @media (${tabletScreens}) {
-    margin-bottom: 30px;
-  }
-`;
-
-const FiscalSponsorImage = styled.img`
   margin-left: 28%;
-  max-height: 35px;
-  max-width: 80px;
 
   @media (${tabletScreens}) {
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
     margin-left: 0%;
   }
-`;
-
-const FiscalSponsorDivider = styled.div`
-  margin-left: 18px;
-  width: 5px;
-  height: 37px;
-  background-color: #f5ec57;
-
-  @media (${tabletScreens}) {
-    height: 110px;
-    margin-left: 27%;
-  }
-`;
-
-const FiscalSponsorText = styled.div`
-  margin-left: 6px;
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 18px;
-  color: #1e1e1e;
-`;
-
-const Border = styled.div`
-  width: 100%;
-  height: 1px;
-  border-bottom: 1px solid #e5e5e5;
 `;

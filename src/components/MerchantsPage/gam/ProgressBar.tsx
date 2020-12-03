@@ -14,7 +14,7 @@ export const SIZE_TYPE = {
   LARGE: 'LARGE',
 };
 type SizeKeys = keyof typeof SIZE_TYPE;
-type SizeType = typeof SIZE_TYPE[SizeKeys];
+export type SizeType = typeof SIZE_TYPE[SizeKeys];
 
 interface Props {
   amount: {

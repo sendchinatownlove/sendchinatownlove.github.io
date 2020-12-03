@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import CampaignInstructions from './CamapignInstructions';
 import ReactPixel from 'react-facebook-pixel';
 import { getCampaignsForMerchant, getDistributor } from '../../../utilities';
+import { SIZE_TYPE } from '../../MerchantsPage/gam/ProgressBar';
 
 export interface Props {
   sellerId: string;
@@ -92,14 +93,6 @@ export const ModalBuyMeal = (props: Props) => {
     </>
   );
 
-  const mealsRaised = Math.floor(
-    campaign.amount_raised / campaign.price_per_meal
-  );
-
-  const targetMeals = Math.floor(
-    campaign.target_amount / campaign.price_per_meal
-  );
-
   return (
     <form className={styles.form} data-testid="ModalBuyMeal">
       <div>
@@ -123,12 +116,12 @@ export const ModalBuyMeal = (props: Props) => {
       <CampaignInstructions />
       <CampaignProgressBar
         isModal={true}
+        endDate={campaign.end_date}
         isActive={campaign.active}
-        numContributions={mealsRaised}
-        targetAmount={targetMeals}
-        progressBarColor={'#cf6e8a'}
-        lastContributionTime={new Date(campaign.last_contribution)}
-        endDate={new Date(campaign.end_date)}
+        pricePerMeal={campaign.price_per_meal}
+        targetAmount={campaign.target_amount}
+        size={SIZE_TYPE.LARGE}
+        totalRaised={campaign.amount_raised}
       />
 
       <div className={styles.amountContainer}>
