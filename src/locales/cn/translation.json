@@ -1,13 +1,17 @@
 {
   "paymentProcessing": {
     "amount": {
-      "header": "您的爱心将会全数送到商家手里，帮助他们负担营运支出。您的网上交易资料将会做加密处理，款项会直接交给商家以支持他们。",
+      "body1": "您的网上交易资料将会做加密处理，款项会直接交给商家以支持他们。",
+      "body2": "Please select or enter an amount.",
       "label1": "选择金额",
       "label2": "其他金额",
       "minimum": "最低",
       "maximum": "最高",
       "amount": "金额",
-      "submit": "下一步"
+      "submit": "下一步",
+      "fees": "Credit card processing fees",
+      "feesTooltip": "Credit card processing fees are added in order to help our small businesses get your full donation.",
+      "total": "Total amount"
     }
   },
   "navBar": {
@@ -84,10 +88,8 @@
   "descriptionBox": {
     "header": "我们在找的小型商家业者",
     "bullet1": "亚裔移民经营的小型商家",
-    "bullet2": "英语上不流畅，以现金收入为主，或者不太懂网上新科技",
-    "bullet3": "现在财务受困，影响到付房租，付水电费，及发工资给员工的能力",
-    "bullet4": "沒有网站，网上外卖，或接受礼品券的服务",
-    "bullet5": "在纽约曼哈顿，法拉盛，或宾臣墟"
+    "bullet2": "现在财务受困，影响到付房租，付水电费，及发工资给员工的能力",
+    "bullet3": "在纽约曼哈顿，法拉盛，或宾臣墟"
   },
   "storeDetails": {
     "storyHeader": "背景简介"
@@ -177,7 +179,6 @@
     "headerText": "Light Up Chinatown",
     "headerSubtext": "Let’s light up Chinatown, one lantern at a time.",
     "donationTierText": "Light Up Chinatown donation tiers",
-    "summaryHeader": "Let’s Light Up Chinatown!",
     "summaryBody1": "Chinatown was hit hardest as fears about the coronavirus circulated in the United States in late January. Rumors swirled about the virus being present in Chinatown, and as xenophobia grew, restaurants’ revenue steeply declined. Without the regular volume of customers and foot traffic in Chinatown, the future of its many small, immigrant-owned businesses seemed bleak.",
     "summaryBody2": "Patrick Mock, manager of 46 Mott St Bakery and community advocate, had an idea to light up Chinatown streets to draw customers back to Chinatown. With the help of City Council District 1 candidate Jenny Low, Chung Seto of United Democratic Organization (UDO), Joanne Kwong of Pearl River Mart and Send Chinatown Love, the <1>Light Up Chinatown</1> project was born.",
     "summaryBody3": "Support the Light Up Chinatown project by donating today where all proceeds will go towards installing permanent light fixtures and traditional lanterns in the neighborhood.",

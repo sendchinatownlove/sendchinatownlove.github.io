@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -70,6 +71,7 @@ const CampaignProgressBar = ({
       </CampaignDescriptorContainer>
       {isActive && (
         <EndsAtContainer isModal={isModal}>
+
           {t('buyMeal.endsIn')}{' '}
           <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
             {moment(endDate).diff(moment(), 'days')}
@@ -148,5 +150,6 @@ const CampaignDescriptorContainer = styled.div`
 const EndsAtContainer = styled(CampaignDescriptorContainer)`
   @media (min-width: 600px) {
     text-align: right;
+
   }
 `;

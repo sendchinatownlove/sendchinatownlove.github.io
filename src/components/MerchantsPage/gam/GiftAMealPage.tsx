@@ -33,10 +33,12 @@ const GiftAMealPage = (props: Props) => {
 
     // Campaigns come back sorted by oldest to newest end date.
     campaignResponse.data.forEach((campaign: Campaign) => {
-      if (campaign.project_id) {
-        activeMegaGam.push(campaign);
-      } else if (campaign.active && campaign.valid) {
-        active.push(campaign);
+      if (campaign.active && campaign.valid) {
+        if (campaign.project_id) {
+          activeMegaGam.push(campaign);
+        } else {
+          active.push(campaign);
+        }
       } else {
         past.push(campaign);
       }
@@ -81,24 +83,26 @@ const GiftAMealPage = (props: Props) => {
       >
         {t('gamHome.backButton')}
       </button>
-      {activeCampaigns.length ? (
-        <>
-          {activeCampaigns.map((campaign: Campaign) =>
-            campaign.project_id ? (
-              <MegaGamListItem campaign={campaign} key={campaign.id} />
-            ) : (
-              <CampaignListItem
-                campaign={campaign}
-                key={campaign.id}
-                selectedCampaignId={selectedCampaignId}
-                setSelectedCampaignId={setSelectedCampaignId}
-              />
-            )
-          )}
-        </>
-      ) : (
-        <NoActiveCampaignsBox />
-      )}
+      <div className={styles.campaignsContainer}>
+        {activeCampaigns.length ? (
+          <>
+            {activeCampaigns.map((campaign: Campaign) =>
+              campaign.project_id ? (
+                <MegaGamListItem campaign={campaign} key={campaign.id} />
+              ) : (
+                <CampaignListItem
+                  campaign={campaign}
+                  key={campaign.id}
+                  selectedCampaignId={selectedCampaignId}
+                  setSelectedCampaignId={setSelectedCampaignId}
+                />
+              )
+            )}
+          </>
+        ) : (
+          <NoActiveCampaignsBox />
+        )}
+      </div>
 
       <div className={styles.videoContainer}>
         <VideoComponent videoId="3zbqvouILto"></VideoComponent>
@@ -108,14 +112,20 @@ const GiftAMealPage = (props: Props) => {
       </div>
 
       <h5 className={styles.campaignHeader}>{t('gamHome.pastSection')}</h5>
-      {pastCampaigns.map((campaign: Campaign) => (
-        <CampaignListItem
-          campaign={campaign}
-          key={campaign.id}
-          selectedCampaignId={selectedCampaignId}
-          setSelectedCampaignId={setSelectedCampaignId}
-        />
-      ))}
+      <div className={styles.campaignsContainer}>
+        {pastCampaigns.map((campaign: Campaign) =>
+          campaign.project_id ? (
+            <MegaGamListItem campaign={campaign} key={campaign.id} />
+          ) : (
+            <CampaignListItem
+              campaign={campaign}
+              key={campaign.id}
+              selectedCampaignId={selectedCampaignId}
+              setSelectedCampaignId={setSelectedCampaignId}
+            />
+          )
+        )}
+      </div>
     </div>
   );
 };

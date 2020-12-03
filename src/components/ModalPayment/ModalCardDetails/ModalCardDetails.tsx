@@ -52,7 +52,9 @@ const ModalCardDetails = ({
 }: Props) => {
   const idempotencyKey = uuid();
   const { t } = useTranslation();
-  const { amount, purchaseType, lucData } = useModalPaymentState(null);
+  const { amount, feesAmount, purchaseType, lucData } = useModalPaymentState(
+    null
+  );
   const dispatch = useModalPaymentDispatch(null);
   const modalRef = useScrollToElement();
 
@@ -131,6 +133,15 @@ const ModalCardDetails = ({
             quantity: 1,
           },
         ];
+
+    if (feesAmount) {
+      payment.push({
+        amount: feesAmount,
+        currency: 'usd',
+        item_type: 'transaction_fee',
+        quantity: 1,
+      });
+    }
 
     const buyer: Buyer = {
       name,
@@ -275,6 +286,10 @@ const ModalCardDetails = ({
     }
   };
 
+  const total = () => {
+    return (Number(amount) * 100 + feesAmount) / 100;
+  };
+
   return (
     <FormContainer>
       <Header ref={modalRef}>
@@ -339,7 +354,7 @@ const ModalCardDetails = ({
               {' '}
               {purchaseTypeMessage(purchaseType, amount)} of{' '}
               <b>
-                ${amount} {numberOfMealsText}
+                ${total()} {numberOfMealsText}
               </b>{' '}
               to {sellerName}{' '}
             </span>
@@ -486,10 +501,6 @@ const CheckboxContainer = styled.label`
 
   :hover {
     text-decoration: underline;
-  }
-
-  > span {
-    padding: 9px 9px 9px 0px;
   }
 `;
 
