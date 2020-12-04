@@ -177,6 +177,13 @@ export const getCampaigns = async (): Promise<any> => {
     .catch((err) => err);
 };
 
+export const getPastCampaigns = async (pageNo = 1): Promise<any> => {
+  return await axios
+    .get(`${campaigns}?inactive=true&items=10&page=${pageNo}`)
+    .then((res) => res)
+    .catch((err) => err);
+};
+
 export const getCampaignsForMerchant = async (
   seller_id: string
 ): Promise<any> => {

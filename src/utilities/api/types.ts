@@ -116,10 +116,13 @@ export type BrowsePageSeller = {
 export type SellerDistributorPair = {
   distributor_id: number;
   distributor_image_url: string;
+  distributor_website_url: string;
   distributor_name: string;
   seller_id: string;
   seller_image_url: string;
   seller_name: string;
+  seller_non_profit_location_id: string;
+  seller_city: string;
 };
 
 export type Campaign = {
