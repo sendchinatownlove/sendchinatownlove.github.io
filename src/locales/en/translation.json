@@ -206,6 +206,11 @@
     },
     "backButton": "Back to Merchants",
     "giftButton": "Gift Meal",
+    "viewMoreButton": "View More",
+    "pastCampaignCount": {
+      "ofText": "of",
+      "pastCampaignText": "past campaigns"
+    },
     "activeSection": "Active Gift-a-Meal",
     "pastSection": "Past Gift-a-Meal",
     "noCampaignsBox": {

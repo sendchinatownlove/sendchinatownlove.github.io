@@ -124,7 +124,11 @@ const GiftAMealPage = (props: Props) => {
       </div>
 
       <h5 className={styles.campaignHeader}>{t('gamHome.pastSection')}</h5>
-      <span>{`${pastCampaigns.length} of ${totalCountPastCmpgn} past campaigns`}</span>
+      <span>{`${pastCampaigns.length} ${t(
+        'gamHome.pastCampaignCount.ofText'
+      )} ${totalCountPastCmpgn} ${t(
+        'gamHome.pastCampaignCount.pastCampaignText'
+      )}`}</span>
       <div className={styles.campaignsContainer}>
         {pastCampaigns.map((campaign: Campaign) =>
           campaign.project_id ? (
@@ -141,7 +145,7 @@ const GiftAMealPage = (props: Props) => {
       </div>
       {pageNo !== totalPages && (
         <button onClick={() => setShouldFetchPastData(true)}>
-          POOSH DA BUTTON rooVV
+          {t('gamHome.viewMoreButton')}
         </button>
       )}
     </div>
