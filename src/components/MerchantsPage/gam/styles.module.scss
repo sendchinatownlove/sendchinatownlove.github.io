@@ -96,11 +96,12 @@
   }
 }
 
-.campaignHeader {
+.campaignHeading {
   font-weight: 600;
   font-size: 18px;
   width: 100%;
   padding-bottom: 12px;
+  margin: 0;
 
   @include for-phone-only {
     font-size: 16px;
@@ -113,9 +114,58 @@
     border-top: 1px solid #e5e5e5;
   }
 
-  > * {
+  > *:not(:last-child) {
     border-bottom: 1px solid #e5e5e5;
   }
+}
+
+.pastCampaignsHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 36px;
+  @include for-phone-only {
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+}
+
+.pastCampaignsCount {
+  margin-top: 12px;
+  width: 250px;
+}
+
+.viewMoreBtnContainer {
+  margin: 44px 0 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.buttonViewMore {
+  box-sizing: border-box;
+  width: 212px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 18px 50px;
+  background: black;
+  color: white;
+  margin: 0 auto;
+  border-radius: 50px;
+  border: 0 solid white;
+  @include for-phone-only {
+    width: 100%;
+  }
+}
+
+.buttonViewMore:hover,
+.buttonViewMore:active {
+  background: rgba(171, 25, 46, 1);
 }
 
 .videoContainer {

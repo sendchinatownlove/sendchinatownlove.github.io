@@ -21,7 +21,7 @@ const GiftAMealPage = (props: Props) => {
 
   const [activeCampaigns, setActiveCampaigns] = useState<Campaign[]>([]);
   const [pastCampaigns, setPastCampaigns] = useState<Campaign[]>([]);
-  const [pageNo, setPageNo] = useState(0);
+  const [currPage, setCurrPage] = useState(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [totalCountPastCmpgn, setTotalCountPastCmpgn] = useState(0);
   const [shouldFetchPastData, setShouldFetchPastData] = useState(true);
@@ -55,18 +55,21 @@ const GiftAMealPage = (props: Props) => {
 
   useEffect(() => {
     const fetchPastCmpgnData = async () => {
-      const { data, headers } = await getPastCampaigns(pageNo + 1);
+      const { data, headers } = await getPastCampaigns(currPage + 1);
       const totalPages = parseInt(headers['total-pages']);
       setPastCampaigns((prev) => prev.concat(data));
       setTotalPages(totalPages);
       setTotalCountPastCmpgn(headers['total-count']);
+      setCurrPage(currPage + 1);
     };
-    if (shouldFetchPastData === true && (pageNo < totalPages || pageNo === 0)) {
+    if (
+      shouldFetchPastData === true &&
+      (currPage < totalPages || currPage === 0)
+    ) {
       fetchPastCmpgnData();
-      setPageNo(pageNo + 1);
       setShouldFetchPastData(false);
     }
-  }, [shouldFetchPastData, pageNo, totalPages]);
+  }, [shouldFetchPastData, currPage, totalPages]);
 
   return (
     <div
@@ -122,13 +125,14 @@ const GiftAMealPage = (props: Props) => {
           {t('gamHome.videoBox.caption')}
         </h5>
       </div>
-
-      <h5 className={styles.campaignHeader}>{t('gamHome.pastSection')}</h5>
-      <span>{`${pastCampaigns.length} ${t(
-        'gamHome.pastCampaignCount.ofText'
-      )} ${totalCountPastCmpgn} ${t(
-        'gamHome.pastCampaignCount.pastCampaignText'
-      )}`}</span>
+      <div className={styles.pastCampaignsHeader}>
+        <h5 className={styles.campaignHeading}>{t('gamHome.pastSection')}</h5>
+        <span className={styles.pastCampaignsCount}>{`${
+          pastCampaigns.length
+        } ${t('gamHome.pastCampaignCount.ofText')} ${totalCountPastCmpgn} ${t(
+          'gamHome.pastCampaignCount.pastCampaignText'
+        )}`}</span>
+      </div>
       <div className={styles.campaignsContainer}>
         {pastCampaigns.map((campaign: Campaign) =>
           campaign.project_id ? (
@@ -142,12 +146,17 @@ const GiftAMealPage = (props: Props) => {
             />
           )
         )}
+        {currPage !== totalPages && (
+          <div className={styles.viewMoreBtnContainer}>
+            <button
+              className={styles.buttonViewMore}
+              onClick={() => setShouldFetchPastData(true)}
+            >
+              {t('gamHome.viewMoreButton')}
+            </button>
+          </div>
+        )}
       </div>
-      {pageNo !== totalPages && (
-        <button onClick={() => setShouldFetchPastData(true)}>
-          {t('gamHome.viewMoreButton')}
-        </button>
-      )}
     </div>
   );
 };
