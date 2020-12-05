@@ -138,7 +138,7 @@
       "details": {
         "donation": "Donation details",
         "voucher": "Purchase details",
-        "megagam_details_match": "Gift-a-meal donation payment of <0>{{totalPayment}}</0> for a total contribution of <1>{{totalContribution}}</1> with X 1:1 match",
+        "megagam_details_match": "Gift-a-meal donation payment of <0>{{totalPayment}}</0> for a total contribution of <1>{{totalContribution}}</1> with a 1:1 match",
         "megagam_details_no_match": "Gift-a-meal donation payment of <0>{{totalPayment}}</0>"
       },
       "message": {
