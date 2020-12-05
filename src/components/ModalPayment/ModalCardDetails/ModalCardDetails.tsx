@@ -224,7 +224,14 @@ const ModalCardDetails = ({
       case ModalPaymentTypes.modalPages.buy_meal:
         return 'Gift a Meal purchase';
       case ModalPaymentTypes.modalPages.mega_gam:
-        return t('modalPayment.modalCardDetails.header.mega_gam'); // to do: campaign display name
+        return (
+          <Trans
+            i18nKey="modalPayment.modalCardDetails.header.mega_gam"
+            values={{
+              campaignName: campaign?.display_name,
+            }}
+          ></Trans>
+        );
       default:
         return 'Donation';
     }
@@ -369,9 +376,6 @@ const ModalCardDetails = ({
       <Header ref={modalRef}>
         {t('modalPayment.modalCardDetails.header.completeYour')}{' '}
         <span>{purchaseTypeHeader(purchaseType)}</span>{' '}
-        {purchaseType === ModalPaymentTypes.modalPages.mega_gam
-          ? 'donation'
-          : ''}
       </Header>
       <p>{t('modalPayment.modalCardDetails.body.paymentInfo')}</p>
 

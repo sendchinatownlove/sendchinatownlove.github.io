@@ -88,7 +88,7 @@
         "paymentInfo": "Payment Information",
         "checkout": "Checkout details",
         "light_up_chinatown_donation": "Light Up Chinatown Donation",
-        "mega_gam": "[Mega-Gam Campaign]"
+        "mega_gam": "{{campaignName}} donation"
       },
       "body": {
         "paymentInfo": "Please add your payment information below",

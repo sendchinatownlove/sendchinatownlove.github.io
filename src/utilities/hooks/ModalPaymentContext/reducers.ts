@@ -35,8 +35,6 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
       return { ...state, modalView: payload };
 
     case SET_AMOUNT:
-      // TODO (billy-yuan): Confirm whether MegaGam campaigns in the future will have donation matching.
-      // If so, then isMatching === true should determine whether `matchAmount` will be a state
       if (state.modalView === ModalPaymentTypes.modalPages.mega_gam) {
         return {
           ...state,
