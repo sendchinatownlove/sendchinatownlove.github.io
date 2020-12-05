@@ -122,16 +122,12 @@ h3 {
 
 @mixin modal-button {
   font-family: 'Open Sans';
-
   padding: 8px;
-  width: 100%;
+  width: 120px;
   border-radius: 75px;
   font-size: 12px;
   text-transform: uppercase;
   outline: none;
-  @media (min-width: 900px) {
-    width: 120px;
-  }
 }
 
 .modalButton {
