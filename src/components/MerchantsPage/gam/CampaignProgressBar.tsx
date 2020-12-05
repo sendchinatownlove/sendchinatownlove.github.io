@@ -62,23 +62,24 @@ const CampaignProgressBar = ({
           size={size}
         />
       </ProgressBarContainer>
-      <CampaignDescriptorContainer isModal={isModal}>
-        <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
-          {percentRaised}% {t('buyMeal.toTarget')}
-        </ProgressTextContainer>{' '}
-        ({Math.round(totalRaised / pricePerMeal)} {t('buyMeal.outOf')}{' '}
-        {Math.round(targetAmount / pricePerMeal)} {t('buyMeal.meals')})
-      </CampaignDescriptorContainer>
-      {isActive && (
-        <EndsAtContainer isModal={isModal}>
-
-          {t('buyMeal.endsIn')}{' '}
-          <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
-            {moment(endDate).diff(moment(), 'days')}
-          </ProgressTextContainer>{' '}
-          {t('buyMeal.days')}
-        </EndsAtContainer>
-      )}
+      <ProgressTextContainer>
+        <CampaignDescriptorContainer isModal={isModal}>
+          <ProgressText color={PROGRESS_BAR_COLOR}>
+            {percentRaised}% {t('buyMeal.toTarget')}
+          </ProgressText>{' '}
+          ({Math.round(totalRaised / pricePerMeal)} {t('buyMeal.outOf')}{' '}
+          {Math.round(targetAmount / pricePerMeal)} {t('buyMeal.meals')})
+        </CampaignDescriptorContainer>
+        {isActive && (
+          <EndsAtContainer isModal={isModal}>
+            {t('buyMeal.endsIn')}{' '}
+            <ProgressText color={PROGRESS_BAR_COLOR}>
+              {moment(endDate).diff(moment(), 'days')}
+            </ProgressText>{' '}
+            {t('buyMeal.days')}
+          </EndsAtContainer>
+        )}
+      </ProgressTextContainer>
     </Container>
   );
 };
@@ -122,9 +123,20 @@ const ProgressBarContainer = styled.div`
   margin-bottom: 12px;
 `;
 
-const ProgressTextContainer = styled.span`
+const ProgressText = styled.span`
   color: ${({ color }: { color: string }) => color};
   font-weight: 600;
+`;
+
+const ProgressTextContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: wrap;
+  @media ${tabletScreens} {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 `;
 
 const CampaignDescriptorContainer = styled.div`
