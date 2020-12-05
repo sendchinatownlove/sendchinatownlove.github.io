@@ -269,6 +269,7 @@ const TransactionFeeContainer = styled.div`
 const TotalContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-top: 25px;
   span {
     color: #dd678a;
   }
