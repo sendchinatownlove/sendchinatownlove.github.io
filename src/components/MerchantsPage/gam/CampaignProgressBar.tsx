@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { tabletScreens } from '../../../utilities/general/responsive';
 import ProgressBar from './ProgressBar';
 import type { SizeType } from './ProgressBar';
+import { makePlural } from '../../../utilities/general/textFormatter';
 
 const PROGRESS_BAR_COLOR = '#CF6E8A';
 
@@ -48,6 +49,7 @@ const CampaignProgressBar = ({
     return Math.round((raised / target) * 100);
   };
   const percentRaised = calculatePercentRaised(totalRaised, targetAmount);
+  const remainingDays = Math.max(moment(endDate).diff(moment(), 'days'), 0);
 
   return (
     <Container>
@@ -71,12 +73,11 @@ const CampaignProgressBar = ({
       </CampaignDescriptorContainer>
       {isActive && (
         <EndsAtContainer isModal={isModal}>
-
           {t('buyMeal.endsIn')}{' '}
           <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
-            {moment(endDate).diff(moment(), 'days')}
+            {remainingDays}
           </ProgressTextContainer>{' '}
-          {t('buyMeal.days')}
+          {t(makePlural(remainingDays, 'day', 's'))}
         </EndsAtContainer>
       )}
     </Container>

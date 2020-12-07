@@ -6,10 +6,14 @@ export function dateFormatter(date) {
   }/${newDate.getDate()}/${newDate.getUTCFullYear()}`;
 }
 
-export function makePlural(amount, keyword, pluralLetters) {
+export function makePlural(
+  amount: number,
+  keyword: string,
+  pluralLetters: string
+) {
   if (amount === 1) return keyword;
-  else if (amount > 1) return `${keyword}${pluralLetters}`;
-  else return '';
+  else if (amount > 1 || amount === 0) return `${keyword}${pluralLetters}`;
+  return '';
 }
 
 export function formatTime(time) {
