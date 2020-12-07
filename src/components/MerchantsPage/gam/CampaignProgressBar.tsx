@@ -1,13 +1,12 @@
 import moment from 'moment';
 import React from 'react';
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import styled from 'styled-components';
 
 import { tabletScreens } from '../../../utilities/general/responsive';
 import ProgressBar from './ProgressBar';
 import type { SizeType } from './ProgressBar';
-import { makePlural } from '../../../utilities/general/textFormatter';
 
 const PROGRESS_BAR_COLOR = '#CF6E8A';
 
@@ -74,10 +73,9 @@ const CampaignProgressBar = ({
       {isActive && (
         <EndsAtContainer isModal={isModal}>
           {t('buyMeal.endsIn')}{' '}
-          <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
-            {remainingDays}
-          </ProgressTextContainer>{' '}
-          {t(makePlural(remainingDays, 'day', 's'))}
+          <Trans i18nKey="buyMeal.dayWithCount" count={remainingDays}>
+            <ProgressTextContainer color={PROGRESS_BAR_COLOR} />
+          </Trans>
         </EndsAtContainer>
       )}
     </Container>
