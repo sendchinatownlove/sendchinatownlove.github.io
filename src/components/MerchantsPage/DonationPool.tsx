@@ -46,7 +46,7 @@ const DonationPoolBox = () => {
         <Modal
           sellerId={'send-chinatown-love'}
           sellerName={'Send Chinatown Love Fund'}
-          costPerMeal={0}
+          costPerMealInDollars={0}
         />
       </Container>
     </div>
