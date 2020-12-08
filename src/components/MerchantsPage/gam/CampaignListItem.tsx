@@ -87,10 +87,10 @@ const CampaignListItem = ({
           <CampaignProgressBar
             endDate={campaign.end_date}
             isActive={campaign.active}
-            pricePerMeal={campaign.price_per_meal}
+            pricePerMealInCents={campaign.price_per_meal}
             size={SIZE_TYPE.SMALL}
-            targetAmount={campaign.target_amount}
-            totalRaised={campaign.amount_raised}
+            targetAmountInCents={campaign.target_amount}
+            totalRaisedInCents={campaign.amount_raised}
           />
         </MiddleColumnContainer>
         <EndColumnContainer>
@@ -124,7 +124,7 @@ const CampaignListItem = ({
           <ModalBox
             sellerId={seller_id}
             sellerName={seller_name}
-            costPerMeal={campaign.price_per_meal / 100}
+            costPerMealInDollars={campaign.price_per_meal / 100}
             nonProfitLocationId={seller_non_profit_location_id}
             campaignId={campaign.id}
           />

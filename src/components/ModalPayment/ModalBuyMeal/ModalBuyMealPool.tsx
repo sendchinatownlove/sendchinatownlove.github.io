@@ -16,7 +16,7 @@ import { SIZE_TYPE } from '../../MerchantsPage/gam/ProgressBar';
 export interface Props {
   sellerId: string;
   sellerName: string;
-  costPerMeal: number;
+  costPerMealInDollars: number;
   campaignId?: string;
 }
 
@@ -31,10 +31,10 @@ export const ModalBuyMeal = (props: Props) => {
   const [campaignDistributor, setCampaignDistributor] = useState<any>([]);
 
   const handleAmount = (value: string, customAmount: boolean, text: string) => {
-    const MAX_VALUE = COST_LIMIT / props.costPerMeal;
-    const valueInt = Math.min(MAX_VALUE, parseInt(value, 10));
-    setNumberOfMeals(isNaN(valueInt) ? 0 : valueInt);
-    const totalMealPrice = valueInt * props.costPerMeal;
+    const MAX_VALUE = COST_LIMIT / props.costPerMealInDollars;
+    const newNumberOfMeals = Math.min(MAX_VALUE, parseInt(value, 10));
+    setNumberOfMeals(isNaN(newNumberOfMeals) ? 0 : newNumberOfMeals);
+    const totalMealPrice = newNumberOfMeals * props.costPerMealInDollars;
     dispatch({
       type: ModalPaymentConstants.SET_AMOUNT,
       payload: String(totalMealPrice),
@@ -52,7 +52,7 @@ export const ModalBuyMeal = (props: Props) => {
     });
   };
 
-  const totalMealPrice = numberOfMeals * props.costPerMeal;
+  const totalMealPrice = numberOfMeals * props.costPerMealInDollars;
   const totalAmount = { value: totalMealPrice, text: '$' + totalMealPrice };
   const COST_LIMIT = 10000;
 
@@ -110,7 +110,8 @@ export const ModalBuyMeal = (props: Props) => {
         {t('buyMealPool.description.andRestaurants')}
         <span className={styles.bold}>
           {' '}
-          {t('buyMealPool.description.allItTakes')} ${props.costPerMeal}
+          {t('buyMealPool.description.allItTakes')} $
+          {props.costPerMealInDollars}
         </span>
       </p>
 
@@ -119,10 +120,10 @@ export const ModalBuyMeal = (props: Props) => {
         isModal={true}
         endDate={campaign.end_date}
         isActive={campaign.active}
-        pricePerMeal={campaign.price_per_meal}
-        targetAmount={campaign.target_amount}
+        pricePerMealInCents={campaign.price_per_meal}
+        targetAmountInCents={campaign.target_amount}
         size={SIZE_TYPE.LARGE}
-        totalRaised={campaign.amount_raised}
+        totalRaisedInCents={campaign.amount_raised}
       />
 
       <div className={styles.amountContainer}>
@@ -151,7 +152,7 @@ export const ModalBuyMeal = (props: Props) => {
               )}
               disabled={true}
             >
-              {'$' + props.costPerMeal}
+              {'$' + props.costPerMealInDollars}
             </button>
           </div>
           <label className={styles.total}>
@@ -166,7 +167,8 @@ export const ModalBuyMeal = (props: Props) => {
         className={classnames(styles.nextBtn, 'modalButton--filled')}
         onClick={openModal}
         disabled={
-          numberOfMeals < 1 || numberOfMeals > COST_LIMIT / props.costPerMeal
+          numberOfMeals < 1 ||
+          numberOfMeals > COST_LIMIT / props.costPerMealInDollars
         }
       >
         {t('paymentProcessing.amount.submit')}

@@ -17,10 +17,10 @@ interface Props {
   endDate: string;
   isModal: boolean;
   isActive: boolean;
-  pricePerMeal: number; // In cents.
+  pricePerMealInCents: number;
   size: SizeType;
-  targetAmount: number; // In cents.
-  totalRaised: number; // In cents.
+  targetAmountInCents: number;
+  totalRaisedInCents: number;
 }
 
 interface CampaignDescriptorContainerProps {
@@ -31,10 +31,10 @@ const CampaignProgressBar = ({
   endDate,
   isModal,
   isActive,
-  pricePerMeal,
+  pricePerMealInCents: pricePerMeal,
   size,
-  targetAmount,
-  totalRaised,
+  targetAmountInCents: targetAmount,
+  totalRaisedInCents: totalRaised,
 }: Props) => {
   const { t } = useTranslation();
 

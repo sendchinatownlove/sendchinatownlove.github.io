@@ -183,7 +183,7 @@ const OwnerPanel = ({
       <ModalBox
         sellerId={seller.seller_id}
         sellerName={seller.name}
-        costPerMeal={pricePerMeal / 100}
+        costPerMealInDollars={pricePerMeal / 100}
         nonProfitLocationId={seller.non_profit_location_id}
         campaignId={campaignId}
       />

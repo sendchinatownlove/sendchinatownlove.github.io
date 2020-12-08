@@ -36,10 +36,10 @@ const MegaGamListItem = ({ campaign }: Props) => {
             <CampaignProgressBar
               endDate={campaign.end_date}
               isActive={campaign.active}
-              pricePerMeal={campaign.price_per_meal}
+              pricePerMealInCents={campaign.price_per_meal}
               size={campaign.active ? SIZE_TYPE.LARGE : SIZE_TYPE.SMALL}
-              targetAmount={campaign.target_amount}
-              totalRaised={campaign.amount_raised}
+              targetAmountInCents={campaign.target_amount}
+              totalRaisedInCents={campaign.amount_raised}
             />
             {campaign.active && (
               // TODO: Open payment modal.

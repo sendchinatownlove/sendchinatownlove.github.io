@@ -67,7 +67,7 @@ const DonationSection = () => {
       <Modal
         sellerId="light-up-chinatown"
         sellerName="Light Up Chinatown"
-        costPerMeal={0}
+        costPerMealInDollars={0}
       />
     </React.Fragment>
   );
