@@ -118,7 +118,7 @@ const ModalCardDetails = ({
     const payment: SquareLineItems = is_distribution
       ? times(
           () => ({
-            amount: Number(costPerMealInDollars) * 100,
+            amount: costPerMealInDollars * 100,
             currency: 'usd',
             item_type: 'gift_card',
             quantity: 1,
@@ -287,7 +287,7 @@ const ModalCardDetails = ({
   };
 
   const total = () => {
-    return (Number(amount) * 100 + feesAmount) / 100;
+    return Number(amount) + feesAmount / 100;
   };
 
   return (
