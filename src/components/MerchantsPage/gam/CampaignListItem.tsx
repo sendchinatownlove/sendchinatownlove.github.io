@@ -255,7 +255,7 @@ const GiftButtonContainer = styled.div`
 
 const ImagesContainer = styled.span`
   align-self: right;
-  margin-bottom: 140px;
+  margin-bottom: auto;
   align-self: flex-end;
 
   @media (${tabletScreens}) {

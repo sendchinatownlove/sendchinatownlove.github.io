@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Project Navigation
+
+Available paths (once your Ruby server is configured - [Ruby server setup here](https://github.com/sendchinatownlove/ruby)) can be found in
+
+`src/components/App/App.tsx` & `src/components/Navbar/Navbar.tsx`
+
+Send Chinatown Love is part React & Ruby and part Weebly! Refer to the above files to see which links are which.
+
 ## Available Scripts
 
 In the project directory, you can run:

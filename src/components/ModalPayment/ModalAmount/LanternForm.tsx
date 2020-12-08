@@ -79,6 +79,7 @@ export const LanternForm = (props) => {
             onChange={handleOnChange}
             placeholder={t('paymentProcessing.amount.place_holder.first_name')}
             value={lucData.firstName}
+            maxLength={40}
           />
         </RowFormat>
         <RowFormat width="20%" mobileWidth="30%">
@@ -94,6 +95,7 @@ export const LanternForm = (props) => {
               'paymentProcessing.amount.place_holder.middle_initial'
             )}
             value={lucData.middleInitial}
+            maxLength={1}
           />
         </RowFormat>
         <RowFormat width="38%">
@@ -107,6 +109,7 @@ export const LanternForm = (props) => {
             onChange={handleOnChange}
             placeholder={t('paymentProcessing.amount.place_holder.last_name')}
             value={lucData.lastName}
+            maxLength={40}
           />
         </RowFormat>
       </SingleRowFormat>
@@ -158,6 +161,7 @@ export const LanternForm = (props) => {
                       'paymentProcessing.amount.place_holder.full_name'
                     )}
                     value={lucData.fullName}
+                    maxLength={100}
                   />
                 </RowFormat>
                 <TextTrigger onClick={(e) => handleAddress(e, false)}>
@@ -180,6 +184,7 @@ export const LanternForm = (props) => {
                     'paymentProcessing.amount.place_holder.address'
                   )}
                   value={lucData.address}
+                  maxLength={100}
                 />
               </RowFormat>
               <SingleRowFormat>
@@ -196,6 +201,7 @@ export const LanternForm = (props) => {
                       'paymentProcessing.amount.place_holder.city'
                     )}
                     value={lucData.city}
+                    maxLength={100}
                   />
                 </RowFormat>
                 <StateZipRow width="50%" mobileWidth="100%">
@@ -212,6 +218,7 @@ export const LanternForm = (props) => {
                         'paymentProcessing.amount.place_holder.state'
                       )}
                       value={lucData.state}
+                      maxLength={20}
                     />
                   </RowFormat>
                   <RowFormat width="47%" mobileWidth="47%">
@@ -227,6 +234,8 @@ export const LanternForm = (props) => {
                         'paymentProcessing.amount.place_holder.zip_code'
                       )}
                       value={lucData.zipCode}
+                      maxLength={5}
+                      pattern="\d{5}"
                     />
                   </RowFormat>
                 </StateZipRow>
