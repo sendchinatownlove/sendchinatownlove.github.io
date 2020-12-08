@@ -67,7 +67,7 @@
   "buyMeal": {
     "header": "Gift a meal for ",
     "subheader": "Send Chinatown Love will connect merchants with local organizations that will distribute your gifted meals to a community in need.",
-    "prompt": "Please enter how many meals to gift",
+    "prompt": "Please enter how many meals from <bold>{{sellerName}}</bold> to gift",
     "explanationFirst": "By gifting a meal, your donation will still go directly to the merchant.",
     "explanationSecond": "Our partners will then distribute vouchers with those who can benefit the most from a free meal.",
     "totalLabel": "Total: ",
