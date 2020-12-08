@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React from 'react';
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import styled from 'styled-components';
 
 import { tabletScreens } from '../../../utilities/general/responsive';
@@ -48,6 +48,7 @@ const CampaignProgressBar = ({
     return Math.round((raised / target) * 100);
   };
   const percentRaised = calculatePercentRaised(totalRaised, targetAmount);
+  const remainingDays = Math.max(moment(endDate).diff(moment(), 'days'), 0);
 
   return (
     <Container>
@@ -71,12 +72,10 @@ const CampaignProgressBar = ({
       </CampaignDescriptorContainer>
       {isActive && (
         <EndsAtContainer isModal={isModal}>
-
           {t('buyMeal.endsIn')}{' '}
-          <ProgressTextContainer color={PROGRESS_BAR_COLOR}>
-            {moment(endDate).diff(moment(), 'days')}
-          </ProgressTextContainer>{' '}
-          {t('buyMeal.days')}
+          <Trans i18nKey="buyMeal.dayWithCount" count={remainingDays}>
+            <ProgressTextContainer color={PROGRESS_BAR_COLOR} />
+          </Trans>
         </EndsAtContainer>
       )}
     </Container>
