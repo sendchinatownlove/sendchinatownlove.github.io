@@ -33,7 +33,7 @@ import {
 type Props = {
   sellerId: string;
   sellerName: string;
-  costPerMeal: number;
+  costPerMealInDollars: number;
   nonProfitLocationId?: string;
   campaignId?: string;
 };
@@ -46,7 +46,7 @@ type ErrorMessage = {
 const ModalCardDetails = ({
   sellerId,
   sellerName,
-  costPerMeal,
+  costPerMealInDollars,
   nonProfitLocationId,
   campaignId,
 }: Props) => {
@@ -88,7 +88,7 @@ const ModalCardDetails = ({
   const checkSubscriptionAgreement = () =>
     setSubscriptionChecked(!isSubscriptionChecked);
 
-  const numberOfMeals = Number(amount) / costPerMeal;
+  const numberOfMeals = Number(amount) / costPerMealInDollars;
   const mealText = numberOfMeals > 1 ? 'meals' : 'meal';
   const numberOfMealsText =
     purchaseType === ModalPaymentTypes.modalPages.buy_meal
@@ -118,7 +118,7 @@ const ModalCardDetails = ({
     const payment: SquareLineItems = is_distribution
       ? times(
           () => ({
-            amount: Number(costPerMeal) * 100,
+            amount: Number(costPerMealInDollars) * 100,
             currency: 'usd',
             item_type: 'gift_card',
             quantity: 1,

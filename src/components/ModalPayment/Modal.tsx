@@ -16,7 +16,7 @@ import styled from 'styled-components';
 export interface Props {
   sellerId: string;
   sellerName: string;
-  costPerMeal: number;
+  costPerMealInDollars: number;
   nonProfitLocationId?: string;
   campaignId?: string;
 }
