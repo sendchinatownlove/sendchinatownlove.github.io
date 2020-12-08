@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { getCampaigns } from '../../../utilities/api';
+import { getCampaigns, getPastCampaigns } from '../../../utilities/api';
 import type { Campaign } from '../../../utilities/api';
 import illustrated_flatlay_hero from '../images/illustrated_flatlay_hero.png';
 import CampaignInstructions from './CampaignInstructions';
@@ -21,40 +21,55 @@ const GiftAMealPage = (props: Props) => {
 
   const [activeCampaigns, setActiveCampaigns] = useState<Campaign[]>([]);
   const [pastCampaigns, setPastCampaigns] = useState<Campaign[]>([]);
+  const [currPage, setCurrPage] = useState(0);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [totalCountPastCmpgn, setTotalCountPastCmpgn] = useState(0);
+  const [shouldFetchPastData, setShouldFetchPastData] = useState(true);
   const [selectedCampaignId, setSelectedCampaignId] = useState<number | null>(
     null
   );
 
   const fetchData = async () => {
-    const campaignResponse = await getCampaigns();
+    const { data: campaignData } = await getCampaigns();
     const activeMegaGam: Campaign[] = [];
     const active: Campaign[] = [];
-    const past: Campaign[] = [];
 
     // Campaigns come back sorted by oldest to newest end date.
-    campaignResponse.data.forEach((campaign: Campaign) => {
-      if (campaign.active && campaign.valid) {
-        if (campaign.project_id) {
-          activeMegaGam.push(campaign);
-        } else {
-          active.push(campaign);
-        }
+    campaignData.forEach((campaign: Campaign) => {
+      if (campaign.project_id) {
+        activeMegaGam.push(campaign);
       } else {
-        past.push(campaign);
+        active.push(campaign);
       }
     });
 
     // We want active Mega GAM campaigns to show up first and then active
     // campaigns from oldest to newest.
     setActiveCampaigns(activeMegaGam.concat(active));
-    // Inactive campaigns should show up newest to oldest.
-    setPastCampaigns(past.reverse());
   };
 
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    const fetchPastCmpgnData = async () => {
+      const { data, headers } = await getPastCampaigns(currPage + 1);
+      const totalPages = parseInt(headers['total-pages']);
+      setPastCampaigns((prev) => prev.concat(data));
+      setTotalPages(totalPages);
+      setTotalCountPastCmpgn(headers['total-count']);
+      setCurrPage(currPage + 1);
+    };
+    if (
+      shouldFetchPastData === true &&
+      (currPage < totalPages || currPage === 0)
+    ) {
+      fetchPastCmpgnData();
+      setShouldFetchPastData(false);
+    }
+  }, [shouldFetchPastData, currPage, totalPages]);
 
   return (
     <div
@@ -110,8 +125,14 @@ const GiftAMealPage = (props: Props) => {
           {t('gamHome.videoBox.caption')}
         </h5>
       </div>
-
-      <h5 className={styles.campaignHeader}>{t('gamHome.pastSection')}</h5>
+      <div className={styles.pastCampaignsHeader}>
+        <h5 className={styles.campaignHeading}>{t('gamHome.pastSection')}</h5>
+        <span className={styles.pastCampaignsCount}>{`${
+          pastCampaigns.length
+        } ${t('gamHome.pastCampaignCount.ofText')} ${totalCountPastCmpgn} ${t(
+          'gamHome.pastCampaignCount.pastCampaignText'
+        )}`}</span>
+      </div>
       <div className={styles.campaignsContainer}>
         {pastCampaigns.map((campaign: Campaign) =>
           campaign.project_id ? (
@@ -124,6 +145,16 @@ const GiftAMealPage = (props: Props) => {
               setSelectedCampaignId={setSelectedCampaignId}
             />
           )
+        )}
+        {currPage !== totalPages && (
+          <div className={styles.viewMoreBtnContainer}>
+            <button
+              className={styles.buttonViewMore}
+              onClick={() => setShouldFetchPastData(true)}
+            >
+              {t('gamHome.viewMoreButton')}
+            </button>
+          </div>
         )}
       </div>
     </div>

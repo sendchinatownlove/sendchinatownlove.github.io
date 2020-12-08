@@ -5,8 +5,6 @@ import { tabletScreens } from '../../../utilities/general/responsive';
 import { useTranslation } from 'react-i18next';
 import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
-import { getDistributor, getSeller } from '../../../utilities/api';
-import { useEffect, useState } from 'react';
 import Modal from '../../ModalPayment';
 import {
   ModalPaymentConstants,
@@ -24,32 +22,31 @@ interface Props {
 
 const ModalBox: any = Modal;
 
-const CampaignListItem = (props: Props) => {
+const CampaignListItem = ({
+  campaign,
+  setSelectedCampaignId,
+  selectedCampaignId,
+}: Props) => {
   const { t } = useTranslation();
   const dispatch = useModalPaymentDispatch(null); //provide null according to Bruce's new branch
 
-  const [distributor, setDistributor] = useState<any | null>();
-  const [merchant, setMerchant] = useState<any | null>();
-  const campaign = props.campaign;
-
-  const fetchData = async () => {
-    const distributorData = await getDistributor(campaign.distributor_id);
-    const seller_id = campaign.seller_distributor_pairs[0].seller_id;
-    const merchantData = await getSeller(seller_id);
-
-    setDistributor(distributorData.data);
-    setMerchant(merchantData.data);
-  };
-
-  useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line
-  }, []);
+  const {
+    seller_distributor_pairs: [sellerDistPair],
+  } = campaign;
+  const {
+    distributor_website_url,
+    distributor_image_url,
+    distributor_name,
+    seller_id,
+    seller_non_profit_location_id,
+    seller_name,
+    seller_city,
+  } = sellerDistPair;
 
   const campaignImageUrls = campaign.gallery_image_urls;
 
   const showModal = (event: any) => {
-    props.setSelectedCampaignId(campaign.id);
+    setSelectedCampaignId(campaign.id);
     dispatch({
       type: ModalPaymentConstants.SET_MODAL_VIEW,
       payload: ModalPaymentTypes.modalPages.buy_meal,
@@ -70,28 +67,22 @@ const CampaignListItem = (props: Props) => {
           )}
         </EndColumnContainer>
         <MiddleColumnContainer>
-          {merchant && merchant.locations && merchant.locations.length && (
-            <Location>{merchant.locations[0].city}</Location>
-          )}
-          {distributor && merchant && (
-            <Name>
-              {merchant.name} x {distributor.name}
-            </Name>
-          )}
+          <Location>{seller_city}</Location>
+          <Name>
+            {seller_name} x {distributor_name}
+          </Name>
           <Description>
             {campaign.description}{' '}
-            {distributor && (
-              <span>
-                Learn more about{' '}
-                <a
-                  href={distributor.website_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {distributor.name}.
-                </a>
-              </span>
-            )}
+            <span>
+              Learn more about{' '}
+              <a
+                href={distributor_website_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {distributor_name}.
+              </a>
+            </span>
           </Description>
           <CampaignProgressBar
             endDate={campaign.end_date}
@@ -104,26 +95,22 @@ const CampaignListItem = (props: Props) => {
         </MiddleColumnContainer>
         <EndColumnContainer>
           <ImagesContainer>
-            {distributor && (
-              <a href={distributor.website_url}>
-                <DistributorImage
-                  src={distributor.image_url}
-                  alt="distributor_logo"
-                />
-              </a>
-            )}
+            <a href={distributor_website_url}>
+              <DistributorImage
+                src={distributor_image_url}
+                alt="distributor_logo"
+              />
+            </a>
           </ImagesContainer>
-          {merchant && (
-            <Button
-              className="button--outlined"
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.href = '/' + merchant.seller_id;
-              }}
-            >
-              {t('gamHome.listItem.viewButton')}
-            </Button>
-          )}
+          <Button
+            className="button--outlined"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = '/' + seller_id;
+            }}
+          >
+            {t('gamHome.listItem.viewButton')}
+          </Button>
           {campaign.active && (
             <GiftButtonContainer>
               <Button className={'button--filled'} onClick={showModal}>
@@ -133,12 +120,12 @@ const CampaignListItem = (props: Props) => {
           )}
         </EndColumnContainer>
 
-        {campaign.active && props.selectedCampaignId === campaign.id && (
+        {campaign.active && selectedCampaignId === campaign.id && (
           <ModalBox
-            sellerId={merchant.seller_id}
-            sellerName={merchant.name}
+            sellerId={seller_id}
+            sellerName={seller_name}
             costPerMeal={campaign.price_per_meal / 100}
-            nonProfitLocationId={merchant.non_profit_location_id}
+            nonProfitLocationId={seller_non_profit_location_id}
             campaignId={campaign.id}
           />
         )}
