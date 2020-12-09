@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+
 import { Button } from './style';
-import {
-  dateFormatter,
-  makePlural,
-} from '../../utilities/general/textFormatter';
+import { dateFormatter } from '../../utilities/general/textFormatter';
 
 interface Props {
   stamps: participatingSellerProps[];
@@ -33,6 +32,7 @@ enum RowStatuses {
 }
 
 const TicketRow = (props: Props) => {
+  const { t } = useTranslation();
   const [status, setStatus] = useState<RowStatuses>(RowStatuses.Inactive);
   const [redeemedOn, setRedeemedOn] = useState('');
 
@@ -57,16 +57,18 @@ const TicketRow = (props: Props) => {
   const showRedeemRow = (status) => {
     switch (status) {
       case RowStatuses.Redeemed:
-        return `PRIZE REDEEMED ${dateFormatter(redeemedOn)}`;
+        return t('passport.placeholders.prizeRedeemed', {
+          date: dateFormatter(redeemedOn),
+        });
       case RowStatuses.Active:
-        return `READY TO REDEEM`;
+        return t('passport.placeholders.readyToRedeem');
       default:
         if (props.stamps.length === 0) return;
-        return `${3 - props.stamps.length} MORE ${makePlural(
-          3 - props.stamps.length,
-          'stamp',
-          's'
-        )} UNTIL YOUR NEXT REWARD`;
+        return 3 - props.stamps.length === 1
+          ? t('passport.placeholders.oneLeftToRedeem')
+          : t('passport.placeholders.leftToRedeem', {
+              amount: 3 - props.stamps.length,
+            });
     }
   };
 
@@ -92,7 +94,7 @@ const TicketRow = (props: Props) => {
               className="button--red-filled"
               onClick={props.sendEmail}
             >
-              Redeem
+              {t('passport.placeholders.redeem').toUpperCase()}
             </SendEmailButton>
           )}
           <StampRow>{!!props.stamps && createStamps(props.stamps)}</StampRow>
