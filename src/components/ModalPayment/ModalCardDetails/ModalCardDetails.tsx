@@ -84,6 +84,9 @@ const ModalCardDetails = ({
   if (sellerId === 'light-up-chinatown') {
     sellerId = '';
     projectId = '1';
+  } else if (sellerId === 'donations-to-apex') {
+    sellerId = '';
+    projectId = '2';
   }
 
   const checkTermsAgreement = () => setTermsChecked(!isTermsChecked);
