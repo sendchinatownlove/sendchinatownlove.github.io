@@ -73,6 +73,9 @@ const ModalCardDetails = ({
   ) {
     applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
+  } else if (sellerId === 'donations-to-apex') {
+    applicationId = process.env.REACT_APP_APEX_APPLICATION_ID ?? '';
+    locationId = process.env.REACT_APP_APEX_LOCATION_ID ?? '';
   } else {
     applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
