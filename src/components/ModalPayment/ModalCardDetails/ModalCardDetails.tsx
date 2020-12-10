@@ -247,20 +247,15 @@ const ModalCardDetails = ({
 
     switch (type) {
       case ModalPaymentTypes.modalPages.donation:
-        return t(
-          'modalPayment.modalCardDetails.disclaimer.donation',
-          sellerName
-        );
+        return t('modalPayment.modalCardDetails.disclaimer.donation', {
+          sellerName: sellerName,
+        });
       case ModalPaymentTypes.modalPages.donation_pool:
-        return t(
-          'modalPayment.modalCardDetails.disclaimer.donation_pool',
-          sellerName
-        );
+        return t('modalPayment.modalCardDetails.disclaimer.donation_pool');
       case ModalPaymentTypes.modalPages.gift_card:
-        return t(
-          'modalPayment.modalCardDetails.disclaimer.gift_card',
-          sellerName
-        );
+        return t('modalPayment.modalCardDetails.disclaimer.gift_card', {
+          sellerName: sellerName,
+        });
       case ModalPaymentTypes.modalPages.light_up_chinatown:
         return t('modalPayment.modalCardDetails.disclaimer.light_up_chinatown');
       default:
