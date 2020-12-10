@@ -382,17 +382,6 @@ const ModalCardDetails = ({
             <p />
             <CheckboxContainer>
               <Checkbox
-                value="checkedA"
-                inputProps={{ 'aria-label': 'Checkbox A' }}
-                onClick={checkTermsAgreement}
-                checked={isTermsChecked}
-              />
-              <span>
-                I agree with the <b>Terms & Conditions</b>
-              </span>
-            </CheckboxContainer>
-            <CheckboxContainer>
-              <Checkbox
                 value="checkedB"
                 inputProps={{ 'aria-label': 'Checkbox B' }}
                 onClick={checkSubscriptionAgreement}
@@ -400,6 +389,17 @@ const ModalCardDetails = ({
               />
               <span>
                 {t('modalPayment.modalCardDetails.body.emailUpdates')}
+              </span>
+            </CheckboxContainer>
+            <CheckboxContainer>
+              <Checkbox
+                value="checkedA"
+                inputProps={{ 'aria-label': 'Checkbox A' }}
+                onClick={checkTermsAgreement}
+                checked={isTermsChecked}
+              />
+              <span>
+                I agree with the <b>Terms & Conditions</b>
               </span>
             </CheckboxContainer>
             <Disclaimer>{setDisclaimerLanguage(purchaseType)}</Disclaimer>
