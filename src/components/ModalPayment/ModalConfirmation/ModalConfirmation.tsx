@@ -46,13 +46,13 @@ const ModalConfirmation = (props: Props) => {
   const confirmationText = (purchaseType, sellerName, amount) => {
     switch (purchaseType) {
       case ModalPaymentTypes.modalPages.donation:
-        return `We appreciate your support. We'll email you your voucher when ${sellerName} opens back up!`;
+        return `We appreciate your support for ${sellerName}! You will receive an an email receipt shortly with the details of your donation.`;
       case ModalPaymentTypes.modalPages.light_up_chinatown:
         if (amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN)
           return 'You will receive an email in the next couple weeks about our Lighting Ceremony in December.';
         return `You will receive an email with receipt for your donation.`;
       case ModalPaymentTypes.modalPages.gift_card:
-        return `We appreciate your support. We'll email you your voucher when ${sellerName} opens back up!`;
+        return `We appreciate your support for ${sellerName}! You will receive an an email receipt shortly with the details of your voucher.`;
       case ModalPaymentTypes.modalPages.buy_meal:
         return `We appreciate your support for ${sellerName} and for those in need! Please check your email for your receipt.`;
       default:
