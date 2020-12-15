@@ -9,7 +9,7 @@ import goal2Img from './images/goal_2.png';
 import { Trans, useTranslation } from 'react-i18next';
 
 import DonationSection from './DonationSection';
-import DonationDetail from './DonationDetail';
+// import DonationDetail from './DonationDetail';
 import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
 import LightUpPartners from './LightUpPartners';
@@ -282,14 +282,6 @@ const DonationContainer = styled.section`
   padding: 30px;
   @media (max-width: 599px) {
     padding: 15px 15px;
-  }
-`;
-
-const DonationDetailContainer = styled.section`
-  background: #f2e0e1;
-  align-items: center;
-  @media (max-width: 599px) {
-    padding: 0px 15px;
   }
 `;
 

@@ -5,8 +5,6 @@ import {
   tabletScreens,
   phoneScreens,
 } from '../../utilities/general/responsive';
-import lantern45 from './images/lantern-45.png';
-import lantern150 from './images/lantern-150.png';
 
 import Modal from '../ModalPayment';
 
@@ -128,28 +126,5 @@ const Button = styled.div`
     font-size: 14px;
     width: 100%;
     margin: 16px 0px 16px 0px;
-  }
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  max-width: 1440px;
-  margin: auto;
-  @media (${tabletScreens}) {
-    flex-direction: column;
-    position: relative;
-    display: -webkit-inline-box;
-  }
-`;
-
-const Image = styled.img`
-  height: 250px;
-  padding-left: 200px;
-  padding-right: 200px;
-  @media (${tabletScreens}) {
-    height: 130px;
-    padding-left: 30px;
-    padding-right: 30px;
   }
 `;
