@@ -40,13 +40,6 @@ const DonationSection = () => {
           <Description>
             {t('lightUpChinatown.donationDescription1')}
           </Description>
-          <br></br>
-          <Description>
-            {t('lightUpChinatown.donationDescription2', {
-              limit_1: LIGHT_UP_CHINATOWN_TIER_2_MIN,
-              limit_2: LIGHT_UP_CHINATOWN_TIER_3_MIN,
-            })}
-          </Description>
         </ColumnContainer>
         <ColumnContainer>
           <Button className={'button--filled'} onClick={openModal}>
