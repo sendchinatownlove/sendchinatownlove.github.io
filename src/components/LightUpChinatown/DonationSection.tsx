@@ -56,14 +56,6 @@ const DonationSection = () => {
           </Button>
         </ColumnContainer>
       </Container>
-      <ImageContainer>
-        <ColumnContainer>
-          <Image src={lantern45}></Image>
-        </ColumnContainer>
-        <ColumnContainer>
-          <Image src={lantern150}></Image>
-        </ColumnContainer>
-      </ImageContainer>
       <Modal
         sellerId="light-up-chinatown"
         sellerName="Light Up Chinatown"

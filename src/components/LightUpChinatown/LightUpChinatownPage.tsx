@@ -26,7 +26,7 @@ import {
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
   const today = new Date();
-  const campaignEndDate = new Date('12/15/2020');
+  const campaignEndDate = new Date('12/20/2020');
   const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
   const [contributions, setContributions] = useState<number>(0);
@@ -95,7 +95,10 @@ const LightUpChinatownPage = () => {
           <br></br>
           <SummaryBody>{t('lightUpChinatown.summaryBody4')}</SummaryBody>
           <br></br>
-          <SummaryBody>{t('lightUpChinatown.summaryBody5')}</SummaryBody>
+          <SummaryBody>
+            <strong>DECEMBER 15 UPDATE: </strong>
+            {t('lightUpChinatown.summaryBody5')}
+          </SummaryBody>
           <br></br>
           <br></br>
           <CampaignInfoText color={'#1E1E1E'}>
@@ -129,9 +132,6 @@ const LightUpChinatownPage = () => {
       <DonationContainer>
         <DonationSection />
       </DonationContainer>
-      <DonationDetailContainer>
-        <DonationDetail></DonationDetail>
-      </DonationDetailContainer>
       <DonationContainer>
         <CostBreakdownImageContainer>
           <CostBreakdownImage src={costBreakdownImg}></CostBreakdownImage>
