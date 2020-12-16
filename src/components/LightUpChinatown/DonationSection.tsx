@@ -13,10 +13,6 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
-import {
-  LIGHT_UP_CHINATOWN_TIER_2_MIN,
-  LIGHT_UP_CHINATOWN_TIER_3_MIN,
-} from '../../consts';
 
 const DonationSection = () => {
   const { t } = useTranslation();
