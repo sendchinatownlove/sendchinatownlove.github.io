@@ -91,8 +91,7 @@
     "donation": "Donation for {{seller}}",
     "voucher": "Voucher for {{seller}}",
     "donation_to": "Donation to {{seller}}",
-    "voucher_to": "Voucher to {{seller}}",
-    "mega_gam": "Title of MegaGAM December etc"
+    "voucher_to": "Voucher to {{seller}}"
   },
   "errorPage": {
     "body": {

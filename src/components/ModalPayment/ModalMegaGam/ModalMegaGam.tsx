@@ -19,6 +19,7 @@ import { Tooltip } from '@material-ui/core';
 import { Help } from '@material-ui/icons';
 import { COST_LIMIT_DOLLARS } from '../../../consts';
 import { phoneScreens } from '../../../utilities/general/responsive';
+import { useEffect } from 'react';
 
 export interface Props {
   sellerId: string;
@@ -102,6 +103,11 @@ export const Modal = (props: Props) => {
       },
     });
   };
+
+  useEffect(() => {
+    updateFeesAndAmounts(String(numberOfMeals));
+    // eslint-disable-next-line
+  }, []);
 
   const handleMealAmount = (value: string) => {
     updateFeesAndAmounts(value);

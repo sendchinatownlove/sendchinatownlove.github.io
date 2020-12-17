@@ -56,8 +56,7 @@
   },
   "purchase": {
     "donation": "捐款 - {{seller}}",
-    "voucher": "购买礼品券 - {{seller}}",
-    "mega_gam": "Title of MegaGAM December etc"
+    "voucher": "购买礼品券 - {{seller}}"
   },
   "errorPage": {
     "body": {
@@ -104,8 +103,8 @@
       "details": {
         "donation": "Donation details",
         "voucher": "Purchase details",
-        "megagam_details_match":  "Gift-a-Meal donation payment of <1>${{totalPayment}}</1> for a total contribution of <2>${{totalContribution}}</2> with a 1:1 match",
-        "megagam_details_no_match": "Gift-a-Meal donation payment of <1>${{totalPayment}}</1>"
+        "megagam_details_match":  "Gift-a-Meal donation payment of <1>{{totalPayment}}</1> for a total contribution of <2>{{totalContribution}}</2> with a 1:1 match",
+        "megagam_details_no_match": "Gift-a-Meal donation payment of <1>{{totalPayment}}</1>"
       },
       "message": {
         "donation": "Donation",
