@@ -18,7 +18,6 @@ import { getSeller } from '../../../utilities';
 export type Props = {
   sellerId: string;
   sellerName: string;
-  projectId?: number | undefined;
 };
 
 const lucHeroImage =
@@ -35,11 +34,7 @@ const ModalConfirmation = (props: Props) => {
     e.preventDefault();
     // @TODO(wilsonj806) Replace the below with a proper fix
     //...for differentiating between a seller and a project
-    if (
-      !props.projectId &&
-      props.sellerId &&
-      props.sellerId !== 'light-up-chinatown'
-    ) {
+    if (props.sellerId && props.sellerId !== 'light-up-chinatown') {
       const { data } = props.sellerId && (await getSeller(props.sellerId));
       dispatch({
         type: ModalPaymentConstants.UPDATE_SELLER_DATA,

@@ -70,6 +70,8 @@ const ModalCardDetails = ({
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
+  const isMegaGam: boolean =
+    purchaseType === ModalPaymentTypes.modalPages.mega_gam;
 
   let applicationId, locationId, projectId;
 
@@ -88,7 +90,7 @@ const ModalCardDetails = ({
   if (sellerId === 'light-up-chinatown') {
     sellerId = '';
     projectId = '1';
-  } else if (purchaseType === ModalPaymentTypes.modalPages.mega_gam) {
+  } else if (isMegaGam) {
     projectId = campaignState.project_id;
   }
 
@@ -124,10 +126,9 @@ const ModalCardDetails = ({
     };
 
     // 'buy_meal' is still represented as a gift card when calling the API
-    const itemType =
-      purchaseType === ModalPaymentTypes.modalPages.mega_gam
-        ? 'donation'
-        : purchaseTypeToItemType(purchaseType);
+    const itemType = isMegaGam
+      ? 'donation'
+      : purchaseTypeToItemType(purchaseType);
 
     const payment: SquareLineItems = is_distribution
       ? times(
@@ -313,10 +314,7 @@ const ModalCardDetails = ({
       100 * (amount + matchAmount)
     );
 
-    if (
-      purchaseType === ModalPaymentTypes.modalPages.mega_gam &&
-      matchAmount > 0
-    ) {
+    if (isMegaGam && matchAmount > 0) {
       return (
         <span>
           <Trans
@@ -333,10 +331,7 @@ const ModalCardDetails = ({
       );
     }
 
-    if (
-      purchaseType === ModalPaymentTypes.modalPages.mega_gam &&
-      matchAmount === 0
-    ) {
+    if (isMegaGam && matchAmount === 0) {
       return (
         <span>
           <Trans

@@ -11,7 +11,6 @@ import {
   ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
 import { getFee } from '../../utilities/api/interactionManager';
-
 import ReactPixel from 'react-facebook-pixel';
 import styled from 'styled-components';
 

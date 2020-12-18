@@ -77,9 +77,9 @@ export const Modal = (props: Props) => {
     return Math.floor((100 * COST_LIMIT_DOLLARS) / costPerMealPlusFee);
   };
 
-  const updateFeesAndAmounts = (value: string) => {
+  const updateFeesAndAmounts = (numMeals: number) => {
     const MAX_MEALS = calculateMaxMeals();
-    const numMeals = value ? Math.min(MAX_MEALS, parseInt(value)) : 0;
+    numMeals = numMeals ? Math.min(MAX_MEALS, numMeals) : 0;
     setNumberOfMeals(numMeals);
 
     const donationAmountDollars = numMeals * props.costPerMealInDollars;
@@ -105,12 +105,12 @@ export const Modal = (props: Props) => {
   };
 
   useEffect(() => {
-    updateFeesAndAmounts(String(numberOfMeals));
+    updateFeesAndAmounts(numberOfMeals);
     // eslint-disable-next-line
   }, []);
 
   const handleMealAmount = (value: string) => {
-    updateFeesAndAmounts(value);
+    updateFeesAndAmounts(parseInt(value));
   };
 
   const openModal = (e: any) => {
@@ -124,34 +124,36 @@ export const Modal = (props: Props) => {
     });
   };
 
-  const subHeaderText = () => {
-    const makeSubHeaderText = (
-      amountRaisedCents: number,
-      targetAmountCents: number
-    ) => {
-      if (amountRaisedCents >= targetAmountCents) {
-        return t('megaGam.description.targetMet');
-      }
-      return (
-        <Trans
-          i18nKey="megaGam.description.targetNotMet"
-          values={{
-            targetAmount: formatCurrency(targetAmountCents, 0),
-          }}
-        ></Trans>
-      );
-    };
-
+  const makeSubHeaderText = (
+    amountRaisedCents: number,
+    targetAmountCents: number
+  ) => {
+    if (amountRaisedCents >= targetAmountCents) {
+      return t('megaGam.description.targetMet');
+    }
     return (
-      <span>
-        {t('megaGam.description.body')}
-        <br />
-        <br />
-        {makeSubHeaderText(
-          campaignState.amount_raised,
-          campaignState.target_amount
-        )}
-      </span>
+      <Trans
+        i18nKey="megaGam.description.targetNotMet"
+        values={{
+          targetAmount: formatCurrency(targetAmountCents, 0),
+        }}
+      ></Trans>
+    );
+  };
+
+  const SubHeaderTextComponent = () => {
+    return (
+      <SubHeader>
+        <span>
+          {t('megaGam.description.body')}
+          <br />
+          <br />
+          {makeSubHeaderText(
+            campaignState.amount_raised,
+            campaignState.target_amount
+          )}
+        </span>
+      </SubHeader>
     );
   };
 
@@ -163,7 +165,7 @@ export const Modal = (props: Props) => {
       }}
     >
       <Header>{campaignState.display_name}</Header>
-      <SubHeader>{subHeaderText()}</SubHeader>
+      <SubHeaderTextComponent />
       {campaignState.id && (
         <CampaignProgressBar
           endDate={campaignState.end_date}

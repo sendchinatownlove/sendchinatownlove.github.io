@@ -217,7 +217,8 @@
   },
   "megaGam": {
     "description": {
-      "targetNotMet": "We appreciate your support! 100% of your donation will be used to provide meals to community members in need. Campaign proceeds will be split evenly amongst the four participating merchants to ensure equal relief goes to our partners. All contributions will be matched 1:1 up until {{targetAmount}} is raised, doubling your impact on those in need. ",
+      "body": "We appreciate your support! 100% of your tax-deductible donation will be used to give back to the community in need. Campaign proceeds will be split evenly amongst the four participating merchants to ensure equal relief goes to our partners.",
+      "targetNotMet": "All contributions will be matched 1:1 up until {{targetAmount}} is raised, doubling your impact on those in need.",
       "targetMet": "We’re excited to announce that our donation match threshold has been hit! While donations will no longer be doubled, we encourage you to still support the cause. Every donation, no matter how big or small, goes a long way in feeding the hungry."
     }
   },
