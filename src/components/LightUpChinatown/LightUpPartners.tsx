@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import partners_46 from './images/partners-46.png';
 import partners_ccba from './images/partners-ccba.png';
 import partners_cccny from './images/partners-cccny.png';
+import partners_nyccc from './images/partners-nyccc.png';
 import partners_prm from './images/partners-prm.png';
 import partners_udooda from './images/partners-udooda.png';
 
@@ -24,6 +25,11 @@ const LightUpPartners = () => {
       url: 'https://cccofny.wordpress.com/',
       src: partners_cccny,
       alt: 'Chinese Chamber of Commerce NY',
+    },
+    {
+      url: 'https://www.nychineseculturalcenter.org/',
+      src: partners_nyccc,
+      alt: 'New York Chinese Cultural Center',
     },
     {
       url: 'https://pearlriver.com/',
