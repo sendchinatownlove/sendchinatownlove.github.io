@@ -253,20 +253,15 @@ const ModalCardDetails = ({
 
     switch (type) {
       case ModalPaymentTypes.modalPages.donation:
-        return t(
-          'modalPayment.modalCardDetails.disclaimer.donation',
-          sellerName
-        );
+        return t('modalPayment.modalCardDetails.disclaimer.donation', {
+          sellerName: sellerName,
+        });
       case ModalPaymentTypes.modalPages.donation_pool:
-        return t(
-          'modalPayment.modalCardDetails.disclaimer.donation_pool',
-          sellerName
-        );
+        return t('modalPayment.modalCardDetails.disclaimer.donation_pool');
       case ModalPaymentTypes.modalPages.gift_card:
-        return t(
-          'modalPayment.modalCardDetails.disclaimer.gift_card',
-          sellerName
-        );
+        return t('modalPayment.modalCardDetails.disclaimer.gift_card', {
+          sellerName: sellerName,
+        });
       case ModalPaymentTypes.modalPages.light_up_chinatown:
         return t('modalPayment.modalCardDetails.disclaimer.light_up_chinatown');
       default:
@@ -393,17 +388,6 @@ const ModalCardDetails = ({
             <p />
             <CheckboxContainer>
               <Checkbox
-                value="checkedA"
-                inputProps={{ 'aria-label': 'Checkbox A' }}
-                onClick={checkTermsAgreement}
-                checked={isTermsChecked}
-              />
-              <span>
-                I agree with the <b>Terms & Conditions</b>
-              </span>
-            </CheckboxContainer>
-            <CheckboxContainer>
-              <Checkbox
                 value="checkedB"
                 inputProps={{ 'aria-label': 'Checkbox B' }}
                 onClick={checkSubscriptionAgreement}
@@ -411,6 +395,17 @@ const ModalCardDetails = ({
               />
               <span>
                 {t('modalPayment.modalCardDetails.body.emailUpdates')}
+              </span>
+            </CheckboxContainer>
+            <CheckboxContainer>
+              <Checkbox
+                value="checkedA"
+                inputProps={{ 'aria-label': 'Checkbox A' }}
+                onClick={checkTermsAgreement}
+                checked={isTermsChecked}
+              />
+              <span>
+                I agree with the <b>Terms & Conditions</b>
               </span>
             </CheckboxContainer>
             <Disclaimer>{setDisclaimerLanguage(purchaseType)}</Disclaimer>

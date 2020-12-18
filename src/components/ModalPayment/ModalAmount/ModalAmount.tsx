@@ -13,10 +13,6 @@ import Help from '@material-ui/icons/Help';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
 
-import { LIGHT_UP_CHINATOWN_TIER_2_MIN } from '../../../consts';
-
-import LanternForm from './LanternForm';
-
 export interface Props {
   sellerId: string;
   sellerName: string;
@@ -202,9 +198,6 @@ export const ModalAmount = (props: Props) => {
           <span>{formatCurrency(Number(amount) * 100 + feesAmount)}</span>
         </b>
       </TotalContainer>
-
-      {modalView === ModalPaymentTypes.modalPages.light_up_chinatown &&
-        amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN && <LanternForm />}
       <NextButton
         type="button"
         className={'modalButton--filled'}

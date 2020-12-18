@@ -5,8 +5,6 @@ import {
   tabletScreens,
   phoneScreens,
 } from '../../utilities/general/responsive';
-import lantern45 from './images/lantern-45.png';
-import lantern150 from './images/lantern-150.png';
 
 import Modal from '../ModalPayment';
 
@@ -15,10 +13,6 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
-import {
-  LIGHT_UP_CHINATOWN_TIER_2_MIN,
-  LIGHT_UP_CHINATOWN_TIER_3_MIN,
-} from '../../consts';
 
 const DonationSection = () => {
   const { t } = useTranslation();
@@ -42,13 +36,6 @@ const DonationSection = () => {
           <Description>
             {t('lightUpChinatown.donationDescription1')}
           </Description>
-          <br></br>
-          <Description>
-            {t('lightUpChinatown.donationDescription2', {
-              limit_1: LIGHT_UP_CHINATOWN_TIER_2_MIN,
-              limit_2: LIGHT_UP_CHINATOWN_TIER_3_MIN,
-            })}
-          </Description>
         </ColumnContainer>
         <ColumnContainer>
           <Button className={'button--filled'} onClick={openModal}>
@@ -56,14 +43,6 @@ const DonationSection = () => {
           </Button>
         </ColumnContainer>
       </Container>
-      <ImageContainer>
-        <ColumnContainer>
-          <Image src={lantern45}></Image>
-        </ColumnContainer>
-        <ColumnContainer>
-          <Image src={lantern150}></Image>
-        </ColumnContainer>
-      </ImageContainer>
       <Modal
         sellerId="light-up-chinatown"
         sellerName="Light Up Chinatown"
@@ -136,28 +115,5 @@ const Button = styled.div`
     font-size: 14px;
     width: 100%;
     margin: 16px 0px 16px 0px;
-  }
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  max-width: 1440px;
-  margin: auto;
-  @media (${tabletScreens}) {
-    flex-direction: column;
-    position: relative;
-    display: -webkit-inline-box;
-  }
-`;
-
-const Image = styled.img`
-  height: 250px;
-  padding-left: 200px;
-  padding-right: 200px;
-  @media (${tabletScreens}) {
-    height: 130px;
-    padding-left: 30px;
-    padding-right: 30px;
   }
 `;
