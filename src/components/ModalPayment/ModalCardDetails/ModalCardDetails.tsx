@@ -73,7 +73,7 @@ const ModalCardDetails = ({
   ) {
     applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
-  } else if (sellerId === 'donations-to-apex') {
+  } else if (sellerId === 'apex-for-youth') {
     applicationId = process.env.REACT_APP_APEX_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_APEX_LOCATION_ID ?? '';
   } else {
@@ -81,12 +81,15 @@ const ModalCardDetails = ({
     locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
   }
 
-  if (sellerId === 'light-up-chinatown') {
+  const projectIdsMap = {
+    'light-up-chinatown': 1,
+    'apex-for-youth': 2
+  };
+
+  // if a project, map to projectId and remove sellerId
+  if (projectIdsMap[sellerId]) {
+    projectId = projectIdsMap[sellerId];
     sellerId = '';
-    projectId = '1';
-  } else if (sellerId === 'donations-to-apex') {
-    sellerId = '';
-    projectId = '2';
   }
 
   const checkTermsAgreement = () => setTermsChecked(!isTermsChecked);
