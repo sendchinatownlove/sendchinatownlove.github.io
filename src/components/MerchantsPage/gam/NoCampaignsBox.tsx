@@ -35,8 +35,8 @@ const NoActiveCampaignsBox = () => {
         {t('gamHome.giftButton')}
       </Button>
       <Modal
-        sellerId="donations-for-apex"
-        sellerName="Donate to Apex"
+        sellerId="apex-for-youth"
+        sellerName="Apex for Youth"
         costPerMealInDollars={0}
       />
     </NoCampaignBox>
