@@ -3,8 +3,15 @@
     "amount": {
       "body1": "您的网上交易资料将会做加密处理，款项会直接交给商家以支持他们。",
       "body2": "Please select or enter an amount.",
+      "header": "您的爱心将会全数送到商家手里，帮助他们负担营运支出。您的网上交易资料将会做加密处理，款项会直接交给商家以支持他们。",
+      "mega_gam": "Please add your payment information below.",
       "label1": "选择金额",
       "label2": "其他金额",
+      "num_meals": "# of meals",
+      "your_donation": "Your Donation",
+      "donation_match": "Donation Match (1:1)",
+      "donation_total": "You Pay",
+      "total_donation_plus_match": "Total contribution with Donation Match",
       "minimum": "最低",
       "maximum": "最高",
       "amount": "金额",
@@ -33,7 +40,7 @@
   "buyMeal": {
     "header": "Gift a meal for ",
     "subheader": "Send Chinatown Love will connect merchants with local organizations that will distribute your gifted meals to our community in need.",
-    "prompt": "Please enter how many meals to gift",
+    "prompt": "Please enter how many meals you'd like to gift",
     "explanationFirst": "By gifting a meal, your donation will still go directly to the merchant.",
     "explanationSecond": "Our partners will then distribute vouchers with those who can benefit the most from a free meal.",
     "totalLabel": "Total: ",
@@ -66,6 +73,53 @@
     "flyerAsk": "认识需要协助的小型商家业者？",
     "flyerDownload": "下载传单分享给他们。",
     "merchantHeader": "我們的商家"
+  },
+  "modalPayment": {
+    "modalCardDetails": {
+      "disclaimer": {
+        "donation": "By proceeding with your transaction, you understand that you are making a donation to {{sellerName}}. No goods or services were exchanged for this donation.",
+        "donation_pool": "By proceeding with your transaction, you understand that you are making a donation to all merchants partnered with Send Chinatown Love Inc. The full donation pool will be split among these merchants. No goods or services were exchanged for this donation.",
+        "gift_card": "By proceeding with your purchase, you understand that the voucher card is not redeemable for cash and can only be used at {{sellerName}}. All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase. Balance displayed in the voucher may or may not represent the final balance. Final balance information is subject to {{sellerName}} most recent records.",
+        "light_up_chinatown": "By proceeding with your transaction, you understand that you are making a donation to the Light Up Chinatown Project. This Project is directed towards supporting Chinatown as a whole, rather than any individual merchant.",
+        "mega_gam": "By proceeding with your donation, you understand that you are purchasing a voucher for a local community member to use at one of our participating merchants. Donations may be tax-deductible. Please see the campaign details for more information."
+      },
+      "header": {
+        "completeYour": "Complete your ",
+        "paymentInfo": "Payment Information",
+        "checkout": "Checkout details",
+        "light_up_chinatown_donation": "Light Up Chinatown Donation",
+        "mega_gam": "Gift-a-Meal donation"
+      },
+      "body": {
+        "paymentInfo": "Please add your payment information below",
+        "fullName": "Full Name",
+        "email": "Email",
+        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded"
+      },
+      "placeholders": {
+        "name": "Name",
+        "email": "Email"
+      },
+      "details": {
+        "donation": "Donation details",
+        "voucher": "Purchase details",
+        "megagam_details_match":  "Gift-a-Meal donation payment of <1>{{totalPayment}}</1> for a total contribution of <2>{{totalContribution}}</2> with a 1:1 match",
+        "megagam_details_no_match": "Gift-a-Meal donation payment of <1>{{totalPayment}}</1>"
+      },
+      "message": {
+        "donation": "Donation",
+        "one_time_donation": "One-Time Donation",
+        "monthly_donation": "Monthly Donation",
+        "light_up_chinatown_tier_2": "Adopt-a-Lantern Donation",
+        "voucher": "Voucher Purchase",
+        "luc_name": "Name for personalized lantern: ",
+        "luc_address": "Shipping Address: "
+      },
+      "modalConfirmation" : {
+        "mega_gam_line_1": "You’ve lent a helping hand to community members and small businesses when they needed it most. Together, we can back those most impacted by the pandemic and keep the city’s Chinatowns vibrant.",
+        "mega_gam_line_2": "You will receive an email receipt shortly with the details of your donation."
+      }
+    }
   },
   "merchantNavBar": {
     "all": "所有的商家",
@@ -157,9 +211,16 @@
       "andRestaurants": " 以及受到 COVID-19 疫情影响的餐厅合作，捐爱心餐给需要的团体。",
       "allItTakes": "仅需"
     },
-    "prompt": "Please enter how many meals to gift",
+    "prompt": "Please enter how many meals you'd like to gift",
     "totalLabel": "Total: ",
     "next": "Next"
+  },
+  "megaGam": {
+    "description": {
+      "body": "We appreciate your support! 100% of your tax-deductible donation will be used to give back to the community in need. Campaign proceeds will be split evenly amongst the four participating merchants to ensure equal relief goes to our partners.",
+      "targetNotMet": "All contributions will be matched 1:1 up until {{targetAmount}} is raised, doubling your impact on those in need.",
+      "targetMet": "We’re excited to announce that our donation match threshold has been hit! While donations will no longer be doubled, we encourage you to still support the cause. Every donation, no matter how big or small, goes a long way in feeding the hungry."
+    }
   },
   "lyftReward": {
     "mainBody1": "Thanks for participating in the Send Chinatown Love Food Crawl!",
