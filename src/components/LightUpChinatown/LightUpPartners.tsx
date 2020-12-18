@@ -6,6 +6,7 @@ import partners_ccba from './images/partners-ccba.png';
 import partners_cccny from './images/partners-cccny.png';
 import partners_nyccc from './images/partners-nyccc.png';
 import partners_prm from './images/partners-prm.png';
+import partners_thinkct from './images/partners-thinkct.png';
 import partners_udooda from './images/partners-udooda.png';
 
 const LightUpPartners = () => {
@@ -35,6 +36,11 @@ const LightUpPartners = () => {
       url: 'https://pearlriver.com/',
       src: partners_prm,
       alt: 'Pearl River Mart',
+    },
+    {
+      url: 'https://www.thinkchinatown.org/',
+      src: partners_thinkct,
+      alt: 'Think Chinatown',
     },
     {
       url: 'https://uniteddems.weebly.com/',
