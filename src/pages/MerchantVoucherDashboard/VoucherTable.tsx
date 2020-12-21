@@ -26,19 +26,21 @@ const centsToDollarString = (cents: number) => String(cents / 100);
 const hasBeenUsed = (record: GiftCardDetails) =>
   record.latest_value !== record.original_value;
 
+interface Props {
+  fetchData: () => void;
+  giftCards: GiftCardDetails[];
+  setErrorType: (type: ErrorTypeValues | null) => void;
+  setShowSuccessBanner: (showSuccessBanner: boolean) => void;
+  showPrintView: boolean;
+}
+
 const VoucherTable = ({
   fetchData,
   giftCards,
   setErrorType,
   setShowSuccessBanner,
   showPrintView,
-}: {
-  fetchData: () => void;
-  giftCards: GiftCardDetails[];
-  setErrorType: (type: ErrorTypeValues | null) => void;
-  setShowSuccessBanner: (showSuccessBanner: boolean) => void;
-  showPrintView: boolean;
-}) => {
+}: Props) => {
   const [
     editingGiftCard,
     setEditingGiftCard,
