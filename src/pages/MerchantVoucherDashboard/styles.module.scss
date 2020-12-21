@@ -19,6 +19,10 @@
     padding: 20px 16px;
   }
 
+  @media print {
+    padding: 20px 120px;
+  }
+
   .headerTitle {
     color: white;
     font-size: 32px;
@@ -39,6 +43,10 @@
   .actionButtons {
     > :first-child {
       margin-right: 24px;
+    }
+
+    @media print {
+      display: none;
     }
 
     @media only screen and (max-width: 960px) {
@@ -74,6 +82,10 @@
   display: flex;
   justify-content: space-between;
   padding: 48px 120px;
+
+  @media print {
+    padding: 24px 120px;
+  }
 
   @media only screen and (max-width: 960px) {
     padding: 24px 28px;
@@ -137,6 +149,10 @@
 .contentContainer {
   padding: 32px 120px;
 
+  @media print {
+    padding: 32px 50px;
+  }
+
   @media only screen and (max-width: 960px) {
     padding: 16px 28px;
   }
@@ -150,6 +166,10 @@
   display: flex;
   margin-bottom: 28px;
   width: 100%;
+
+  @media print {
+    display: none;
+  }
 }
 
 .searchBar {
@@ -215,6 +235,9 @@
   .editIconContainer {
     align-items: center;
     display: flex;
+    @media print {
+      display: none;
+    }
   }
 
   .editIcon {
