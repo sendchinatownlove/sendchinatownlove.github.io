@@ -20,7 +20,8 @@
   }
 
   @media print {
-    padding: 20px 120px;
+    padding: 20px 50px;
+    background: white;
   }
 
   .headerTitle {
@@ -30,6 +31,9 @@
     letter-spacing: -0.01em;
     line-height: 44px;
     margin-bottom: 16px;
+    @media print {
+      color: black;
+    }
   }
 
   .headerSubtitle {
@@ -38,6 +42,9 @@
     letter-spacing: 0.05em;
     line-height: 25px;
     text-transform: uppercase;
+    @media print {
+      color: black;
+    }
   }
 
   .actionButtons {
@@ -84,7 +91,8 @@
   padding: 48px 120px;
 
   @media print {
-    padding: 24px 120px;
+    padding: 24px 50px;
+    background: white;
   }
 
   @media only screen and (max-width: 960px) {
