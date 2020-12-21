@@ -239,7 +239,6 @@ const SelectAmtContainer = styled.div`
 const CustomAmountContainer = styled.div`
   position: relative;
   display: inline;
-
   :before {
     content: '$';
     position: absolute;
@@ -273,11 +272,9 @@ const CustomAmountInput = styled.input`
   border: 1px solid #121212;
   margin-top: 8px;
   padding-left: 2em;
-
   :invalid {
     border: 1px solid red;
   }
-
   @media (max-width: 450px) {
     width: 100%;
   }

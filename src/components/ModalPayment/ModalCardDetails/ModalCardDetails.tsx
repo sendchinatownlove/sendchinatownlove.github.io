@@ -3,7 +3,7 @@ import { times } from 'lodash/fp';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import styled from 'styled-components';
 import { v4 as uuid } from 'uuid';
 
@@ -29,6 +29,7 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
+import { formatCurrency } from '../../../utilities/general/textFormatter';
 
 type Props = {
   sellerId: string;
@@ -52,9 +53,14 @@ const ModalCardDetails = ({
 }: Props) => {
   const idempotencyKey = uuid();
   const { t } = useTranslation();
-  const { amount, feesAmount, purchaseType, lucData } = useModalPaymentState(
-    null
-  );
+  const {
+    amount,
+    feesAmount,
+    purchaseType,
+    lucData,
+    matchAmount,
+    campaignState,
+  } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
   const modalRef = useScrollToElement();
 
@@ -64,6 +70,8 @@ const ModalCardDetails = ({
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
+  const isMegaGam: boolean =
+    purchaseType === ModalPaymentTypes.modalPages.mega_gam;
 
   let applicationId, locationId, projectId;
 
@@ -87,9 +95,12 @@ const ModalCardDetails = ({
   };
 
   // if a project, map to projectId and remove sellerId
+  // TODO (billy-yuan) Fix so we don't assign seller or project IDs in the front end
   if (projectIdsMap[sellerId]) {
     projectId = projectIdsMap[sellerId];
     sellerId = '';
+  } else if (isMegaGam) {
+    projectId = campaignState.project_id;
   }
 
   const checkTermsAgreement = () => setTermsChecked(!isTermsChecked);
@@ -124,6 +135,10 @@ const ModalCardDetails = ({
     };
 
     // 'buy_meal' is still represented as a gift card when calling the API
+    const itemType = isMegaGam
+      ? 'donation'
+      : purchaseTypeToItemType(purchaseType);
+
     const payment: SquareLineItems = is_distribution
       ? times(
           () => ({
@@ -138,7 +153,7 @@ const ModalCardDetails = ({
           {
             amount: Number(amount) * 100,
             currency: 'usd',
-            item_type: purchaseTypeToItemType(purchaseType),
+            item_type: itemType,
             quantity: 1,
           },
         ];
@@ -167,7 +182,7 @@ const ModalCardDetails = ({
       sellerId,
       payment,
       buyer,
-      is_distribution,
+      is_distribution, // TODO (billy-yuan): will deprecate is_distribution after it is removed from the back-end
       campaignId,
       projectId,
       projectId ? JSON.stringify(lucData) : null
@@ -217,6 +232,15 @@ const ModalCardDetails = ({
         return `voucher purchase`;
       case ModalPaymentTypes.modalPages.buy_meal:
         return 'Gift a Meal purchase';
+      case ModalPaymentTypes.modalPages.mega_gam:
+        return (
+          <Trans
+            i18nKey="modalPayment.modalCardDetails.header.mega_gam"
+            values={{
+              campaignName: campaignState.display_name,
+            }}
+          ></Trans>
+        );
       default:
         return 'Donation';
     }
@@ -267,6 +291,8 @@ const ModalCardDetails = ({
         });
       case ModalPaymentTypes.modalPages.light_up_chinatown:
         return t('modalPayment.modalCardDetails.disclaimer.light_up_chinatown');
+      case ModalPaymentTypes.modalPages.mega_gam:
+        return t('modalPayment.modalCardDetails.disclaimer.mega_gam');
       default:
         break;
     }
@@ -281,6 +307,7 @@ const ModalCardDetails = ({
 
     if (
       type === ModalPaymentTypes.modalPages.gift_card ||
+      type === ModalPaymentTypes.modalPages.mega_gam ||
       (type === ModalPaymentTypes.modalPages.light_up_chinatown &&
         amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN)
     ) {
@@ -290,15 +317,61 @@ const ModalCardDetails = ({
     }
   };
 
-  const total = () => {
-    return Number(amount) + feesAmount / 100;
+  const TransactionDetails = () => {
+    const totalPaymentDollars = formatCurrency(100 * amount + feesAmount);
+    const totalContributionDollars = formatCurrency(
+      100 * (amount + matchAmount)
+    );
+
+    if (isMegaGam && matchAmount > 0) {
+      return (
+        <span>
+          <Trans
+            i18nKey="modalPayment.modalCardDetails.details.megagam_details_match"
+            values={{
+              totalPayment: totalPaymentDollars,
+              totalContribution: totalContributionDollars,
+            }}
+          >
+            <strong>{totalPaymentDollars}</strong>
+            <strong>{totalContributionDollars}</strong>
+          </Trans>
+        </span>
+      );
+    }
+
+    if (isMegaGam && matchAmount === 0) {
+      return (
+        <span>
+          <Trans
+            i18nKey="modalPayment.modalCardDetails.details.megagam_details_no_match"
+            values={{
+              totalPayment: totalPaymentDollars,
+            }}
+          >
+            <strong>{totalPaymentDollars}</strong>
+          </Trans>
+        </span>
+      );
+    }
+
+    return (
+      <span>
+        {' '}
+        {purchaseTypeMessage(purchaseType, amount)} of{' '}
+        <b>
+          {totalPaymentDollars} {numberOfMealsText}
+        </b>{' '}
+        to {sellerName}{' '}
+      </span>
+    );
   };
 
   return (
     <FormContainer>
       <Header ref={modalRef}>
         {t('modalPayment.modalCardDetails.header.completeYour')}{' '}
-        {purchaseTypeHeader(purchaseType)}
+        <span>{purchaseTypeHeader(purchaseType)}</span>{' '}
       </Header>
       <p>{t('modalPayment.modalCardDetails.body.paymentInfo')}</p>
 
@@ -353,16 +426,7 @@ const ModalCardDetails = ({
             </div>
             <br />
             <Subheader>{setDetailsText(purchaseType, amount)}</Subheader>
-
-            <span>
-              {' '}
-              {purchaseTypeMessage(purchaseType, amount)} of{' '}
-              <b>
-                ${total()} {numberOfMealsText}
-              </b>{' '}
-              to {sellerName}{' '}
-            </span>
-
+            <TransactionDetails />
             {lucData.firstName !== '' && (
               <span>
                 <br />

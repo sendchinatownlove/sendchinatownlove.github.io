@@ -3,11 +3,17 @@
     "amount": {
       "header": "100% of your support will go to the merchant toward their operating costs. Your transaction is secure, encrypted and directly goes to the owner for sustaining their business.",
       "light_up_chinatown": "100% of donation goes towards permanent light fixtures throughout Chinatown.",
+      "mega_gam":"Please add your payment information below.",
       "label1": "Select amount",
       "label2": "Other:",
       "minimum": "Minimum",
       "maximum": "Maximum",
       "amount": "amount",
+      "num_meals": "# of meals",
+      "your_donation": "Your Donation",
+      "donation_match": "Donation Match (1:1)",
+      "donation_total": "You Pay",
+      "total_donation_plus_match": "Total contribution with Donation Match",
       "submit": "Next",
       "fees": "Credit card processing fees",
       "feesTooltip": "Credit card processing fees are added in order to help our small businesses get your full donation.",
@@ -67,7 +73,7 @@
   "buyMeal": {
     "header": "Gift a meal for ",
     "subheader": "Send Chinatown Love will connect merchants with local organizations that will distribute your gifted meals to a community in need.",
-    "prompt": "Please enter how many meals to gift",
+    "prompt": "Please enter how many meals you'd like to gift",
     "explanationFirst": "By gifting a meal, your donation will still go directly to the merchant.",
     "explanationSecond": "Our partners will then distribute vouchers with those who can benefit the most from a free meal.",
     "totalLabel": "Total: ",
@@ -109,13 +115,15 @@
         "donation": "By proceeding with your transaction, you understand that you are making a donation to {{sellerName}}. No goods or services were exchanged for this donation.",
         "donation_pool": "By proceeding with your transaction, you understand that you are making a donation to all merchants partnered with Send Chinatown Love Inc. The full donation pool will be split among these merchants. No goods or services were exchanged for this donation.",
         "gift_card": "By proceeding with your purchase, you understand that the voucher card is not redeemable for cash and can only be used at {{sellerName}}. All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase. Balance displayed in the voucher may or may not represent the final balance. Final balance information is subject to {{sellerName}} most recent records.",
-        "light_up_chinatown": "By proceeding with your transaction, you understand that you are making a donation to the Light Up Chinatown Project. This Project is directed towards supporting Chinatown as a whole, rather than any individual merchant."
+        "light_up_chinatown": "By proceeding with your transaction, you understand that you are making a donation to the Light Up Chinatown Project. This Project is directed towards supporting Chinatown as a whole, rather than any individual merchant.",
+        "mega_gam": "By proceeding with your donation, you understand that you are purchasing a voucher for a local community member to use at one of our participating merchants. Donations may be tax-deductible. Please see the campaign details for more information."
       },
       "header": {
         "completeYour": "Complete your ",
         "paymentInfo": "Payment Information",
         "checkout": "Checkout details",
-        "light_up_chinatown_donation": "Light Up Chinatown Donation"
+        "light_up_chinatown_donation": "Light Up Chinatown Donation",
+        "mega_gam": "Gift-a-Meal donation"
       },
       "body": {
         "paymentInfo": "Please add your payment information below",
@@ -129,7 +137,9 @@
       },
       "details": {
         "donation": "Donation details",
-        "voucher": "Purchase details"
+        "voucher": "Purchase details",
+        "megagam_details_match": "Gift-a-Meal donation payment of <0>{{totalPayment}}</0> for a total contribution of <1>{{totalContribution}}</1> with a 1:1 match",
+        "megagam_details_no_match": "Gift-a-Meal donation payment of <0>{{totalPayment}}</0>"
       },
       "message": {
         "donation": "Donation",
@@ -140,6 +150,10 @@
         "luc_name": "Name for personalized lantern: ",
         "luc_address": "Shipping Address: "
       }
+    },
+    "modalConfirmation" : {
+      "mega_gam_line_1": "You’ve lent a helping hand to community members and small businesses when they needed it most. Together, we can back those most impacted by the pandemic and keep the city’s Chinatowns vibrant.",
+      "mega_gam_line_2": "You will receive an email receipt shortly with the details of your donation."
     }
   },
   "merchantNavBar": {
@@ -237,9 +251,16 @@
       "andRestaurants": "and restaurants who have been impacted by COVID-19 to gift meals to communities in need.",
       "allItTakes": "All it takes is"
     },
-    "prompt": "Please enter how many meals to gift",
+    "prompt": "Please enter how many meals you'd like to gift",
     "totalLabel": "Total: ",
     "next": "Next"
+  },
+  "megaGam": {
+    "description": {
+      "body": "We appreciate your support! 100% of your tax-deductible donation will be used to give back to the community in need. Campaign proceeds will be split evenly amongst the four participating merchants to ensure equal relief goes to our partners.",
+      "targetNotMet": "All contributions will be matched 1:1 up until {{targetAmount}} is raised, doubling your impact on those in need.",
+      "targetMet": "We’re excited to announce that our donation match threshold has been hit! While donations will no longer be doubled, we encourage you to still support the cause. Every donation, no matter how big or small, goes a long way in feeding the hungry."
+    }
   },
   "lyftReward": {
     "mainBody1": "Thanks for participating in the Send Chinatown Love Food Crawl!",
@@ -284,7 +305,7 @@
     "faqQuestion3": "How will the light fixtures and lanterns be installed for “Light Up Chinatown”?",
     "faqAnswer3": "<0>Alternative Earth Care</0> has a four man team that will install 14 sections of lighting on Mott Street from Canal to Bayard with lanterns hung between each light bulb for Light Up Chinatown.",
     "faqQuestion4": "I donated $150+ before December 15th, where can I pick up my personalized lantern?",
-    "faqAnswer4": "The pick up location for lanterns is at CCBA, 62 Mott Street, New York, NY 10013. You will receive an email confirmation with detailed instructions on what time to pick up the lantern after making your donation. If you provided  your shipping address, we will ship you your personalized lantern after December 21st.",
+    "faqAnswer4": "The pick up location for lanterns will be at Pearl River Mart on 395 Broadway, New York, NY 10013 after 12/26 anytime from 11am - 6pm. You should have received an email confirmation with detailed instructions on pick up. If you provided your shipping address, we will ship you your personalized lantern after December 21st.",
     "faqQuestion5": "I have not received an email confirmation. Who can I contact?",
     "faqAnswer5": "Please contact us at <0>hello@sendchinatownlove.com</0> with the subject line “Light Up Chinatown”.",
     "faqQuestion6": "I love Chinatown and I’d love to further support its businesses. Where can I do that?",
