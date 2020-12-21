@@ -5,9 +5,25 @@ import {
 } from '../../../utilities/general/responsive';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+  ModalPaymentTypes,
+} from '../../../utilities/hooks/ModalPaymentContext';
+import Modal from '../../ModalPayment';
 
 const NoActiveCampaignsBox = () => {
   const { t } = useTranslation();
+
+  const ModalPaymentDispatcher = useModalPaymentDispatch(null);
+
+  const openModal = (event) => {
+    event.preventDefault();
+    ModalPaymentDispatcher({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.donation,
+    });
+  };
 
   return (
     <NoCampaignBox>
@@ -15,15 +31,14 @@ const NoActiveCampaignsBox = () => {
         <Heading>{t('gamHome.noCampaignsBox.CTA')}</Heading>
         <SubHeading>{t('gamHome.noCampaignsBox.description')}</SubHeading>
       </TextContainer>
-      <Button
-        className="button--filled"
-        onClick={(e) => {
-          e.preventDefault();
-          window.open('https://www.gofundme.com/f/gift-a-meal', '_blank');
-        }}
-      >
+      <Button className="button--filled" onClick={openModal}>
         {t('gamHome.giftButton')}
       </Button>
+      <Modal
+        sellerId="apex-for-youth"
+        sellerName="Apex for Youth"
+        costPerMealInDollars={0}
+      />
     </NoCampaignBox>
   );
 };

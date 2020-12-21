@@ -81,15 +81,24 @@ const ModalCardDetails = ({
   ) {
     applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
+  } else if (sellerId === 'apex-for-youth') {
+    applicationId = process.env.REACT_APP_APEX_APPLICATION_ID ?? '';
+    locationId = process.env.REACT_APP_APEX_LOCATION_ID ?? '';
   } else {
     applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
   }
 
+  const projectIdsMap = {
+    'light-up-chinatown': 1,
+    'apex-for-youth': 2
+  };
+
+  // if a project, map to projectId and remove sellerId
   // TODO (billy-yuan) Fix so we don't assign seller or project IDs in the front end
-  if (sellerId === 'light-up-chinatown') {
+  if (projectIdsMap[sellerId]) {
+    projectId = projectIdsMap[sellerId];
     sellerId = '';
-    projectId = '1';
   } else if (isMegaGam) {
     projectId = campaignState.project_id;
   }
