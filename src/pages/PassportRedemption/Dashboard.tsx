@@ -8,7 +8,7 @@ import RedemptionClaimScreen from './RedemptionClaimScreen';
 import ScreenName from './ScreenName';
 import PassportScreen from './Passport';
 import LyftCodeScreen from './LyftCodeScreen';
-import CrawlMap from './CrawlMap.png';
+import CrawlMap from './Assets/CrawlMap.png';
 import { useHistory } from 'react-router-dom';
 
 interface Props {

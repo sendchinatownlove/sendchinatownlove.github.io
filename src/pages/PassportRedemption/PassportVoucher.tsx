@@ -8,8 +8,8 @@ import {
 } from '../../utilities/api/interactionManager';
 import { useLocation } from 'react-router-dom';
 import { LoaderFillerContainer } from '../../components/Loader';
-import VoucherImage from './VoucherFront.png';
-import BackImage from './VoucherBack.png';
+import VoucherImage from './Assets/VoucherFront.png';
+import BackImage from './Assets/VoucherBack.png';
 
 const Voucher = () => {
   const { id, tickets_secret } = useParams();

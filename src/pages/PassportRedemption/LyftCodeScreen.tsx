@@ -9,7 +9,7 @@ import {
   redeemToken,
 } from '../../utilities/api/interactionManager';
 
-import CircleLogo from './CircleLogo.png';
+import CircleLogo from './Assets/CircleLogo.png';
 
 const LyftCodeScreen = () => {
   const { contact_id, token } = useParams();
