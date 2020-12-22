@@ -25,10 +25,6 @@ import {
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
-  const today = new Date();
-  const campaignEndDate = new Date('12/20/2020');
-  const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
-  const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
   const [contributions, setContributions] = useState<number>(0);
 
   const modalPaymentDispatcher = useModalPaymentDispatch(null);
@@ -253,14 +249,6 @@ const Map = styled.img`
   height: 515px;
   width: 388px;
   margin-bottom: 20px;
-`;
-
-const CampaignInfoText = styled.div`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: bold;
-  line-height: 35px;
-  color: ${(props) => props.color};
 `;
 
 const DonationProgress = styled.div`
