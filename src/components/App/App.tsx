@@ -10,7 +10,7 @@ import Loader from '../Loader';
 import Header from '../Navbar';
 import ScrollToTop from '../ScrollToTop';
 import { Page } from '../../consts';
-import ScreenName from '../../pages/PassportRedemption/ScreenName';
+import ScreenType from '../../pages/PassportRedemption/ScreenTypes';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
 
@@ -48,7 +48,7 @@ const MerchantVoucherDashboard = lazy(
 );
 
 const PassportVoucher = lazy(
-  () => import('../../pages/PassportRedemption/PassportVoucher')
+  () => import('../../pages/PassportRedemption/Voucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
 const DetachedVoucherPrintouts = lazy(
@@ -116,19 +116,19 @@ const App = () => {
             </VoucherProvider>
           </Route>
           <Route exact path="/passport">
-            <PassportRedemption screen={ScreenName.Track} />
+            <PassportRedemption screen={ScreenType.Track} />
           </Route>
           <Route exact path="/passport/:id/tickets">
-            <PassportRedemption screen={ScreenName.Dashboard} />
+            <PassportRedemption screen={ScreenType.Dashboard} />
           </Route>
           <Route exact path="/passport/:id/redeem/:access_token">
-            <PassportRedemption screen={ScreenName.Redemption} />
+            <PassportRedemption screen={ScreenType.Rewards} />
           </Route>
           <Route
             exact
             path="/passport/:id/redeem/:access_token/sponsor/:sponsor_seller_id"
           >
-            <PassportRedemption screen={ScreenName.Claim} />
+            <PassportRedemption screen={ScreenType.Claim} />
           </Route>
           <Route exact path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
@@ -137,7 +137,7 @@ const App = () => {
             <PassportVoucher />
           </Route>
           <Route exact path="/passport/lyft_rewards/:contact_id/redeem/:token">
-            <PassportRedemption screen={ScreenName.LyftCode} />
+            <PassportRedemption screen={ScreenType.LyftCode} />
           </Route>
           <Route
             path="/gift-a-meal"

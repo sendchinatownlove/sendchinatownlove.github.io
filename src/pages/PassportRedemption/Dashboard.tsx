@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import TrackScreen from './TrackScreen';
-import RedemptionSelectScreen from './RedemptionSelectScreen';
-import RedemptionClaimScreen from './RedemptionClaimScreen';
-
-import ScreenName from './ScreenName';
+import TrackScreen from './SignIn';
+import RewardsSelectScreen from './Rewards';
+import RedemptionClaimScreen from './Redemption';
+import ScreenType from './ScreenTypes';
 import PassportScreen from './Passport';
-import LyftCodeScreen from './LyftCodeScreen';
+import LyftCodeScreen from './Lyft';
+
 import CrawlMap from './Assets/CrawlMap.png';
 import { useHistory } from 'react-router-dom';
 
 interface Props {
-  screen: ScreenName;
+  screen: ScreenType;
 }
 
 const PassportRedemption = (props: Props) => {
   const { location } = useHistory();
-  const [currentScreenView, setCurrentScreenView] = useState<ScreenName>(
+  const [currentScreenView, setCurrentScreenView] = useState<ScreenType>(
     props.screen
   );
 
   useEffect(() => {
     if (location.pathname === '/passport') {
-      setCurrentScreenView(ScreenName.Track);
+      setCurrentScreenView(ScreenType.Track);
     } else if (location.pathname.includes('/tickets')) {
-      setCurrentScreenView(ScreenName.Dashboard);
+      setCurrentScreenView(ScreenType.Dashboard);
     }
   }, [location.pathname]);
 
@@ -34,19 +34,19 @@ const PassportRedemption = (props: Props) => {
     // NOTE: not sure if this is the right flow,
     // but currently set up like this for now for ease of editing
     switch (screen) {
-      case ScreenName.Redemption:
+      case ScreenType.Rewards:
         return (
-          <RedemptionSelectScreen setCurrentScreenView={setCurrentScreenView} />
+          <RewardsSelectScreen setCurrentScreenView={setCurrentScreenView} />
         );
-      case ScreenName.Track:
+      case ScreenType.Track:
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
-      case ScreenName.Dashboard:
+      case ScreenType.Dashboard:
         return <PassportScreen setCurrentScreenView={setCurrentScreenView} />;
-      case ScreenName.Claim:
+      case ScreenType.Claim:
         return (
           <RedemptionClaimScreen setCurrentScreenView={setCurrentScreenView} />
         );
-      case ScreenName.LyftCode:
+      case ScreenType.LyftCode:
         return <LyftCodeScreen />;
       default:
         return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
