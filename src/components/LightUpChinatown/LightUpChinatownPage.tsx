@@ -101,12 +101,6 @@ const LightUpChinatownPage = () => {
           </SummaryBody>
           <br></br>
           <br></br>
-          <CampaignInfoText color={'#1E1E1E'}>
-            {t('lightUpChinatown.campaignDates')}
-          </CampaignInfoText>
-          <CampaignInfoText color={'#A8192E'}>
-            {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
-          </CampaignInfoText>
         </TextContainer>
         <MapContainer>
           <Map
