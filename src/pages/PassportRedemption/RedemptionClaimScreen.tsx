@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { InputContainer } from './TrackScreen';
 import { CardText, Button, SubTitle } from './style';
-import CircleLogo from './CircleLogo.png';
+import CircleLogo from './Assets/CircleLogo.png';
 
 import ScreenName from './ScreenName';
 

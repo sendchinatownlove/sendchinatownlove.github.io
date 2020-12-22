@@ -17,9 +17,9 @@ import GiveawayPopover from './GiveawayPopover';
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
 
-import PassportDashboardBackground from './PassportDashboardBackground.png';
-import PassportIconImg from './passportIcon.png';
-import CircleLogo from './CircleLogo.png';
+import PassportDashboardBackground from './Assets/PassportDashboardBackground.png';
+import PassportIconImg from './Assets/passportIcon.png';
+import CircleLogo from './Assets/CircleLogo.png';
 import { LyftRewardPromo, LyftConfirmationPromo } from './LyftPromo';
 
 interface Props {
