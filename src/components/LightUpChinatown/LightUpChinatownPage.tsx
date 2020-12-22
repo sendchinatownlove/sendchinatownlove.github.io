@@ -25,10 +25,12 @@ import {
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
-  const today = new Date();
-  const campaignEndDate = new Date('12/20/2020');
-  const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
-  const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
+  // @NOTE (wilson) Temporarily comment out since the campaign's been extended,
+  // but may be prudent to keep it in for future reuse
+  // const today = new Date();
+  // const campaignEndDate = new Date('12/20/2020');
+  // const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
+  // const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
   const [contributions, setContributions] = useState<number>(0);
 
   const modalPaymentDispatcher = useModalPaymentDispatch(null);
@@ -101,12 +103,12 @@ const LightUpChinatownPage = () => {
           </SummaryBody>
           <br></br>
           <br></br>
-          <CampaignInfoText color={'#1E1E1E'}>
+          {/* <CampaignInfoText color={'#1E1E1E'}>
             {t('lightUpChinatown.campaignDates')}
           </CampaignInfoText>
           <CampaignInfoText color={'#A8192E'}>
             {daysUntilEnd} {t('lightUpChinatown.campaignDaysLeft')}
-          </CampaignInfoText>
+          </CampaignInfoText> */}
         </TextContainer>
         <MapContainer>
           <Map
@@ -261,13 +263,14 @@ const Map = styled.img`
   margin-bottom: 20px;
 `;
 
-const CampaignInfoText = styled.div`
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: bold;
-  line-height: 35px;
-  color: ${(props) => props.color};
-`;
+// (wilson)See note above
+// const CampaignInfoText = styled.div`
+//   font-family: Open Sans;
+//   font-style: normal;
+//   font-weight: bold;
+//   line-height: 35px;
+//   color: ${(props) => props.color};
+// `;
 
 const DonationProgress = styled.div`
   position: relative;
