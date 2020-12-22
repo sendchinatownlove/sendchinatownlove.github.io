@@ -4,7 +4,7 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import { InputContainer } from './TrackScreen';
 import { CardText, Button, SubTitle } from './style';
-import CircleLogo from './CircleLogo.png';
+import CircleLogo from './Assets/CircleLogo.png';
 
 import ScreenName from './ScreenName';
 

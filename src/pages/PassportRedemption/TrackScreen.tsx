@@ -16,8 +16,8 @@ import {
 } from '../../utilities/api/interactionManager';
 import { ModalPaymentConstants } from '../../utilities/hooks/ModalPaymentContext';
 
-import CrawlInfoIcon from './CrawlInfoIcon.png';
-import CircleLogo from './CircleLogo.png';
+import CrawlInfoIcon from './Assets/CrawlInfoIcon.png';
+import CircleLogo from './Assets/CircleLogo.png';
 
 interface Props {
   setCurrentScreenView: Function;

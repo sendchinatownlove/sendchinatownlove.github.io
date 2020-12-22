@@ -8,7 +8,7 @@ import {
   DefaultFooter,
 } from './RedemptionFooters';
 import { CardText } from './style';
-import CircleLogo from './CircleLogo.png';
+import CircleLogo from './Assets/CircleLogo.png';
 
 import {
   getPassportTickets,
