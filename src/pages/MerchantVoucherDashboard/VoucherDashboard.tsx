@@ -157,20 +157,18 @@ const VoucherDashboard = ({
           <div className={styles.headerTitle}>Voucher Tracker 礼品券记录</div>
           <div className={styles.headerSubtitle}>{organizationName}</div>
         </div>
-        {!showPrintView && (
-          <div className={styles.actionButtons}>
-            <LoadingButton
-              icon={RefreshIcon}
-              onClick={fetchData}
-              text="Refresh 刷新"
-            />
-            <LoadingButton
-              icon={PrintIcon}
-              onClick={handlePrint}
-              text="Print 打印"
-            />
-          </div>
-        )}
+        <div className={styles.actionButtons}>
+          <LoadingButton
+            icon={RefreshIcon}
+            onClick={fetchData}
+            text="Refresh 刷新"
+          />
+          <LoadingButton
+            icon={PrintIcon}
+            onClick={handlePrint}
+            text="Print 打印"
+          />
+        </div>
       </div>
       <div className={styles.stats}>
         {stats.map((section) => (
@@ -180,46 +178,44 @@ const VoucherDashboard = ({
       {showSuccessBanner && <SuccessfulSaveBanner />}
       {errorType && <SaveErrorBanner errorType={errorType} />}
       <div className={styles.contentContainer}>
-        {!showPrintView && (
-          <div className={styles.filterSection}>
-            <div className={styles.searchBar}>
-              <div className={styles.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                className={styles.searchText}
-                inputProps={{ 'aria-label': 'search' }}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setSearchFilter(event.target.value)
-                }
-                placeholder="Search by Voucher Code or Email Address 使用礼品券号码或电子邮件搜寻"
-              />
+        <div className={styles.filterSection}>
+          <div className={styles.searchBar}>
+            <div className={styles.searchIcon}>
+              <SearchIcon />
             </div>
-            <div className={styles.filterGamContainer}>
-              <Checkbox
-                checked={filterGam}
-                className={styles.checkbox}
-                classes={{
-                  checked: filterGam ? styles.filterGamSelected : '',
-                  colorSecondary: filterGam ? styles.filterGamSelected : '',
-                }}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setFilterGam(event.target.checked)
-                }
-              />
-              <div
-                className={classNames({
-                  [styles.filterGamText]: true,
-                  [styles.filterGamSelected]: filterGam,
-                })}
-              >
-                Hide gift-a-meal vouchers
-                <br />
-                隐藏爱心餐餐券
-              </div>
+            <InputBase
+              className={styles.searchText}
+              inputProps={{ 'aria-label': 'search' }}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setSearchFilter(event.target.value)
+              }
+              placeholder="Search by Voucher Code or Email Address 使用礼品券号码或电子邮件搜寻"
+            />
+          </div>
+          <div className={styles.filterGamContainer}>
+            <Checkbox
+              checked={filterGam}
+              className={styles.checkbox}
+              classes={{
+                checked: filterGam ? styles.filterGamSelected : '',
+                colorSecondary: filterGam ? styles.filterGamSelected : '',
+              }}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setFilterGam(event.target.checked)
+              }
+            />
+            <div
+              className={classNames({
+                [styles.filterGamText]: true,
+                [styles.filterGamSelected]: filterGam,
+              })}
+            >
+              Hide gift-a-meal vouchers
+              <br />
+              隐藏爱心餐餐券
             </div>
           </div>
-        )}
+        </div>
         <VoucherTable
           fetchData={fetchData}
           giftCards={filteredGiftCards}
