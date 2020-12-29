@@ -1,11 +1,14 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { SubTitle, Button } from './style';
 
 export const NoRewardsFooter = () => {
+  const { t } = useTranslation();
+
   return (
     <>
-      <SubTitle bold="700">Have more tickets to add?</SubTitle>
+      <SubTitle bold="700">{t('passport.labels.moreTickets')}</SubTitle>
 
       <Button
         value="redemption-selected-button"
@@ -15,7 +18,7 @@ export const NoRewardsFooter = () => {
           window.location.href = '/passport';
         }}
       >
-        ADD NEW TICKETS
+        {t('passport.placeholders.addNewTickets').toLocaleUpperCase()}
       </Button>
     </>
   );
@@ -28,11 +31,10 @@ interface RedeemRewardsProps {
 }
 
 export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
+  const { t } = useTranslation();
   return (
     <>
-      <SubTitle bold="700">
-        When redeemed, you have 5 minutes to use your reward.
-      </SubTitle>
+      <SubTitle bold="700"> {t('passport.labels.whenRedeemed')} </SubTitle>
 
       <Button
         value="redemption-selected-button"
@@ -43,7 +45,7 @@ export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
           window.location.href = `/passport/${props.id}/redeem/${props.access_token}/sponsor/${props.selectedSponsor.id}`;
         }}
       >
-        REDEEM NOW
+        {t('passport.placeholders.redeemNow').toUpperCase()}
       </Button>
     </>
   );
@@ -55,11 +57,10 @@ interface defaultProps {
 }
 
 export const DefaultFooter = (props: defaultProps) => {
+  const { t } = useTranslation();
   return (
     <>
-      <SubTitle bold="700">
-        Select an offer and be ready to show this screen when you’re ordering.
-      </SubTitle>
+      <SubTitle bold="700"> {t('passport.labels.selectOffer')}</SubTitle>
 
       {props.allSponsors.length <= 4 && (
         <Button
@@ -69,7 +70,7 @@ export const DefaultFooter = (props: defaultProps) => {
             window.location.href = `/passport/${props.id}/tickets`;
           }}
         >
-          RETURN TO PASSPORT
+          {t('passport.placeholders.returnTo').toLocaleUpperCase()}
         </Button>
       )}
     </>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import {
   NoRewardsFooter,
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const PassportSelected = ({ setCurrentScreenView }: Props) => {
+  const { t } = useTranslation();
   const { id, access_token } = useParams();
 
   const [tickets, setTickets] = useState<any[]>([]);
@@ -93,10 +95,17 @@ const PassportSelected = ({ setCurrentScreenView }: Props) => {
       <Header numSponsors={allSponsors.length}>
         <Logo src={CircleLogo} alt="scl-log" />
         <Heading>
-          {numRewards} REWARD{numRewards === 0 || numRewards > 1 ? 'S' : ''}{' '}
-          AVAILABLE
+          {t('passport.labels.itemsAvailable', {
+            amount: numRewards,
+            item: numRewards === 0 || numRewards > 1 ? 'Rewards' : 'Reward',
+          })}
         </Heading>
-        <SubHeading>Rewards available until 9/30/2020</SubHeading>
+        <SubHeading>
+          {t('passport.labels.itemsExpiration', {
+            item: numRewards === 0 || numRewards > 1 ? 'Rewards' : 'Reward',
+            date: '9/30/20',
+          })}
+        </SubHeading>
       </Header>
 
       <RewardsContainer>

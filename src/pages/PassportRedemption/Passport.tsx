@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { CardContainer, TitleRow, Title, SubTitle, Button } from './style';
 import { MAILTO_URL } from '../../consts';
@@ -26,6 +27,7 @@ interface Props {
 }
 
 const Passport = (props: Props) => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { push, location } = useHistory();
   const [showFaq, setShowFaq] = useState(false);
@@ -166,10 +168,12 @@ const Passport = (props: Props) => {
           href="https://www.sendchinatownlove.com/food-crawl.html"
           target="_blank"
         >
-          Learn More
+          {t('passport.headers.learn')}
         </RedirectionLinks>
         <Logo src={CircleLogo} alt="scl-log" />
-        <RedirectionLinks href={MAILTO_URL}>contact us</RedirectionLinks>
+        <RedirectionLinks href={MAILTO_URL}>
+          {t('passport.headers.contact')}
+        </RedirectionLinks>
       </HeaderContainer>
       <BodyContainer>
         <FAQ
@@ -182,7 +186,7 @@ const Passport = (props: Props) => {
         >
           <TitleRow>
             <Title color={showFaq ? 'grey' : 'black'}>
-              PASSPORT TO CHINATOWN
+              {t('passport.headers.passport').toUpperCase()}
             </Title>
             {showFaq ? (
               <>
@@ -194,7 +198,7 @@ const Passport = (props: Props) => {
               <>
                 <SubHeader color={showFaq ? 'transparent' : 'black'}>
                   {showInstagram
-                    ? 'INSTAGRAM FOR GIVEAWAY ADDED'
+                    ? t('passport.labels.instagramAdded')
                     : '9/1/2020 - 9/30/2020'}
                 </SubHeader>
               </>
@@ -218,20 +222,19 @@ const Passport = (props: Props) => {
             <SendEmailContainer>
               <PassportIcon src={PassportIconImg} />
               <TitleRow>
-                <Title>REWARD EMAIL SENT</Title>
+                <Title>{t('passport.headers.rewardEmail').toUpperCase()}</Title>
                 <SubTitle bold="700">
-                  Check your inbox shortly for a link to access your available
-                  rewards!
+                  {t('passport.labels.checkInbox')}
                   <br />
                   <br />
-                  This link will expire in 30 minutes.
+                  {t('passport.labels.linkExpire')}
                 </SubTitle>
               </TitleRow>
               <SendEmailButtonClose
                 className="button--red-filled"
                 onClick={(e) => setShowEmailSent(false)}
               >
-                CLOSE
+                {t('passport.placeholders.close')}
               </SendEmailButtonClose>
             </SendEmailContainer>
           )}
@@ -240,7 +243,7 @@ const Passport = (props: Props) => {
       </BodyContainer>
       {!showFaq && (
         <AddNewTicket className="button--filled" onClick={addTicket}>
-          Add New Ticket
+          {t('passport.placeholders.addNewTicket')}
         </AddNewTicket>
       )}
     </Container>

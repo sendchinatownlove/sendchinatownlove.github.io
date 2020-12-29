@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { InputContainer } from './TrackScreen';
 import { CardText, Button, SubTitle } from './style';
@@ -20,6 +21,7 @@ interface Props {
 }
 
 const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
+  const { t } = useTranslation();
   const { push } = useHistory();
   const { id, access_token, sponsor_seller_id } = useParams();
 
@@ -134,7 +136,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         <InputContainer className="bottom shadow">
           <ContentContainer>
             <CardText size="15px" color="#a8192e">
-              Offer must be used in:
+              {t('passport.labels.offerUser')}
               <span style={{ fontWeight: 'bold' }}>
                 {' '}
                 {formatTime(timeLeft)}
@@ -145,9 +147,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
       </Shadow>
 
       <Footer>
-        <SubTitle bold="700">
-          Please show this screen to the host when you are placing your order.
-        </SubTitle>
+        <SubTitle bold="700">{t('passport.labels.pleaseShow')}</SubTitle>
         <Button
           value="redemption-selected-button"
           className="button--red-filled"
@@ -156,7 +156,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
             window.location.href = `/passport/${id}/redeem/${access_token}`;
           }}
         >
-          MARK AS USED
+          {t('passport.placeholders.markUsed')}
         </Button>
       </Footer>
     </Container>

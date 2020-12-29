@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import GreenCheck from './GreenCheck';
 import InstagramEnabled from './InstagramEnabled';
@@ -21,6 +22,7 @@ interface GiveawayData {
 }
 
 const GiveawayPopover = (props: Props) => {
+  const { t } = useTranslation();
   const [showInfo, setShowInfo] = useState(true);
   const [giveawayData, setData] = useState<GiveawayData>({
     weekly_giveaway_entries: '',
@@ -37,11 +39,13 @@ const GiveawayPopover = (props: Props) => {
       number_of_visits_left: allSellers.length - unique_seller_tickets,
     });
   }
+
   useEffect(() => {
     if (props.showInstagram && showInfo) {
       setGiveawayCount(props.contactId);
     }
   }, [props.showInstagram, showInfo, props.contactId]);
+
   return (
     <>
       {props.showInstagram ? (
@@ -59,14 +63,14 @@ const GiveawayPopover = (props: Props) => {
             <ToggleClosedButton onClick={() => setShowInfo(false)}>
               <InstagramEnabled />
             </ToggleClosedButton>
-            <Title>INSTAGRAM FOR GIVEAWAY ADDED</Title>
+            <Title>{t('passport.labels.instagramAdded')}</Title>
             <Divider />
             <GiveawayTextContainer>
               <InfoSentence>
                 <DynamicBoldText>
                   {giveawayData.weekly_giveaway_entries}
                 </DynamicBoldText>
-                <GeneralText>Weekly Giveaway Entries</GeneralText>
+                <GeneralText>{t('passport.labels.weeklyGiveaway')}</GeneralText>
               </InfoSentence>
 
               {giveawayData.number_of_visits_left !== 0 ? (
@@ -74,26 +78,22 @@ const GiveawayPopover = (props: Props) => {
                   <DynamicBoldText>
                     {giveawayData.number_of_visits_left}
                   </DynamicBoldText>
-                  <GeneralText>
-                    Vendor Tickets away from a Grand Prize Giveaway Entry
-                  </GeneralText>
+                  <GeneralText>{t('passport.labels.ticketsAway')}</GeneralText>
                 </InfoSentence>
               ) : (
                 <InfoSentence>
                   <IconWrap>
                     <GreenCheck />
                   </IconWrap>
-                  <GeneralText>Grand Prize Giveaway Entered</GeneralText>
+                  <GeneralText>
+                    {t('passport.labels.grandPrizeEntered')}
+                  </GeneralText>
                 </InfoSentence>
               )}
             </GiveawayTextContainer>
-            <SubText>
-              Weekly Giveaway winners are announced on Instagram each Monday
-              during the month of September. Grand Prize winners will be
-              announced on October 1st.
-            </SubText>
+            <SubText>{t('passport.labels.weeklyGiveawayAnnounced')}</SubText>
             <CloseButton type="button" onClick={() => setShowInfo(false)}>
-              CLOSE
+              {t('passport.placeholders.close').toUpperCase()}
             </CloseButton>
           </PopoverContent>
         )}

@@ -321,5 +321,57 @@
     "goal2": "Permanent light fixtures on Bayard St from Mott St to Bowery St",
     "partnerThanks": "Thank you to our Chinatown Partners who make this possible!",
     "costBreakdown": "How do the Costs Breakdown?"
+  },
+  "passport": {
+    "headers": {
+      "passport": "Passport to Chinatown",
+      "rewards": "How to Win Rewards",
+      "learn": "Learn More",
+      "contact": "Contact Us",
+      "rewardEmail": "Reward Email Sent"
+    },
+    "labels": {
+      "enterTicket": "Enter your ticket code to start accumulating rewards you can use in Chinatown",
+      "email": "Email Address",
+      "ticketCode": "Ticket Code",
+      "instagramHandle": "Instagram Handle",
+      "instagramHandlePrompt": "(for Digital Giveaway)",
+      "instagramAdded": "INSTAGRAM FOR GIVEAWAY ADDED",
+      "weeklyGiveaway": "Weekly Giveaway Entries",
+      "ticketsAway": "Vendor Tickets away from a Grand Prize Giveaway Entry",
+      "grandPrizeEntered": "Grand Prize Giveaway Entered",
+      "weeklyGiveawayAnnounced": "Weekly Giveaway winners are announced on Instagram each Monday during the month of September. Grand Prize winners will be announced on October 1st.",
+      "optional": "Optional",
+      "checkInbox": "Check your inbox shortly for a link to access your available rewards!",
+      "linkExpire": "This link will expire in 30 minutes.",
+      "itemsAvailable": "{{amount}} {{item}} Available",
+      "itemsExpiration": "{{item}} available until {{date}}",
+      "moreTickets": "Have more tickets to add?",
+      "whenRedeemed": "When redeemed, you have 5 minutes to use your reward.",
+      "selectOffer": "Select an offer and be ready to show this screen when you’re ordering.",
+      "offerUsed": "Offer must be used in: ",
+      "pleaseShow": "Please show this screen to the host when you are placing your order."
+    },
+    "errors": {
+      "validEmail": "Please enter a valid email address.",
+      "noTickets": "Sorry, there are no saved tickets tied to this email.",
+      "validTicket": "This is not a valid Ticket Code. Please check your ticket again and make sure you haven’t added this ticket before."
+    },
+    "placeholders": {
+      "redeem": "Redeem",
+      "redeemNow": "Redeem Now",
+      "viewItem": "View my tickets",
+      "addTicket": "Add Ticket",
+      "addNewTicket": "Add New Ticket",
+      "addNewTickets": "Add New Tickets",
+      "close": "Close",
+      "activeRewardsLink": "View active rewards & giveaways",
+      "markUsed": "Mark as used",
+      "returnTo": "Return to passport",
+      "prizeRedeemed": "PRIZE REDEEMED {{date}}",
+      "readyToRedeem": "READY TO REDEEM",
+      "leftToRedeem": "{{amount}} more stamps until your next reward",
+      "oneLeftToRedeem": "1 more stamp until your next reward"
+    }
   }
 }
