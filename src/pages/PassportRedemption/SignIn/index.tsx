@@ -2,6 +2,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, Theme } from '@material-ui/core/styles';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { Title, SubTitle, Button, ErrorMessage } from '../style';
@@ -23,10 +24,12 @@ interface Props {
   setCurrentScreenView: Function;
 }
 
-const Track = ({ setCurrentScreenView }: Props) => {
+const Track = (props: Props) => {
+  const { t } = useTranslation();
   const { push } = useHistory();
+
   const [email, setEmail] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [emailError, setEmailError] = useState('');
 
   const [ticketCode, setTicketCode] = useState('');
   const [isTicketValid, setIsTicketValid] = useState(true);
@@ -38,13 +41,13 @@ const Track = ({ setCurrentScreenView }: Props) => {
 
     // (to view tickets): sets error message for non-existent users and users with no tickets
     if (viewTickets && !data) {
-      setIsEmailValid(false);
+      setEmailError(t('passport.errors.noTickets'));
       setEmail('');
       return;
     } else if (viewTickets && data) {
       const { data: hasTickets } = await getPassportTickets(data.id);
       if (hasTickets.length) push(`/passport/${data.id}/tickets`);
-      else setIsEmailValid(false);
+      else setEmailError(t('passport.errors.noTickets'));
       return;
     }
 
@@ -103,38 +106,35 @@ const Track = ({ setCurrentScreenView }: Props) => {
       <PassportCard>
         <Logo src={CircleLogo} alt="scl-log" />
         <InputContainer className="trackScreen top">
-          <Title color="#a8192e">PASSPORT TO CHINATOWN</Title>
-          <SubTitle>
-            Enter your ticket code to start accumulating rewards you can use in
-            Chinatown
-          </SubTitle>
-
+          <Title color="#a8192e">{t('passport.headers.passport')}</Title>
+          <SubTitle>{t('passport.labels.enterTicket')}</SubTitle>
           <Column />
-
           <Column>
-            <Label htmlFor="email-input">Email Address</Label>
+            <Label htmlFor="email-input">{t('passport.labels.email')}</Label>
             <InputField
               name="email-input"
               type="email"
               onChange={(e) => {
+                e.preventDefault();
                 setEmail(e.target.value);
-                setIsEmailValid(true);
+                setEmailError('');
+              }}
+              onBlur={(e) => {
+                e.preventDefault();
+                if (!!email && !ModalPaymentConstants.EMAIL_REGEX.test(email)) {
+                  setEmailError(t('passport.errors.validEmail'));
+                }
               }}
               value={email}
               pattern={ModalPaymentConstants.EMAIL_REGEX.source}
             />
-            {!!email && !ModalPaymentConstants.EMAIL_REGEX.test(email) && (
-              <ErrorMessage>Please enter a valid email address.</ErrorMessage>
-            )}
-            {!isEmailValid && (
-              <ErrorMessage>
-                Sorry, there are no saved tickets tied to this email.
-              </ErrorMessage>
-            )}
+            {emailError && <ErrorMessage>{emailError}</ErrorMessage>}
           </Column>
 
           <Column>
-            <Label htmlFor="ticket-code">Ticket Code</Label>
+            <Label htmlFor="ticket-code">
+              {t('passport.labels.ticketCode')}
+            </Label>
             <InputField
               name="ticket-code"
               type="text"
@@ -151,17 +151,15 @@ const Track = ({ setCurrentScreenView }: Props) => {
               maxLength={6}
             />
             {!isTicketValid && (
-              <ErrorMessage>
-                This is not a valid Ticket Code. Please check your ticket again
-                and make sure you haven’t added this ticket before.
-              </ErrorMessage>
+              <ErrorMessage>{t('passport.errors.validTicket')}</ErrorMessage>
             )}
           </Column>
 
           <Column>
             <Row className="row-no-margin">
               <Label htmlFor="instagram-handle">
-                Instagram Handle <strong>(for Digital Giveaway)</strong>
+                {t('passport.labels.instagramHandle')}{' '}
+                <strong>{t('passport.labels.instagramHandlePrompt')}</strong>
               </Label>
               <SupporterTooltip
                 title={
@@ -197,7 +195,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
               placeholder="@"
             />
             <SubTitle color="grey" size="11px" align="left">
-              Optional
+              {t('passport.labels.optional')}
             </SubTitle>
           </Column>
         </InputContainer>
@@ -211,7 +209,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
               findOrCreateUser(email, false);
             }}
           >
-            Add Ticket
+            {t('passport.placeholders.addTicket')}
           </Button>
           {!!email && ModalPaymentConstants.EMAIL_REGEX.test(email) && (
             <Button
@@ -221,7 +219,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
                 findOrCreateUser(email, true);
               }}
             >
-              View my tickets
+              {t('passport.placeholders.viewItem')}
             </Button>
           )}
         </InputContainer>
@@ -232,7 +230,7 @@ const Track = ({ setCurrentScreenView }: Props) => {
           href="https://www.sendchinatownlove.com/food-crawl.html"
           target="_blank"
         >
-          Learn More
+          {t('passport.headers.learn')}
         </ExternalLinks>
         <LinksContainer>
           {socialMediaLinks.map((social) => (
