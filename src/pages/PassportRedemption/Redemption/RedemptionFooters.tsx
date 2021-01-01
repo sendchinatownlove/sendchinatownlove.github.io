@@ -1,11 +1,14 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { SubTitle, Button } from '../style';
 
 export const NoRewardsFooter = () => {
+  const { t } = useTranslation();
+
   return (
     <>
-      <SubTitle bold="700">Have more tickets to add?</SubTitle>
+      <SubTitle bold="700">{t('passport.labels.moreTickets')}</SubTitle>
 
       <Button
         value="redemption-selected-button"
@@ -15,7 +18,7 @@ export const NoRewardsFooter = () => {
           window.location.href = '/passport';
         }}
       >
-        ADD NEW TICKETS
+        {t('passport.placeholders.addNewTickets').toLocaleUpperCase()}
       </Button>
     </>
   );
