@@ -91,7 +91,7 @@ const ModalCardDetails = ({
 
   const projectIdsMap = {
     'light-up-chinatown': 1,
-    'apex-for-youth': 2
+    'apex-for-youth': 2,
   };
 
   // if a project, map to projectId and remove sellerId

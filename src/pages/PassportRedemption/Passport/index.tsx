@@ -8,7 +8,6 @@ import { MAILTO_URL } from '../../../consts';
 import {
   getPassportTickets,
   getParticipatingSeller,
-  sendRedeemTicketsEmail,
   getContactInfo,
   createLyftReward,
 } from '../../../utilities/api/interactionManager';
@@ -108,16 +107,6 @@ const Passport = (props: Props) => {
     return rows;
   };
 
-  const sendEmail = () => {
-    // Disable the email modal if the Lyft reward modal is showing
-    if (showLyftRewardPromo || lyftRewardConfirmation.showConfirmation) {
-      return;
-    }
-    sendRedeemTicketsEmail(id).then((res) => {
-      setShowEmailSent(true);
-    });
-  };
-
   const lyftRewardYesClickHandler = () => {
     setShowLyftRewardPromo(false);
     createLyftReward(id).then((res) => {
@@ -148,7 +137,6 @@ const Passport = (props: Props) => {
                 stamps={row}
                 index={index}
                 key={index}
-                sendEmail={sendEmail}
               />
             ))}
           </tbody>
