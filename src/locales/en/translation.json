@@ -350,7 +350,8 @@
       "whenRedeemed": "When redeemed, you have 5 minutes to use your reward.",
       "selectOffer": "Select an offer and be ready to show this screen when you’re ordering.",
       "offerUsed": "Offer must be used in: ",
-      "pleaseShow": "Please show this screen to the host when you are placing your order."
+      "pleaseShow": "Please show this screen to the host when you are placing your order.",
+      "enteredGiveAway": "You are now entered into our tier {{tier}} giveaway!"
     },
     "errors": {
       "validEmail": "Please enter a valid email address.",

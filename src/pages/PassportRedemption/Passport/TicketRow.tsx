@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Button } from '../style';
+import Coin1 from "../Assets/Coins/Coin1.svg";
+// import Coin2 from "../Assets/Coins/Coin2.svg";
+// import Coin3 from "../Assets/Coins/Coin3.svg";
 import { useTranslation } from 'react-i18next';
 
 import { dateFormatter } from '../../../utilities/general/textFormatter';
@@ -8,7 +10,6 @@ import { dateFormatter } from '../../../utilities/general/textFormatter';
 interface Props {
   stamps: participatingSellerProps[];
   index: number;
-  sendEmail: () => void;
 }
 
 type participatingSellerProps = {
@@ -85,36 +86,41 @@ const TicketRow = (props: Props) => {
   };
 
   return (
+    <tr>
     <TableRow key={props.index} status={status}>
+      {status === RowStatuses.Redeemed && (
+        <RedeemedRowOverlay>
+          <img src={Coin1} alt='coin1'/>
+          <span>
+            {t('passport.labels.enteredGiveAway')}
+          </span>
+        </RedeemedRowOverlay>
+      )}
       <TableIndex> {props.index + 1} </TableIndex>
       <TableStamp>
         <StampColumn>
-          {status === RowStatuses.Active && (
-            <SendEmailButton
-              className="button--red-filled"
-              onClick={props.sendEmail}
-            >
-              {t('passport.placeholders.redeem').toUpperCase()}
-            </SendEmailButton>
-          )}
           <StampRow>{!!props.stamps && createStamps(props.stamps)}</StampRow>
         </StampColumn>
         <RedeemedRow status={status}>{showRedeemRow(status)}</RedeemedRow>
       </TableStamp>
     </TableRow>
+    </tr>
   );
 };
 
 export default TicketRow;
 
-const TableRow = styled.tr`
+const TableRow = styled.div`
+  width: 100%;
   height: 90px;
+  display: flex;
   border: 2px solid #a5a5a5;
+  position: relative;
   ${(props: redeemRowProp) => {
     switch (props.status) {
       case RowStatuses.Redeemed:
         return `
-          opacity: 0.75;
+          // opacity: 0.75;
           background: rgba(0, 0, 0, 0.05);
         `;
       case RowStatuses.Active:
@@ -178,27 +184,27 @@ const RedeemedRow = styled.div`
   ${(props: redeemRowProp) =>
     props.status === RowStatuses.Active && 'font-weight: 700;'};
 `;
+const RedeemedRowOverlay = styled.div`
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background: rgba(248,186,23,0.8);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  span {
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    width: 75%;
+  }
+`;
 const Stamp = styled.img`
   width: 55px;
 `;
 const EmptyStamp = styled.div`
   width: 55px;
-`;
-const SendEmailButton = styled(Button)`
-  padding: 0;
-  height: 25px;
-  width: 300px;
-  top: 65px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-
-  font-weight: bold;
-  font-size: 11px;
-  line-height: 15px;
-  align-items: center;
-  text-align: center;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
 `;
