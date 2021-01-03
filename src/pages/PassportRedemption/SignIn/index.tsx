@@ -5,8 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import { Title, SubTitle, Button, ErrorMessage } from './style';
-import { socialMediaLinks } from '../../consts';
+import { Title, SubTitle, Button, ErrorMessage } from '../style';
+import { socialMediaLinks } from '../../../consts';
 import {
   getPassportEmailId,
   createPassportEmailId,
@@ -14,11 +14,11 @@ import {
   checkForValidTicket,
   updateTicketContactId,
   getPassportTickets,
-} from '../../utilities/api/interactionManager';
-import { ModalPaymentConstants } from '../../utilities/hooks/ModalPaymentContext';
+} from '../../../utilities/api/interactionManager';
+import { ModalPaymentConstants } from '../../../utilities/hooks/ModalPaymentContext';
 
-import CrawlInfoIcon from './CrawlInfoIcon.png';
-import CircleLogo from './CircleLogo.png';
+import CrawlInfoIcon from '../Assets/CrawlInfoIcon.png';
+import CircleLogo from '../Assets/CircleLogo.png';
 
 interface Props {
   setCurrentScreenView: Function;

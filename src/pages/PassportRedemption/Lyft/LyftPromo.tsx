@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { TitleRow, SubTitle, Button, CardContainer } from './style';
-import CitiBikeImg from './citi_bike.png';
 import { useTranslation } from 'react-i18next';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Overlay from 'react-bootstrap/Overlay';
-import { useState, useRef } from 'react';
+
+import { TitleRow, SubTitle, Button, CardContainer } from '../style';
+import CitiBikeImg from '../Assets/citi_bike.png';
 
 interface PromoProps {
   yesClickHander: () => void;

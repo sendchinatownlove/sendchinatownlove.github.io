@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { InputContainer } from './TrackScreen';
-import { CardText, Button, SubTitle } from './style';
-import CircleLogo from './CircleLogo.png';
+import { InputContainer } from '../SignIn';
+import { CardText, Button, SubTitle } from '../style';
+import CircleLogo from '../Assets/CircleLogo.png';
 
-import ScreenName from './ScreenName';
+import ScreenType from '../ScreenTypes';
 
 import {
   getPassportTickets,
   getOneSponsor,
   getLocationById,
   redeemReward,
-} from '../../utilities/api/interactionManager';
+} from '../../../utilities/api/interactionManager';
 
 interface Props {
   setCurrentScreenView: Function;
@@ -82,7 +82,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
     const timer = setTimeout(() => {
       setTimeLeft(timeLeft - 1);
     }, 1000);
-    if (!timeLeft) setCurrentScreenView(ScreenName.Redemption);
+    if (!timeLeft) setCurrentScreenView(ScreenType.Rewards);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft]);

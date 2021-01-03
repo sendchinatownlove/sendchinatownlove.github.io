@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 import {
   getParticipatingMerchant,
   getParticipatingMerchantTickets,
-} from '../../utilities/api/interactionManager';
-import { useLocation } from 'react-router-dom';
-import { LoaderFillerContainer } from '../../components/Loader';
-import VoucherImage from './VoucherFront.png';
-import BackImage from './VoucherBack.png';
+} from '../../../utilities/api/interactionManager';
+import { LoaderFillerContainer } from '../../../components/Loader';
+
+import VoucherImage from '../Assets/VoucherFront.png';
+import BackImage from '../Assets/VoucherBack.png';
 
 const Voucher = () => {
   const { id, tickets_secret } = useParams();

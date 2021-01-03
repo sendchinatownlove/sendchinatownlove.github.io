@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { LyftCode } from './LyftPromo';
-import { MAILTO_URL } from '../../consts';
+import { MAILTO_URL } from '../../../consts';
 import {
   getLyftReward,
   redeemToken,
-} from '../../utilities/api/interactionManager';
+} from '../../../utilities/api/interactionManager';
 
-import CircleLogo from './CircleLogo.png';
+import CircleLogo from '../Assets/CircleLogo.png';
 
 const LyftCodeScreen = () => {
   const { contact_id, token } = useParams();

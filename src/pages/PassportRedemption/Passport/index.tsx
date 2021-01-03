@@ -3,24 +3,25 @@ import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { CardContainer, TitleRow, Title, SubTitle, Button } from './style';
-import { MAILTO_URL } from '../../consts';
+import { CardContainer, TitleRow, Title, SubTitle, Button } from '../style';
+import { MAILTO_URL } from '../../../consts';
 import {
   getPassportTickets,
   getParticipatingSeller,
   sendRedeemTicketsEmail,
   getContactInfo,
   createLyftReward,
-} from '../../utilities/api/interactionManager';
+} from '../../../utilities/api/interactionManager';
 
-import GiveawayPopover from './GiveawayPopover';
+import GiveawayPopover from '../Giveaway';
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
 
-import PassportDashboardBackground from './PassportDashboardBackground.png';
-import PassportIconImg from './passportIcon.png';
-import CircleLogo from './CircleLogo.png';
-import { LyftRewardPromo, LyftConfirmationPromo } from './LyftPromo';
+import PassportDashboardBackground from '../Assets/PassportDashboardBackground.png';
+import PassportIconImg from '../Assets/passportIcon.png';
+import CircleLogo from '../Assets/CircleLogo.png';
+
+import { LyftRewardPromo, LyftConfirmationPromo } from '../Lyft/LyftPromo';
 
 interface Props {
   setCurrentScreenView: Function;

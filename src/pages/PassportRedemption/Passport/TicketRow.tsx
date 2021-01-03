@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { Button } from '../style';
 import { useTranslation } from 'react-i18next';
 
-import { Button } from './style';
-import { dateFormatter } from '../../utilities/general/textFormatter';
+import { dateFormatter } from '../../../utilities/general/textFormatter';
 
 interface Props {
   stamps: participatingSellerProps[];

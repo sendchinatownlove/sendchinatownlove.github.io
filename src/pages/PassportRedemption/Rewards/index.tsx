@@ -7,15 +7,15 @@ import {
   NoRewardsFooter,
   RedeemRewardsFooter,
   DefaultFooter,
-} from './RedemptionFooters';
-import { CardText } from './style';
-import CircleLogo from './CircleLogo.png';
+} from '../Redemption/RedemptionFooters';
+import { CardText } from '../style';
+import CircleLogo from '../Assets/CircleLogo.png';
 
 import {
   getPassportTickets,
   getAllSponsors,
   getLocationById,
-} from '../../utilities/api/interactionManager';
+} from '../../../utilities/api/interactionManager';
 
 interface Props {
   setCurrentScreenView: Function;

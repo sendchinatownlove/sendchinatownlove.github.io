@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { SubTitle, Button } from './style';
+import { SubTitle, Button } from '../style';
 
 export const NoRewardsFooter = () => {
   const { t } = useTranslation();
@@ -32,10 +32,10 @@ interface RedeemRewardsProps {
 
 export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
   const { t } = useTranslation();
+
   return (
     <>
       <SubTitle bold="700"> {t('passport.labels.whenRedeemed')} </SubTitle>
-
       <Button
         value="redemption-selected-button"
         className="button--red-filled"
@@ -61,7 +61,6 @@ export const DefaultFooter = (props: defaultProps) => {
   return (
     <>
       <SubTitle bold="700"> {t('passport.labels.selectOffer')}</SubTitle>
-
       {props.allSponsors.length <= 4 && (
         <Button
           className="linkButton"

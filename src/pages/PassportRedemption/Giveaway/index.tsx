@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import GreenCheck from './GreenCheck';
-import InstagramEnabled from './InstagramEnabled';
-import InstagramDisabled from './InstagramDisabled';
+import GreenCheck from '../Assets/GreenCheck';
+import InstagramEnabled from '../Assets/InstagramEnabled';
+import InstagramDisabled from '../Assets/InstagramDisabled';
 
 import {
   getAllParticipatingSellers,
   getGiveawayTicketsForContact,
-} from '../../utilities/api/interactionManager';
+} from '../../../utilities/api/interactionManager';
 
 interface Props {
   showInstagram: boolean;
@@ -23,6 +23,7 @@ interface GiveawayData {
 
 const GiveawayPopover = (props: Props) => {
   const { t } = useTranslation();
+
   const [showInfo, setShowInfo] = useState(true);
   const [giveawayData, setData] = useState<GiveawayData>({
     weekly_giveaway_entries: '',

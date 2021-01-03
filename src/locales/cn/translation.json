@@ -103,7 +103,7 @@
       "details": {
         "donation": "Donation details",
         "voucher": "Purchase details",
-        "megagam_details_match":  "Gift-a-Meal donation payment of <1>{{totalPayment}}</1> for a total contribution of <2>{{totalContribution}}</2> with a 1:1 match",
+        "megagam_details_match": "Gift-a-Meal donation payment of <1>{{totalPayment}}</1> for a total contribution of <2>{{totalContribution}}</2> with a 1:1 match",
         "megagam_details_no_match": "Gift-a-Meal donation payment of <1>{{totalPayment}}</1>"
       },
       "message": {
@@ -115,7 +115,7 @@
         "luc_name": "Name for personalized lantern: ",
         "luc_address": "Shipping Address: "
       },
-      "modalConfirmation" : {
+      "modalConfirmation": {
         "mega_gam_line_1": "You’ve lent a helping hand to community members and small businesses when they needed it most. Together, we can back those most impacted by the pandemic and keep the city’s Chinatowns vibrant.",
         "mega_gam_line_2": "You will receive an email receipt shortly with the details of your donation."
       }
@@ -277,8 +277,8 @@
     "donationDetail3": "1 x 14-inch lantern with your personalization hung on Mott Street",
     "donationDetail4": "1 x 12-inch custom designed lantern by a local artist to take home with you ",
     "donationDetail5": "*A limited number of invitations to our Winter Solstice Celebration and lighting ceremony in December will be given to our largest donors",
-    "goal1":"Permanent light fixtures and lanterns on Mott St from Canal St to Bayard St",
-    "goal2":"Permanent light fixtures on Bayard St from Mott St to Bowery St",
+    "goal1": "Permanent light fixtures and lanterns on Mott St from Canal St to Bayard St",
+    "goal2": "Permanent light fixtures on Bayard St from Mott St to Bowery St",
     "costBreakdown": "How do the Costs Breakdown?"
   },
   "passport": {

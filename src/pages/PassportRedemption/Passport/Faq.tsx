@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Trans, useTranslation } from 'react-i18next';
-import { CardContainer, TitleRow, Title } from './style';
+import { CardContainer, TitleRow, Title } from '../style';
 
 type Props = {
   showFaq: boolean;
