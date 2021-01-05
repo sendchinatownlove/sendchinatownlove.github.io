@@ -20,7 +20,7 @@
     "@types/stripe-v3": "^3.1.20",
     "@types/styled-components": "^5.1.2",
     "@types/uuid": "^7.0.4",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "classnames": "^2.2.6",
     "history": "^4.10.1",
