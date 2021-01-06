@@ -53,8 +53,8 @@ const MegaGamListItem = ({ campaign }: Props) => {
           />
         </CampaignImageContainer>
         <CampaignContent>
-          {/* TODO: Figure out if this is the correct header. If so, we need to translate. */}
-          <Header>Mega-GAM</Header>
+          {/* TODO: Figure out what text will go in the header (i.e. blue text) for future mega gam campaigns */}
+          <Header></Header>
           <Subheader>{campaign.display_name}</Subheader>
           <Description>{campaign.description}</Description>
           <DonationContainer>
@@ -227,7 +227,7 @@ const Subheader = styled.div`
 const Description = styled.div`
   font-size: 18px;
   margin-bottom: 24px;
-
+  white-space: pre-line;
   @media (${tabletScreens}) {
     font-size: 14px;
   }
