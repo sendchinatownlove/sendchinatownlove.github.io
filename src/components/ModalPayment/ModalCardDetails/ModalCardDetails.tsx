@@ -84,6 +84,10 @@ const ModalCardDetails = ({
   } else if (sellerId === 'apex-for-youth') {
     applicationId = process.env.REACT_APP_APEX_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_APEX_LOCATION_ID ?? '';
+    // TODO (billy-yuan): Replace the next else if  statement with a less hacky solution after mega gam
+  } else if (campaignState && campaignState.nonprofit_id === 2) {
+    applicationId = process.env.REACT_APP_APEX_APPLICATION_ID ?? '';
+    locationId = process.env.REACT_APP_APEX_LOCATION_ID ?? '';
   } else {
     applicationId = process.env.REACT_APP_SQUARE_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_SQUARE_LOCATION_ID ?? '';
