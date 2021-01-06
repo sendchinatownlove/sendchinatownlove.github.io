@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Coin1 from "../Assets/Coins/Coin1.svg";
-// import Coin2 from "../Assets/Coins/Coin2.svg";
+import Coin1 from "../Assets/Coins/Coin1.png";
+// import Coin2 from "../Assets/Coins/Coin2.png";
 // import Coin3 from "../Assets/Coins/Coin3.svg";
 import { useTranslation } from 'react-i18next';
 
@@ -62,7 +62,7 @@ const TicketRow = (props: Props) => {
           date: dateFormatter(redeemedOn),
         });
       case RowStatuses.Active:
-        return t('passport.placeholders.readyToRedeem');
+        return t('passport.placeholders.readyToRedeem').toUpperCase();
       default:
         if (props.stamps.length === 0) return;
         return 3 - props.stamps.length === 1
@@ -87,7 +87,7 @@ const TicketRow = (props: Props) => {
 
   return (
     <tr>
-    <TableRow key={props.index} status={status}>
+    <TableRow key={props.index} >
       {status === RowStatuses.Redeemed && (
         <RedeemedRowOverlay>
           <img src={Coin1} alt='coin1'/>
@@ -101,7 +101,7 @@ const TicketRow = (props: Props) => {
         <StampColumn>
           <StampRow>{!!props.stamps && createStamps(props.stamps)}</StampRow>
         </StampColumn>
-        <RedeemedRow status={status}>{showRedeemRow(status)}</RedeemedRow>
+        { status !== RowStatuses.Redeemed && <RedeemedRow status={status}>{showRedeemRow(status)}</RedeemedRow>}
       </TableStamp>
     </TableRow>
     </tr>
@@ -114,27 +114,10 @@ const TableRow = styled.div`
   width: 100%;
   height: 90px;
   display: flex;
-  border: 2px solid #a5a5a5;
+  border: 2px solid rgb(248,186,23);
+  border-width: 1px 2px;
   position: relative;
-  ${(props: redeemRowProp) => {
-    switch (props.status) {
-      case RowStatuses.Redeemed:
-        return `
-          // opacity: 0.75;
-          background: rgba(0, 0, 0, 0.05);
-        `;
-      case RowStatuses.Active:
-        return `
-          background: rgba(168, 25, 46, 0.05);
-          color: #A8192E;
-        `;
-      default:
-        return `
-          background: rgba(0, 0, 0, 0);
-          color: black;
-        `;
-    }
-  }};
+  color: rgb(248,186,23);
 `;
 const TableIndex = styled.td`
   display: flex;
@@ -144,7 +127,7 @@ const TableIndex = styled.td`
   align-items: flex-start;
   justify-content: center;
   padding-top: 12px;
-  border-right: 2px solid #a5a5a5;
+  border-right: 2px solid rgb(248,186,23);
   font-weight: bold;
 `;
 const TableStamp = styled.td`
@@ -155,7 +138,7 @@ const TableStamp = styled.td`
 const StampColumn = styled.div`
   position: relative;
   width: 100%;
-  height: 70px;
+  height: 65px;
 
   display: flex;
   align-items: center;
@@ -171,15 +154,17 @@ const StampRow = styled.div`
   height: 100%;
 `;
 const RedeemedRow = styled.div`
-  border-top: 1px dotted #a5a5a5;
+  border-top: 1px dotted rgb(248,186,23); 
   width: 100%;
   margin: 0 auto;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  padding: 5px;
   font-size: 10px;
-  height: 20px;
+  height: 25px;
   text-transform: uppercase;
   ${(props: redeemRowProp) =>
     props.status === RowStatuses.Active && 'font-weight: 700;'};
@@ -188,18 +173,21 @@ const RedeemedRowOverlay = styled.div`
   position: absolute;
   left: 0;
   width: 100%;
-  height: 90px;
-  background: rgba(248,186,23,0.8);
+  height: 88px;
+  background: rgba(168,25,46,0.7);
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 5%;
   span {
-    color: black;
+    color: white;
     font-size: 16px;
     font-weight: bold;
     width: 75%;
+  }
+  img {
+    width: 65px;
   }
 `;
 const Stamp = styled.img`
