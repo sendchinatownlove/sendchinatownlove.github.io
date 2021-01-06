@@ -328,9 +328,10 @@
       "rewards": "How to Win Rewards",
       "learn": "Learn More",
       "contact": "Contact Us",
-      "rewardEmail": "Reward Email Sent"
+      "giveAwayEntryGoal": "Tier {{tier}} giveaway ENTRY goal!"
     },
     "labels": {
+      "daysLeft": "{{daysLeft}} days left",
       "enterTicket": "Enter your ticket code to start accumulating rewards you can use in Chinatown",
       "email": "Email Address",
       "ticketCode": "Ticket Code",
@@ -342,8 +343,8 @@
       "grandPrizeEntered": "Grand Prize Giveaway Entered",
       "weeklyGiveawayAnnounced": "Weekly Giveaway winners are announced on Instagram each Monday during the month of September. Grand Prize winners will be announced on October 1st.",
       "optional": "Optional",
-      "checkInbox": "Check your inbox shortly for a link to access your available rewards!",
-      "linkExpire": "This link will expire in 30 minutes.",
+      "merchantsVisited": "You have visited {{merchantsVisited}} of our crawl merchants! You are 3 entries away from your next Giveaway entry.",
+      "thankYou": "Thank you for participating and supporting our Chinatown small businesses      ",
       "itemsAvailable": "{{amount}} {{item}} Available",
       "itemsExpiration": "{{item}} available until {{date}}",
       "moreTickets": "Have more tickets to add?",
@@ -428,7 +429,7 @@
       "markUsed": "Mark as used",
       "returnTo": "Return to passport",
       "prizeRedeemed": "PRIZE REDEEMED {{date}}",
-      "readyToRedeem": "READY TO REDEEM",
+      "readyToRedeem": "Thank you for supporting small businesses",
       "leftToRedeem": "{{amount}} more stamps until your next reward",
       "oneLeftToRedeem": "1 more stamp until your next reward"
     }

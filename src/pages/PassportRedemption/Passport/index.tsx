@@ -9,18 +9,13 @@ import {
   getPassportTickets,
   getParticipatingSeller,
   getContactInfo,
-  createLyftReward,
 } from '../../../utilities/api/interactionManager';
 
-import GiveawayPopover from '../Giveaway';
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
 
-import PassportDashboardBackground from '../Assets/PassportDashboardBackground.png';
-import PassportIconImg from '../Assets/passportIcon.png';
 import CircleLogo from '../Assets/CircleLogo.png';
-
-import { LyftRewardPromo, LyftConfirmationPromo } from '../Lyft/LyftPromo';
+import Coin1 from "../Assets/Coins/Coin1.png";
 
 interface Props {
   setCurrentScreenView: Function;
@@ -31,13 +26,7 @@ const Passport = (props: Props) => {
   const { id } = useParams();
   const { push, location } = useHistory();
   const [showFaq, setShowFaq] = useState(false);
-  const [showInstagram, setShowInstagram] = useState(false);
-  const [showEmailSent, setShowEmailSent] = useState(false);
-  const [showLyftRewardPromo, setShowLyftRewardPromo] = useState(false);
-  const [lyftRewardConfirmation, setLyftRewardConfirmation] = useState({
-    showConfirmation: false,
-    isSuccess: false,
-  });
+  const [showPopup, setShowPopup] = useState(false);
   const [tickets, setTickets] = useState<any[]>([]);
 
   useEffect(() => {
@@ -52,8 +41,6 @@ const Passport = (props: Props) => {
     if (id) {
       getContactInfo(id)
         .then((contactInfo) => {
-          setShowInstagram(contactInfo.data.instagram);
-          setShowLyftRewardPromo(contactInfo.data.is_eligible_for_lyft_reward);
           return getPassportTickets(id);
         })
         .then((ticketIds) => {
@@ -107,25 +94,6 @@ const Passport = (props: Props) => {
     return rows;
   };
 
-  const lyftRewardYesClickHandler = () => {
-    setShowLyftRewardPromo(false);
-    createLyftReward(id).then((res) => {
-      const isSuccess = res.status === 200;
-      setLyftRewardConfirmation({
-        showConfirmation: true,
-        isSuccess: isSuccess,
-      });
-    });
-  };
-
-  const lyftRewardNoClickHandler = () => {
-    setShowLyftRewardPromo(false);
-  };
-
-  const lyftConfirmationCloseClickHandler = () => {
-    setLyftRewardConfirmation({ showConfirmation: false, isSuccess: false });
-  };
-
   const createRows = (stamps) => {
     const rows = createTicketRows(stamps);
     return (
@@ -174,7 +142,7 @@ const Passport = (props: Props) => {
           onClick={() => push(location.pathname)}
         >
           <TitleRow>
-            <Title color={showFaq ? 'grey' : 'black'}>
+            <Title color={showFaq ? 'rgba(255, 255, 255, 0.7)' : 'rgb(248,186,23,1)'}>
               {t('passport.headers.passport').toUpperCase()}
             </Title>
             {showFaq ? (
@@ -185,43 +153,28 @@ const Passport = (props: Props) => {
               </>
             ) : (
               <>
-                <SubHeader color={showFaq ? 'transparent' : 'black'}>
-                  {showInstagram
-                    ? t('passport.labels.instagramAdded')
-                    : '9/1/2020 - 9/30/2020'}
-                </SubHeader>
+                <SubHeader color={showFaq ? 'transparent' : 'white'}>
+                  {t('passport.labels.daysLeft', {daysLeft: 25})} 
+                </SubHeader> 
               </>
             )}
           </TitleRow>
-          <GiveawayPopover showInstagram={showInstagram} contactId={id} />
-          {showLyftRewardPromo && (
-            <LyftRewardPromo
-              yesClickHander={lyftRewardYesClickHandler}
-              noClickHander={lyftRewardNoClickHandler}
-            ></LyftRewardPromo>
-          )}
-          {lyftRewardConfirmation.showConfirmation && (
-            <LyftConfirmationPromo
-              isSuccess={lyftRewardConfirmation.isSuccess}
-              closeClickHander={lyftConfirmationCloseClickHandler}
-            ></LyftConfirmationPromo>
-          )}
 
-          {showEmailSent && (
+          {showPopup && (
             <SendEmailContainer>
-              <PassportIcon src={PassportIconImg} />
+              <PassportIcon src={Coin1} />
               <TitleRow>
-                <Title>{t('passport.headers.rewardEmail').toUpperCase()}</Title>
+                <Title>{t('passport.headers.giveAwayEntryGoal', {tier: 1}).toUpperCase()}</Title>
                 <SubTitle bold="700">
-                  {t('passport.labels.checkInbox')}
+                  {t('passport.labels.merchantsVisited', {merchantsVisited: 3})}
                   <br />
                   <br />
-                  {t('passport.labels.linkExpire')}
+                  {t('passport.labels.thankYou')}
                 </SubTitle>
               </TitleRow>
               <SendEmailButtonClose
                 className="button--red-filled"
-                onClick={(e) => setShowEmailSent(false)}
+                onClick={(e) => setShowPopup(false)}
               >
                 {t('passport.placeholders.close')}
               </SendEmailButtonClose>
@@ -252,12 +205,12 @@ const Container = styled.div`
 
 const PassportContainer = styled(CardContainer)`
   background-size: 400px;
-  background-image: url(${PassportDashboardBackground});
   max-height: 650px;
 `;
 
 const SubHeader = styled(SubTitle)`
   font-style: italic;
+  font-weight: bold;
 `;
 
 const HeaderContainer = styled.div`
@@ -317,7 +270,7 @@ const SendEmailContainer = styled.div`
   position: absolute;
   width: 340px;
   margin: 0 auto;
-  height: 260px;
+  height: 467px;
   z-index: 20;
   top: 70px;
   display: flex;
@@ -328,11 +281,12 @@ const SendEmailContainer = styled.div`
   background: #f2eae8;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(4px);
+  border-radius: 5px;
 `;
 
 const PassportIcon = styled.img`
-  width: 59px;
-  height: 76px;
+  width: 193px;
+  height: 190px;
 `;
 
 const SendEmailButtonClose = styled(Button)`
