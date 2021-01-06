@@ -81,13 +81,7 @@ const ModalCardDetails = ({
   ) {
     applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
-  } else if (
-    sellerId === 'apex-for-youth' ||
-    // TODO (billy-yuan): Remove the nonprofit_id === 2 line once January mega-gam is over
-    // and replace with less hacky solution
-    campaignState.nonprofit_id === 2 ||
-    campaignState.campaignId === 28
-  ) {
+  } else if (sellerId === 'apex-for-youth') {
     applicationId = process.env.REACT_APP_APEX_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_APEX_LOCATION_ID ?? '';
   } else {
