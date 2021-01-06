@@ -81,7 +81,12 @@ const ModalCardDetails = ({
   ) {
     applicationId = process.env.REACT_APP_THINK_CHINATOWN_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_THINK_CHINATOWN_LOCATION_ID ?? '';
-  } else if (sellerId === 'apex-for-youth') {
+  } else if (
+    sellerId === 'apex-for-youth' ||
+    // TODO (billy-yuan): Remove the nonprofit_id === 2 line once January mega-gam is over
+    // and replace with less hacky solution
+    campaignState.nonprofit_id === '2'
+  ) {
     applicationId = process.env.REACT_APP_APEX_APPLICATION_ID ?? '';
     locationId = process.env.REACT_APP_APEX_LOCATION_ID ?? '';
   } else {
@@ -91,7 +96,7 @@ const ModalCardDetails = ({
 
   const projectIdsMap = {
     'light-up-chinatown': 1,
-    'apex-for-youth': 2
+    'apex-for-youth': 2,
   };
 
   // if a project, map to projectId and remove sellerId
