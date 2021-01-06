@@ -227,7 +227,7 @@ const Subheader = styled.div`
 const Description = styled.div`
   font-size: 18px;
   margin-bottom: 24px;
-
+  white-space: pre-line;
   @media (${tabletScreens}) {
     font-size: 14px;
   }
