@@ -11,6 +11,7 @@ import NoActiveCampaignsBox from './NoCampaignsBox';
 import VideoComponent from './VideoComponent';
 
 import styles from './styles.module.scss';
+import Loader from '../../Loader';
 
 interface Props {
   menuOpen: boolean;
@@ -19,6 +20,7 @@ interface Props {
 const GiftAMealPage = (props: Props) => {
   const { t } = useTranslation();
 
+  const [loading, setLoading] = useState<boolean>(true);
   const [activeCampaigns, setActiveCampaigns] = useState<Campaign[]>([]);
   const [pastCampaigns, setPastCampaigns] = useState<Campaign[]>([]);
   const [currPage, setCurrPage] = useState(0);
@@ -31,6 +33,7 @@ const GiftAMealPage = (props: Props) => {
 
   const fetchData = async () => {
     const { data: campaignData } = await getCampaigns();
+    setLoading(false);
     const activeMegaGam: Campaign[] = [];
     const active: Campaign[] = [];
 
@@ -56,7 +59,7 @@ const GiftAMealPage = (props: Props) => {
   useEffect(() => {
     const fetchPastCmpgnData = async () => {
       const { data, headers } = await getPastCampaigns(currPage + 1);
-      const totalPages = parseInt(headers['total-pages']);
+      const totalPages = headers && parseInt(headers['total-pages']);
       setPastCampaigns((prev) => prev.concat(data));
       setTotalPages(totalPages);
       setTotalCountPastCmpgn(headers['total-count']);
@@ -71,7 +74,9 @@ const GiftAMealPage = (props: Props) => {
     }
   }, [shouldFetchPastData, currPage, totalPages]);
 
-  return (
+  return loading ? (
+    <Loader isPage={true} />
+  ) : (
     <div
       className={styles.container}
       style={{ display: props.menuOpen ? 'none' : 'inherit' }}
