@@ -15,7 +15,7 @@ import TicketRow from './TicketRow';
 import FAQ from './Faq';
 
 import CircleLogo from '../Assets/CircleLogo.png';
-import Coin1 from "../Assets/Coins/Coin1.png";
+import RaffleTicketCombo from "../Assets/RaffleTicketCombo.png";
 
 interface Props {
   setCurrentScreenView: Function;
@@ -68,6 +68,17 @@ const Passport = (props: Props) => {
         });
     }
   }, [id]);
+
+  const daysLeft = (endDate) => {
+    const DaysEnd = new Date(endDate);
+    const DateNow = new Date();
+    const distance = DaysEnd.getDate() - DateNow.getDate();
+    if (distance < 0) {
+      return 0;
+    }
+
+    return distance;
+  }
 
   const createTicketRows = (tickets) => {
     let rows: any[] = [];
@@ -152,17 +163,15 @@ const Passport = (props: Props) => {
                 <br />
               </>
             ) : (
-              <>
-                <SubHeader color={showFaq ? 'transparent' : 'white'}>
-                  {t('passport.labels.daysLeft', {daysLeft: 25})} 
-                </SubHeader> 
-              </>
+              <SubHeader color={showFaq ? 'transparent' : 'white'}>
+                {t('passport.labels.daysLeft', {daysLeft: daysLeft('February 20, 2021')})} 
+              </SubHeader> 
             )}
           </TitleRow>
 
           {showPopup && (
             <SendEmailContainer>
-              <PassportIcon src={Coin1} />
+              <PassportIcon src={RaffleTicketCombo} />
               <TitleRow>
                 <Title>{t('passport.headers.giveAwayEntryGoal', {tier: 1}).toUpperCase()}</Title>
                 <SubTitle bold="700">
@@ -184,9 +193,9 @@ const Passport = (props: Props) => {
         </PassportContainer>
       </BodyContainer>
       {!showFaq && (
-        <AddNewTicket className="button--filled" onClick={addTicket}>
-          {t('passport.placeholders.addNewTicket')}
-        </AddNewTicket>
+        <AddNewReceipt className="button--filled" onClick={addTicket}>
+          {t('passport.placeholders.addNewReceipt')}
+        </AddNewReceipt>
       )}
     </Container>
   );
@@ -196,16 +205,19 @@ export default Passport;
 
 const Container = styled.div`
   position: relative;
-  width: 375px;
-  hidden: 100vh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  width: 375px;
+  letter-spacing: 0.15em;
 `;
 
-const PassportContainer = styled(CardContainer)`
-  background-size: 400px;
-  max-height: 650px;
+const PassportContainer = styled(CardContainer)` 
+  position: fixed;
+  bottom: 0;
+  top: 124px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; 
 `;
 
 const SubHeader = styled(SubTitle)`
@@ -237,15 +249,19 @@ const Logo = styled.img`
 
 const BodyContainer = styled.div`
   width: 375px;
-  position: relative;
   display: flex;
   justify-content: center;
+
+  position: absolute;
+  top: 125px;
+  bottom: 0;
+  hidden: 100vh;
 `;
 
 const TableContainer = styled.div`
   width: 100%;
   overflow: auto;
-  height: calc(100vh - 300px);
+  // height: calc(100vh - 260px);
 `;
 
 const Table = styled.table`
@@ -255,7 +271,7 @@ const Table = styled.table`
   font-size: 12px;
 `;
 
-const AddNewTicket = styled(Button)`
+const AddNewReceipt = styled(Button)`
   position: fixed;
   margin-left: -150px;
   bottom: 0;

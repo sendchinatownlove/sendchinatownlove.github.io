@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Coin1 from "../Assets/Coins/Coin1.png";
-// import Coin2 from "../Assets/Coins/Coin2.png";
-// import Coin3 from "../Assets/Coins/Coin3.svg";
 import { useTranslation } from 'react-i18next';
+
+import RaffleTicket from "../Assets/RaffleTicket.png";
+import CoinIcon from "../Assets/ReceiptIcons/Coin.png";
+import GoldIcon from "../Assets/ReceiptIcons/Gold.png";
+import MoneyIcon from "../Assets/ReceiptIcons/Money.png";
+// import RedEnvIcon from "../Assets/ReceiptIcons/RedEnv.png"
+
+import { Button } from '../style';
 
 import { dateFormatter } from '../../../utilities/general/textFormatter';
 
@@ -74,9 +79,25 @@ const TicketRow = (props: Props) => {
   };
 
   const createStamps = (stamps) => {
-    const filledStamps = stamps.map((ticketInfo) => (
-      <Stamp key={ticketInfo.id} src={ticketInfo.stamp_url} />
-    ));
+    const filledStamps = stamps.map((ticketInfo) => {
+      const category = props.index%3;
+      let icon;
+      switch(category){
+        case 1:
+          icon = GoldIcon;
+          break;
+        case 2:
+          icon = MoneyIcon;
+          break;
+        default:
+          icon = CoinIcon;
+          break;
+      };
+
+      return (
+        <Stamp key={ticketInfo.id} src={icon} />
+      )
+    });
 
     while (filledStamps.length < 3) {
       filledStamps.push(<EmptyStamp />);
@@ -89,11 +110,21 @@ const TicketRow = (props: Props) => {
     <tr>
     <TableRow key={props.index} >
       {status === RowStatuses.Redeemed && (
-        <RedeemedRowOverlay>
-          <img src={Coin1} alt='coin1'/>
+        <RedeemedRowOverlay status={status}>
+          <img src={RaffleTicket} alt='RaffleTicket'/>
           <span>
-            {t('passport.labels.enteredGiveAway')}
+            {t('passport.labels.enteredGiveAway').toUpperCase()}
           </span>
+        </RedeemedRowOverlay>
+      )}
+      {status === RowStatuses.Active && (
+        <RedeemedRowOverlay status={status}>
+          <span>
+            {t('passport.labels.earnedYourTicket').toUpperCase()}
+          </span>
+          <RedeemRaffleTicketButton>
+            {t('passport.placeholders.useTicket').toUpperCase()}
+          </RedeemRaffleTicketButton>
         </RedeemedRowOverlay>
       )}
       <TableIndex> {props.index + 1} </TableIndex>
@@ -101,7 +132,7 @@ const TicketRow = (props: Props) => {
         <StampColumn>
           <StampRow>{!!props.stamps && createStamps(props.stamps)}</StampRow>
         </StampColumn>
-        { status !== RowStatuses.Redeemed && <RedeemedRow status={status}>{showRedeemRow(status)}</RedeemedRow>}
+        {status !== RowStatuses.Redeemed && <RedeemedRow>{showRedeemRow(status)}</RedeemedRow>}
       </TableStamp>
     </TableRow>
     </tr>
@@ -154,7 +185,7 @@ const StampRow = styled.div`
   height: 100%;
 `;
 const RedeemedRow = styled.div`
-  border-top: 1px dotted rgb(248,186,23); 
+  border-top: 1px dotted #F8BA17;
   width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -166,33 +197,57 @@ const RedeemedRow = styled.div`
   font-size: 10px;
   height: 25px;
   text-transform: uppercase;
-  ${(props: redeemRowProp) =>
-    props.status === RowStatuses.Active && 'font-weight: 700;'};
+  font-weight: 700;
 `;
 const RedeemedRowOverlay = styled.div`
   position: absolute;
   left: 0;
   width: 100%;
   height: 88px;
-  background: rgba(168,25,46,0.7);
+  background: rgba(168,25,46,0.8);
   z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5%;
+
+  padding: ${(props: redeemRowProp) => props.status === RowStatuses.Active ? '0' : '0 5%'};
   span {
     color: white;
-    font-size: 16px;
     font-weight: bold;
-    width: 75%;
   }
   img {
     width: 65px;
+    margin-right: 16px;
   }
+
+  display: flex;
+  align-items: center;
+  flex-direction: ${(props: redeemRowProp) =>
+    props.status === RowStatuses.Active ? 'column' : 'row'};
+  justify-content: center;
+  
 `;
 const Stamp = styled.img`
-  width: 55px;
+  width: 45px;
 `;
 const EmptyStamp = styled.div`
   width: 55px;
+`;
+const RedeemRaffleTicketButton = styled(Button)`
+  padding: 0;
+  height: 35px;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 10px;
+  align-items: center;
+  text-align: center;
+
+  border: 1.5px solid #A8192E;
+  color: #A8192E;
+  box-sizing: border-box;
+  border-radius: 50px;
+
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.15));
 `;
