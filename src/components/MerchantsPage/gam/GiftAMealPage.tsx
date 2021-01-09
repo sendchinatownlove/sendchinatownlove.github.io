@@ -59,7 +59,7 @@ const GiftAMealPage = (props: Props) => {
   useEffect(() => {
     const fetchPastCmpgnData = async () => {
       const { data, headers } = await getPastCampaigns(currPage + 1);
-      const totalPages = headers && parseInt(headers['total-pages']);
+      const totalPages = parseInt(headers['total-pages']);
       setPastCampaigns((prev) => prev.concat(data));
       setTotalPages(totalPages);
       setTotalCountPastCmpgn(headers['total-count']);
