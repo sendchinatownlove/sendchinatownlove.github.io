@@ -331,8 +331,8 @@
   },
   "passport": {
     "headers": {
-      "passport": "Passport to Chinatown",
-      "rewards": "How to Win Rewards",
+      "passport": "Passport to Lunar New Year",
+      "rewards": "Crawl FAQ",
       "learn": "Learn More",
       "contact": "Contact Us",
       "giveAwayEntryGoal": "Tier {{tier}} giveaway ENTRY goal!"
@@ -359,7 +359,8 @@
       "selectOffer": "Select an offer and be ready to show this screen when you’re ordering.",
       "offerUsed": "Offer must be used in: ",
       "pleaseShow": "Please show this screen to the host when you are placing your order.",
-      "enteredGiveAway": "You are now entered into our tier {{tier}} giveaway!"
+      "enteredGiveAway": "Your raffle ticket has been applied",
+      "earnedYourTicket": "You’ve earned a ticket!"
     },
     "errors": {
       "validEmail": "Please enter a valid email address.",
@@ -426,19 +427,20 @@
     },
     "placeholders": {
       "redeem": "Redeem",
+      "useTicket": "Use my raffle ticket",
       "redeemNow": "Redeem Now",
       "viewItem": "View my tickets",
       "addTicket": "Add Ticket",
-      "addNewTicket": "Add New Ticket",
-      "addNewTickets": "Add New Tickets",
+      "addNewReceipt": "Add New Receipt",
+      "addNewReceipts": "Add New Receipts",
       "close": "Close",
       "activeRewardsLink": "View active rewards & giveaways",
       "markUsed": "Mark as used",
       "returnTo": "Return to passport",
       "prizeRedeemed": "PRIZE REDEEMED {{date}}",
       "readyToRedeem": "Thank you for supporting small businesses",
-      "leftToRedeem": "{{amount}} more stamps until your next reward",
-      "oneLeftToRedeem": "1 more stamp until your next reward"
+      "leftToRedeem": "{{amount}} more receipts to your next goal",
+      "oneLeftToRedeem": "1 more receipt to your next goal"
     }
   }
 }

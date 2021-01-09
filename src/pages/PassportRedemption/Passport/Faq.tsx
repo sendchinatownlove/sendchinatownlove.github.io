@@ -20,7 +20,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
   return (
     <CardContainer mainView={showFaq} onClick={toggleView}>
       <TitleRow>
-        <Title color={showFaq ? 'rgb(248,186,23,1)' : 'rgba(255, 255, 255, 0.7)'}>HOW TO WIN REWARDS</Title>
+        <Title color={showFaq ? 'rgb(248,186,23,1)' : 'rgba(255, 255, 255, 0.7)'}>{t('passport.headers.rewards').toUpperCase()}</Title>
       </TitleRow>
       {!showFaq && (
         <>
