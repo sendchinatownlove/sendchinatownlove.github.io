@@ -56,7 +56,12 @@ const LightUpPartners = () => {
       </PartnerThanksTitle>
       <PartnersLogoContainer>
         {partners.map((partner) => (
-          <a href={partner.url} target="_blank" rel="noopener noreferrer">
+          <a
+            href={partner.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            key={partner.alt}
+          >
             <PartnerLogo src={partner.src} alt={partner.alt} />
           </a>
         ))}
