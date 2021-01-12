@@ -38,7 +38,7 @@ const DonationRedirect = () => {
             }}
           >
             {t('lightUpChinatown.goalReachedButton1')}{' '}
-            <img src={ExternalLink} />
+            <img alt="external-link" src={ExternalLink} />
           </Button>
           <Button
             className={'button--outlined-with-red'}
