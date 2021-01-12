@@ -133,7 +133,7 @@ const LightUpChinatownPage = () => {
         <DonationProgressBar raised={contributions}></DonationProgressBar>
       </DonationProgress>
       <DonationContainer style={{ background: '#A8192E' }}>
-        <DonationRedirect />{' '}
+        <DonationRedirect />
         {/* swapped with <DonationSection /> when the campaign ended */}
       </DonationContainer>
       <DonationContainer>
