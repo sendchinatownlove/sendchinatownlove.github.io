@@ -16,13 +16,6 @@ import LightUpPartners from './LightUpPartners';
 import { getProject, light_up_chinatown_id } from '../../utilities/api';
 import { phoneScreens } from '../../utilities/general/responsive';
 
-import {
-  useModalPaymentDispatch,
-  ModalPaymentConstants,
-  ModalPaymentTypes,
-} from '../../utilities/hooks/ModalPaymentContext';
-//import { url } from 'inspector'; // Will use this after making topBanner into a styled component
-
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
   // @NOTE (wilson) Temporarily comment out since the campaign's been extended,
@@ -33,15 +26,6 @@ const LightUpChinatownPage = () => {
   // const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
   const [contributions, setContributions] = useState<number>(0);
 
-  const modalPaymentDispatcher = useModalPaymentDispatch(null);
-
-  const openModal = (event) => {
-    event.preventDefault();
-    modalPaymentDispatcher({
-      type: ModalPaymentConstants.SET_MODAL_VIEW,
-      payload: ModalPaymentTypes.modalPages.light_up_chinatown,
-    });
-  };
   const fetchData = async (project_id: number) => {
     const { data } = await getProject(project_id);
     if (data) {
@@ -76,7 +60,6 @@ const LightUpChinatownPage = () => {
       >
         <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
         <HeaderSubtext>{t('lightUpChinatown.headerSubtext')}</HeaderSubtext>
-        <Button onClick={openModal}>{t('donationBox.button')}</Button>
       </div>
       <Container>
         <TextContainer>
