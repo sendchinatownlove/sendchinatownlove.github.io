@@ -13,6 +13,7 @@ import DonationSection from './DonationSection';
 import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
 import LightUpPartners from './LightUpPartners';
+import DonationRedirect from './DonationRedirect';
 import { getProject, light_up_chinatown_id } from '../../utilities/api';
 import { phoneScreens } from '../../utilities/general/responsive';
 
@@ -131,8 +132,9 @@ const LightUpChinatownPage = () => {
       <DonationProgress>
         <DonationProgressBar raised={contributions}></DonationProgressBar>
       </DonationProgress>
-      <DonationContainer>
-        <DonationSection />
+      <DonationContainer style={{ background: '#A8192E' }}>
+        <DonationRedirect />{' '}
+        {/* swapped with <DonationSection /> when the campaign ended */}
       </DonationContainer>
       <DonationContainer>
         <CostBreakdownImageContainer>

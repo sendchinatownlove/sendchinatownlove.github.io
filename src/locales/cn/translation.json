@@ -28,6 +28,7 @@
       "waystodonate": {
         "donate": "DONATE",
         "gift-a-meal": "GIFT-A-MEAL",
+        "light-up-chinatown": "LIGHT UP CHINATOWN",
         "sticky-locals-x-scl": "STICKY LOCALS X SCL"
       },
       "light-up-chinatown": "LIGHT UP CHINATOWN"
@@ -279,7 +280,12 @@
     "donationDetail5": "*A limited number of invitations to our Winter Solstice Celebration and lighting ceremony in December will be given to our largest donors",
     "goal1": "Permanent light fixtures and lanterns on Mott St from Canal St to Bayard St",
     "goal2": "Permanent light fixtures on Bayard St from Mott St to Bowery St",
-    "costBreakdown": "How do the Costs Breakdown?"
+    "costBreakdown": "How do the Costs Breakdown?",
+    "goalReachedtitle": "Thank you for helping us reach our goal!",
+    "goalReachedDescription1": "We have closed our campaign but you can continue to support. The Light Up Chinatown project at CCBA and Chinese Chamber of Commerce GoFundMe page. Please keep an eye out on our Instagram as we install the lanterns and lights on Mott and Bayard Street. We appreciate our community’s neverending support in helping us drive foot traffic back into Chinatown!",
+    "goalReachedDescription2": "You can also continue to support our Send Chinatown Love businesses and causes at our Ways to Donate page.",
+    "goalReachedButton1": "GOFUNDME",
+    "goalReachedButton2": "ways to Donate"
   },
   "passport": {
     "faq":{

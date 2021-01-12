@@ -93,6 +93,13 @@ h3 {
     background-color: white;
   }
 
+  &--outlined-with-red {
+    @include base-button;
+    color: $default-button-color;
+    background-color: white;
+    border: 2px solid $standard-red;
+  }
+
   &--outlined:hover {
     @include base-button;
     color: $standard-red;
