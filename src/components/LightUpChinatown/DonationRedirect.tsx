@@ -28,25 +28,16 @@ const DonationRedirect = () => {
         <ColumnContainer>
           <Button
             className={'button--outlined-with-red'}
-            onClick={(e) => {
-              e.preventDefault();
-              window.open(
-                'https://www.gofundme.com/f/light-up-chinatown',
-                '_blank',
-                'noopener,noreferrer'
-              );
-            }}
+            href="https://www.gofundme.com/f/light-up-chinatown"
+            rel="noopener noreferrer"
+            target="_blank"
           >
             {t('lightUpChinatown.goalReachedButton1')}{' '}
             <img alt="external-link" src={ExternalLink} />
           </Button>
           <Button
             className={'button--outlined-with-red'}
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.href =
-                'https://www.sendchinatownlove.com/ways-to-donate.html';
-            }}
+            href="https://www.sendchinatownlove.com/ways-to-donate.html"
           >
             {t('lightUpChinatown.goalReachedButton2')}
           </Button>
@@ -104,8 +95,9 @@ const Description = styled.div`
   }
 `;
 
-const Button = styled.div`
+const Button = styled.a`
   color: #a8192e;
+  text-decoration: none;
 
   text-align: center;
   line-height: 40px;
