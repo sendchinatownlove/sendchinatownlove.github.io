@@ -8,11 +8,12 @@ import goal2Img from './images/goal_2.png';
 
 import { Trans, useTranslation } from 'react-i18next';
 
-import DonationSection from './DonationSection';
+// import DonationSection from './DonationSection';
 // import DonationDetail from './DonationDetail';
 import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
 import LightUpPartners from './LightUpPartners';
+import DonationRedirect from './DonationRedirect';
 import { getProject, light_up_chinatown_id } from '../../utilities/api';
 
 const LightUpChinatownPage = () => {
@@ -96,8 +97,9 @@ const LightUpChinatownPage = () => {
       <DonationProgress>
         <DonationProgressBar raised={contributions}></DonationProgressBar>
       </DonationProgress>
-      <DonationContainer>
-        <DonationSection />
+      <DonationContainer style={{ background: '#A8192E' }}>
+        <DonationRedirect />
+        {/* swapped with <DonationSection /> when the campaign ended */}
       </DonationContainer>
       <DonationContainer>
         <CostBreakdownImageContainer>
