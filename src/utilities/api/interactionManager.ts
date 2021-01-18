@@ -17,6 +17,7 @@ import {
   lyftRewards,
   nonprofits,
   projects,
+  gcs,
 } from './endpoints';
 
 // Fix return typing
@@ -381,3 +382,22 @@ export const getProject = async (project_id: number) =>
     .catch((err) => err);
 
 export const light_up_chinatown_id = 1;
+
+export const sendImage = async (
+  signedUrl: string,
+  filename: string,
+  image: File
+) => {
+  return axios.put(signedUrl, image, {
+    headers: {
+      'Content-Type': image.type,
+    },
+  });
+};
+
+export const getUploadUrl = async (filename: string, filetype: string) => {
+  return axios.post(gcs, {
+    file_name: filename,
+    file_type: filetype,
+  });
+};

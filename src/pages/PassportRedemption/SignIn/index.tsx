@@ -14,6 +14,8 @@ import {
   checkForValidTicket,
   updateTicketContactId,
   getPassportTickets,
+  getUploadUrl,
+  sendImage,
 } from '../../../utilities/api/interactionManager';
 import { ModalPaymentConstants } from '../../../utilities/hooks/ModalPaymentContext';
 
@@ -35,6 +37,33 @@ const Track = (props: Props) => {
   const [isTicketValid, setIsTicketValid] = useState(true);
 
   const [instagramHandle, setinstagramHandle] = useState('');
+
+  const [receipt, setReceipt] = useState<File | null>(null);
+
+  const uploadPhoto = async () => {
+    let filename;
+
+    if (receipt === null || email.length === 0) {
+      return false;
+    }
+
+    try {
+      const ext = receipt.type.split('/')[1];
+      filename = `${email.split('@')[0]}-${new Date()
+        .toISOString()
+        .replace(/(:|\.)/g, '-')}.${ext}`;
+
+      const signedUrl = unescape(
+        (await getUploadUrl(filename, receipt.type)).data.url
+      );
+
+      await sendImage(signedUrl, filename, receipt);
+
+      // save filename and send with final request to be saved in DB
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const findOrCreateUser = async (email, viewTickets) => {
     const { data } = await getPassportEmailId(email);
@@ -198,6 +227,23 @@ const Track = (props: Props) => {
               {t('passport.labels.optional')}
             </SubTitle>
           </Column>
+
+          <Column>
+            <input
+              type="file"
+              id="imageFile"
+              capture="environment"
+              accept="image/*"
+              onChange={(event) => {
+                const file: File | null =
+                  event.target.files && event.target.files.length > 0
+                    ? event.target.files[0]
+                    : null;
+                console.log(file);
+                setReceipt(file);
+              }}
+            />
+          </Column>
         </InputContainer>
 
         <InputContainer className="bottom">
@@ -206,7 +252,7 @@ const Track = (props: Props) => {
             className="button--red-filled"
             disabled={!email || !ticketCode || !isTicketValid}
             onClick={() => {
-              findOrCreateUser(email, false);
+              uploadPhoto();
             }}
           >
             {t('passport.placeholders.addTicket')}
@@ -216,7 +262,7 @@ const Track = (props: Props) => {
               className="linkButton"
               disabled={!email}
               onClick={() => {
-                findOrCreateUser(email, true);
+                uploadPhoto();
               }}
             >
               {t('passport.placeholders.viewItem')}
