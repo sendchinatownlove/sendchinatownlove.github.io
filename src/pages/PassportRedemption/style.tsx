@@ -19,7 +19,8 @@ const CardContainer = styled.div`
   width: 100%;
   min-width: 367px;
   margin: 0 auto;
-  background: ${(props: PassportProps) => (props.mainView ? 'rgba(168,25,46,1)' : 'rgba(130,3,21,1)')}; 
+  background: ${(props: PassportProps) =>
+    props.mainView ? 'rgba(168,25,46,1)' : 'rgba(130,3,21,1)'};
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   box-sizing: border-box;

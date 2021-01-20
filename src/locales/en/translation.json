@@ -335,7 +335,9 @@
       "rewards": "Crawl FAQ",
       "learn": "Learn More",
       "contact": "Contact Us",
-      "giveAwayEntryGoal": "Tier {{tier}} giveaway ENTRY goal!"
+      "giveAwayEntryGoal": "Tier {{tier}} giveaway ENTRY goal!",
+      "oneRaffleTicketAvailable": "1 Raffle ticket available",
+      "raffleTicketAvailable": "{{amount}} Raffle tickets available"
     },
     "labels": {
       "daysLeft": "{{daysLeft}} days left",
@@ -360,7 +362,9 @@
       "offerUsed": "Offer must be used in: ",
       "pleaseShow": "Please show this screen to the host when you are placing your order.",
       "enteredGiveAway": "Your raffle ticket has been applied",
-      "earnedYourTicket": "You’ve earned a ticket!"
+      "earnedYourTicket": "You’ve earned a ticket!",
+      "selectGiveawayBasket": "Select a giveaway basket to enter your ticket into below.",
+      "totalValue": "Total Value"
     },
     "errors": {
       "validEmail": "Please enter a valid email address.",
@@ -440,7 +444,9 @@
       "prizeRedeemed": "PRIZE REDEEMED {{date}}",
       "readyToRedeem": "Thank you for supporting small businesses",
       "leftToRedeem": "{{amount}} more receipts to your next goal",
-      "oneLeftToRedeem": "1 more receipt to your next goal"
+      "oneLeftToRedeem": "1 more receipt to your next goal",
+      "giveawayDetails": "View giveaway BASKET details",
+      "cancel": "Cancel"
     }
   }
 }

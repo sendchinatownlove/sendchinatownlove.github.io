@@ -15,7 +15,7 @@ import TicketRow from './TicketRow';
 import FAQ from './Faq';
 
 import CircleLogo from '../Assets/CircleLogo.png';
-import RaffleTicketCombo from "../Assets/RaffleTicketCombo.png";
+import RaffleTicketCombo from '../Assets/RaffleTicketCombo.png';
 
 interface Props {
   setCurrentScreenView: Function;
@@ -30,6 +30,11 @@ const Passport = (props: Props) => {
   const [tickets, setTickets] = useState<any[]>([]);
 
   useEffect(() => {
+    push(`/passport/${id}/tickets`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
+  useEffect(() => {
     if (location.hash === '#faq') {
       setShowFaq(true);
     } else {
@@ -40,7 +45,7 @@ const Passport = (props: Props) => {
   useEffect(() => {
     if (id) {
       getContactInfo(id)
-        .then((contactInfo) => {
+        .then((res) => {
           return getPassportTickets(id);
         })
         .then((ticketIds) => {
@@ -78,7 +83,7 @@ const Passport = (props: Props) => {
     }
 
     return distance;
-  }
+  };
 
   const createTicketRows = (tickets) => {
     let rows: any[] = [];
@@ -116,6 +121,7 @@ const Passport = (props: Props) => {
                 stamps={row}
                 index={index}
                 key={index}
+                setCurrentScreenView={props.setCurrentScreenView}
               />
             ))}
           </tbody>
@@ -153,7 +159,9 @@ const Passport = (props: Props) => {
           onClick={() => push(location.pathname)}
         >
           <TitleRow>
-            <Title color={showFaq ? 'rgba(255, 255, 255, 0.7)' : 'rgb(248,186,23,1)'}>
+            <Title
+              color={showFaq ? 'rgba(255, 255, 255, 0.7)' : 'rgb(248,186,23,1)'}
+            >
               {t('passport.headers.passport').toUpperCase()}
             </Title>
             {showFaq ? (
@@ -164,8 +172,10 @@ const Passport = (props: Props) => {
               </>
             ) : (
               <SubHeader color={showFaq ? 'transparent' : 'white'}>
-                {t('passport.labels.daysLeft', {daysLeft: daysLeft('February 20, 2021')})} 
-              </SubHeader> 
+                {t('passport.labels.daysLeft', {
+                  daysLeft: daysLeft('February 20, 2021'),
+                })}
+              </SubHeader>
             )}
           </TitleRow>
 
@@ -173,9 +183,15 @@ const Passport = (props: Props) => {
             <SendEmailContainer>
               <PassportIcon src={RaffleTicketCombo} />
               <TitleRow>
-                <Title>{t('passport.headers.giveAwayEntryGoal', {tier: 1}).toUpperCase()}</Title>
+                <Title>
+                  {t('passport.headers.giveAwayEntryGoal', {
+                    tier: 1,
+                  }).toUpperCase()}
+                </Title>
                 <SubTitle bold="700">
-                  {t('passport.labels.merchantsVisited', {merchantsVisited: 3})}
+                  {t('passport.labels.merchantsVisited', {
+                    merchantsVisited: 3,
+                  })}
                   <br />
                   <br />
                   {t('passport.labels.thankYou')}
@@ -212,19 +228,17 @@ const Container = styled.div`
   letter-spacing: 0.15em;
 `;
 
-const PassportContainer = styled(CardContainer)` 
+const PassportContainer = styled(CardContainer)`
   position: fixed;
   bottom: 0;
   top: 124px;
   border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0; 
+  border-bottom-right-radius: 0;
 `;
-
 const SubHeader = styled(SubTitle)`
   font-style: italic;
   font-weight: bold;
 `;
-
 const HeaderContainer = styled.div`
   width: 100%;
   height: 100px;
@@ -240,13 +254,11 @@ const RedirectionLinks = styled.a`
   letter-spacing: 0.15em;
   font-size: 12px;
 `;
-
 const Logo = styled.img`
   width: 100px;
   height: 100px;
   filter: drop-shadow(0 0mm 2px #cdcdcd);
 `;
-
 const BodyContainer = styled.div`
   width: 375px;
   display: flex;
@@ -257,20 +269,17 @@ const BodyContainer = styled.div`
   bottom: 0;
   hidden: 100vh;
 `;
-
 const TableContainer = styled.div`
   width: 100%;
   overflow: auto;
   // height: calc(100vh - 260px);
 `;
-
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
   font-size: 12px;
 `;
-
 const AddNewReceipt = styled(Button)`
   position: fixed;
   margin-left: -150px;
@@ -280,7 +289,6 @@ const AddNewReceipt = styled(Button)`
   z-index: 100;
   font-weight: bold;
 `;
-
 const SendEmailContainer = styled.div`
   padding: 10px;
   position: absolute;
@@ -299,12 +307,10 @@ const SendEmailContainer = styled.div`
   backdrop-filter: blur(4px);
   border-radius: 5px;
 `;
-
 const PassportIcon = styled.img`
   width: 193px;
   height: 190px;
 `;
-
 const SendEmailButtonClose = styled(Button)`
   padding: 0;
   text-align: center;

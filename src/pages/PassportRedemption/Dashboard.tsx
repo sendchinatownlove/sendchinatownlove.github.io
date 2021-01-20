@@ -25,6 +25,8 @@ const PassportRedemption = (props: Props) => {
       setCurrentScreenView(ScreenType.Track);
     } else if (location.pathname.includes('/tickets')) {
       setCurrentScreenView(ScreenType.Dashboard);
+    } else if (location.pathname.includes('/redeem')) {
+      setCurrentScreenView(ScreenType.Rewards);
     }
   }, [location.pathname]);
 
