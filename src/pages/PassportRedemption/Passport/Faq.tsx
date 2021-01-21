@@ -18,8 +18,8 @@ const Faq = ({ showFaq, toggleView }: Props) => {
   });
 
   return (
-    <CardContainer mainView={showFaq} onClick={toggleView}>
-      <TitleRow>
+    <Container mainView={showFaq} onClick={toggleView}>
+      <TitleRow active={showFaq}>
         <Title
           color={showFaq ? 'rgb(248,186,23,1)' : 'rgba(255, 255, 255, 0.7)'}
         >
@@ -58,20 +58,31 @@ const Faq = ({ showFaq, toggleView }: Props) => {
           </div>
         ))}
       </FaqContent>
-    </CardContainer>
+    </Container>
   );
 };
 
+const Container = styled(CardContainer)<{
+  mainView: Boolean;
+}>`
+  position: fixed;
+  bottom: 0;
+  top: ${(props) =>
+    props.mainView ? '180px' : '130px'};
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+`;
 const FaqContent = styled.div`
   padding: 10px 30px 15px;
   font-size: 12px;
   overflow: auto;
+  color: white;
   height: calc(100vh - 230px);
 `;
 
 const RewardsLink = styled.span`
   text-transform: uppercase;
-  color: black;
+  color: white;
   font-weight: 700;
   letter-spacing: 0.15em;
   font-size: 14px;

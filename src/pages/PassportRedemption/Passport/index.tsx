@@ -158,7 +158,7 @@ const Passport = (props: Props) => {
           mainView={!showFaq}
           onClick={() => push(location.pathname)}
         >
-          <TitleRow>
+          <TitleRow active={!showFaq}> 
             <Title
               color={showFaq ? 'rgba(255, 255, 255, 0.7)' : 'rgb(248,186,23,1)'}
             >
@@ -182,7 +182,7 @@ const Passport = (props: Props) => {
           {showPopup && (
             <SendEmailContainer>
               <PassportIcon src={RaffleTicketCombo} />
-              <TitleRow>
+              <TitleRow active={!showFaq}>
                 <Title>
                   {t('passport.headers.giveAwayEntryGoal', {
                     tier: 1,
@@ -228,10 +228,13 @@ const Container = styled.div`
   letter-spacing: 0.15em;
 `;
 
-const PassportContainer = styled(CardContainer)`
+const PassportContainer = styled(CardContainer)<{
+  mainView: Boolean;
+}>`
   position: fixed;
   bottom: 0;
-  top: 124px;
+  top: ${(props) =>
+    props.mainView ? '180px' : '130px'};
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 `;
@@ -265,14 +268,12 @@ const BodyContainer = styled.div`
   justify-content: center;
 
   position: absolute;
-  top: 125px;
+  top: 155px;
   bottom: 0;
-  hidden: 100vh;
 `;
 const TableContainer = styled.div`
   width: 100%;
   overflow: auto;
-  // height: calc(100vh - 260px);
 `;
 const Table = styled.table`
   width: 100%;

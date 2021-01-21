@@ -46,11 +46,15 @@ const ExternalLink = styled.a`
   }
 `;
 
-const TitleRow = styled.div`
+const TitleRow = styled.div<{
+  active?: Boolean;
+}>`
   text-align: center;
   padding: 10px 20px;
   display: flex;
   flex-direction: column;
+  border-bottom: 2px solid ${props => props.active ? 'rgb(248,186,23)' : 'transparent'};
+  width: 100%;
 `;
 
 const Title = styled.span`
