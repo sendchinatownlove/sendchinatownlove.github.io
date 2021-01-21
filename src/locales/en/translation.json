@@ -364,7 +364,8 @@
       "enteredGiveAway": "Your raffle ticket has been applied",
       "earnedYourTicket": "You’ve earned a ticket!",
       "selectGiveawayBasket": "Select a giveaway basket to enter your ticket into below.",
-      "totalValue": "Total Value"
+      "totalValue": "Total Value",
+      "ticketSelection": "Once you've made a selection, you cannot change your raffle entry."
     },
     "errors": {
       "validEmail": "Please enter a valid email address.",
@@ -446,7 +447,8 @@
       "leftToRedeem": "{{amount}} more receipts to your next goal",
       "oneLeftToRedeem": "1 more receipt to your next goal",
       "giveawayDetails": "View giveaway BASKET details",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "enterRaffle": "Enter Raffle Ticket"
     }
   }
 }

@@ -112,10 +112,11 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
     history.push(`/passport/${id}/tickets`);
   }
 
-  const selectCard = (e) => {
-    
+  const handleSubmission = (e) => {
+    e.preventDefault();
+    console.log("submitting to card:" + e.target.value);
   }
-
+  
   return (
     <Container>
       <Header>
@@ -153,9 +154,22 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
         </TicketCard>
       ))}
       </TicketsContainer>
-      <CancelButton onClick={handleCancel}>
-        {t('passport.placeholders.cancel').toUpperCase()}
-      </CancelButton>
+      { activeCard >= 0 ? (
+          <EnterRaffleContainer>
+            <SubText>{t('passport.labels.ticketSelection')}</SubText>
+            <EnterRaffleTicketButton 
+              className="button--red-filled"
+              onClick={handleSubmission}
+              value={activeCard}          
+            >
+            {t('passport.placeholders.enterRaffle').toUpperCase()} 
+            </EnterRaffleTicketButton>
+          </EnterRaffleContainer>
+        ) : (
+        <CancelButton onClick={handleCancel}>
+          {t('passport.placeholders.cancel').toUpperCase()}
+        </CancelButton>
+      )}
     </Container>
   );
 };
@@ -238,6 +252,19 @@ const BasketDetails = styled(Button)`
   font-weight: bold;
   text-align: center;
   letter-spacing: 0.15em;
+`;
+const EnterRaffleContainer = styled.div`
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-self: center;
+  width: 300px;
+`;
+const EnterRaffleTicketButton = styled(Button)`
+  font-weight: bold;
 `;
 const CancelButton = styled(Button)`
   position: fixed;
