@@ -67,8 +67,7 @@ const Container = styled(CardContainer)<{
 }>`
   position: fixed;
   bottom: 0;
-  top: ${(props) =>
-    props.mainView ? '180px' : '130px'};
+  top: ${(props) => (props.mainView ? '180px' : '130px')};
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 `;

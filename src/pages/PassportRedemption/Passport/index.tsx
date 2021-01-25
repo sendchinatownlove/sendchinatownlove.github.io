@@ -33,7 +33,7 @@ const Passport = (props: Props) => {
     push(`/passport/${id}/tickets`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   useEffect(() => {
     if (location.hash === '#faq') {
       setShowFaq(true);
@@ -158,7 +158,7 @@ const Passport = (props: Props) => {
           mainView={!showFaq}
           onClick={() => push(location.pathname)}
         >
-          <TitleRow active={!showFaq}> 
+          <TitleRow active={!showFaq}>
             <Title
               color={showFaq ? 'rgba(255, 255, 255, 0.7)' : 'rgb(248,186,23,1)'}
             >
@@ -233,8 +233,7 @@ const PassportContainer = styled(CardContainer)<{
 }>`
   position: fixed;
   bottom: 0;
-  top: ${(props) =>
-    props.mainView ? '180px' : '130px'};
+  top: ${(props) => (props.mainView ? '180px' : '130px')};
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 `;

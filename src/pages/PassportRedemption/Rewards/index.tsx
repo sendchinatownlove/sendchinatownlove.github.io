@@ -29,21 +29,24 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
   const fetchRewards = async () => {
     try {
       // TODO: GET /Rewards
-      const allRewards = [{
-        id: 0,
-        total_value: 5000,
-        name: "Hype Beast Basket",
-        image_url: null,
-        active: false,
-        amount: 0,
-      }, {
-        id: 1,
-        total_value: 5200,
-        name: "Rest and Relax Basket",
-        image_url: null,
-        active: false,
-        amount: 0,
-      }];
+      const allRewards = [
+        {
+          id: 0,
+          total_value: 5000,
+          name: 'Hype Beast Basket',
+          image_url: null,
+          active: false,
+          amount: 0,
+        },
+        {
+          id: 1,
+          total_value: 5200,
+          name: 'Rest and Relax Basket',
+          image_url: null,
+          active: false,
+          amount: 0,
+        },
+      ];
       setRewards(allRewards);
     } catch (err) {
       console.error('passport error: ' + err);
@@ -54,31 +57,35 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
     try {
       // TODO: GET /contacts/:contact_id/crawl_receipts
       // filter it so that the receipts must have a null sponsor_seller_id (that are uploaded but not redeeemed)
-      const allReceipts = [{
-        id: 0,
-        participating_seller: 1,
-        payment_intent: null,
-        contact_id: 8,
-        amount: 5000,
-        receipt_url: "",
-        redemption_id: null
-      }, {
-        id: 1,
-        participating_seller: 1,
-        payment_intent: null,
-        contact_id: 8,
-        amount: 5000,
-        receipt_url: "",
-        redemption_id: null
-      }, {
-        id: 2,
-        participating_seller: 1,
-        payment_intent: null,
-        contact_id: 8,
-        amount: 5000,
-        receipt_url: "",
-        redemption_id: null
-      }];
+      const allReceipts = [
+        {
+          id: 0,
+          participating_seller: 1,
+          payment_intent: null,
+          contact_id: 8,
+          amount: 5000,
+          receipt_url: '',
+          redemption_id: null,
+        },
+        {
+          id: 1,
+          participating_seller: 1,
+          payment_intent: null,
+          contact_id: 8,
+          amount: 5000,
+          receipt_url: '',
+          redemption_id: null,
+        },
+        {
+          id: 2,
+          participating_seller: 1,
+          payment_intent: null,
+          contact_id: 8,
+          amount: 5000,
+          receipt_url: '',
+          redemption_id: null,
+        },
+      ];
       const availableReceipts = allReceipts.filter(
         (receipt) => receipt.redemption_id === null
       );
@@ -90,7 +97,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
 
   // const redeemReward = async (e) => {
   //   e.preventDefault();
-  //   console.log('redeemReward');    
+  //   console.log('redeemReward');
   // }
 
   // const changeReward = async (e) => {
@@ -101,7 +108,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
   const viewDetails = (e) => {
     e.preventDefault();
     console.log('add details');
-  }
+  };
 
   useEffect(() => {
     history.push(`/passport/${id}/redeem`);
@@ -113,16 +120,16 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
   const handleCancel = (e) => {
     e.preventDefault();
     history.push(`/passport/${id}/tickets`);
-  }
+  };
 
   const handleSubmission = (e) => {
     e.preventDefault();
-    console.log("submitting to card:" + e.target.value);
-  }
+    console.log('submitting to card:' + e.target.value);
+  };
 
   const handleTicketSelection = (e) => {
     e.preventDefault();
-    const id =  e.currentTarget.name;
+    const id = e.currentTarget.name;
     e.persist();
 
     setRewards((oldRewards) => {
@@ -131,18 +138,18 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
           return {
             ...rew,
             active: !rew.active,
-            amount: rew.active ? rew.amount - 1 : rew.amount + 1
-          }
+            amount: rew.active ? rew.amount - 1 : rew.amount + 1,
+          };
         }
         return rew;
       });
 
       return newRewards;
     });
-  }
-  
-  const activeRewards = rewards.filter(rew => rew.active === true);
-  
+  };
+
+  const activeRewards = rewards.filter((rew) => rew.active === true);
+
   return (
     <Container>
       <Header>
@@ -160,41 +167,42 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
         </BasketDetails>
       </Header>
       <TicketsContainer>
-      {rewards && rewards.map((reward) => (
-        <TicketCard 
-          active={reward.active}
-          name={reward.id}
-          onClick={handleTicketSelection}
-          key={reward.id}
-        >
-          <TicketHeader>
-            <TicketTopRow>
-              <TicketButton active={reward.active}/>
-              <Title>
-                {reward.name.toUpperCase()}
-              </Title>
-              <TicketRewardAmount>{reward.amount}</TicketRewardAmount>
-            </TicketTopRow>
-            <SubText>
-              {`${t('passport.labels.totalValue')}: ${reward.total_value}`.toUpperCase()}
-            </SubText>
-          </TicketHeader>
-          <TicketImage src={reward.image_url} alt="reward-image-url"/>
-        </TicketCard>
-      ))}
-      </TicketsContainer>
-      { activeRewards.length > 0 ? (
-          <EnterRaffleContainer>
-            <SubText>{t('passport.labels.ticketSelection')}</SubText>
-            <EnterRaffleTicketButton 
-              className="button--red-filled"
-              onClick={handleSubmission}
-              value={activeRewards.length}          
+        {rewards &&
+          rewards.map((reward) => (
+            <TicketCard
+              active={reward.active}
+              name={reward.id}
+              onClick={handleTicketSelection}
+              key={reward.id}
             >
-            {t('passport.placeholders.enterRaffle').toUpperCase()} 
-            </EnterRaffleTicketButton>
-          </EnterRaffleContainer>
-        ) : (
+              <TicketHeader>
+                <TicketTopRow>
+                  <TicketButton active={reward.active} />
+                  <Title>{reward.name.toUpperCase()}</Title>
+                  <TicketRewardAmount>{reward.amount}</TicketRewardAmount>
+                </TicketTopRow>
+                <SubText>
+                  {`${t('passport.labels.totalValue')}: ${
+                    reward.total_value
+                  }`.toUpperCase()}
+                </SubText>
+              </TicketHeader>
+              <TicketImage src={reward.image_url} alt="reward-image-url" />
+            </TicketCard>
+          ))}
+      </TicketsContainer>
+      {activeRewards.length > 0 ? (
+        <EnterRaffleContainer>
+          <SubText>{t('passport.labels.ticketSelection')}</SubText>
+          <EnterRaffleTicketButton
+            className="button--red-filled"
+            onClick={handleSubmission}
+            value={activeRewards.length}
+          >
+            {t('passport.placeholders.enterRaffle').toUpperCase()}
+          </EnterRaffleTicketButton>
+        </EnterRaffleContainer>
+      ) : (
         <CancelButton onClick={handleCancel}>
           {t('passport.placeholders.cancel').toUpperCase()}
         </CancelButton>
@@ -247,8 +255,8 @@ const TicketCard = styled.button<{
   align-items: center;
   padding: 10px;
 
-  background: #ffffff; 
-  border: 1px solid ${props => props.active ? '#A8192E' : '#FFFFFF'};
+  background: #ffffff;
+  border: 1px solid ${(props) => (props.active ? '#A8192E' : '#FFFFFF')};
   box-sizing: border-box;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -259,8 +267,8 @@ const TicketHeader = styled.div`
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;  
-`
+  align-items: center;
+`;
 const TicketTopRow = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -272,23 +280,23 @@ const TicketButton = styled.div<{
 }>`
   width: 16px;
   height: 16px;
-  border: 1px solid #C4C4C4;
+  border: 1px solid #c4c4c4;
   border-radius: 50%;
-  background-color: ${props => props.active ? '#A8192E' : 'transparent'};
+  background-color: ${(props) => (props.active ? '#A8192E' : 'transparent')};
 `;
 const TicketRewardAmount = styled.div`
   width: 30px;
   height: 14px;
   border-radius: 8px;
   color: white;
-  background: #DD678A;
+  background: #dd678a;
 `;
 const TicketImage = styled.img`
   width: 100%;
-  border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
   box-sizing: border-box;
   border-radius: 20px;
-`
+`;
 const Logo = styled.img`
   width: 100px;
   height: 100px;
@@ -321,7 +329,7 @@ const CancelButton = styled(Button)`
   position: fixed;
   bottom: 0;
   z-index: 100;
-  color: #A8192E;
+  color: #a8192e;
   display: flex;
   justify-self: center;
   align-self: center;
