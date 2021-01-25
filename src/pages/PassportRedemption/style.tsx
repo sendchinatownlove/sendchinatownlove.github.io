@@ -53,7 +53,8 @@ const TitleRow = styled.div<{
   padding: 10px 20px;
   display: flex;
   flex-direction: column;
-  border-bottom: 2px solid ${props => props.active ? 'rgb(248,186,23)' : 'transparent'};
+  border-bottom: 2px solid
+    ${(props) => (props.active ? 'rgb(248,186,23)' : 'transparent')};
   width: 100%;
 `;
 
