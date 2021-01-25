@@ -19,7 +19,6 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
 
   const [receipts, setReceipts] = useState<any[]>([]);
   const [rewards, setRewards] = useState<any[]>([]);
-  const [activeCard, setActiveCard] = useState(-1);
 
   const numRewards = Math.floor(receipts.length / 3);
   // const totalAmount = receipts.reduce((acc, curr) => {
@@ -34,12 +33,16 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
         id: 0,
         total_value: 5000,
         name: "Hype Beast Basket",
-        image_url: null
+        image_url: null,
+        active: false,
+        amount: 0,
       }, {
         id: 1,
         total_value: 5200,
         name: "Rest and Relax Basket",
-        image_url: null
+        image_url: null,
+        active: false,
+        amount: 0,
       }];
       setRewards(allRewards);
     } catch (err) {
@@ -116,6 +119,29 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
     e.preventDefault();
     console.log("submitting to card:" + e.target.value);
   }
+
+  const handleTicketSelection = (e) => {
+    e.preventDefault();
+    const id =  e.currentTarget.name;
+    e.persist();
+
+    setRewards((oldRewards) => {
+      const newRewards = oldRewards.map((rew) => {
+        if (rew.id.toString() === id) {
+          return {
+            ...rew,
+            active: !rew.active,
+            amount: rew.active ? rew.amount - 1 : rew.amount + 1
+          }
+        }
+        return rew;
+      });
+
+      return newRewards;
+    });
+  }
+  
+  const activeRewards = rewards.filter(rew => rew.active === true);
   
   return (
     <Container>
@@ -136,16 +162,19 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
       <TicketsContainer>
       {rewards && rewards.map((reward) => (
         <TicketCard 
-          active={reward.id === activeCard}
-          onClick={e => {
-            e.preventDefault();
-            setActiveCard(reward.id);
-          }}
+          active={reward.active}
+          name={reward.id}
+          onClick={handleTicketSelection}
+          key={reward.id}
         >
           <TicketHeader>
-            <Title>
-              {reward.name.toUpperCase()}
-            </Title>
+            <TicketTopRow>
+              <TicketButton active={reward.active}/>
+              <Title>
+                {reward.name.toUpperCase()}
+              </Title>
+              <TicketRewardAmount>{reward.amount}</TicketRewardAmount>
+            </TicketTopRow>
             <SubText>
               {`${t('passport.labels.totalValue')}: ${reward.total_value}`.toUpperCase()}
             </SubText>
@@ -154,13 +183,13 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
         </TicketCard>
       ))}
       </TicketsContainer>
-      { activeCard >= 0 ? (
+      { activeRewards.length > 0 ? (
           <EnterRaffleContainer>
             <SubText>{t('passport.labels.ticketSelection')}</SubText>
             <EnterRaffleTicketButton 
               className="button--red-filled"
               onClick={handleSubmission}
-              value={activeCard}          
+              value={activeRewards.length}          
             >
             {t('passport.placeholders.enterRaffle').toUpperCase()} 
             </EnterRaffleTicketButton>
@@ -207,7 +236,7 @@ const TicketsContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const TicketCard = styled.div<{
+const TicketCard = styled.button<{
   active: Boolean;
 }>`
   width: 80%;
@@ -219,7 +248,7 @@ const TicketCard = styled.div<{
   padding: 10px;
 
   background: #ffffff; 
-  border: 1px solid ${props => props.active ? '#A8192E' : '#FFFFFF'};;
+  border: 1px solid ${props => props.active ? '#A8192E' : '#FFFFFF'};
   box-sizing: border-box;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -232,6 +261,28 @@ const TicketHeader = styled.div`
   flex-direction: column;
   align-items: center;  
 `
+const TicketTopRow = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex: space-between;
+`;
+const TicketButton = styled.div<{
+  active: Boolean;
+}>`
+  width: 16px;
+  height: 16px;
+  border: 1px solid #C4C4C4;
+  border-radius: 50%;
+  background-color: ${props => props.active ? '#A8192E' : 'transparent'};
+`;
+const TicketRewardAmount = styled.div`
+  width: 30px;
+  height: 14px;
+  border-radius: 8px;
+  color: white;
+  background: #DD678A;
+`;
 const TicketImage = styled.img`
   width: 100%;
   border: 1px solid #EAEAEA;
