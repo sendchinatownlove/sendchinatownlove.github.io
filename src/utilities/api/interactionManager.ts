@@ -17,6 +17,9 @@ import {
   lyftRewards,
   nonprofits,
   projects,
+  crawlReceipts,
+  crawlRedemptions,
+  crawlRewards
 } from './endpoints';
 
 // Fix return typing
@@ -381,3 +384,27 @@ export const getProject = async (project_id: number) =>
     .catch((err) => err);
 
 export const light_up_chinatown_id = 1;
+
+export const getCrawlRewards = async () => 
+  axios
+    .get(crawlRewards)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const redeemRaffle = async (contact_id: number, reward_id: number) => 
+  axios
+    .post(crawlRedemptions, {contact_id, reward_id})
+    .then((res) => res)
+    .catch((err) => err);
+
+export const updateRaffle = async (reward_id: number) => 
+  axios
+    .put(crawlRedemptions, {reward_id})
+    .then((res) => res)
+    .catch((err) => err);
+  
+export const getCrawlReceipts = async (contact_id: number) => 
+  axios
+    .get(contacts+contact_id + '/' + crawlReceipts)
+    .then((res) => res)
+    .catch((err) => err);
