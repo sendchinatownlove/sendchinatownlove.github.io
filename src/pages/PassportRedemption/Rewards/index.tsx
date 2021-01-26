@@ -95,16 +95,6 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
     }
   };
 
-  // const redeemReward = async (e) => {
-  //   e.preventDefault();
-  //   console.log('redeemReward');
-  // }
-
-  // const changeReward = async (e) => {
-  //   e.preventDefault();
-  //   console.log('changeReward');
-  // }
-
   const viewDetails = (e) => {
     e.preventDefault();
     console.log('add details');
@@ -134,11 +124,11 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
 
     setRewards((oldRewards) => {
       const newRewards = oldRewards.map((rew) => {
-        if (rew.id.toString() === id) {
+        if (rew.id.toString() === id && !rew.active) {
           return {
             ...rew,
-            active: !rew.active,
-            amount: rew.active ? rew.amount - 1 : rew.amount + 1,
+            active: true,
+            amount: rew.amount + 1
           };
         }
         return rew;
@@ -147,6 +137,23 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
       return newRewards;
     });
   };
+
+  const clearTickets = (e) => {
+    setRewards((oldRewards) => {
+      const newRewards = oldRewards.map((rew) => {
+        if (rew.active) {
+          return {
+            ...rew,
+            active: false,
+            amount: rew.amount - 1
+          };
+        }
+        return rew;
+      });
+
+      return newRewards;
+    }); 
+  }
 
   const activeRewards = rewards.filter((rew) => rew.active === true);
 
@@ -162,9 +169,15 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
               }).toUpperCase()}
         </Title>
         <SubText>{t('passport.labels.selectGiveawayBasket')}</SubText>
-        <BasketDetails className="button--outlined" onClick={viewDetails}>
-          {t('passport.placeholders.giveawayDetails')}
-        </BasketDetails>
+        { activeRewards.length > 0 ? (
+          <BasketDetails className="button--filled" onClick={clearTickets}>
+            {t('passport.placeholders.clearSelection')}
+          </BasketDetails>
+        ) : (
+            <BasketDetails className="button--outlined" onClick={viewDetails}>
+              {t('passport.placeholders.giveawayDetails')}
+            </BasketDetails>
+        )}
       </Header>
       <TicketsContainer>
         {rewards &&

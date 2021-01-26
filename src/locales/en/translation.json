@@ -463,7 +463,8 @@
       "oneLeftToRedeem": "1 more receipt to your next goal",
       "giveawayDetails": "View giveaway BASKET details",
       "cancel": "Cancel",
-      "enterRaffle": "Enter Raffle Ticket"
+      "enterRaffle": "Enter Raffle Ticket",
+      "clearSelection": "Clear Selection"
     }
   }
 }
