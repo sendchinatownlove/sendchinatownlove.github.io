@@ -8,20 +8,14 @@ import { MAILTO_URL } from '../../../consts';
 import {
   getPassportTickets,
   getParticipatingSeller,
-  sendRedeemTicketsEmail,
   getContactInfo,
-  createLyftReward,
 } from '../../../utilities/api/interactionManager';
 
-import GiveawayPopover from '../Giveaway';
 import TicketRow from './TicketRow';
 import FAQ from './Faq';
 
-import PassportDashboardBackground from '../Assets/PassportDashboardBackground.png';
-import PassportIconImg from '../Assets/passportIcon.png';
 import CircleLogo from '../Assets/CircleLogo.png';
-
-import { LyftRewardPromo, LyftConfirmationPromo } from '../Lyft/LyftPromo';
+import RaffleTicketCombo from '../Assets/RaffleTicketCombo.png';
 
 interface Props {
   setCurrentScreenView: Function;
@@ -32,14 +26,13 @@ const Passport = (props: Props) => {
   const { id } = useParams();
   const { push, location } = useHistory();
   const [showFaq, setShowFaq] = useState(false);
-  const [showInstagram, setShowInstagram] = useState(false);
-  const [showEmailSent, setShowEmailSent] = useState(false);
-  const [showLyftRewardPromo, setShowLyftRewardPromo] = useState(false);
-  const [lyftRewardConfirmation, setLyftRewardConfirmation] = useState({
-    showConfirmation: false,
-    isSuccess: false,
-  });
+  const [showPopup, setShowPopup] = useState(false);
   const [tickets, setTickets] = useState<any[]>([]);
+
+  useEffect(() => {
+    push(`/passport/${id}/tickets`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (location.hash === '#faq') {
@@ -52,9 +45,7 @@ const Passport = (props: Props) => {
   useEffect(() => {
     if (id) {
       getContactInfo(id)
-        .then((contactInfo) => {
-          setShowInstagram(contactInfo.data.instagram);
-          setShowLyftRewardPromo(contactInfo.data.is_eligible_for_lyft_reward);
+        .then((res) => {
           return getPassportTickets(id);
         })
         .then((ticketIds) => {
@@ -83,6 +74,17 @@ const Passport = (props: Props) => {
     }
   }, [id]);
 
+  const daysLeft = (endDate) => {
+    const DaysEnd = new Date(endDate);
+    const DateNow = new Date();
+    const distance = DaysEnd.getDate() - DateNow.getDate();
+    if (distance < 0) {
+      return 0;
+    }
+
+    return distance;
+  };
+
   const createTicketRows = (tickets) => {
     let rows: any[] = [];
 
@@ -108,35 +110,6 @@ const Passport = (props: Props) => {
     return rows;
   };
 
-  const sendEmail = () => {
-    // Disable the email modal if the Lyft reward modal is showing
-    if (showLyftRewardPromo || lyftRewardConfirmation.showConfirmation) {
-      return;
-    }
-    sendRedeemTicketsEmail(id).then((res) => {
-      setShowEmailSent(true);
-    });
-  };
-
-  const lyftRewardYesClickHandler = () => {
-    setShowLyftRewardPromo(false);
-    createLyftReward(id).then((res) => {
-      const isSuccess = res.status === 200;
-      setLyftRewardConfirmation({
-        showConfirmation: true,
-        isSuccess: isSuccess,
-      });
-    });
-  };
-
-  const lyftRewardNoClickHandler = () => {
-    setShowLyftRewardPromo(false);
-  };
-
-  const lyftConfirmationCloseClickHandler = () => {
-    setLyftRewardConfirmation({ showConfirmation: false, isSuccess: false });
-  };
-
   const createRows = (stamps) => {
     const rows = createTicketRows(stamps);
     return (
@@ -148,7 +121,7 @@ const Passport = (props: Props) => {
                 stamps={row}
                 index={index}
                 key={index}
-                sendEmail={sendEmail}
+                setCurrentScreenView={props.setCurrentScreenView}
               />
             ))}
           </tbody>
@@ -185,8 +158,10 @@ const Passport = (props: Props) => {
           mainView={!showFaq}
           onClick={() => push(location.pathname)}
         >
-          <TitleRow>
-            <Title color={showFaq ? 'grey' : 'black'}>
+          <TitleRow active={!showFaq}>
+            <Title
+              color={showFaq ? 'rgba(255, 255, 255, 0.7)' : 'rgb(248,186,23,1)'}
+            >
               {t('passport.headers.passport').toUpperCase()}
             </Title>
             {showFaq ? (
@@ -196,44 +171,35 @@ const Passport = (props: Props) => {
                 <br />
               </>
             ) : (
-              <>
-                <SubHeader color={showFaq ? 'transparent' : 'black'}>
-                  {showInstagram
-                    ? t('passport.labels.instagramAdded')
-                    : '9/1/2020 - 9/30/2020'}
-                </SubHeader>
-              </>
+              <SubHeader color={showFaq ? 'transparent' : 'white'}>
+                {t('passport.labels.daysLeft', {
+                  daysLeft: daysLeft('February 20, 2021'),
+                })}
+              </SubHeader>
             )}
           </TitleRow>
-          <GiveawayPopover showInstagram={showInstagram} contactId={id} />
-          {showLyftRewardPromo && (
-            <LyftRewardPromo
-              yesClickHander={lyftRewardYesClickHandler}
-              noClickHander={lyftRewardNoClickHandler}
-            ></LyftRewardPromo>
-          )}
-          {lyftRewardConfirmation.showConfirmation && (
-            <LyftConfirmationPromo
-              isSuccess={lyftRewardConfirmation.isSuccess}
-              closeClickHander={lyftConfirmationCloseClickHandler}
-            ></LyftConfirmationPromo>
-          )}
 
-          {showEmailSent && (
+          {showPopup && (
             <SendEmailContainer>
-              <PassportIcon src={PassportIconImg} />
-              <TitleRow>
-                <Title>{t('passport.headers.rewardEmail').toUpperCase()}</Title>
+              <PassportIcon src={RaffleTicketCombo} />
+              <TitleRow active={!showFaq}>
+                <Title>
+                  {t('passport.headers.giveAwayEntryGoal', {
+                    tier: 1,
+                  }).toUpperCase()}
+                </Title>
                 <SubTitle bold="700">
-                  {t('passport.labels.checkInbox')}
+                  {t('passport.labels.merchantsVisited', {
+                    merchantsVisited: 3,
+                  })}
                   <br />
                   <br />
-                  {t('passport.labels.linkExpire')}
+                  {t('passport.labels.thankYou')}
                 </SubTitle>
               </TitleRow>
               <SendEmailButtonClose
                 className="button--red-filled"
-                onClick={(e) => setShowEmailSent(false)}
+                onClick={(e) => setShowPopup(false)}
               >
                 {t('passport.placeholders.close')}
               </SendEmailButtonClose>
@@ -243,9 +209,9 @@ const Passport = (props: Props) => {
         </PassportContainer>
       </BodyContainer>
       {!showFaq && (
-        <AddNewTicket className="button--filled" onClick={addTicket}>
-          {t('passport.placeholders.addNewTicket')}
-        </AddNewTicket>
+        <AddNewReceipt className="button--filled" onClick={addTicket}>
+          {t('passport.placeholders.addNewReceipt')}
+        </AddNewReceipt>
       )}
     </Container>
   );
@@ -255,23 +221,26 @@ export default Passport;
 
 const Container = styled.div`
   position: relative;
-  width: 375px;
-  hidden: 100vh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  width: 375px;
+  letter-spacing: 0.15em;
 `;
 
-const PassportContainer = styled(CardContainer)`
-  background-size: 400px;
-  background-image: url(${PassportDashboardBackground});
-  max-height: 650px;
+const PassportContainer = styled(CardContainer)<{
+  mainView: Boolean;
+}>`
+  position: fixed;
+  bottom: 0;
+  top: ${(props) => (props.mainView ? '180px' : '130px')};
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 `;
-
 const SubHeader = styled(SubTitle)`
   font-style: italic;
+  font-weight: bold;
 `;
-
 const HeaderContainer = styled.div`
   width: 100%;
   height: 100px;
@@ -287,34 +256,31 @@ const RedirectionLinks = styled.a`
   letter-spacing: 0.15em;
   font-size: 12px;
 `;
-
 const Logo = styled.img`
   width: 100px;
   height: 100px;
   filter: drop-shadow(0 0mm 2px #cdcdcd);
 `;
-
 const BodyContainer = styled.div`
   width: 375px;
-  position: relative;
   display: flex;
   justify-content: center;
-`;
 
+  position: absolute;
+  top: 155px;
+  bottom: 0;
+`;
 const TableContainer = styled.div`
   width: 100%;
   overflow: auto;
-  height: calc(100vh - 300px);
 `;
-
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
   font-size: 12px;
 `;
-
-const AddNewTicket = styled(Button)`
+const AddNewReceipt = styled(Button)`
   position: fixed;
   margin-left: -150px;
   bottom: 0;
@@ -323,13 +289,12 @@ const AddNewTicket = styled(Button)`
   z-index: 100;
   font-weight: bold;
 `;
-
 const SendEmailContainer = styled.div`
   padding: 10px;
   position: absolute;
   width: 340px;
   margin: 0 auto;
-  height: 260px;
+  height: 467px;
   z-index: 20;
   top: 70px;
   display: flex;
@@ -340,13 +305,12 @@ const SendEmailContainer = styled.div`
   background: #f2eae8;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(4px);
+  border-radius: 5px;
 `;
-
 const PassportIcon = styled.img`
-  width: 59px;
-  height: 76px;
+  width: 193px;
+  height: 190px;
 `;
-
 const SendEmailButtonClose = styled(Button)`
   padding: 0;
   text-align: center;

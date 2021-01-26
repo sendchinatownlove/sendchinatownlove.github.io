@@ -8,7 +8,6 @@ import ScreenType from './ScreenTypes';
 import PassportScreen from './Passport';
 import LyftCodeScreen from './Lyft';
 
-import CrawlMap from './Assets/CrawlMap.png';
 import { useHistory } from 'react-router-dom';
 
 interface Props {
@@ -26,6 +25,8 @@ const PassportRedemption = (props: Props) => {
       setCurrentScreenView(ScreenType.Track);
     } else if (location.pathname.includes('/tickets')) {
       setCurrentScreenView(ScreenType.Dashboard);
+    } else if (location.pathname.includes('/redeem')) {
+      setCurrentScreenView(ScreenType.Rewards);
     }
   }, [location.pathname]);
 
@@ -59,14 +60,10 @@ const PassportRedemption = (props: Props) => {
 export default PassportRedemption;
 
 const Container = styled.div`
-  background-color: #e5e5e5;
+  background-color: #ffffff;
   min-height: 100vh;
-  background-image: url(${CrawlMap});
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  @media (max-width: 475px) {
-    background-size: 500px;
-  }
 `;

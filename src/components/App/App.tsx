@@ -121,14 +121,8 @@ const App = () => {
           <Route exact path="/passport/:id/tickets">
             <PassportRedemption screen={ScreenType.Dashboard} />
           </Route>
-          <Route exact path="/passport/:id/redeem/:access_token">
+          <Route exact path="/passport/:id/redeem">
             <PassportRedemption screen={ScreenType.Rewards} />
-          </Route>
-          <Route
-            exact
-            path="/passport/:id/redeem/:access_token/sponsor/:sponsor_seller_id"
-          >
-            <PassportRedemption screen={ScreenType.Claim} />
           </Route>
           <Route exact path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
@@ -136,7 +130,7 @@ const App = () => {
           <Route path="/print-passport-voucher/:id/tickets/:tickets_secret">
             <PassportVoucher />
           </Route>
-          <Route exact path="/passport/lyft_rewards/:contact_id/redeem/:token">
+          <Route exact path="/passport/lyft_rewards/:contact_id/redeem">
             <PassportRedemption screen={ScreenType.LyftCode} />
           </Route>
           <Route

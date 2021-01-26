@@ -16,18 +16,17 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 367px;
+  width: 100%;
+  min-width: 367px;
   margin: 0 auto;
-  background: #ffffff;
-
+  background: ${(props: PassportProps) =>
+    props.mainView ? 'rgba(168,25,46,1)' : 'rgba(130,3,21,1)'};
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  border: 1px solid #dedede;
   border-radius: 20px;
   box-sizing: border-box;
   overflow: hidden;
 
   position: absolute;
-  // opacity: ${(props: PassportProps) => (props.mainView ? '1' : '0.85')};
   z-index: ${(props: PassportProps) => (props.mainView ? '10' : '0')};
   top: ${(props: PassportProps) => (props.mainView ? '50px' : '0')};
 `;
@@ -47,11 +46,16 @@ const ExternalLink = styled.a`
   }
 `;
 
-const TitleRow = styled.div`
+const TitleRow = styled.div<{
+  active?: Boolean;
+}>`
   text-align: center;
   padding: 10px 20px;
   display: flex;
   flex-direction: column;
+  border-bottom: 2px solid
+    ${(props) => (props.active ? 'rgb(248,186,23)' : 'transparent')};
+  width: 100%;
 `;
 
 const Title = styled.span`
@@ -72,7 +76,7 @@ const SubTitle = styled.span`
   font-size: ${(props: Props) => (props.size ? props.size : '12px')};
   font-weight: ${(props: Props) => (props.bold ? props.bold : '400')};
   text-align: ${(props: Props) => (props.align ? props.align : 'center')};
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
 `;
 
 const Button = styled.button`
@@ -83,7 +87,7 @@ const Button = styled.button`
   &.linkButton {
     background-color: transparent;
     border: none;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     font-weight: bold;
     text-transform: uppercase;
   }
@@ -104,7 +108,7 @@ interface CardTextProps {
 const CardText = styled.p`
   text-transform: uppercase;
   text-align: center;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   margin: 0;
   font-weight: ${(props: CardTextProps) => (props.bold ? props.bold : '400')};
   font-size: ${(props: CardTextProps) => (props.size ? props.size : '12px')};

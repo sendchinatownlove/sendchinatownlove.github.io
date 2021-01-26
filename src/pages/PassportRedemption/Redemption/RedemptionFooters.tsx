@@ -18,7 +18,7 @@ export const NoRewardsFooter = () => {
           window.location.href = '/passport';
         }}
       >
-        {t('passport.placeholders.addNewTickets').toLocaleUpperCase()}
+        {t('passport.placeholders.addNewReceipts').toLocaleUpperCase()}
       </Button>
     </>
   );
