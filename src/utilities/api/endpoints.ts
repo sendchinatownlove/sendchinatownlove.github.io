@@ -17,3 +17,5 @@ export const lyftRewards = 'lyft_rewards/';
 export const projects = baseUrl + 'projects/';
 export const gcs = baseUrl + 'gcs/';
 export const crawlReceipts = baseUrl + 'crawl_receipts/';
+export const crawlRewards = baseUrl + 'rewards/';
+export const crawlRedemptions = baseUrl + 'redemptions/';
