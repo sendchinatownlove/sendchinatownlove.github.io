@@ -327,7 +327,6 @@
     "goalReachedDescription2": "You can also continue to support our Send Chinatown Love businesses and causes at our Ways to Donate page.",
     "goalReachedButton1": "GOFUNDME",
     "goalReachedButton2": "ways to Donate"
-
   },
   "passport": {
     "headers": {
@@ -361,7 +360,7 @@
       "selectOffer": "Select an offer and be ready to show this screen when you’re ordering.",
       "offerUsed": "Offer must be used in: ",
       "pleaseShow": "Please show this screen to the host when you are placing your order.",
-      "enteredGiveAway": "Your raffle ticket has been applied",
+      "enteredGiveAway": "Your raffle ticket has been ENTERED",
       "earnedYourTicket": "You’ve earned a ticket!",
       "selectGiveawayBasket": "Select a giveaway basket to enter your ticket into below.",
       "totalValue": "Total Value",
@@ -376,78 +375,42 @@
       "viewActiveRewards": "VIEW ACTIVE REWARDS & GIVEAWAYS",
       "arrayOfQuestionAnswers": [
         {
-          "question": "What is the Send Chinatown Love Food Crawl?",
-          "answer": "For the <0>month of September</0>, Send Chinatown Love is hosting a food crawl in Manhattan’s Chinatown, highlighting 13 incredible restaurants, bakeries, cafes and more throughout the neighborhood. Come with your friends and family to explore locally and savor all the incredible things Chinatown has to offer and earn rewards for shopping with our merchants!"
+          "question": "What is the Lunar New Year Crawl?",
+          "answer": "From February 1 - 28, 2021, Send Chinatown Love is hosting a Lunar New Year (LNY) Crawl in Manhattan, Brooklyn, and Queens to celebrate the special holiday. This event highlights 33+ vendors, ranging from gift shops to restaurants, to encourage communities to shop at local Asian-owned businesses in celebration of Lunar New Year! Participants can also shop for their LNY must-haves to prepare for their own celebrations, whether they need decorations or traditional dishes to complete their LNY spread.<5/> Designed to be as flexible as possible, the LNY Crawl is a unique way to discover and interact with amazing shops, restaurants, bakeries, and more in your own backyard!"
         },
         {
-          "question": "What is the purpose of the Send Chinatown Love Food Crawl?",
-          "answer": "Chinatown was disproportionately impacted by the lack of tourism and foot traffic resulting from COVID-19. To sustain long-term growth for the businesses in Chinatown, we have planned a food crawl for the entire month of September to bring foot traffic back to the neighborhood. <2></2> Unlike a traditional food crawl, we encourage you to participate at your own pace and on your own schedule throughout the month to better ensure everyone’s health and safety.<2></2>Collect tickets as you visit our 13 vendors around Chinatown and record them in your <1>Passport to Chinatown</1>. Your tickets will unlock rewards at local businesses in the neighborhood! Visit all 13 vendors for a chance to win a grand prize!"
+          "question": "What is the purpose of the Lunar New Year Crawl?",
+          "answer": "The goal of this event is to encourage people to explore locally while helping to bring some much needed support to small business owners who need it most.<5/>In 2020, most Chinatowns across the nation noted a large decline in business due to COVID-19 related xenophobia. Beginning as early as January 2020, these communities missed out on significant business from Lunar New Year celebrations, with the majority entering the subsequent lockdowns at a financial deficit that set a dire precedent for the year to come.<5/>Lunar New Year represents one of the most joyous and festive times of year for the Chinatowns across New York City. We hope to keep that spirit alive."
         },
         {
-          "question": "What is the Passport to Chinatown?",
-          "answer": "The <1>Passport to Chinatown</1> is a mobile site that will be your ultimate guide to the Send Chinatown Love Food Crawl. It will track which vendors you’ve visited and provide a full list of local rewards you can redeem once you’ve submitted your unique ticket codes."
+          "question": "How can I participate in the LNY Crawl?",
+          "answer": "From digital donations to take-out receipts, there are many ways to participate in the Crawl, even if you don’t live in New York! <5/> To make this event as accessible and COVID-safe as possible, you can either: (1) order take-out, (2) order delivery, (3) dine-in where available, or (4) donate to our merchants or our Gift-a-Meal campaigns at <3>www.sendchinatownlove.com</3><5/> Once you've made a purchase of <0>at least $10 USD</0>, upload or take a picture of your receipt using your <1>Passport to Lunar New Year</1> mobile site.<5/> Collect 3 receipts or provide 3 donations from different vendors to get a raffle ticket! You can use this raffle ticket to enter into one of our giveaway baskets."
         },
         {
-          "question": "How can I access my Passport to Chinatown?",
-          "answer": "Scan the QR code on your ticket to access your <1>Passport to Chinatown</1>. You will be prompted to submit your email address and your ticket code.<2></2> You can then view all of your collected tickets by entering your email address in your <1>Passport</1>, then clicking “View My Tickets.”"
+          "question": "I don’t live in NYC but still want to support local businesses. Can I still participate in the LNY Crawl?",
+          "answer": "Yes! If you can’t make it to one of our featured vendors, you can donate to any of our initiatives on <3>www.sendchinatownlove.com</3>. You can choose to donate to 1) merchants directly, 2) to a donation pool to have your funds evenly distributed among all our merchants, 3) or to our Gift-A-Meal program, where we work with merchants and local organizations to distribute meals to community members in need. Once you donate, your <1>Passport to Lunar New Year</1> will automatically update with a stamp, which you can collect to earn a raffle ticket to enter into our giveaway baskets.<5/>Be sure to use the same email for both your <1>Passport</1> and your donation(s)! "
         },
         {
-          "question": "How do I get a ticket?",
-          "answer": "Spend at least $5 at any one of our 13 participating vendors and you will be issued a ticket. Each ticket has a unique ticket code that cannot be replaced — don’t lose this!"
+          "question": "What do I get for participating?",
+          "answer": "Not only will you be supporting local businesses and finding new local favorites, but you’ll also be entering for a chance to win one of our giveaway baskets."
         },
         {
-          "question": "How many tickets do I get per purchase?",
-          "answer": "You get one (1) ticket per purchase over $5. You must spend a minimum of $5 to get one (1) ticket, and are limited to one (1) ticket per transaction. <2></2> You will not get multiple tickets for purchases over $5."
+          "question": "How do I enter the giveaway?",
+          "answer": "Winners of the giveaways will be drawn at the end of the month (February 2021). Once you collect 3 receipts from different LNY Crawl vendors (or make a donation on Send Chinatown Love’s website), you will earn 1 raffle ticket. You can use this raffle ticket as 1 entry towards the giveaway basket of your choice.<5/>You have unlimited entries and can collect as many receipts, (or provide as many donations), as you want!"
         },
         {
-          "question": "What are the tickets for?",
-          "answer": "The tickets are used to track the vendors you’ve visited. Be sure to submit your unique ticket code to your Passport to Chinatown. Once submitted, every three (3) tickets will unlock rewards from a list of our local rewards partners."
+          "question": "How do I get a raffle ticket?",
+          "answer": "Purchase a meal or item from any of our featured vendors, or make a donation of your choice on Send Chinatown Love’s website.5/>  Make a purchase of at least $10 USD, or make a donation of at least $5 USD.<5/> Upload a photo of your receipt from in-person purchases or takeout orders to your <1>Passport to Lunar New Year</1>. <5/> Collect 3 receipts from different vendors (or make donations), and you’ll get a raffle ticket in your <1>Passport</1>, allowing you to enter into the giveaway basket of your choice!"
         },
         {
-          "question": "How many tickets do I need to win a reward?",
-          "answer": "You must submit a <0>total of three (3) tickets</0> to redeem your reward at one of our local reward partners. Each of your three <0>(3) tickets</0> must be obtained from three (3) different vendors. You will <0>not</0> be eligible if you submit multiple tickets from the same vendor. <2></2> Every three (3) tickets qualifies you for one (1) local reward. You can get as many tickets as you want, as long as your three (3) tickets are from different vendors. <2></2> For example, if you collect a second ticket from a Food Crawl vendor you’ve already visited, you can use this ticket in combination with two other different vendors to redeem another reward. <2></2> You can only redeem your reward once you have <0>entered your unique ticket code</0> into your <1>Passport to Chinatown</1>."
-        },
-        {
-          "question": "What is a “rewards partner,” and who are they?",
-          "answer": "We have partnered with other local businesses to offer rewards to food crawl participants who have successfully collected three (3) tickets. These rewards range from discounts to complimentary items with a purchase. <2></2> See the full list of our reward partners and their offerings on our site, <3>www.sendchinatownlove.com/food-crawl</3>"
-        },
-        {
-          "question": "How do I redeem my reward?",
-          "answer": "Scan the QR code on the back side of your ticket to access your <1>Passport to Chinatown</1>. You will be able to keep track of the vendors you have visited and redeem your rewards there. <2></2> Once you have submitted three (3) tickets (one (1) ticket each from three (3) different vendors) to your <1>Passport</1>, you will be able to redeem a reward from one of our reward partners listed at <3>www.sendchinatownlove.com/food-crawl</3>. Visit one of our reward partners to redeem your reward!"
-        },
-        {
-          "question": "How long are the rewards valid for?",
-          "answer": "The rewards are redeemable from our local reward partners’ stores for the entire duration of the food crawl (September 1 - 30, 2020). Once you redeem a reward, your <1>Passport to Chinatown</1> will mark that reward as used. <2></2> Please note that some of our reward partners are only open certain days of the week. Check our website <3>www.sendchinatownlove.com/food-crawl</3> for the latest updates."
-        },
-        {
-          "question": "What are the weekly digital giveaways?",
-          "answer": "As an added bonus, once you have collected your three (3) tickets, you will be entered into a digital raffle to win our item of the week! These raffle items will be announced every Sunday."
-        },
-        {
-          "question": "How do I enter the weekly digital giveaways?",
-          "answer": "Once you’ve collected three (3) tickets and logged them into the <1>Passport to Chinatown</1>, you will also be entered into the digital giveaway with just one more step: <2></2> Post about the Food Crawl and tag us on Instagram (@sendchinatownlove). This can be an in-feed post or a story. You must include your Instagram username when submitting at least one of your tickets to your Passport to Chinatown."
-        },
-        {
-          "question": "How many times can I enter the digital giveaway? Can I have multiple entries?",
-          "answer": "Every three (3) tickets qualifies you for one (1) entry into our digital giveaway for the month. We’ll select winners four (4) times throughout the month."
-        },
-        {
-          "question": "Will the tickets I’ve collected carry over into other weeks?",
-          "answer": "Yes! Once you input your ticket codes into your <1>Passport to Chinatown</1>, they are automatically saved to your email. The tickets collected during one week of the Food Crawl can roll over to other weeks. For example, if you collect one (1) ticket during the first week of September, you can get two (2) more tickets during another week in September to have a total of three (3) tickets. You can now use these three (3) tickets to redeem a local reward from one of our reward partners. <2></2> We’ll select winners for digital giveaway four (4) times throughout the month."
-        },
-        {
-          "question": "Do I get a grand prize for visiting ALL 13 vendors on the Food Crawl?",
-          "answer": "YES! Visit all 13 vendors in the month of September to be entered into our grand prize giveaway!"
-        },
-        {
-          "question": "What should I bring?",
-          "answer": "<0>PPE</0>. Please bring and wear your mask at all times when you’re not eating or drinking. We want to encourage more foot traffic in the area, but not at the expense of others’ safety. Your own personal hand sanitizer is recommended, but not required, as many businesses will already have hand sanitizer available for you. <2></2> <0>Cash</0>. Remember to bring cash, since many businesses are cash only. If you forget, refer to our Food Crawl map for ATMs in the Chinatown area. <2></2> <0>Friends and family.</0> Food is always more enjoyable when shared with your loved ones!"
+          "question": "What is the Passport to <1>Lunar New Year</1>, and how do I use it? ",
+          "answer": "This is a mobile site built by our team where you can log your receipts for all of the vendors you support! Each time you collect a receipt, add it to your <1>Passport to Lunar New Year</1> by uploading a photo of the receipt. The more receipts you collect, the more chances you have to win giveaways! Once you’ve collected three receipts, you can use your <1>Passport</1> to enter into the giveaway basket of your choice."
         }
       ]
     },
     "placeholders": {
       "redeem": "Redeem",
-      "useTicket": "Use my raffle ticket",
+      "useTicket": "Enter my raffle ticket",
       "redeemNow": "Redeem Now",
       "viewItem": "View my tickets",
       "addTicket": "Add Ticket",
@@ -459,8 +422,8 @@
       "returnTo": "Return to passport",
       "prizeRedeemed": "PRIZE REDEEMED {{date}}",
       "readyToRedeem": "Thank you for supporting small businesses",
-      "leftToRedeem": "{{amount}} more receipts to your next goal",
-      "oneLeftToRedeem": "1 more receipt to your next goal",
+      "leftToRedeem": "{{amount}} more receipts to your {{goalNumber}} goal",
+      "oneLeftToRedeem": "1 more receipt to your {{goalNumber}} goal",
       "giveawayDetails": "View giveaway BASKET details",
       "cancel": "Cancel",
       "enterRaffle": "Enter Raffle Ticket",

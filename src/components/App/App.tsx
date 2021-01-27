@@ -115,13 +115,13 @@ const App = () => {
               <VoucherRedemptionPage />
             </VoucherProvider>
           </Route>
-          <Route exact path="/passport">
+          <Route exact path="/lny-passport">
             <PassportRedemption screen={ScreenType.Track} />
           </Route>
-          <Route exact path="/passport/:id/tickets">
+          <Route exact path="/lny-passport/:id/tickets">
             <PassportRedemption screen={ScreenType.Dashboard} />
           </Route>
-          <Route exact path="/passport/:id/redeem">
+          <Route exact path="/lny-passport/:id/redeem">
             <PassportRedemption screen={ScreenType.Rewards} />
           </Route>
           <Route exact path="/:seller_id/dashboard/:secret_id">

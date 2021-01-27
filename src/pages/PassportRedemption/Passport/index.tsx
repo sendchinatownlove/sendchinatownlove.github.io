@@ -30,7 +30,7 @@ const Passport = (props: Props) => {
   const [tickets, setTickets] = useState<any[]>([]);
 
   useEffect(() => {
-    push(`/passport/${id}/tickets`);
+    push(`/lny-passport/${id}/tickets`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -132,7 +132,7 @@ const Passport = (props: Props) => {
 
   const addTicket = (e) => {
     e.preventDefault();
-    push('/passport');
+    push('/lny-passport');
   };
 
   return (
@@ -173,7 +173,7 @@ const Passport = (props: Props) => {
             ) : (
               <SubHeader color={showFaq ? 'transparent' : 'white'}>
                 {t('passport.labels.daysLeft', {
-                  daysLeft: daysLeft('February 20, 2021'),
+                  daysLeft: daysLeft('February 28, 2021'),
                 })}
               </SubHeader>
             )}

@@ -101,7 +101,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
   };
 
   useEffect(() => {
-    history.push(`/passport/${id}/redeem`);
+    history.push(`/lny-passport/${id}/redeem`);
     fetchReceipts();
     fetchRewards();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,7 +109,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
 
   const handleCancel = (e) => {
     e.preventDefault();
-    history.push(`/passport/${id}/tickets`);
+    history.push(`/lny-passport/${id}/tickets`);
   };
 
   const handleSubmission = (e) => {
@@ -128,7 +128,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
           return {
             ...rew,
             active: true,
-            amount: rew.amount + 1
+            amount: rew.amount + 1,
           };
         }
         return rew;
@@ -145,15 +145,15 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
           return {
             ...rew,
             active: false,
-            amount: rew.amount - 1
+            amount: rew.amount - 1,
           };
         }
         return rew;
       });
 
       return newRewards;
-    }); 
-  }
+    });
+  };
 
   const activeRewards = rewards.filter((rew) => rew.active === true);
 
@@ -169,14 +169,14 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
               }).toUpperCase()}
         </Title>
         <SubText>{t('passport.labels.selectGiveawayBasket')}</SubText>
-        { activeRewards.length > 0 ? (
+        {activeRewards.length > 0 ? (
           <BasketDetails className="button--filled" onClick={clearTickets}>
             {t('passport.placeholders.clearSelection')}
           </BasketDetails>
         ) : (
-            <BasketDetails className="button--outlined" onClick={viewDetails}>
-              {t('passport.placeholders.giveawayDetails')}
-            </BasketDetails>
+          <BasketDetails className="button--outlined" onClick={viewDetails}>
+            {t('passport.placeholders.giveawayDetails')}
+          </BasketDetails>
         )}
       </Header>
       <TicketsContainer>
