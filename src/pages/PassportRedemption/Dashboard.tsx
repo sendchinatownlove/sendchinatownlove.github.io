@@ -21,7 +21,7 @@ const PassportRedemption = (props: Props) => {
   );
 
   useEffect(() => {
-    if (location.pathname === '/passport') {
+    if (location.pathname === '/lny-passport') {
       setCurrentScreenView(ScreenType.Track);
     } else if (location.pathname.includes('/tickets')) {
       setCurrentScreenView(ScreenType.Dashboard);

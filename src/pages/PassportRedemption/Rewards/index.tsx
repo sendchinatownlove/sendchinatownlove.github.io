@@ -101,7 +101,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
   };
 
   useEffect(() => {
-    history.push(`/passport/${id}/redeem`);
+    history.push(`/lny-passport/${id}/redeem`);
     fetchReceipts();
     fetchRewards();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,7 +109,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
 
   const handleCancel = (e) => {
     e.preventDefault();
-    history.push(`/passport/${id}/tickets`);
+    history.push(`/lny-passport/${id}/tickets`);
   };
 
   const handleSubmission = (e) => {

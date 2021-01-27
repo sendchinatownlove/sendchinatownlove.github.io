@@ -46,7 +46,7 @@ const Track = (props: Props) => {
       return;
     } else if (viewTickets && data) {
       const { data: hasTickets } = await getPassportTickets(data.id);
-      if (hasTickets.length) push(`/passport/${data.id}/tickets`);
+      if (hasTickets.length) push(`/lny-passport/${data.id}/tickets`);
       else setEmailError(t('passport.errors.noTickets'));
       return;
     }
@@ -78,7 +78,7 @@ const Track = (props: Props) => {
         formattedCode,
         contactId
       );
-      newContactId && push(`/passport/${newContactId.contact_id}/tickets`);
+      newContactId && push(`/lny-passport/${newContactId.contact_id}/tickets`);
     } else {
       setIsTicketValid(false);
       setTicketCode('');
