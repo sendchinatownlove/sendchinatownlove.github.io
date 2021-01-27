@@ -41,7 +41,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
             <Question>
               {`${idx + 1}.`} {faq.question}
             </Question>
-            <br/>
+            <br />
             <Trans
               i18nKey={`passport.faq.arrayOfQuestionAnswers.${idx}.answer`}
             >
@@ -51,7 +51,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
               <a
                 href="https://www.sendchinatownlove.com/"
                 target="_blank"
-                style={{color: 'white'}}
+                style={{ color: 'white' }}
                 rel="noopener noreferrer"
               >
                 https://www.sendchinatownlove.com/
@@ -70,16 +70,16 @@ const Faq = ({ showFaq, toggleView }: Props) => {
             </Trans>
           </div>
         ))}
-        <br/>
+        <br />
         <FAQFooter>
-          Questions? Email us at 
-            <a 
-              href="hello@sendchinatownlove.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-            hello@sendchinatownlove.com 
-            </a>
+          Questions? Email us at
+          <a
+            href="hello@sendchinatownlove.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            hello@sendchinatownlove.com
+          </a>
         </FAQFooter>
       </FaqContent>
     </Container>
