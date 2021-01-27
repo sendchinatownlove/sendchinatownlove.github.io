@@ -226,6 +226,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 375px;
   letter-spacing: 0.15em;
+  overflow: hidden;
 `;
 
 const PassportContainer = styled(CardContainer)<{

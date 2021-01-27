@@ -375,8 +375,20 @@
       "viewActiveRewards": "VIEW ACTIVE REWARDS & GIVEAWAYS",
       "arrayOfQuestionAnswers": [
         {
+          "question": "How do I enter the giveaway?",
+          "answer": "Winners of the giveaways will be drawn at the end of the month (February 2021). Once you collect 3 receipts from different LNY Crawl vendors (or make a donation on Send Chinatown Love’s website), you will earn 1 raffle ticket. You can use this raffle ticket as 1 entry towards the giveaway basket of your choice.<5/>You have unlimited entries and can collect as many receipts, (or provide as many donations), as you want!"
+        },
+        {
+          "question": "How do I get a raffle ticket?",
+          "answer": "Purchase a meal or item from any of our featured vendors, or make a donation of your choice on Send Chinatown Love’s website.<5/>  Make a purchase of at least $10 USD, or make a donation of at least $5 USD.<5/> Upload a photo of your receipt from in-person purchases or takeout orders to your <1>Passport to Lunar New Year</1>. <5/> Collect 3 receipts from different vendors (or make donations), and you’ll get a raffle ticket in your <1>Passport</1>, allowing you to enter into the giveaway basket of your choice!"
+        },
+        {
+          "question": "What is the Passport to <1>Lunar New Year</1>, and how do I use it? ",
+          "answer": "This is a mobile site built by our team where you can log your receipts for all of the vendors you support! Each time you collect a receipt, add it to your <1>Passport to Lunar New Year</1> by uploading a photo of the receipt. The more receipts you collect, the more chances you have to win giveaways! Once you’ve collected three receipts, you can use your <1>Passport</1> to enter into the giveaway basket of your choice."
+        },
+        {
           "question": "What is the Lunar New Year Crawl?",
-          "answer": "From February 1 - 28, 2021, Send Chinatown Love is hosting a Lunar New Year (LNY) Crawl in Manhattan, Brooklyn, and Queens to celebrate the special holiday. This event highlights 33+ vendors, ranging from gift shops to restaurants, to encourage communities to shop at local Asian-owned businesses in celebration of Lunar New Year! Participants can also shop for their LNY must-haves to prepare for their own celebrations, whether they need decorations or traditional dishes to complete their LNY spread.<5/> Designed to be as flexible as possible, the LNY Crawl is a unique way to discover and interact with amazing shops, restaurants, bakeries, and more in your own backyard!"
+          "answer": "From February 1 - 28, 2021, Send Chinatown Love is hosting a Lunar New Year (LNY) Crawl in Manhattan, Brooklyn, and Queens to celebrate the special holiday. This event highlights 33+ vendors, ranging from gift shops to restaurants, to encourage communities to shop at local Asian-owned businesses in celebration of Lunar New Year! Participants can also shop for their LNY must-haves to prepare for their own celebrations, whether they need decorations or traditional dishes to complete their LNY spread.</5> Designed to be as flexible as possible, the LNY Crawl is a unique way to discover and interact with amazing shops, restaurants, bakeries, and more in your own backyard!"
         },
         {
           "question": "What is the purpose of the Lunar New Year Crawl?",
@@ -393,19 +405,7 @@
         {
           "question": "What do I get for participating?",
           "answer": "Not only will you be supporting local businesses and finding new local favorites, but you’ll also be entering for a chance to win one of our giveaway baskets."
-        },
-        {
-          "question": "How do I enter the giveaway?",
-          "answer": "Winners of the giveaways will be drawn at the end of the month (February 2021). Once you collect 3 receipts from different LNY Crawl vendors (or make a donation on Send Chinatown Love’s website), you will earn 1 raffle ticket. You can use this raffle ticket as 1 entry towards the giveaway basket of your choice.<5/>You have unlimited entries and can collect as many receipts, (or provide as many donations), as you want!"
-        },
-        {
-          "question": "How do I get a raffle ticket?",
-          "answer": "Purchase a meal or item from any of our featured vendors, or make a donation of your choice on Send Chinatown Love’s website.5/>  Make a purchase of at least $10 USD, or make a donation of at least $5 USD.<5/> Upload a photo of your receipt from in-person purchases or takeout orders to your <1>Passport to Lunar New Year</1>. <5/> Collect 3 receipts from different vendors (or make donations), and you’ll get a raffle ticket in your <1>Passport</1>, allowing you to enter into the giveaway basket of your choice!"
-        },
-        {
-          "question": "What is the Passport to <1>Lunar New Year</1>, and how do I use it? ",
-          "answer": "This is a mobile site built by our team where you can log your receipts for all of the vendors you support! Each time you collect a receipt, add it to your <1>Passport to Lunar New Year</1> by uploading a photo of the receipt. The more receipts you collect, the more chances you have to win giveaways! Once you’ve collected three receipts, you can use your <1>Passport</1> to enter into the giveaway basket of your choice."
-        }
+        }        
       ]
     },
     "placeholders": {

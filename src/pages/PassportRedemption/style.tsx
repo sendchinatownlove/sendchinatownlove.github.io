@@ -56,6 +56,7 @@ const TitleRow = styled.div<{
   border-bottom: 2px solid
     ${(props) => (props.active ? 'rgb(248,186,23)' : 'transparent')};
   width: 100%;
+  min-height: 70px;
 `;
 
 const Title = styled.span`
