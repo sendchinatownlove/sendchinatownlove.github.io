@@ -99,7 +99,9 @@ const TicketRow = (props: Props) => {
     });
 
     while (filledStamps.length < 3) {
-      filledStamps.push(<EmptyStamp />);
+      filledStamps.push(
+        <EmptyStamp key={'empty stamp' + filledStamps.length} />
+      );
     }
 
     return filledStamps;
@@ -236,6 +238,8 @@ const RedeemRaffleTicketButton = styled(Button)`
   margin-top: 10px;
   align-items: center;
   text-align: center;
+  z-index: 100;
+  backcroung: white;
 
   border: 1.5px solid #a8192e;
   color: #a8192e;

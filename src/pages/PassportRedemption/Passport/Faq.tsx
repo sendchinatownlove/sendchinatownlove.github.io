@@ -39,7 +39,13 @@ const Faq = ({ showFaq, toggleView }: Props) => {
         {foodCrawlFaq.map((faq: any, idx) => (
           <div key={'foodCrawlFaq' + idx}>
             <Question>
-              {`${idx + 1}.`} {faq.question}
+              {`${idx + 1}.`}
+              <Trans
+                i18nKey={`passport.faq.arrayOfQuestionAnswers.${idx}.question`}
+              >
+                <strong />
+                <i />
+              </Trans>
             </Question>
             <br />
             <Trans
