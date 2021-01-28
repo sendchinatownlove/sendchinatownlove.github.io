@@ -4,6 +4,7 @@ enum ScreenType {
   Dashboard,
   Claim,
   LyftCode,
+  Upload,
 }
 
 export default ScreenType;

@@ -56,6 +56,7 @@ const TitleRow = styled.div`
 
 const Title = styled.span`
   color: ${(props) => (props.color ? props.color : 'black')};
+  text-transform: 'uppercase';
   font-size: 14px;
   font-weight: bold;
   text-align: center;

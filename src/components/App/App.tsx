@@ -36,23 +36,23 @@ history.listen((location) => {
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const GiftAMealPage = lazy(() => import('../MerchantsPage/gam/GiftAMealPage'));
-const LightUpChinatownPage = lazy(
-  () => import('../LightUpChinatown/LightUpChinatownPage')
+const LightUpChinatownPage = lazy(() =>
+  import('../LightUpChinatown/LightUpChinatownPage')
 );
 const ErrorPage = lazy(() => import('../404Page'));
-const VoucherRedemptionPage = lazy(
-  () => import('../../pages/VoucherRedemption')
+const VoucherRedemptionPage = lazy(() =>
+  import('../../pages/VoucherRedemption')
 );
-const MerchantVoucherDashboard = lazy(
-  () => import('../../pages/MerchantVoucherDashboard')
+const MerchantVoucherDashboard = lazy(() =>
+  import('../../pages/MerchantVoucherDashboard')
 );
 
-const PassportVoucher = lazy(
-  () => import('../../pages/PassportRedemption/Voucher')
+const PassportVoucher = lazy(() =>
+  import('../../pages/PassportRedemption/Voucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
-const DetachedVoucherPrintouts = lazy(
-  () => import('../../pages/VoucherManagement/DetachedVoucherPrintout')
+const DetachedVoucherPrintouts = lazy(() =>
+  import('../../pages/VoucherManagement/DetachedVoucherPrintout')
 );
 
 const options = {
@@ -117,6 +117,9 @@ const App = () => {
           </Route>
           <Route exact path="/passport">
             <PassportRedemption screen={ScreenType.Track} />
+          </Route>
+          <Route exact path="/passport/:id/upload">
+            <PassportRedemption screen={ScreenType.Upload} />
           </Route>
           <Route exact path="/passport/:id/tickets">
             <PassportRedemption screen={ScreenType.Dashboard} />
