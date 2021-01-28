@@ -280,6 +280,7 @@ const HeaderContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   margin: 12px auto;
+  overflow: hidden;
 `;
 const RedirectionLinks = styled.a`
   text-transform: uppercase;
@@ -299,8 +300,9 @@ const BodyContainer = styled.div`
   justify-content: center;
 
   position: absolute;
-  top: 155px;
+  // top: 155px;
   bottom: 0;
+  overflow: hidden; 
 `;
 const TableContainer = styled.div`
   width: 100%;
