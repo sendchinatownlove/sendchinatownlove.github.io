@@ -327,6 +327,7 @@ const SendEmailContainer = styled.div`
   padding: 15px;
   position: absolute;
   width: 95%;
+  min-height: 500px;
   margin: 0 auto;
   z-index: 20;
   top: 15px;

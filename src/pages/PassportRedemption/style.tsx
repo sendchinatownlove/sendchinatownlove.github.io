@@ -24,7 +24,7 @@ const CardContainer = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   box-sizing: border-box;
-  overflow: hidden;
+  // overflow: hidden;
 
   position: absolute;
   z-index: ${(props: PassportProps) => (props.mainView ? '10' : '0')};

@@ -239,7 +239,7 @@ const RedeemRaffleTicketButton = styled(Button)`
   align-items: center;
   text-align: center;
   z-index: 100;
-  backcroung: white;
+  background: #ffffff!important;
 
   border: 1.5px solid #a8192e;
   color: #a8192e;
