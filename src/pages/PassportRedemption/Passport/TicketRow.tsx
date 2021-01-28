@@ -99,7 +99,9 @@ const TicketRow = (props: Props) => {
     });
 
     while (filledStamps.length < 3) {
-      filledStamps.push(<EmptyStamp />);
+      filledStamps.push(
+        <EmptyStamp key={'empty stamp' + filledStamps.length} />
+      );
     }
 
     return filledStamps;

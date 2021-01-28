@@ -45,7 +45,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
               >
                 <strong />
                 <i />
-              </Trans> 
+              </Trans>
             </Question>
             <br />
             <Trans

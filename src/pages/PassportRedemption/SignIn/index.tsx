@@ -1,6 +1,6 @@
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles, Theme } from '@material-ui/core/styles';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -35,6 +35,11 @@ const Track = (props: Props) => {
   const [isTicketValid, setIsTicketValid] = useState(true);
 
   const [instagramHandle, setinstagramHandle] = useState('');
+
+  useEffect(() => {
+    push('/lny-passport');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const findOrCreateUser = async (email, viewTickets) => {
     const { data } = await getPassportEmailId(email);

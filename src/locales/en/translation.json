@@ -334,7 +334,7 @@
       "rewards": "Crawl FAQ",
       "learn": "Learn More",
       "contact": "Contact Us",
-      "giveAwayEntryGoal": "Tier {{tier}} giveaway ENTRY goal!",
+      "raffleTicketEarned": "You've earned a raffle ticket",
       "oneRaffleTicketAvailable": "1 Raffle ticket available",
       "raffleTicketAvailable": "{{amount}} Raffle tickets available"
     },
@@ -351,8 +351,9 @@
       "grandPrizeEntered": "Grand Prize Giveaway Entered",
       "weeklyGiveawayAnnounced": "Weekly Giveaway winners are announced on Instagram each Monday during the month of September. Grand Prize winners will be announced on October 1st.",
       "optional": "Optional",
-      "merchantsVisited": "You have visited {{merchantsVisited}} of our crawl merchants! You are 3 entries away from your next Giveaway entry.",
-      "thankYou": "Thank you for participating and supporting our Chinatown small businesses      ",
+      "merchantsVisited": "Congratulations on supporting {{merchantsVisited}} merchants! Way to show up for small, Asian-owned businesses across the city.",
+      "thankYou": "You are just {{stamps}} stamps away from your next giveway entry and another chance to win. Keep up the great work!",
+      "thankYouSingle": "You are just 1 stamp away from your next giveway entry and another chance to win. Keep up the great work!",
       "itemsAvailable": "{{amount}} {{item}} Available",
       "itemsExpiration": "{{item}} available until {{date}}",
       "moreTickets": "Have more tickets to add?",
@@ -405,7 +406,7 @@
         {
           "question": "What do I get for participating?",
           "answer": "Not only will you be supporting local businesses and finding new local favorites, but you’ll also be entering for a chance to win one of our giveaway baskets."
-        }        
+        }
       ]
     },
     "placeholders": {
@@ -416,7 +417,7 @@
       "addTicket": "Add Ticket",
       "addNewReceipt": "Add New Receipt",
       "addNewReceipts": "Add New Receipts",
-      "close": "Close",
+      "close": "Enter Later",
       "activeRewardsLink": "View active rewards & giveaways",
       "markUsed": "Mark as used",
       "returnTo": "Return to passport",
@@ -427,6 +428,7 @@
       "giveawayDetails": "View giveaway BASKET details",
       "cancel": "Cancel",
       "enterRaffle": "Enter Raffle Ticket",
+      "enterMyRaffle": "Enter My Raffle Ticket",
       "clearSelection": "Clear Selection"
     }
   }
