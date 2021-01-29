@@ -157,3 +157,13 @@ export type Nonprofit = {
   name: string;
   updated_at: string;
 };
+
+export type Contact = {
+  email: string;
+  is_subscribed: boolean;
+  name?: string;
+  id: number;
+  instagram?: string;
+  rewards_redemption_access_token?: string;
+  expires_at?: string;
+};

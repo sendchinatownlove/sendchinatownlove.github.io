@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-
+import ReactMarkdown from 'react-markdown';
 import type {
   Campaign,
   SellerDistributorPair as SellerDistributorPairType,
@@ -53,10 +53,12 @@ const MegaGamListItem = ({ campaign }: Props) => {
           />
         </CampaignImageContainer>
         <CampaignContent>
-          {/* TODO: Figure out if this is the correct header. If so, we need to translate. */}
-          <Header>Mega-GAM</Header>
+          {/* TODO: Figure out what text will go in the header (i.e. blue text) for future mega gam campaigns */}
+          <Header></Header>
           <Subheader>{campaign.display_name}</Subheader>
-          <Description>{campaign.description}</Description>
+          <Description>
+            <ReactMarkdown source={campaign.description} />
+          </Description>
           <DonationContainer>
             <CampaignProgressBar
               endDate={campaign.end_date}
@@ -227,7 +229,6 @@ const Subheader = styled.div`
 const Description = styled.div`
   font-size: 18px;
   margin-bottom: 24px;
-
   @media (${tabletScreens}) {
     font-size: 14px;
   }

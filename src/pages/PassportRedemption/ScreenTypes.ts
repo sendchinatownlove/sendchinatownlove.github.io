@@ -5,6 +5,7 @@ enum ScreenType {
   Claim,
   LyftCode,
   Upload,
+  Email,
 }
 
 export default ScreenType;

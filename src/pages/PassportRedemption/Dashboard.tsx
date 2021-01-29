@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import TrackScreen from './SignIn';
+import UploadScreen from './SignIn/uploadScreen';
 import RewardsSelectScreen from './Rewards';
 import RedemptionClaimScreen from './Redemption';
 import ScreenType from './ScreenTypes';
 import PassportScreen from './Passport';
 import LyftCodeScreen from './Lyft';
 
-import CrawlMap from './Assets/CrawlMap.png';
 import { useHistory } from 'react-router-dom';
 
 interface Props {
@@ -22,12 +22,14 @@ const PassportRedemption = (props: Props) => {
   );
 
   useEffect(() => {
-    if (location.pathname === '/passport') {
+    if (location.pathname === '/lny-passport') {
       setCurrentScreenView(ScreenType.Track);
     } else if (location.pathname.includes('/tickets')) {
       setCurrentScreenView(ScreenType.Dashboard);
     } else if (location.pathname.includes('/upload')) {
       setCurrentScreenView(ScreenType.Upload);
+    } else if (location.pathname.includes('/redeem')) {
+      setCurrentScreenView(ScreenType.Rewards);
     }
   }, [location.pathname]);
 
@@ -41,9 +43,9 @@ const PassportRedemption = (props: Props) => {
           <RewardsSelectScreen setCurrentScreenView={setCurrentScreenView} />
         );
       case ScreenType.Track:
-        return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
+        return <TrackScreen currentView={ScreenType.Email} />;
       case ScreenType.Upload:
-        return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
+        return <TrackScreen currentView={ScreenType.Upload} />;
       case ScreenType.Dashboard:
         return <PassportScreen setCurrentScreenView={setCurrentScreenView} />;
       case ScreenType.Claim:
@@ -53,7 +55,7 @@ const PassportRedemption = (props: Props) => {
       case ScreenType.LyftCode:
         return <LyftCodeScreen />;
       default:
-        return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
+        return <TrackScreen currentView={ScreenType.Email} />;
     }
   };
 
@@ -63,14 +65,10 @@ const PassportRedemption = (props: Props) => {
 export default PassportRedemption;
 
 const Container = styled.div`
-  background-color: #e5e5e5;
+  background-color: #ffffff;
   min-height: 100vh;
-  background-image: url(${CrawlMap});
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  @media (max-width: 475px) {
-    background-size: 500px;
-  }
 `;

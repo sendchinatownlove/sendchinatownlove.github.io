@@ -1,24 +1,32 @@
-import React, { useState, useEffect } from 'react';
-// import { useHistory } from 'react-router-dom';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { Title } from '../style';
 import { socialMediaLinks } from '../../../consts';
+import ScreenType from '../ScreenTypes';
 
 import CircleLogo from '../Assets/CircleLogo.png';
 import EmailScreen from './emailScreen';
 import UploadScreen from './uploadScreen';
 
 interface Props {
-  setCurrentScreenView: Function;
+  currentView: ScreenType;
 }
 
-const Track = (props: Props) => {
+const Track = ({ currentView }: Props) => {
   const { t } = useTranslation();
 
-  // THIS WILL BE DELETED. FOR TESTING ONLY.
-  const [page, setPage] = useState(0);
+  const setCurrentView = (currentView) => {
+    switch (currentView) {
+      case ScreenType.Email:
+        return <EmailScreen />;
+      case ScreenType.Upload:
+        return <UploadScreen />;
+      default:
+        return <EmailScreen />;
+    }
+  };
 
   return (
     <Container>
@@ -28,9 +36,7 @@ const Track = (props: Props) => {
           <Title color="#a8192e">
             {t('passport.headers.passport').toUpperCase()}
           </Title>
-
-          {page === 0 && <EmailScreen setPage={setPage} />}
-          {page === 1 && <UploadScreen />}
+          {setCurrentView(currentView)}
         </InputContainer>
       </PassportCard>
 

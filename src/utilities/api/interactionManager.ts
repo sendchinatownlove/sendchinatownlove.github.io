@@ -18,6 +18,7 @@ import {
   nonprofits,
   projects,
   gcs,
+  crawlReceipts,
 } from './endpoints';
 
 // Fix return typing
@@ -400,3 +401,19 @@ export const getUploadUrl = async (filename: string, filetype: string) => {
     file_type: filetype,
   });
 };
+
+export const uploadCrawlReceipts = async (
+  participating_seller_id: number,
+  contact_id: number,
+  amount: number,
+  receipt_url: string
+) =>
+  axios
+    .post(crawlReceipts, {
+      participating_seller_id,
+      contact_id,
+      amount,
+      receipt_url,
+    })
+    .then((res) => res)
+    .catch((err) => err);

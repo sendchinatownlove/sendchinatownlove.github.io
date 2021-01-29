@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -9,67 +9,61 @@ import { Button } from './emailScreen';
 import {
   getUploadUrl,
   sendImage,
-  getContactInfo,
   getAllParticipatingSellers,
+  uploadCrawlReceipts,
 } from '../../../utilities/api/interactionManager';
 import uploadImageIcon from '../Assets/uploadImage.png';
 
 const UploadScreen = () => {
+  const { push } = useHistory();
   const { t } = useTranslation();
   const { id } = useParams();
 
-  const [email, setEmail] = useState('');
+  // all sellers part of the lny crawl - retrieved on initial load of the page
+  const [allParticipatingSellers, setallParticipatingSellers] = useState<any>(
+    []
+  );
 
-  useEffect(() => {
-    if (id) {
-      getContactInfo(id)
-        .then((contactInfo) => {
-          // FIGURE OUT IF THIS IS CORRECT STRUCTURE & IF WERE DOING IT LIKE THIS?
-          setEmail(contactInfo.data.email);
-        })
-        .catch((err) => {
-          console.log('passport error: ' + err);
-        });
-    }
-  }, [id]);
+  // seller name + id
+  const [participatingSeller, setParticipatingSeller] = useState('');
+  const [participatingSellerId, setParticipatingSellerId] = useState<number>(
+    -1
+  );
 
-  const [businessName, setBusinessName] = useState('');
+  // search values + did user select a valid merchant?
+  const [sellersSearchBar, setSellersSearchBar] = useState<any>([]);
+  const [selectedSeller, setSelectedSeller] = useState(true);
 
-  const [array, setArray] = useState<any>([]);
-  const [selected, setSelectedMerchant] = useState(true);
+  // receipt total
+  const [billTotal, setBillTotal] = useState('');
 
-  // TODO: UPDATE THIS WITH DATA FROM AN ACTUAL AJAX CALL!
-  const [searchBar, setSearchBar] = useState<any>([]);
+  // string value of receipt + actual receipt (file format)
+  const [receiptFilePath, setReceiptFilePath] = useState('');
+  const [receipt, setReceipt] = useState<File | null>(null);
 
   useEffect(() => {
     const getAllSellers = async () => {
       const { data: allSellers } = await getAllParticipatingSellers();
-      setSearchBar(allSellers);
+      setallParticipatingSellers(allSellers);
     };
     getAllSellers();
   }, []);
 
   useEffect(() => {
     const debouncer = setTimeout(() => {
-      if (searchBar[0]?.name) {
-        let match = searchBar
+      if (allParticipatingSellers[0]?.name) {
+        let match = allParticipatingSellers
           .filter((merchant) =>
             merchant?.name
               .toLowerCase()
-              .includes(businessName.toLowerCase().trim())
+              .includes(participatingSeller.toLowerCase().trim())
           )
           .slice(0, 5);
-        setArray(match);
+        setSellersSearchBar(match);
       }
     }, 200);
-
     return () => clearTimeout(debouncer);
-  }, [businessName, searchBar]);
-
-  const [billTotal, setBillTotal] = useState('');
-
-  const [receiptFilePath, setReceiptFilePath] = useState('');
-  const [receipt, setReceipt] = useState<File | null>(null);
+  }, [participatingSeller, allParticipatingSellers]);
 
   const uploadImage = async (event) => {
     event.preventDefault();
@@ -80,27 +74,30 @@ const UploadScreen = () => {
   };
 
   const submitReceipt = async () => {
-    let filename;
-
     if (receipt === null) return false;
 
     try {
       const ext = receipt.type.split('/')[1];
-      // filename = `${email.split('@')[0]}-${new Date()
-      //   .toISOString()
-      //   .replace(/(:|\.)/g, '-')}.${ext}`;
 
-      filename = `hello-${new Date()
+      let filename = `${id}-${new Date()
         .toISOString()
-        .replace(/(:|\.)/g, '-')}.${ext}`;
+        .replace(/(:|\.)/g, '-')}.${ext}-${participatingSeller}`;
 
+      // upload receipt to gc
       const signedUrl = unescape(
         (await getUploadUrl(filename, receipt.type)).data.url
       );
-
-      // TODO: UPDATE THIS ENDPOINT WITH ALL RECEIPT PARAMS
-      // save filename and send with final request to be saved in DB
       await sendImage(signedUrl, filename, receipt);
+
+      // upload info + receipt to db
+      let data = await uploadCrawlReceipts(
+        participatingSellerId,
+        id,
+        Number(billTotal),
+        filename
+      );
+
+      if (data) push(`/lny-passport/${id}/tickets`);
     } catch (err) {
       console.log(err);
     }
@@ -114,30 +111,31 @@ const UploadScreen = () => {
         <Label htmlFor="crawl-merchant-name">
           {t('passport.labels.crawlMerchant')}
         </Label>
-        <CustomSymbolContainer className="searchBar">
+        <CustomSymbolContainer className="allParticipatingSellers">
           <InputField
             name="crawl-merchant-name"
             type="text"
             onChange={(e) => {
               e.preventDefault();
-              setBusinessName(e.target.value);
-              setSelectedMerchant(false);
+              setParticipatingSeller(e.target.value);
+              setSelectedSeller(false);
             }}
-            value={businessName}
+            value={participatingSeller}
             placeholder="Search Chinatown Businesses"
           />
         </CustomSymbolContainer>
 
-        {!!businessName && !selected ? (
-          !!array.length ? (
+        {!!participatingSeller && !selectedSeller ? (
+          !!sellersSearchBar.length ? (
             <SearchContainer>
-              {array.map((merchant) => (
+              {sellersSearchBar.map((merchant) => (
                 <SearchResult
                   key={merchant.name + 'lny-crawl'}
                   onClick={(e) => {
                     e.preventDefault();
-                    setBusinessName(merchant.name);
-                    setSelectedMerchant(true);
+                    setParticipatingSeller(merchant.name);
+                    setSelectedSeller(true);
+                    setParticipatingSellerId(merchant.id);
                   }}
                 >
                   {merchant.name}
@@ -146,8 +144,7 @@ const UploadScreen = () => {
             </SearchContainer>
           ) : (
             <SearchContainer className="addPadding">
-              Sorry, this name doesn’t correspond with one of our participating
-              merchants. Please try searching again.
+              {t('passport.errors.validParticipatingSeller')}
             </SearchContainer>
           )
         ) : null}
@@ -163,9 +160,12 @@ const UploadScreen = () => {
               setBillTotal(e.target.value);
             }}
             value={billTotal}
-            min="0"
+            min="10"
             step=".01"
           />
+          <SubTitle color="grey" spacing="none">
+            $10 minimum
+          </SubTitle>
         </CustomSymbolContainer>
 
         <ButtonTest>
@@ -173,7 +173,7 @@ const UploadScreen = () => {
             <>
               <img src={uploadImageIcon} alt="upload-receipt-arrow-img" />
               <p />
-              <span>Tap to upload a picture of your receipt</span>
+              <span>{t('passport.labels.uploadReceipt')}</span>
             </>
           ) : (
             <>
@@ -181,7 +181,9 @@ const UploadScreen = () => {
                 src={receiptFilePath}
                 alt="upload-receipt-arrow-img"
               />
-              <ReplaceButton>Tap to replace</ReplaceButton>
+              <ReplaceButton>
+                {t('passport.labels.reuploadReceipt')}
+              </ReplaceButton>
             </>
           )}
           <input
@@ -197,7 +199,7 @@ const UploadScreen = () => {
       <InputContainer className="bottom">
         <Button
           primary={true}
-          disabled={!businessName && !receipt && !billTotal}
+          disabled={!participatingSeller || !receipt || Number(billTotal) < 10}
           onClick={(e) => {
             e.preventDefault();
             submitReceipt();
@@ -234,7 +236,6 @@ const SearchResult = styled.div`
 
 const SelectedImage = styled.img`
   width: 100%;
-  // height: 115px;
 `;
 
 const ReplaceButton = styled.span`
@@ -265,7 +266,7 @@ const CustomSymbolContainer = styled.div`
     }
   }
 
-  &.searchBar {
+  &.allParticipatingSellers {
     :before {
       content: '\f002';
       font-family: FontAwesome;

@@ -12,12 +12,7 @@ import {
   getPassportTickets,
 } from '../../../utilities/api/interactionManager';
 
-// TODO: ATHENA - delete this, used only for testing!
-interface Props {
-  setPage: Function;
-}
-
-const EmailScreen = ({ setPage }: Props) => {
+const EmailScreen = () => {
   const { t } = useTranslation();
   const { push } = useHistory();
 
@@ -33,7 +28,7 @@ const EmailScreen = ({ setPage }: Props) => {
       return;
     } else {
       const { data: hasTickets } = await getPassportTickets(data.id);
-      if (hasTickets.length) push(`/passport/${data.id}/tickets`);
+      if (hasTickets.length) push(`/lny-passport/${data.id}/tickets`);
       else setEmailError(t('passport.errors.noTickets'));
       return;
     }
@@ -46,7 +41,7 @@ const EmailScreen = ({ setPage }: Props) => {
       const { data: newUser } = await createPassportEmailId(email);
       data = newUser;
     }
-    push(`/passport/${data.id}/upload`);
+    push(`/lny-passport/${data.id}/upload`);
   };
 
   return (
@@ -79,8 +74,7 @@ const EmailScreen = ({ setPage }: Props) => {
           disabled={!email || !ModalPaymentConstants.EMAIL_REGEX.test(email)}
           onClick={(e) => {
             e.preventDefault();
-            setPage(1);
-            // viewUploadScreen(email)
+            viewUploadScreen(email);
           }}
         >
           Log Receipts
