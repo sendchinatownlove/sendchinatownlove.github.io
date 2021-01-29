@@ -81,6 +81,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
     if (selectedRewards.length - numReceipts === 0) {
       history.push(`/lny-passport/${id}/tickets`);
     } else {
+      fetchRewards();
       fetchReceipts(id);
     }
   };
