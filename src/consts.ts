@@ -69,6 +69,16 @@ interface SocialMediaLink {
   url: string;
 }
 
+const SellerIds = {
+  APEX_FOR_YOUTH: 'apex-for-youth',
+  SEND_CHINATOWN_LOVE: 'send-chinatown-love',
+};
+
+const SellerNames = {
+  APEX_FOR_YOUTH: 'Apex for Youth',
+  SEND_CHINATOWN_LOVE: 'Send Chinatown Love',
+};
+
 const socialMediaLinks: SocialMediaLink[] = [
   {
     platform: 'facebook',
@@ -98,6 +108,8 @@ export {
   MAILTO_URL,
   Page,
   SquareErrors,
+  SellerIds,
+  SellerNames,
   hasKey,
   socialMediaLinks,
   LIGHT_UP_CHINATOWN_TIER_2_MIN,
