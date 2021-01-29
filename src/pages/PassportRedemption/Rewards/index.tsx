@@ -9,6 +9,7 @@ import RaffleTicketCombo from '../Assets/RaffleTicketCombo.png';
 import {
   getCrawlRewards,
   getCrawlReceipts,
+  redeemRaffle
 } from '../../../utilities/api/interactionManager';
 
 interface Props {
@@ -24,22 +25,17 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
   const [rewards, setRewards] = useState<any[]>([]);
 
   const numReceipts = Math.floor(receipts.length / 3);
-  // const totalAmount = receipts.reduce((acc, curr) => {
-  //   acc += curr.amount;
-  //   return acc;
-  // }, 0);
+  const selectedRewards = rewards.filter((reward) => reward.active).map((reward) => reward.id);
 
   const fetchRewards = async () => {
     try {
-      // TODO: GET /Rewards
       const apiRewards = await getCrawlRewards();
-      console.log(apiRewards);
-      // const parsedRewards = apiRewards.data.map((reward) => ({
-      //   ...reward,
-      //   active: false,
-      //   amount: 0,
-      // }));
-      // setRewards(parsedRewards);
+      const parsedRewards = apiRewards.data.map((reward) => ({
+        ...reward,
+        active: false,
+        amount: 0,
+      }));
+      setRewards(parsedRewards);
     } catch (err) {
       console.error('passport error: ' + err);
     }
@@ -47,8 +43,6 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
 
   const fetchReceipts = async (id) => {
     try {
-      // TODO: GET /contacts/:contact_id/crawl_receipts
-      // filter it so that the receipts must have a null sponsor_seller_id (that are uploaded but not redeeemed)
       const apiReceipts = await getCrawlReceipts(id);
       const parsedReceipts = apiReceipts.data.sort(
         (a, b) => a.redemption_id - b.redemption_id
@@ -81,6 +75,15 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
 
   const handleSubmission = async (e) => {
     e.preventDefault();
+    const selectedRewards = rewards.filter((reward) => reward.active).map((reward) => reward.id);
+    for (const reward_id of selectedRewards) {
+      redeemRaffle(id, reward_id);
+    }
+    if (selectedRewards.length - numReceipts === 0) {
+      history.push(`/lny-passport/${id}/tickets`);
+    } else {
+      fetchReceipts(id);
+    }
   };
 
   const handleTicketSelection = (e) => {
@@ -122,16 +125,16 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
   };
 
   const activeRewards = rewards.filter((rew) => rew.active === true);
-
+  const ticketsLeft = numReceipts - selectedRewards.length;
   return (
     <Container>
       <Header>
         <Logo src={RaffleTicketCombo} alt="raffle-redemption" />
         <Title color="black">
-          {numReceipts === 1
+          {ticketsLeft === 1
             ? t('passport.headers.oneRaffleTicketAvailable').toUpperCase()
             : t('passport.headers.raffleTicketAvailable', {
-                amount: numReceipts,
+                amount: ticketsLeft,
               }).toUpperCase()}
         </Title>
         <SubText>{t('passport.labels.selectGiveawayBasket')}</SubText>
@@ -153,6 +156,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
               name={reward.id}
               onClick={handleTicketSelection}
               key={reward.id}
+              disabled={ticketsLeft === 0}
             >
               <TicketHeader>
                 <TicketTopRow>
@@ -176,7 +180,6 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
           <EnterRaffleTicketButton
             className="button--red-filled"
             onClick={handleSubmission}
-            value={activeRewards.length}
           >
             {t('passport.placeholders.enterRaffle').toUpperCase()}
           </EnterRaffleTicketButton>
@@ -203,10 +206,10 @@ const Container = styled.div`
 const Header = styled.div`
   width: 100%;
   margin: 0 auto;
-  margin-top: 30px;
-  position: fixed:
+  margin-top: 20px;
+  position: fixed;
   z-index: 100;
-  height: 215px;
+  height: 250px;
 
   top: 0;
   display: flex;
@@ -216,8 +219,8 @@ const Header = styled.div`
 const TicketsContainer = styled.div`
   width: 100%;
   position: fixed;
-  bottom: 50px;
   top: 250px;
+  bottom: 0;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -286,6 +289,7 @@ const SubText = styled(Title)`
 `;
 const BasketDetails = styled(Button)`
   width: 300px;
+  height: 40px;
   font-size: 12px;
   font-weight: bold;
   text-align: center;
@@ -299,7 +303,14 @@ const EnterRaffleContainer = styled.div`
   flex-direction: column;
   justify-self: center;
   align-self: center;
-  width: 300px;
+  width: 100%;
+  
+  span {
+    width: 300px;
+  }
+  
+  background: linear-gradient(180deg,rgba(255,255,255,0) 5.31%,#FFFFFF 22.65%);
+  padding-top: 20px;
 `;
 const EnterRaffleTicketButton = styled(Button)`
   font-weight: bold;
@@ -313,11 +324,16 @@ const CancelButton = styled(Button)`
   justify-self: center;
   align-self: center;
 
-  background: transparent;
   border: none;
   text-decoration: underline;
   font-size: 12px;
   font-weight: bold;
   text-align: center;
   letter-spacing: 0.15em;
+
+  width: 100%;
+  justify-content: center;
+  background: linear-gradient(180deg,rgba(255,255,255,0) 3.31%,#FFFFFF 68.65%); 
+  padding: 30px 0 20px 0;
+  margin: 0 auto;
 `;
