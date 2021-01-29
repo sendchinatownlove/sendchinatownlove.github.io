@@ -342,6 +342,9 @@
     "labels": {
       "daysLeft": "{{daysLeft}} days left",
       "enterTicket": "Enter your ticket code to start accumulating rewards you can use in Chinatown",
+      "showReceipt": "To log your receipt, select the merchant you visited and add the total bill amount. Then, upload an image of the receipt from your phone’s photo library or take one live.",
+      "crawlMerchant": "Crawl Merchant",
+      "billTotal": "Bill Total",
       "email": "Email Address",
       "ticketCode": "Ticket Code",
       "instagramHandle": "Instagram Handle",
@@ -366,11 +369,14 @@
       "earnedYourTicket": "You’ve earned a ticket!",
       "selectGiveawayBasket": "Select a giveaway basket to enter your ticket into below.",
       "totalValue": "Total Value",
-      "ticketSelection": "Once you've made a selection, you cannot change your raffle entry."
+      "ticketSelection": "Once you've made a selection, you cannot change your raffle entry.",
+      "uploadReceipt": "Tap to upload a picture of your receipt",
+      "reuploadReceipt": "Tap to replace"
     },
     "errors": {
       "validEmail": "Please enter a valid email address.",
       "noTickets": "Sorry, there are no saved tickets tied to this email.",
+      "validParticipatingSeller": "Sorry, this name doesn’t correspond with one of our participating merchants. Please try searching again.",
       "validTicket": "This is not a valid Ticket Code. Please check your ticket again and make sure you haven’t added this ticket before."
     },
     "faq": {

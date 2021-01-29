@@ -17,6 +17,8 @@ import {
   lyftRewards,
   nonprofits,
   projects,
+  gcs,
+  crawlReceipts,
 } from './endpoints';
 
 // Fix return typing
@@ -266,12 +268,11 @@ export const getContactInfo = async (passportId: string) =>
 
 export const createPassportEmailId = async (
   email: string,
-  instagram: string
+  instagram?: string
 ) => {
   let params = {};
 
-  if (instagram) params = { email, instagram };
-  else params = { email };
+  params = instagram ? { email, instagram } : { email };
 
   return axios
     .post(contacts, params)
@@ -381,3 +382,38 @@ export const getProject = async (project_id: number) =>
     .catch((err) => err);
 
 export const light_up_chinatown_id = 1;
+
+export const sendImage = async (
+  signedUrl: string,
+  filename: string,
+  image: File
+) => {
+  return axios.put(signedUrl, image, {
+    headers: {
+      'Content-Type': image.type,
+    },
+  });
+};
+
+export const getUploadUrl = async (filename: string, filetype: string) => {
+  return axios.post(gcs, {
+    file_name: filename,
+    file_type: filetype,
+  });
+};
+
+export const uploadCrawlReceipts = async (
+  participating_seller_id: number,
+  contact_id: number,
+  amount: number,
+  receipt_url: string
+) =>
+  axios
+    .post(crawlReceipts, {
+      participating_seller_id,
+      contact_id,
+      amount,
+      receipt_url,
+    })
+    .then((res) => res)
+    .catch((err) => err);

@@ -242,7 +242,7 @@ const SelectAmtContainer = styled.div`
   margin: 15px 0px;
 `;
 
-const CustomAmountContainer = styled.div`
+export const CustomAmountContainer = styled.div`
   position: relative;
   display: inline;
   :before {

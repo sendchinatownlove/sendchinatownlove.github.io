@@ -1,232 +1,42 @@
-import Tooltip from '@material-ui/core/Tooltip';
-import { withStyles, Theme } from '@material-ui/core/styles';
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import { Title, SubTitle, Button, ErrorMessage } from '../style';
+import { Title } from '../style';
 import { socialMediaLinks } from '../../../consts';
-import {
-  getPassportEmailId,
-  createPassportEmailId,
-  updatePassportInstagram,
-  checkForValidTicket,
-  updateTicketContactId,
-  getPassportTickets,
-} from '../../../utilities/api/interactionManager';
-import { ModalPaymentConstants } from '../../../utilities/hooks/ModalPaymentContext';
+import ScreenType from '../ScreenTypes';
 
-import CrawlInfoIcon from '../Assets/CrawlInfoIcon.png';
 import CircleLogo from '../Assets/CircleLogo.png';
+import EmailScreen from './emailScreen';
+import UploadScreen from './uploadScreen';
 
 interface Props {
-  setCurrentScreenView: Function;
+  currentView: ScreenType;
 }
 
-const Track = (props: Props) => {
+const Track = ({ currentView }: Props) => {
   const { t } = useTranslation();
-  const { push } = useHistory();
 
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-
-  const [ticketCode, setTicketCode] = useState('');
-  const [isTicketValid, setIsTicketValid] = useState(true);
-
-  const [instagramHandle, setinstagramHandle] = useState('');
-
-  useEffect(() => {
-    push('/lny-passport');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const findOrCreateUser = async (email, viewTickets) => {
-    const { data } = await getPassportEmailId(email);
-
-    // (to view tickets): sets error message for non-existent users and users with no tickets
-    if (viewTickets && !data) {
-      setEmailError(t('passport.errors.noTickets'));
-      setEmail('');
-      return;
-    } else if (viewTickets && data) {
-      const { data: hasTickets } = await getPassportTickets(data.id);
-      if (hasTickets.length) push(`/lny-passport/${data.id}/tickets`);
-      else setEmailError(t('passport.errors.noTickets'));
-      return;
-    }
-
-    // (to add tickets): searches for existing user or creates new user
-    let contactId = '';
-    if (data) {
-      contactId = data.id;
-      // updates instagram handle for existing users
-      if (instagramHandle) {
-        await updatePassportInstagram(contactId, instagramHandle);
-      }
-    } else {
-      const {
-        data: { id },
-      } = await createPassportEmailId(email, instagramHandle);
-      contactId = id;
-    }
-    await findTicketCode(ticketCode, contactId);
-  };
-
-  const findTicketCode = async (code, contactId) => {
-    let formattedCode = code.split('-').join('');
-    formattedCode = formattedCode.toUpperCase();
-
-    const { data } = await checkForValidTicket(formattedCode);
-    if (data && !data.contact_id) {
-      const { data: newContactId } = await updateTicketContactId(
-        formattedCode,
-        contactId
-      );
-      newContactId && push(`/lny-passport/${newContactId.contact_id}/tickets`);
-    } else {
-      setIsTicketValid(false);
-      setTicketCode('');
+  const setCurrentView = (currentView) => {
+    switch (currentView) {
+      case ScreenType.Email:
+        return <EmailScreen />;
+      case ScreenType.Upload:
+        return <UploadScreen />;
+      default:
+        return <EmailScreen />;
     }
   };
-
-  // const formatTicketCode = (code) => {
-  //   if (code.length === 3) {
-  //     setTicketCode(code + '-');
-  //   }
-  // };
-
-  const SupporterTooltip = withStyles((theme: Theme) => ({
-    tooltip: {
-      backgroundColor: '#ffffff',
-      color: 'rgba(0, 0, 0, 0.87)',
-      width: '100%',
-      fontSize: theme.typography.pxToRem(14),
-      border: '1px solid #dadde9',
-    },
-  }))(Tooltip);
 
   return (
     <Container>
       <PassportCard>
         <Logo src={CircleLogo} alt="scl-log" />
-        <InputContainer className="trackScreen top">
-          <Title color="#a8192e">{t('passport.headers.passport')}</Title>
-          <SubTitle>{t('passport.labels.enterTicket')}</SubTitle>
-          <Column />
-          <Column>
-            <Label htmlFor="email-input">{t('passport.labels.email')}</Label>
-            <InputField
-              name="email-input"
-              type="email"
-              onChange={(e) => {
-                e.preventDefault();
-                setEmail(e.target.value);
-                setEmailError('');
-              }}
-              onBlur={(e) => {
-                e.preventDefault();
-                if (!!email && !ModalPaymentConstants.EMAIL_REGEX.test(email)) {
-                  setEmailError(t('passport.errors.validEmail'));
-                }
-              }}
-              value={email}
-              pattern={ModalPaymentConstants.EMAIL_REGEX.source}
-            />
-            {emailError && <ErrorMessage>{emailError}</ErrorMessage>}
-          </Column>
-
-          <Column>
-            <Label htmlFor="ticket-code">
-              {t('passport.labels.ticketCode')}
-            </Label>
-            <InputField
-              name="ticket-code"
-              type="text"
-              onChange={(e) => {
-                setTicketCode(e.target.value);
-                setIsTicketValid(true);
-              }}
-              // onKeyUp={(e) => {
-              //   if (e.key !== 'Backspace' || e.keyCode !== 8) {
-              //     formatTicketCode(e.target['value']);
-              //   }
-              // }}
-              value={ticketCode}
-              maxLength={6}
-            />
-            {!isTicketValid && (
-              <ErrorMessage>{t('passport.errors.validTicket')}</ErrorMessage>
-            )}
-          </Column>
-
-          <Column>
-            <Row className="row-no-margin">
-              <Label htmlFor="instagram-handle">
-                {t('passport.labels.instagramHandle')}{' '}
-                <strong>{t('passport.labels.instagramHandlePrompt')}</strong>
-              </Label>
-              <SupporterTooltip
-                title={
-                  <React.Fragment>
-                    <ToolTipTable>
-                      <tbody>
-                        <tr>
-                          To be entered into our weekly Digital Giveaways, visit
-                          3 merchants and post and tag{' '}
-                          <strong>@sendchinatownlove</strong>
-                          &nbsp;with your food crawl pictures on Instagram.
-                          Enter your Instagram handle so we can track your
-                          entries.
-                        </tr>
-                      </tbody>
-                    </ToolTipTable>
-                  </React.Fragment>
-                }
-                enterTouchDelay={10}
-                leaveTouchDelay={6000}
-                placement="left"
-              >
-                <div>
-                  <img src={CrawlInfoIcon} alt="instagram-crawl-info" />
-                </div>
-              </SupporterTooltip>
-            </Row>
-            <InputField
-              name="instagram-handle"
-              type="text"
-              onChange={(e) => setinstagramHandle(e.target.value)}
-              value={instagramHandle}
-              placeholder="@"
-            />
-            <SubTitle color="grey" size="11px" align="left">
-              {t('passport.labels.optional')}
-            </SubTitle>
-          </Column>
-        </InputContainer>
-
-        <InputContainer className="bottom">
-          <Button
-            value="track-screen-button"
-            className="button--red-filled"
-            disabled={!email || !ticketCode || !isTicketValid}
-            onClick={() => {
-              findOrCreateUser(email, false);
-            }}
-          >
-            {t('passport.placeholders.addTicket')}
-          </Button>
-          {!!email && ModalPaymentConstants.EMAIL_REGEX.test(email) && (
-            <Button
-              className="linkButton"
-              disabled={!email}
-              onClick={() => {
-                findOrCreateUser(email, true);
-              }}
-            >
-              {t('passport.placeholders.viewItem')}
-            </Button>
-          )}
+        <InputContainer className="trackScreen">
+          <Title color="#a8192e">
+            {t('passport.headers.passport').toUpperCase()}
+          </Title>
+          {setCurrentView(currentView)}
         </InputContainer>
       </PassportCard>
 
@@ -286,6 +96,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  border-radius: 20px;
 
   &.trackScreen {
     padding-top: 60px;
@@ -301,6 +112,7 @@ export const InputContainer = styled.div`
     border-radius: 0px 0px 20px 20px;
     border-top: 1px dashed #dedede;
     text-align: center;
+    align-items: center;
   }
 
   &.red {
@@ -308,15 +120,23 @@ export const InputContainer = styled.div`
   }
 `;
 
-const Label = styled.label`
-  font-size: 13px;
+export const Label = styled.label`
+  font-size: 14px;
+  margin: 15px 0 0;
 `;
 
-const Column = styled.div`
+export const Column = styled.div`
   margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+
+  &.center {
+    align-items: center;
+    margin: 45px 0 15px;
+  }
 `;
 
-const InputField = styled.input`
+export const InputField = styled.input`
   width: 100%;
   height: 45px;
   border: 1px solid #dadada;
@@ -326,15 +146,15 @@ const InputField = styled.input`
   outline: none;
   -webkit-appearance: none;
   font-size: 16px;
-  color: grey;
+  // color: grey;
 
   :invalid {
     border: 1px solid red;
   }
-`;
 
-const ToolTipTable = styled.table`
-  width: 100%;
+  &.indent {
+    padding-left: 1.5em;
+  }
 `;
 
 // FOOTER

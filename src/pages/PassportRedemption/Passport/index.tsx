@@ -235,10 +235,10 @@ const Passport = (props: Props) => {
               </SubHeader>
             )}
           </TitleRow>
-          
+
           {!showFaq && createRows(tickets)}
         </PassportContainer>
-      </BodyContainer>    
+      </BodyContainer>
 
       {!showFaq && (
         <AddNewReceipt className="button--filled" onClick={addTicket}>
@@ -255,15 +255,15 @@ const Container = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
-  
+
   margin: 0 auto;
   letter-spacing: 0.15em;
 
   display: flex;
   flex-direction: column;
   width: 100%;
-  
-  align-items: center;  
+
+  align-items: center;
   justify-content: center;
 `;
 
@@ -314,7 +314,7 @@ const BodyContainer = styled.div`
   position: fixed;
   // top: 155px;
   bottom: 0;
-  // overflow: hidden; 
+  overflow: hidden;
 `;
 const TableContainer = styled.div`
   width: 100%;

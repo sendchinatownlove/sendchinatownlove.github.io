@@ -6,6 +6,7 @@ type Props = {
   align?: string;
   size?: string;
   isMainTitle?: boolean;
+  spacing?: string;
 };
 
 type PassportProps = {
@@ -61,6 +62,7 @@ const TitleRow = styled.div<{
 
 const Title = styled.span`
   color: ${(props) => (props.color ? props.color : 'black')};
+  text-transform: 'uppercase';
   font-size: 14px;
   font-weight: bold;
   text-align: center;
@@ -77,7 +79,8 @@ const SubTitle = styled.span`
   font-size: ${(props: Props) => (props.size ? props.size : '12px')};
   font-weight: ${(props: Props) => (props.bold ? props.bold : '400')};
   text-align: ${(props: Props) => (props.align ? props.align : 'center')};
-  letter-spacing: 0.15em;
+  letter-spacing: ${(props: Props) =>
+    props.spacing ? props.spacing : '0.15em'};
 `;
 
 const Button = styled.button`

@@ -25,6 +25,8 @@ const PassportRedemption = (props: Props) => {
       setCurrentScreenView(ScreenType.Track);
     } else if (location.pathname.includes('/tickets')) {
       setCurrentScreenView(ScreenType.Dashboard);
+    } else if (location.pathname.includes('/upload')) {
+      setCurrentScreenView(ScreenType.Upload);
     } else if (location.pathname.includes('/redeem')) {
       setCurrentScreenView(ScreenType.Rewards);
     }
@@ -40,7 +42,9 @@ const PassportRedemption = (props: Props) => {
           <RewardsSelectScreen setCurrentScreenView={setCurrentScreenView} />
         );
       case ScreenType.Track:
-        return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
+        return <TrackScreen currentView={ScreenType.Email} />;
+      case ScreenType.Upload:
+        return <TrackScreen currentView={ScreenType.Upload} />;
       case ScreenType.Dashboard:
         return <PassportScreen setCurrentScreenView={setCurrentScreenView} />;
       case ScreenType.Claim:
@@ -50,7 +54,7 @@ const PassportRedemption = (props: Props) => {
       case ScreenType.LyftCode:
         return <LyftCodeScreen />;
       default:
-        return <TrackScreen setCurrentScreenView={setCurrentScreenView} />;
+        return <TrackScreen currentView={ScreenType.Email} />;
     }
   };
 
