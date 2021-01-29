@@ -383,6 +383,38 @@
       "viewActiveRewards": "VIEW ACTIVE REWARDS & GIVEAWAYS",
       "arrayOfQuestionAnswers": [
         {
+          "question": "When is the Lunar New Year Crawl?",
+          "answer": "From February 1 - 28, 2021"
+        },
+        {
+          "question": "What is the Lunar New Year Crawl?",
+          "answer": "Send Chinatown Love is hosting a Lunar New Year (LNY) Crawl in Manhattan, Brooklyn, and Queens to celebrate the special holiday. This event highlights 33+ vendors, ranging from gift shops to restaurants, to encourage communities to shop at local Asian-owned businesses in celebration of Lunar New Year! Participants can also shop for their LNY must-haves to prepare for their own celebrations, whether they need decorations or traditional dishes to complete their LNY spread.<5/> Designed to be as flexible as possible, the LNY Crawl is a unique way to discover and interact with amazing shops, restaurants, bakeries, and more in your own backyard!"
+        },
+        {
+          "question": "Which vendors are participating?",
+          "answer": "We have 29 vendors ranging from gift shops to restaurants that are spread across Manhattan, Brooklyn and Queens. Check out the full list at <4>https://www.sendchinatownlove.com/lny-crawl.html/</4>"
+        },
+        {
+          "question": "What is the purpose of the Lunar New Year Crawl?",
+          "answer": "The goal of this event is to encourage people to explore locally while helping to bring some much needed support to small business owners who need it most.<5/>In 2020, most Chinatowns across the nation noted a large decline in business due to COVID-19 related xenophobia. Beginning as early as January 2020, these communities missed out on significant business from Lunar New Year celebrations, with the majority entering the subsequent lockdowns at a financial deficit that set a dire precedent for the year to come.<5/>Lunar New Year represents one of the most joyous and festive times of year for the Chinatowns across New York City. We hope to keep that spirit alive."
+        },
+        {
+          "question": "How can I participate in the LNY Crawl?",
+          "answer": "From digital donations to take-out receipts, there are many ways to participate in the Crawl, even if you don’t live in New York! <5/> To make this event as accessible and COVID-safe as possible, you can either: (1) order take-out, (2) order delivery, (3) dine-in where available, or (4) donate to our merchants or our Gift-a-Meal campaigns at <3>www.sendchinatownlove.com</3><5/> Once you've made a purchase of <0>at least $10 USD</0>, upload or take a picture of your receipt using your <6>Passport to Lunar New Year</6><5/> Collect 3 receipts or provide 3 donations from different vendors to get a raffle ticket! You can use this raffle ticket to enter into one of our giveaway baskets."
+        },
+        {
+          "question": "I didn’t get a receipt / lost my receipt. Can I still log my purchase into my <1>Passport to Lunar New Year? </1>",
+          "answer": "Yes! If you don’t have a receipt, you can either: 1) take a screenshot of your purchase on your card statement, or 2) take a picture of your food / item purchase. This is still valid and will count towards earning a raffle ticket for giveaways."
+        },
+        {
+          "question": "I don’t live in NYC but still want to support local businesses. Can I still participate in the LNY Crawl?",
+          "answer": "Yes! If you can’t make it to one of our featured vendors, you can donate to any of our initiatives on <3>www.sendchinatownlove.com</3>. You can choose to donate to 1) merchants directly, 2) to a donation pool to have your funds evenly distributed among all our merchants, 3) or to our Gift-A-Meal program, where we work with merchants and local organizations to distribute meals to community members in need. Once you donate, your <1>Passport to Lunar New Year</1> will automatically update with a stamp, which you can collect to earn a raffle ticket to enter into our giveaway baskets.<5/>Be sure to use the same email for both your <1>Passport</1> and your donation(s)! "
+        },
+        {
+          "question": "What do I get for participating?",
+          "answer": "Not only will you be supporting local businesses and finding new local favorites, but you’ll also be entering for a chance to win one of our giveaway baskets."
+        },
+        {
           "question": "How do I enter the giveaway?",
           "answer": "Winners of the giveaways will be drawn at the end of the month (February 2021). Once you collect 3 receipts from different LNY Crawl vendors (or make a donation on Send Chinatown Love’s website), you will earn 1 raffle ticket. You can use this raffle ticket as 1 entry towards the giveaway basket of your choice.<5/>You have unlimited entries and can collect as many receipts, (or provide as many donations), as you want!"
         },
@@ -393,26 +425,6 @@
         {
           "question": "What is the Passport to <1>Lunar New Year</1>, and how do I use it? ",
           "answer": "This is a mobile site built by our team where you can log your receipts for all of the vendors you support! Each time you collect a receipt, add it to your <1>Passport to Lunar New Year</1> by uploading a photo of the receipt. The more receipts you collect, the more chances you have to win giveaways! Once you’ve collected three receipts, you can use your <1>Passport</1> to enter into the giveaway basket of your choice."
-        },
-        {
-          "question": "What is the Lunar New Year Crawl?",
-          "answer": "From February 1 - 28, 2021, Send Chinatown Love is hosting a Lunar New Year (LNY) Crawl in Manhattan, Brooklyn, and Queens to celebrate the special holiday. This event highlights 33+ vendors, ranging from gift shops to restaurants, to encourage communities to shop at local Asian-owned businesses in celebration of Lunar New Year! Participants can also shop for their LNY must-haves to prepare for their own celebrations, whether they need decorations or traditional dishes to complete their LNY spread.</5> Designed to be as flexible as possible, the LNY Crawl is a unique way to discover and interact with amazing shops, restaurants, bakeries, and more in your own backyard!"
-        },
-        {
-          "question": "What is the purpose of the Lunar New Year Crawl?",
-          "answer": "The goal of this event is to encourage people to explore locally while helping to bring some much needed support to small business owners who need it most.<5/>In 2020, most Chinatowns across the nation noted a large decline in business due to COVID-19 related xenophobia. Beginning as early as January 2020, these communities missed out on significant business from Lunar New Year celebrations, with the majority entering the subsequent lockdowns at a financial deficit that set a dire precedent for the year to come.<5/>Lunar New Year represents one of the most joyous and festive times of year for the Chinatowns across New York City. We hope to keep that spirit alive."
-        },
-        {
-          "question": "How can I participate in the LNY Crawl?",
-          "answer": "From digital donations to take-out receipts, there are many ways to participate in the Crawl, even if you don’t live in New York! <5/> To make this event as accessible and COVID-safe as possible, you can either: (1) order take-out, (2) order delivery, (3) dine-in where available, or (4) donate to our merchants or our Gift-a-Meal campaigns at <3>www.sendchinatownlove.com</3><5/> Once you've made a purchase of <0>at least $10 USD</0>, upload or take a picture of your receipt using your <1>Passport to Lunar New Year</1> mobile site.<5/> Collect 3 receipts or provide 3 donations from different vendors to get a raffle ticket! You can use this raffle ticket to enter into one of our giveaway baskets."
-        },
-        {
-          "question": "I don’t live in NYC but still want to support local businesses. Can I still participate in the LNY Crawl?",
-          "answer": "Yes! If you can’t make it to one of our featured vendors, you can donate to any of our initiatives on <3>www.sendchinatownlove.com</3>. You can choose to donate to 1) merchants directly, 2) to a donation pool to have your funds evenly distributed among all our merchants, 3) or to our Gift-A-Meal program, where we work with merchants and local organizations to distribute meals to community members in need. Once you donate, your <1>Passport to Lunar New Year</1> will automatically update with a stamp, which you can collect to earn a raffle ticket to enter into our giveaway baskets.<5/>Be sure to use the same email for both your <1>Passport</1> and your donation(s)! "
-        },
-        {
-          "question": "What do I get for participating?",
-          "answer": "Not only will you be supporting local businesses and finding new local favorites, but you’ll also be entering for a chance to win one of our giveaway baskets."
         }
       ]
     },

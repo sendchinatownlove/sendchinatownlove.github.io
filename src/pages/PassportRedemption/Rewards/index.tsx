@@ -143,9 +143,9 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
             {t('passport.placeholders.clearSelection')}
           </BasketDetails>
         ) : (
-          <BasketDetails className="button--outlined" onClick={viewDetails}>
+          <LNYLink className="button--filled" href="https://www.sendchinatownlove.com/lny-crawl.html/" target="_blank" rel="noopener noreferrer">
             {t('passport.placeholders.giveawayDetails')}
-          </BasketDetails>
+          </LNYLink>
         )}
       </Header>
       <TicketsContainer>
@@ -336,4 +336,12 @@ const CancelButton = styled(Button)`
   background: linear-gradient(180deg,rgba(255,255,255,0) 3.31%,#FFFFFF 68.65%); 
   padding: 30px 0 20px 0;
   margin: 0 auto;
+`;
+
+const LNYLink = styled.a`
+  letter-spacing: 0.15em;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 10px auto;
 `;

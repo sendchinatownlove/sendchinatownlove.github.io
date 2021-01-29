@@ -141,11 +141,11 @@ const Passport = (props: Props) => {
             <br />
             <SubTitle>
               {t('passport.labels.merchantsVisited', {
-                merchantsVisited: 3,
+                merchantsVisited: receipts.length,
               })}
               <br />
               <br />
-              {t('passport.labels.thankYou', { stamps: 2 })}
+              {t('passport.labels.thankYou', { stamps: 3 - receipts.length % 3 })}
             </SubTitle>
           </TextContainer>
 
@@ -162,7 +162,7 @@ const Passport = (props: Props) => {
       )}
       <HeaderContainer>
         <RedirectionLinks
-          href="https://www.sendchinatownlove.com/food-crawl.html"
+          href="https://www.sendchinatownlove.com/lny-crawl.html/"
           target="_blank"
         >
           {t('passport.headers.learn')}

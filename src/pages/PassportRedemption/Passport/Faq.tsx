@@ -10,7 +10,7 @@ type Props = {
 
 const Faq = ({ showFaq, toggleView }: Props) => {
   const goToFoodCrawlInfo = (e) => {
-    window.open('https://www.sendchinatownlove.com/food-crawl.html', '_blank');
+    window.open('https://www.sendchinatownlove.com/lny-crawl.html/', '_blank');
   };
   const { t } = useTranslation();
   const foodCrawlFaq = t<object[]>('passport.faq.arrayOfQuestionAnswers', {
@@ -63,16 +63,25 @@ const Faq = ({ showFaq, toggleView }: Props) => {
                 https://www.sendchinatownlove.com/
               </a>
               <a
-                href="https://www.sendchinatownlove.com/food-crawl.html"
+                href="https://www.sendchinatownlove.com/lny-crawl.html/"
                 target="_blank"
                 rel="noopener noreferrer"
+                style={{ color: 'white' }}
               >
-                link
+                https://www.sendchinatownlove.com/lny-crawl.html/
               </a>
               <>
                 <br />
                 <br />
               </>
+              <a
+                href="https://merchant.sendchinatownlove.com/lny-passport"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'white' }}
+              >
+                https://merchant.sendchinatownlove.com/lny-passport
+              </a>
             </Trans>
           </div>
         ))}
