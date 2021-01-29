@@ -29,6 +29,17 @@ const Passport = (props: Props) => {
 
   useEffect(() => {
     push(`/lny-passport/${id}/tickets`);
+    if (id) {
+      getCrawlReceipts(id)
+        .then((res) => {
+          setReceipts(
+            res.data.sort((a, b) => b.redemption_id - a.redemption_id)
+          );
+        })
+        .catch((err) => {
+          console.log('passport error: ' + err);
+        });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -45,7 +56,7 @@ const Passport = (props: Props) => {
       getCrawlReceipts(id)
         .then((res) => {
           setReceipts(
-            res.data.sort((a, b) => a.redemption_id - b.redemption_id)
+            res.data.sort((a, b) => b.redemption_id - a.redemption_id)
           );
         })
         .catch((err) => {
@@ -58,7 +69,7 @@ const Passport = (props: Props) => {
     if (receipts.length / 3 >= 1)
       setShowPopup(
         localStorage.getItem('amountOfReceipts') !==
-          ((receipts.length % 3) + 1).toString()
+          (receipts.length / 3 + 1).toString()
       );
   }, [receipts]);
 
