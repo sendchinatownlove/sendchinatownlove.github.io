@@ -47,11 +47,7 @@ const TicketRow = (props: Props) => {
 
   useEffect(() => {
     if (props.receipts.length === 3) {
-      if (
-        props.receipts.every(
-          (receipt) => receipt.redemption_id
-        )
-      ) {
+      if (props.receipts.every((receipt) => receipt.redemption_id)) {
         // const date = props.receipts[0].redeemed_at;
         // setRedeemedOn(date);
         setStatus(RowStatuses.Redeemed);
@@ -131,7 +127,9 @@ const TicketRow = (props: Props) => {
       <TableIndex> {props.index + 1} </TableIndex>
       <TableStamp>
         <StampColumn>
-          <StampRow>{!!props.receipts && createStamps(props.receipts)}</StampRow>
+          <StampRow>
+            {!!props.receipts && createStamps(props.receipts)}
+          </StampRow>
         </StampColumn>
         <RedeemedRow>{showRedeemRow(status)}</RedeemedRow>
       </TableStamp>

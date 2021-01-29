@@ -20,7 +20,7 @@ import {
   gcs,
   crawlReceipts,
   crawlRedemptions,
-  crawlRewards
+  crawlRewards,
 } from './endpoints';
 
 // Fix return typing
@@ -419,27 +419,27 @@ export const uploadCrawlReceipts = async (
     })
     .then((res) => res)
     .catch((err) => err);
-    
-export const getCrawlRewards = async () => 
+
+export const getCrawlRewards = async () =>
   axios
     .get(crawlRewards)
     .then((res) => res)
     .catch((err) => err);
 
-export const redeemRaffle = async (contact_id: number, reward_id: number) => 
+export const redeemRaffle = async (contact_id: number, reward_id: number) =>
   axios
-    .post(crawlRedemptions, {contact_id, reward_id})
+    .post(crawlRedemptions, { contact_id, reward_id })
     .then((res) => res)
     .catch((err) => err);
 
-export const updateRaffle = async (reward_id: number) => 
+export const updateRaffle = async (reward_id: number) =>
   axios
-    .put(crawlRedemptions, {reward_id})
+    .put(crawlRedemptions, { reward_id })
     .then((res) => res)
     .catch((err) => err);
-  
-export const getCrawlReceipts = async (contact_id: number) => 
+
+export const getCrawlReceipts = async (contact_id: number) =>
   axios
-    .get(contacts+contact_id + '/crawl_receipts/')
+    .get(contacts + contact_id + '/crawl_receipts/')
     .then((res) => res)
     .catch((err) => err);

@@ -9,7 +9,7 @@ import RaffleTicketCombo from '../Assets/RaffleTicketCombo.png';
 import {
   getCrawlRewards,
   getCrawlReceipts,
-  redeemRaffle
+  redeemRaffle,
 } from '../../../utilities/api/interactionManager';
 
 interface Props {
@@ -25,7 +25,9 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
   const [rewards, setRewards] = useState<any[]>([]);
 
   const numReceipts = Math.floor(receipts.length / 3);
-  const selectedRewards = rewards.filter((reward) => reward.active).map((reward) => reward.id);
+  const selectedRewards = rewards
+    .filter((reward) => reward.active)
+    .map((reward) => reward.id);
 
   const fetchRewards = async () => {
     try {
@@ -56,11 +58,6 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
     }
   };
 
-  const viewDetails = (e) => {
-    e.preventDefault();
-    console.log('add details');
-  };
-
   useEffect(() => {
     history.push(`/lny-passport/${id}/redeem`);
     fetchReceipts(id);
@@ -75,7 +72,9 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
 
   const handleSubmission = async (e) => {
     e.preventDefault();
-    const selectedRewards = rewards.filter((reward) => reward.active).map((reward) => reward.id);
+    const selectedRewards = rewards
+      .filter((reward) => reward.active)
+      .map((reward) => reward.id);
     for (const reward_id of selectedRewards) {
       redeemRaffle(id, reward_id);
     }
@@ -143,7 +142,12 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
             {t('passport.placeholders.clearSelection')}
           </BasketDetails>
         ) : (
-          <LNYLink className="button--filled" href="https://www.sendchinatownlove.com/lny-crawl.html/" target="_blank" rel="noopener noreferrer">
+          <LNYLink
+            className="button--filled"
+            href="https://www.sendchinatownlove.com/lny-crawl.html/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {t('passport.placeholders.giveawayDetails')}
           </LNYLink>
         )}
@@ -304,12 +308,16 @@ const EnterRaffleContainer = styled.div`
   justify-self: center;
   align-self: center;
   width: 100%;
-  
+
   span {
     width: 300px;
   }
-  
-  background: linear-gradient(180deg,rgba(255,255,255,0) 5.31%,#FFFFFF 22.65%);
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 5.31%,
+    #ffffff 22.65%
+  );
   padding-top: 20px;
 `;
 const EnterRaffleTicketButton = styled(Button)`
@@ -333,7 +341,11 @@ const CancelButton = styled(Button)`
 
   width: 100%;
   justify-content: center;
-  background: linear-gradient(180deg,rgba(255,255,255,0) 3.31%,#FFFFFF 68.65%); 
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 3.31%,
+    #ffffff 68.65%
+  );
   padding: 30px 0 20px 0;
   margin: 0 auto;
 `;

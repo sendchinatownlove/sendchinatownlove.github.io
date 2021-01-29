@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import moment from "moment";
+import moment from 'moment';
 
 import { CardContainer, TitleRow, Title, SubTitle, Button } from '../style';
 import { MAILTO_URL } from '../../../consts';
@@ -44,7 +44,9 @@ const Passport = (props: Props) => {
     if (id) {
       getCrawlReceipts(id)
         .then((res) => {
-          setReceipts(res.data.sort((a,b) => a.redemption_id - b.redemption_id));
+          setReceipts(
+            res.data.sort((a, b) => a.redemption_id - b.redemption_id)
+          );
         })
         .catch((err) => {
           console.log('passport error: ' + err);
@@ -145,7 +147,9 @@ const Passport = (props: Props) => {
               })}
               <br />
               <br />
-              {t('passport.labels.thankYou', { stamps: 3 - receipts.length % 3 })}
+              {t('passport.labels.thankYou', {
+                stamps: 3 - (receipts.length % 3),
+              })}
             </SubTitle>
           </TextContainer>
 
@@ -205,7 +209,7 @@ const Passport = (props: Props) => {
           </TitleRow>
           {!showFaq && createRows(receipts)}
         </PassportContainer>
-      </BodyContainer>    
+      </BodyContainer>
       {!showFaq && (
         <AddNewReceipt className="button--filled" onClick={addReceipt}>
           {t('passport.placeholders.addNewReceipt').toUpperCase()}
