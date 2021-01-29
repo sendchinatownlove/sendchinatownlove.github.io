@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import TrackScreen from './SignIn';
-import UploadScreen from './SignIn/uploadScreen';
 import RewardsSelectScreen from './Rewards';
 import RedemptionClaimScreen from './Redemption';
 import ScreenType from './ScreenTypes';
