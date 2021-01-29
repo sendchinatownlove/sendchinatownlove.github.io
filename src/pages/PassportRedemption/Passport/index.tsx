@@ -164,6 +164,36 @@ const Passport = (props: Props) => {
 
   return (
     <Container>
+      {showPopup && (
+        <SendEmailContainer>
+          <TextContainer>
+            <PassportIcon src={RaffleTicketCombo} />
+            <br />
+            <Title>
+              {t('passport.headers.raffleTicketEarned').toUpperCase()}
+            </Title>
+            <br />
+            <SubTitle>
+              {t('passport.labels.merchantsVisited', {
+                merchantsVisited: 3,
+              })}
+              <br />
+              <br />
+              {t('passport.labels.thankYou', { stamps: 2 })}
+            </SubTitle>
+          </TextContainer>
+
+          <EnterRaffleButton
+            className="button--filled"
+            onClick={enterRaffleTicket}
+          >
+            {t('passport.placeholders.enterMyRaffle').toUpperCase()}
+          </EnterRaffleButton>
+          <SendEmailButtonClose onClick={closePopup}>
+            {t('passport.placeholders.close')}
+          </SendEmailButtonClose>
+        </SendEmailContainer>
+      )}
       <HeaderContainer>
         <RedirectionLinks
           href="https://www.sendchinatownlove.com/food-crawl.html"
@@ -206,44 +236,15 @@ const Passport = (props: Props) => {
             )}
           </TitleRow>
 
-          {showPopup && (
-            <SendEmailContainer>
-              <TextContainer>
-                <PassportIcon src={RaffleTicketCombo} />
-                <br />
-                <Title>
-                  {t('passport.headers.raffleTicketEarned').toUpperCase()}
-                </Title>
-                <br />
-                <SubTitle>
-                  {t('passport.labels.merchantsVisited', {
-                    merchantsVisited: 3,
-                  })}
-                  <br />
-                  <br />
-                  {t('passport.labels.thankYou', { stamps: 2 })}
-                </SubTitle>
-              </TextContainer>
-
-              <EnterRaffleButton
-                className="button--filled"
-                onClick={enterRaffleTicket}
-              >
-                {t('passport.placeholders.enterMyRaffle').toUpperCase()}
-              </EnterRaffleButton>
-              <SendEmailButtonClose onClick={closePopup}>
-                {t('passport.placeholders.close')}
-              </SendEmailButtonClose>
-            </SendEmailContainer>
-          )}
           {!showFaq && createRows(tickets)}
-          {!showFaq && (
-            <AddNewReceipt className="button--filled" onClick={addTicket}>
-              {t('passport.placeholders.addNewReceipt').toUpperCase()}
-            </AddNewReceipt>
-          )}
         </PassportContainer>
       </BodyContainer>
+
+      {!showFaq && (
+        <AddNewReceipt className="button--filled" onClick={addTicket}>
+          {t('passport.placeholders.addNewReceipt').toUpperCase()}
+        </AddNewReceipt>
+      )}
     </Container>
   );
 };
@@ -251,13 +252,19 @@ const Passport = (props: Props) => {
 export default Passport;
 
 const Container = styled.div`
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
   margin: 0 auto;
+  letter-spacing: 0.15em;
+
   display: flex;
   flex-direction: column;
-  width: 375px;
-  letter-spacing: 0.15em;
-  overflow: hidden;
+  width: 100%;
+
+  align-items: center;
+  justify-content: center;
 `;
 
 const PassportContainer = styled(CardContainer)<{
@@ -274,10 +281,12 @@ const SubHeader = styled(SubTitle)`
   font-weight: bold;
 `;
 const HeaderContainer = styled.div`
+  position: absolute;
+  top: 0;
   width: 100%;
   height: 100px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   margin: 12px auto;
   overflow: hidden;
@@ -288,6 +297,8 @@ const RedirectionLinks = styled.a`
   font-weight: bold;
   letter-spacing: 0.15em;
   font-size: 12px;
+  margin: 0 20px;
+  text-align: center;
 `;
 const Logo = styled.img`
   width: 100px;
@@ -295,11 +306,12 @@ const Logo = styled.img`
   filter: drop-shadow(0 0mm 2px #cdcdcd);
 `;
 const BodyContainer = styled.div`
-  width: 375px;
+  min-width: 375px;
+  width: 100%;
   display: flex;
   justify-content: center;
 
-  position: absolute;
+  position: fixed;
   // top: 155px;
   bottom: 0;
   overflow: hidden;
@@ -324,21 +336,19 @@ const AddNewReceipt = styled(Button)`
   align-self: center;
 `;
 const SendEmailContainer = styled.div`
-  padding: 15px;
-  position: absolute;
-  width: 95%;
-  min-height: 500px;
-  margin: 0 auto;
   z-index: 20;
-  top: 15px;
-  bottom: 15px;
+  // position: fixed;
+  // bottom: 15px;
 
-  z-index: 100;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 
+  width: 95%;
+  height: 500px;
+  margin: 0 auto;
+  padding: 15px;
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(4px);
@@ -354,8 +364,8 @@ const TextContainer = styled.div`
 `;
 
 const PassportIcon = styled.img`
-  width: 193px;
-  height: 190px;
+  width: 50%;
+  max-width: 193px;
 `;
 const SendEmailButtonClose = styled(Button)`
   text-align: center;
