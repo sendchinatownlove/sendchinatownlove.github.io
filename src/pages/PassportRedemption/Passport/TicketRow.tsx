@@ -15,20 +15,20 @@ import { Button } from '../style';
 import ScreenType from '../ScreenTypes';
 
 interface Props {
-  stamps: participatingSellerProps[];
+  receipts: receiptProps[];
   index: number;
   setCurrentScreenView: Function;
 }
 
-type participatingSellerProps = {
-  created_at: string;
+type receiptProps = {
+  amount: number;
+  contact_id: number;
   id: number;
-  name: string;
-  seller_id: number;
-  stamp_url: string;
-  updated_at: string;
-  redeemed_at: string;
-  sponsor_seller_id: string;
+  participating_seller_id: number;
+  payment_intent_id: any;
+  receipt_url: string;
+  redemption_id: any;
+  created_at: string;
 };
 type redeemRowProp = {
   status?: RowStatuses;
@@ -46,13 +46,13 @@ const TicketRow = (props: Props) => {
   // const [redeemedOn, setRedeemedOn] = useState('');
 
   useEffect(() => {
-    if (props.stamps.length === 3) {
+    if (props.receipts.length === 3) {
       if (
-        props.stamps.every(
-          (stamp) => stamp.redeemed_at && stamp.sponsor_seller_id
+        props.receipts.every(
+          (receipt) => receipt.redemption_id
         )
       ) {
-        // const date = props.stamps[0].redeemed_at;
+        // const date = props.receipts[0].redeemed_at;
         // setRedeemedOn(date);
         setStatus(RowStatuses.Redeemed);
       } else {
@@ -61,7 +61,7 @@ const TicketRow = (props: Props) => {
     } else {
       setStatus(RowStatuses.Inactive);
     }
-  }, [props.stamps]);
+  }, [props.receipts]);
 
   const showRedeemRow = (status) => {
     switch (status) {
@@ -70,11 +70,11 @@ const TicketRow = (props: Props) => {
       case RowStatuses.Active:
         return t('passport.placeholders.readyToRedeem').toUpperCase();
       default:
-        if (props.stamps.length === 0) return;
-        return 3 - props.stamps.length === 1
+        if (props.receipts.length === 0) return;
+        return 3 - props.receipts.length === 1
           ? t('passport.placeholders.oneLeftToRedeem')
           : t('passport.placeholders.leftToRedeem', {
-              amount: 3 - props.stamps.length,
+              amount: 3 - props.receipts.length,
             });
     }
   };
@@ -131,7 +131,7 @@ const TicketRow = (props: Props) => {
       <TableIndex> {props.index + 1} </TableIndex>
       <TableStamp>
         <StampColumn>
-          <StampRow>{!!props.stamps && createStamps(props.stamps)}</StampRow>
+          <StampRow>{!!props.receipts && createStamps(props.receipts)}</StampRow>
         </StampColumn>
         <RedeemedRow>{showRedeemRow(status)}</RedeemedRow>
       </TableStamp>
