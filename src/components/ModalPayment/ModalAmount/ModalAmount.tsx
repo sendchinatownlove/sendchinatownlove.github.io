@@ -12,6 +12,7 @@ import { Tooltip } from '@material-ui/core';
 import Help from '@material-ui/icons/Help';
 import styled from 'styled-components';
 import ReactPixel from 'react-facebook-pixel';
+import { SellerIds, SellerNames } from '../../../consts';
 
 export interface Props {
   sellerId: string;
@@ -84,6 +85,9 @@ export const ModalAmount = (props: Props) => {
   }));
 
   const getHeaderText = (purchaseType, sellerName) => {
+    if (props.sellerName === SellerNames.APEX_FOR_YOUTH)
+      return 'Gift-a-Meal Donation';
+
     switch (purchaseType) {
       case ModalPaymentTypes.modalPages.donation:
         return t('purchase.donation', { seller: sellerName });
@@ -96,22 +100,24 @@ export const ModalAmount = (props: Props) => {
     }
   };
 
+  const getSubHeaderText = () => {
+    if (modalView === ModalPaymentTypes.modalPages.light_up_chinatown) {
+      return t('paymentProcessing.amount.light_up_chinatown');
+    } else if (props.sellerId === SellerIds.APEX_FOR_YOUTH) {
+      return t('donationPool.descriptionApex');
+    } else {
+      return t('paymentProcessing.amount.header');
+    }
+  };
+
   return (
     <ContentContainer id="donation-form" data-testid="modal-amount">
       <Header>{getHeaderText(modalView, props.sellerName)}</Header>
 
-      {props.sellerId === 'send-chinatown-love' && (
+      {props.sellerId === SellerIds.SEND_CHINATOWN_LOVE && (
         <p>{t('donationPool.description2')}</p>
       )}
-      <p>
-        {t(
-          `paymentProcessing.amount.${
-            modalView === ModalPaymentTypes.modalPages.light_up_chinatown
-              ? 'light_up_chinatown'
-              : 'header'
-          }`
-        )}
-      </p>
+      <p>{getSubHeaderText()}</p>
 
       <AmountContainer>
         <label htmlFor="select-amount">

@@ -11,6 +11,7 @@ import {
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
 import Modal from '../../ModalPayment';
+import { SellerIds, SellerNames } from '../../../consts';
 
 const NoActiveCampaignsBox = () => {
   const { t } = useTranslation();
@@ -35,8 +36,8 @@ const NoActiveCampaignsBox = () => {
         {t('gamHome.giftButton')}
       </Button>
       <Modal
-        sellerId="apex-for-youth"
-        sellerName="Apex for Youth"
+        sellerId={SellerIds.APEX_FOR_YOUTH}
+        sellerName={SellerNames.APEX_FOR_YOUTH}
         costPerMealInDollars={0}
       />
     </NoCampaignBox>
