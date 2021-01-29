@@ -9,7 +9,7 @@ import { ModalPaymentConstants } from '../../../utilities/hooks/ModalPaymentCont
 import {
   getPassportEmailId,
   createPassportEmailId,
-  getPassportTickets,
+  getCrawlReceipts,
 } from '../../../utilities/api/interactionManager';
 
 const EmailScreen = () => {
@@ -27,8 +27,9 @@ const EmailScreen = () => {
       setEmail('');
       return;
     } else {
-      const { data: hasTickets } = await getPassportTickets(data.id);
-      if (hasTickets.length) push(`/lny-passport/${data.id}/tickets`);
+      const Tickets = await getCrawlReceipts(data.id);
+
+      if (Tickets.data.length) push(`/lny-passport/${data.id}/tickets`);
       else setEmailError(t('passport.errors.noTickets'));
       return;
     }

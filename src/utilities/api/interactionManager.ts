@@ -440,6 +440,6 @@ export const updateRaffle = async (reward_id: number) =>
   
 export const getCrawlReceipts = async (contact_id: number) => 
   axios
-    .get(contacts+contact_id + '/' + crawlReceipts)
+    .get(contacts+contact_id + '/crawl_receipts/')
     .then((res) => res)
     .catch((err) => err);
