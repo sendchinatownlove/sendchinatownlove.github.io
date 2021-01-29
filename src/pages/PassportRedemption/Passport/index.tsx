@@ -252,14 +252,17 @@ const Passport = (props: Props) => {
 export default Passport;
 
 const Container = styled.div`
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  
   margin: 0 auto;
   letter-spacing: 0.15em;
 
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  
   align-items: center;  
   justify-content: center;
 `;
