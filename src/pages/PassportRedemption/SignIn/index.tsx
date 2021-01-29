@@ -42,7 +42,7 @@ const Track = ({ currentView }: Props) => {
 
       <Row>
         <ExternalLinks
-          href="https://www.sendchinatownlove.com/food-crawl.html"
+          href="https://www.sendchinatownlove.com/lny-crawl.html/"
           target="_blank"
         >
           {t('passport.headers.learn')}

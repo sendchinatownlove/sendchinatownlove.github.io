@@ -2,14 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import moment from 'moment';
 
 import { CardContainer, TitleRow, Title, SubTitle, Button } from '../style';
 import { MAILTO_URL } from '../../../consts';
-import {
-  getPassportTickets,
-  getParticipatingSeller,
-  getContactInfo,
-} from '../../../utilities/api/interactionManager';
+import { getCrawlReceipts } from '../../../utilities/api/interactionManager';
 import ScreenType from '../ScreenTypes';
 
 import TicketRow from './TicketRow';
@@ -28,10 +25,21 @@ const Passport = (props: Props) => {
   const { push, location } = useHistory();
   const [showFaq, setShowFaq] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [tickets, setTickets] = useState<any[]>([]);
+  const [receipts, setReceipts] = useState<any[]>([]);
 
   useEffect(() => {
     push(`/lny-passport/${id}/tickets`);
+    if (id) {
+      getCrawlReceipts(id)
+        .then((res) => {
+          setReceipts(
+            res.data.sort((a, b) => b.redemption_id - a.redemption_id)
+          );
+        })
+        .catch((err) => {
+          console.log('passport error: ' + err);
+        });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -45,29 +53,11 @@ const Passport = (props: Props) => {
 
   useEffect(() => {
     if (id) {
-      getContactInfo(id)
+      getCrawlReceipts(id)
         .then((res) => {
-          return getPassportTickets(id);
-        })
-        .then((ticketIds) => {
-          let promises: any[] = [];
-          ticketIds.data.forEach((ticket) => {
-            promises.push(
-              getParticipatingSeller(ticket.participating_seller_id).then(
-                (seller) => ({
-                  stamp_url: seller.data.stamp_url,
-                  ...ticket,
-                })
-              )
-            );
-          });
-
-          return Promise.all(promises);
-        })
-        .then((passportTickets) => {
-          if (passportTickets.length > 0) {
-            setTickets(passportTickets);
-          }
+          setReceipts(
+            res.data.sort((a, b) => b.redemption_id - a.redemption_id)
+          );
         })
         .catch((err) => {
           console.log('passport error: ' + err);
@@ -76,34 +66,22 @@ const Passport = (props: Props) => {
   }, [id]);
 
   useEffect(() => {
-    if (tickets.length / 3 >= 1)
+    if (receipts.length / 3 >= 1)
       setShowPopup(
-        localStorage.getItem('amountOfRedemptions') !==
-          ((tickets.length % 3) + 1).toString()
+        localStorage.getItem('amountOfReceipts') !==
+          (Math.floor((receipts.length / 3)) + 1).toString()
       );
-  }, [tickets]);
+  }, [receipts]);
 
-  const daysLeft = (endDate) => {
-    const DaysEnd = new Date(endDate);
-    const DateNow = new Date();
-    const distance = DaysEnd.getDate() - DateNow.getDate();
-    if (distance < 0) {
-      return 0;
-    }
-
-    return distance;
-  };
-
-  const createTicketRows = (tickets) => {
+  const createReceiptRows = (receipts) => {
     let rows: any[] = [];
 
-    if (tickets.length > 0) {
-      // make a temp ticket that sorts the tickets by sponsor seller, then redemption date
-      let tempTickets = [...tickets];
+    if (receipts.length > 0) {
+      let tempReceipts = [...receipts];
 
       // push the stamps to rows of 3, if there arent 3, then push the left over amount
-      while (tempTickets.length) {
-        rows.push(tempTickets.splice(0, 3));
+      while (tempReceipts.length) {
+        rows.push(tempReceipts.splice(0, 3));
       }
     }
 
@@ -120,14 +98,14 @@ const Passport = (props: Props) => {
   };
 
   const createRows = (stamps) => {
-    const rows = createTicketRows(stamps);
+    const rows = createReceiptRows(stamps);
     return (
       <TableContainer>
         <Table>
           <tbody>
             {rows.map((row, index) => (
               <TicketRow
-                stamps={row}
+                receipts={row}
                 index={index}
                 key={'row' + index}
                 setCurrentScreenView={props.setCurrentScreenView}
@@ -139,17 +117,18 @@ const Passport = (props: Props) => {
     );
   };
 
-  const addTicket = (e) => {
+  const addReceipt = (e) => {
     e.preventDefault();
     props.setCurrentScreenView(ScreenType.Track);
+    push(`/lny-passport`);
   };
 
   const closePopup = (e) => {
     e.preventDefault();
     setShowPopup(false);
     localStorage.setItem(
-      'amountOfRedemptions',
-      ((tickets.length % 3) + 1).toString()
+      'amountOfReceipts',
+      ( Math.floor((receipts.length / 3)) + 1).toString()
     );
   };
 
@@ -157,14 +136,14 @@ const Passport = (props: Props) => {
     e.preventDefault();
     props.setCurrentScreenView(ScreenType.Rewards);
     localStorage.setItem(
-      'amountOfRedemptions',
-      ((tickets.length % 3) + 1).toString()
+      'amountOfReceipts',
+      (Math.floor((receipts.length / 3)) + 1).toString()
     );
   };
 
   return (
     <Container>
-      {showPopup && (
+      {!showFaq && showPopup && (
         <SendEmailContainer>
           <TextContainer>
             <PassportIcon src={RaffleTicketCombo} />
@@ -175,11 +154,13 @@ const Passport = (props: Props) => {
             <br />
             <SubTitle>
               {t('passport.labels.merchantsVisited', {
-                merchantsVisited: 3,
+                merchantsVisited: receipts.length,
               })}
               <br />
               <br />
-              {t('passport.labels.thankYou', { stamps: 2 })}
+              {t('passport.labels.thankYou', {
+                stamps: 3 - (receipts.length % 3),
+              })}
             </SubTitle>
           </TextContainer>
 
@@ -196,7 +177,7 @@ const Passport = (props: Props) => {
       )}
       <HeaderContainer>
         <RedirectionLinks
-          href="https://www.sendchinatownlove.com/food-crawl.html"
+          href="https://www.sendchinatownlove.com/lny-crawl.html/"
           target="_blank"
         >
           {t('passport.headers.learn')}
@@ -230,18 +211,18 @@ const Passport = (props: Props) => {
             ) : (
               <SubHeader color={showFaq ? 'transparent' : 'white'}>
                 {t('passport.labels.daysLeft', {
-                  daysLeft: daysLeft('February 28, 2021'),
+                  daysLeft: Math.max(
+                    moment('February 28, 2021').diff(moment(), 'days')
+                  ).toString(),
                 })}
               </SubHeader>
             )}
           </TitleRow>
-
-          {!showFaq && createRows(tickets)}
+          {!showFaq && createRows(receipts)}
         </PassportContainer>
       </BodyContainer>
-
       {!showFaq && (
-        <AddNewReceipt className="button--filled" onClick={addTicket}>
+        <AddNewReceipt className="button--filled" onClick={addReceipt}>
           {t('passport.placeholders.addNewReceipt').toUpperCase()}
         </AddNewReceipt>
       )}
