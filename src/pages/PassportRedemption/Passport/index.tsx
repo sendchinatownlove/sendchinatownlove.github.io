@@ -128,7 +128,7 @@ const Passport = (props: Props) => {
     setShowPopup(false);
     localStorage.setItem(
       'amountOfReceipts',
-      ((receipts.length % 3) + 1).toString()
+      ((receipts.length / 3) + 1).toString()
     );
   };
 
@@ -137,7 +137,7 @@ const Passport = (props: Props) => {
     props.setCurrentScreenView(ScreenType.Rewards);
     localStorage.setItem(
       'amountOfReceipts',
-      ((receipts.length % 3) + 1).toString()
+      ((receipts.length / 3) + 1).toString()
     );
   };
 
