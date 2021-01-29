@@ -6,7 +6,10 @@ import { useTranslation } from 'react-i18next';
 import { Title, Button } from '../style';
 import RaffleTicketCombo from '../Assets/RaffleTicketCombo.png';
 
-// import { getPassportReceipts } from '../../../utilities/api/interactionManager';
+import {
+  getCrawlRewards,
+  getCrawlReceipts,
+} from '../../../utilities/api/interactionManager';
 
 interface Props {
   setCurrentScreenView: Function;
@@ -20,7 +23,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
   const [receipts, setReceipts] = useState<any[]>([]);
   const [rewards, setRewards] = useState<any[]>([]);
 
-  const numRewards = Math.floor(receipts.length / 3);
+  const numReceipts = Math.floor(receipts.length / 3);
   // const totalAmount = receipts.reduce((acc, curr) => {
   //   acc += curr.amount;
   //   return acc;
@@ -29,64 +32,28 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
   const fetchRewards = async () => {
     try {
       // TODO: GET /Rewards
-      const allRewards = [
-        {
-          id: 0,
-          total_value: 5000,
-          name: 'Hype Beast Basket',
-          image_url: null,
-          active: false,
-          amount: 0,
-        },
-        {
-          id: 1,
-          total_value: 5200,
-          name: 'Rest and Relax Basket',
-          image_url: null,
-          active: false,
-          amount: 0,
-        },
-      ];
-      setRewards(allRewards);
+      const apiRewards = await getCrawlRewards();
+      console.log(apiRewards);
+      // const parsedRewards = apiRewards.data.map((reward) => ({
+      //   ...reward,
+      //   active: false,
+      //   amount: 0,
+      // }));
+      // setRewards(parsedRewards);
     } catch (err) {
       console.error('passport error: ' + err);
     }
   };
 
-  const fetchReceipts = async () => {
+  const fetchReceipts = async (id) => {
     try {
       // TODO: GET /contacts/:contact_id/crawl_receipts
       // filter it so that the receipts must have a null sponsor_seller_id (that are uploaded but not redeeemed)
-      const allReceipts = [
-        {
-          id: 0,
-          participating_seller: 1,
-          payment_intent: null,
-          contact_id: 8,
-          amount: 5000,
-          receipt_url: '',
-          redemption_id: null,
-        },
-        {
-          id: 1,
-          participating_seller: 1,
-          payment_intent: null,
-          contact_id: 8,
-          amount: 5000,
-          receipt_url: '',
-          redemption_id: null,
-        },
-        {
-          id: 2,
-          participating_seller: 1,
-          payment_intent: null,
-          contact_id: 8,
-          amount: 5000,
-          receipt_url: '',
-          redemption_id: null,
-        },
-      ];
-      const availableReceipts = allReceipts.filter(
+      const apiReceipts = await getCrawlReceipts(id);
+      const parsedReceipts = apiReceipts.data.sort(
+        (a, b) => a.redemption_id - b.redemption_id
+      );
+      const availableReceipts = parsedReceipts.filter(
         (receipt) => receipt.redemption_id === null
       );
       setReceipts(availableReceipts);
@@ -102,7 +69,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
 
   useEffect(() => {
     history.push(`/lny-passport/${id}/redeem`);
-    fetchReceipts();
+    fetchReceipts(id);
     fetchRewards();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -112,9 +79,8 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
     history.push(`/lny-passport/${id}/tickets`);
   };
 
-  const handleSubmission = (e) => {
+  const handleSubmission = async (e) => {
     e.preventDefault();
-    console.log('submitting to card:' + e.target.value);
   };
 
   const handleTicketSelection = (e) => {
@@ -162,10 +128,10 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
       <Header>
         <Logo src={RaffleTicketCombo} alt="raffle-redemption" />
         <Title color="black">
-          {numRewards === 1
+          {numReceipts === 1
             ? t('passport.headers.oneRaffleTicketAvailable').toUpperCase()
             : t('passport.headers.raffleTicketAvailable', {
-                amount: numRewards,
+                amount: numReceipts,
               }).toUpperCase()}
         </Title>
         <SubText>{t('passport.labels.selectGiveawayBasket')}</SubText>
