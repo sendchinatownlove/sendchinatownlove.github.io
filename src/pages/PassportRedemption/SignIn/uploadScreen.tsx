@@ -79,9 +79,9 @@ const UploadScreen = () => {
     try {
       const ext = receipt.type.split('/')[1];
 
-      let filename = `${id}-${new Date()
+      let filename = `${id}-${participatingSeller}-${new Date()
         .toISOString()
-        .replace(/(:|\.)/g, '-')}.${ext}-${participatingSeller}`;
+        .replace(/(:|\.)/g, '-')}.${ext}`;
 
       // upload receipt to gc
       const signedUrl = unescape(
@@ -93,7 +93,7 @@ const UploadScreen = () => {
       let data = await uploadCrawlReceipts(
         participatingSellerId,
         id,
-        Number(billTotal),
+        Number(billTotal) * 100,
         filename
       );
 
@@ -191,7 +191,7 @@ const UploadScreen = () => {
             id="imageFile"
             capture="environment"
             accept="image/*"
-            onChange={(e) => uploadImage(e)}
+            onChange={uploadImage}
           />
         </ButtonTest>
       </Column>
