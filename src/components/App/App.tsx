@@ -115,6 +115,9 @@ const App = () => {
               <VoucherRedemptionPage />
             </VoucherProvider>
           </Route>
+          <Route path="/passport">
+            <Redirect to="/lny-passport" />
+          </Route>
           <Route exact path="/lny-passport">
             <PassportRedemption screen={ScreenType.Track} />
           </Route>
@@ -133,9 +136,9 @@ const App = () => {
           <Route path="/print-passport-voucher/:id/tickets/:tickets_secret">
             <PassportVoucher />
           </Route>
-          <Route exact path="/passport/lyft_rewards/:contact_id/redeem">
+          {/* <Route exact path="/passport/lyft_rewards/:contact_id/redeem">
             <PassportRedemption screen={ScreenType.LyftCode} />
-          </Route>
+          </Route> */}
           <Route
             path="/gift-a-meal"
             component={() => {

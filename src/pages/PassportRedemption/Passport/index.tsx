@@ -120,7 +120,7 @@ const Passport = (props: Props) => {
   const addReceipt = (e) => {
     e.preventDefault();
     props.setCurrentScreenView(ScreenType.Track);
-    push(`/lny-passport`);
+    push(`/lny-passport/${id}/upload`);
   };
 
   const closePopup = (e) => {
