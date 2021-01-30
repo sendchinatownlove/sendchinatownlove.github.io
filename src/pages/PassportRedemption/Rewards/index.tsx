@@ -166,7 +166,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
               <TicketHeader>
                 <TicketTopRow>
                   <TicketButton active={reward.active} />
-                  <Title>{reward.name.toUpperCase()}</Title>
+                  <TicketTitle>{reward.name.toUpperCase()}</TicketTitle>
                   <TicketRewardAmount>{reward.amount}</TicketRewardAmount>
                 </TicketTopRow>
                 <SubText>
@@ -236,9 +236,11 @@ const TicketCard = styled.button<{
 }>`
   width: 80%;
   min-width: 200px;
+  min-height: 400px;
   margin: 12px auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   padding: 10px;
 
@@ -270,6 +272,10 @@ const TicketButton = styled.div<{
   border: 1px solid #c4c4c4;
   border-radius: 50%;
   background-color: ${(props) => (props.active ? '#A8192E' : 'transparent')};
+`;
+const TicketTitle = styled(Title)`
+  width: 80%;
+  margin: 0 auto;
 `;
 const TicketRewardAmount = styled.div`
   width: 30px;
