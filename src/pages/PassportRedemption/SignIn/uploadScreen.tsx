@@ -131,7 +131,7 @@ const UploadScreen = () => {
               setParticipatingSeller(e.target.value);
               setIsSearchingSellers(true);
             }}
-            onBlur={() => setIsSearchingSellers(false)}
+            // onBlur={() => setIsSearchingSellers(false)}
             value={participatingSeller}
             placeholder="Search Chinatown Businesses"
           />
