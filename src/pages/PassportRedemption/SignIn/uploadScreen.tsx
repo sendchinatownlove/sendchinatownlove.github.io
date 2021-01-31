@@ -110,6 +110,7 @@ const UploadScreen = () => {
       setParticipatingSeller('');
       setBillTotal('');
       setReceiptFilePath('');
+      setIsLoading(false);
     }
   };
 
@@ -129,7 +130,6 @@ const UploadScreen = () => {
               e.preventDefault();
               setParticipatingSeller(e.target.value);
               setIsSearchingSellers(true);
-              setIsLoading(false);
             }}
             onBlur={() => setIsSearchingSellers(false)}
             value={participatingSeller}
@@ -148,7 +148,6 @@ const UploadScreen = () => {
                     setParticipatingSeller(merchant.name);
                     setIsSearchingSellers(false);
                     setParticipatingSellerId(merchant.id);
-                    setIsLoading(false);
                   }}
                 >
                   {merchant.name}
@@ -171,7 +170,6 @@ const UploadScreen = () => {
             onChange={(e) => {
               e.preventDefault();
               setBillTotal(e.target.value);
-              setIsLoading(false);
             }}
             value={billTotal}
             min="10"
