@@ -64,7 +64,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         });
       const { status } = await redeemReward(id, access_token, ticketsToRedeem);
       // figure out how to handle invalid redemption with this page
-      if (status !== 200) push(`/passport/${id}/tickets`);
+      if (status !== 200) push(`/lny-passport/${id}/tickets`);
     } catch (err) {
       console.error('passport error: ' + err);
     }
@@ -153,7 +153,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
           className="button--red-filled"
           onClick={(e) => {
             e.preventDefault();
-            window.location.href = `/passport/${id}/redeem/${access_token}`;
+            window.location.href = `/lny-passport/${id}/redeem/${access_token}`;
           }}
         >
           {t('passport.placeholders.markUsed')}

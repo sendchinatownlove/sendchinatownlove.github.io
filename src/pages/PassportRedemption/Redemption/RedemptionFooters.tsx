@@ -15,10 +15,10 @@ export const NoRewardsFooter = () => {
         className="button--red-filled"
         onClick={(e) => {
           e.preventDefault();
-          window.location.href = '/passport';
+          window.location.href = '/lny-passport';
         }}
       >
-        {t('passport.placeholders.addNewTickets').toLocaleUpperCase()}
+        {t('passport.placeholders.addNewReceipts').toLocaleUpperCase()}
       </Button>
     </>
   );
@@ -42,7 +42,7 @@ export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
         disabled={!props.selectedSponsor}
         onClick={(e) => {
           e.preventDefault();
-          window.location.href = `/passport/${props.id}/redeem/${props.access_token}/sponsor/${props.selectedSponsor.id}`;
+          window.location.href = `/lny-passport/${props.id}/redeem/${props.access_token}/sponsor/${props.selectedSponsor.id}`;
         }}
       >
         {t('passport.placeholders.redeemNow').toUpperCase()}
@@ -66,7 +66,7 @@ export const DefaultFooter = (props: defaultProps) => {
           className="linkButton"
           onClick={(e) => {
             e.preventDefault();
-            window.location.href = `/passport/${props.id}/tickets`;
+            window.location.href = `/lny-passport/${props.id}/tickets`;
           }}
         >
           {t('passport.placeholders.returnTo').toLocaleUpperCase()}

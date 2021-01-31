@@ -10,7 +10,7 @@ type Props = {
 
 const Faq = ({ showFaq, toggleView }: Props) => {
   const goToFoodCrawlInfo = (e) => {
-    window.open('https://www.sendchinatownlove.com/food-crawl.html', '_blank');
+    window.open('https://www.sendchinatownlove.com/lny-crawl.html/', '_blank');
   };
   const { t } = useTranslation();
   const foodCrawlFaq = t<object[]>('passport.faq.arrayOfQuestionAnswers', {
@@ -18,9 +18,13 @@ const Faq = ({ showFaq, toggleView }: Props) => {
   });
 
   return (
-    <CardContainer mainView={showFaq} onClick={toggleView}>
-      <TitleRow>
-        <Title color={showFaq ? 'black' : 'grey'}>HOW TO WIN REWARDS</Title>
+    <Container mainView={showFaq} onClick={toggleView}>
+      <TitleRow active={showFaq}>
+        <Title
+          color={showFaq ? 'rgb(248,186,23,1)' : 'rgba(255, 255, 255, 0.7)'}
+        >
+          {t('passport.headers.rewards').toUpperCase()}
+        </Title>
       </TitleRow>
       {!showFaq && (
         <>
@@ -35,8 +39,15 @@ const Faq = ({ showFaq, toggleView }: Props) => {
         {foodCrawlFaq.map((faq: any, idx) => (
           <div key={'foodCrawlFaq' + idx}>
             <Question>
-              {`${idx + 1}.`} {faq.question}
+              {`${idx + 1}.`}
+              <Trans
+                i18nKey={`passport.faq.arrayOfQuestionAnswers.${idx}.question`}
+              >
+                <strong />
+                <i />
+              </Trans>
             </Question>
+            <br />
             <Trans
               i18nKey={`passport.faq.arrayOfQuestionAnswers.${idx}.answer`}
             >
@@ -44,30 +55,72 @@ const Faq = ({ showFaq, toggleView }: Props) => {
               <i />
               <p />
               <a
-                href="https://www.sendchinatownlove.com/food-crawl.html"
+                href="https://www.sendchinatownlove.com/"
                 target="_blank"
+                style={{ color: 'white' }}
                 rel="noopener noreferrer"
               >
-                link
+                https://www.sendchinatownlove.com/
+              </a>
+              <a
+                href="https://www.sendchinatownlove.com/lny-crawl.html/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'white' }}
+              >
+                https://www.sendchinatownlove.com/lny-crawl.html/
+              </a>
+              <>
+                <br />
+                <br />
+              </>
+              <a
+                href="https://merchant.sendchinatownlove.com/lny-passport"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'white' }}
+              >
+                https://merchant.sendchinatownlove.com/lny-passport
               </a>
             </Trans>
           </div>
         ))}
+        <br />
+        <FAQFooter>
+          Questions? Email us at
+          <a
+            href="hello@sendchinatownlove.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            hello@sendchinatownlove.com
+          </a>
+        </FAQFooter>
       </FaqContent>
-    </CardContainer>
+    </Container>
   );
 };
 
+const Container = styled(CardContainer)<{
+  mainView: Boolean;
+}>`
+  position: fixed;
+  bottom: 0;
+  top: ${(props) => (props.mainView ? '180px' : '130px')};
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+`;
 const FaqContent = styled.div`
   padding: 10px 30px 15px;
   font-size: 12px;
   overflow: auto;
+  color: white;
   height: calc(100vh - 230px);
 `;
 
 const RewardsLink = styled.span`
   text-transform: uppercase;
-  color: black;
+  color: white;
   font-weight: 700;
   letter-spacing: 0.15em;
   font-size: 14px;
@@ -79,6 +132,14 @@ const RewardsLink = styled.span`
 const Question = styled.p`
   font-weight: bold;
   margin-bottom: 1px;
+`;
+
+const FAQFooter = styled.div`
+  a {
+    margin-left: 5px;
+    font-weight: bold;
+    color: white;
+  }
 `;
 
 export default Faq;

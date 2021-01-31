@@ -1,317 +1,387 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import {
-  NoRewardsFooter,
-  RedeemRewardsFooter,
-  DefaultFooter,
-} from '../Redemption/RedemptionFooters';
-import { CardText } from '../style';
-import CircleLogo from '../Assets/CircleLogo.png';
+import { Title, Button } from '../style';
+import RaffleTicketCombo from '../Assets/RaffleTicketCombo.png';
 
 import {
-  getPassportTickets,
-  getAllSponsors,
-  getLocationById,
+  getCrawlRewards,
+  getCrawlReceipts,
+  getRedeemedRewards,
+  redeemRaffle,
 } from '../../../utilities/api/interactionManager';
+import Loader from '../../../components/Loader';
 
 interface Props {
   setCurrentScreenView: Function;
 }
 
-const PassportSelected = ({ setCurrentScreenView }: Props) => {
+const Rewards = ({ setCurrentScreenView }: Props) => {
   const { t } = useTranslation();
-  const { id, access_token } = useParams();
+  const { id } = useParams();
+  const history = useHistory();
 
-  const [tickets, setTickets] = useState<any[]>([]);
-  const numRewards = Math.floor(tickets.length / 3);
+  const [receipts, setReceipts] = useState<any[]>([]);
+  const [rewards, setRewards] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const [allSponsors, setAllSponsors] = useState<any[]>([]);
-  const [selectedSponsor, setSelectedSponsor] = useState({
-    id: null,
-    reward_cost: null,
-  });
+  const numReceipts = Math.floor(receipts.length / 3);
+  const selectedRewards = rewards
+    .filter((reward) => reward.active)
+    .map((reward) => reward.id);
 
-  const fetchTickets = async () => {
+  const fetchReceipts = async (id) => {
     try {
-      const { data: allTickets } = await getPassportTickets(id);
-      const availableTickets = allTickets.filter(
-        (ticket) => ticket.sponsor_seller_id === null
+      // first get crawl receipts, sort them by redemption_id
+      const apiReceipts = await getCrawlReceipts(id);
+      const parsedReceipts = apiReceipts.data.sort(
+        (a, b) => a.redemption_id - b.redemption_id
       );
-      setTickets(availableTickets);
-    } catch (err) {
-      console.error('passport error: ' + err);
-    }
-  };
 
-  const fetchSponsors = async () => {
-    try {
-      const { data: allSponsors } = await getAllSponsors();
-      const allSponsorsWithLocations = await Promise.all(
-        allSponsors.map(async (sponsor) => {
-          const { data: location } = await getLocationById(sponsor.location_id);
-          return { ...sponsor, location: location };
-        })
+      const availableReceipts = parsedReceipts.filter(
+        (receipt) => receipt.redemption_id === null
       );
-      setAllSponsors(allSponsorsWithLocations);
+      setReceipts(availableReceipts);
+
+      const redeemedRewards = await getRedeemedRewards(id);
+      const redeemedRewardsCount = redeemedRewards.data.reduce((acc, curr) => {
+        acc[curr.reward_id] = !acc[curr.reward_id]
+          ? 1
+          : acc[curr.reward_id] + 1;
+        return acc;
+      }, {});
+
+      const apiRewards = await getCrawlRewards();
+      const parsedRewards = apiRewards.data.map((reward) => {
+        return {
+          ...reward,
+          active: false,
+          amount: redeemedRewardsCount[reward.id]
+            ? redeemedRewardsCount[reward.id]
+            : 0,
+        };
+      });
+
+      setRewards(parsedRewards);
     } catch (err) {
       console.error('passport error: ' + err);
     }
   };
 
   useEffect(() => {
-    fetchTickets();
-    fetchSponsors();
-
+    history.push(`/lny-passport/${id}/redeem`);
+    fetchReceipts(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleFooter = () => {
-    if (numRewards === 0) return <NoRewardsFooter />;
-    else if (!!selectedSponsor.id)
-      return (
-        <RedeemRewardsFooter
-          id={id}
-          access_token={access_token}
-          selectedSponsor={selectedSponsor}
-        />
-      );
-    else return <DefaultFooter allSponsors={allSponsors} id={id} />;
+  const handleCancel = (e) => {
+    e.preventDefault();
+    history.push(`/lny-passport/${id}/tickets`);
   };
 
-  const [vh, setVh] = useState(window.innerHeight * 0.01);
+  const handleSubmission = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const selectedRewards = rewards
+      .filter((reward) => reward.active)
+      .map((reward) => reward.id);
 
-  useEffect(() => {
-    function handleResize() {
-      setVh(window.innerHeight * 0.01);
+    const redeemedRewards: any[] = [];
+    for (const reward_id of selectedRewards) {
+      const redeemedReward = await redeemRaffle(id, reward_id);
+      redeemedRewards.push(redeemedReward);
     }
-    window.addEventListener('resize', handleResize);
-  });
 
+    setLoading(false);
+    if (redeemedRewards.length - numReceipts === 0) {
+      history.push(`/lny-passport/${id}/tickets`);
+    } else {
+      fetchReceipts(id);
+    }
+  };
+
+  const handleTicketSelection = (e) => {
+    e.preventDefault();
+    const id = e.currentTarget.name;
+    e.persist();
+
+    setRewards((oldRewards) => {
+      const newRewards = oldRewards.map((rew) => {
+        if (rew.id.toString() === id && !rew.active) {
+          return {
+            ...rew,
+            active: true,
+            amount: rew.amount + 1,
+          };
+        }
+        return rew;
+      });
+
+      return newRewards;
+    });
+  };
+
+  const clearTickets = (e) => {
+    setRewards((oldRewards) => {
+      const newRewards = oldRewards.map((rew) => {
+        if (rew.active) {
+          return {
+            ...rew,
+            active: false,
+            amount: rew.amount - 1,
+          };
+        }
+        return rew;
+      });
+
+      return newRewards;
+    });
+  };
+
+  const activeRewards = rewards.filter((rew) => rew.active === true);
+  const ticketsLeft = numReceipts - selectedRewards.length;
   return (
-    <Container vh={vh}>
-      <Header numSponsors={allSponsors.length}>
-        <Logo src={CircleLogo} alt="scl-log" />
-        <Heading>
-          {t('passport.labels.itemsAvailable', {
-            amount: numRewards,
-            item: numRewards === 0 || numRewards > 1 ? 'Rewards' : 'Reward',
-          })}
-        </Heading>
-        <SubHeading>
-          {t('passport.labels.itemsExpiration', {
-            item: numRewards === 0 || numRewards > 1 ? 'Rewards' : 'Reward',
-            date: '9/30/20',
-          })}
-        </SubHeading>
+    <Container>
+      <Header>
+        <Logo src={RaffleTicketCombo} alt="raffle-redemption" />
+        <Title color="black">
+          {ticketsLeft === 1
+            ? t('passport.headers.oneRaffleTicketAvailable').toUpperCase()
+            : t('passport.headers.raffleTicketAvailable', {
+                amount: ticketsLeft,
+              }).toUpperCase()}
+        </Title>
+        <SubText>{t('passport.labels.selectGiveawayBasket')}</SubText>
+        {activeRewards.length > 0 ? (
+          <BasketDetails className="button--filled" onClick={clearTickets}>
+            {t('passport.placeholders.clearSelection')}
+          </BasketDetails>
+        ) : (
+          <LNYLink
+            className="button--filled"
+            href="https://www.sendchinatownlove.com/lny-crawl.html/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t('passport.placeholders.giveawayDetails')}
+          </LNYLink>
+        )}
       </Header>
-
-      <RewardsContainer>
-        {allSponsors.length > 0 &&
-          allSponsors.map((sponsor: any) => {
-            return (
-              <SingleRewardContainer
-                selected={selectedSponsor.id === sponsor.id}
-                numRewards={numRewards}
-                onClick={() => {
-                  if (numRewards === 0) {
-                    return;
-                  }
-                  if (selectedSponsor.id !== sponsor.id) {
-                    setSelectedSponsor({
-                      id: sponsor.id,
-                      reward_cost: sponsor.reward_cost,
-                    });
-                  } else {
-                    setSelectedSponsor({
-                      id: null,
-                      reward_cost: null,
-                    });
-                  }
-                }}
-              >
-                {numRewards !== 0 && (
-                  <input
-                    type="radio"
-                    checked={selectedSponsor.id === sponsor.id}
-                    id={sponsor.reward}
-                  />
-                )}
-
-                <SingleRewardInfo>
-                  <div>
-                    <CardText bold="700" size="14px">
-                      {sponsor.reward}
-                    </CardText>
-                    <CardText bold="700" size="10px">
-                      {sponsor.reward_detail}
-                    </CardText>
-                  </div>
-                  <LogoImage src={sponsor.logo_url} alt="reward-logo" />
-                  <CardText bold="700" size="10px">
-                    {sponsor.name}
-                  </CardText>
-                  {sponsor && sponsor.location && (
-                    <CardText size="10px">{sponsor.location.address1}</CardText>
-                  )}
-                </SingleRewardInfo>
-              </SingleRewardContainer>
-            );
-          })}
-        {allSponsors.length > 4 && <Buffer />}
-      </RewardsContainer>
-
-      <Footer numSponsors={allSponsors.length}>{handleFooter()}</Footer>
+      <TicketsContainer>
+        {rewards &&
+          rewards.map((reward) => (
+            <TicketCard
+              active={reward.active}
+              name={reward.id}
+              onClick={handleTicketSelection}
+              key={reward.id}
+              disabled={ticketsLeft === 0}
+            >
+              <TicketHeader>
+                <TicketTopRow>
+                  <TicketButton active={reward.active} />
+                  <TicketTitle>{reward.name.toUpperCase()}</TicketTitle>
+                  <TicketRewardAmount>{reward.amount}</TicketRewardAmount>
+                </TicketTopRow>
+                <SubText>
+                  {`${t('passport.labels.totalValue')}: $${
+                    reward.total_value / 100
+                  }`.toUpperCase()}
+                </SubText>
+              </TicketHeader>
+              <TicketImage src={reward.image_url} alt="reward-image-url" />
+            </TicketCard>
+          ))}
+      </TicketsContainer>
+      {activeRewards.length > 0 ? (
+        <EnterRaffleContainer>
+          <SubText>{t('passport.labels.ticketSelection')}</SubText>
+          <EnterRaffleTicketButton
+            className="button--red-filled"
+            onClick={handleSubmission}
+          >
+            {loading ? (
+              <Loader color="#ffffff" size="15px" />
+            ) : (
+              t('passport.placeholders.enterRaffle').toUpperCase()
+            )}
+          </EnterRaffleTicketButton>
+        </EnterRaffleContainer>
+      ) : (
+        <CancelButton onClick={handleCancel}>
+          {t('passport.placeholders.cancel').toUpperCase()}
+        </CancelButton>
+      )}
     </Container>
   );
 };
 
-export default PassportSelected;
+export default Rewards;
 
-const Container = styled.div<{
-  vh: number;
-}>`
-  width: 375px;
-  height: ${(props) => 100 * props.vh}px;
+const Container = styled.div`
+  width: 100%;
   margin: 0 auto;
   font-size: 12px;
-  display: grid;
-  grid-template-rows: min-content 1fr min-content;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 `;
+const Header = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+  position: fixed;
+  z-index: 100;
+  height: 250px;
 
-const Header = styled.div<{
-  numSponsors: number;
-}>`
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+const TicketsContainer = styled.div`
   width: 100%;
-  position: relative;
-
-  ${(props) =>
-    props.numSponsors > 4
-      ? `    
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 90%;
-        width: 100%;
-        background-color: white;
-        box-shadow: 0px 25px 27px 22px white;
-      }
-    `
-      : ''}
-`;
-
-const Logo = styled.img`
-  z-index: 10;
-  width: 70px;
-  height: 70px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
-  background-color: white;
-  border-radius: 50%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
-
-const Heading = styled.span`
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-top: 10px;
-  z-index: 2;
-  font-weight: bold;
-  font-size: 13px;
-`;
-
-const SubHeading = styled.span`
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-top: 10px;
-  z-index: 2;
-`;
-
-const Footer = styled.div<{
-  numSponsors: number;
-}>`
+  position: fixed;
+  top: 250px;
+  bottom: 0;
+  overflow: auto;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  padding: 20px;
-
-  & > * {
-    z-index: 2;
-    padding: 10px;
-  }
-
-  ${(props) =>
-    props.numSponsors > 4
-      ? `  
-      height: calc(min-content - 20px);
-      postion: relative;
-      background-color: white;
-      box-shadow: 0px -10px 27px 20px white;
-      z-index: 1;
-    `
-      : ''}
+  align-items: center;
 `;
-
-const RewardsContainer = styled.div`
-  margin: 0 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow-y: scroll;
-  padding-top: 20px;
-  padding-bottom: 50px;
-
-  ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-  }
-`;
-
-const SingleRewardContainer = styled.button<{
-  selected: boolean;
-  numRewards: number;
+const TicketCard = styled.button<{
+  active: Boolean;
 }>`
-  width: 160px;
-  height: 220px;
-  border: ${(props) =>
-    props.selected ? '1px solid black' : '1px solid #e5e5e5'};
-  box-shadow: ${(props) =>
-    props.numRewards > 0 ? '0px 0px 10px rgba(0, 0, 0, 0.25)' : 'none'};
-  background-color: white;
-  box-sizing: border-box;
-  margin: 8px;
-  padding: 5px;
-  outline: none;
-  border-radius: 5px;
-  cursor: ${(props) => (props.numRewards > 0 ? 'pointer' : 'auto')};
-
-  display: flex;
-  flex-direction: column;
-  place-self: center;
-`;
-
-const SingleRewardInfo = styled.div`
-  width: 100%;
-  height: calc(220px - 5px - 15px);
+  width: 80%;
+  min-width: 200px;
+  min-height: 400px;
+  margin: 12px auto;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-`;
+  padding: 10px;
 
-const LogoImage = styled.img`
-  width: 130px;
-  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid ${(props) => (props.active ? '#A8192E' : '#FFFFFF')};
+  box-sizing: border-box;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+`;
+const TicketHeader = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const TicketTopRow = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex: space-between;
+`;
+const TicketButton = styled.div<{
+  active: Boolean;
+}>`
+  width: 16px;
+  height: 16px;
+  border: 1px solid #c4c4c4;
+  border-radius: 50%;
+  background-color: ${(props) => (props.active ? '#A8192E' : 'transparent')};
+`;
+const TicketTitle = styled(Title)`
+  width: 80%;
+  margin: 0 auto;
+`;
+const TicketRewardAmount = styled.div`
+  width: 30px;
+  height: 14px;
+  border-radius: 8px;
+  color: white;
+  background: #dd678a;
+`;
+const TicketImage = styled.img`
+  width: 100%;
   border: 1px solid #eaeaea;
+  box-sizing: border-box;
+  border-radius: 20px;
+`;
+const Logo = styled.img`
+  width: 100px;
+  height: 100px;
+`;
+const SubText = styled(Title)`
+  font-size: 12px;
+  font-weight: normal;
+`;
+const BasketDetails = styled(Button)`
+  width: 300px;
+  height: 40px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0.15em;
+`;
+const EnterRaffleContainer = styled.div`
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-self: center;
+  width: 100%;
+
+  span {
+    width: 300px;
+  }
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 5.31%,
+    #ffffff 22.65%
+  );
+  padding-top: 20px;
+`;
+const EnterRaffleTicketButton = styled(Button)`
+  font-weight: bold;
+  min-height: 40px;
+`;
+const CancelButton = styled(Button)`
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+  color: #a8192e;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+
+  border: none;
+  text-decoration: underline;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0.15em;
+
+  width: 100%;
+  justify-content: center;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 3.31%,
+    #ffffff 68.65%
+  );
+  padding: 30px 0 20px 0;
+  margin: 0 auto;
 `;
 
-const Buffer = styled.div`
-  height: 50px;
-  grid-column: 1 / span 2;
+const LNYLink = styled.a`
+  letter-spacing: 0.15em;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 10px auto;
 `;
