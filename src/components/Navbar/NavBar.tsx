@@ -129,6 +129,14 @@ const NavBar = (props: Props) => {
         {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
         <NavLink
           compact={hamburgerOpen.toString()}
+
+          href="https://www.sendchinatownlove.com/lny-crawl.html"
+          i18nText="navBar.header.lunar-new-year-crawl"
+          altText="LUNAR NEW YEAR CRAWL"
+        />
+        <NavLink
+          compact={hamburgerOpen.toString()}
+
           href="https://www.sendchinatownlove.com/about.html"
           i18nText="OUR STORY"
           altText="OUR STORY"
@@ -175,6 +183,13 @@ const NavBar = (props: Props) => {
           </ReactNavLink>
           <NavLink
             compact={hamburgerOpen.toString()}
+            href="https://www.sendchinatownlove.com/lny-crawl.html"
+            i18nText="navBar.header.lunar-new-year-crawl"
+            altText="LUNAR NEW YEAR CRAWL"
+          />
+          <NavLink
+            compact={hamburgerOpen.toString()}
+
             href="https://www.sendchinatownlove.com/about.html"
             i18nText="OUR STORY"
             altText="OUR STORY"
