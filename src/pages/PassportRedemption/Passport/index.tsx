@@ -69,7 +69,7 @@ const Passport = (props: Props) => {
     if (receipts.length / 3 >= 1)
       setShowPopup(
         localStorage.getItem('amountOfReceipts') !==
-          (Math.floor((receipts.length / 3)) + 1).toString()
+          (Math.floor(receipts.length / 3) + 1).toString()
       );
   }, [receipts]);
 
@@ -128,7 +128,7 @@ const Passport = (props: Props) => {
     setShowPopup(false);
     localStorage.setItem(
       'amountOfReceipts',
-      ( Math.floor((receipts.length / 3)) + 1).toString()
+      (Math.floor(receipts.length / 3) + 1).toString()
     );
   };
 
@@ -137,7 +137,7 @@ const Passport = (props: Props) => {
     props.setCurrentScreenView(ScreenType.Rewards);
     localStorage.setItem(
       'amountOfReceipts',
-      (Math.floor((receipts.length / 3)) + 1).toString()
+      (Math.floor(receipts.length / 3) + 1).toString()
     );
   };
 
