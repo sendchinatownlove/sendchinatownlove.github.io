@@ -32,7 +32,7 @@ const UploadScreen = () => {
 
   // search values + did user select a valid merchant?
   const [sellersSearchBar, setSellersSearchBar] = useState<any>([]);
-  const [isSearchingSellers, setIsSearchingSellers] = useState(true);
+  const [isSearchingSellers, setIsSearchingSellers] = useState(false);
 
   // receipt total
   const [billTotal, setBillTotal] = useState('');
