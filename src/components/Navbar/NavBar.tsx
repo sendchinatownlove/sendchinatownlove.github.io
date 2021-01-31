@@ -124,9 +124,9 @@ const NavBar = (props: Props) => {
         {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
         <NavLink
           compact={hamburgerOpen.toString()}
-          href="https://merchant.sendchinatownlove.com/light-up-chinatown"
-          i18nText="navBar.header.light-up-chinatown"
-          altText="LIGHT UP CHINATOWN"
+          href="https://www.sendchinatownlove.com/lny-crawl.html"
+          i18nText="navBar.header.lunar-new-year-crawl"
+          altText="LUNAR NEW YEAR CRAWL"
         />
         <NavLink
           compact={hamburgerOpen.toString()}
