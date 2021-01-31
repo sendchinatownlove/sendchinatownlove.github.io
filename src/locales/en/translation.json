@@ -341,7 +341,7 @@
     },
     "labels": {
       "daysLeft": "{{daysLeft}} days left",
-      "enterTicket": "Enter your ticket code to start accumulating rewards you can use in Chinatown",
+      "enterTicket": "Welcome LNY crawler! Enter your email below to start logging receipts or to view your current progress.",
       "showReceipt": "To log your receipt, select the merchant you visited and add the total bill amount. Then, upload an image of the receipt from your phone’s photo library or take one live.",
       "crawlMerchant": "Crawl Merchant",
       "billTotal": "Bill Total",
