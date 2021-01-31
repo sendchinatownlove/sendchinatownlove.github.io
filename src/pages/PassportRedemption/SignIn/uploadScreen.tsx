@@ -32,7 +32,7 @@ const UploadScreen = () => {
 
   // search values + did user select a valid merchant?
   const [sellersSearchBar, setSellersSearchBar] = useState<any>([]);
-  const [selectedSeller, setSelectedSeller] = useState(true);
+  const [isSearchingSellers, setIsSearchingSellers] = useState(true);
 
   // receipt total
   const [billTotal, setBillTotal] = useState('');
@@ -40,6 +40,9 @@ const UploadScreen = () => {
   // string value of receipt + actual receipt (file format)
   const [receiptFilePath, setReceiptFilePath] = useState('');
   const [receipt, setReceipt] = useState<File | null>(null);
+
+  // disables buttons while loading info from the backend
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getAllSellers = async () => {
@@ -65,6 +68,10 @@ const UploadScreen = () => {
     return () => clearTimeout(debouncer);
   }, [participatingSeller, allParticipatingSellers]);
 
+  const alphanumericRegex = (str) => {
+    return str.replace(/[^a-zA-Z0-9]/g, '-');
+  };
+
   const uploadImage = async (event) => {
     event.preventDefault();
     if (event.target.files && event.target.files[0]) {
@@ -79,9 +86,9 @@ const UploadScreen = () => {
     try {
       const ext = receipt.type.split('/')[1];
 
-      let filename = `${id}-${participatingSeller}-${new Date()
-        .toISOString()
-        .replace(/(:|\.)/g, '-')}.${ext}`;
+      let filename = `${id}-${alphanumericRegex(
+        participatingSeller
+      )}-${alphanumericRegex(new Date().toISOString())}.${ext}`;
 
       // upload receipt to gc
       const signedUrl = unescape(
@@ -100,6 +107,9 @@ const UploadScreen = () => {
       if (data) push(`/lny-passport/${id}/tickets`);
     } catch (err) {
       console.log(err);
+      setParticipatingSeller('');
+      setBillTotal('');
+      setReceiptFilePath('');
     }
   };
 
@@ -118,14 +128,16 @@ const UploadScreen = () => {
             onChange={(e) => {
               e.preventDefault();
               setParticipatingSeller(e.target.value);
-              setSelectedSeller(false);
+              setIsSearchingSellers(true);
+              setIsLoading(false);
             }}
+            onBlur={() => setIsSearchingSellers(false)}
             value={participatingSeller}
             placeholder="Search Chinatown Businesses"
           />
         </CustomSymbolContainer>
 
-        {!!participatingSeller && !selectedSeller ? (
+        {!!participatingSeller && isSearchingSellers ? (
           !!sellersSearchBar.length ? (
             <SearchContainer>
               {sellersSearchBar.map((merchant) => (
@@ -134,8 +146,9 @@ const UploadScreen = () => {
                   onClick={(e) => {
                     e.preventDefault();
                     setParticipatingSeller(merchant.name);
-                    setSelectedSeller(true);
+                    setIsSearchingSellers(false);
                     setParticipatingSellerId(merchant.id);
+                    setIsLoading(false);
                   }}
                 >
                   {merchant.name}
@@ -158,9 +171,11 @@ const UploadScreen = () => {
             onChange={(e) => {
               e.preventDefault();
               setBillTotal(e.target.value);
+              setIsLoading(false);
             }}
             value={billTotal}
             min="10"
+            max="2000"
             step=".01"
           />
           <SubTitle color="grey" spacing="none">
@@ -199,10 +214,19 @@ const UploadScreen = () => {
       <InputContainer className="bottom">
         <Button
           primary={true}
-          disabled={!participatingSeller || !receipt || Number(billTotal) < 10}
+          disabled={
+            !allParticipatingSellers.find(
+              (seller) => seller.name === participatingSeller
+            ) ||
+            !receipt ||
+            Number(billTotal) < 10 ||
+            Number(billTotal) > 2000 ||
+            isLoading
+          }
           onClick={(e) => {
             e.preventDefault();
             submitReceipt();
+            setIsLoading(true);
           }}
         >
           Add Receipt
