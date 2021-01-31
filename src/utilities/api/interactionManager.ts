@@ -443,3 +443,9 @@ export const getCrawlReceipts = async (contact_id: number) =>
     .get(contacts + contact_id + '/crawl_receipts/')
     .then((res) => res)
     .catch((err) => err);
+
+export const getRedeemedRewards = async (contact_id: number) =>
+  axios
+    .get(contacts + contact_id + '/redemptions/')
+    .then((res) => res)
+    .catch((err) => err);

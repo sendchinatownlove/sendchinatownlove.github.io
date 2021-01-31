@@ -6,7 +6,7 @@ import RaffleTicket from '../Assets/RaffleTicket.png';
 import CoinIcon from '../Assets/ReceiptIcons/Coin.png';
 import GoldIcon from '../Assets/ReceiptIcons/Gold.png';
 import MoneyIcon from '../Assets/ReceiptIcons/Money.png';
-// import RedEnvIcon from "../Assets/ReceiptIcons/RedEnv.png"
+import RedEnvIcon from '../Assets/ReceiptIcons/RedEnv.png';
 
 import { Button } from '../style';
 // import { Contact } from '../../../utilities/api/types';
@@ -79,19 +79,23 @@ const TicketRow = (props: Props) => {
     const filledStamps = stamps.map((ticketInfo) => {
       const category = props.index % 3;
       let icon;
-      switch (category) {
-        case 1:
-          icon = GoldIcon;
-          break;
-        case 2:
-          icon = MoneyIcon;
-          break;
-        default:
-          icon = CoinIcon;
-          break;
+      if (ticketInfo.payment_intent_id) {
+        icon = RedEnvIcon;
+      } else {
+        switch (category) {
+          case 1:
+            icon = GoldIcon;
+            break;
+          case 2:
+            icon = MoneyIcon;
+            break;
+          default:
+            icon = CoinIcon;
+            break;
+        }
       }
 
-      return <Stamp key={ticketInfo.id} src={icon} />;
+      return <Stamp key={ticketInfo.id} src={icon} size="30px" />;
     });
 
     while (filledStamps.length < 3) {
@@ -222,8 +226,10 @@ const RedeemedRowOverlay = styled.div`
     props.status === RowStatuses.Active ? 'column' : 'row'};
   justify-content: center;
 `;
-const Stamp = styled.img`
-  width: 45px;
+const Stamp = styled.img<{
+  size?: string;
+}>`
+  width: ${(props) => (props.size ? props.size : '45px')};
 `;
 const EmptyStamp = styled.div`
   width: 55px;

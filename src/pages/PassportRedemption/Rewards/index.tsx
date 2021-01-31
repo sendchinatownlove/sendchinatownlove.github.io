@@ -9,8 +9,10 @@ import RaffleTicketCombo from '../Assets/RaffleTicketCombo.png';
 import {
   getCrawlRewards,
   getCrawlReceipts,
+  getRedeemedRewards,
   redeemRaffle,
 } from '../../../utilities/api/interactionManager';
+import Loader from '../../../components/Loader';
 
 interface Props {
   setCurrentScreenView: Function;
@@ -23,36 +25,46 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
 
   const [receipts, setReceipts] = useState<any[]>([]);
   const [rewards, setRewards] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const numReceipts = Math.floor(receipts.length / 3);
   const selectedRewards = rewards
     .filter((reward) => reward.active)
     .map((reward) => reward.id);
 
-  const fetchRewards = async () => {
-    try {
-      const apiRewards = await getCrawlRewards();
-      const parsedRewards = apiRewards.data.map((reward) => ({
-        ...reward,
-        active: false,
-        amount: 0,
-      }));
-      setRewards(parsedRewards);
-    } catch (err) {
-      console.error('passport error: ' + err);
-    }
-  };
-
   const fetchReceipts = async (id) => {
     try {
+      // first get crawl receipts, sort them by redemption_id
       const apiReceipts = await getCrawlReceipts(id);
       const parsedReceipts = apiReceipts.data.sort(
         (a, b) => a.redemption_id - b.redemption_id
       );
+
       const availableReceipts = parsedReceipts.filter(
         (receipt) => receipt.redemption_id === null
       );
       setReceipts(availableReceipts);
+
+      const redeemedRewards = await getRedeemedRewards(id);
+      const redeemedRewardsCount = redeemedRewards.data.reduce((acc, curr) => {
+        acc[curr.reward_id] = !acc[curr.reward_id]
+          ? 1
+          : acc[curr.reward_id] + 1;
+        return acc;
+      }, {});
+
+      const apiRewards = await getCrawlRewards();
+      const parsedRewards = apiRewards.data.map((reward) => {
+        return {
+          ...reward,
+          active: false,
+          amount: redeemedRewardsCount[reward.id]
+            ? redeemedRewardsCount[reward.id]
+            : 0,
+        };
+      });
+
+      setRewards(parsedRewards);
     } catch (err) {
       console.error('passport error: ' + err);
     }
@@ -61,7 +73,6 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
   useEffect(() => {
     history.push(`/lny-passport/${id}/redeem`);
     fetchReceipts(id);
-    fetchRewards();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -72,16 +83,21 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
 
   const handleSubmission = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const selectedRewards = rewards
       .filter((reward) => reward.active)
       .map((reward) => reward.id);
+
+    const redeemedRewards: any[] = [];
     for (const reward_id of selectedRewards) {
-      redeemRaffle(id, reward_id);
+      const redeemedReward = await redeemRaffle(id, reward_id);
+      redeemedRewards.push(redeemedReward);
     }
-    if (selectedRewards.length - numReceipts === 0) {
+
+    setLoading(false);
+    if (redeemedRewards.length - numReceipts === 0) {
       history.push(`/lny-passport/${id}/tickets`);
     } else {
-      fetchRewards();
       fetchReceipts(id);
     }
   };
@@ -170,8 +186,8 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
                   <TicketRewardAmount>{reward.amount}</TicketRewardAmount>
                 </TicketTopRow>
                 <SubText>
-                  {`${t('passport.labels.totalValue')}: ${
-                    reward.total_value
+                  {`${t('passport.labels.totalValue')}: $${
+                    reward.total_value / 100
                   }`.toUpperCase()}
                 </SubText>
               </TicketHeader>
@@ -186,7 +202,11 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
             className="button--red-filled"
             onClick={handleSubmission}
           >
-            {t('passport.placeholders.enterRaffle').toUpperCase()}
+            {loading ? (
+              <Loader color="#ffffff" size="15px" />
+            ) : (
+              t('passport.placeholders.enterRaffle').toUpperCase()
+            )}
           </EnterRaffleTicketButton>
         </EnterRaffleContainer>
       ) : (
@@ -329,6 +349,7 @@ const EnterRaffleContainer = styled.div`
 `;
 const EnterRaffleTicketButton = styled(Button)`
   font-weight: bold;
+  min-height: 40px;
 `;
 const CancelButton = styled(Button)`
   position: fixed;
