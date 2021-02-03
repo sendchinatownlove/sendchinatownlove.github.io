@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
 import costBreakdownImg from './images/cost-breakdown.png';
@@ -14,7 +13,6 @@ import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
 import LightUpPartners from './LightUpPartners';
 import DonationRedirect from './DonationRedirect';
-import { getProject, light_up_chinatown_id } from '../../utilities/api';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -24,18 +22,9 @@ const LightUpChinatownPage = () => {
   // const campaignEndDate = new Date('12/20/2020');
   // const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   // const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
-  const [contributions, setContributions] = useState<number>(0);
 
-  const fetchData = async (project_id: number) => {
-    const { data } = await getProject(project_id);
-    if (data) {
-      setContributions(data.amount_raised);
-    }
-  };
-
-  useEffect(() => {
-    fetchData(light_up_chinatown_id);
-  }, []);
+  // @NOTE (jacob): the campaign has ended, so let's save the backend some stress and hard-code this number
+  const contributions = 4785900;
 
   return (
     // Need to update topBanner to styled component
