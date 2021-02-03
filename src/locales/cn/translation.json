@@ -57,6 +57,8 @@
     "meals": "meals"
   },
   "purchase": {
+    "footer": "Certain Gift-a-Meal campaigns will be conducted in partnership with Apex for Youth, a 501(c)(3) nonprofit organization. If a campaign is denoted as such, contributions will be tax deductible.",
+    "donationDefault": "Gift-A-Meal Donation",
     "donation": "捐款 - {{seller}}",
     "voucher": "购买礼品券 - {{seller}}"
   },
