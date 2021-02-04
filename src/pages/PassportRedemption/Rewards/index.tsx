@@ -161,7 +161,7 @@ const Rewards = ({ setCurrentScreenView }: Props) => {
         ) : (
           <LNYLink
             className="button--filled"
-            href="https://www.sendchinatownlove.com/lny-crawl.html/"
+            href="https://www.sendchinatownlove.com/lny-crawl.html#giveaways"
             target="_blank"
             rel="noopener noreferrer"
           >
