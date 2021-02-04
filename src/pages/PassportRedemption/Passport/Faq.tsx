@@ -10,7 +10,7 @@ type Props = {
 
 const Faq = ({ showFaq, toggleView }: Props) => {
   const goToFoodCrawlInfo = (e) => {
-    window.open('https://www.sendchinatownlove.com/lny-crawl.html/', '_blank');
+    window.open('https://www.sendchinatownlove.com/lny-crawl.html#giveaways', '_blank');
   };
   const { t } = useTranslation();
   const foodCrawlFaq = t<object[]>('passport.faq.arrayOfQuestionAnswers', {
