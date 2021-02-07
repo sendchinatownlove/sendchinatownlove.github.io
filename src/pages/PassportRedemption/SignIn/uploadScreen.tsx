@@ -202,8 +202,8 @@ const UploadScreen = () => {
           <input
             type="file"
             id="imageFile"
-            capture="environment"
-            accept="image/*"
+            // capture="environment"
+            // accept="image/*"
             onChange={uploadImage}
           />
         </ButtonTest>
