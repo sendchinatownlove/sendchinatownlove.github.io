@@ -53,11 +53,6 @@ const NavBar = (props: Props) => {
       translation: 'light-up-chinatown',
       external: false,
     },
-    {
-      url: 'https://stickylocals.com/scl',
-      translation: 'sticky-locals-x-scl',
-      external: true,
-    },
   ];
 
   const drop = dropdownOptions.map((option) => {
@@ -129,14 +124,12 @@ const NavBar = (props: Props) => {
         {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
         <NavLink
           compact={hamburgerOpen.toString()}
-
           href="https://www.sendchinatownlove.com/lny-crawl.html"
           i18nText="navBar.header.lunar-new-year-crawl"
           altText="LUNAR NEW YEAR CRAWL"
         />
         <NavLink
           compact={hamburgerOpen.toString()}
-
           href="https://www.sendchinatownlove.com/about.html"
           i18nText="OUR STORY"
           altText="OUR STORY"
@@ -189,7 +182,6 @@ const NavBar = (props: Props) => {
           />
           <NavLink
             compact={hamburgerOpen.toString()}
-
             href="https://www.sendchinatownlove.com/about.html"
             i18nText="OUR STORY"
             altText="OUR STORY"
