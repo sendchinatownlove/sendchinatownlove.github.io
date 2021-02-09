@@ -24,7 +24,7 @@ const LightUpChinatownPage = () => {
   // const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
 
   // @NOTE (jacob): the campaign has ended, so let's save the backend some stress and hard-code this number
-  const contributions = 4785900;
+  const contributions = 4832802;
 
   return (
     // Need to update topBanner to styled component
