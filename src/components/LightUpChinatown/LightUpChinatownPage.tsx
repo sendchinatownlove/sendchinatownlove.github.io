@@ -38,7 +38,6 @@ const LightUpChinatownPage = () => {
   }, []);
 
   return (
-    // Need to update topBanner to styled component
     <React.Fragment>
       <HeroSection>
         <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
