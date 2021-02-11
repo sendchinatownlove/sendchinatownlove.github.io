@@ -15,3 +15,5 @@ export const sponsorSellers = baseUrl + 'sponsor_sellers/';
 export const locations = baseUrl + 'locations/';
 export const lyftRewards = 'lyft_rewards/';
 export const projects = baseUrl + 'projects/';
+export const authGoogle = baseUrl + 'auth/google';
+export const authPasswordless = baseUrl + 'auth/passwordless';

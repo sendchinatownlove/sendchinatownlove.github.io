@@ -17,6 +17,8 @@ import {
   lyftRewards,
   nonprofits,
   projects,
+  authGoogle,
+  authPasswordless,
 } from './endpoints';
 
 // Fix return typing
@@ -381,3 +383,15 @@ export const getProject = async (project_id: number) =>
     .catch((err) => err);
 
 export const light_up_chinatown_id = 1;
+
+export const getAuthGoogle = async () =>
+  axios
+    .get(authGoogle)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const requestAuthPasswordless = async (email: string) =>
+  axios
+    .post(authPasswordless, { email })
+    .then((res) => res)
+    .catch((err) => err);
