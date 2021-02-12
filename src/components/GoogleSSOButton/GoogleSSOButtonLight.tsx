@@ -6,9 +6,9 @@ interface Props {
   handleClick: (args: any) => void;
 }
 
-const SSOButton = (props: Props) => {
+const SSOButton = ({ handleClick }: Props) => {
   return (
-    <Button type="button">
+    <Button type="button" onClick={handleClick}>
       <GoogleIcon width="36" height="36" />
       <Text>Sign in with Google</Text>
     </Button>
