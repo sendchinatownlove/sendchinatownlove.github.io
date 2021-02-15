@@ -22,8 +22,9 @@ const DistributorLoginView = () => {
     requestAuthPasswordless(email);
   };
 
-  const handleGoogleSSOClick = () => {
-    getAuthGoogle();
+  const handleGoogleSSOClick = async () => {
+    const { data } = await getAuthGoogle();
+    window.open(data.authorization_url, '_self');
   };
   return (
     <Main>
