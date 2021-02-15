@@ -90,9 +90,6 @@ export const ModalAmount = (props: Props) => {
 
     switch (purchaseType) {
       case ModalPaymentTypes.modalPages.donation:
-        if (sellerName === 'Apex for Youth') {
-          return t('purchase.donationDefault');
-        }
         return t('purchase.donation', { seller: sellerName });
       case ModalPaymentTypes.modalPages.gift_card:
         return t('purchase.voucher', { seller: sellerName });
@@ -207,25 +204,18 @@ export const ModalAmount = (props: Props) => {
           <span>{formatCurrency(Number(amount) * 100 + feesAmount)}</span>
         </b>
       </TotalContainer>
-      <Footer>
-        <ButtonContainer>
-          <button
-            type="button"
-            className={'modalButton--filled'}
-            onClick={openModal}
-            disabled={
-              Number(amount) < CUSTOM_AMOUNT_MIN ||
-              Number(amount) > CUSTOM_AMOUNT_MAX ||
-              !validAmount(amount)
-            }
-          >
-            {t('paymentProcessing.amount.submit')}
-          </button>
-        </ButtonContainer>
-        {modalView === ModalPaymentTypes.modalPages.donation && (
-          <Disclaimer>{t('purchase.footer')}</Disclaimer>
-        )}
-      </Footer>
+      <NextButton
+        type="button"
+        className={'modalButton--filled'}
+        onClick={openModal}
+        disabled={
+          Number(amount) < CUSTOM_AMOUNT_MIN ||
+          Number(amount) > CUSTOM_AMOUNT_MAX ||
+          !validAmount(amount)
+        }
+      >
+        {t('paymentProcessing.amount.submit')}
+      </NextButton>
     </ContentContainer>
   );
 };
@@ -301,19 +291,11 @@ const ErrorMessage = styled.div`
   font-size: 13px;
 `;
 
-const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const ButtonContainer = styled.div`
-  text-align: right;
-  padding-top: 25px;
-`;
-
-const Disclaimer = styled.div`
-  margin-top: 25px;
+const NextButton = styled.button`
+  position: relative;
+  float: right;
+  right: 0px;
+  bottom: -25px;
 `;
 
 const Header = styled.div`

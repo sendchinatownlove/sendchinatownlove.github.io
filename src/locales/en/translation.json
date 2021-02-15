@@ -1,7 +1,7 @@
 {
   "paymentProcessing": {
     "amount": {
-      "header": "100% of your donation will feed communities in need through Send Chinatown’s Love Gift-a-Meal program. Your transaction is secure and encrypted.",
+      "header": "100% of your support will go to the merchant toward their operating costs. Your transaction is secure, encrypted and directly goes to the owner for sustaining their business.",
       "light_up_chinatown": "100% of donation goes towards permanent light fixtures throughout Chinatown.",
       "mega_gam": "Please add your payment information below.",
       "label1": "Select amount",
@@ -89,8 +89,6 @@
     "meals": "meals"
   },
   "purchase": {
-    "footer": "Certain Gift-a-Meal campaigns will be conducted in partnership with Apex for Youth, a 501(c)(3) nonprofit organization. If a campaign is denoted as such, contributions will be tax deductible.",
-    "donationDefault": "Gift-A-Meal Donation",
     "donation": "Donation for {{seller}}",
     "voucher": "Voucher for {{seller}}",
     "donation_to": "Donation to {{seller}}",
