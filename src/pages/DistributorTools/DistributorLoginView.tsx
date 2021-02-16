@@ -45,11 +45,21 @@ const DistributorLoginView = () => {
         </Paragraph>
 
         <Form onSubmit={handleSubmit}>
+          {email !== '' && !EMAIL_REGEX.test(email) && (
+            <ErrorMessage>Error: Email Invalid</ErrorMessage>
+          )}
           <Label>
             Email Address
-            <Input value={email} onChange={handleChange} type="text" />
+            <Input
+              value={email}
+              onChange={handleChange}
+              type="email"
+              pattern={EMAIL_REGEX.source}
+            />
           </Label>
-          <SubmitBtn disabled={email === ''}>Send Link</SubmitBtn>
+          <SubmitBtn disabled={email === '' || EMAIL_REGEX.test(email)}>
+            Send Link
+          </SubmitBtn>
         </Form>
         <span>
           Forgot your email? Send us a message at{' '}
@@ -118,7 +128,17 @@ const Input = styled.input`
   width: 100%;
   font-size: 28px;
   height: 56px;
+
+  &:invalid {
+    border: 1px solid red;
+  }
 `;
+
+const ErrorMessage = styled.div`
+  color: red;
+  width: 100%;
+`;
+
 const SubmitBtn = styled.button`
   margin-left: 54px;
   width: 348px;
