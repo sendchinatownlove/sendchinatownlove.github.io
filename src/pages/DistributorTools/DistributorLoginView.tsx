@@ -49,7 +49,7 @@ const DistributorLoginView = () => {
             Email Address
             <Input value={email} onChange={handleChange} type="text" />
           </Label>
-          <SubmitBtn>Send Link</SubmitBtn>
+          <SubmitBtn disabled={email === ''}>Send Link</SubmitBtn>
         </Form>
         <span>
           Forgot your email? Send us a message at{' '}
@@ -132,6 +132,11 @@ const SubmitBtn = styled.button`
   border-radius: 50px;
   text-transform: uppercase;
 
+  &:disabled,
+  :disabled:hover,
+  :disabled:active {
+    background: rgb(139, 139, 139);
+  }
   &:hover {
     background: rgb(171, 25, 46);
   }
