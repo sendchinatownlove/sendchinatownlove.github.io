@@ -46,10 +46,10 @@ const DistributorLoginView = () => {
 
         <Form onSubmit={handleSubmit}>
           {email !== '' && !EMAIL_REGEX.test(email) && (
-            <ErrorMessage>Error: Email Invalid</ErrorMessage>
+            <ErrorMessage>Error: Invalid Email Address</ErrorMessage>
           )}
           <Label>
-            Email Address
+            <LabelText>Email Address</LabelText>
             <Input
               value={email}
               onChange={handleChange}
@@ -57,7 +57,7 @@ const DistributorLoginView = () => {
               pattern={EMAIL_REGEX.source}
             />
           </Label>
-          <SubmitBtn disabled={email === '' || EMAIL_REGEX.test(email)}>
+          <SubmitBtn disabled={email === '' || !EMAIL_REGEX.test(email)}>
             Send Link
           </SubmitBtn>
         </Form>
@@ -114,20 +114,32 @@ width: 821px;
 
 const Form = styled.form`
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: 680px auto;
+  grid-template-rows: 20px 100px;
+  gap: 0px 54px;
+  grid-template-areas:
+    'err err'
+    'input submit';
 `;
 
 const Label = styled.label`
   display: inline-block;
   width: 680px;
+  grid-area: input;
+`;
+
+const LabelText = styled.span`
+  height: 28px;
+  margin-bottom: 6px;
 `;
 
 const Input = styled.input`
   width: 100%;
   font-size: 28px;
   height: 56px;
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 5px;
 
   &:invalid {
     border: 1px solid red;
@@ -135,12 +147,14 @@ const Input = styled.input`
 `;
 
 const ErrorMessage = styled.div`
+  grid-area: err;
   color: red;
   width: 100%;
 `;
 
 const SubmitBtn = styled.button`
-  margin-left: 54px;
+  grid-area: submit;
+  align-self: center;
   width: 348px;
   height: 56px;
   box-sizing: border-box;
