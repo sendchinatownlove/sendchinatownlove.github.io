@@ -8,6 +8,7 @@ import {
   getAuthGoogle,
   requestAuthPasswordless,
 } from '../../utilities/api/interactionManager';
+import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 const DistributorLoginView = () => {
   const [email, setEmail] = useState('');
