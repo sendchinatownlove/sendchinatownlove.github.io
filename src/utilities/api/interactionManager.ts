@@ -19,6 +19,7 @@ import {
   projects,
   authGoogle,
   authPasswordless,
+  authValidate,
 } from './endpoints';
 
 // Fix return typing
@@ -393,5 +394,11 @@ export const getAuthGoogle = async () =>
 export const requestAuthPasswordless = async (email: string) =>
   axios
     .post(authPasswordless, { email })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const validateSession = async () =>
+  axios
+    .get(authValidate, { validateStatus: (status) => status < 500 })
     .then((res) => res)
     .catch((err) => err);

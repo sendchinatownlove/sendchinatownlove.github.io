@@ -17,3 +17,4 @@ export const lyftRewards = 'lyft_rewards/';
 export const projects = baseUrl + 'projects/';
 export const authGoogle = baseUrl + 'auth/google';
 export const authPasswordless = baseUrl + 'auth/passwordless';
+export const authValidate = baseUrl + 'auth/validate';
