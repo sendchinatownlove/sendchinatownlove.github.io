@@ -172,13 +172,13 @@ const UploadScreen = () => {
               setBillTotal(e.target.value);
             }}
             value={billTotal}
-            min="10"
+            // min="10"
             max="2000"
             step=".01"
           />
-          <SubTitle color="grey" spacing="none">
+          {/* <SubTitle color="grey" spacing="none">
             $10 minimum
-          </SubTitle>
+          </SubTitle> */}
         </CustomSymbolContainer>
 
         <ButtonTest>
@@ -217,7 +217,7 @@ const UploadScreen = () => {
               (seller) => seller.name === participatingSeller
             ) ||
             !receipt ||
-            Number(billTotal) < 10 ||
+            // Number(billTotal) < 10 ||
             Number(billTotal) > 2000 ||
             isLoading
           }
