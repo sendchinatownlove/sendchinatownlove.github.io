@@ -1,5 +1,4 @@
 import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
 import { render, waitFor, fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 
@@ -11,6 +10,7 @@ import {
   authGoogle,
   authPasswordless,
 } from '../utilities/api/endpoints';
+import renderWithRouter from '../utilities/testing/renderWithRouter';
 
 const mock = new MockAdapter(axios);
 
@@ -18,10 +18,27 @@ const MOCK_EMAIL = 'abc@gmail.com';
 const MOCK_GOOGLE_RES = { authorization_url: 'google.com' };
 const MOCK_REDIRECT = 'google.com';
 
-describe('Distributor Tools Login Page', () => {
+describe.only('Distributor Tools Login Page', () => {
+  it('should redirect if the server validates an existing session', async () => {
+    const endingPath = '/distributor/dashboard';
+    mock.onGet(authValidate).reply(200);
+
+    const spy = jest.spyOn(APIInteracts, 'validateSession');
+
+    const { getByText } = renderWithRouter(<DistributorLoginView />, {
+      startingPath: '/',
+      endingPath,
+    });
+
+    expect(spy).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(getByText(endingPath)).toBeInTheDocument();
+    });
+  });
+
   it('should hit the login endpoint if I submit the form', () => {
     expect.assertions(3);
-    mock.onGet(authValidate).reply(200);
+    mock.onGet(authValidate).reply(401);
     mock.onGet(authPasswordless).reply(200);
 
     const { container } = render(<DistributorLoginView />);
@@ -43,8 +60,8 @@ describe('Distributor Tools Login Page', () => {
     expect(spy).toHaveBeenCalledWith(MOCK_EMAIL);
   });
 
-  it.only('should hit the Google auth endpoint if I click the Google SSO button', async () => {
-    mock.onGet(authValidate).reply(200);
+  it('should hit the Google auth endpoint if I click the Google SSO button', async () => {
+    mock.onGet(authValidate).reply(401);
 
     const { getByText } = render(<DistributorLoginView />);
     window.open = jest.fn();
