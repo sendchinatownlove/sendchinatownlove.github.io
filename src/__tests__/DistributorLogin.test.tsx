@@ -49,9 +49,12 @@ describe('Distributor Tools Login Page', () => {
     const { getByText } = render(<DistributorLoginView />);
     window.open = jest.fn();
     mock.onGet(authGoogle).reply(200, MOCK_GOOGLE_RES);
+    const apiSpy = jest.spyOn(APIInteracts, 'getAuthGoogle');
 
     const googleBtn = getByText('Sign in with Google') as HTMLButtonElement;
     fireEvent.click(googleBtn!);
+
+    expect(apiSpy).toHaveBeenCalled();
 
     await waitFor(() =>
       expect(window.open).toHaveBeenCalledWith(MOCK_REDIRECT, '_self')
