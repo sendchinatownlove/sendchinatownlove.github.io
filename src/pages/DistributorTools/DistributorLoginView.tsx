@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { Logo } from '../../components/Logos/Logos';
 import GoogleSSOButtonLight from '../../components/GoogleSSOButton/GoogleSSOButtonLight';
@@ -6,12 +7,25 @@ import Footer from '../../components/Footer/Footer';
 
 import {
   getAuthGoogle,
+  validateSession,
   requestAuthPasswordless,
 } from '../../utilities/api/interactionManager';
 import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 const DistributorLoginView = () => {
   const [email, setEmail] = useState('');
+  const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    const asyncFetch = async () => {
+      const res = await validateSession();
+      console.log(typeof res.status);
+      if (res.status === 200) {
+        setRedirect(true);
+      }
+    };
+    asyncFetch();
+  }, []);
 
   const handleChange = (e) => {
     setEmail(e.target.value);
@@ -29,6 +43,7 @@ const DistributorLoginView = () => {
   };
   return (
     <Main>
+      {redirect && <Redirect to={'/distributor/dashboard'} />}
       <Nav>
         <a href="/">
           <Logo />
@@ -108,9 +123,9 @@ const Section = styled.section`
 `;
 
 const Paragraph = styled.p`
-margin: 54px 0 92px;
-font-size: 24px
-width: 821px;
+  margin: 54px 0 92px;
+  font-size: 24px;
+  width: 821px;
 `;
 
 const Form = styled.form`
