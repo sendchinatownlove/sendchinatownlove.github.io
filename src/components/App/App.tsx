@@ -54,6 +54,9 @@ const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
 const DetachedVoucherPrintouts = lazy(() =>
   import('../../pages/DistributorTools/DetachedVoucherPrintout')
 );
+const DistributorLoginView = lazy(() =>
+  import('../../pages/DistributorTools/DistributorLoginView')
+);
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
@@ -146,6 +149,9 @@ const App = () => {
               return null;
             }}
           />
+          <Route exact path="/distributor/login">
+            <DistributorLoginView />
+          </Route>
           <Route
             exact
             path="/distributor/:distributor_id/dashboard/print-detached"
