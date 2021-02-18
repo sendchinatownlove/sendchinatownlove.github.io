@@ -49,9 +49,9 @@ const NavBar = (props: Props) => {
     { url: '/merchants', translation: 'donate', external: false },
     { url: '/gift-a-meal-home', translation: 'gift-a-meal', external: false },
     {
-      url: 'https://stickylocals.com/scl',
-      translation: 'sticky-locals-x-scl',
-      external: true,
+      url: '/light-up-chinatown',
+      translation: 'light-up-chinatown',
+      external: false,
     },
   ];
 
@@ -124,9 +124,9 @@ const NavBar = (props: Props) => {
         {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
         <NavLink
           compact={hamburgerOpen.toString()}
-          href="https://merchant.sendchinatownlove.com/light-up-chinatown"
-          i18nText="navBar.header.light-up-chinatown"
-          altText="LIGHT UP CHINATOWN"
+          href="https://www.sendchinatownlove.com/lny-crawl.html"
+          i18nText="navBar.header.lunar-new-year-crawl"
+          altText="LUNAR NEW YEAR CRAWL"
         />
         <NavLink
           compact={hamburgerOpen.toString()}
@@ -176,9 +176,9 @@ const NavBar = (props: Props) => {
           </ReactNavLink>
           <NavLink
             compact={hamburgerOpen.toString()}
-            href="https://merchant.sendchinatownlove.com/light-up-chinatown"
-            i18nText="navBar.header.light-up-chinatown"
-            altText="LIGHT UP CHINATOWN"
+            href="https://www.sendchinatownlove.com/lny-crawl.html"
+            i18nText="navBar.header.lunar-new-year-crawl"
+            altText="LUNAR NEW YEAR CRAWL"
           />
           <NavLink
             compact={hamburgerOpen.toString()}

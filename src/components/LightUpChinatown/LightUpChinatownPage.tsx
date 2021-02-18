@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import lanternHeroTop from './images/lantern-hero-top.png';
 import costBreakdownImg from './images/cost-breakdown.png';
@@ -8,20 +7,12 @@ import goal2Img from './images/goal_2.png';
 
 import { Trans, useTranslation } from 'react-i18next';
 
-import DonationSection from './DonationSection';
+// import DonationSection from './DonationSection';
 // import DonationDetail from './DonationDetail';
 import DonationProgressBar from './DonationProgressBar';
 import LightUpFaq from './LightUpFaq';
 import LightUpPartners from './LightUpPartners';
-import { getProject, light_up_chinatown_id } from '../../utilities/api';
-import { phoneScreens } from '../../utilities/general/responsive';
-
-import {
-  useModalPaymentDispatch,
-  ModalPaymentConstants,
-  ModalPaymentTypes,
-} from '../../utilities/hooks/ModalPaymentContext';
-//import { url } from 'inspector'; // Will use this after making topBanner into a styled component
+import DonationRedirect from './DonationRedirect';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -31,53 +22,16 @@ const LightUpChinatownPage = () => {
   // const campaignEndDate = new Date('12/20/2020');
   // const timeUntilEnd = campaignEndDate.getTime() - today.getTime();
   // const daysUntilEnd = Math.ceil(timeUntilEnd / (1000 * 3600 * 24));
-  const [contributions, setContributions] = useState<number>(0);
 
-  const modalPaymentDispatcher = useModalPaymentDispatch(null);
-
-  const openModal = (event) => {
-    event.preventDefault();
-    modalPaymentDispatcher({
-      type: ModalPaymentConstants.SET_MODAL_VIEW,
-      payload: ModalPaymentTypes.modalPages.light_up_chinatown,
-    });
-  };
-  const fetchData = async (project_id: number) => {
-    const { data } = await getProject(project_id);
-    if (data) {
-      setContributions(data.amount_raised);
-    }
-  };
-
-  useEffect(() => {
-    fetchData(light_up_chinatown_id);
-  }, []);
+  // @NOTE (jacob): the campaign has ended, so let's save the backend some stress and hard-code this number
+  const contributions = 4832802;
 
   return (
-    // Need to update topBanner to styled component
     <React.Fragment>
-      <div
-        className="topBanner"
-        style={{
-          height: '352px',
-          backgroundImage: 'url(' + lanternHeroTop + ')',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          alignContent: 'center',
-          paddingTop: '100px',
-          paddingBottom: '50px',
-          paddingLeft: '25px',
-          paddingRight: '25px',
-        }}
-      >
+      <HeroSection>
         <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
         <HeaderSubtext>{t('lightUpChinatown.headerSubtext')}</HeaderSubtext>
-        <Button onClick={openModal}>{t('donationBox.button')}</Button>
-      </div>
+      </HeroSection>
       <Container>
         <TextContainer>
           <SummaryBody>{t('lightUpChinatown.summaryBody1')}</SummaryBody>
@@ -131,8 +85,9 @@ const LightUpChinatownPage = () => {
       <DonationProgress>
         <DonationProgressBar raised={contributions}></DonationProgressBar>
       </DonationProgress>
-      <DonationContainer>
-        <DonationSection />
+      <DonationContainer style={{ background: '#A8192E' }}>
+        <DonationRedirect />
+        {/* swapped with <DonationSection /> when the campaign ended */}
       </DonationContainer>
       <DonationContainer>
         <CostBreakdownImageContainer>
@@ -145,28 +100,16 @@ const LightUpChinatownPage = () => {
   );
 };
 
-const Button = styled.span`
-  margin: 0 auto;
-  cursor: pointer;
-  width: 212px;
-  line-height: 37px;
-  text-align: center;
-  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.12em;
-
-  box-shadow: 0 0 0.5pt 0.5pt black;
-  background-color: #ffffff;
-  border-radius: 100px;
-  padding: 10px 10px 10px 10px;
-  @media (${phoneScreens}) {
-    letter-spacing: 0.08em;
-  }
-  &:hover {
-    color: #ab192e;
-    box-shadow: 0 0 1pt 1pt #ab192e;
-  }
+const HeroSection = styled.div`
+  background-image: url(${lanternHeroTop});
+  height: 352px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 `;
 
 const Container = styled.section`
@@ -179,7 +122,7 @@ const Container = styled.section`
   @media (min-width: 900px) {
     display: grid;
     grid-column-gap: 116px;
-    padding-top: 80px;
+    padding-top: 60px;
     max-width: 1280px;
   }
 `;
@@ -206,26 +149,17 @@ const HeaderText = styled.span`
   color: #ffffff;
 
   @media (max-width: 599px) {
-    margin-left: 0;
-    text-align: left;
+    margin-left: 25px;
   }
 `;
 
-const HeaderSubtext = styled.span`
-  margin: 0 auto;
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: bold;
+const HeaderSubtext = styled(HeaderText)`
   font-size: 24px;
   line-height: 33px;
-  letter-spacing: 0.01em;
-  color: #ffffff;
   @media (max-width: 599px) {
     font-size: 16px;
     line-height: 22px;
     width: 215px;
-    text-align: left;
-    margin-left: 0;
   }
 `;
 
@@ -261,6 +195,7 @@ const Map = styled.img`
   height: 515px;
   width: 388px;
   margin-bottom: 20px;
+  border-radius: 10px;
 `;
 
 // (wilson)See note above
