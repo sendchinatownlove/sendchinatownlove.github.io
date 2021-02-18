@@ -399,6 +399,9 @@ export const requestAuthPasswordless = async (email: string) =>
 
 export const validateSession = async () =>
   axios
-    .get(authValidate, { validateStatus: (status) => status < 500 })
+    .get(authValidate, {
+      validateStatus: (status) => status < 500,
+      withCredentials: true,
+    })
     .then((res) => res)
     .catch((err) => err);
