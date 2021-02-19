@@ -21,7 +21,7 @@ import {
   crawlReceipts,
   crawlRedemptions,
   crawlRewards,
-    authGoogle,
+  authGoogle,
   authPasswordless,
   authValidate,
 } from './endpoints';
@@ -466,8 +466,16 @@ export const requestAuthPasswordless = async (email: string) =>
     .catch((err) => err);
 
 export const validateSession = async () =>
+  axios.get(authValidate, {
+    validateStatus: (status) => status < 500,
+    withCredentials: true,
+  });
+
+export const getAllVouchers = async (pageNo = '1') =>
   axios
-    .get(authValidate, {
+    .get(vouchers + '?items=20&page=' + pageNo, {
       validateStatus: (status) => status < 500,
       withCredentials: true,
     })
+    .then((res) => res)
+    .catch((err) => err);
