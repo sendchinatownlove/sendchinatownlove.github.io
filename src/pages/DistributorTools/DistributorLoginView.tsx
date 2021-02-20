@@ -13,13 +13,13 @@ import {
 import { EMAIL_REGEX } from '../../utilities/hooks/ModalPaymentContext/constants';
 
 const DistributorLoginView = () => {
+  const [shouldShowModal, setDisplayModal] = useState(false);
   const [email, setEmail] = useState('');
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     const asyncFetch = async () => {
       const res = await validateSession();
-      console.log(typeof res.status);
       if (res.status === 200) {
         setRedirect(true);
       }
@@ -31,10 +31,12 @@ const DistributorLoginView = () => {
     setEmail(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO ask about email validation
-    requestAuthPasswordless(email);
+    const res = await requestAuthPasswordless(email);
+    if (res.status === 200) {
+      setDisplayModal(true);
+    }
   };
 
   const handleGoogleSSOClick = async () => {
@@ -90,6 +92,20 @@ const DistributorLoginView = () => {
         <GoogleSSOButtonLight handleClick={handleGoogleSSOClick} />
       </Section>
       <Footer />
+      {shouldShowModal && (
+        <ModalBg>
+          <Modal>
+            <ModalHeading>Single Sign On Link Sent!</ModalHeading>
+            <ModalText>
+              Magic link sent! Please Check your email for a link to the
+              Distributor Dashboard!
+            </ModalText>
+            <CloseButton type="button" onClick={() => setDisplayModal(false)}>
+              Close
+            </CloseButton>
+          </Modal>
+        </ModalBg>
+      )}
     </Main>
   );
 };
@@ -97,12 +113,13 @@ const DistributorLoginView = () => {
 export default DistributorLoginView;
 
 const Main = styled.main`
+  position: relative;
   width: 100%;
   min-height: 100%;
 `;
 
 const Nav = styled.nav`
-  margin: 22px 130px;
+  padding: 22px 130px;
 `;
 
 const Header = styled.header`
@@ -212,4 +229,57 @@ const SSOText = styled.span`
   background: white;
   width: 212px;
   text-align: center;
+`;
+
+const ModalBg = styled.div`
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+`;
+
+const Modal = styled.section`
+  background: white;
+  width: 810px;
+  height: 364px;
+  padding: 32px 54px;
+  position: sticky;
+  top: calc((100% - 364px) * 0.5);
+  left: calc((100vw - 810px) * 0.5);
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 32px;
+  grid-template-areas:
+    'heading'
+    'body'
+    'footer';
+`;
+
+const ModalHeading = styled.h1`
+  grid-area: heading;
+  font-weight: 600;
+  font-size: 40px;
+`;
+
+const ModalText = styled.p`
+  grid-area: body;
+  font-size: 24px;
+`;
+
+const CloseButton = styled.button`
+  grid-area: footer;
+  width: 200px;
+  height: 57px;
+  font-weight: 700;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  background: rgb(18, 18, 18);
+  color: white;
+  border: 1px;
+  border-radius: 50px;
+  &:hover {
+    background: rgb(171, 25, 46);
+  }
 `;
