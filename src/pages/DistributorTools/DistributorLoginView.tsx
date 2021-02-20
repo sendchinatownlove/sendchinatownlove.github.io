@@ -20,7 +20,6 @@ const DistributorLoginView = () => {
   useEffect(() => {
     const asyncFetch = async () => {
       const res = await validateSession();
-      console.log(typeof res.status);
       if (res.status === 200) {
         setRedirect(true);
       }
