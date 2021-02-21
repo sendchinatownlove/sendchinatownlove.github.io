@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useCallback } from 'react';
 
 interface Context {
   totalPageCount: string;
@@ -12,7 +12,7 @@ const PageCountContext = createContext<Context>({
 
 const Provider = ({ children }) => {
   const [totalPageCount, setTotalPageCount] = useState('1');
-  const wrapSetPageCount = (page) => setTotalPageCount(page);
+  const wrapSetPageCount = useCallback((page) => setTotalPageCount(page), []);
 
   return (
     <PageCountContext.Provider
