@@ -21,6 +21,7 @@ import {
   crawlReceipts,
   crawlRedemptions,
   crawlRewards,
+  metrics,
 } from './endpoints';
 
 // Fix return typing

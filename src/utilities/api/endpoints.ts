@@ -19,3 +19,4 @@ export const gcs = baseUrl + 'gcs/';
 export const crawlReceipts = baseUrl + 'crawl_receipts/';
 export const crawlRewards = baseUrl + 'rewards/';
 export const crawlRedemptions = baseUrl + 'redemptions/';
+export const metrics = baseUrl + 'metrics/';

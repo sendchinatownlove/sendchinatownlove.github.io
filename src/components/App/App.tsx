@@ -13,6 +13,7 @@ import { Page } from '../../consts';
 import ScreenType from '../../pages/PassportRedemption/ScreenTypes';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
+import LiveMetrics from '../../pages/Metrics/LiveMetrics';
 
 const trackingId = process.env.REACT_APP_GA_TRACKING_ID!;
 
@@ -36,24 +37,25 @@ history.listen((location) => {
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const GiftAMealPage = lazy(() => import('../MerchantsPage/gam/GiftAMealPage'));
-const LightUpChinatownPage = lazy(
-  () => import('../LightUpChinatown/LightUpChinatownPage')
+const LightUpChinatownPage = lazy(() =>
+  import('../LightUpChinatown/LightUpChinatownPage')
 );
 const ErrorPage = lazy(() => import('../404Page'));
-const VoucherRedemptionPage = lazy(
-  () => import('../../pages/VoucherRedemption')
+const VoucherRedemptionPage = lazy(() =>
+  import('../../pages/VoucherRedemption')
 );
-const MerchantVoucherDashboard = lazy(
-  () => import('../../pages/MerchantVoucherDashboard')
+const MerchantVoucherDashboard = lazy(() =>
+  import('../../pages/MerchantVoucherDashboard')
 );
 
-const PassportVoucher = lazy(
-  () => import('../../pages/PassportRedemption/Voucher')
+const PassportVoucher = lazy(() =>
+  import('../../pages/PassportRedemption/Voucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
-const DetachedVoucherPrintouts = lazy(
-  () => import('../../pages/VoucherManagement/DetachedVoucherPrintout')
+const DetachedVoucherPrintouts = lazy(() =>
+  import('../../pages/VoucherManagement/DetachedVoucherPrintout')
 );
+const Metrics = lazy(() => import('../../pages/Metrics/LiveMetrics'));
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
@@ -85,6 +87,9 @@ const App = () => {
         break;
       case Page.LightUpChinatown:
         component = <LightUpChinatownPage />;
+        break;
+      case Page.Metrics:
+        component = <LiveMetrics />;
         break;
       case Page.Error:
       default:
@@ -159,6 +164,7 @@ const App = () => {
             {returnComponent(Page.LightUpChinatown)}
           </Route>
           <Route path="/merchants">{returnComponent(Page.Merchants)}</Route>
+          <Route path="/metrics">{returnComponent(Page.Metrics)}</Route>
           <Route path="/:id">{returnComponent(Page.Seller)}</Route>
           <Route path="/:id#story">{returnComponent(Page.Seller)}</Route>
           <Route>{returnComponent(Page.Error)}</Route>
