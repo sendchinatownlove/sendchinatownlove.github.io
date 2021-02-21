@@ -36,23 +36,26 @@ history.listen((location) => {
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const GiftAMealPage = lazy(() => import('../MerchantsPage/gam/GiftAMealPage'));
-const LightUpChinatownPage = lazy(
-  () => import('../LightUpChinatown/LightUpChinatownPage')
+const LightUpChinatownPage = lazy(() =>
+  import('../LightUpChinatown/LightUpChinatownPage')
 );
 const ErrorPage = lazy(() => import('../404Page'));
-const VoucherRedemptionPage = lazy(
-  () => import('../../pages/VoucherRedemption')
+const VoucherRedemptionPage = lazy(() =>
+  import('../../pages/VoucherRedemption')
 );
-const MerchantVoucherDashboard = lazy(
-  () => import('../../pages/MerchantVoucherDashboard')
+const MerchantVoucherDashboard = lazy(() =>
+  import('../../pages/MerchantVoucherDashboard')
 );
 
-const PassportVoucher = lazy(
-  () => import('../../pages/PassportRedemption/Voucher')
+const PassportVoucher = lazy(() =>
+  import('../../pages/PassportRedemption/Voucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
-const DetachedVoucherPrintouts = lazy(
-  () => import('../../pages/VoucherManagement/DetachedVoucherPrintout')
+const DetachedVoucherPrintouts = lazy(() =>
+  import('../../pages/DistributorTools/DetachedVoucherPrintout')
+);
+const DistributorLoginView = lazy(() =>
+  import('../../pages/DistributorTools/DistributorLoginView')
 );
 
 const options = {
@@ -146,6 +149,9 @@ const App = () => {
               return null;
             }}
           />
+          <Route exact path="/distributor/login">
+            <DistributorLoginView />
+          </Route>
           <Route
             exact
             path="/distributor/:distributor_id/dashboard/print-detached"

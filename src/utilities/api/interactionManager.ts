@@ -21,6 +21,9 @@ import {
   crawlReceipts,
   crawlRedemptions,
   crawlRewards,
+    authGoogle,
+  authPasswordless,
+  authValidate,
 } from './endpoints';
 
 // Fix return typing
@@ -447,5 +450,24 @@ export const getCrawlReceipts = async (contact_id: number) =>
 export const getRedeemedRewards = async (contact_id: number) =>
   axios
     .get(contacts + contact_id + '/redemptions/')
+
     .then((res) => res)
     .catch((err) => err);
+export const getAuthGoogle = async () =>
+  axios
+    .get(authGoogle)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const requestAuthPasswordless = async (email: string) =>
+  axios
+    .post(authPasswordless, { email })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const validateSession = async () =>
+  axios
+    .get(authValidate, {
+      validateStatus: (status) => status < 500,
+      withCredentials: true,
+    })
