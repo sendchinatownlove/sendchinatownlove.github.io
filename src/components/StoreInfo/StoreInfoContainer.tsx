@@ -273,6 +273,8 @@ const BaseBumper = styled.button`
   top: 50%;
   border-radius: 50%;
   z-index: 2;
+  height: 33px;
+  width: 33px;
 `;
 
 const LeftBumper = styled(BaseBumper)`
