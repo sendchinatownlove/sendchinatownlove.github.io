@@ -172,7 +172,7 @@ const UploadScreen = () => {
               setBillTotal(e.target.value);
             }}
             value={billTotal}
-            // min="10"
+            min=".01"
             max="2000"
             step=".01"
           />
@@ -217,7 +217,7 @@ const UploadScreen = () => {
               (seller) => seller.name === participatingSeller
             ) ||
             !receipt ||
-            // Number(billTotal) < 10 ||
+            Number(billTotal) <= 0 ||
             Number(billTotal) > 2000 ||
             isLoading
           }
