@@ -14,6 +14,8 @@ import styles from './styles.module.scss';
 import defaultStoreFront from './misc-store.png';
 import { useMedia } from 'use-media';
 import { OrderNow, MobileOrderWrapper } from '../OwnerPanel';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 type Props = {
   seller: BrowsePageSeller;
@@ -31,13 +33,30 @@ export const StoreInfo: FC<Props> = ({
   const showAltLayout = useMedia({ maxWidth: 900 });
   const { summary, story, cuisine_name, locations, website_url } = seller;
 
+  console.log('hello world!');
+  seller.gallery_image_urls = [
+    'https://storage.googleapis.com/sendchinatownlove-assets/public/assets/46-mott/46-mott-gallery-1.png',
+    'https://storage.googleapis.com/sendchinatownlove-assets/public/assets/46-mott/46-mott-gallery-2.png',
+    'https://storage.googleapis.com/sendchinatownlove-assets/public/assets/46-mott/46-mott-gallery-3.png',
+  ];
   // modal functionality for menu and gallery tabs
   const [viewImage, setViewImage] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [imageIndex, setImageIndex] = useState(-1);
 
-  const expandImage = (url: string) => {
+  const expandImage = (url: string, index: number) => {
     setViewImage(url);
     setShowModal(true);
+    setImageIndex(index);
+  };
+
+  const updateImageIndex = (index: number) => {
+    if (index < 0 || index >= seller.gallery_image_urls.length) {
+      return;
+    }
+
+    setViewImage(seller.gallery_image_urls[index]);
+    setImageIndex(index);
   };
 
   // logic for nav bar & tab switching
@@ -138,7 +157,17 @@ export const StoreInfo: FC<Props> = ({
 
       <ImageModal style={{ display: showModal ? 'block' : 'none' }}>
         <CloseButton onClick={() => setShowModal(false)}>×</CloseButton>
+        <ArrowBackIosIcon
+          onClick={() => {
+            updateImageIndex(imageIndex - 1);
+          }}
+        />
         <img src={viewImage} alt="modal view" />
+        <ArrowForwardIosIcon
+          onClick={() => {
+            updateImageIndex(imageIndex + 1);
+          }}
+        />
       </ImageModal>
     </section>
   );
