@@ -157,17 +157,21 @@ export const StoreInfo: FC<Props> = ({
 
       <ImageModal style={{ display: showModal ? 'block' : 'none' }}>
         <CloseButton onClick={() => setShowModal(false)}>×</CloseButton>
-        <ArrowBackIosIcon
-          onClick={() => {
-            updateImageIndex(imageIndex - 1);
-          }}
-        />
+        <LeftBumper>
+          <ArrowBackIosIcon
+            onClick={() => {
+              updateImageIndex(imageIndex - 1);
+            }}
+          />
+        </LeftBumper>
         <img src={viewImage} alt="modal view" />
-        <ArrowForwardIosIcon
-          onClick={() => {
-            updateImageIndex(imageIndex + 1);
-          }}
-        />
+        <RightBumper>
+          <ArrowForwardIosIcon
+            onClick={() => {
+              updateImageIndex(imageIndex + 1);
+            }}
+          />
+        </RightBumper>
       </ImageModal>
     </section>
   );
@@ -262,4 +266,19 @@ const CloseButton = styled.button`
   border: none;
   outline: none;
   z-index: 2;
+`;
+
+const BaseBumper = styled.button`
+  position: fixed;
+  top: 50%;
+  border-radius: 50%;
+  z-index: 2;
+`;
+
+const LeftBumper = styled(BaseBumper)`
+  left: 0;
+`;
+
+const RightBumper = styled(BaseBumper)`
+  right: 0;
 `;
