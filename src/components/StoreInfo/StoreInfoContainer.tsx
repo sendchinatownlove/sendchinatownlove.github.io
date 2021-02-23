@@ -33,12 +33,6 @@ export const StoreInfo: FC<Props> = ({
   const showAltLayout = useMedia({ maxWidth: 900 });
   const { summary, story, cuisine_name, locations, website_url } = seller;
 
-  console.log('hello world!');
-  seller.gallery_image_urls = [
-    'https://storage.googleapis.com/sendchinatownlove-assets/public/assets/46-mott/46-mott-gallery-1.png',
-    'https://storage.googleapis.com/sendchinatownlove-assets/public/assets/46-mott/46-mott-gallery-2.png',
-    'https://storage.googleapis.com/sendchinatownlove-assets/public/assets/46-mott/46-mott-gallery-3.png',
-  ];
   // modal functionality for menu and gallery tabs
   const [viewImage, setViewImage] = useState('');
   const [showModal, setShowModal] = useState(false);
