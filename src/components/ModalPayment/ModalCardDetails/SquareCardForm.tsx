@@ -6,27 +6,37 @@ import {
   CreditCardCVVInput,
 } from 'react-square-payment-form';
 import 'react-square-payment-form/lib/default.css';
+import { getWebsiteImages } from '../../../utilities/general/StoreImages';
 import styled from 'styled-components';
 
 type Props = {};
 
 const SquareCardForm = (props: Props) => {
-  return (
-    <SquareCardFieldset className="sq-fieldset">
-      <CreditCardNumberInput />
+  const { squareLogo } = getWebsiteImages();
 
-      <SquareCardRow>
-        <SquareCardItem>
-          <CreditCardExpirationDateInput />
-        </SquareCardItem>
-        <SquareCardItem>
-          <CreditCardCVVInput />
-        </SquareCardItem>
-        <SquareCardItem>
-          <CreditCardPostalCodeInput />
-        </SquareCardItem>
-      </SquareCardRow>
-    </SquareCardFieldset>
+  return (
+    <>
+      <SquareCardFieldset className="sq-fieldset">
+        <CreditCardNumberInput />
+
+        <SquareCardRow>
+          <SquareCardItem>
+            <CreditCardExpirationDateInput />
+          </SquareCardItem>
+          <SquareCardItem>
+            <CreditCardCVVInput />
+          </SquareCardItem>
+          <SquareCardItem>
+            <CreditCardPostalCodeInput />
+          </SquareCardItem>
+        </SquareCardRow>
+      </SquareCardFieldset>
+
+      <Row>
+        <img src={squareLogo} alt="Powered by Square logo" width="30px" />
+        Powered by Square
+      </Row>
+    </>
   );
 };
 
@@ -54,4 +64,14 @@ const SquareCardRow = styled.div`
 
 const SquareCardItem = styled.div`
   width: 30% !important;
+`;
+
+const Row = styled.div`
+  font-family: 'Open Sans';
+  font-size: 16px;
+  color: #a5a9ad;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 15px;
 `;
