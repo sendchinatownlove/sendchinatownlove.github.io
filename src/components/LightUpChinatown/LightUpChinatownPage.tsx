@@ -15,6 +15,7 @@ import LightUpFaq from './LightUpFaq';
 import LightUpPartners from './LightUpPartners';
 import DonationRedirect from './DonationRedirect';
 import { getProject, light_up_chinatown_id } from '../../utilities/api';
+import LiveMetrics from '../../pages/Metrics/LiveMetrics';
 
 const LightUpChinatownPage = () => {
   const { t } = useTranslation();
@@ -39,6 +40,7 @@ const LightUpChinatownPage = () => {
 
   return (
     <React.Fragment>
+      <LiveMetrics />
       <HeroSection>
         <HeaderText>{t('lightUpChinatown.headerText')}</HeaderText>
         <HeaderSubtext>{t('lightUpChinatown.headerSubtext')}</HeaderSubtext>
