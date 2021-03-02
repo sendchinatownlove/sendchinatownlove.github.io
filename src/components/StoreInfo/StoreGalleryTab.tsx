@@ -19,7 +19,7 @@ const StoreGallery: React.SFC<Props> = ({ seller, expandImage }) => {
             src={image}
             className={`item-${idx + 1}`}
             alt="store-menu"
-            onClick={() => expandImage(image)}
+            onClick={() => expandImage(image, idx)}
           />
         );
       })}
