@@ -41,7 +41,7 @@ export const StoreInfo: FC<Props> = ({
   const expandImage = (url: string, index: number) => {
     setViewImage(url);
     setShowModal(true);
-    setImageIndex(index ? index : -1);
+    setImageIndex(index ? index : 0);
   };
 
   const updateImageIndex = (index: number) => {
