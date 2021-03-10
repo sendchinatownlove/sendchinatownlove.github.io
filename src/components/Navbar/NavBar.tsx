@@ -121,13 +121,7 @@ const NavBar = (props: Props) => {
           </ReactNavLink>
           <DropdownButton onClick={handleDropdownOpen}>›</DropdownButton>
         </DropdownButtonContainer>
-        {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
-        <NavLink
-          compact={hamburgerOpen.toString()}
-          href="https://www.sendchinatownlove.com/lny-crawl.html"
-          i18nText="navBar.header.lunar-new-year-crawl"
-          altText="LUNAR NEW YEAR CRAWL"
-        />
+        {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}        
         <NavLink
           compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/about.html"
@@ -174,12 +168,6 @@ const NavBar = (props: Props) => {
             {t('navBar.header.merchants')}
             {dropdownOpen && <Dropdown>{drop}</Dropdown>}
           </ReactNavLink>
-          <NavLink
-            compact={hamburgerOpen.toString()}
-            href="https://www.sendchinatownlove.com/lny-crawl.html"
-            i18nText="navBar.header.lunar-new-year-crawl"
-            altText="LUNAR NEW YEAR CRAWL"
-          />
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/about.html"
