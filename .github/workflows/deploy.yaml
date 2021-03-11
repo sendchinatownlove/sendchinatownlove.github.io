@@ -36,8 +36,14 @@ jobs:
           HOOK_OS_NAME: ${{ runner.os }}
           WORKFLOW_NAME: ${{ github.workflow }}
         run: |
-          git clone https://github.com/DiscordHooks/github-actions-discord-webhook.git webhook
-        
-        
-        bash webhook/send.sh $JOB_STATUS $WEBHOOK_URL
-      shell: bash    
+          echo Status: $JOB_STATUS
+          git clone $WEBHOOK_REPO webhook
+          bash webhook/send.sh $JOB_STATUS $WEBHOOK_URL
+        shell: bash
+          
+          
+          
+
+          
+          
+          
