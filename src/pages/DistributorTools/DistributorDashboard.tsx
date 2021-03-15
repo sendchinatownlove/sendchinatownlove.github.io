@@ -5,9 +5,17 @@ import Footer from '../../components/Footer/Footer';
 import SimplePager from '../../components/SimplePager/SimplePager';
 
 import { PageCountContext } from '../../utilities/general/PageCountContext';
-import { getAllVouchers } from '../../utilities/api/interactionManager';
+import {
+  getAllVouchers,
+  getVoucherMetadata,
+} from '../../utilities/api/interactionManager';
 
 import Table, { FIELDS } from '../../components/SortableTable/Table';
+import {
+  formatCurrency,
+  dateFormatter,
+  formatUTCOffsetlessTime,
+} from '../../utilities/general/textFormatter';
 
 const Dashboard = () => {
   const { setPageCount } = useContext(PageCountContext);
@@ -17,20 +25,31 @@ const Dashboard = () => {
 
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [data, setData] = useState<any[] | undefined>(undefined);
+  const [voucherCount, setVoucherCount] = useState(0);
+  const [totalVoucherVal, setTotalVal] = useState(0);
+  const [lastUpdated, setLastUpdated] = useState<number | string>(
+    new Date().toLocaleString()
+  );
   const [sellersList, setSellersList] = useState<{ [key: string]: any }>({});
 
   useEffect(() => {
     const asyncFetch = async () => {
       // If URL has page number, use that, else use currPage
       const {
+        data: { count, sum, updated_at },
         status,
+      } = await getVoucherMetadata();
+      if (status === 401) return setShouldRedirect(true);
+      const {
         data: { gift_cards, seller_names },
         headers,
       } = await getAllVouchers(pageNo && pageNo !== '1' ? pageNo : '1');
-      if (status === 401) return setShouldRedirect(true);
       setPageCount(headers['total-pages']);
       setData(gift_cards);
       setSellersList(seller_names);
+      setVoucherCount(count);
+      setTotalVal(sum);
+      setLastUpdated(updated_at);
     };
     if (data) return;
     asyncFetch();
@@ -52,9 +71,11 @@ const Dashboard = () => {
         </MetadataHeading>
         <MetadataHeading num={2}>Total balance 总结余</MetadataHeading>
         <MetadataHeading num={3}>Last Updated 上次更新时间</MetadataHeading>
-        <Metadata num={1}>yes</Metadata>
-        <Metadata num={2}>A lot</Metadata>
-        <Metadata num={3}>At some point</Metadata>
+        <Metadata num={1}>{voucherCount}</Metadata>
+        <Metadata num={2}>{formatCurrency(totalVoucherVal)}</Metadata>
+        <Metadata num={3}>{`${dateFormatter(
+          lastUpdated
+        )} ${formatUTCOffsetlessTime(lastUpdated)}`}</Metadata>
       </DistributorOverview>
       <TableContainer>
         <Table
@@ -112,7 +133,8 @@ const Heading = styled.h1`
 `;
 
 const TableContainer = styled.article`
-  margin: 0 130px 80px;
+  margin: 0 auto;
+  max-width: 950px;
 `;
 
 const DistributorOverview = styled.section`
