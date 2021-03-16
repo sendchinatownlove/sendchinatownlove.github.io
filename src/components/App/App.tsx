@@ -31,6 +31,11 @@ history.listen((location) => {
   }
 });
 
+// Lazy load page count context
+const PagerProvider = lazy(() =>
+  import('../../pages/DistributorTools/PageCountContext')
+);
+
 // we could use template strings, but just to be safe we'll hardcode the
 // lazy imports
 const SellerPage = lazy(() => import('../SellerPage'));
@@ -56,6 +61,9 @@ const DetachedVoucherPrintouts = lazy(() =>
 );
 const DistributorLoginView = lazy(() =>
   import('../../pages/DistributorTools/DistributorLoginView')
+);
+const DistributorDashboard = lazy(() =>
+  import('../../pages/DistributorTools/DistributorDashboard')
 );
 
 const options = {
