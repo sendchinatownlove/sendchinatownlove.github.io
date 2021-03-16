@@ -27,23 +27,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           publish_branch: master
-      - uses: actions/checkout@v1
-      - name: Send Webhook Notification
-        if: always()
-        env:
-          JOB_STATUS: ${{ job.status }}
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-          HOOK_OS_NAME: ${{ runner.os }}
-          WORKFLOW_NAME: ${{ github.workflow }}
-        run: |
-          echo Status: $JOB_STATUS
-          git clone $WEBHOOK_REPO webhook
-          bash webhook/send.sh $JOB_STATUS $WEBHOOK_URL
-        shell: bash
-          
-          
-          
-
-          
-          
-          
