@@ -4,7 +4,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
-import { PageCountContext } from '../../utilities/general/PageCountContext';
+import { PageCountContext } from '../../pages/DistributorTools/PageCountContext';
 
 const SimplePager = () => {
   const { totalPageCount } = useContext(PageCountContext);

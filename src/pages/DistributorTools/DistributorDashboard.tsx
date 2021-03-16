@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Footer from '../../components/Footer/Footer';
 import SimplePager from '../../components/SimplePager/SimplePager';
 
-import { PageCountContext } from '../../utilities/general/PageCountContext';
+import { PageCountContext } from './PageCountContext';
 import {
   getAllVouchers,
   getVoucherMetadata,

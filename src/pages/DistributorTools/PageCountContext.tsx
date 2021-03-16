@@ -11,6 +11,7 @@ const PageCountContext = createContext<Context>({
 });
 
 const Provider = ({ children }) => {
+  console.log('rerendering');
   const [totalPageCount, setTotalPageCount] = useState('1');
   const wrapSetPageCount = useCallback((page) => setTotalPageCount(page), []);
 
