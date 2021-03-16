@@ -152,12 +152,15 @@ const App = () => {
           <Route exact path="/distributor/login">
             <DistributorLoginView />
           </Route>
-          <Route
-            exact
-            path="/distributor/:distributor_id/dashboard/print-detached"
-          >
+          <Route exact path="/distributor/:distributor_id/print-detached">
             <DetachedVoucherPrintouts />
           </Route>
+          <PagerProvider>
+            <Route exact path="/distributor/dashboard">
+              <DistributorDashboard />
+            </Route>
+          </PagerProvider>
+
           <Route path="/gift-a-meal-home">
             {returnComponent(Page.GiftAMeal)}
           </Route>
