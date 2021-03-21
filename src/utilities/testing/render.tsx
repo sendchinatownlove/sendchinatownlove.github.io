@@ -1,4 +1,5 @@
 jest.mock('../../utilities/api/interactionManager');
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: () => ({ id: 'shunfa-bakery' }),

@@ -13,6 +13,7 @@ import { Page } from '../../consts';
 import ScreenType from '../../pages/PassportRedemption/ScreenTypes';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
+import LiveMetrics from '../../pages/Metrics/LiveMetrics';
 
 const trackingId = process.env.REACT_APP_GA_TRACKING_ID!;
 
@@ -57,6 +58,7 @@ const DetachedVoucherPrintouts = lazy(() =>
 const DistributorLoginView = lazy(() =>
   import('../../pages/DistributorTools/DistributorLoginView')
 );
+const Metrics = lazy(() => import('../../pages/Metrics/LiveMetrics'));
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
@@ -88,6 +90,9 @@ const App = () => {
         break;
       case Page.LightUpChinatown:
         component = <LightUpChinatownPage />;
+        break;
+      case Page.Metrics:
+        component = <LiveMetrics />;
         break;
       case Page.Error:
       default:
@@ -165,6 +170,7 @@ const App = () => {
             {returnComponent(Page.LightUpChinatown)}
           </Route>
           <Route path="/merchants">{returnComponent(Page.Merchants)}</Route>
+          <Route path="/metrics">{returnComponent(Page.Metrics)}</Route>
           <Route path="/:id">{returnComponent(Page.Seller)}</Route>
           <Route path="/:id#story">{returnComponent(Page.Seller)}</Route>
           <Route>{returnComponent(Page.Error)}</Route>

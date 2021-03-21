@@ -21,9 +21,10 @@ import {
   crawlReceipts,
   crawlRedemptions,
   crawlRewards,
-    authGoogle,
+  authGoogle,
   authPasswordless,
   authValidate,
+  metrics,
 } from './endpoints';
 
 // Fix return typing
@@ -466,8 +467,7 @@ export const requestAuthPasswordless = async (email: string) =>
     .catch((err) => err);
 
 export const validateSession = async () =>
-  axios
-    .get(authValidate, {
-      validateStatus: (status) => status < 500,
-      withCredentials: true,
-    })
+  axios.get(authValidate, {
+    validateStatus: (status) => status < 500,
+    withCredentials: true,
+  });

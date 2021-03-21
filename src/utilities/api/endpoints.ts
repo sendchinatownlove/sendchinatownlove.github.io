@@ -23,3 +23,4 @@ export const authGoogle = baseUrl + 'auth/google';
 export const authPasswordless = baseUrl + 'auth/passwordless';
 export const authValidate = baseUrl + 'auth/validate';
 
+export const metrics = baseUrl + 'metrics/';
