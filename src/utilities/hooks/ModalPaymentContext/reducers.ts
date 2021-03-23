@@ -5,6 +5,7 @@ import {
   SET_AMOUNT,
   SET_FEES_AMOUNT,
   SET_FEES,
+  SET_REFERRER,
   CLOSE_MODAL,
   CLEAR_FORMS,
   SET_SELLER_DATA,
@@ -57,6 +58,8 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
       return { ...state, fees: payload };
     case SET_SELLER_DATA:
       return { ...state, sellerData: payload };
+    case SET_REFERRER:
+      return { ...state, referrer: payload };
     case UPDATE_SELLER_DATA:
       return {
         ...state,
