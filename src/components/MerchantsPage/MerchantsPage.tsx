@@ -131,9 +131,12 @@ const MerchantsPage = (props: Props) => {
 
             <div className={styles.storeInfoContainer}>
               <NavBar filterStoreType={filterStoreType} />
-              <h2>
-                <b>{t('merchantsPage.merchantHeader')}</b>
-              </h2>
+              <div className={styles.row}>
+                <h2>
+                  <b>{t('merchantsPage.merchantHeader')}</b>
+                </h2>
+                {sellers && <h4>{sellers.length} Total Merchants</h4>}
+              </div>
               <br />
               <br />
 
