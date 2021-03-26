@@ -361,7 +361,7 @@ const Dropdown = styled.div`
 
 const DropdownMobile = styled.div`
   width: 100%;
-  height: 164px;
+  height: auto;
   position: relative;
   bottom: 8px;
   display: flex;
@@ -382,6 +382,7 @@ const DropItem = styled.div`
   @media (max-width: 920px) {
     color: grey;
     margin: 0px;
+    padding: 8px 0;
   }
 `;
 
@@ -393,6 +394,7 @@ const DropdownButtonContainer = styled.div`
   justify-content: center;
   align-items:center;
 `;
+
 const DropdownButton = styled.h1`
   font-size: 45px;
   font-family: system-ui, serif;
