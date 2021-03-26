@@ -48,11 +48,6 @@ const NavBar = (props: Props) => {
   const dropdownOptions = [
     { url: '/merchants', translation: 'donate', external: false },
     { url: '/gift-a-meal-home', translation: 'gift-a-meal', external: false },
-    {
-      url: '/light-up-chinatown',
-      translation: 'light-up-chinatown',
-      external: false,
-    },
   ];
 
   const drop = dropdownOptions.map((option) => {
@@ -121,7 +116,7 @@ const NavBar = (props: Props) => {
           </ReactNavLink>
           <DropdownButton onClick={handleDropdownOpen}>›</DropdownButton>
         </DropdownButtonContainer>
-        {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}        
+        {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
         <NavLink
           compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/about.html"
