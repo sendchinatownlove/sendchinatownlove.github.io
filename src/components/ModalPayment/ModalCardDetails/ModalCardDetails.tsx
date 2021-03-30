@@ -60,6 +60,7 @@ const ModalCardDetails = ({
     lucData,
     matchAmount,
     campaignState,
+    referrer
   } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
   const modalRef = useScrollToElement();
@@ -181,6 +182,10 @@ const ModalCardDetails = ({
 
     setCanSubmit(false);
 
+    let metadata: any = {};
+    if (projectId) metadata = lucData;
+    if (referrer) metadata.referrer = referrer;
+
     return makeSquarePayment(
       nonce,
       sellerId,
@@ -189,7 +194,7 @@ const ModalCardDetails = ({
       is_distribution, // TODO (billy-yuan): will deprecate is_distribution after it is removed from the back-end
       campaignId,
       projectId,
-      projectId ? JSON.stringify(lucData) : null
+      metadata !== {} ? JSON.stringify(metadata) : null
     )
       .then((res) => {
         if (res.status === 200) {
