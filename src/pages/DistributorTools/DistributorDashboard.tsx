@@ -18,7 +18,7 @@ import {
 } from '../../utilities/general/textFormatter';
 
 const Dashboard = () => {
-  const { setPageCount, setLoading } = useContext(PageCountContext);
+  const { setPageCount, setLoading, isLoading } = useContext(PageCountContext);
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const pageNo = params.get('page');
@@ -86,7 +86,11 @@ const Dashboard = () => {
           sortFn={sortData}
           sellersList={sellersList}
         />
-        {data ? null : 'No Vouchers To Load'}
+        {isLoading ? (
+          <TablePlaceholderText>Loading...</TablePlaceholderText>
+        ) : data ? null : (
+          <TablePlaceholderText>No Vouchers To Load</TablePlaceholderText>
+        )}
         <SimplePager />
       </TableContainer>
       <Footer />
@@ -165,4 +169,10 @@ const Metadata = styled.p`
   text-transform: uppercase;
   font-size: 24px;
   font-weight: 700;
+`;
+
+const TablePlaceholderText = styled.p`
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
 `;
