@@ -7,7 +7,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { PageCountContext } from '../../pages/DistributorTools/PageCountContext';
 
 const SimplePager = () => {
-  const { totalPageCount } = useContext(PageCountContext);
+  const { totalPageCount, isLoading } = useContext(PageCountContext);
+  console.log(totalPageCount);
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const pageNo = params.get('page') || '1';
@@ -31,8 +32,11 @@ const SimplePager = () => {
           <ChevronLeftIcon stroke="var(--disabled)" />
         </IconWrapper>
       )}
-
-      <PagerText>{`Page ${pageNo} out of ${totalPageCount} 页面 ${pageNo}/ ${totalPageCount}`}</PagerText>
+      {isLoading ? (
+        <PagerText>Loading 装货...</PagerText>
+      ) : (
+        <PagerText>{`Page ${pageNo} out of ${totalPageCount} 页面 ${pageNo}/ ${totalPageCount}`}</PagerText>
+      )}
       {isLastPage ? (
         <Link
           to={`/distributor/dashboard?page=${parseInt(pageNo) + 1}`}

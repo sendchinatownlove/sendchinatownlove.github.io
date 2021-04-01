@@ -1,23 +1,25 @@
 import React, { useState, createContext, useCallback } from 'react';
 
 interface Context {
-  totalPageCount: string;
-  setPageCount: (page: string) => void;
+  [key: string]: any;
 }
 
-const PageCountContext = createContext<Context>({
-  totalPageCount: '1',
-  setPageCount: () => true,
-});
+const PageCountContext = createContext<Context>({});
 
 const Provider = ({ children }) => {
-  console.log('rerendering');
   const [totalPageCount, setTotalPageCount] = useState('1');
+  const [isLoading, setLoading] = useState(true);
   const wrapSetPageCount = useCallback((page) => setTotalPageCount(page), []);
+  const wrapSetLoading = useCallback((state) => setLoading(state), []);
 
   return (
     <PageCountContext.Provider
-      value={{ totalPageCount, setPageCount: wrapSetPageCount }}
+      value={{
+        totalPageCount,
+        setPageCount: wrapSetPageCount,
+        setLoading: wrapSetLoading,
+        isLoading,
+      }}
     >
       {children}
     </PageCountContext.Provider>

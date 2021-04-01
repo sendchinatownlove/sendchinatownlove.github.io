@@ -18,7 +18,7 @@ import {
 } from '../../utilities/general/textFormatter';
 
 const Dashboard = () => {
-  const { setPageCount } = useContext(PageCountContext);
+  const { setPageCount, setLoading } = useContext(PageCountContext);
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const pageNo = params.get('page');
@@ -35,6 +35,7 @@ const Dashboard = () => {
   useEffect(() => {
     const asyncFetch = async () => {
       // If URL has page number, use that, else use currPage
+      setLoading(true);
       const {
         data: { count, sum, updated_at },
         status,
@@ -50,10 +51,11 @@ const Dashboard = () => {
       setVoucherCount(count);
       setTotalVal(sum);
       setLastUpdated(updated_at);
+      setLoading(false);
     };
     if (data) return;
     asyncFetch();
-  }, [pageNo, setPageCount, data]);
+  }, [pageNo, setPageCount, setLoading, data]);
 
   const sortData = (ind, isAsc) =>
     setData(sortByColumn(data, FIELDS)(ind, isAsc));
