@@ -60,14 +60,12 @@ const HeaderEntries = ({ fields, sortFn }) => {
 
 // TableCell either renders the English name, a monetary value, any other potential values, or N/A if there's nothing
 // Conditional will not scale if there's any more wildly different fields than the current ones
-const PopulatedTableRow = ({ row, fields, enName }) => {
+const PopulatedTableRow = ({ row, fields }) => {
   return (
     <TableRow>
       {fields.map((field) => (
         <TableCell key={field.name}>{`${
-          field.name === 'name'
-            ? enName
-            : field.name === 'value'
+          field.name === 'value'
             ? formatCurrency(row[field.name])
             : row[field.name]
             ? row[field.name]
@@ -78,7 +76,7 @@ const PopulatedTableRow = ({ row, fields, enName }) => {
   );
 };
 
-const SortableMuiTable = ({ fields, data, sortFn, sellersList }) => {
+const SortableMuiTable = ({ fields, data, sortFn }) => {
   return (
     <>
       <Table>
@@ -86,12 +84,7 @@ const SortableMuiTable = ({ fields, data, sortFn, sellersList }) => {
         <MuiTableBody>
           {data.length > 0
             ? data.map((row, i) => (
-                <PopulatedTableRow
-                  row={row}
-                  key={`row-${i}`}
-                  fields={fields}
-                  enName={sellersList[row.id] ? sellersList[row.id].en : ''}
-                />
+                <PopulatedTableRow row={row} key={`row-${i}`} fields={fields} />
               ))
             : null}
         </MuiTableBody>

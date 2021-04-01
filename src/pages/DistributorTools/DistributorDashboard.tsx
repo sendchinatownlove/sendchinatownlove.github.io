@@ -46,7 +46,12 @@ const Dashboard = () => {
         headers,
       } = await getAllVouchers(pageNo && pageNo !== '1' ? pageNo : '1');
       setPageCount(headers['total-pages']);
-      setData(gift_cards);
+      // FIXME gift_cards requires more processing?
+      const processed = gift_cards.map((gift_card) => ({
+        ...gift_card,
+        name: seller_names[gift_card.id] ? seller_names[gift_card.id].en : '',
+      }));
+      setData(processed);
       setSellersList(seller_names);
       setVoucherCount(count);
       setTotalVal(sum);
@@ -80,12 +85,7 @@ const Dashboard = () => {
         )} ${formatUTCOffsetlessTime(lastUpdated)}`}</Metadata>
       </DistributorOverview>
       <TableContainer>
-        <Table
-          fields={FIELDS}
-          data={data || []}
-          sortFn={sortData}
-          sellersList={sellersList}
-        />
+        <Table fields={FIELDS} data={data || []} sortFn={sortData} />
         {isLoading ? (
           <TablePlaceholderText>Loading...</TablePlaceholderText>
         ) : data ? null : (

@@ -8,7 +8,6 @@ import { PageCountContext } from '../../pages/DistributorTools/PageCountContext'
 
 const SimplePager = () => {
   const { totalPageCount, isLoading } = useContext(PageCountContext);
-  console.log(totalPageCount);
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const pageNo = params.get('page') || '1';
