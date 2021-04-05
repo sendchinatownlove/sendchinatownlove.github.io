@@ -1,1 +1,1 @@
-export { default } from './PassportDashboard';
+export { default } from './Dashboard';

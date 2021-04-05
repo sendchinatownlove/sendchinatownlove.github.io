@@ -17,6 +17,13 @@ import {
   lyftRewards,
   nonprofits,
   projects,
+  gcs,
+  crawlReceipts,
+  crawlRedemptions,
+  crawlRewards,
+    authGoogle,
+  authPasswordless,
+  authValidate,
 } from './endpoints';
 
 // Fix return typing
@@ -266,12 +273,11 @@ export const getContactInfo = async (passportId: string) =>
 
 export const createPassportEmailId = async (
   email: string,
-  instagram: string
+  instagram?: string
 ) => {
   let params = {};
 
-  if (instagram) params = { email, instagram };
-  else params = { email };
+  params = instagram ? { email, instagram } : { email };
 
   return axios
     .post(contacts, params)
@@ -381,3 +387,87 @@ export const getProject = async (project_id: number) =>
     .catch((err) => err);
 
 export const light_up_chinatown_id = 1;
+
+export const sendImage = async (
+  signedUrl: string,
+  filename: string,
+  image: File
+) => {
+  return axios.put(signedUrl, image, {
+    headers: {
+      'Content-Type': image.type,
+    },
+  });
+};
+
+export const getUploadUrl = async (filename: string, filetype: string) => {
+  return axios.post(gcs, {
+    file_name: filename,
+    file_type: filetype,
+  });
+};
+
+export const uploadCrawlReceipts = async (
+  participating_seller_id: number,
+  contact_id: number,
+  amount: number,
+  receipt_url: string
+) =>
+  axios
+    .post(crawlReceipts, {
+      participating_seller_id,
+      contact_id,
+      amount,
+      receipt_url,
+    })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getCrawlRewards = async () =>
+  axios
+    .get(crawlRewards)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const redeemRaffle = async (contact_id: number, reward_id: number) =>
+  axios
+    .post(crawlRedemptions, { contact_id, reward_id })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const updateRaffle = async (reward_id: number) =>
+  axios
+    .put(crawlRedemptions, { reward_id })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getCrawlReceipts = async (contact_id: number) =>
+  axios
+    .get(contacts + contact_id + '/crawl_receipts/')
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getRedeemedRewards = async (contact_id: number) =>
+  axios
+    .get(contacts + contact_id + '/redemptions/')
+
+    .then((res) => res)
+    .catch((err) => err);
+export const getAuthGoogle = async () =>
+  axios
+    .get(authGoogle)
+    .then((res) => res)
+    .catch((err) => err);
+
+export const requestAuthPasswordless = async (email: string) =>
+  axios
+    .post(authPasswordless, { email })
+    .then((res) => res)
+    .catch((err) => err);
+
+export const validateSession = async () =>
+  axios
+    .get(authValidate, {
+      validateStatus: (status) => status < 500,
+      withCredentials: true,
+    })

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-
+import ReactMarkdown from 'react-markdown';
 import type {
   Campaign,
   SellerDistributorPair as SellerDistributorPairType,
@@ -11,6 +11,13 @@ import CampaignProgressBar from '../CampaignProgressBar';
 import FiscalSponsor from '../FiscalSponsor';
 import { SIZE_TYPE } from '../ProgressBar';
 import SellerDistributorPair from './SellerDistributorPair';
+import Modal from '../../../ModalPayment';
+
+import {
+  useModalPaymentDispatch,
+  ModalPaymentConstants,
+  ModalPaymentTypes,
+} from '../../../../utilities/hooks/ModalPaymentContext';
 
 interface Props {
   campaign: Campaign;
@@ -18,6 +25,24 @@ interface Props {
 
 const MegaGamListItem = ({ campaign }: Props) => {
   const { t } = useTranslation();
+
+  const ModalPaymentDispatcher = useModalPaymentDispatch(null);
+
+  const openModal = (event) => {
+    event.preventDefault();
+    ModalPaymentDispatcher({
+      type: ModalPaymentConstants.SET_MODAL_VIEW,
+      payload: ModalPaymentTypes.modalPages.mega_gam,
+    });
+
+    ModalPaymentDispatcher({
+      type: ModalPaymentConstants.SET_PAYMENT_STATE,
+      payload: {
+        campaign: campaign,
+      },
+    });
+  };
+
   return (
     <Container isActive={campaign.active}>
       <ImageContentContainer isActive={campaign.active}>
@@ -28,10 +53,12 @@ const MegaGamListItem = ({ campaign }: Props) => {
           />
         </CampaignImageContainer>
         <CampaignContent>
-          {/* TODO: Figure out if this is the correct header. If so, we need to translate. */}
-          <Header>Mega-GAM</Header>
+          {/* TODO: Figure out what text will go in the header (i.e. blue text) for future mega gam campaigns */}
+          <Header></Header>
           <Subheader>{campaign.display_name}</Subheader>
-          <Description>{campaign.description}</Description>
+          <Description>
+            <ReactMarkdown source={campaign.description} />
+          </Description>
           <DonationContainer>
             <CampaignProgressBar
               endDate={campaign.end_date}
@@ -43,11 +70,20 @@ const MegaGamListItem = ({ campaign }: Props) => {
             />
             {campaign.active && (
               // TODO: Open payment modal.
-              <Button className="button--filled" onClick={undefined}>
+              <Button className="button--filled" onClick={openModal}>
                 <ButtonText>
                   {t('gamHome.megaGamListItem.giftButton')}
                 </ButtonText>
               </Button>
+            )}
+            {campaign.active && (
+              <Modal
+                sellerId={''}
+                sellerName={''}
+                costPerMealInDollars={campaign.price_per_meal / 100}
+                nonProfitLocationId={''}
+                campaignId={String(campaign.id)}
+              />
             )}
           </DonationContainer>
         </CampaignContent>
@@ -193,7 +229,6 @@ const Subheader = styled.div`
 const Description = styled.div`
   font-size: 18px;
   margin-bottom: 24px;
-
   @media (${tabletScreens}) {
     font-size: 14px;
   }

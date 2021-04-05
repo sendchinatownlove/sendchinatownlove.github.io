@@ -3,8 +3,15 @@
     "amount": {
       "body1": "您的网上交易资料将会做加密处理，款项会直接交给商家以支持他们。",
       "body2": "Please select or enter an amount.",
+      "header": "您的爱心将会全数送到商家手里，帮助他们负担营运支出。您的网上交易资料将会做加密处理，款项会直接交给商家以支持他们。",
+      "mega_gam": "Please add your payment information below.",
       "label1": "选择金额",
       "label2": "其他金额",
+      "num_meals": "# of meals",
+      "your_donation": "Your Donation",
+      "donation_match": "Donation Match (1:1)",
+      "donation_total": "You Pay",
+      "total_donation_plus_match": "Total contribution with Donation Match",
       "minimum": "最低",
       "maximum": "最高",
       "amount": "金额",
@@ -20,10 +27,10 @@
       "merchants": "WAYS TO DONATE",
       "waystodonate": {
         "donate": "DONATE",
-        "gift-a-meal": "GIFT-A-MEAL",
-        "sticky-locals-x-scl": "STICKY LOCALS X SCL"
+        "gift-a-meal": "GIFT-A-MEAL"
       },
-      "light-up-chinatown": "LIGHT UP CHINATOWN"
+      "light-up-chinatown": "LIGHT UP CHINATOWN",
+      "lunar-new-year-crawl": "LUNAR NEW YEAR CRAWL"
     },
     "languages": {
       "english": "ENG",
@@ -33,7 +40,7 @@
   "buyMeal": {
     "header": "Gift a meal for ",
     "subheader": "Send Chinatown Love will connect merchants with local organizations that will distribute your gifted meals to our community in need.",
-    "prompt": "Please enter how many meals to gift",
+    "prompt": "Please enter how many meals you'd like to gift",
     "explanationFirst": "By gifting a meal, your donation will still go directly to the merchant.",
     "explanationSecond": "Our partners will then distribute vouchers with those who can benefit the most from a free meal.",
     "totalLabel": "Total: ",
@@ -67,6 +74,53 @@
     "flyerDownload": "下载传单分享给他们。",
     "merchantHeader": "我們的商家"
   },
+  "modalPayment": {
+    "modalCardDetails": {
+      "disclaimer": {
+        "donation": "By proceeding with your transaction, you understand that you are making a donation to {{sellerName}}. No goods or services were exchanged for this donation.",
+        "donation_pool": "By proceeding with your transaction, you understand that you are making a donation to all merchants partnered with Send Chinatown Love Inc. The full donation pool will be split among these merchants. No goods or services were exchanged for this donation.",
+        "gift_card": "By proceeding with your purchase, you understand that the voucher card is not redeemable for cash and can only be used at {{sellerName}}. All purchases are final. In the event that the merchant is no longer open at the time of redemption, Send Chinatown Love Inc. will not be able to refund your purchase. Balance displayed in the voucher may or may not represent the final balance. Final balance information is subject to {{sellerName}} most recent records.",
+        "light_up_chinatown": "By proceeding with your transaction, you understand that you are making a donation to the Light Up Chinatown Project. This Project is directed towards supporting Chinatown as a whole, rather than any individual merchant.",
+        "mega_gam": "By proceeding with your donation, you understand that you are purchasing a voucher for a local community member to use at one of our participating merchants. Donations may be tax-deductible. Please see the campaign details for more information."
+      },
+      "header": {
+        "completeYour": "Complete your ",
+        "paymentInfo": "Payment Information",
+        "checkout": "Checkout details",
+        "light_up_chinatown_donation": "Light Up Chinatown Donation",
+        "mega_gam": "Gift-a-Meal donation"
+      },
+      "body": {
+        "paymentInfo": "Please add your payment information below",
+        "fullName": "Full Name",
+        "email": "Email",
+        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded"
+      },
+      "placeholders": {
+        "name": "Name",
+        "email": "Email"
+      },
+      "details": {
+        "donation": "Donation details",
+        "voucher": "Purchase details",
+        "megagam_details_match": "Gift-a-Meal donation payment of <1>{{totalPayment}}</1> for a total contribution of <2>{{totalContribution}}</2> with a 1:1 match",
+        "megagam_details_no_match": "Gift-a-Meal donation payment of <1>{{totalPayment}}</1>"
+      },
+      "message": {
+        "donation": "Donation",
+        "one_time_donation": "One-Time Donation",
+        "monthly_donation": "Monthly Donation",
+        "light_up_chinatown_tier_2": "Adopt-a-Lantern Donation",
+        "voucher": "Voucher Purchase",
+        "luc_name": "Name for personalized lantern: ",
+        "luc_address": "Shipping Address: "
+      },
+      "modalConfirmation": {
+        "mega_gam_line_1": "You’ve lent a helping hand to community members and small businesses when they needed it most. Together, we can back those most impacted by the pandemic and keep the city’s Chinatowns vibrant.",
+        "mega_gam_line_2": "You will receive an email receipt shortly with the details of your donation."
+      }
+    }
+  },
   "merchantNavBar": {
     "all": "所有的商家",
     "brooklyn": "布鲁克林",
@@ -77,6 +131,7 @@
     "header": "不太确定捐款给哪个商家？",
     "description1": "捐献到爱心池来支持我们的每间商家！我们会把你的捐款平均分配给各商家。。",
     "description2": "",
+    "descriptionApex": "100% of your donation will feed communities in need through Send Chinatown Love’s Gift-a-Meal program, which is conducted under fiscal sponsorship from Apex for Youth, a 501(c)(3) nonprofit organization. Your Gift-a-Meal donations will be tax deductible to the fullest extent of the law. All transactions are secure and encrypted.",
     "button": "请支持华埠!"
   },
   "contributionBar": {
@@ -157,9 +212,16 @@
       "andRestaurants": " 以及受到 COVID-19 疫情影响的餐厅合作，捐爱心餐给需要的团体。",
       "allItTakes": "仅需"
     },
-    "prompt": "Please enter how many meals to gift",
+    "prompt": "Please enter how many meals you'd like to gift",
     "totalLabel": "Total: ",
     "next": "Next"
+  },
+  "megaGam": {
+    "description": {
+      "body": "We appreciate your support! 100% of your tax-deductible donation will be used to give back to the community in need. Campaign proceeds will be split evenly amongst the four participating merchants to ensure equal relief goes to our partners.",
+      "targetNotMet": "All contributions will be matched 1:1 up until {{targetAmount}} is raised, doubling your impact on those in need.",
+      "targetMet": "We’re excited to announce that our donation match threshold has been hit! While donations will no longer be doubled, we encourage you to still support the cause. Every donation, no matter how big or small, goes a long way in feeding the hungry."
+    }
   },
   "lyftReward": {
     "mainBody1": "Thanks for participating in the Send Chinatown Love Food Crawl!",
@@ -184,7 +246,7 @@
     "summaryBody2": "Patrick Mock, manager of 46 Mott St Bakery and community advocate, had an idea to light up Chinatown streets to draw customers back to Chinatown. With the help of City Council District 1 candidate Jenny Low, Chung Seto of United Democratic Organization (UDO), Joanne Kwong of Pearl River Mart and Send Chinatown Love, the <1>Light Up Chinatown</1> project was born.",
     "summaryBody3": "Support the Light Up Chinatown project by donating today where all proceeds will go towards installing permanent light fixtures and traditional lanterns in the neighborhood.",
     "summaryBody4": "All donations are welcome and no amount is too small. If you donate $45 or more, a personalized lantern will be hung on Mott Street and if you donate $150 or more, you will receive an additional lantern to take home as a keepsake.",
-    "summaryBody5": "Help us show that Chinatown is open for business and light the path forward for the neighborhood’s small business owners by supporting the Light Up Chinatown project today.",
+    "summaryBody5": "We are extending the campaign time and are still accepting donations. We are no longer accepting lantern requests as we reached the maximum lantern amount. Thank you all to those who are supporting this project!",
     "campaignHeader": "Light Up Chinatown Fundraising Campaign:",
     "campaignDates": "November 16 - December 15, 2020",
     "campaignDaysLeft": "More Days Left",
@@ -200,24 +262,104 @@
     "faqQuestion1": "How will my donation for this project benefit Chinatown?",
     "faqAnswer1": "Your donation will help permanently light up Chinatown streets and create a warm and welcoming ambience to ensure consistent foot traffic and the longevity of Chinatown businesses. For donations that are $150 and more, you will receive a lantern and be invited to the Winter Solstice Lighting Ceremony.",
     "faqQuestion2": "What is the “Light Up Chinatown” Ceremony?",
-    "faqAnswer2": "In celebration of the Winter Solstice, there will be an all-day event in Chinatown to honor the start of the season and a “Light Up Chinatown” Ceremony. During the celebration, all are welcome to enjoy delicious food and holiday shopping. Invitations with exact details will be sent to those who donated $150+ to our Light Up Chinatown Fundraising Campaign. <0 /> The ceremony will follow social distancing regulations set forth by the government due to the COVID-19 pandemic, and as a result, may need to be modified.",
+    "faqAnswer2": "In celebration of the Winter Solstice, there will be an all-day event in Chinatown to honor the start of the season and a “Light Up Chinatown” Ceremony. During the celebration, all are welcome to enjoy delicious food and holiday shopping. Invitations with exact details will be sent to those who donated $150+ to our Light Up Chinatown Fundraising Campaign. The lights will be installed and available for viewing on December 23th.",
     "faqQuestion3": "How will the light fixtures and lanterns be installed for “Light Up Chinatown”?",
     "faqAnswer3": "<0>Alternative Earth Care</0> has a four man team that will install 14 sections of lighting on Mott Street from Canal to Bayard with lanterns hung between each light bulb for Light Up Chinatown.",
     "faqQuestion4": "I donated $150+, where can I pick up my personalized lantern?",
-    "faqAnswer4": "Pick up location is at CCBA, 62 Mott Street, New York, NY 10013. You will receive an email confirmation with detailed instructions on what time to pick up the lantern.",
+    "faqAnswer4": "The pick up location for lanterns will be at Pearl River Mart on 395 Broadway, New York, NY 10013 after December 26th anytime from 11am - 6pm. You should have received an email confirmation with detailed instructions on pick up. If you provided your shipping address, we will ship you your personalized lantern after December 21st.",
     "faqQuestion5": "I have not received an email confirmation. Who can I contact?",
     "faqAnswer5": "Please contact us at <0>hello@sendchinatownlove.com</0> with the subject line “Light Up Chinatown”.",
     "faqQuestion6": "I love Chinatown and I’d love to further support its businesses. Where can I do that?",
     "faqAnswer6": "Thank you for sending Chinatown your love! To continue supporting this community, check out our <0>merchant page</0> for the full list of Asian-owned businesses we’re working with to make a donation or buy a gift card!",
     "faqQuestion7": "What is Send Chinatown Love?",
-    "faqAnswer7": "Send Chinatown Love is a New York-based, entirely volunteer-run organization that helps the Chinatowns across the city get back on their feet by supporting immigrant-owned, small businesses that make up the fabric of these neighborhoods. The goal of Send Chinatown Love is to facilitate community support by creating digital platforms for restaurants and stores in need so that they can sustain themselves now and into the future. Check out our full list of partner merchants <0>here</0>.",
+    "faqAnswer7": "Send Chinatown Love is a New York-based, entirely volunteer-run organization that helps the Chinatowns across the city get back on their feet The goal of Send Chinatown Love is to uplift Asian and immigrant-owned small businesses by providing donations and personalized business development support.",
     "donationDetail1": "1 x 12-inch lantern with your personalization hung on Mott Street",
     "donationDetail2": "Funding permanent light fixtures throughout Chinatown",
     "donationDetail3": "1 x 14-inch lantern with your personalization hung on Mott Street",
     "donationDetail4": "1 x 12-inch custom designed lantern by a local artist to take home with you ",
     "donationDetail5": "*A limited number of invitations to our Winter Solstice Celebration and lighting ceremony in December will be given to our largest donors",
-    "goal1":"Permanent light fixtures and lanterns on Mott St from Canal St to Bayard St",
-    "goal2":"Permanent light fixtures on Bayard St from Mott St to Bowery St",
-    "costBreakdown": "How do the Costs Breakdown?"
+    "goal1": "Permanent light fixtures and lanterns on Mott St from Canal St to Bayard St",
+    "goal2": "Permanent light fixtures on Bayard St from Mott St to Bowery St",
+    "costBreakdown": "How do the Costs Breakdown?",
+    "goalReachedtitle": "Thank you for helping us reach our goal!",
+    "goalReachedDescription1": "We have closed our campaign but you can continue to support the Light Up Chinatown project at CCBA and Chinese Chamber of Commerce GoFundMe page. Please keep an eye out on our Instagram as we install the lanterns and lights on Mott and Bayard Street. We appreciate our community’s never-ending support in helping us drive foot traffic back into Chinatown!",
+    "goalReachedDescription2": "You can also continue to support our Send Chinatown Love businesses and causes at our Ways to Donate page.",
+    "goalReachedButton1": "GOFUNDME",
+    "goalReachedButton2": "ways to Donate"
+  },
+  "passport": {
+    "faq": {
+      "viewActiveRewards": "VIEW ACTIVE REWARDS & GIVEAWAYS",
+      "arrayOfQuestionAnswers": [
+        {
+          "question": "What is the Send Chinatown Love Food Crawl?",
+          "answer": "For the <0>month of September</0>, Send Chinatown Love is hosting a food crawl in Manhattan’s Chinatown, highlighting 13 incredible restaurants, bakeries, cafes and more throughout the neighborhood. Come with your friends and family to explore locally and savor all the incredible things Chinatown has to offer and earn rewards for shopping with our merchants!"
+        },
+        {
+          "question": "What is the purpose of the Send Chinatown Love Food Crawl?",
+          "answer": "Chinatown was disproportionately impacted by the lack of tourism and foot traffic resulting from COVID-19. To sustain long-term growth for the businesses in Chinatown, we have planned a food crawl for the entire month of September to bring foot traffic back to the neighborhood. <2></2> Unlike a traditional food crawl, we encourage you to participate at your own pace and on your own schedule throughout the month to better ensure everyone’s health and safety.<2></2>Collect tickets as you visit our 13 vendors around Chinatown and record them in your <1>Passport to Chinatown</1>. Your tickets will unlock rewards at local businesses in the neighborhood! Visit all 13 vendors for a chance to win a grand prize!"
+        },
+        {
+          "question": "What is the Passport to Chinatown?",
+          "answer": "The <1>Passport to Chinatown</1> is a mobile site that will be your ultimate guide to the Send Chinatown Love Food Crawl. It will track which vendors you’ve visited and provide a full list of local rewards you can redeem once you’ve submitted your unique ticket codes."
+        },
+        {
+          "question": "How can I access my Passport to Chinatown?",
+          "answer": "Scan the QR code on your ticket to access your <1>Passport to Chinatown</1>. You will be prompted to submit your email address and your ticket code.<2></2> You can then view all of your collected tickets by entering your email address in your <1>Passport</1>, then clicking “View My Tickets.”"
+        },
+        {
+          "question": "How do I get a ticket?",
+          "answer": "Spend at least $5 at any one of our 13 participating vendors and you will be issued a ticket. Each ticket has a unique ticket code that cannot be replaced — don’t lose this!"
+        },
+        {
+          "question": "How many tickets do I get per purchase?",
+          "answer": "You get one (1) ticket per purchase over $5. You must spend a minimum of $5 to get one (1) ticket, and are limited to one (1) ticket per transaction. <2></2> You will not get multiple tickets for purchases over $5."
+        },
+        {
+          "question": "What are the tickets for?",
+          "answer": "The tickets are used to track the vendors you’ve visited. Be sure to submit your unique ticket code to your Passport to Chinatown. Once submitted, every three (3) tickets will unlock rewards from a list of our local rewards partners."
+        },
+        {
+          "question": "How many tickets do I need to win a reward?",
+          "answer": "You must submit a <0>total of three (3) tickets</0> to redeem your reward at one of our local reward partners. Each of your three <0>(3) tickets</0> must be obtained from three (3) different vendors. You will <0>not</0> be eligible if you submit multiple tickets from the same vendor. <2></2> Every three (3) tickets qualifies you for one (1) local reward. You can get as many tickets as you want, as long as your three (3) tickets are from different vendors. <2></2> For example, if you collect a second ticket from a Food Crawl vendor you’ve already visited, you can use this ticket in combination with two other different vendors to redeem another reward. <2></2> You can only redeem your reward once you have <0>entered your unique ticket code</0> into your <1>Passport to Chinatown</1>."
+        },
+        {
+          "question": "What is a “rewards partner,” and who are they?",
+          "answer": "We have partnered with other local businesses to offer rewards to food crawl participants who have successfully collected three (3) tickets. These rewards range from discounts to complimentary items with a purchase. <2></2> See the full list of our reward partners and their offerings on our site, <3>www.sendchinatownlove.com/food-crawl</3>"
+        },
+        {
+          "question": "How do I redeem my reward?",
+          "answer": "Scan the QR code on the back side of your ticket to access your <1>Passport to Chinatown</1>. You will be able to keep track of the vendors you have visited and redeem your rewards there. <2></2> Once you have submitted three (3) tickets (one (1) ticket each from three (3) different vendors) to your <1>Passport</1>, you will be able to redeem a reward from one of our reward partners listed at <3>www.sendchinatownlove.com/food-crawl</3>. Visit one of our reward partners to redeem your reward!"
+        },
+        {
+          "question": "How long are the rewards valid for?",
+          "answer": "The rewards are redeemable from our local reward partners’ stores for the entire duration of the food crawl (September 1 - 30, 2020). Once you redeem a reward, your <1>Passport to Chinatown</1> will mark that reward as used. <2></2> Please note that some of our reward partners are only open certain days of the week. Check our website <3>www.sendchinatownlove.com/food-crawl</3> for the latest updates."
+        },
+        {
+          "question": "What are the weekly digital giveaways?",
+          "answer": "As an added bonus, once you have collected your three (3) tickets, you will be entered into a digital raffle to win our item of the week! These raffle items will be announced every Sunday."
+        },
+        {
+          "question": "How do I enter the weekly digital giveaways?",
+          "answer": "Once you’ve collected three (3) tickets and logged them into the <1>Passport to Chinatown</1>, you will also be entered into the digital giveaway with just one more step: <2></2> Post about the Food Crawl and tag us on Instagram (@sendchinatownlove). This can be an in-feed post or a story. You must include your Instagram username when submitting at least one of your tickets to your Passport to Chinatown."
+        },
+        {
+          "question": "How many times can I enter the digital giveaway? Can I have multiple entries?",
+          "answer": "Every three (3) tickets qualifies you for one (1) entry into our digital giveaway for the month. We’ll select winners four (4) times throughout the month."
+        },
+        {
+          "question": "Will the tickets I’ve collected carry over into other weeks?",
+          "answer": "Yes! Once you input your ticket codes into your <1>Passport to Chinatown</1>, they are automatically saved to your email. The tickets collected during one week of the Food Crawl can roll over to other weeks. For example, if you collect one (1) ticket during the first week of September, you can get two (2) more tickets during another week in September to have a total of three (3) tickets. You can now use these three (3) tickets to redeem a local reward from one of our reward partners. <2></2> We’ll select winners for digital giveaway four (4) times throughout the month."
+        },
+        {
+          "question": "Do I get a grand prize for visiting ALL 13 vendors on the Food Crawl?",
+          "answer": "YES! Visit all 13 vendors in the month of September to be entered into our grand prize giveaway!"
+        },
+        {
+          "question": "What should I bring?",
+          "answer": "<0>PPE</0>. Please bring and wear your mask at all times when you’re not eating or drinking. We want to encourage more foot traffic in the area, but not at the expense of others’ safety. Your own personal hand sanitizer is recommended, but not required, as many businesses will already have hand sanitizer available for you. <2></2> <0>Cash</0>. Remember to bring cash, since many businesses are cash only. If you forget, refer to our Food Crawl map for ATMs in the Chinatown area. <2></2> <0>Friends and family.</0> Food is always more enjoyable when shared with your loved ones!"
+        }
+      ]
+    }
   }
 }

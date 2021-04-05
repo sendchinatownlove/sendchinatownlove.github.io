@@ -10,7 +10,7 @@ import Loader from '../Loader';
 import Header from '../Navbar';
 import ScrollToTop from '../ScrollToTop';
 import { Page } from '../../consts';
-import ScreenName from '../../pages/PassportRedemption/ScreenName';
+import ScreenType from '../../pages/PassportRedemption/ScreenTypes';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext';
 import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
 
@@ -36,23 +36,26 @@ history.listen((location) => {
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const GiftAMealPage = lazy(() => import('../MerchantsPage/gam/GiftAMealPage'));
-const LightUpChinatownPage = lazy(
-  () => import('../LightUpChinatown/LightUpChinatownPage')
+const LightUpChinatownPage = lazy(() =>
+  import('../LightUpChinatown/LightUpChinatownPage')
 );
 const ErrorPage = lazy(() => import('../404Page'));
-const VoucherRedemptionPage = lazy(
-  () => import('../../pages/VoucherRedemption')
+const VoucherRedemptionPage = lazy(() =>
+  import('../../pages/VoucherRedemption')
 );
-const MerchantVoucherDashboard = lazy(
-  () => import('../../pages/MerchantVoucherDashboard')
+const MerchantVoucherDashboard = lazy(() =>
+  import('../../pages/MerchantVoucherDashboard')
 );
 
-const PassportVoucher = lazy(
-  () => import('../../pages/PassportRedemption/PassportVoucher')
+const PassportVoucher = lazy(() =>
+  import('../../pages/PassportRedemption/Voucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
-const DetachedVoucherPrintouts = lazy(
-  () => import('../../pages/VoucherManagement/DetachedVoucherPrintout')
+const DetachedVoucherPrintouts = lazy(() =>
+  import('../../pages/DistributorTools/DetachedVoucherPrintout')
+);
+const DistributorLoginView = lazy(() =>
+  import('../../pages/DistributorTools/DistributorLoginView')
 );
 
 const options = {
@@ -115,20 +118,20 @@ const App = () => {
               <VoucherRedemptionPage />
             </VoucherProvider>
           </Route>
-          <Route exact path="/passport">
-            <PassportRedemption screen={ScreenName.Track} />
+          <Route path="/passport">
+            <Redirect to="/lny-passport" />
           </Route>
-          <Route exact path="/passport/:id/tickets">
-            <PassportRedemption screen={ScreenName.Dashboard} />
+          <Route exact path="/lny-passport">
+            <PassportRedemption screen={ScreenType.Track} />
           </Route>
-          <Route exact path="/passport/:id/redeem/:access_token">
-            <PassportRedemption screen={ScreenName.Redemption} />
+          <Route exact path="/lny-passport/:id/upload">
+            <PassportRedemption screen={ScreenType.Upload} />
           </Route>
-          <Route
-            exact
-            path="/passport/:id/redeem/:access_token/sponsor/:sponsor_seller_id"
-          >
-            <PassportRedemption screen={ScreenName.Claim} />
+          <Route exact path="/lny-passport/:id/tickets">
+            <PassportRedemption screen={ScreenType.Dashboard} />
+          </Route>
+          <Route exact path="/lny-passport/:id/redeem">
+            <PassportRedemption screen={ScreenType.Rewards} />
           </Route>
           <Route exact path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
@@ -136,9 +139,9 @@ const App = () => {
           <Route path="/print-passport-voucher/:id/tickets/:tickets_secret">
             <PassportVoucher />
           </Route>
-          <Route exact path="/passport/lyft_rewards/:contact_id/redeem/:token">
-            <PassportRedemption screen={ScreenName.LyftCode} />
-          </Route>
+          {/* <Route exact path="/passport/lyft_rewards/:contact_id/redeem">
+            <PassportRedemption screen={ScreenType.LyftCode} />
+          </Route> */}
           <Route
             path="/gift-a-meal"
             component={() => {
@@ -146,6 +149,9 @@ const App = () => {
               return null;
             }}
           />
+          <Route exact path="/distributor/login">
+            <DistributorLoginView />
+          </Route>
           <Route
             exact
             path="/distributor/:distributor_id/dashboard/print-detached"

@@ -48,11 +48,6 @@ const NavBar = (props: Props) => {
   const dropdownOptions = [
     { url: '/merchants', translation: 'donate', external: false },
     { url: '/gift-a-meal-home', translation: 'gift-a-meal', external: false },
-    {
-      url: 'https://stickylocals.com/scl',
-      translation: 'sticky-locals-x-scl',
-      external: true,
-    },
   ];
 
   const drop = dropdownOptions.map((option) => {
@@ -124,12 +119,6 @@ const NavBar = (props: Props) => {
         {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
         <NavLink
           compact={hamburgerOpen.toString()}
-          href="https://merchant.sendchinatownlove.com/light-up-chinatown"
-          i18nText="navBar.header.light-up-chinatown"
-          altText="LIGHT UP CHINATOWN"
-        />
-        <NavLink
-          compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/about.html"
           i18nText="OUR STORY"
           altText="OUR STORY"
@@ -174,12 +163,6 @@ const NavBar = (props: Props) => {
             {t('navBar.header.merchants')}
             {dropdownOpen && <Dropdown>{drop}</Dropdown>}
           </ReactNavLink>
-          <NavLink
-            compact={hamburgerOpen.toString()}
-            href="https://merchant.sendchinatownlove.com/light-up-chinatown"
-            i18nText="navBar.header.light-up-chinatown"
-            altText="LIGHT UP CHINATOWN"
-          />
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/about.html"
@@ -378,7 +361,7 @@ const Dropdown = styled.div`
 
 const DropdownMobile = styled.div`
   width: 100%;
-  height: 164px;
+  height: auto;
   position: relative;
   bottom: 8px;
   display: flex;
@@ -399,6 +382,7 @@ const DropItem = styled.div`
   @media (max-width: 920px) {
     color: grey;
     margin: 0px;
+    padding: 8px 0;
   }
 `;
 
@@ -410,6 +394,7 @@ const DropdownButtonContainer = styled.div`
   justify-content: center;
   align-items:center;
 `;
+
 const DropdownButton = styled.h1`
   font-size: 45px;
   font-family: system-ui, serif;

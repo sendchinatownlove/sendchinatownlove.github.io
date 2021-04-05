@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-import { InputContainer } from './TrackScreen';
-import { CardText, Button, SubTitle } from './style';
-import CircleLogo from './CircleLogo.png';
+import { InputContainer } from '../SignIn';
+import { CardText, Button, SubTitle } from '../style';
+import CircleLogo from '../Assets/CircleLogo.png';
 
-import ScreenName from './ScreenName';
+import ScreenType from '../ScreenTypes';
 
 import {
   getPassportTickets,
   getOneSponsor,
   getLocationById,
   redeemReward,
-} from '../../utilities/api/interactionManager';
+} from '../../../utilities/api/interactionManager';
 
 interface Props {
   setCurrentScreenView: Function;
 }
 
 const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
+  const { t } = useTranslation();
   const { push } = useHistory();
   const { id, access_token, sponsor_seller_id } = useParams();
 
@@ -62,7 +64,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         });
       const { status } = await redeemReward(id, access_token, ticketsToRedeem);
       // figure out how to handle invalid redemption with this page
-      if (status !== 200) push(`/passport/${id}/tickets`);
+      if (status !== 200) push(`/lny-passport/${id}/tickets`);
     } catch (err) {
       console.error('passport error: ' + err);
     }
@@ -80,7 +82,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
     const timer = setTimeout(() => {
       setTimeLeft(timeLeft - 1);
     }, 1000);
-    if (!timeLeft) setCurrentScreenView(ScreenName.Redemption);
+    if (!timeLeft) setCurrentScreenView(ScreenType.Rewards);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft]);
@@ -134,7 +136,7 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
         <InputContainer className="bottom shadow">
           <ContentContainer>
             <CardText size="15px" color="#a8192e">
-              Offer must be used in:
+              {t('passport.labels.offerUser')}
               <span style={{ fontWeight: 'bold' }}>
                 {' '}
                 {formatTime(timeLeft)}
@@ -145,18 +147,16 @@ const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
       </Shadow>
 
       <Footer>
-        <SubTitle bold="700">
-          Please show this screen to the host when you are placing your order.
-        </SubTitle>
+        <SubTitle bold="700">{t('passport.labels.pleaseShow')}</SubTitle>
         <Button
           value="redemption-selected-button"
           className="button--red-filled"
           onClick={(e) => {
             e.preventDefault();
-            window.location.href = `/passport/${id}/redeem/${access_token}`;
+            window.location.href = `/lny-passport/${id}/redeem/${access_token}`;
           }}
         >
-          MARK AS USED
+          {t('passport.placeholders.markUsed')}
         </Button>
       </Footer>
     </Container>

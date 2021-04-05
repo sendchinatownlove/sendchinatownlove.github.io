@@ -1,5 +1,7 @@
+import { ModalPaymentTypes } from '.';
 import {
   SET_MODAL_VIEW,
+  SET_PAYMENT_STATE,
   SET_AMOUNT,
   SET_FEES_AMOUNT,
   SET_FEES,
@@ -26,14 +28,29 @@ const ModalPaymentReducer = (state: ModalPaymentState, action: Action) => {
         payload === modalPages.donation ||
         payload === modalPages.gift_card ||
         payload === modalPages.buy_meal ||
-        payload === modalPages.light_up_chinatown
+        payload === modalPages.light_up_chinatown ||
+        payload === modalPages.mega_gam
       ) {
         return { ...state, modalView: payload, purchaseType: payload };
       }
       return { ...state, modalView: payload };
 
+    case SET_PAYMENT_STATE:
+      if (state.modalView === ModalPaymentTypes.modalPages.mega_gam) {
+        return { ...state, campaignState: payload.campaign };
+      }
+      return { ...state };
+
     case SET_AMOUNT:
-      return { ...state, amount: payload };
+      if (state.modalView === ModalPaymentTypes.modalPages.mega_gam) {
+        return {
+          ...state,
+          amount: payload.amount,
+          matchAmount: payload.matchAmount,
+        };
+      } else {
+        return { ...state, amount: payload };
+      }
     case SET_FEES_AMOUNT:
       return { ...state, feesAmount: payload };
     case SET_FEES:

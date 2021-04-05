@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nova+Mono&family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nova+Mono&family=Open+Sans:wght@400;700&family=Roboto:wght@400;500&display=swap');
 $default-button-color: black;
 $standard-red: #ab192e;
 $default-hover-red: #a9182e;
@@ -91,6 +91,20 @@ h3 {
     @include base-button;
     color: $default-button-color;
     background-color: white;
+  }
+
+  &--outlined-with-red {
+    @include base-button;
+    color: $standard-red;
+    background-color: white;
+    border: 2px solid $standard-red;
+  }
+
+  &--outlined-with-red:hover {
+    @include base-button;
+    color: black;
+    background-color: white;
+    border: 2px solid black;
   }
 
   &--outlined:hover {

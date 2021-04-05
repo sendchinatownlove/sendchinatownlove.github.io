@@ -1,21 +1,24 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { SubTitle, Button } from './style';
+import { SubTitle, Button } from '../style';
 
 export const NoRewardsFooter = () => {
+  const { t } = useTranslation();
+
   return (
     <>
-      <SubTitle bold="700">Have more tickets to add?</SubTitle>
+      <SubTitle bold="700">{t('passport.labels.moreTickets')}</SubTitle>
 
       <Button
         value="redemption-selected-button"
         className="button--red-filled"
         onClick={(e) => {
           e.preventDefault();
-          window.location.href = '/passport';
+          window.location.href = '/lny-passport';
         }}
       >
-        ADD NEW TICKETS
+        {t('passport.placeholders.addNewReceipts').toLocaleUpperCase()}
       </Button>
     </>
   );
@@ -28,22 +31,21 @@ interface RedeemRewardsProps {
 }
 
 export const RedeemRewardsFooter = (props: RedeemRewardsProps) => {
+  const { t } = useTranslation();
+
   return (
     <>
-      <SubTitle bold="700">
-        When redeemed, you have 5 minutes to use your reward.
-      </SubTitle>
-
+      <SubTitle bold="700"> {t('passport.labels.whenRedeemed')} </SubTitle>
       <Button
         value="redemption-selected-button"
         className="button--red-filled"
         disabled={!props.selectedSponsor}
         onClick={(e) => {
           e.preventDefault();
-          window.location.href = `/passport/${props.id}/redeem/${props.access_token}/sponsor/${props.selectedSponsor.id}`;
+          window.location.href = `/lny-passport/${props.id}/redeem/${props.access_token}/sponsor/${props.selectedSponsor.id}`;
         }}
       >
-        REDEEM NOW
+        {t('passport.placeholders.redeemNow').toUpperCase()}
       </Button>
     </>
   );
@@ -55,21 +57,19 @@ interface defaultProps {
 }
 
 export const DefaultFooter = (props: defaultProps) => {
+  const { t } = useTranslation();
   return (
     <>
-      <SubTitle bold="700">
-        Select an offer and be ready to show this screen when you’re ordering.
-      </SubTitle>
-
+      <SubTitle bold="700"> {t('passport.labels.selectOffer')}</SubTitle>
       {props.allSponsors.length <= 4 && (
         <Button
           className="linkButton"
           onClick={(e) => {
             e.preventDefault();
-            window.location.href = `/passport/${props.id}/tickets`;
+            window.location.href = `/lny-passport/${props.id}/tickets`;
           }}
         >
-          RETURN TO PASSPORT
+          {t('passport.placeholders.returnTo').toLocaleUpperCase()}
         </Button>
       )}
     </>
