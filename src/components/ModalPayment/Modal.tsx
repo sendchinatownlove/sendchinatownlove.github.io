@@ -1,4 +1,8 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import ReactPixel from 'react-facebook-pixel';
+import styled from 'styled-components';
+
 import ModalAmount from './ModalAmount';
 import ModalBuyMeal from './ModalBuyMeal';
 import ModalMegaGam from './ModalMegaGam';
@@ -11,8 +15,6 @@ import {
   ModalPaymentTypes,
 } from '../../utilities/hooks/ModalPaymentContext';
 import { getFee } from '../../utilities/api/interactionManager';
-import ReactPixel from 'react-facebook-pixel';
-import styled from 'styled-components';
 
 export interface Props {
   sellerId: string;
@@ -26,9 +28,22 @@ export interface ModalProps {
   modalView: number;
 }
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 export const Modal = (props: Props) => {
+  const query = useQuery();
+
   const { modalView } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
+
+  useEffect(() => {
+    const referrer = query.get("referrer") ? query.get("referrer") : null;
+    dispatch({ type: ModalPaymentConstants.SET_REFERRER, payload: referrer });
+
+  // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     // @TODO: For now we are only applying the Square fee, but backend may eventually
