@@ -129,7 +129,8 @@
         "paymentInfo": "Please add your payment information below",
         "fullName": "Full Name",
         "email": "Email",
-        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded"
+        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded",
+        "tAndC": "I agree with the <bold>Terms & Conditions</bold>"
       },
       "placeholders": {
         "name": "Name",

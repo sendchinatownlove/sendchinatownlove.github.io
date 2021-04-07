@@ -70,6 +70,7 @@ const ModalCardDetails = ({
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
+
   const isMegaGam: boolean =
     purchaseType === ModalPaymentTypes.modalPages.mega_gam;
 
@@ -126,6 +127,7 @@ const ModalCardDetails = ({
 
     if (errors && errors.length > 0 && errors[0]) {
       setErrorsMessages(errors.map((error) => error.message));
+      setCanSubmit(false);
       return;
     }
 
@@ -268,13 +270,17 @@ const ModalCardDetails = ({
   };
 
   useEffect(() => {
-    setCanSubmit(
-      isTermsChecked &&
-        name.length > 0 &&
-        email.length > 0 &&
-        ModalPaymentConstants.EMAIL_REGEX.test(email)
-    );
+    setCanSubmit(checkFormValidity);
   }, [isTermsChecked, name, email]);
+
+  const checkFormValidity = () => {
+    return (
+      isTermsChecked &&
+      name.length > 0 &&
+      email.length > 0 &&
+      ModalPaymentConstants.EMAIL_REGEX.test(email)
+    );
+  };
 
   const setDisclaimerLanguage = (
     type: string | ModalPaymentTypes.modalPages
@@ -421,6 +427,12 @@ const ModalCardDetails = ({
             cardNonceResponseReceived={cardNonceResponseReceived}
             formId="SPF"
             apiWrapper=""
+            inputEventReceived={() => {
+              console.log('??', checkFormValidity());
+              if (checkFormValidity()) {
+                setCanSubmit(true);
+              }
+            }}
           >
             <SquareCardForm />
             <div className="sq-error-message">
@@ -460,7 +472,7 @@ const ModalCardDetails = ({
             <CheckboxContainer>
               <Checkbox
                 value="checkedB"
-                inputProps={{ 'aria-label': 'Checkbox B' }}
+                inputProps={{ 'aria-label': 'Email Updates' }}
                 onClick={checkSubscriptionAgreement}
                 checked={isSubscriptionChecked}
               />
@@ -471,13 +483,16 @@ const ModalCardDetails = ({
             <CheckboxContainer>
               <Checkbox
                 value="checkedA"
-                inputProps={{ 'aria-label': 'Checkbox A' }}
+                inputProps={{ 'aria-label': 'Terms and Conditions' }}
                 onClick={checkTermsAgreement}
                 checked={isTermsChecked}
               />
-              <span>
-                I agree with the <b>Terms & Conditions</b>
-              </span>
+              <Trans
+                i18nKey="modalPayment.modalCardDetails.body.tAndC"
+                components={{ bold: <strong /> }}
+              >
+                <span>{t('modalPayment.modalCardDetails.body.tAndC')}</span>
+              </Trans>
             </CheckboxContainer>
             <Disclaimer>{setDisclaimerLanguage(purchaseType)}</Disclaimer>
             <ButtonRow>
@@ -570,6 +585,7 @@ const CheckboxContainer = styled.label`
   width: 100%;
   align-items: center;
   margin-bottom: 10px;
+  white-space: pre-wrap;
 
   :hover {
     text-decoration: underline;
