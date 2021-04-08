@@ -70,7 +70,6 @@ const ModalCardDetails = ({
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
-
   const isMegaGam: boolean =
     purchaseType === ModalPaymentTypes.modalPages.mega_gam;
 
