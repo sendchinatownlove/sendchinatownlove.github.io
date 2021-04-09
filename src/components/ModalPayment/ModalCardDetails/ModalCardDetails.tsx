@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { times } from 'lodash/fp';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
@@ -119,6 +119,10 @@ const ModalCardDetails = ({
       ? `(${numberOfMeals} ${mealText})`
       : '';
 
+  const inputEventReceived = () => {
+    setCanSubmit(checkFormValidity());
+  };
+
   const cardNonceResponseReceived = (errors: any[], nonce: string) => {
     setErrorsMessages([]);
     const is_distribution =
@@ -179,8 +183,6 @@ const ModalCardDetails = ({
       idempotency_key: idempotencyKey,
       is_subscribed: isSubscriptionChecked,
     };
-
-    setCanSubmit(false);
 
     return makeSquarePayment(
       nonce,
@@ -268,11 +270,9 @@ const ModalCardDetails = ({
     }
   };
 
-  useEffect(() => {
-    setCanSubmit(checkFormValidity());
-  }, [isTermsChecked, name, email]);
-
   const checkFormValidity = () => {
+    console.log(isTermsChecked, name, email);
+
     return (
       isTermsChecked &&
       name.length > 0 &&
@@ -280,6 +280,10 @@ const ModalCardDetails = ({
       ModalPaymentConstants.EMAIL_REGEX.test(email)
     );
   };
+
+  useEffect(() => {
+    setCanSubmit(checkFormValidity());
+  }, [isTermsChecked, name, email, checkFormValidity]);
 
   const setDisclaimerLanguage = (
     type: string | ModalPaymentTypes.modalPages
@@ -426,9 +430,7 @@ const ModalCardDetails = ({
             cardNonceResponseReceived={cardNonceResponseReceived}
             formId="SPF"
             apiWrapper=""
-            inputEventReceived={() => {
-              setCanSubmit(checkFormValidity());
-            }}
+            inputEventReceived={inputEventReceived}
           >
             <SquareCardForm />
             <div className="sq-error-message">
