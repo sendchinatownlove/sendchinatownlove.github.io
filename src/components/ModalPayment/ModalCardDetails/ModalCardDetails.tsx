@@ -269,7 +269,7 @@ const ModalCardDetails = ({
   };
 
   useEffect(() => {
-    setCanSubmit(checkFormValidity);
+    setCanSubmit(checkFormValidity());
   }, [isTermsChecked, name, email]);
 
   const checkFormValidity = () => {
@@ -427,10 +427,7 @@ const ModalCardDetails = ({
             formId="SPF"
             apiWrapper=""
             inputEventReceived={() => {
-              console.log('??', checkFormValidity());
-              if (checkFormValidity()) {
-                setCanSubmit(true);
-              }
+              setCanSubmit(checkFormValidity());
             }}
           >
             <SquareCardForm />
