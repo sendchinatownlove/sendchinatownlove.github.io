@@ -119,10 +119,6 @@ const ModalCardDetails = ({
       ? `(${numberOfMeals} ${mealText})`
       : '';
 
-  const inputEventReceived = () => {
-    setCanSubmit(checkFormValidity());
-  };
-
   const cardNonceResponseReceived = (errors: any[], nonce: string) => {
     setErrorsMessages([]);
     const is_distribution =
@@ -130,7 +126,6 @@ const ModalCardDetails = ({
 
     if (errors && errors.length > 0 && errors[0]) {
       setErrorsMessages(errors.map((error) => error.message));
-      setCanSubmit(false);
       return;
     }
 
@@ -270,20 +265,18 @@ const ModalCardDetails = ({
     }
   };
 
-  const checkFormValidity = () => {
-    console.log(isTermsChecked, name, email);
-
+  const checkFormValidity = useCallback(() => {
     return (
       isTermsChecked &&
       name.length > 0 &&
       email.length > 0 &&
       ModalPaymentConstants.EMAIL_REGEX.test(email)
     );
-  };
+  }, [isTermsChecked, name, email]);
 
   useEffect(() => {
     setCanSubmit(checkFormValidity());
-  }, [isTermsChecked, name, email, checkFormValidity]);
+  }, [checkFormValidity]);
 
   const setDisclaimerLanguage = (
     type: string | ModalPaymentTypes.modalPages
@@ -430,7 +423,6 @@ const ModalCardDetails = ({
             cardNonceResponseReceived={cardNonceResponseReceived}
             formId="SPF"
             apiWrapper=""
-            inputEventReceived={inputEventReceived}
           >
             <SquareCardForm />
             <div className="sq-error-message">
@@ -469,7 +461,7 @@ const ModalCardDetails = ({
             <p />
             <CheckboxContainer>
               <Checkbox
-                value="checkedB"
+                value="emailUpdates"
                 inputProps={{ 'aria-label': 'Email Updates' }}
                 onClick={checkSubscriptionAgreement}
                 checked={isSubscriptionChecked}
@@ -480,7 +472,7 @@ const ModalCardDetails = ({
             </CheckboxContainer>
             <CheckboxContainer>
               <Checkbox
-                value="checkedA"
+                value="termsAndConditions"
                 inputProps={{ 'aria-label': 'Terms and Conditions' }}
                 onClick={checkTermsAgreement}
                 checked={isTermsChecked}
