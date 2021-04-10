@@ -33,6 +33,7 @@ export type ModalPaymentState = {
   modalView: modalPages | null;
   sellerData: BrowsePageSeller;
   lucData: lucData;
+  referrer: string;
 };
 
 export const defaultState: ModalPaymentState = {
@@ -83,6 +84,7 @@ export const defaultState: ModalPaymentState = {
     state: '',
     zipCode: '',
   },
+  referrer: '',
 };
 
 export enum modalPages {
