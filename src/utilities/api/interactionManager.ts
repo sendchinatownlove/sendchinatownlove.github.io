@@ -5,6 +5,8 @@ import {
   charges,
   sellers,
   vouchers,
+  vouchers20Count,
+  vouchersMetadata,
   campaigns,
   fees,
   distributors,
@@ -471,9 +473,9 @@ export const validateSession = async () =>
     withCredentials: true,
   });
 
-export const getAllVouchers = async (pageNo = '1') =>
+export const getCurrentPageVouchers = async (pageNo = '1') =>
   axios
-    .get(vouchers + '?items=20&page=' + pageNo, {
+    .get(vouchers20Count + pageNo, {
       validateStatus: (status) => status < 500,
       withCredentials: true,
     })
@@ -482,7 +484,7 @@ export const getAllVouchers = async (pageNo = '1') =>
 
 export const getVoucherMetadata = async () =>
   axios
-    .get(vouchers + 'metadata', {
+    .get(vouchersMetadata, {
       validateStatus: (status) => status < 500,
       withCredentials: true,
     })

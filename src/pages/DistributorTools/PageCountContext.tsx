@@ -4,7 +4,11 @@ interface Context {
   [key: string]: any;
 }
 
-const PageCountContext = createContext<Context>({});
+const PageCountContext = createContext<Context>({
+  setPageCount: () => console.log('hi'),
+  setLoading: () => console.log('hi'),
+  isLoading: false,
+});
 
 const Provider = ({ children }) => {
   const [totalPageCount, setTotalPageCount] = useState('1');

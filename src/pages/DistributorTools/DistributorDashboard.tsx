@@ -6,7 +6,7 @@ import SimplePager from '../../components/SimplePager/SimplePager';
 
 import { PageCountContext } from './PageCountContext';
 import {
-  getAllVouchers,
+  getCurrentPageVouchers,
   getVoucherMetadata,
 } from '../../utilities/api/interactionManager';
 
@@ -30,21 +30,18 @@ const Dashboard = () => {
   const [lastUpdated, setLastUpdated] = useState<number | string>(
     new Date().toLocaleString()
   );
-  const [sellersList, setSellersList] = useState<{ [key: string]: any }>({});
 
   useEffect(() => {
     const asyncFetch = async () => {
       // If URL has page number, use that, else use currPage
       setLoading(true);
-      const {
-        data: { count, sum, updated_at },
-        status,
-      } = await getVoucherMetadata();
+      const { data, status } = await getVoucherMetadata();
       if (status === 401) return setShouldRedirect(true);
+      const { count, sum, updated_at } = data;
       const {
         data: { gift_cards, seller_names },
         headers,
-      } = await getAllVouchers(pageNo && pageNo !== '1' ? pageNo : '1');
+      } = await getCurrentPageVouchers(pageNo && pageNo !== '1' ? pageNo : '1');
       setPageCount(headers['total-pages']);
       // FIXME gift_cards requires more processing?
       const processed = gift_cards.map((gift_card) => ({
@@ -52,7 +49,6 @@ const Dashboard = () => {
         name: seller_names[gift_card.id] ? seller_names[gift_card.id].en : '',
       }));
       setData(processed);
-      setSellersList(seller_names);
       setVoucherCount(count);
       setTotalVal(sum);
       setLastUpdated(updated_at);

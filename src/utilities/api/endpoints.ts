@@ -3,6 +3,8 @@ const baseUrl = process.env.REACT_APP_API_ENDPOINT!;
 export const sellers = baseUrl + 'sellers/';
 export const charges = baseUrl + 'charges';
 export const vouchers = baseUrl + 'gift_cards/';
+export const vouchers20Count = vouchers + '?items=20&page=';
+export const vouchersMetadata = vouchers + 'metadata';
 export const campaigns = baseUrl + 'campaigns/';
 export const fees = baseUrl + 'fees/';
 export const distributors = baseUrl + 'distributors/';
@@ -22,4 +24,3 @@ export const crawlRedemptions = baseUrl + 'redemptions/';
 export const authGoogle = baseUrl + 'auth/google';
 export const authPasswordless = baseUrl + 'auth/passwordless';
 export const authValidate = baseUrl + 'auth/validate';
-
