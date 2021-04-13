@@ -76,13 +76,14 @@ const MerchantsPage = (props: Props) => {
           store!.locations.length > 0 && store!.locations[0].city === type
       );
       if (type === 'Floral Park') {
-        const flushing = sellers.filter(
+        const queens = sellers.filter(
           (store: any) =>
             store!.locations.length > 0 &&
             (store!.locations[0].city === 'Flushing' ||
-              store!.locations[0].city === 'Queens')
+              store!.locations[0].city === 'Queens' ||
+              store!.locations[0].city === 'Elmhurst')
         );
-        result.push(...flushing);
+        result.push(...queens);
       }
       setFilter(result);
     }
