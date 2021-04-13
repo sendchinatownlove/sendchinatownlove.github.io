@@ -79,7 +79,8 @@ const MerchantsPage = (props: Props) => {
         const flushing = sellers.filter(
           (store: any) =>
             store!.locations.length > 0 &&
-            store!.locations[0].city === 'Flushing'
+            (store!.locations[0].city === 'Flushing' ||
+              store!.locations[0].city === 'Queens')
         );
         result.push(...flushing);
       }
