@@ -22,7 +22,10 @@ const NavBar = ({ filterStoreType }: Props) => {
     { value: 'all', text: t('merchantNavBar.all') },
     { value: 'Brooklyn', text: t('merchantNavBar.brooklyn') },
     { value: 'New York', text: t('merchantNavBar.manhattan') },
-    { value: 'Floral Park' || 'Flushing', text: t('merchantNavBar.queens') },
+    {
+      value: 'Floral Park' || 'Flushing' || 'Queens',
+      text: t('merchantNavBar.queens'),
+    },
   ];
 
   return (
