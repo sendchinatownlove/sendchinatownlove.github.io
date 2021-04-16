@@ -153,8 +153,13 @@
       }
     },
     "modalConfirmation": {
+      "buyMeal": "We appreciate your support for {{seller}} and for those in need! Please check your email for your receipt.",
+      "donation": "We appreciate your support for {{seller}}! You will receive an email receipt shortly with the details of your donation.",
+      "lightUpMinTier": "You will receive an email in the next couple weeks about our Lighting Ceremony in December.",
+      "lightUpMaxTier": "You will receive an email with receipt for your donation.",
       "mega_gam_line_1": "You’ve lent a helping hand to community members and small businesses when they needed it most. Together, we can back those most impacted by the pandemic and keep the city’s Chinatowns vibrant.",
-      "mega_gam_line_2": "You will receive an email receipt shortly with the details of your donation."
+      "mega_gam_line_2": "You will receive an email receipt shortly with the details of your donation.",
+      "voucher": "We appreciate your support for {{seller}}! You will receive an email receipt shortly with the details of your voucher."
     }
   },
   "merchantNavBar": {
