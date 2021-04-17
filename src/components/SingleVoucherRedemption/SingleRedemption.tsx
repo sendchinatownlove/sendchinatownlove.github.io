@@ -5,8 +5,8 @@ import {
   Faq,
   VoucherMerchant,
   VoucherAmount,
-  VoucherQr,
-  VoucherSeparator,
+  // VoucherQr,
+  // VoucherSeparator,
   VoucherCode,
 } from './';
 
@@ -19,7 +19,8 @@ interface Props {
   zip_code?: string;
   voucher_code: string;
   value?: number;
-  qr_url?: string;
+  // TEMP: until qr generation is done
+  // qr_url?: string;
   expiration_date?: string | Date;
   distributor_image?: string;
 }
@@ -32,7 +33,7 @@ const SingleRedemption: FC<Props> = ({
   zip_code,
   voucher_code,
   value,
-  qr_url,
+  // qr_url,
   expiration_date,
   distributor_image,
 }) => {
@@ -53,8 +54,8 @@ const SingleRedemption: FC<Props> = ({
       ​
       <VoucherBody>
         <VoucherCode voucherCode={voucher_code} />
-        <VoucherSeparator />
-        <VoucherQr qrUrl={qr_url} />
+        {/* <VoucherSeparator />
+        <VoucherQr qrUrl={qr_url} /> */}
       </VoucherBody>
       <Faq cnName={cn_name} name={name} />
       <FooterSR distributorImage={distributor_image} />
@@ -71,7 +72,7 @@ SingleRedemption.defaultProps = {
   city: 'New York',
   state: 'NY',
   zip_code: '10002',
-  qr_url: '',
+  // qr_url: '',
   value: 2000,
   expiration_date: '12/32/2020',
 };

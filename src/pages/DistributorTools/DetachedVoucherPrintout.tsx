@@ -10,13 +10,14 @@ const DetachedVoucherPrintouts = ({ vouchers }) => {
   const [distributor_image, setDistributorImage] = useState('');
   const { distributor_id } = useParams<any>();
   useEffect(() => {
-    if (distributor_id) {
-      getDistributor(distributor_id).then(({ data }) => {
+    if (true === true) {
+      getDistributor('1').then(({ data }) => {
         setDistributorImage(data.image_url);
       });
     }
-  }, [distributor_id]);
-
+  }, []);
+  console.log('doot');
+  console.log(vouchers);
   const Vouchers =
     distributor_image && buildVouchers(vouchers, distributor_image);
   return <PrintoutContainer>{Vouchers}</PrintoutContainer>;

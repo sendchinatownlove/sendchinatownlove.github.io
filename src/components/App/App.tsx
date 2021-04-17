@@ -160,7 +160,7 @@ const App = () => {
           <Route exact path="/distributor/login">
             <DistributorLoginView />
           </Route>
-          <Route exact path="/distributor/:distributor_id/print-detached">
+          <Route exact path="/distributor/print/vouchers">
             <DetachedVoucherPrintouts />
           </Route>
           <PagerProvider>
