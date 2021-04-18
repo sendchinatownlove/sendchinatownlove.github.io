@@ -57,7 +57,7 @@ const PassportVoucher = lazy(() =>
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
 const DetachedVoucherPrintouts = lazy(() =>
-  import('../../pages/DistributorTools/DetachedVoucherPrintout')
+  import('../../pages/DistributorTools/AllVouchersPrintout')
 );
 const DistributorLoginView = lazy(() =>
   import('../../pages/DistributorTools/DistributorLoginView')
