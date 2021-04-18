@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Redirect, useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../../components/Footer/Footer';
 import SimplePager from '../../components/SimplePager/SimplePager';
+import PrintIcon from '@material-ui/icons/Print';
 
 import { PageCountContext } from './PageCountContext';
 import {
@@ -80,6 +81,12 @@ const Dashboard = () => {
           lastUpdated
         )} ${formatUTCOffsetlessTime(lastUpdated)}`}</Metadata>
       </DistributorOverview>
+      <SearchBarContainer>
+        <PrintoutLink to="/distributor/print/vouchers">
+          <Icon />
+          Print All Vouchers
+        </PrintoutLink>
+      </SearchBarContainer>
       <TableContainer>
         <Table fields={FIELDS} data={data || []} sortFn={sortData} />
         {isLoading ? (
@@ -138,6 +145,42 @@ const TableContainer = styled.article`
   margin: 0 auto;
   max-width: 950px;
 `;
+const SearchBarContainer = styled.div`
+  height: 58px;
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  max-width: 950px;
+  margin: 0 auto 28px;
+`;
+
+const Icon = styled(PrintIcon)`
+  margin: 0 12px;
+`;
+const PrintoutLink = styled(Link)`
+  border: 1.5px solid #a8192e;
+  border-radius: 50px;
+  color: rgb(168, 25, 46);
+  text-transform: uppercase;
+  padding: 18px 18px 18px 6px;
+  width: 300px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+
+  &:link {
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:active {
+    background-color: #a8192e;
+    color: white;
+  }
+`;
 
 const DistributorOverview = styled.section`
   display: grid;
@@ -152,8 +195,9 @@ const DistributorOverview = styled.section`
     'val1 val2 val3';
   justify-content: center;
   grid-gap: 7px 192px;
-  margin-bottom: 80px;
+  margin-bottom: 26px;
 `;
+
 const MetadataHeading = styled.h2`
   ${({ num }: { num: number }) => `grid-area: heading${num} ;`}
   font-family: Noto Sans SC, sans-serif;
