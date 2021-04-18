@@ -220,6 +220,15 @@ const HeaderContainer = styled.header`
     `
     margin-top: 40px;
   `}
+
+  @media (max-width: 600px) {
+    background-color: white;
+    width: 100%;
+    padding-bottom: 30px;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+  }
 `;
 
 const NavLinksContainer = styled.div`
