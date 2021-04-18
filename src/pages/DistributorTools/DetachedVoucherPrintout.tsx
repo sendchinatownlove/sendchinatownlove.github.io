@@ -1,64 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import SingleRedemption from '../../components/SingleVoucherRedemption';
-import { getDistributor } from '../../utilities/api/interactionManager';
+import { getAllVouchers } from '../../utilities/api/interactionManager';
 
-// NOTE(wilsonj806): This voucher printout is NOT connected to any API, and all data needs to be hardcoded
-const DetachedVoucherPrintouts = ({ vouchers }) => {
-  const [distributor_image, setDistributorImage] = useState('');
-  const { distributor_id } = useParams<any>();
+const DetachedVoucherPrintouts = () => {
+  const [isLoading, setLoading] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [distributor, setDistributor] = useState<{ [key: string]: any }>({});
+  const [vouchers, setVouchers] = useState<
+    { [key: string]: any }[] | undefined
+  >(undefined);
   useEffect(() => {
-    if (true === true) {
-      getDistributor('1').then(({ data }) => {
-        setDistributorImage(data.image_url);
-      });
-    }
-  }, []);
-  console.log('doot');
-  console.log(vouchers);
+    const asyncFetch = async () => {
+      setLoading(true);
+      const {
+        status,
+        data: { gift_cards, seller_names, distributor },
+      } = await getAllVouchers();
+      if (status === 401) return setShouldRedirect(true);
+
+      const processed = gift_cards.map((gift_card) => ({
+        ...gift_card,
+        name: seller_names[gift_card.id] ? seller_names[gift_card.id].en : '',
+      }));
+      setVouchers(processed);
+      setDistributor(distributor);
+      setLoading(false);
+    };
+    if (vouchers) return;
+    asyncFetch();
+  }, [vouchers]);
+
   const Vouchers =
-    distributor_image && buildVouchers(vouchers, distributor_image);
-  return <PrintoutContainer>{Vouchers}</PrintoutContainer>;
+    vouchers &&
+    distributor.image_url &&
+    buildVouchers(vouchers, distributor.image_url);
+  return (
+    <PrintoutContainer>
+      {shouldRedirect && <Redirect to="/distributor/login" />}
+      {isLoading
+        ? 'LOADING...'
+        : Vouchers
+        ? Vouchers
+        : 'NO VOUCHERS TO DISPLAY'}
+    </PrintoutContainer>
+  );
 };
 
 export default DetachedVoucherPrintouts;
 
-DetachedVoucherPrintouts.defaultProps = {
-  vouchers: [
-    {
-      name: 'Lanzhou Ramen',
-      cn_name: '兰州拉面',
-      voucher_code: 'AH2-TA',
-      address1: '107 E Broadway',
-      city: 'New York',
-      state: 'NY',
-      zip_code: '10002',
-      qr_url: '',
-      value: 2000,
-      expiration_date: '12/32/2020',
-    },
-    {
-      name: 'Lanzhou Ramen',
-      cn_name: '兰州拉面',
-      voucher_code: 'AH2-TA',
-      address1: '107 E Broadway',
-      city: 'New York',
-      state: 'NY',
-      zip_code: '10002',
-      qr_url: '',
-      value: 2000,
-      expiration_date: '12/32/2020',
-    },
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-  ],
-};
 const Row = styled.div`
   width: 100vw;
   height: 100%;
@@ -77,8 +69,6 @@ const PrintoutContainer = styled.div`
     }
   }
 `;
-// NOTE(wilsonj806): Uncomment for debugging
-// Row.displayName = 'Row';
 
 function buildVouchers(vouchers: any[], distributor_image: string) {
   const res: any[] = [];

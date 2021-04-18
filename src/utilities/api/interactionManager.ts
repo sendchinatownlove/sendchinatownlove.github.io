@@ -482,6 +482,15 @@ export const getCurrentPageVouchers = async (pageNo = '1') =>
     .then((res) => res)
     .catch((err) => err);
 
+export const getAllVouchers = async (pageNo = '1') =>
+  axios
+    .get(vouchers, {
+      validateStatus: (status) => status < 500,
+      withCredentials: true,
+    })
+    .then((res) => res)
+    .catch((err) => err);
+
 export const getVoucherMetadata = async () =>
   axios
     .get(vouchersMetadata, {
