@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import { Logo } from '../Logos';
 import { Page } from '../../consts';
+import { smallScreens } from '../../utilities/general/responsive';
 
 interface Props {
   menuOpen: boolean;
@@ -221,13 +222,21 @@ const HeaderContainer = styled.header`
     margin-top: 40px;
   `}
 
-  @media (max-width: 600px) {
-    background-color: white;
-    width: 100%;
-    padding-bottom: 30px;
+  @media (${smallScreens}) {
+    a {
+      margin-left: 19px;
+    }
+
     position: sticky;
     position: -webkit-sticky;
     top: 0;
+    z-index: 10;
+    background-color: white;
+    border-bottom: 1px solid #f2f2f2;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 30px;
+    margin: 0;
   }
 `;
 
@@ -259,6 +268,10 @@ const HamburgerContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media (${smallScreens}) {
+    margin-right: 20px;
+  }
 `;
 
 const NavLinkStyle = styled.a`
