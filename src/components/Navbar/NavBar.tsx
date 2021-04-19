@@ -230,7 +230,7 @@ const HeaderContainer = styled.header`
     position: sticky;
     position: -webkit-sticky;
     top: 0;
-    z-index: 10;
+    z-index: ${theme.maxzIndex};
     background-color: white;
     border-bottom: 1px solid #f2f2f2;
     width: 100%;
@@ -279,11 +279,17 @@ const NavLinkStyle = styled.a`
   color: black;
   transition: 0.1s;
   margin: 0 20px;
+
+  @media (${smallScreens}) {
+    background-color: white;
+  }
+
   ${(props: CompactProps) =>
     props.compact === 'true' &&
     `
     width: 100%;
-    margin: 16px auto;
+    margin: 0 auto;
+    padding: 16px 0;
     text-align: center;
   `} :link {
     color: black;
@@ -344,6 +350,10 @@ const ReactNavLink = styled.a`
   color: black;
   transition: 0.1s;
   margin: 0 20px;
+
+  @media (${smallScreens}) {
+    background-color: white;
+  }
   ${(props: CompactProps) =>
     props.compact === 'true' &&
     `
