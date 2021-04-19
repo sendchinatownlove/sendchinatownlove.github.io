@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import { Logo } from '../Logos';
 import { Page } from '../../consts';
+import { smallScreens } from '../../utilities/general/responsive';
 
 interface Props {
   menuOpen: boolean;
@@ -96,7 +97,7 @@ const NavBar = (props: Props) => {
     ) : (
       <NavLinksContainer compact={hamburgerOpen.toString()}>
         <HeaderContainer compact={hamburgerOpen.toString()}>
-          <a href="https://sendchinatownlove.com/">
+          <a className="nav-bar-logo" href="https://sendchinatownlove.com/">
             <Logo />
           </a>
           <Close onClick={(e) => props.setMenuOpen(false)} />
@@ -140,7 +141,7 @@ const NavBar = (props: Props) => {
   };
   return (
     <HeaderContainer compact={hamburgerOpen.toString()}>
-      <a href="https://sendchinatownlove.com/">
+      <a className="nav-bar-logo" href="https://sendchinatownlove.com/">
         <Logo />
       </a>
       {hamburgerOpen ? (
@@ -220,6 +221,23 @@ const HeaderContainer = styled.header`
     `
     margin-top: 40px;
   `}
+
+  @media (${smallScreens}) {
+    a.nav-bar-logo {
+      margin-left: 19px;
+    }
+
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: ${theme.maxzIndex};
+    background-color: white;
+    border-bottom: 1px solid #f2f2f2;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 30px;
+    margin: 0;
+  }
 `;
 
 const NavLinksContainer = styled.div`
@@ -250,6 +268,10 @@ const HamburgerContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media (${smallScreens}) {
+    margin-right: 20px;
+  }
 `;
 
 const NavLinkStyle = styled.a`
@@ -257,11 +279,17 @@ const NavLinkStyle = styled.a`
   color: black;
   transition: 0.1s;
   margin: 0 20px;
+
+  @media (${smallScreens}) {
+    background-color: white;
+  }
+
   ${(props: CompactProps) =>
     props.compact === 'true' &&
     `
     width: 100%;
-    margin: 16px auto;
+    margin: 0 auto;
+    padding: 16px 0;
     text-align: center;
   `} :link {
     color: black;
@@ -322,6 +350,10 @@ const ReactNavLink = styled.a`
   color: black;
   transition: 0.1s;
   margin: 0 20px;
+
+  @media (${smallScreens}) {
+    background-color: white;
+  }
   ${(props: CompactProps) =>
     props.compact === 'true' &&
     `
@@ -344,6 +376,10 @@ const ReactNavLink = styled.a`
 
 const Close = styled(CloseIcon)`
   cursor: pointer;
+
+  @media (${smallScreens}) {
+    margin-right: 20px;
+  }
 `;
 
 const Dropdown = styled.div`
