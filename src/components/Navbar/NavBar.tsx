@@ -97,7 +97,7 @@ const NavBar = (props: Props) => {
     ) : (
       <NavLinksContainer compact={hamburgerOpen.toString()}>
         <HeaderContainer compact={hamburgerOpen.toString()}>
-          <a href="https://sendchinatownlove.com/">
+          <a className="nav-bar-logo" href="https://sendchinatownlove.com/">
             <Logo />
           </a>
           <Close onClick={(e) => props.setMenuOpen(false)} />
@@ -141,7 +141,7 @@ const NavBar = (props: Props) => {
   };
   return (
     <HeaderContainer compact={hamburgerOpen.toString()}>
-      <a href="https://sendchinatownlove.com/">
+      <a className="nav-bar-logo" href="https://sendchinatownlove.com/">
         <Logo />
       </a>
       {hamburgerOpen ? (
@@ -223,7 +223,7 @@ const HeaderContainer = styled.header`
   `}
 
   @media (${smallScreens}) {
-    a {
+    a.nav-bar-logo {
       margin-left: 19px;
     }
 
@@ -366,6 +366,10 @@ const ReactNavLink = styled.a`
 
 const Close = styled(CloseIcon)`
   cursor: pointer;
+
+  @media (${smallScreens}) {
+    margin-right: 20px;
+  }
 `;
 
 const Dropdown = styled.div`
