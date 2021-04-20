@@ -27,8 +27,7 @@
       "merchants": "WAYS TO DONATE",
       "waystodonate": {
         "donate": "DONATE",
-        "gift-a-meal": "GIFT-A-MEAL",
-        "light-up-chinatown": "LIGHT UP CHINATOWN"
+        "gift-a-meal": "GIFT-A-MEAL"
       },
       "light-up-chinatown": "LIGHT UP CHINATOWN",
       "lunar-new-year-crawl": "LUNAR NEW YEAR CRAWL"
@@ -41,7 +40,7 @@
   "buyMeal": {
     "header": "Gift a meal for ",
     "subheader": "Send Chinatown Love will connect merchants with local organizations that will distribute your gifted meals to our community in need.",
-    "prompt": "Please enter how many meals you'd like to gift",
+    "prompt": "Please enter how many meals from <bold>{{sellerName}}</bold> to gift",
     "explanationFirst": "By gifting a meal, your donation will still go directly to the merchant.",
     "explanationSecond": "Our partners will then distribute vouchers with those who can benefit the most from a free meal.",
     "totalLabel": "Total: ",
@@ -57,7 +56,9 @@
   },
   "purchase": {
     "donation": "捐款 - {{seller}}",
-    "voucher": "购买礼品券 - {{seller}}"
+    "voucher": "购买礼品券 - {{seller}}",
+    "donation_to": "Donation to {{seller}}",
+    "voucher_to": "Voucher to {{seller}}"
   },
   "errorPage": {
     "body": {
@@ -95,7 +96,8 @@
         "paymentInfo": "Please add your payment information below",
         "fullName": "Full Name",
         "email": "Email",
-        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded"
+        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded",
+        "tAndC": "我同意 <bold>商业条款</bold>"
       },
       "placeholders": {
         "name": "Name",
@@ -117,8 +119,13 @@
         "luc_address": "Shipping Address: "
       },
       "modalConfirmation": {
+        "buyMeal": "We appreciate your support for {{seller}} and for those in need! Please check your email for your receipt.",
+        "donation": "We appreciate your support for {{seller}}! You will receive an email receipt shortly with the details of your donation.",
+        "lightUpMinTier": "You will receive an email in the next couple weeks about our Lighting Ceremony in December.",
+        "lightUpMaxTier": "You will receive an email with receipt for your donation.",
         "mega_gam_line_1": "You’ve lent a helping hand to community members and small businesses when they needed it most. Together, we can back those most impacted by the pandemic and keep the city’s Chinatowns vibrant.",
-        "mega_gam_line_2": "You will receive an email receipt shortly with the details of your donation."
+        "mega_gam_line_2": "You will receive an email receipt shortly with the details of your donation.",
+        "voucher": "We appreciate your support for {{seller}}! You will receive an email receipt shortly with the details of your voucher."  
       }
     }
   },
@@ -164,7 +171,7 @@
     }
   },
   "donationBox": {
-    "header": "不太确定捐款给哪个商家？",
+    "header": "请支持我们献爱华埠成立一周年的筹款活动",
     "description": "捐献到爱心池来支持我们的每间商家！我们会把你的捐款平均分配给各商家。",
     "button": "捐款"
   },

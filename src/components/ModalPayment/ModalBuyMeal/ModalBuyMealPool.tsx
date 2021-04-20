@@ -7,7 +7,7 @@ import {
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
 import CampaignProgressBar from '../../MerchantsPage/gam/CampaignProgressBar';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import CampaignInstructions from './CamapignInstructions';
 import ReactPixel from 'react-facebook-pixel';
 import { getCampaignsForMerchant, getDistributor } from '../../../utilities';
@@ -127,7 +127,13 @@ export const ModalBuyMeal = (props: Props) => {
       />
 
       <div className={styles.amountContainer}>
-        <label htmlFor="select-amount">{t('buyMeal.prompt')}</label>
+        <Trans
+          i18nKey="buyMeal.prompt"
+          values={{ sellerName: props.sellerName }}
+          components={{ bold: <span className={styles.bold} /> }}
+        >
+          <label htmlFor="select-amount">{t('buyMeal.prompt')}</label>
+        </Trans>
         <br />
         <div className={styles.selectAmtContainer}>
           <div className={styles.selectAmt}>
