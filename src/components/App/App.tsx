@@ -51,11 +51,14 @@ const PassportVoucher = lazy(() =>
   import('../../pages/PassportRedemption/Voucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
-const DetachedVoucherPrintouts = lazy(() =>
-  import('../../pages/DistributorTools/DetachedVoucherPrintout')
+const AllVoucherPrintouts = lazy(() =>
+  import('../../pages/DistributorTools/AllVouchersPrintout')
 );
 const DistributorLoginView = lazy(() =>
   import('../../pages/DistributorTools/DistributorLoginView')
+);
+const DistributorDashboard = lazy(() =>
+  import('../../pages/DistributorTools/DistributorDashboard')
 );
 
 const options = {
@@ -133,6 +136,16 @@ const App = () => {
           <Route exact path="/lny-passport/:id/redeem">
             <PassportRedemption screen={ScreenType.Rewards} />
           </Route>
+          <Route exact strict path="/distributor/login">
+            <DistributorLoginView />
+          </Route>
+          <Route exact strict path="/distributor/print/vouchers">
+            <AllVoucherPrintouts />
+          </Route>
+          <Route exact strict path="/distributor/dashboard">
+            <DistributorDashboard />
+          </Route>
+
           <Route exact path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
           </Route>
@@ -149,15 +162,7 @@ const App = () => {
               return null;
             }}
           />
-          <Route exact path="/distributor/login">
-            <DistributorLoginView />
-          </Route>
-          <Route
-            exact
-            path="/distributor/:distributor_id/dashboard/print-detached"
-          >
-            <DetachedVoucherPrintouts />
-          </Route>
+
           <Route path="/gift-a-meal-home">
             {returnComponent(Page.GiftAMeal)}
           </Route>

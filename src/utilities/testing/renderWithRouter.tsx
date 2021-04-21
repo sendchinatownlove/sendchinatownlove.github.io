@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Redirect } from 'react-router-dom';
+
 import { createBrowserHistory } from 'history';
 
 /**
@@ -41,6 +42,11 @@ const renderWithRouter = (ui, { startingPath, endingPath }) => {
 };
 
 export default renderWithRouter;
+export const resetRouterFixture = () =>
+  renderWithRouter(<Route path="/" render={() => <Redirect to="/" />} />, {
+    startingPath: '/',
+    endingPath: '/',
+  });
 
 /**
  * TEST FIXTURES BELOW

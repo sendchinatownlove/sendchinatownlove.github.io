@@ -10,7 +10,11 @@ import {
   authGoogle,
   authPasswordless,
 } from '../utilities/api/endpoints';
-import renderWithRouter from '../utilities/testing/renderWithRouter';
+
+import renderWithRouter, {
+  resetRouterFixture,
+} from '../utilities/testing/renderWithRouter';
+
 
 const mock = new MockAdapter(axios);
 
@@ -18,7 +22,12 @@ const MOCK_EMAIL = 'abc@gmail.com';
 const MOCK_GOOGLE_RES = { authorization_url: 'google.com' };
 const MOCK_REDIRECT = 'google.com';
 
-describe.only('Distributor Tools Login Page', () => {
+
+describe('Distributor Tools Login Page', () => {
+  afterEach(() => {
+    resetRouterFixture();
+  });
+
   it('should redirect if the server validates an existing session', async () => {
     const endingPath = '/distributor/dashboard';
     mock.onGet(authValidate).reply(200);

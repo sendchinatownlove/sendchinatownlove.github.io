@@ -33,6 +33,14 @@ export function formatTime(time) {
   return `${hours}:${minutes}${suffix}`;
 }
 
+export function formatUTCOffsetlessTime(time) {
+  const date = new Date(time);
+  const offset = new Date().getTimezoneOffset() / 60;
+  date.setHours(date.getHours() - offset);
+
+  return date.toLocaleTimeString();
+}
+
 export function formatCurrency(cents: number, decimals: number = 2) {
   return Intl.NumberFormat('en-US', {
     style: 'currency',
