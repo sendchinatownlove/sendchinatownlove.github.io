@@ -1,19 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
-import { PageCountContext } from '../../pages/DistributorTools/PageCountContext';
-
-const SimplePager = () => {
-  const { totalPageCount, isLoading } = useContext(PageCountContext);
+const SimplePager = ({ pageCount, isLoading }) => {
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const pageNo = params.get('page') || '1';
 
   const isFirstPage = pageNo !== '1';
-  const isLastPage = checkIfLastPage(totalPageCount, pageNo);
+  const isLastPage = checkIfLastPage(pageCount, pageNo);
 
   return (
     <PagerWrapper>
@@ -34,7 +31,7 @@ const SimplePager = () => {
       {isLoading ? (
         <PagerText>Loading 装货...</PagerText>
       ) : (
-        <PagerText>{`Page ${pageNo} out of ${totalPageCount} 页面 ${pageNo}/ ${totalPageCount}`}</PagerText>
+        <PagerText>{`Page ${pageNo} out of ${pageCount} 页面 ${pageNo}/ ${pageCount}`}</PagerText>
       )}
       {isLastPage ? (
         <Link

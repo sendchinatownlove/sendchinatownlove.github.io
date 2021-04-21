@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect, useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from '../../components/Footer/Footer';
 import SimplePager from '../../components/SimplePager/SimplePager';
 import PrintIcon from '@material-ui/icons/Print';
 
-import { PageCountContext } from './PageCountContext';
 import {
   getCurrentPageVouchers,
   getVoucherMetadata,
@@ -19,7 +18,8 @@ import {
 } from '../../utilities/general/textFormatter';
 
 const Dashboard = () => {
-  const { setPageCount, setLoading, isLoading } = useContext(PageCountContext);
+  const [isLoading, setLoading] = useState(false);
+  const [pageCount, setPageCount] = useState('1');
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const pageNo = params.get('page');
@@ -94,7 +94,7 @@ const Dashboard = () => {
         ) : data ? null : (
           <TablePlaceholderText>No Vouchers To Load</TablePlaceholderText>
         )}
-        <SimplePager />
+        <SimplePager pageCount={pageCount} isLoading={isLoading} />
       </TableContainer>
       <Footer />
     </Main>

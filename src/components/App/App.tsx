@@ -31,11 +31,6 @@ history.listen((location) => {
   }
 });
 
-// Lazy load page count context
-const PagerProvider = lazy(() =>
-  import('../../pages/DistributorTools/PageCountContext')
-);
-
 // we could use template strings, but just to be safe we'll hardcode the
 // lazy imports
 const SellerPage = lazy(() => import('../SellerPage'));
@@ -141,6 +136,16 @@ const App = () => {
           <Route exact path="/lny-passport/:id/redeem">
             <PassportRedemption screen={ScreenType.Rewards} />
           </Route>
+          <Route exact strict path="/distributor/login">
+            <DistributorLoginView />
+          </Route>
+          <Route exact strict path="/distributor/print/vouchers">
+            <DetachedVoucherPrintouts />
+          </Route>
+          <Route exact strict path="/distributor/dashboard">
+            <DistributorDashboard />
+          </Route>
+
           <Route exact path="/:seller_id/dashboard/:secret_id">
             <MerchantVoucherDashboard />
           </Route>
@@ -157,17 +162,6 @@ const App = () => {
               return null;
             }}
           />
-          <Route exact path="/distributor/login">
-            <DistributorLoginView />
-          </Route>
-          <Route exact path="/distributor/print/vouchers">
-            <DetachedVoucherPrintouts />
-          </Route>
-          <PagerProvider>
-            <Route exact path="/distributor/dashboard">
-              <DistributorDashboard />
-            </Route>
-          </PagerProvider>
 
           <Route path="/gift-a-meal-home">
             {returnComponent(Page.GiftAMeal)}
