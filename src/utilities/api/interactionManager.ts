@@ -500,10 +500,3 @@ export const getVoucherMetadata = async () =>
 
     .then((res) => res)
     .catch((err) => err);
-
-export const validateSession = async () =>
-  axios
-    .get(authValidate, {
-      validateStatus: (status) => status < 500,
-      withCredentials: true,
-    })
