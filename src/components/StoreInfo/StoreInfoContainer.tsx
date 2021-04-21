@@ -14,6 +14,8 @@ import styles from './styles.module.scss';
 import defaultStoreFront from './misc-store.png';
 import { useMedia } from 'use-media';
 import { OrderNow, MobileOrderWrapper } from '../OwnerPanel';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 type Props = {
   seller: BrowsePageSeller;
@@ -34,10 +36,21 @@ export const StoreInfo: FC<Props> = ({
   // modal functionality for menu and gallery tabs
   const [viewImage, setViewImage] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [imageIndex, setImageIndex] = useState(-1);
 
-  const expandImage = (url: string) => {
+  const expandImage = (url: string, index: number) => {
     setViewImage(url);
     setShowModal(true);
+    setImageIndex(index ? index : -1);
+  };
+
+  const updateImageIndex = (index: number) => {
+    if (index < 0 || index >= seller.gallery_image_urls.length) {
+      return;
+    }
+
+    setViewImage(seller.gallery_image_urls[index]);
+    setImageIndex(index);
   };
 
   // logic for nav bar & tab switching
@@ -138,7 +151,21 @@ export const StoreInfo: FC<Props> = ({
 
       <ImageModal style={{ display: showModal ? 'block' : 'none' }}>
         <CloseButton onClick={() => setShowModal(false)}>×</CloseButton>
+        <LeftBumper>
+          <ArrowBackIosIcon
+            onClick={() => {
+              updateImageIndex(imageIndex - 1);
+            }}
+          />
+        </LeftBumper>
         <img src={viewImage} alt="modal view" />
+        <RightBumper>
+          <ArrowForwardIosIcon
+            onClick={() => {
+              updateImageIndex(imageIndex + 1);
+            }}
+          />
+        </RightBumper>
       </ImageModal>
     </section>
   );
@@ -233,4 +260,21 @@ const CloseButton = styled.button`
   border: none;
   outline: none;
   z-index: 2;
+`;
+
+const BaseBumper = styled.button`
+  position: fixed;
+  top: 50%;
+  border-radius: 50%;
+  z-index: 2;
+  height: 33px;
+  width: 33px;
+`;
+
+const LeftBumper = styled(BaseBumper)`
+  left: 0;
+`;
+
+const RightBumper = styled(BaseBumper)`
+  right: 0;
 `;

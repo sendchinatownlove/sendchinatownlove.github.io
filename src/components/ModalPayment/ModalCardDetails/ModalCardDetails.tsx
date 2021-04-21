@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { times } from 'lodash/fp';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
@@ -60,6 +60,7 @@ const ModalCardDetails = ({
     lucData,
     matchAmount,
     campaignState,
+    referrer
   } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
   const modalRef = useScrollToElement();
@@ -179,7 +180,9 @@ const ModalCardDetails = ({
       is_subscribed: isSubscriptionChecked,
     };
 
-    setCanSubmit(false);
+    let metadata: any = {};
+    if (projectId) metadata = lucData;
+    if (referrer) metadata.referrer = referrer;
 
     return makeSquarePayment(
       nonce,
@@ -189,7 +192,7 @@ const ModalCardDetails = ({
       is_distribution, // TODO (billy-yuan): will deprecate is_distribution after it is removed from the back-end
       campaignId,
       projectId,
-      projectId ? JSON.stringify(lucData) : null
+      metadata !== {} ? JSON.stringify(metadata) : null
     )
       .then((res) => {
         if (res.status === 200) {
@@ -267,14 +270,18 @@ const ModalCardDetails = ({
     }
   };
 
-  useEffect(() => {
-    setCanSubmit(
+  const checkFormValidity = useCallback(() => {
+    return (
       isTermsChecked &&
-        name.length > 0 &&
-        email.length > 0 &&
-        ModalPaymentConstants.EMAIL_REGEX.test(email)
+      name.length > 0 &&
+      email.length > 0 &&
+      ModalPaymentConstants.EMAIL_REGEX.test(email)
     );
   }, [isTermsChecked, name, email]);
+
+  useEffect(() => {
+    setCanSubmit(checkFormValidity());
+  }, [checkFormValidity]);
 
   const setDisclaimerLanguage = (
     type: string | ModalPaymentTypes.modalPages
@@ -459,8 +466,8 @@ const ModalCardDetails = ({
             <p />
             <CheckboxContainer>
               <Checkbox
-                value="checkedB"
-                inputProps={{ 'aria-label': 'Checkbox B' }}
+                value="emailUpdates"
+                inputProps={{ 'aria-label': 'Email Updates' }}
                 onClick={checkSubscriptionAgreement}
                 checked={isSubscriptionChecked}
               />
@@ -470,14 +477,17 @@ const ModalCardDetails = ({
             </CheckboxContainer>
             <CheckboxContainer>
               <Checkbox
-                value="checkedA"
-                inputProps={{ 'aria-label': 'Checkbox A' }}
+                value="termsAndConditions"
+                inputProps={{ 'aria-label': 'Terms and Conditions' }}
                 onClick={checkTermsAgreement}
                 checked={isTermsChecked}
               />
-              <span>
-                I agree with the <b>Terms & Conditions</b>
-              </span>
+              <Trans
+                i18nKey="modalPayment.modalCardDetails.body.tAndC"
+                components={{ bold: <strong /> }}
+              >
+                <span>{t('modalPayment.modalCardDetails.body.tAndC')}</span>
+              </Trans>
             </CheckboxContainer>
             <Disclaimer>{setDisclaimerLanguage(purchaseType)}</Disclaimer>
             <ButtonRow>
@@ -570,6 +580,7 @@ const CheckboxContainer = styled.label`
   width: 100%;
   align-items: center;
   margin-bottom: 10px;
+  white-space: pre-wrap;
 
   :hover {
     text-decoration: underline;

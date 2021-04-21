@@ -51,7 +51,7 @@ const PassportVoucher = lazy(() =>
   import('../../pages/PassportRedemption/Voucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
-const DetachedVoucherPrintouts = lazy(() =>
+const AllVoucherPrintouts = lazy(() =>
   import('../../pages/DistributorTools/AllVouchersPrintout')
 );
 const DistributorLoginView = lazy(() =>
@@ -140,7 +140,7 @@ const App = () => {
             <DistributorLoginView />
           </Route>
           <Route exact strict path="/distributor/print/vouchers">
-            <DetachedVoucherPrintouts />
+            <AllVoucherPrintouts />
           </Route>
           <Route exact strict path="/distributor/dashboard">
             <DistributorDashboard />

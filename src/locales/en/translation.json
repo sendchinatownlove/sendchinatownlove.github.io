@@ -60,8 +60,7 @@
       "merchants": "WAYS TO DONATE",
       "waystodonate": {
         "donate": "DONATE",
-        "gift-a-meal": "GIFT-A-MEAL",
-        "light-up-chinatown": "LIGHT UP CHINATOWN"
+        "gift-a-meal": "GIFT-A-MEAL"
       },
       "light-up-chinatown": "LIGHT UP CHINATOWN",
       "lunar-new-year-crawl": "LUNAR NEW YEAR CRAWL"
@@ -74,7 +73,7 @@
   "buyMeal": {
     "header": "Gift a meal for ",
     "subheader": "Send Chinatown Love will connect merchants with local organizations that will distribute your gifted meals to a community in need.",
-    "prompt": "Please enter how many meals you'd like to gift",
+    "prompt": "Please enter how many meals from <bold>{{sellerName}}</bold> to gift",
     "explanationFirst": "By gifting a meal, your donation will still go directly to the merchant.",
     "explanationSecond": "Our partners will then distribute vouchers with those who can benefit the most from a free meal.",
     "totalLabel": "Total: ",
@@ -130,7 +129,8 @@
         "paymentInfo": "Please add your payment information below",
         "fullName": "Full Name",
         "email": "Email",
-        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded"
+        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded",
+        "tAndC": "I agree with the <bold>Terms & Conditions</bold>"
       },
       "placeholders": {
         "name": "Name",
@@ -153,8 +153,13 @@
       }
     },
     "modalConfirmation": {
+      "buyMeal": "We appreciate your support for {{seller}} and for those in need! Please check your email for your receipt.",
+      "donation": "We appreciate your support for {{seller}}! You will receive an email receipt shortly with the details of your donation.",
+      "lightUpMinTier": "You will receive an email in the next couple weeks about our Lighting Ceremony in December.",
+      "lightUpMaxTier": "You will receive an email with receipt for your donation.",
       "mega_gam_line_1": "You’ve lent a helping hand to community members and small businesses when they needed it most. Together, we can back those most impacted by the pandemic and keep the city’s Chinatowns vibrant.",
-      "mega_gam_line_2": "You will receive an email receipt shortly with the details of your donation."
+      "mega_gam_line_2": "You will receive an email receipt shortly with the details of your donation.",
+      "voucher": "We appreciate your support for {{seller}}! You will receive an email receipt shortly with the details of your voucher."
     }
   },
   "merchantNavBar": {
@@ -199,7 +204,7 @@
     }
   },
   "donationBox": {
-    "header": "Not sure who to donate to?",
+    "header": "Contribute to our 1 Year Fundraiser",
     "description": "To support every merchant on this page, contribute to our donation pool. We distribute funds evenly across all businesses.",
     "button": "DONATE"
   },

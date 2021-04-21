@@ -47,15 +47,21 @@ const ModalConfirmation = (props: Props) => {
   const confirmationText = (purchaseType, sellerName, amount) => {
     switch (purchaseType) {
       case ModalPaymentTypes.modalPages.donation:
-        return `We appreciate your support. We'll let you know when ${sellerName} receives your donation!`;
+        return t('modalPayment.modalConfirmation.donation', {
+          seller: sellerName,
+        });
       case ModalPaymentTypes.modalPages.light_up_chinatown:
         if (amount >= LIGHT_UP_CHINATOWN_TIER_2_MIN)
-          return 'You will receive an email in the next couple weeks about our Lighting Ceremony in December.';
-        return `You will receive an email with receipt for your donation.`;
+          return t('modalPayment.modalConfirmation.lightUpMaxTier');
+        return t('modalPayment.modalConfirmation.lightUpMinTier');
       case ModalPaymentTypes.modalPages.gift_card:
-        return `We appreciate your support. We'll email you your voucher when ${sellerName} opens back up!`;
+        return t('modalPayment.modalConfirmation.voucher', {
+          seller: sellerName,
+        });
       case ModalPaymentTypes.modalPages.buy_meal:
-        return `We appreciate your support for ${sellerName} and for those in need! Please check your email for your receipt.`;
+        return t('modalPayment.modalConfirmation.buyMeal', {
+          seller: sellerName,
+        });
       case ModalPaymentTypes.modalPages.mega_gam:
         return (
           <span>

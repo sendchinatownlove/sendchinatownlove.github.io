@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Router, Route, Redirect } from 'react-router-dom';
+
 import { createBrowserHistory } from 'history';
 
 /**
@@ -25,7 +26,6 @@ const renderWithRouter = (ui, { startingPath, endingPath }) => {
   // Build history object with initial location
   const history = createBrowserHistory();
   history.push(start);
-  console.log(history);
 
   return {
     history,
@@ -47,6 +47,7 @@ export const resetRouterFixture = () =>
     startingPath: '/',
     endingPath: '/',
   });
+
 /**
  * TEST FIXTURES BELOW
  * - A Router test fixture that sets up the two routes to test

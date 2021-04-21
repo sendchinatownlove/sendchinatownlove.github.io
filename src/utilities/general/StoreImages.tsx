@@ -8,5 +8,7 @@ export const getWebsiteImages = () => {
       'https://storage.googleapis.com/sendchinatownlove-assets/public/assets/general/gam-hero.png',
     donationPoolHero:
       'https://storage.googleapis.com/sendchinatownlove-assets/public/assets/general/donation-pool-hero.png',
+    squareLogo:
+      'https://storage.googleapis.com/sendchinatownlove-assets/public/assets/general/square_logo.png',
   };
 };
