@@ -41,6 +41,7 @@ const MerchantsPage = (props: Props) => {
   const [contributions, setContributions] = useState<ContributionsType>(
     INITIAL_CONTRIBUTIONS
   );
+  const [totalActiveSellers, setTotalActiveSellers] = useState<number | null>();
 
   const fetchData = async (lang?: string) => {
     const { data } = await getSellers(lang);
@@ -59,6 +60,10 @@ const MerchantsPage = (props: Props) => {
         }),
         INITIAL_CONTRIBUTIONS
       )
+    );
+    setTotalActiveSellers(
+      data.filter((seller) => seller.accept_donation || seller.sell_gift_cards)
+        .length
     );
   };
 
@@ -137,7 +142,7 @@ const MerchantsPage = (props: Props) => {
                 <h2>
                   <b>{t('merchantsPage.merchantHeader')}</b>
                 </h2>
-                {sellers && <h4>{sellers.length} Total Merchants</h4>}
+                {sellers && <h4>{totalActiveSellers} Total Merchants</h4>}
               </div>
               <br />
               <br />
