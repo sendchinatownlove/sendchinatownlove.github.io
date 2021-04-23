@@ -109,12 +109,15 @@ const ModalContainer = styled.div`
   top: 0;
   left: 0;
   z-index: 10;
-  padding-bottom: 40px;
   width: 100%;
   height: 100%;
+  padding-bottom: 40px;
+  @media min-width: 1000px {
+    padding-bottom: 0;
+  }
 `;
 const ViewContainer = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
   margin: 0 auto;
   height: 100%;
   width: 100%;
@@ -127,11 +130,16 @@ const CloseButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  padding: 0;
+  @media min-width: 1000px {
+    padding: 0 50px;
+  }
 `;
 const CloseButton = styled.button`
-  width: 40px;
-  font-weight: bold;
-  font-size: 30px;
+  width: 45px;
+  font-weight: 500;
+  font-size: 45px;
+  line-height: 1;
   border: none;
   outline: none;
   cursor: pointer;
