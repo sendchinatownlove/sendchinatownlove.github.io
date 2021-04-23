@@ -162,7 +162,6 @@ const App = () => {
               return null;
             }}
           />
-
           <Route path="/gift-a-meal-home">
             {returnComponent(Page.GiftAMeal)}
           </Route>
