@@ -49,6 +49,7 @@ const NavBar = (props: Props) => {
   const dropdownOptions = [
     { url: '/merchants', translation: 'donate', external: false },
     { url: '/gift-a-meal-home', translation: 'gift-a-meal', external: false },
+    { url: '/cookbook', translation: 'cookbook', external: false },
   ];
 
   const drop = dropdownOptions.map((option) => {

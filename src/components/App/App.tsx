@@ -162,10 +162,17 @@ const App = () => {
               return null;
             }}
           />
-
           <Route path="/gift-a-meal-home">
             {returnComponent(Page.GiftAMeal)}
           </Route>
+          <Route
+            path="/cookbook"
+            component={() => {
+              window.location.href =
+                'https://www.sendchinatownlove.com/cookbook';
+              return null;
+            }}
+          />
           <Route path="/light-up-chinatown">
             {returnComponent(Page.LightUpChinatown)}
           </Route>
