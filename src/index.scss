@@ -46,6 +46,13 @@ h3 {
   margin-bottom: 15px;
 }
 
+h4 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  margin: 0;
+}
+
 @mixin base-button {
   border-radius: 100px;
   padding: 10px 22px;

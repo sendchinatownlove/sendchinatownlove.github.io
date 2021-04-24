@@ -59,13 +59,14 @@
 }
 
 .body__voucherCode {
-  width: 50%;
+  // width: 50%;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
-  border-right: 1px dashed #959595;
+  // border-right: 1px dashed #959595;
 }
 
 .heading__voucherCode {
@@ -75,7 +76,8 @@
 }
 
 .text__codeDescription {
-  width: 65%;
+  // width: 65%;
+  width: 100%;
   display: block;
 }
 
