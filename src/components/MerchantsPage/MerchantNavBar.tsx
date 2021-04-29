@@ -63,6 +63,7 @@ const NavContainer = styled.div`
   }
 
   @media (max-width: 450px) {
-    display: none;
+    display: grid;
+    grid-template-columns: 50% 1fr;
   }
 `;
