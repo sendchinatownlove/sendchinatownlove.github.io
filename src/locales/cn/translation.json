@@ -41,7 +41,7 @@
   "buyMeal": {
     "header": "Gift a meal for ",
     "subheader": "Send Chinatown Love will connect merchants with local organizations that will distribute your gifted meals to our community in need.",
-    "prompt": "Please enter how many meals from <bold>{{sellerName}}</bold> to gift",
+    "prompt": "Please enter how many meals you'd like to gift",
     "explanationFirst": "By gifting a meal, your donation will still go directly to the merchant.",
     "explanationSecond": "Our partners will then distribute vouchers with those who can benefit the most from a free meal.",
     "totalLabel": "Total: ",
@@ -57,9 +57,7 @@
   },
   "purchase": {
     "donation": "捐款 - {{seller}}",
-    "voucher": "购买礼品券 - {{seller}}",
-    "donation_to": "Donation to {{seller}}",
-    "voucher_to": "Voucher to {{seller}}"
+    "voucher": "购买礼品券 - {{seller}}"
   },
   "errorPage": {
     "body": {
@@ -97,8 +95,7 @@
         "paymentInfo": "Please add your payment information below",
         "fullName": "Full Name",
         "email": "Email",
-        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded",
-        "tAndC": "我同意 <bold>商业条款</bold>"
+        "emailUpdates": "I'd like to receive email updates from Send Chinatown Love, such as when the merchant receives my donation/purchase or when a new merchant is onboarded"
       },
       "placeholders": {
         "name": "Name",
