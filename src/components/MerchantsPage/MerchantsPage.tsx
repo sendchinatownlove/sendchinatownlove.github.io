@@ -62,7 +62,7 @@ const MerchantsPage = (props: Props) => {
       )
     );
     setTotalActiveSellers(
-      data.filter((seller) => seller.accept_donation || seller.sell_gift_cards)
+      data.filter((seller) => seller.accept_donations || seller.sell_gift_cards)
         .length
     );
   };
