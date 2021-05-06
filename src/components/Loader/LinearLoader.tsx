@@ -13,9 +13,9 @@ const Loader = () => {
 export default Loader;
 
 const LinearLoader = styled(LinearProgress)`
-  height: 20px !important;
+  height: 16px !important;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 8px;
   background-color: #e6c5ca !important;
   & div {
     background-color: #ab192e !important;
