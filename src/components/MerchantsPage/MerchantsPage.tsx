@@ -46,7 +46,7 @@ const MerchantsPage = (props: Props) => {
   );
   const [totalActiveSellers, setTotalActiveSellers] = useState<number | null>();
 
-  const fetchData = async (lang?: string) => {
+  const fetchSellers = async (lang?: string) => {
     setLoadingSellers(true);
     const { data } = await getSellers(lang);
     setSellers(data);
@@ -59,11 +59,11 @@ const MerchantsPage = (props: Props) => {
   };
 
   useEffect(() => {
-    fetchData(i18n.language);
+    fetchSellers(i18n.language);
   }, [i18n.language]);
 
   useEffect(() => {
-    const asyncFetch = async () => {
+    const fetchTotalContributions = async () => {
       setLoadingContrib(true);
       const {
         data: { donation_amount, gift_a_meal_amount, gift_card_amount },
@@ -78,7 +78,7 @@ const MerchantsPage = (props: Props) => {
       setLoadingContrib(false);
     };
 
-    asyncFetch();
+    fetchTotalContributions();
   }, []);
 
   // TODO: replace this filter with a backend API call
