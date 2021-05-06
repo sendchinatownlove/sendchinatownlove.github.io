@@ -26,6 +26,7 @@ import {
   authGoogle,
   authPasswordless,
   authValidate,
+  totalContributions,
 } from './endpoints';
 
 // Fix return typing
@@ -498,5 +499,11 @@ export const getVoucherMetadata = async () =>
       withCredentials: true,
     })
 
+    .then((res) => res)
+    .catch((err) => err);
+
+export const getTotalContributions = async () =>
+  axios
+    .get(totalContributions)
     .then((res) => res)
     .catch((err) => err);

@@ -9,9 +9,10 @@ import GiftMealHighlightBox from './GiftMealHighlightBox';
 import MerchantCard from './MerchantCard';
 import MerchantDescriptionBanner from './MerchantDescriptionBanner';
 import NavBar from './MerchantNavBar';
-import { LoaderFillerContainer } from '../Loader';
-import { getSellers } from '../../utilities/api';
-import type { BrowsePageSeller } from '../../utilities/api/types';
+import Loader from '../Loader';
+import LinearLoader from '../Loader/LinearLoader';
+import { getSellers, getTotalContributions } from '../../utilities/api';
+import MerchantsGridContainer from './MerchantsGridContainer';
 import { getWebsiteImages } from '../../utilities/general/StoreImages';
 
 import styles from './styles.module.scss';
@@ -34,42 +35,51 @@ const INITIAL_CONTRIBUTIONS: ContributionsType = {
 
 ReactPixel.trackCustom('MerchantsPageView', {});
 const MerchantsPage = (props: Props) => {
+  const [loadingContrib, setLoadingContrib] = useState(false);
+  const [loadingSellers, setLoadingSellers] = useState(false);
   const websiteImages = getWebsiteImages();
   const { t, i18n } = useTranslation();
-  const [sellers, setSellers] = useState<any | null>();
-  const [filter, setFilter] = useState<any | null>();
+  const [sellers, setSellers] = useState<any[]>([]);
+  const [filter, setFilter] = useState<any[]>([]);
   const [contributions, setContributions] = useState<ContributionsType>(
     INITIAL_CONTRIBUTIONS
   );
   const [totalActiveSellers, setTotalActiveSellers] = useState<number | null>();
 
-  const fetchData = async (lang?: string) => {
+  const fetchSellers = async (lang?: string) => {
+    setLoadingSellers(true);
     const { data } = await getSellers(lang);
-
     setSellers(data);
     setFilter(data);
-    setContributions(
-      data.reduce(
-        (totalContributions: ContributionsType, store: BrowsePageSeller) => ({
-          donationAmount:
-            totalContributions.donationAmount + store.donation_amount,
-          giftCardAmount:
-            totalContributions.giftCardAmount + store.gift_card_amount,
-          giftAMealAmount:
-            totalContributions.giftAMealAmount + store.gift_a_meal_amount,
-        }),
-        INITIAL_CONTRIBUTIONS
-      )
-    );
     setTotalActiveSellers(
       data.filter((seller) => seller.accept_donations || seller.sell_gift_cards)
         .length
     );
+    setLoadingSellers(false);
   };
 
   useEffect(() => {
-    fetchData(i18n.language);
+    fetchSellers(i18n.language);
   }, [i18n.language]);
+
+  useEffect(() => {
+    const fetchTotalContributions = async () => {
+      setLoadingContrib(true);
+      const {
+        data: { donation_amount, gift_a_meal_amount, gift_card_amount },
+      } = await getTotalContributions();
+
+      setContributions({
+        donationAmount: donation_amount,
+        giftAMealAmount: gift_a_meal_amount,
+        giftCardAmount: gift_card_amount,
+      });
+
+      setLoadingContrib(false);
+    };
+
+    fetchTotalContributions();
+  }, []);
 
   // TODO: replace this filter with a backend API call
   const filterStoreType = (type: any) => {
@@ -99,81 +109,83 @@ const MerchantsPage = (props: Props) => {
       className={styles.container}
       style={{ display: props.menuOpen ? 'none' : 'inherit' }}
     >
-      {filter ? (
-        <>
-          <div className={styles.overlayContainer}>
-            <img
-              src={websiteImages.merchantHero}
-              className={styles.nycMap}
-              alt="NYC MAP"
-            />
-            <div className={styles.contentContainer}>
-              <div className={styles.textArea}>
-                <h2 style={{ fontWeight: 'bolder' }}>
-                  {t('merchantsPage.platformInfoHeader')}
-                </h2>
-                <br />
-                <p>{t('merchantsPage.platformInfoDescription')}</p>
-                <p>{t('merchantsPage.platformInfoAction')}</p>
-              </div>
-              <div className={styles.storeInfo}>
-                <ContributionBar
-                  donationsRaised={contributions.donationAmount}
-                  giftAMealAmountRaised={contributions.giftAMealAmount}
-                  // giftCardAmountRaised includes the amount from the gift-a-meal program.
-                  // Subtract out contributions.giftAMealAmount so we don't overcount.
-                  giftCardAmountRaised={
-                    contributions.giftCardAmount - contributions.giftAMealAmount
-                  }
-                />
-              </div>
-            </div>
+      <div className={styles.overlayContainer}>
+        <img
+          src={websiteImages.merchantHero}
+          className={styles.nycMap}
+          width="2407"
+          height="780"
+          alt="NYC MAP"
+        />
+        <div className={styles.contentContainer}>
+          <div className={styles.textArea}>
+            <h2 style={{ fontWeight: 'bolder' }}>
+              {t('merchantsPage.platformInfoHeader')}
+            </h2>
+            <br />
+            <p>{t('merchantsPage.platformInfoDescription')}</p>
+            <p>{t('merchantsPage.platformInfoAction')}</p>
           </div>
-
-          <div className={styles.merchantInfoContainer}>
-            <div className={styles.highlightsContainer}>
-              <DonationHighlightBox />
-              <GiftMealHighlightBox />
-            </div>
-
-            <div className={styles.storeInfoContainer}>
-              <NavBar filterStoreType={filterStoreType} />
-              <div className={styles.row}>
-                <h2>
-                  <b>{t('merchantsPage.merchantHeader')}</b>
-                </h2>
-                {sellers && <h4>{totalActiveSellers} Total Merchants</h4>}
-              </div>
-              <br />
-              <br />
-
-              <div className={styles.merchantsContainer}>
-                {filter.map((store: any) =>
-                  store.seller_id !== 'send-chinatown-love' ? (
-                    <MerchantCard key={store.seller_id} storeInfo={store} />
-                  ) : null
-                )}
-              </div>
-            </div>
+          <div className={styles.storeInfo}>
+            {!loadingContrib ? (
+              <ContributionBar
+                donationsRaised={contributions.donationAmount}
+                giftAMealAmountRaised={contributions.giftAMealAmount}
+                // giftCardAmountRaised includes the amount from the gift-a-meal program.
+                // Subtract out contributions.giftAMealAmount so we don't overcount.
+                giftCardAmountRaised={
+                  contributions.giftCardAmount - contributions.giftAMealAmount
+                }
+              />
+            ) : (
+              <LinearLoader />
+            )}
           </div>
+        </div>
+      </div>
+      <div className={styles.merchantInfoContainer}>
+        <div className={styles.highlightsContainer}>
+          <DonationHighlightBox />
+          <GiftMealHighlightBox />
+        </div>
 
-          <MerchantDescriptionBanner />
-
-          <div className={styles.flyerContainer}>
-            <p>
-              {t('merchantsPage.flyerAsk') + ' '}
-              <a
-                className={styles.redLink}
-                href="https://www.sendchinatownlove.com/merchant-flyers.html"
-              >
-                {t('merchantsPage.flyerDownload')}
-              </a>
-            </p>
+        <div className={styles.storeInfoContainer}>
+          <NavBar filterStoreType={filterStoreType} />
+          <div className={styles.row}>
+            <h2>
+              <b>{t('merchantsPage.merchantHeader')}</b>
+            </h2>
+            {sellers && <h4>{totalActiveSellers} Total Merchants</h4>}
           </div>
-        </>
-      ) : (
-        <LoaderFillerContainer />
-      )}
+          <br />
+          <br />
+
+          <MerchantsGridContainer loadingSellers={loadingSellers}>
+            {loadingSellers ? (
+              <Loader />
+            ) : (
+              filter.map((store: any) =>
+                store.seller_id !== 'send-chinatown-love' ? (
+                  <MerchantCard key={store.seller_id} storeInfo={store} />
+                ) : null
+              )
+            )}
+          </MerchantsGridContainer>
+        </div>
+      </div>
+      <MerchantDescriptionBanner />
+      <div className={styles.flyerContainer}>
+        <p>
+          {t('merchantsPage.flyerAsk') + ' '}
+          <a
+            className={styles.redLink}
+            href="https://www.sendchinatownlove.com/merchant-flyers.html"
+          >
+            {t('merchantsPage.flyerDownload')}
+          </a>
+        </p>
+      </div>
+      )
     </div>
   );
 };
