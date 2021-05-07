@@ -32,15 +32,19 @@ import {
 // Fix return typing
 
 let CACHE = {};
+const cache_duration = 300; // 5 minutes expressed in seconds
+let expiration_time = ~~(Date.now() / 1000); // time in seconds
 
 export const getSellers = async (lang?: string): Promise<any> => {
-  if (Object.entries(CACHE).length !== 0) {
+  const current_time = ~~(Date.now() / 1000);
+  if (Object.entries(CACHE).length !== 0 && expiration_time > current_time) {
     return CACHE;
   }
   const result = await axios.get(sellers, {
     params: { locale: localeFromLanguage(lang) },
   });
   CACHE = result;
+  expiration_time = current_time + cache_duration;
   return CACHE;
 };
 
