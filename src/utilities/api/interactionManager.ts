@@ -30,10 +30,18 @@ import {
 } from './endpoints';
 
 // Fix return typing
+
+let CACHE = {};
+
 export const getSellers = async (lang?: string): Promise<any> => {
-  return await axios.get(sellers, {
+  if (Object.entries(CACHE).length !== 0) {
+    return CACHE;
+  }
+  const result = await axios.get(sellers, {
     params: { locale: localeFromLanguage(lang) },
   });
+  CACHE = result;
+  return CACHE;
 };
 
 export const getSeller = async (id: string, lang?: string): Promise<any> => {
