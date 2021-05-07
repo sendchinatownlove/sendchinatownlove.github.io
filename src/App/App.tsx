@@ -34,9 +34,9 @@ history.listen((location) => {
 // we could use template strings, but just to be safe we'll hardcode the
 // lazy imports
 const SellerPage = lazy(() => import('../pages/SellerPage'));
-const MerchantsPage = lazy(() => import('../components/MerchantsPage'));
+const MerchantsPage = lazy(() => import('../pages/MerchantsPage'));
 const GiftAMealPage = lazy(() =>
-  import('../components/MerchantsPage/gam/GiftAMealPage')
+  import('../pages/MerchantsPage/gam/GiftAMealPage')
 );
 const LightUpChinatownPage = lazy(() =>
   import('../pages/LightUpChinatown/LightUpChinatownPage')

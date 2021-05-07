@@ -10,7 +10,7 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
-import Modal from '../../ModalPayment';
+import Modal from '../../../components/ModalPayment';
 import { SellerIds, SellerNames } from '../../../consts';
 
 const NoActiveCampaignsBox = () => {

@@ -9,12 +9,12 @@ import {
 } from '../../../utilities/hooks/ModalPaymentContext';
 import { useTranslation, Trans } from 'react-i18next';
 import ReactPixel from 'react-facebook-pixel';
-import CampaignProgressBar from '../../MerchantsPage/gam/CampaignProgressBar';
-import { SIZE_TYPE } from '../../MerchantsPage/gam/ProgressBar';
+import CampaignProgressBar from '../../../pages/MerchantsPage/gam/CampaignProgressBar';
+import { SIZE_TYPE } from '../../../pages/MerchantsPage/gam/ProgressBar';
 import styled from 'styled-components';
 import { formatCurrency } from '../../../utilities/general/textFormatter';
 import { calculateFeeAmount } from '../../../utilities/general/feeCalculator';
-import FiscalSponsor from '../../MerchantsPage/gam/FiscalSponsor';
+import FiscalSponsor from '../../../pages/MerchantsPage/gam/FiscalSponsor';
 import { Tooltip } from '@material-ui/core';
 import { Help } from '@material-ui/icons';
 import { COST_LIMIT_DOLLARS } from '../../../consts';

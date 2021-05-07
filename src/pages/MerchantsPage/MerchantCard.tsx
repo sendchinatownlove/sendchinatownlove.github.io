@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { BrowsePageSeller } from '../../utilities/api';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from '../../components/ProgressBar';
 import styled from 'styled-components';
 import { smallScreens } from '../../utilities/general/responsive';
 
