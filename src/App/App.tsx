@@ -41,7 +41,7 @@ const GiftAMealPage = lazy(() =>
 const LightUpChinatownPage = lazy(() =>
   import('../pages/LightUpChinatown/LightUpChinatownPage')
 );
-const ErrorPage = lazy(() => import('../components/404Page'));
+const ErrorPage = lazy(() => import('../pages/404Page'));
 const VoucherRedemptionPage = lazy(() => import('../pages/VoucherRedemption'));
 const MerchantVoucherDashboard = lazy(() =>
   import('../pages/MerchantVoucherDashboard')

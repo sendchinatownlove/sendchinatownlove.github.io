@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StoreInfo } from '../../components/StoreInfo';
 import OwnerPanel from '../../components/OwnerPanel';
-import ErrorPage from '../../components/404Page';
+import ErrorPage from '../404Page';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
