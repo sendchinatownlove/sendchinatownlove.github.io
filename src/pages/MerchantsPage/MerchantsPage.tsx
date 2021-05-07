@@ -185,7 +185,6 @@ const MerchantsPage = (props: Props) => {
           </a>
         </p>
       </div>
-      )
     </div>
   );
 };
