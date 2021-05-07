@@ -9,6 +9,8 @@ import { Logo } from '../Logos';
 import { Page } from '../../consts';
 import { smallScreens } from '../../utilities/general/responsive';
 
+import styles from './styles.module.scss';
+
 interface Props {
   menuOpen: boolean;
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -151,7 +153,10 @@ const NavBar = (props: Props) => {
     );
   };
   return (
-    <HeaderContainer compact={hamburgerOpen.toString()}>
+    <HeaderContainer
+      compact={hamburgerOpen.toString()}
+      className={props.menuOpen ? '' : styles.sticky}
+    >
       <a className="nav-bar-logo" href="https://sendchinatownlove.com/">
         <Logo />
       </a>
@@ -244,9 +249,6 @@ const HeaderContainer = styled.header`
       margin-left: 19px;
     }
 
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
     z-index: ${theme.maxzIndex};
     background-color: white;
     border-bottom: 1px solid #f2f2f2;

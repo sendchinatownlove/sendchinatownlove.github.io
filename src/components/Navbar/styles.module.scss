@@ -1,0 +1,10 @@
+.sticky {
+  @media (max-width: 599px) {
+    top: 0;
+    position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -o-sticky;
+    position: -ms-sticky;
+  }
+}
