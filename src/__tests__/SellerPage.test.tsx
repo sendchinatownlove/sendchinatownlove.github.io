@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderIntegration } from '../utilities/testing/render';
-import SellerPage from '../components/SellerPage';
+import SellerPage from '../pages/SellerPage';
 
 describe('Seller Page', () => {
   test('should display SellerPage with succesful GET /seller request', async () => {

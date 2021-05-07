@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StoreInfo } from '../StoreInfo';
-import OwnerPanel from '../OwnerPanel';
-import ErrorPage from '../404Page';
+import { StoreInfo } from '../../components/StoreInfo';
+import OwnerPanel from '../../components/OwnerPanel';
+import ErrorPage from '../../components/404Page';
 import {
   useModalPaymentState,
   useModalPaymentDispatch,
@@ -13,7 +13,7 @@ import {
   getSellerDeliveryOptions,
 } from '../../utilities/api';
 import { useParams } from 'react-router-dom';
-import Loader from '../Loader';
+import Loader from '../../components/Loader';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 

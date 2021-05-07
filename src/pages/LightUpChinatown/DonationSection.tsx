@@ -6,7 +6,7 @@ import {
   phoneScreens,
 } from '../../utilities/general/responsive';
 
-import Modal from '../ModalPayment';
+import Modal from '../../components/ModalPayment';
 
 import {
   useModalPaymentDispatch,
