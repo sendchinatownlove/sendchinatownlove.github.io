@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
   ReactGA.initialize(trackingId);
 }
 
-const history = createBrowserHistory();
+const history: any = createBrowserHistory();
 
 // Initialize google analytics page view tracking
 history.listen((location) => {
@@ -36,29 +36,29 @@ history.listen((location) => {
 const SellerPage = lazy(() => import('../SellerPage'));
 const MerchantsPage = lazy(() => import('../MerchantsPage'));
 const GiftAMealPage = lazy(() => import('../MerchantsPage/gam/GiftAMealPage'));
-const LightUpChinatownPage = lazy(() =>
-  import('../LightUpChinatown/LightUpChinatownPage')
+const LightUpChinatownPage = lazy(
+  () => import('../LightUpChinatown/LightUpChinatownPage')
 );
 const ErrorPage = lazy(() => import('../404Page'));
-const VoucherRedemptionPage = lazy(() =>
-  import('../../pages/VoucherRedemption')
+const VoucherRedemptionPage = lazy(
+  () => import('../../pages/VoucherRedemption')
 );
-const MerchantVoucherDashboard = lazy(() =>
-  import('../../pages/MerchantVoucherDashboard')
+const MerchantVoucherDashboard = lazy(
+  () => import('../../pages/MerchantVoucherDashboard')
 );
 
-const PassportVoucher = lazy(() =>
-  import('../../pages/PassportRedemption/Voucher')
+const PassportVoucher = lazy(
+  () => import('../../pages/PassportRedemption/Voucher')
 );
 const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
-const AllVoucherPrintouts = lazy(() =>
-  import('../../pages/DistributorTools/AllVouchersPrintout')
+const AllVoucherPrintouts = lazy(
+  () => import('../../pages/DistributorTools/AllVouchersPrintout')
 );
-const DistributorLoginView = lazy(() =>
-  import('../../pages/DistributorTools/DistributorLoginView')
+const DistributorLoginView = lazy(
+  () => import('../../pages/DistributorTools/DistributorLoginView')
 );
-const DistributorDashboard = lazy(() =>
-  import('../../pages/DistributorTools/DistributorDashboard')
+const DistributorDashboard = lazy(
+  () => import('../../pages/DistributorTools/DistributorDashboard')
 );
 
 const options = {
