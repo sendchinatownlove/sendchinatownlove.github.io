@@ -17,7 +17,7 @@ import uploadImageIcon from '../Assets/uploadImage.png';
 const UploadScreen = () => {
   const { push } = useHistory();
   const { t } = useTranslation();
-  const { id } = useParams();
+  const { id } = useParams<any>();
 
   // all sellers part of the lny crawl - retrieved on initial load of the page
   const [allParticipatingSellers, setallParticipatingSellers] = useState<any>(

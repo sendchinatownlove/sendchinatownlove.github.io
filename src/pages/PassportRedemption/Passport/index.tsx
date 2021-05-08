@@ -21,7 +21,7 @@ interface Props {
 
 const Passport = (props: Props) => {
   const { t } = useTranslation();
-  const { id } = useParams();
+  const { id } = useParams<any>();
   const { push, location } = useHistory();
   const [showFaq, setShowFaq] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
