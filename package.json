@@ -48,7 +48,8 @@
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject",
     "format": "prettier --write .",
-    "deploy": "yarn build && gh-pages -d build -b master"
+    "deploy": "yarn build && gh-pages -d build -b master",
+    "preinstall": "npx only-allow yarn"
   },
   "eslintConfig": {
     "extends": "react-app"
