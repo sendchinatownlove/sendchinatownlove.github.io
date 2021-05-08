@@ -65,17 +65,22 @@ const MerchantsPage = (props: Props) => {
   useEffect(() => {
     const fetchTotalContributions = async () => {
       setLoadingContrib(true);
-      const {
-        data: { donation_amount, gift_a_meal_amount, gift_card_amount },
-      } = await getTotalContributions();
 
-      setContributions({
-        donationAmount: donation_amount,
-        giftAMealAmount: gift_a_meal_amount,
-        giftCardAmount: gift_card_amount,
-      });
+      try {
+        const {
+          data: { donation_amount, gift_a_meal_amount, gift_card_amount },
+        } = await getTotalContributions();
 
-      setLoadingContrib(false);
+        setContributions({
+          donationAmount: donation_amount,
+          giftAMealAmount: gift_a_meal_amount,
+          giftCardAmount: gift_card_amount,
+        });
+
+        setLoadingContrib(false);
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     fetchTotalContributions();
