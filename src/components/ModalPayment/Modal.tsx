@@ -39,10 +39,10 @@ export const Modal = (props: Props) => {
   const dispatch = useModalPaymentDispatch(null);
 
   useEffect(() => {
-    const referrer = query.get("referrer") ? query.get("referrer") : null;
+    const referrer = query.get('referrer') ? query.get('referrer') : null;
     dispatch({ type: ModalPaymentConstants.SET_REFERRER, payload: referrer });
 
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
