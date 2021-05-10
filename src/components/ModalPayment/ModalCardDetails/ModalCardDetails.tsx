@@ -60,7 +60,7 @@ const ModalCardDetails = ({
     lucData,
     matchAmount,
     campaignState,
-    referrer
+    referrer,
   } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
   const modalRef = useScrollToElement();
@@ -71,6 +71,8 @@ const ModalCardDetails = ({
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const isMegaGam: boolean =
     purchaseType === ModalPaymentTypes.modalPages.mega_gam;
 
@@ -181,7 +183,7 @@ const ModalCardDetails = ({
     };
 
     setCanSubmit(false);
-
+    setLoading(true);
     let metadata: any = {};
     if (projectId) metadata = lucData;
     if (referrer) metadata.referrer = referrer;
@@ -197,6 +199,8 @@ const ModalCardDetails = ({
       metadata !== {} ? JSON.stringify(metadata) : null
     )
       .then((res) => {
+        setCanSubmit(true);
+        setLoading(false);
         if (res.status === 200) {
           dispatch({
             type: ModalPaymentConstants.SET_MODAL_VIEW,
@@ -205,6 +209,8 @@ const ModalCardDetails = ({
         }
       })
       .catch((err) => {
+        setCanSubmit(true);
+        setLoading(false);
         if (err.response) {
           let responseErrors: ErrorMessage[] = [];
           if (err.response.data.errors)
@@ -498,7 +504,7 @@ const ModalCardDetails = ({
               >
                 ᐸ Back
               </BackButton>
-              <SubmissionButton canSubmit={canSubmit} />
+              <SubmissionButton canSubmit={canSubmit} loading={loading} />
             </ButtonRow>
           </SquarePaymentForm>
         </SquareFormContainer>
