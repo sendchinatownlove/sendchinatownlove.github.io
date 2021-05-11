@@ -6,12 +6,12 @@ import {
   ModalPaymentConstants,
   ModalPaymentTypes,
 } from '../../../utilities/hooks/ModalPaymentContext';
-import CampaignProgressBar from '../../MerchantsPage/gam/CampaignProgressBar';
+import CampaignProgressBar from '../../../pages/MerchantsPage/gam/CampaignProgressBar';
 import { Trans, useTranslation } from 'react-i18next';
 import CampaignInstructions from './CamapignInstructions';
 import ReactPixel from 'react-facebook-pixel';
 import { getCampaignsForMerchant, getDistributor } from '../../../utilities';
-import { SIZE_TYPE } from '../../MerchantsPage/gam/ProgressBar';
+import { SIZE_TYPE } from '../../../pages/MerchantsPage/gam/ProgressBar';
 
 export interface Props {
   sellerId: string;

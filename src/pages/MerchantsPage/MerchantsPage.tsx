@@ -9,8 +9,8 @@ import GiftMealHighlightBox from './GiftMealHighlightBox';
 import MerchantCard from './MerchantCard';
 import MerchantDescriptionBanner from './MerchantDescriptionBanner';
 import NavBar from './MerchantNavBar';
-import Loader from '../Loader';
-import LinearLoader from '../Loader/LinearLoader';
+import Loader from '../../components/Loader';
+import LinearLoader from '../../components/Loader/LinearLoader';
 import { getSellers, getTotalContributions } from '../../utilities/api';
 import MerchantsGridContainer from './MerchantsGridContainer';
 import { getWebsiteImages } from '../../utilities/general/StoreImages';
@@ -185,7 +185,6 @@ const MerchantsPage = (props: Props) => {
           </a>
         </p>
       </div>
-      )
     </div>
   );
 };

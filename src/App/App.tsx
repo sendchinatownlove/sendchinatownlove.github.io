@@ -5,14 +5,14 @@ import ReactGA from 'react-ga';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useMedia } from 'use-media';
 
-import Footer from '../Footer';
-import Loader from '../Loader';
-import Header from '../Navbar';
-import ScrollToTop from '../ScrollToTop';
-import { Page } from '../../consts';
-import ScreenType from '../../pages/PassportRedemption/ScreenTypes';
-import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext';
-import { VoucherProvider } from '../../utilities/hooks/VoucherContext';
+import Footer from '../components/Footer';
+import Loader from '../components/Loader';
+import Header from '../components/Navbar';
+import ScrollToTop from '../components/ScrollToTop';
+import { Page } from '../consts';
+import ScreenType from '../pages/PassportRedemption/ScreenTypes';
+import { ModalPaymentProvider } from '../utilities/hooks/ModalPaymentContext';
+import { VoucherProvider } from '../utilities/hooks/VoucherContext';
 
 const trackingId = process.env.REACT_APP_GA_TRACKING_ID!;
 
@@ -33,32 +33,32 @@ history.listen((location) => {
 
 // we could use template strings, but just to be safe we'll hardcode the
 // lazy imports
-const SellerPage = lazy(() => import('../SellerPage'));
-const MerchantsPage = lazy(() => import('../MerchantsPage'));
-const GiftAMealPage = lazy(() => import('../MerchantsPage/gam/GiftAMealPage'));
+const SellerPage = lazy(() => import('../pages/SellerPage'));
+const MerchantsPage = lazy(() => import('../pages/MerchantsPage'));
+const GiftAMealPage = lazy(() =>
+  import('../pages/MerchantsPage/gam/GiftAMealPage')
+);
 const LightUpChinatownPage = lazy(() =>
-  import('../LightUpChinatown/LightUpChinatownPage')
+  import('../pages/LightUpChinatown/LightUpChinatownPage')
 );
-const ErrorPage = lazy(() => import('../404Page'));
-const VoucherRedemptionPage = lazy(() =>
-  import('../../pages/VoucherRedemption')
-);
+const ErrorPage = lazy(() => import('../pages/404Page'));
+const VoucherRedemptionPage = lazy(() => import('../pages/VoucherRedemption'));
 const MerchantVoucherDashboard = lazy(() =>
-  import('../../pages/MerchantVoucherDashboard')
+  import('../pages/MerchantVoucherDashboard')
 );
 
 const PassportVoucher = lazy(() =>
-  import('../../pages/PassportRedemption/Voucher')
+  import('../pages/PassportRedemption/Voucher')
 );
-const PassportRedemption = lazy(() => import('../../pages/PassportRedemption'));
+const PassportRedemption = lazy(() => import('../pages/PassportRedemption'));
 const AllVoucherPrintouts = lazy(() =>
-  import('../../pages/DistributorTools/AllVouchersPrintout')
+  import('../pages/DistributorTools/AllVouchersPrintout')
 );
 const DistributorLoginView = lazy(() =>
-  import('../../pages/DistributorTools/DistributorLoginView')
+  import('../pages/DistributorTools/DistributorLoginView')
 );
 const DistributorDashboard = lazy(() =>
-  import('../../pages/DistributorTools/DistributorDashboard')
+  import('../pages/DistributorTools/DistributorDashboard')
 );
 
 const options = {
