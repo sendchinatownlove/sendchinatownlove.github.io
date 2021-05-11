@@ -1,7 +1,23 @@
 {
   "name": "sendchinatownlove",
   "version": "0.1.0",
+  "description": "React front-end used in conjunction with our site builder",
+  "author": "Send Chinatown Love",
   "private": true,
+  "homepage": "https://sendchinatownlove.com",
+  "engines": {
+    "node": "14.x"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "eject": "react-scripts eject",
+    "format": "prettier --write .",
+    "deploy": "yarn build && gh-pages -d build -b master",
+    "preinstall": "npx only-allow yarn",
+    "prepare": "husky install"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
@@ -11,7 +27,7 @@
     "bootstrap": "^4.6.0",
     "classnames": "^2.3.1",
     "history": "^4.10.1",
-    "i18next": "^19.9.2",
+    "i18next": "^20.2.2",
     "jshashes": "^1.0.8",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
@@ -42,14 +58,30 @@
     "use-media": "^1.4.0",
     "uuid": "^8.3.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
-    "eject": "react-scripts eject",
-    "format": "prettier --write .",
-    "deploy": "yarn build && gh-pages -d build -b master",
-    "preinstall": "npx only-allow yarn"
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^10.4.9",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/classnames": "^2.3.1",
+    "@types/history": "^4.7.8",
+    "@types/jest": "^25.2.3",
+    "@types/node": "14.x",
+    "@types/object-hash": "^1.3.4",
+    "@types/react": "^16.14.6",
+    "@types/react-dom": "^16.9.12",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/stripe-v3": "^3.1.23",
+    "@types/styled-components": "^5.1.9",
+    "@types/uuid": "^8.3.0",
+    "axios-mock-adapter": "^1.19.0",
+    "gh-pages": "^2.2.0",
+    "husky": "^6.0.0",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.2.1",
+    "ts-jest": "^25.5.1",
+    "typescript": "^4.2.4",
+    "yarn": "^1.22.10"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -65,37 +97,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage": "/",
-  "devDependencies": {
-    "@testing-library/jest-dom": "^5.12.0",
-    "@testing-library/react": "^10.4.9",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/classnames": "^2.3.1",
-    "@types/history": "^4.7.8",
-    "@types/jest": "^25.2.3",
-    "@types/node": "^12.20.12",
-    "@types/object-hash": "^1.3.4",
-    "@types/react": "^16.14.6",
-    "@types/react-dom": "^16.9.12",
-    "@types/react-router-dom": "^5.1.7",
-    "@types/stripe-v3": "^3.1.23",
-    "@types/styled-components": "^5.1.9",
-    "@types/uuid": "^7.0.4",
-    "axios-mock-adapter": "^1.19.0",
-    "gh-pages": "^2.2.0",
-    "husky": "^4.3.8",
-    "jest-environment-jsdom-sixteen": "^1.0.3",
-    "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1",
-    "ts-jest": "^25.5.1",
-    "typescript": "^4.2.4",
-    "yarn": "^1.22.10"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{ts,tsx,scss,md}": "prettier --write"
