@@ -1,14 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Context } from 'react-square-payment-form';
 import ReactPixel from 'react-facebook-pixel';
+import Loader from '../../Loader';
 
 type Props = {
   canSubmit: boolean;
+  loading: boolean;
 };
 
-const SubmissionButton = ({ canSubmit }: Props) => {
+const SubmissionButton = ({ canSubmit, loading }: Props) => {
   const context = useContext(Context);
-  var [submittable] = useState(false);
 
   const handleSubmit = (evt: { preventDefault: () => void }) => {
     ReactPixel.trackCustom('PaymentConfirmButtonClick', {});
@@ -16,16 +17,14 @@ const SubmissionButton = ({ canSubmit }: Props) => {
     context.onCreateNonce();
   };
 
-  submittable = canSubmit;
-
   return (
     <button
       type="button"
       className={'modalButton--filled'}
       onClick={handleSubmit}
-      disabled={!submittable}
+      disabled={!canSubmit || loading}
     >
-      Confirm
+      {loading ? <Loader size="20px" color="white" /> : 'Confirm'}
     </button>
   );
 };

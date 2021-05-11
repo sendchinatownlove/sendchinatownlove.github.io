@@ -11,7 +11,7 @@ import CampaignProgressBar from '../CampaignProgressBar';
 import FiscalSponsor from '../FiscalSponsor';
 import { SIZE_TYPE } from '../ProgressBar';
 import SellerDistributorPair from './SellerDistributorPair';
-import Modal from '../../../ModalPayment';
+import Modal from '../../../../components/ModalPayment';
 
 import {
   useModalPaymentDispatch,

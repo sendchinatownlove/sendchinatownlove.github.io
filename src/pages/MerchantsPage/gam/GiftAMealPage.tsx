@@ -11,7 +11,7 @@ import NoActiveCampaignsBox from './NoCampaignsBox';
 import VideoComponent from './VideoComponent';
 
 import styles from './styles.module.scss';
-import Loader from '../../Loader';
+import Loader from '../../../components/Loader';
 
 interface Props {
   menuOpen: boolean;
@@ -27,9 +27,8 @@ const GiftAMealPage = (props: Props) => {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [totalCountPastCmpgn, setTotalCountPastCmpgn] = useState(0);
   const [shouldFetchPastData, setShouldFetchPastData] = useState(true);
-  const [selectedCampaignId, setSelectedCampaignId] = useState<number | null>(
-    null
-  );
+  const [selectedCampaignId, setSelectedCampaignId] =
+    useState<number | null>(null);
 
   const fetchData = async () => {
     const { data: campaignData } = await getCampaigns();
