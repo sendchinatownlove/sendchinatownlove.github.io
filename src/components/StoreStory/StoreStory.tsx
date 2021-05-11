@@ -7,7 +7,7 @@ type Props = {
 };
 
 const StoreStory: React.SFC<Props> = ({ story }) => (
-  <ReactMarkdown className={styles.container} source={story} />
+  <ReactMarkdown className={styles.container} children={story} />
 );
 
 export default StoreStory;
