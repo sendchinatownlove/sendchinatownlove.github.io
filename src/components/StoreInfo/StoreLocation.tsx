@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
 import { Location } from '../../utilities';
+import { validatePhone } from '../../utilities/general/storeInfo';
+import { generateMapLink } from '../../utilities/general/storeInfo';
 
 interface Props {
   locations: Location[] | undefined;
@@ -35,16 +37,9 @@ const StoreLocation: FC<Props> = ({ locations }) => {
                   {location.address1 && (
                     <span>
                       <a
-                        href={
-                          'https://www.google.com/maps/place/' +
-                          (
-                            (location.address1 + ' ' || '') +
-                            (location.city + ' ' || '') +
-                            (location.state + ' ' || '') +
-                            (location.zip_code || '')
-                          ).replaceAll(' ', '+')
-                        }
+                        href={generateMapLink(location)}
                         target="_blank"
+                        rel="noopener noreferrer"
                         className={styles.mapURL}
                       >
                         <i className="fa fa-map-marker"></i> Map
@@ -53,9 +48,7 @@ const StoreLocation: FC<Props> = ({ locations }) => {
                   )}
                   {location.phone_number && (
                     <p itemProp="telephone" className={styles.phone}>
-                      {/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(
-                        location.phone_number
-                      ) ? (
+                      {validatePhone(location.phone_number) ? (
                         <a
                           href={'tel:' + location.phone_number}
                           className={styles.phoneURL}
