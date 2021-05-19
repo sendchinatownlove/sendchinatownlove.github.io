@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { BrowsePageSeller } from '../../utilities/api';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from '../../components/ProgressBar';
 import styled from 'styled-components';
 import { smallScreens } from '../../utilities/general/responsive';
 
@@ -25,7 +25,12 @@ const MerchantCardBox = ({ storeInfo }: Props) => {
         style={{ textDecoration: 'none', color: 'black' }}
       >
         <MerchantCard>
-          <Logo src={storeInfo!.hero_image_url} alt="Logo" />
+          <Logo
+            src={storeInfo!.hero_image_url}
+            alt="Logo"
+            width="298"
+            height="129"
+          />
           <Location>
             {city}, {state}
           </Location>

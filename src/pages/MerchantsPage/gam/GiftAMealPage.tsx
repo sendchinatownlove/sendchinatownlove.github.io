@@ -11,7 +11,7 @@ import NoActiveCampaignsBox from './NoCampaignsBox';
 import VideoComponent from './VideoComponent';
 
 import styles from './styles.module.scss';
-import Loader from '../../Loader';
+import Loader from '../../../components/Loader';
 
 interface Props {
   menuOpen: boolean;

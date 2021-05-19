@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Modal from '../ModalPayment';
+import Modal from '../../components/ModalPayment';
 import {
   useModalPaymentDispatch,
   ModalPaymentConstants,
