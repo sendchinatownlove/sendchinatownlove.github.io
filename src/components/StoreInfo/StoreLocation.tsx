@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import styles from './styles.module.scss';
 import { Location } from '../../utilities';
+import { validatePhone } from '../../utilities/general/storeInfo';
+import { generateMapLink } from '../../utilities/general/storeInfo';
 
 interface Props {
   locations: Location[] | undefined;
@@ -17,15 +19,47 @@ const StoreLocation: FC<Props> = ({ locations }) => {
                   className={styles.wrap__singleLocation}
                   key={location.seller_id}
                 >
-                  <address>
-                    <p className={styles.address}>
-                      {location.address1 + (location.address2 || '')}
+                  <address
+                    itemProp="address"
+                    itemType="https://schema.org/PostalAddress"
+                  >
+                    <p itemProp="streetAddress" className={styles.address}>
+                      {location.address1}
+                      {location.address2 ? <br /> : ''}
+                      {location.address2 ? location.address2 : ''}
                     </p>
                     <p className={styles.address}>
-                      {location.city}, {location.state} {location.zip_code}
+                      <span itemProp="addressLocality">{location.city}</span>,{' '}
+                      <span itemProp="addressRegion">{location.state}</span>{' '}
+                      <span itemProp="postalCode">{location.zip_code}</span>
                     </p>
                   </address>
-                  <p className={styles.address}>{location.phone_number}</p>
+                  {location.address1 && (
+                    <span>
+                      <a
+                        href={generateMapLink(location)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.mapURL}
+                      >
+                        <i className="fa fa-map-marker"></i> Map
+                      </a>
+                    </span>
+                  )}
+                  {location.phone_number && (
+                    <p itemProp="telephone" className={styles.phone}>
+                      {validatePhone(location.phone_number) ? (
+                        <a
+                          href={'tel:' + location.phone_number}
+                          className={styles.phoneURL}
+                        >
+                          {location.phone_number}
+                        </a>
+                      ) : (
+                        location.phone_number
+                      )}
+                    </p>
+                  )}
                 </div>
               ))
             : 'Address Not Available'}

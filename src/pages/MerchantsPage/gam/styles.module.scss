@@ -33,22 +33,25 @@
   z-index: 2;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   max-width: 385px;
+  padding-top: 10px;
 
   p {
     font-size: 18px;
   }
 
   @include for-phone-only {
-    max-width: 264px;
+    max-width: 225px;
+    margin-bottom: 25px;
 
     h3 {
       font-size: 33px;
+      margin-bottom: 0px;
     }
 
     p {
-      font-size: 15px;
+      font-size: 13px;
     }
   }
 }
