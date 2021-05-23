@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
 
 import VoucherDashboard from './VoucherDashboard';
-import ErrorPage from '../../components/404Page';
+import ErrorPage from '../404Page';
 import Loader from '../../components/Loader/Loader';
 import {
   getMerchantGiftCards,

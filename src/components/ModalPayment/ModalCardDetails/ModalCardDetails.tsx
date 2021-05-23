@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { times } from 'lodash/fp';
 import { Checkbox } from '@material-ui/core';
 import { SquarePaymentForm } from 'react-square-payment-form';
@@ -60,7 +60,7 @@ const ModalCardDetails = ({
     lucData,
     matchAmount,
     campaignState,
-    referrer
+    referrer,
   } = useModalPaymentState(null);
   const dispatch = useModalPaymentDispatch(null);
   const modalRef = useScrollToElement();
@@ -71,6 +71,8 @@ const ModalCardDetails = ({
   const [email, setEmail] = useState('');
   const [errorMessages, setErrorsMessages] = useState<string[]>([]);
   const [canSubmit, setCanSubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const isMegaGam: boolean =
     purchaseType === ModalPaymentTypes.modalPages.mega_gam;
 
@@ -180,6 +182,8 @@ const ModalCardDetails = ({
       is_subscribed: isSubscriptionChecked,
     };
 
+    setCanSubmit(false);
+    setLoading(true);
     let metadata: any = {};
     if (projectId) metadata = lucData;
     if (referrer) metadata.referrer = referrer;
@@ -195,6 +199,8 @@ const ModalCardDetails = ({
       metadata !== {} ? JSON.stringify(metadata) : null
     )
       .then((res) => {
+        setCanSubmit(true);
+        setLoading(false);
         if (res.status === 200) {
           dispatch({
             type: ModalPaymentConstants.SET_MODAL_VIEW,
@@ -203,6 +209,8 @@ const ModalCardDetails = ({
         }
       })
       .catch((err) => {
+        setCanSubmit(true);
+        setLoading(false);
         if (err.response) {
           let responseErrors: ErrorMessage[] = [];
           if (err.response.data.errors)
@@ -270,18 +278,14 @@ const ModalCardDetails = ({
     }
   };
 
-  const checkFormValidity = useCallback(() => {
-    return (
+  useEffect(() => {
+    setCanSubmit(
       isTermsChecked &&
-      name.length > 0 &&
-      email.length > 0 &&
-      ModalPaymentConstants.EMAIL_REGEX.test(email)
+        name.length > 0 &&
+        email.length > 0 &&
+        ModalPaymentConstants.EMAIL_REGEX.test(email)
     );
   }, [isTermsChecked, name, email]);
-
-  useEffect(() => {
-    setCanSubmit(checkFormValidity());
-  }, [checkFormValidity]);
 
   const setDisclaimerLanguage = (
     type: string | ModalPaymentTypes.modalPages
@@ -466,8 +470,8 @@ const ModalCardDetails = ({
             <p />
             <CheckboxContainer>
               <Checkbox
-                value="emailUpdates"
-                inputProps={{ 'aria-label': 'Email Updates' }}
+                value="checkedB"
+                inputProps={{ 'aria-label': 'Checkbox B' }}
                 onClick={checkSubscriptionAgreement}
                 checked={isSubscriptionChecked}
               />
@@ -477,17 +481,14 @@ const ModalCardDetails = ({
             </CheckboxContainer>
             <CheckboxContainer>
               <Checkbox
-                value="termsAndConditions"
-                inputProps={{ 'aria-label': 'Terms and Conditions' }}
+                value="checkedA"
+                inputProps={{ 'aria-label': 'Checkbox A' }}
                 onClick={checkTermsAgreement}
                 checked={isTermsChecked}
               />
-              <Trans
-                i18nKey="modalPayment.modalCardDetails.body.tAndC"
-                components={{ bold: <strong /> }}
-              >
-                <span>{t('modalPayment.modalCardDetails.body.tAndC')}</span>
-              </Trans>
+              <span>
+                I agree with the <b>Terms & Conditions</b>
+              </span>
             </CheckboxContainer>
             <Disclaimer>{setDisclaimerLanguage(purchaseType)}</Disclaimer>
             <ButtonRow>
@@ -503,7 +504,7 @@ const ModalCardDetails = ({
               >
                 ᐸ Back
               </BackButton>
-              <SubmissionButton canSubmit={canSubmit} />
+              <SubmissionButton canSubmit={canSubmit} loading={loading} />
             </ButtonRow>
           </SquarePaymentForm>
         </SquareFormContainer>
@@ -580,7 +581,6 @@ const CheckboxContainer = styled.label`
   width: 100%;
   align-items: center;
   margin-bottom: 10px;
-  white-space: pre-wrap;
 
   :hover {
     text-decoration: underline;

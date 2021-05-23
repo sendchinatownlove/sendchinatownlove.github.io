@@ -9,6 +9,8 @@ import { Logo } from '../Logos';
 import { Page } from '../../consts';
 import { smallScreens } from '../../utilities/general/responsive';
 
+import styles from './styles.module.scss';
+
 interface Props {
   menuOpen: boolean;
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -125,6 +127,12 @@ const NavBar = (props: Props) => {
         {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
         <NavLink
           compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/apahm-gam"
+          i18nText="APAHM-GAM"
+          altText="APAHM-GAM"
+        />
+        <NavLink
+          compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/about.html"
           i18nText="OUR STORY"
           altText="OUR STORY"
@@ -145,7 +153,10 @@ const NavBar = (props: Props) => {
     );
   };
   return (
-    <HeaderContainer compact={hamburgerOpen.toString()}>
+    <HeaderContainer
+      compact={hamburgerOpen.toString()}
+      className={props.menuOpen ? '' : styles.sticky}
+    >
       <a className="nav-bar-logo" href="https://sendchinatownlove.com/">
         <Logo />
       </a>
@@ -169,6 +180,12 @@ const NavBar = (props: Props) => {
             {t('navBar.header.merchants')}
             {dropdownOpen && <Dropdown>{drop}</Dropdown>}
           </ReactNavLink>
+          <NavLink
+            compact={hamburgerOpen.toString()}
+            href="https://www.sendchinatownlove.com/apahm-gam"
+            i18nText="APAHM-GAM"
+            altText="APAHM-GAM"
+          />
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/about.html"
@@ -232,9 +249,6 @@ const HeaderContainer = styled.header`
       margin-left: 19px;
     }
 
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
     z-index: ${theme.maxzIndex};
     background-color: white;
     border-bottom: 1px solid #f2f2f2;

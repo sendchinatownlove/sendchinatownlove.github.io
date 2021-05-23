@@ -5,7 +5,7 @@ import { tabletScreens } from '../../../utilities/general/responsive';
 import { useTranslation } from 'react-i18next';
 import campaignDefaultImage from '../images/campaign_default.png';
 import { Campaign } from '../../../utilities/api/types';
-import Modal from '../../ModalPayment';
+import Modal from '../../../components/ModalPayment';
 import {
   ModalPaymentConstants,
   useModalPaymentDispatch,
