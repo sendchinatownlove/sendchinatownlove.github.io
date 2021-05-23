@@ -1,4 +1,12 @@
 const MAILTO_URL = 'mailto:hello@sendchinatownlove.com';
+const emailIcon = require('./images/social-icons/email.png');
+const instagramIcon = require('./images/social-icons/instagram.png');
+const tiktokIcon = require('./images/social-icons/tiktok.png');
+const facebookIcon = require('./images/social-icons/facebook.png');
+const twitterIcon = require('./images/social-icons/twitter.png');
+const linkedinIcon = require('./images/social-icons/linkedin.png');
+const youtubeIcon = require('./images/social-icons/youtube.png');
+const wechatIcon = require('./images/social-icons/weixin.png');
 
 enum Page {
   All,
@@ -65,8 +73,16 @@ const SquareErrors = {
 };
 
 interface SocialMediaLink {
-  platform: 'facebook' | 'instagram' | 'wechat';
+  platform:
+    | 'instagram'
+    | 'tiktok'
+    | 'facebook'
+    | 'twitter'
+    | 'linkedin'
+    | 'youtube'
+    | 'wechat';
   url: string;
+  icon: string;
 }
 
 const SellerIds = {
@@ -81,17 +97,40 @@ const SellerNames = {
 
 const socialMediaLinks: SocialMediaLink[] = [
   {
-    platform: 'facebook',
-    url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891',
-  },
-  {
     platform: 'instagram',
     url: 'https://instagram.com/sendchinatownlove',
+    icon: instagramIcon,
+  },
+  {
+    platform: 'tiktok',
+    url: 'https://www.tiktok.com/@sendchinatownlove',
+    icon: tiktokIcon,
+  },
+  {
+    platform: 'facebook',
+    url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891',
+    icon: facebookIcon,
+  },
+  {
+    platform: 'twitter',
+    url: 'https://twitter.com/Chinatownlove',
+    icon: twitterIcon,
+  },
+  {
+    platform: 'linkedin',
+    url: 'https://www.linkedin.com/company/send-chinatown-love/',
+    icon: linkedinIcon,
+  },
+  {
+    platform: 'youtube',
+    url: 'https://www.youtube.com/channel/UCbuN_a2DFec6TFUdC7rGXcw',
+    icon: youtubeIcon,
   },
   {
     platform: 'wechat',
     url:
       'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png',
+    icon: wechatIcon,
   },
 ];
 
@@ -106,6 +145,7 @@ const COST_LIMIT_DOLLARS = 10000;
 
 export {
   MAILTO_URL,
+  emailIcon,
   Page,
   SquareErrors,
   SellerIds,
