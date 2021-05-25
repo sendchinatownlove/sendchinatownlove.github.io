@@ -128,8 +128,8 @@ const NavBar = (props: Props) => {
         <NavLink
           compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/send-chinatown-love-letters.html"
-          i18nText="Send Chinatown Love Letters"
-          altText="Send Chinatown Love Letters"
+          i18nText="SEND CHINATOWN LOVE LETTERS"
+          altText="SEND CHINATOWN LOVE LETTERS"
         />
         <NavLink
           compact={hamburgerOpen.toString()}
@@ -183,8 +183,8 @@ const NavBar = (props: Props) => {
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/send-chinatown-love-letters.html"
-            i18nText="Send Chinatown Love Letters"
-            altText="Send Chinatown Love Letters"
+            i18nText="SEND CHINATOWN LOVE LETTERS"
+            altText="SEND CHINATOWN LOVE LETTERS"
           />
           <NavLink
             compact={hamburgerOpen.toString()}
