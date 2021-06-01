@@ -10,10 +10,13 @@ type Props = {
 
 const Faq = ({ showFaq, toggleView }: Props) => {
   const goToFoodCrawlInfo = (e) => {
-    window.open('https://www.sendchinatownlove.com/lny-crawl.html#giveaways', '_blank');
+    window.open(
+      'https://www.sendchinatownlove.com/lny-crawl.html#giveaways',
+      '_blank'
+    );
   };
   const { t } = useTranslation();
-  const foodCrawlFaq = t<object[]>('passport.faq.arrayOfQuestionAnswers', {
+  const foodCrawlFaq: any[] = t('passport.faq.arrayOfQuestionAnswers', {
     returnObjects: true,
   });
 
@@ -36,7 +39,7 @@ const Faq = ({ showFaq, toggleView }: Props) => {
         <RewardsLink onClick={goToFoodCrawlInfo}>
           {t('passport.faq.viewActiveRewards')}
         </RewardsLink>
-        {foodCrawlFaq.map((faq: any, idx) => (
+        {foodCrawlFaq?.map((faq: any, idx) => (
           <div key={'foodCrawlFaq' + idx}>
             <Question>
               {`${idx + 1}.`}

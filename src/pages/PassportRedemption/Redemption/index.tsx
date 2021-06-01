@@ -23,7 +23,7 @@ interface Props {
 const PassportRedemptionClaim = ({ setCurrentScreenView }: Props) => {
   const { t } = useTranslation();
   const { push } = useHistory();
-  const { id, access_token, sponsor_seller_id } = useParams();
+  const { id, access_token, sponsor_seller_id } = useParams<any>();
 
   const [selectedReward, setSelectedReward] = useState({
     id: '',

@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
   ReactGA.initialize(trackingId);
 }
 
-const history = createBrowserHistory();
+const history: any = createBrowserHistory();
 
 // Initialize google analytics page view tracking
 history.listen((location) => {
@@ -35,30 +35,30 @@ history.listen((location) => {
 // lazy imports
 const SellerPage = lazy(() => import('../pages/SellerPage'));
 const MerchantsPage = lazy(() => import('../pages/MerchantsPage'));
-const GiftAMealPage = lazy(() =>
-  import('../pages/MerchantsPage/gam/GiftAMealPage')
+const GiftAMealPage = lazy(
+  () => import('../pages/MerchantsPage/gam/GiftAMealPage')
 );
-const LightUpChinatownPage = lazy(() =>
-  import('../pages/LightUpChinatown/LightUpChinatownPage')
+const LightUpChinatownPage = lazy(
+  () => import('../pages/LightUpChinatown/LightUpChinatownPage')
 );
 const ErrorPage = lazy(() => import('../pages/404Page'));
 const VoucherRedemptionPage = lazy(() => import('../pages/VoucherRedemption'));
-const MerchantVoucherDashboard = lazy(() =>
-  import('../pages/MerchantVoucherDashboard')
+const MerchantVoucherDashboard = lazy(
+  () => import('../pages/MerchantVoucherDashboard')
 );
 
-const PassportVoucher = lazy(() =>
-  import('../pages/PassportRedemption/Voucher')
+const PassportVoucher = lazy(
+  () => import('../pages/PassportRedemption/Voucher')
 );
 const PassportRedemption = lazy(() => import('../pages/PassportRedemption'));
-const AllVoucherPrintouts = lazy(() =>
-  import('../pages/DistributorTools/AllVouchersPrintout')
+const AllVoucherPrintouts = lazy(
+  () => import('../pages/DistributorTools/AllVouchersPrintout')
 );
-const DistributorLoginView = lazy(() =>
-  import('../pages/DistributorTools/DistributorLoginView')
+const DistributorLoginView = lazy(
+  () => import('../pages/DistributorTools/DistributorLoginView')
 );
-const DistributorDashboard = lazy(() =>
-  import('../pages/DistributorTools/DistributorDashboard')
+const DistributorDashboard = lazy(
+  () => import('../pages/DistributorTools/DistributorDashboard')
 );
 
 const options = {

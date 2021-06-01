@@ -20,7 +20,7 @@ interface Props {
 
 const Rewards = ({ setCurrentScreenView }: Props) => {
   const { t } = useTranslation();
-  const { id } = useParams();
+  const { id } = useParams<any>();
   const history = useHistory();
 
   const [receipts, setReceipts] = useState<any[]>([]);
