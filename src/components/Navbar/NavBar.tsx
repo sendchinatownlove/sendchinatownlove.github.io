@@ -278,7 +278,7 @@ const NavLinksContainer = styled.div`
   
   `
       : `
-    max-width: 876px;
+    max-width: 976px;
     justify-content: flex-end;
   `}
 `;
@@ -297,7 +297,7 @@ const NavLinkStyle = styled.a`
   text-decoration: none;
   color: black;
   transition: 0.1s;
-  margin: 0 20px;
+  margin: 0 16px;
 
   @media (${smallScreens}) {
     background-color: white;
