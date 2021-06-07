@@ -35,9 +35,9 @@ const MerchantVoucherDashboard = () => {
   }, [handlePrint]);
 
   const params = useHistory();
-  const urlParams = (params.location.pathname.match(
-    /\/[^/]+/g
-  ) as string[]).map((param) => param.replace('/', ''));
+  const urlParams = (
+    params.location.pathname.match(/\/[^/]+/g) as string[]
+  ).map((param) => param.replace('/', ''));
   const sellerId = urlParams[0];
   const secretId = urlParams[2];
 

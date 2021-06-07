@@ -57,7 +57,7 @@ const MegaGamListItem = ({ campaign }: Props) => {
           <Header></Header>
           <Subheader>{campaign.display_name}</Subheader>
           <Description>
-            <ReactMarkdown source={campaign.description} />
+            <ReactMarkdown children={campaign.description} />
           </Description>
           <DonationContainer>
             <CampaignProgressBar

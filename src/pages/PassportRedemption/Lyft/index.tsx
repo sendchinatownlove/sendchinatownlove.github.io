@@ -12,7 +12,7 @@ import {
 import CircleLogo from '../Assets/CircleLogo.png';
 
 const LyftCodeScreen = () => {
-  const { contact_id, token } = useParams();
+  const { contact_id, token } = useParams<any>();
   const [code, setCode] = useState('');
 
   useEffect(() => {

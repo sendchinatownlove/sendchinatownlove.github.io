@@ -1,9 +1,3 @@
-jest.mock('../../utilities/api/interactionManager');
-jest.mock('react-router-dom', () => ({
-  ...(jest.requireActual('react-router-dom') as any),
-  useParams: () => ({ id: 'shunfa-bakery' }),
-}));
-
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -12,6 +6,12 @@ import { I18nextProvider } from 'react-i18next';
 import { ModalPaymentProvider } from '../../utilities/hooks/ModalPaymentContext';
 import i18n from '../../i18n';
 import '../../../__mocks__/matchMedia.mock';
+
+jest.mock('../../utilities/api/interactionManager');
+jest.mock('react-router-dom', () => ({
+  ...(jest.requireActual('react-router-dom') as any),
+  useParams: () => ({ id: 'shunfa-bakery' }),
+}));
 
 const renderIntegration = (
   initialPage = '',

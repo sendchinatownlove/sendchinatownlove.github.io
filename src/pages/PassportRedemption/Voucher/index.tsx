@@ -12,7 +12,7 @@ import VoucherImage from '../Assets/VoucherFront.png';
 import BackImage from '../Assets/VoucherBack.png';
 
 const Voucher = () => {
-  const { id, tickets_secret } = useParams();
+  const { id, tickets_secret } = useParams<any>();
   const location = useLocation().search;
   let params = new URLSearchParams(location);
 
