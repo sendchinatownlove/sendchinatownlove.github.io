@@ -1,12 +1,12 @@
+import instagramIcon from './images/social-icons/instagram.png';
+import tiktokIcon from './images/social-icons/tiktok.png';
+import facebookIcon from './images/social-icons/facebook.png';
+import twitterIcon from './images/social-icons/twitter.png';
+import linkedinIcon from './images/social-icons/linkedin.png';
+import youtubeIcon from './images/social-icons/youtube.png';
+import wechatIcon from './images/social-icons/weixin.png';
+
 const MAILTO_URL = 'mailto:hello@sendchinatownlove.com';
-const emailIcon = require('./images/social-icons/email.png');
-const instagramIcon = require('./images/social-icons/instagram.png');
-const tiktokIcon = require('./images/social-icons/tiktok.png');
-const facebookIcon = require('./images/social-icons/facebook.png');
-const twitterIcon = require('./images/social-icons/twitter.png');
-const linkedinIcon = require('./images/social-icons/linkedin.png');
-const youtubeIcon = require('./images/social-icons/youtube.png');
-const wechatIcon = require('./images/social-icons/weixin.png');
 
 enum Page {
   All,
@@ -145,7 +145,6 @@ const COST_LIMIT_DOLLARS = 10000;
 
 export {
   MAILTO_URL,
-  emailIcon,
   Page,
   SquareErrors,
   SellerIds,

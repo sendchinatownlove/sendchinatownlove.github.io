@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Logo } from '../Logos';
-import { MAILTO_URL, emailIcon, socialMediaLinks } from '../../consts';
+import emailIcon from '../../images/social-icons/email.png';
+import { MAILTO_URL, socialMediaLinks } from '../../consts';
 import '../../responsive.scss';
 
 export type Theme = 'dark' | 'none';
