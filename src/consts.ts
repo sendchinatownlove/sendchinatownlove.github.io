@@ -73,14 +73,7 @@ const SquareErrors = {
 };
 
 interface SocialMediaLink {
-  platform:
-    | 'instagram'
-    | 'tiktok'
-    | 'facebook'
-    | 'twitter'
-    | 'linkedin'
-    | 'youtube'
-    | 'wechat';
+  platform: string;
   url: string;
   icon: string;
 }
