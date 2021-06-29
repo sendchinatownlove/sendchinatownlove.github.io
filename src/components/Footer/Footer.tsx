@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Logo } from '../Logos';
+import emailIcon from '../../images/social-icons/email.png';
 import { MAILTO_URL, socialMediaLinks } from '../../consts';
 import '../../responsive.scss';
 
@@ -20,19 +21,22 @@ const FooterComponent = (props: Props) => {
     {
       platform: 'envelope',
       url: MAILTO_URL,
+      icon: emailIcon,
     },
   ];
 
   return (
     <Container theme={theme}>
-      <a href="https://sendchinatownlove.com/">
-        <Logo theme={theme} />
-      </a>
+      <LogoContainer>
+        <a href="https://sendchinatownlove.com/">
+          <Logo theme={theme} />
+        </a>
+      </LogoContainer>
       <LinksContainer>
         {links.map((social) => (
           <LinkItem key={social.platform}>
             <Icon href={social.url} target="_blank">
-              <span className={`fa fa-${social.platform}`} />
+              <img src={social.icon} alt={social.platform} />
             </Icon>
           </LinkItem>
         ))}
@@ -55,10 +59,6 @@ const Container = styled.footer`
   background-color: ${(props: Props) =>
     props.theme === 'dark' ? '#f7f7f7' : '#ffffff'};
 
-  span {
-    margin-left: 24px;
-    color: #a8192e;
-  }
   @media (min-width: 600px) {
     justify-content: space-between;
     height: 120px;
@@ -66,6 +66,23 @@ const Container = styled.footer`
   @media (max-width: 599px) {
     padding: 0 16px 0 16px;
     height: 80px;
+  }
+`;
+const LogoContainer = styled.div`
+  display: flex;
+  @media (max-width: 599px) {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+
+    a {
+      width: 30%;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      padding: 10px 0 20px 0;
+    }
   }
 `;
 
@@ -80,12 +97,22 @@ const LinksContainer = styled.div`
   }
   @media (max-width: 599px) {
     flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
   }
 `;
 
 const LinkItem = styled.div`
-  padding: 0;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: flex;
+  margin-left: 24px;
+  color: #a8192e;
+  @media (max-width: 599px) {
+    margin-left: 0;
+    padding-bottom: 40px;
+  }
 `;
 
 const Icon = styled.a`

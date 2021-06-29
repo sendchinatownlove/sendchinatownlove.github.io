@@ -1,3 +1,11 @@
+import instagramIcon from './images/social-icons/instagram.png';
+import tiktokIcon from './images/social-icons/tiktok.png';
+import facebookIcon from './images/social-icons/facebook.png';
+import twitterIcon from './images/social-icons/twitter.png';
+import linkedinIcon from './images/social-icons/linkedin.png';
+import youtubeIcon from './images/social-icons/youtube.png';
+import wechatIcon from './images/social-icons/weixin.png';
+
 const MAILTO_URL = 'mailto:hello@sendchinatownlove.com';
 
 enum Page {
@@ -65,8 +73,9 @@ const SquareErrors = {
 };
 
 interface SocialMediaLink {
-  platform: 'facebook' | 'instagram' | 'wechat';
+  platform: string;
   url: string;
+  icon: string;
 }
 
 const SellerIds = {
@@ -81,17 +90,40 @@ const SellerNames = {
 
 const socialMediaLinks: SocialMediaLink[] = [
   {
-    platform: 'facebook',
-    url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891',
-  },
-  {
     platform: 'instagram',
     url: 'https://instagram.com/sendchinatownlove',
+    icon: instagramIcon,
+  },
+  {
+    platform: 'tiktok',
+    url: 'https://www.tiktok.com/@sendchinatownlove',
+    icon: tiktokIcon,
+  },
+  {
+    platform: 'facebook',
+    url: 'https://www.facebook.com/Send-Chinatown-Love-100872288240891',
+    icon: facebookIcon,
+  },
+  {
+    platform: 'twitter',
+    url: 'https://twitter.com/Chinatownlove',
+    icon: twitterIcon,
+  },
+  {
+    platform: 'linkedin',
+    url: 'https://www.linkedin.com/company/send-chinatown-love/',
+    icon: linkedinIcon,
+  },
+  {
+    platform: 'youtube',
+    url: 'https://www.youtube.com/channel/UCbuN_a2DFec6TFUdC7rGXcw',
+    icon: youtubeIcon,
   },
   {
     platform: 'wechat',
     url:
       'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png',
+    icon: wechatIcon,
   },
 ];
 
