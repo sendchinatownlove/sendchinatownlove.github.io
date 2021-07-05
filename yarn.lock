@@ -13187,10 +13187,10 @@ strip-url-auth@^1.0.0:
   resolved "https://registry.yarnpkg.com/strip-url-auth/-/strip-url-auth-1.0.1.tgz#22b0fa3a41385b33be3f331551bbb837fa0cd7ae"
   integrity sha1-IrD6OkE4WzO+PzMVUbu4N/oM164=
 
-stripe@^8.148.0:
-  version "8.148.0"
-  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.148.0.tgz#12dd13ed80c4f1cd77a74b0b9db5e0ef0c4dae15"
-  integrity sha512-xBpYJxMVGaZFrF3r2cHytiZOTwQC/i/7bx5ttVdb4KsK/9xYuXclQZkOwMZVxTGhKWnpoLc1gOFWa0CZE1D8uA==
+stripe@^8.160.0:
+  version "8.160.0"
+  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.160.0.tgz#6a320aba4c813865cd2bd9fd9faed3b93a604648"
+  integrity sha512-UGIxgtjiVvN69F14N+pJK+ArkeRYoZccDoPwz20Cp0VnNzVQyWOO8j5YbIVjjgLeh9Rm9l9/GPrt6xJGmPlR3Q==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.6.0"
