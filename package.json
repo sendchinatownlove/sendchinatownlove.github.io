@@ -45,7 +45,7 @@
     "react-number-format": "^4.5.5",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "4.0.3",
     "react-share": "^4.4.0",
     "react-social-icons": "^4.1.0",
     "react-square-payment-form": "^0.6.3",
@@ -53,7 +53,7 @@
     "react-youtube": "^7.13.1",
     "reactjs-popup": "^1.5.0",
     "redux": "^4.1.0",
-    "stripe": "^8.148.0",
+    "stripe": "^8.160.0",
     "styled-components": "^5.3.0",
     "use-media": "^1.4.0",
     "uuid": "^8.3.2"
