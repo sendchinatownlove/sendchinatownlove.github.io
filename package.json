@@ -45,7 +45,7 @@
     "react-number-format": "^4.5.5",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "4.0.3",
     "react-share": "^4.4.0",
     "react-social-icons": "^4.1.0",
     "react-square-payment-form": "^0.6.3",
