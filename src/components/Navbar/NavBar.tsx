@@ -127,12 +127,6 @@ const NavBar = (props: Props) => {
         {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
         <NavLink
           compact={hamburgerOpen.toString()}
-          href="https://www.sendchinatownlove.com/send-chinatown-love-letters.html"
-          i18nText="SEND CHINATOWN LOVE LETTERS"
-          altText="SEND CHINATOWN LOVE LETTERS"
-        />
-        <NavLink
-          compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/about.html"
           i18nText="OUR STORY"
           altText="OUR STORY"
@@ -180,12 +174,6 @@ const NavBar = (props: Props) => {
             {t('navBar.header.merchants')}
             {dropdownOpen && <Dropdown>{drop}</Dropdown>}
           </ReactNavLink>
-          <NavLink
-            compact={hamburgerOpen.toString()}
-            href="https://www.sendchinatownlove.com/send-chinatown-love-letters.html"
-            i18nText="SEND CHINATOWN LOVE LETTERS"
-            altText="SEND CHINATOWN LOVE LETTERS"
-          />
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/about.html"
@@ -278,7 +266,7 @@ const NavLinksContainer = styled.div`
   
   `
       : `
-    max-width: 876px;
+    max-width: 976px;
     justify-content: flex-end;
   `}
 `;
@@ -297,7 +285,7 @@ const NavLinkStyle = styled.a`
   text-decoration: none;
   color: black;
   transition: 0.1s;
-  margin: 0 20px;
+  margin: 0 16px;
 
   @media (${smallScreens}) {
     background-color: white;
