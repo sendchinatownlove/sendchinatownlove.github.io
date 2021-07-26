@@ -1,6 +1,6 @@
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import React, { useState, useEffect, MouseEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -27,14 +27,9 @@ interface CompactProps {
 }
 
 const NavBar = (props: Props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const changeLanguage = (e: MouseEvent, language: string) => {
-    e.preventDefault();
-    i18n.changeLanguage(language);
-  };
 
   const handleResize = () => {
     if (window.innerWidth < 1025 && !props.menuOpen) {
@@ -203,9 +198,8 @@ const HeaderContainer = styled.header`
   flex-direction: row;
   justify-content: space-between;
 
- 
   margin: 15px auto;
-  padding:5px 0px;
+  padding: 5px 0px;
   align-items: center;
   font-size: 14px;
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
