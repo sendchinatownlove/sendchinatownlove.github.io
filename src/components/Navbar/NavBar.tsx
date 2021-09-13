@@ -1,6 +1,6 @@
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import React, { useState, useEffect, MouseEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { Logo } from '../Logos';
 import { Page } from '../../consts';
 import { smallScreens } from '../../utilities/general/responsive';
+import { desktopScreens } from '../../utilities/general/responsive';
 
 import styles from './styles.module.scss';
 
@@ -26,14 +27,9 @@ interface CompactProps {
 }
 
 const NavBar = (props: Props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const changeLanguage = (e: MouseEvent, language: string) => {
-    e.preventDefault();
-    i18n.changeLanguage(language);
-  };
 
   const handleResize = () => {
     if (window.innerWidth < 1025 && !props.menuOpen) {
@@ -90,15 +86,6 @@ const NavBar = (props: Props) => {
   const showCompactMenu = () => {
     return !props.menuOpen ? (
       <HamburgerContainer>
-        <LanguageContainer compact={hamburgerOpen.toString()}>
-          <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
-            ENG
-          </LanguageButton>
-          <LanguageSeparator>|</LanguageSeparator>
-          <LanguageButton onClick={(e) => changeLanguage(e, 'cn')}>
-            中文
-          </LanguageButton>
-        </LanguageContainer>
         <MenuIcon onClick={(e) => props.setMenuOpen(true)} />
       </HamburgerContainer>
     ) : (
@@ -192,15 +179,6 @@ const NavBar = (props: Props) => {
             i18nText="PRESS"
             altText="PRESS"
           />
-          <LanguageContainer compact={hamburgerOpen.toString()}>
-            <LanguageButton onClick={(e) => changeLanguage(e, 'en')}>
-              ENG
-            </LanguageButton>
-            <LanguageSeparator>|</LanguageSeparator>
-            <LanguageButton onClick={(e) => changeLanguage(e, 'cn')}>
-              中文
-            </LanguageButton>
-          </LanguageContainer>
         </NavLinksContainer>
       )}
     </HeaderContainer>
@@ -219,30 +197,31 @@ const HeaderContainer = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 90%;
-  max-width: 1280px;
+
   margin: 15px auto;
+  padding: 5px 0px;
   align-items: center;
   font-size: 14px;
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
-  padding-right: 5px;
   ${(props: CompactProps) =>
     props.compact !== 'true' &&
     `
-    margin-top: 40px;
+    margin: 35px 40px 20px;
   `}
+
+  @media (${desktopScreens}) {
+    padding: 15px 20px 30px 20px;
+  }
 
   @media (${smallScreens}) {
     a.nav-bar-logo {
-      margin-left: 19px;
+      margin-left: 0;
     }
 
     z-index: ${theme.maxzIndex};
     background-color: white;
     border-bottom: 1px solid #f2f2f2;
     width: 100%;
-    padding-top: 15px;
-    padding-bottom: 30px;
     margin: 0;
   }
 `;
@@ -277,7 +256,7 @@ const HamburgerContainer = styled.div`
   justify-content: space-between;
 
   @media (${smallScreens}) {
-    margin-right: 20px;
+    margin-right: 0;
   }
 `;
 
@@ -285,7 +264,7 @@ const NavLinkStyle = styled.a`
   text-decoration: none;
   color: black;
   transition: 0.1s;
-  margin: 0 16px;
+  margin: 5px 22px 0 22px;
 
   @media (${smallScreens}) {
     background-color: white;
@@ -296,7 +275,7 @@ const NavLinkStyle = styled.a`
     `
     width: 100%;
     margin: 0 auto;
-    padding: 16px 0;
+    padding: 10px 0;
     text-align: center;
   `} :link {
     color: black;
@@ -319,44 +298,11 @@ const NavLink = (props: CompactProps) => {
   );
 };
 
-const LanguageContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 13px;
-  width: 78px;
-  margin-left: 20px;
-  margin-top: -4px;
-  ${(props: CompactProps) =>
-    props.compact === 'true' &&
-    `margin-right: 20px;
-  `}
-`;
-
-const LanguageButton = styled.div`
-  margin: 0;
-  transition: 0.1s;
-  color: ${theme.navHoverColor};
-  font-size: 14px;
-  cursor: pointer;
-  font-weight: 200;
-  :hover {
-    color: #a7182d;
-  }
-  width: 36px;
-`;
-
-const LanguageSeparator = styled.div`
-  margin-left: 6px;
-  margin-right: 8px;
-`;
-
 const ReactNavLink = styled.a`
   text-decoration: none;
   color: black;
   transition: 0.1s;
-  margin: 0 20px;
+  margin: 5px 22px 0 22px;
 
   @media (${smallScreens}) {
     background-color: white;
