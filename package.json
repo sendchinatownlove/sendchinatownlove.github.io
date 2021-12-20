@@ -42,7 +42,7 @@
     "react-ga": "^2.7.0",
     "react-i18next": "^11.8.15",
     "react-markdown": "^6.0.2",
-    "react-number-format": "^4.5.5",
+    "react-number-format": "^4.9.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
