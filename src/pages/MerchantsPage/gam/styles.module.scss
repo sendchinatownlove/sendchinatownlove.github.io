@@ -303,3 +303,60 @@
     }
   }
 }
+
+.statsHeader {
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.statsContainer {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-row-gap: 15px;
+  justify-items: center;
+
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  height: 500px;
+  width: 100%;
+
+  @media only screen and (max-width: 680px) {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-row-gap: 0px;
+    height: 750px;
+  }
+}
+
+.statsBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0px;
+  text-align: center;
+
+  background-color: $standard-red;
+  color: white;
+
+  border-radius: 50px;
+  padding: 10px;
+  width: 70%;
+  min-width: 200px;
+
+  @media only screen and (max-width: 680px) {
+    // width: 100%;
+    margin: 20px 0px;
+  }
+}
+
+.statsText {
+  font-size: 50px;
+  margin: 15px 0px;
+}
+
+.statsDescriptionText {
+  font-size: 16px;
+}

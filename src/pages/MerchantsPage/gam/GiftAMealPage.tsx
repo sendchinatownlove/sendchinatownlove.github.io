@@ -11,6 +11,7 @@ import CampaignListItem from './CampaignListItem';
 import MegaGamListItem from './MegaGamListItem/MegaGamListItem';
 import NoActiveCampaignsBox from './NoCampaignsBox';
 import VideoComponent from './VideoComponent';
+import { Summary2021 } from './Summary2021';
 
 import styles from './styles.module.scss';
 import Loader from '../../../components/Loader';
@@ -125,6 +126,8 @@ const GiftAMealPage = (props: Props) => {
           <NoActiveCampaignsBox />
         )}
       </div>
+
+      <Summary2021 />
 
       <div className={styles.videoContainer}>
         <VideoComponent videoId="3zbqvouILto"></VideoComponent>
