@@ -12,6 +12,7 @@ import MegaGamListItem from './MegaGamListItem/MegaGamListItem';
 import NoActiveCampaignsBox from './NoCampaignsBox';
 import VideoComponent from './VideoComponent';
 import { Summary2021 } from './Summary2021';
+import { LNY2022Callout } from './LNY2022Callout';
 
 import styles from './styles.module.scss';
 import Loader from '../../../components/Loader';
@@ -106,7 +107,7 @@ const GiftAMealPage = (props: Props) => {
       >
         {t('gamHome.backButton')}
       </button>
-      <div className={styles.campaignsContainer}>
+      {/* <div className={styles.campaignsContainer}>
         {activeCampaigns.length ? (
           <>
             {activeCampaigns.map((campaign: Campaign) =>
@@ -125,8 +126,9 @@ const GiftAMealPage = (props: Props) => {
         ) : (
           <NoActiveCampaignsBox />
         )}
-      </div>
+      </div> */}
 
+      <LNY2022Callout />
       <Summary2021 />
 
       <div className={styles.videoContainer}>
