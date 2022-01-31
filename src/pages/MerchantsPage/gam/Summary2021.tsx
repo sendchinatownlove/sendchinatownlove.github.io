@@ -13,7 +13,6 @@ export const Summary2021 = () => {
     {
       stat: 31196,
       desc: 'Meals and gift bags given to the community',
-      money: true,
     },
     {
       stat: 43,
@@ -31,10 +30,12 @@ export const Summary2021 = () => {
       currency: 'USD',
       maximumFractionDigits: 0,
     });
+    const regNum = new Intl.NumberFormat('en-US');
+
     return (
       <div className={styles.statsBox}>
         <div className={styles.statsText}>
-          {item.money ? currency.format(item.stat) : item.stat}
+          {item.money ? currency.format(item.stat) : regNum.format(item.stat)}
         </div>
         <div className={styles.statsDescriptionText}>{item.desc}</div>
       </div>

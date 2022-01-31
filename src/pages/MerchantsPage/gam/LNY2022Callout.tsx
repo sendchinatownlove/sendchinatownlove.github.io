@@ -12,7 +12,10 @@ export const LNY2022Callout = () => {
     <CampaignBox>
       <HeaderImage src={lny_web} alt="Happy year of the tiger :)" />
       <TextContainer>
-        <Heading>Donate to our Lunar New Year Gift-a-Meal campaign</Heading>
+        <Heading>
+          Learn more about our Lunar New Year Gift-a-Meal and donate to future
+          campaigns.
+        </Heading>
         {/* <SubHeading>Lorem Ipsum something something</SubHeading> */}
       </TextContainer>
       <Button
@@ -23,7 +26,7 @@ export const LNY2022Callout = () => {
             'https://www.sendchinatownlove.com/lny-gam-2022.html';
         }}
       >
-        VISIT LNY GIFT-A-MEAL
+        Visit LNY Gift-a-Meal
       </Button>
     </CampaignBox>
   );
@@ -33,7 +36,7 @@ const CampaignBox = styled.div`
   align-items: center;
   border: 1px solid #e5e5e5;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1.5fr 1fr;
   padding: 30px;
   margin-bottom: 25px;
 
@@ -77,6 +80,7 @@ const Button = styled.button`
   font-weight: 700;
   font-size: 16px;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
 
   @media (${smallScreens}) {
     font-size: 14px;
