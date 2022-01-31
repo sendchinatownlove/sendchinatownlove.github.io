@@ -1,39 +1,39 @@
 import React from 'react';
 import styles from './styles.module.scss';
-import { useTranslation } from 'react-i18next';
 
-import gam_icon_step1 from '../images/gam_icon_step1.svg';
-import gam_icon_step2 from '../images/gam_icon_step2.svg';
-import gam_icon_step3 from '../images/gam_icon_step3.svg';
-import gam_icon_step4 from '../images/gam_icon_step4.svg';
+import step1 from '../images/new_gam_icons/step1.png';
+import step2 from '../images/new_gam_icons/step2.png';
+import step3 from '../images/new_gam_icons/step3.png';
+import step4 from '../images/new_gam_icons/step4.png';
+import step5 from '../images/new_gam_icons/step5.png';
 
 const CampaignInstructions = () => {
-  const { t } = useTranslation();
+  const newSteps = [
+    ['STEP 1:', 'Donate to Gift-a-Meal via our website', step1],
+    [
+      'STEP 2:',
+      '100% of donations go directly to Merchants as revenue - they then prepare and pack meals',
+      step2,
+    ],
+    [
+      'STEP 3:',
+      'SCL coordinates pick-up time between Merchants and Distributors/SCL Volunteers',
+      step3,
+    ],
+    [
+      'STEP 4:',
+      'Items are delivered to drop off points in Manhattan, Brooklyn, Queens (non-profits, food shelters, among others!)',
+      step4,
+    ],
+    ['STEP 5:', 'Community members pick up meals', step5],
+  ];
+
   return (
     <div className={styles.background}>
       <div className={styles.instructionsGrid}>
-        {[
-          [
-            `${t('gamHome.subheading.step1')}`,
-            `${t('gamHome.subheading.step1Text')}`,
-            gam_icon_step1,
-          ],
-          [
-            `${t('gamHome.subheading.step2')}`,
-            `${t('gamHome.subheading.step2Text')}`,
-            gam_icon_step2,
-          ],
-          [
-            `${t('gamHome.subheading.step3')}`,
-            `${t('gamHome.subheading.step3Text')}`,
-            gam_icon_step3,
-          ],
-          [
-            `${t('gamHome.subheading.step4')}`,
-            `${t('gamHome.subheading.step4Text')}`,
-            gam_icon_step4,
-          ],
-        ].map(([step, text, icon], idx) => generateStep(step, text, icon, idx))}
+        {newSteps.map(([step, text, icon], idx) =>
+          generateStep(step, text, icon, idx)
+        )}
       </div>
     </div>
   );

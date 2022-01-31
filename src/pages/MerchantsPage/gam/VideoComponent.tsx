@@ -34,7 +34,7 @@ const VideoComponent = ({ videoId }: Props) => {
 
   const size = useWindowSize();
   const width = Math.min(size.width * 0.8, 1200);
-  const height = width / 2;
+  const height = (width / 2) * 1.1;
   const opts: Options = {
     height: height.toString(),
     width: width.toString(),

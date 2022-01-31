@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -9,6 +11,8 @@ import CampaignListItem from './CampaignListItem';
 import MegaGamListItem from './MegaGamListItem/MegaGamListItem';
 import NoActiveCampaignsBox from './NoCampaignsBox';
 import VideoComponent from './VideoComponent';
+import { Summary2021 } from './Summary2021';
+import { LNY2022Callout } from './LNY2022Callout';
 
 import styles from './styles.module.scss';
 import Loader from '../../../components/Loader';
@@ -26,12 +30,13 @@ const GiftAMealPage = (props: Props) => {
   const [currPage, setCurrPage] = useState(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [totalCountPastCmpgn, setTotalCountPastCmpgn] = useState(0);
-  const [shouldFetchPastData, setShouldFetchPastData] = useState(true);
+  const [shouldFetchPastData, setShouldFetchPastData] = useState(false);
   const [selectedCampaignId, setSelectedCampaignId] =
     useState<number | null>(null);
 
   const fetchData = async () => {
-    const { data: campaignData } = await getCampaigns();
+    // const { data: campaignData } = await getCampaigns();
+    const campaignData = [];
     setLoading(false);
     const activeMegaGam: Campaign[] = [];
     const active: Campaign[] = [];
@@ -102,7 +107,7 @@ const GiftAMealPage = (props: Props) => {
       >
         {t('gamHome.backButton')}
       </button>
-      <div className={styles.campaignsContainer}>
+      {/* <div className={styles.campaignsContainer}>
         {activeCampaigns.length ? (
           <>
             {activeCampaigns.map((campaign: Campaign) =>
@@ -121,7 +126,11 @@ const GiftAMealPage = (props: Props) => {
         ) : (
           <NoActiveCampaignsBox />
         )}
-      </div>
+      </div> */}
+
+      <LNY2022Callout />
+      <br />
+      <Summary2021 />
 
       <div className={styles.videoContainer}>
         <VideoComponent videoId="3zbqvouILto"></VideoComponent>
@@ -129,7 +138,7 @@ const GiftAMealPage = (props: Props) => {
           {t('gamHome.videoBox.caption')}
         </h5>
       </div>
-      <div className={styles.pastCampaignsHeader}>
+      {/* <div className={styles.pastCampaignsHeader}>
         <h5 className={styles.campaignHeading}>{t('gamHome.pastSection')}</h5>
         <span className={styles.pastCampaignsCount}>{`${
           pastCampaigns.length
@@ -160,7 +169,7 @@ const GiftAMealPage = (props: Props) => {
             </button>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
