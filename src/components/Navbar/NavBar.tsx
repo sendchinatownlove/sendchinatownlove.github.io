@@ -114,6 +114,12 @@ const NavBar = (props: Props) => {
         {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
         <NavLink
           compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/lny-gam-2022.html"
+          i18nText="LNY GIFT-A-MEAL"
+          altText="LNY GIFT-A-MEAL"
+        />
+        <NavLink
+          compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/bd-services.html"
           i18nText="OUR SERVICES"
           altText="OUR SERVICES"
@@ -167,6 +173,12 @@ const NavBar = (props: Props) => {
             {t('navBar.header.merchants')}
             {dropdownOpen && <Dropdown>{drop}</Dropdown>}
           </ReactNavLink>
+          <NavLink
+            compact={hamburgerOpen.toString()}
+            href="https://www.sendchinatownlove.com/lny-gam-2022.html"
+            i18nText="LNY GIFT-A-MEAL"
+            altText="LNY GIFT-A-MEAL"
+          />
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/bd-services.html"
