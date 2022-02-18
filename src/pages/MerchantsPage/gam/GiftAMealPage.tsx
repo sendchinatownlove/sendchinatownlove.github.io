@@ -98,15 +98,15 @@ const GiftAMealPage = (props: Props) => {
         <CampaignInstructions />
       </div>
       <br />
-      <button
+      {/* <button
         className={styles.backButton}
         onClick={(e) => {
           e.preventDefault();
-          window.location.href = '/all';
+          window.location.href = 'https://www.sendchinatownlove.com/donate';
         }}
       >
         {t('gamHome.backButton')}
-      </button>
+      </button> */}
       {/* <div className={styles.campaignsContainer}>
         {activeCampaigns.length ? (
           <>

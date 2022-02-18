@@ -45,7 +45,11 @@ const NavBar = (props: Props) => {
   };
 
   const dropdownOptions = [
-    { url: '/merchants', translation: 'donate', external: false },
+    {
+      url: 'https://www.sendchinatownlove.com/donate',
+      translation: 'donate',
+      external: true,
+    },
     { url: '/gift-a-meal-home', translation: 'gift-a-meal', external: false },
     {
       url: 'https://www.sendchinatownlove.com/cookbook',
