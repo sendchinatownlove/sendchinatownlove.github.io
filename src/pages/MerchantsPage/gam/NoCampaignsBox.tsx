@@ -5,26 +5,26 @@ import {
 } from '../../../utilities/general/responsive';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import {
-  useModalPaymentDispatch,
-  ModalPaymentConstants,
-  ModalPaymentTypes,
-} from '../../../utilities/hooks/ModalPaymentContext';
-import Modal from '../../../components/ModalPayment';
-import { SellerIds, SellerNames } from '../../../consts';
+// import {
+//   useModalPaymentDispatch,
+//   ModalPaymentConstants,
+//   ModalPaymentTypes,
+// } from '../../../utilities/hooks/ModalPaymentContext';
+// import Modal from '../../../components/ModalPayment';
+// import { SellerIds, SellerNames } from '../../../consts';
 
 const NoActiveCampaignsBox = () => {
   const { t } = useTranslation();
 
-  const ModalPaymentDispatcher = useModalPaymentDispatch(null);
+  // const ModalPaymentDispatcher = useModalPaymentDispatch(null);
 
-  const openModal = (event) => {
-    event.preventDefault();
-    ModalPaymentDispatcher({
-      type: ModalPaymentConstants.SET_MODAL_VIEW,
-      payload: ModalPaymentTypes.modalPages.donation,
-    });
-  };
+  // const openModal = (event) => {
+  //   event.preventDefault();
+  //   ModalPaymentDispatcher({
+  //     type: ModalPaymentConstants.SET_MODAL_VIEW,
+  //     payload: ModalPaymentTypes.modalPages.donation,
+  //   });
+  // };
 
   return (
     <NoCampaignBox>
@@ -32,14 +32,21 @@ const NoActiveCampaignsBox = () => {
         <Heading>{t('gamHome.noCampaignsBox.CTA')}</Heading>
         <SubHeading>{t('gamHome.noCampaignsBox.description')}</SubHeading>
       </TextContainer>
-      <Button className="button--filled" onClick={openModal}>
+      <Button
+        className="button--filled"
+        onClick={(e) => {
+          e.preventDefault();
+          window.location.href =
+            'https://www.sendchinatownlove.com/donate.html';
+        }}
+      >
         {t('gamHome.giftButton')}
       </Button>
-      <Modal
+      {/* <Modal
         sellerId={SellerIds.APEX_FOR_YOUTH}
         sellerName={SellerNames.APEX_FOR_YOUTH}
         costPerMealInDollars={0}
-      />
+      /> */}
     </NoCampaignBox>
   );
 };

@@ -13,6 +13,7 @@ import NoActiveCampaignsBox from './NoCampaignsBox';
 import VideoComponent from './VideoComponent';
 import { Summary2021 } from './Summary2021';
 import { LNY2022Callout } from './LNY2022Callout';
+import NoCampaignBox from './NoCampaignsBox';
 
 import styles from './styles.module.scss';
 import Loader from '../../../components/Loader';
@@ -128,7 +129,8 @@ const GiftAMealPage = (props: Props) => {
         )}
       </div> */}
 
-      <LNY2022Callout />
+      {/* <LNY2022Callout /> */}
+      <NoCampaignBox />
       <br />
       <Summary2021 />
 
