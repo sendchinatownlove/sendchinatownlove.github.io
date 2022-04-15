@@ -27,7 +27,6 @@ interface CompactProps {
 }
 
 const NavBar = (props: Props) => {
-  const { t } = useTranslation();
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -45,28 +44,21 @@ const NavBar = (props: Props) => {
   };
 
   const dropdownOptions = [
+    { url: '/gift-a-meal-home', text: 'gift-a-meal', external: false },
     {
-      url: 'https://www.sendchinatownlove.com/donate',
-      translation: 'donate',
-      external: true,
-    },
-    { url: '/gift-a-meal-home', translation: 'gift-a-meal', external: false },
-    {
-      url: 'https://www.sendchinatownlove.com/cookbook',
-      translation: 'cookbook',
+      url: 'https://www.sendchinatownlove.com/bd-services.html',
+      text: 'business development',
       external: true,
     },
   ];
 
   const drop = dropdownOptions.map((option) => {
-    const { url, translation, external } = option;
+    const { url, text, external } = option;
     return external ? (
-      <DropdownItem href={url}>
-        {t(`navBar.header.waystodonate.${translation}`)}
-      </DropdownItem>
+      <DropdownItem href={url}>{text.toUpperCase()}</DropdownItem>
     ) : (
       <DropdownItemLink to={url} onClick={(e) => props.setMenuOpen(false)}>
-        {t(`navBar.header.waystodonate.${translation}`)}
+        {text.toUpperCase()}
       </DropdownItemLink>
     );
   });
@@ -106,22 +98,19 @@ const NavBar = (props: Props) => {
           i18nText="navBar.header.home"
           altText="HOME"
         />
+        <NavLink
+          compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/donate.html"
+          i18nText="DONATE"
+          altText="DONATE"
+        />
         <DropdownButtonContainer>
-          <ReactNavLink
-            href="https://www.sendchinatownlove.com/ways-to-donate.html"
-            compact={hamburgerOpen.toString()}
-          >
-            <p>{t('navBar.header.merchants')}</p>
+          <ReactNavLink compact={hamburgerOpen.toString()}>
+            <p>{'OUR WORK'}</p>
           </ReactNavLink>
           <DropdownButton onClick={handleDropdownOpen}>›</DropdownButton>
         </DropdownButtonContainer>
         {dropdownOpen && <DropdownMobile>{drop}</DropdownMobile>}
-        <NavLink
-          compact={hamburgerOpen.toString()}
-          href="https://www.sendchinatownlove.com/bd-services.html"
-          i18nText="OUR SERVICES"
-          altText="OUR SERVICES"
-        />
         <NavLink
           compact={hamburgerOpen.toString()}
           href="https://www.sendchinatownlove.com/about.html"
@@ -161,22 +150,21 @@ const NavBar = (props: Props) => {
             i18nText="navBar.header.home"
             altText="HOME"
           />
+          <NavLink
+            compact={hamburgerOpen.toString()}
+            href="https://www.sendchinatownlove.com/donate.html"
+            i18nText="DONATE"
+            altText="DONATE"
+          />
           <ReactNavLink
-            href="https://www.sendchinatownlove.com/ways-to-donate.html"
             onMouseEnter={() => setDropdownOpen(true)}
             onMouseLeave={() => setDropdownOpen(false)}
             compact={hamburgerOpen.toString()}
             active={isMerchantsPathActive.toString()}
           >
-            {t('navBar.header.merchants')}
+            {'OUR WORK'}
             {dropdownOpen && <Dropdown>{drop}</Dropdown>}
           </ReactNavLink>
-          <NavLink
-            compact={hamburgerOpen.toString()}
-            href="https://www.sendchinatownlove.com/bd-services.html"
-            i18nText="OUR SERVICES"
-            altText="OUR SERVICES"
-          />
           <NavLink
             compact={hamburgerOpen.toString()}
             href="https://www.sendchinatownlove.com/about.html"
