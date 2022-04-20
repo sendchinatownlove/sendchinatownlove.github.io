@@ -50,6 +50,11 @@ const NavBar = (props: Props) => {
       text: 'business development',
       external: true,
     },
+    {
+      url: 'https://www.sendchinatownlove.com/past-campaigns.html',
+      text: 'past campaigns',
+      external: true,
+    },
   ];
 
   const drop = dropdownOptions.map((option) => {
