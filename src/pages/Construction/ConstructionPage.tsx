@@ -25,7 +25,7 @@ const ConstructionPage = (props: CompactProps) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            hello@sendchinatove.com
+            hello@sendchinatownlove.com
           </a>
         </SubHeader>
       </Text>
