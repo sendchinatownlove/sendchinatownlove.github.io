@@ -12,10 +12,10 @@
     "static/js/4.5229a541.chunk.js": "/static/js/4.5229a541.chunk.js",
     "static/js/4.5229a541.chunk.js.map": "/static/js/4.5229a541.chunk.js.map",
     "main.css": "/static/css/main.2314a12a.chunk.css",
-    "main.js": "/static/js/main.d3b9d4b9.chunk.js",
-    "main.js.map": "/static/js/main.d3b9d4b9.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.642f7816.js",
-    "runtime-main.js.map": "/static/js/runtime-main.642f7816.js.map",
+    "main.js": "/static/js/main.dab219fb.chunk.js",
+    "main.js.map": "/static/js/main.dab219fb.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.689f3548.js",
+    "runtime-main.js.map": "/static/js/runtime-main.689f3548.js.map",
     "static/css/7.40a24353.chunk.css": "/static/css/7.40a24353.chunk.css",
     "static/js/7.3b5ed3c6.chunk.js": "/static/js/7.3b5ed3c6.chunk.js",
     "static/js/7.3b5ed3c6.chunk.js.map": "/static/js/7.3b5ed3c6.chunk.js.map",
@@ -51,12 +51,12 @@
     "static/js/20.6a00302a.chunk.js.map": "/static/js/20.6a00302a.chunk.js.map",
     "static/js/21.ead498e1.chunk.js": "/static/js/21.ead498e1.chunk.js",
     "static/js/21.ead498e1.chunk.js.map": "/static/js/21.ead498e1.chunk.js.map",
-    "static/js/22.6d0a9e7d.chunk.js": "/static/js/22.6d0a9e7d.chunk.js",
-    "static/js/22.6d0a9e7d.chunk.js.map": "/static/js/22.6d0a9e7d.chunk.js.map",
+    "static/js/22.70835021.chunk.js": "/static/js/22.70835021.chunk.js",
+    "static/js/22.70835021.chunk.js.map": "/static/js/22.70835021.chunk.js.map",
     "static/js/23.4fcbf496.chunk.js": "/static/js/23.4fcbf496.chunk.js",
     "static/js/23.4fcbf496.chunk.js.map": "/static/js/23.4fcbf496.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.76d889cf14b86c820b3d71073ccfff32.js": "/precache-manifest.76d889cf14b86c820b3d71073ccfff32.js",
+    "precache-manifest.2a669f2ff95edd2d6c82608401a9ee62.js": "/precache-manifest.2a669f2ff95edd2d6c82608401a9ee62.js",
     "service-worker.js": "/service-worker.js",
     "static/css/14.3c05fd9d.chunk.css.map": "/static/css/14.3c05fd9d.chunk.css.map",
     "static/css/16.79325639.chunk.css.map": "/static/css/16.79325639.chunk.css.map",
@@ -109,9 +109,9 @@
     "static/media/partners-udooda.png": "/static/media/partners-udooda.aabb5f71.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.642f7816.js",
+    "static/js/runtime-main.689f3548.js",
     "static/js/8.fb8e7f32.chunk.js",
     "static/css/main.2314a12a.chunk.css",
-    "static/js/main.d3b9d4b9.chunk.js"
+    "static/js/main.dab219fb.chunk.js"
   ]
 }
