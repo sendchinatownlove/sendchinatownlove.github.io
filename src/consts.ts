@@ -15,6 +15,7 @@ enum Page {
   Merchants,
   Seller,
   LightUpChinatown,
+  Construction,
 }
 
 const SquareErrors = {
@@ -121,8 +122,7 @@ const socialMediaLinks: SocialMediaLink[] = [
   },
   {
     platform: 'wechat',
-    url:
-      'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png',
+    url: 'https://www.sendchinatownlove.com/uploads/1/3/1/9/131935948/wechat_scl.png',
     icon: wechatIcon,
   },
 ];

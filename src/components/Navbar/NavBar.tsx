@@ -16,6 +16,7 @@ interface Props {
   menuOpen: boolean;
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   pageName: Page;
+  showLinks?: boolean;
 }
 
 interface CompactProps {
@@ -145,7 +146,9 @@ const NavBar = (props: Props) => {
       <a className="nav-bar-logo" href="https://sendchinatownlove.com/">
         <Logo />
       </a>
-      {hamburgerOpen ? (
+      {!props.showLinks ? (
+        <></>
+      ) : hamburgerOpen ? (
         showCompactMenu()
       ) : (
         <NavLinksContainer compact={hamburgerOpen.toString()}>

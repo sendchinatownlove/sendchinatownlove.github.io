@@ -60,6 +60,9 @@ const DistributorLoginView = lazy(
 const DistributorDashboard = lazy(
   () => import('../pages/DistributorTools/DistributorDashboard')
 );
+const ConstructionPage = lazy(
+  () => import('../pages/Construction/ConstructionPage')
+);
 
 const options = {
   autoConfig: true, // set pixel's autoConfig
@@ -74,6 +77,7 @@ const App = () => {
 
   const returnComponent = (child: Page) => {
     let component;
+    let showHeaderLinks = true;
     switch (child) {
       case Page.All:
         component = <MerchantsPage menuOpen={menuOpen} />;
@@ -92,6 +96,10 @@ const App = () => {
       case Page.LightUpChinatown:
         component = <LightUpChinatownPage />;
         break;
+      case Page.Construction:
+        component = <ConstructionPage menuOpen={menuOpen} />;
+        showHeaderLinks = false;
+        break;
       case Page.Error:
       default:
         component = <ErrorPage menuOpen={menuOpen} />;
@@ -104,6 +112,7 @@ const App = () => {
           menuOpen={menuOpen}
           pageName={child}
           setMenuOpen={setMenuOpen}
+          showLinks={showHeaderLinks}
         />
         {component}
         <Footer menuOpen={menuOpen} />
@@ -171,7 +180,8 @@ const App = () => {
           <Route path="/merchants">{returnComponent(Page.Merchants)}</Route>
           <Route path="/:id">{returnComponent(Page.Seller)}</Route>
           <Route path="/:id#story">{returnComponent(Page.Seller)}</Route>
-          <Route>{returnComponent(Page.Error)}</Route>
+          {/* <Route>{returnComponent(Page.Error)}</Route> */}
+          <Route>{returnComponent(Page.Construction)}</Route>
         </Switch>
       </Suspense>
     </Router>
