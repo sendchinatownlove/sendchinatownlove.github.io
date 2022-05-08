@@ -10,22 +10,24 @@ const ConstructionPage = (props: CompactProps) => {
   return (
     <Container>
       <Text menuOpen={props.menuOpen}>
-        <Error src={ConstructionImage} alt="under construction" />
-        <MainHeader> Website Under Construction! </MainHeader>
-        <SubHeader> Our website is currently undergoing maintenance.</SubHeader>
+        <Icon src={ConstructionImage} alt="under construction" />
+        <MainHeader>Website Under Construction</MainHeader>
         <SubHeader>
-          Please be patient while we're hard at work! You can still donate to us
-          in the meantime.
-        </SubHeader>
-        <BackToHome>
+          Our systems are temporarily offline as we are undergoing maintenance.
+          We apologize for any inconvenience this may cause and appreciate your
+          continued support and patience.
+          <br />
+          <br />
+          If you are looking to get in touch, volunteer, or donate, please send
+          us a note at{' '}
           <a
-            href="https://square.link/u/G7n2wte2?src=embed"
+            href="mailto:hello@sendchinatownlove.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            DONATE
+            hello@sendchinatove.com
           </a>
-        </BackToHome>
+        </SubHeader>
       </Text>
     </Container>
   );
@@ -34,14 +36,14 @@ const ConstructionPage = (props: CompactProps) => {
 export default ConstructionPage;
 
 const Container = styled.main`
-  font-family: futura;
+  font-family: Open Sans;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 80vh;
 `;
 
-const Error = styled.img`
+const Icon = styled.img`
   width: 80%;
   max-width: 480px;
   margin: 0 auto;
@@ -60,15 +62,9 @@ const Text = styled.div`
 
 const MainHeader = styled.div`
   font-weight: 600;
+  font-size: 24px;
 `;
 const SubHeader = styled.div`
-  font-weight: 400;
   margin: 0.2rem auto;
-`;
-const BackToHome = styled.div`
-  font-weight: 450;
-  font-size: 1rem;
-  a {
-    color: #a7182d;
-  }
+  max-width: 400px;
 `;
