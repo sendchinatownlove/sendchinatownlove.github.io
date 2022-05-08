@@ -143,7 +143,10 @@ const NavBar = (props: Props) => {
       compact={hamburgerOpen.toString()}
       className={props.menuOpen ? '' : styles.sticky}
     >
-      <a className="nav-bar-logo" href="https://sendchinatownlove.com/">
+      <a
+        className="nav-bar-logo"
+        href="https://merchant.sendchinatownlove.com/"
+      >
         <Logo />
       </a>
       {!props.showLinks ? (
