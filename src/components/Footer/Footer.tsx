@@ -28,7 +28,7 @@ const FooterComponent = (props: Props) => {
   return (
     <Container theme={theme}>
       <LogoContainer>
-        <a href="https://merchant.sendchinatownlove.com/">
+        <a href="https://sendchinatownlove.com/">
           <Logo theme={theme} />
         </a>
       </LogoContainer>

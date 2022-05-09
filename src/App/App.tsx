@@ -180,8 +180,8 @@ const App = () => {
           <Route path="/merchants">{returnComponent(Page.Merchants)}</Route>
           <Route path="/:id">{returnComponent(Page.Seller)}</Route>
           <Route path="/:id#story">{returnComponent(Page.Seller)}</Route>
-          {/* <Route>{returnComponent(Page.Error)}</Route> */}
-          <Route>{returnComponent(Page.Construction)}</Route>
+          <Route>{returnComponent(Page.Error)}</Route>
+          {/* <Route>{returnComponent(Page.Construction)}</Route> */}
         </Switch>
       </Suspense>
     </Router>
