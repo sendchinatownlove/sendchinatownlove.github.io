@@ -110,6 +110,12 @@ const NavBar = (props: Props) => {
           i18nText="DONATE"
           altText="DONATE"
         />
+        <NavLink
+          compact={hamburgerOpen.toString()}
+          href="https://www.sendchinatownlove.com/apahm-2022.html"
+          i18nText="APAHM 2022"
+          altText="APAHM 2022"
+        />
         <DropdownButtonContainer>
           <ReactNavLink compact={hamburgerOpen.toString()}>
             <p>{'OUR WORK'}</p>
@@ -163,6 +169,12 @@ const NavBar = (props: Props) => {
             href="https://www.sendchinatownlove.com/donate.html"
             i18nText="DONATE"
             altText="DONATE"
+          />
+          <NavLink
+            compact={hamburgerOpen.toString()}
+            href="https://www.sendchinatownlove.com/apahm-2022.html"
+            i18nText="APAHM 2022"
+            altText="APAHM 2022"
           />
           <ReactNavLink
             onMouseEnter={() => setDropdownOpen(true)}
